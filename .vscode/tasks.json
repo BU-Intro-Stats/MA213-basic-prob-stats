@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "Live Preview",
+			"workspacePath": "/Users/yongholim/Documents/Work/LCT_repo/openintro-statistics-slides",
+			"problemMatcher": [],
+			"label": "Live Preview: Run Server",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
