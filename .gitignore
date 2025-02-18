@@ -13,3 +13,4 @@
 *.fdb_latexmk
 .Rhistory
 .latex.json
+.vscode
