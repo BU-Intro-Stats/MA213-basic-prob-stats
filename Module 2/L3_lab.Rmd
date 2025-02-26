@@ -9,31 +9,24 @@ library(ggplot2)
 set.seed(1234)   
 ```
 
-
 ## Learning objectives
 
-* Understand and Compute Expectations and Variances:
-Explain the concepts of expectations and variances of random
-variables, and compute the expectation and variance of a
-linear combination of random variables.
-
+-   Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
 
 ## Lessons
 
 ### 1 - objectives 1
 
-* Rolling dice, if r.v. $X$ is the sum of two rolled dice.
-* Then what is $E(X)$ and $Var(X)$? (theoretical) - this can be explained through slides
-* What do we achieve? 
-* How do we do it? 
-  * How to roll the dice?
-  * How to collect the data? 
-  * What do we show? 
-
-
-* `Sample()`
-	* `sample(x, size, replace = FALSE, prob = NULL)`
-	* sample takes a sample of the specified size from the elements of x using either with or without replacement.
+-   Rolling dice, if r.v. $X$ is the sum of two rolled dice.
+-   Then what is $E(X)$ and $Var(X)$? (theoretical) - this can be explained through slides
+-   What do we achieve?
+-   How do we do it?
+    -   How to roll the dice?
+    -   How to collect the data?
+    -   What do we show?
+-   `Sample()`
+    -   `sample(x, size, replace = FALSE, prob = NULL)`
+    -   sample takes a sample of the specified size from the elements of x using either with or without replacement.
 
 ```{r, eval=FALSE}
 # for loops 
@@ -42,13 +35,16 @@ linear combination of random variables.
 # usage of sample function
 ```
 
-How to rolle a dice ? 
+How to roll a dice ?
+
 ```{r chunk1}
 oneRoll <- sample(1:6, 1, TRUE)
 oneRoll
 
 ```
-Sum of $2$ dice? 
+
+Sum of $2$ dice?
+
 ```{r chunk2}
 firstRoll <- sample(1:6, 1, TRUE)
 secondRoll <- sample(1:6, 1, TRUE)
@@ -60,8 +56,8 @@ sum_of_two
 
 ```
 
-
 ### Theoretical sol (by definition)
+
 ```{r chunk0}
 
 Number_ways <- c(1,2,3,4,5,6,5,4,3,2,1)
@@ -73,9 +69,10 @@ sigma_2 = sum((x-mu)^2*prob)
 sigma_2
 ```
 
-
 ### 2 - Simulation
+
 We can build a function to show if simulated values are close to theoretical values.
+
 ```{r chunk3}
 n = 1000 #sample size
 sim_data = rep(0,n)
@@ -89,6 +86,7 @@ head(sim_data)
 ```
 
 We can make this using `replicate()` function. (This way is faster than for loop)
+
 ```{r chunk4}
 n = 1000 #sample size
 sim_data <- replicate(n,{
@@ -100,9 +98,8 @@ head(sim_data)
 
 ```
 
-
-
 #### What is simulated $E(X)$ and $Var(X)$?
+
 ```{r chunk5}
 sim_table<-table(sim_data)
 sim_table
@@ -116,6 +113,7 @@ sigma_2_hat
 ```
 
 Let's make a function to do a simulation.
+
 ```{r chunk6}
 sim_fn <- function(n=1000){
 sim_data <- replicate(n,{
@@ -178,11 +176,12 @@ ggplot(sim_data, aes(x = n_values, y = sim_sigma_2)) +
 
 ### 3 - Activity (Linear combination of r.v.)
 
-#### Let the random variable  X  be the sum of three rolled dice. However, this time, the first die has triple its value, the second die has double its value, and the last die remains unchanged. Can we simulate and verify whether the estimated  $E(X)$  and  $Var(X)$  are close to their true values?
-1. What are possible values of $X$?
-2. What are $E(X)$ and $Var(X)$?  
-3. How do you obtain one trial in R? and simulated trials with $n=1000$?  
-4. Let $Y_i$ for $i=1,2,3$ be a roll of one die. Then can we say that $3E(Y_1)+ 2E(Y_2) + E(Y_3) = E(3 Y_1+ 2 Y_2 + Y_3)$? How about $Var(3 Y_1+ 2 Y_2 + Y_3)$?
+#### Let the random variable X be the sum of three rolled dice. However, this time, the first die has triple its value, the second die has double its value, and the last die remains unchanged. Can we simulate and verify whether the estimated $E(X)$ and $Var(X)$ are close to their true values?
+
+1.  What are possible values of $X$?
+2.  What are $E(X)$ and $Var(X)$?\
+3.  How do you obtain one trial in R? and simulated trials with $n=1000$?\
+4.  Let $Y_i$ for $i=1,2,3$ be a roll of one die. Then can we say that $3E(Y_1)+ 2E(Y_2) + E(Y_3) = E(3 Y_1+ 2 Y_2 + Y_3)$? How about $Var(3 Y_1+ 2 Y_2 + Y_3)$?
 
 ```{r activity}
 
@@ -208,4 +207,3 @@ return(c(mu_hat, sigma_2_hat))
 sim_fn(1000)
 
 ```
-

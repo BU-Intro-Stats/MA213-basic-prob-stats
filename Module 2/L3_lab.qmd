@@ -1,0 +1,255 @@
+---
+title: "L3:Simulation and probability"
+subtitle: "working ver"
+format:
+ html: 
+  html-math-method: katex
+  code-tools: true
+  self-contained: true
+execute: 
+  warning: false
+editor: visual
+---
+
+```{r}
+#| echo: false
+library(ggplot2)
+
+```
+
+## Learning objectives
+
+Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
+
+## Lessons
+
+Let’s roll a die! You’re playing a dice-rolling game with your friend, and you’re curious about how this game goes at the end.
+
+### Think about
+
+-   What is the random variable?
+
+-   What is then the expected value and the variance?
+
+## Expected value of a discrete random variable
+
+$$
+E(X) = \sum_{i=1}^{k} x_i P(X=x_i)
+$$
+
+## General variance formula
+
+$$
+\sigma^2 = \sum_{i=1}^{k} (x_i-\mu)^2 P(X=x_i)
+$$
+
+## Table
+
+Let's think about the table here:
+
+```{r}
+#| label: Prob-table1
+#| echo: false
+i <- 2:12
+x_i <- rep("", length(i))
+prob <- ""
+Prob_table <- rbind(x_i, prob)
+Prob_table <- as.data.frame(Prob_table)
+names(Prob_table) <- as.character(i)
+
+knitr::kable(Prob_table)
+```
+
+## Prob Table
+
+Let's think about the table here:
+
+```{r}
+#| label: Prob-table2
+#| code-fold: true
+i <- 2:12
+x_i <- c(1,2,3,4,5,6,5,4,3,2,1) # Number of different ways
+prob <- (1/6)*(1/6)*x_i # Think about why here
+prob <- round(prob, 3)
+x_i <- as.character(x_i)
+Prob_table <- rbind(x_i, prob)
+Prob_table <- as.data.frame(Prob_table)
+names(Prob_table) <- as.character(i)
+
+knitr::kable(Prob_table)
+```
+
+## How to calculate in R?
+
+```{r}
+x_i <- c(1,2,3,4,5,6,5,4,3,2,1) # Number of different ways
+prob <- (1/6)*(1/6)*x_i # Think about why here
+x <- 2:12
+```
+
+```{r}
+mu = sum(x * prob)
+mu
+sigma_2 = sum((x-mu)^2*prob)
+sigma_2
+```
+
+## Simulation
+
+We can build a function to show if simulated values are close to theoretical values.
+
+```{r chunk3}
+set.seed(1234)
+
+n = 1000 #sample size
+sim_data = rep(0,n)
+for (i in 1:n){
+	sum_of_two <- sum(sample(1:6, 2, TRUE))
+	sim_data[i] = sum_of_two
+}
+
+head(sim_data)
+
+```
+
+We can make this using `replicate()` function. (This way is faster than for loop)
+
+```{r chunk4}
+set.seed(1234)
+
+n = 1000 #sample size
+sim_data <- replicate(n,{
+	sum_of_two <- sum(sample(1:6, 2, TRUE))
+	sum_of_two
+})
+
+head(sim_data)
+
+```
+
+## What is simulated $E(X)$ and $Var(X)$?
+
+```{r chunk5}
+sim_table<-table(sim_data)
+sim_table
+x <- 2:12 # possible values
+prob_est = sim_table/n
+prob_est
+mu_hat = sum(prob_est * x)
+mu_hat
+sigma_2_hat = sum( (x-mu_hat)^2*prob_est )
+sigma_2_hat
+```
+
+## Let's make a function to do a simulation.
+
+How do we approach it?
+
+```{r}
+#| code-fold: true
+sim_fn <- function(n=1000){
+sim_data <- replicate(n,{
+	sum_of_two <- sum(sample(1:6, 2, TRUE))
+	sum_of_two
+})
+
+
+sim_table <- table(sim_data) # Try this with small n, and show how we can fix it
+
+# sim_table <- table(factor(sim_data, levels = x))  # Ensure all values appear (important to avoid error)
+
+
+x <- 2:12 # possible values
+prob_est = sim_table/n
+mu_hat = sum(prob_est * x)
+sigma_2_hat = sum( (x-mu_hat)^2*prob_est )
+
+return(c(mu_hat, sigma_2_hat))
+}
+```
+
+```{r}
+sim_fn(100)
+sim_fn(1000)
+sim_fn(10000)
+```
+
+## Plot 1: Simulated mean vs n
+
+```{r chunk8}
+#| code-fold: true
+n_values = seq(50, 10000, 100)
+sim_mu = rep(0, length(n_values))
+sim_sigma_2 = rep(0, length(n_values))
+
+for (i in 1:length(n_values)){
+	sim_results <- sim_fn(n_values[i]) 
+	sim_mu[i] = sim_results[1]
+	sim_sigma_2[i] = sim_results[2]
+}
+
+sim_data <- data.frame(n_values, sim_mu)
+```
+
+```{r}
+#| code-fold: true
+# mu hat plot
+ggplot(sim_data, aes(x = n_values, y = sim_mu)) +
+  ylim(6.5,7.25) + 
+  geom_line(color = "blue") +
+  labs(title = "Estimated Mean vs. Sample Size",
+       x = "Number of trials (n)",
+       y = "Estimated Mean (mu_hat)") +
+  theme_minimal()
+```
+
+## Plot 2: Simulated $\sigma^2$ vs n
+
+```{r}
+#| code-fold: true
+sim_data <- data.frame(n_values, sim_sigma_2)
+# sigma^2 hat plot
+ggplot(sim_data, aes(x = n_values, y = sim_sigma_2)) +
+  ylim(5.5,6.25) + 
+  geom_line(color = "blue") +
+  labs(title = "Estimated Sigma^2 vs. Sample Size",
+       x = "Number of trials (n)",
+       y = "Estimated Variance (sigma_2_hat)") +
+  theme_minimal()
+```
+
+## Excersize : Linear combination of r.v.
+
+Let the random variable X be the sum of three rolled dice. However, this time, the first die has triple its value, the second die has double its value, and the last die remains unchanged. Can we simulate and verify whether the estimated $E(X)$ and $Var(X)$ are close to their true values?
+
+1.  What are possible values of $X$?
+2.  What are $E(X)$ and $Var(X)$?\
+3.  How do you obtain one trial in R? and simulated trials with $n=1000$?\
+4.  Let $Y_i$ for $i=1,2,3$ be a roll of one die each. Then can we say that $3E(Y_1)+ 2E(Y_2) + E(Y_3) = E(3 Y_1+ 2 Y_2 + Y_3)$? How about $Var(3 Y_1+ 2 Y_2 + Y_3)$?
+
+```{r activity}
+#| eval: false
+#| echo: false
+
+sim_fn <- function(n=1000){
+sim_data <- replicate(n,{
+	die1 <- 3*sample(1:6, 1, TRUE)
+	die2 <- 2*sample(1:6, 1, TRUE)
+	die3 <- sample(1:6, 1, TRUE)
+	sum_of_three <- die1 + die2 + die3
+})
+
+x <- 6:36 # possible values
+sim_table <- table(factor(sim_data, levels = x))  # Ensure all values appear (important to aviod error)
+
+
+prob_est = sim_table/n
+mu_hat = sum(prob_est * x)
+sigma_2_hat = sum( (x-mu_hat)^2*prob_est )
+
+return(c(mu_hat, sigma_2_hat))
+}
+
+sim_fn(1000)
+
+```
