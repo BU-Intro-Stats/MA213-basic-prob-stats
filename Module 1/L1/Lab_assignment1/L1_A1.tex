@@ -1,0 +1,55 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{verbatim}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{L1: Assignment }
+\author{}
+                              % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+Please complete the following problems and submit a file named \verb|assignment1.R|.
+\newline
+
+Remember:
+\begin{itemize}
+\item Do not rename external data files or edit them in any way. In other words, don't modify \verb|data.csv|. Your code won't work properly on my version of that data set, if you do.
+\item Do not use global paths in your script. Instead, use \verb|setwd()| interactively in the console, but do not forget to remove or comment out this part of the code before you submit. The directory structure of your machine is not the same as the one on Gradescope's virtual machines.
+\item Do not destroy or overwrite any variables in your program. I check them only after I have run your entire program from start to finish.
+\item Check to make sure you do not have any syntax errors. Code that doesn't run will get a very bad grade. 
+\item Make sure to name your submission \verb|assignment1.R|
+\end{itemize} 
+
+
+
+1. Calculate these and assign it to object \verb|myobj1|, \verb|myobj2|, \verb|myobj3|. \\
+
+1) $178.2 - 26$ \\
+
+2) $(\frac{12}{140})^{3}$\\ 
+
+3) $\frac{123^2}{456^3}$\\ \\
+
+
+2. Make a vector object named \verb|Mydata1| which has values $1,2, \dots, 10$. \\ \\
+
+3. Make a vector object named \verb|Mydata2| which has values A, A, A, B, B, C, C, C, C, C, D.\\ \\ 
+
+4. Make a vector object named \verb|Mydata3| which has values $1,3, 5\dots, 99$. \\ \\
+
+5. Read in the data set called \verb|data.csv| and obtain the mean of the data. Assign this mean value to \verb|Mymean|
+
+%\section{}
+%\subsection{}
+
+
+
+\end{document}  
