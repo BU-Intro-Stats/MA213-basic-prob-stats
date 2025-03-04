@@ -1,0 +1,246 @@
+---
+title: "MA213 - Fall 2025"
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+# **Lab Session 4: Simulation and probability**
+
+## Basic Statistics and Probability
+
+In this lab session, we will go over central limit theorem. Can we verify central limit theorem by simulation?
+
+## Pre-lab activities
+
+Let's think about
+
+-   How do we get random sample from a specific distribution?
+
+-   Can we visualize the shape of the distribution you picked?
+
+## Lab activities
+
+1.  You are given different population. Each group pick different population. We are supposed to pick it up differently.
+
+#### Some distribution functions in `R`.
+
+-   **Normal distribution** : `rnorm(n, mean, sd)`
+
+    -   `n`: Number of random values to generate
+    -   `mean`: Mean (center) of the distribution
+    -   `sd`: Standard deviation (spread) of the distribution
+
+-   **Exponential distribution** : `rexp(n, rate)`
+
+    -   `n`: Number of random values to generate
+    -   `rate`: Rate parameter (inverse of the mean)
+    -   Mean is `1/rate`
+    -   Standard deviation: `1/rate`
+
+-   **Binomial distribution** : `rbinom(n, size, prob)`
+
+    -   `n`: Number of random values to generate
+    -   `size`: Number of trials
+    -   `prob`: Probability of success in each trial
+    -   Mean is `n*prob`
+    -   Standard deviation is `sqrt(size * prob * (1 - prob))`
+
+-   **Poisson distribution** : `rpois(n, lambda)`
+
+    -   `n`: Number of random values to generate
+    -   `lambda`: Expected number of occurrences in a fixed interval
+    -   Mean is `lambda`
+    -   Standard deviation is `sqrt(lambda)`
+
+-   **Gamma distribution** : `rgamma(n, shape, scale)`
+
+    -   `n`: Number of random values to generate
+    -   `shape`: Shape parameter (determines the distribution's form)
+    -   `scale`: Scale parameter (stretches or shrinks the distribution)
+    -   The mean is `shape*scale`
+    -   Standard deviation is `sqrt(shape * scale^2)`
+
+-   **Uniform distribution** : `runif(n, min, max)`
+
+    -   `n`: Number of random values to generate
+    -   `min`: Lower bound of the distribution
+    -   `max`: Upper bound of the distribution
+    -   Mean is `(min + max) / 2`
+    -   Standard deviation is `sqrt((max - min)^2 / 12)`
+
+```{r}
+sigma <- 0.5
+N <- 1000000
+
+# Normal Distribution (mean = 0, sd = sigma)
+pops <- rnorm(N, mean = 1, sd = sigma)
+
+# Exponential Distribution (lambda = 1/sigma)
+lambda <- 1 / sigma
+pops <- rexp(N, rate = lambda)
+
+# Binomial Distribution (Bernoulli trial)
+p <- 0.5
+pops <- rbinom(N, size = 1, prob = p) # Bernoulli trial
+
+# Poisson Distribution (lambda = sigma^2)
+lambda <- sigma^2
+pops <- rpois(N, lambda = lambda)
+
+# Gamma Distribution
+alpha <- 4  
+beta <- sqrt(alpha) / sigma
+pops <- rgamma(N, shape = alpha, rate = beta)
+
+# Uniform Distribution
+min = 2
+max = 2 + sqrt(3)  #this will give the standard deviation ~ 0.5
+pops <- runif(N, min, max)
+
+
+
+```
+
+What is the shape of the data?
+
+```{r}
+
+# Can you plot them? (Some options are here) 
+# how ...? ggplot or plot or hist
+plot(pops, col = "blue")
+
+# or density plot
+plot(density(pops), col = "blue", lwd = 2, main = "Density Plot")
+
+# histogram
+hist(pops)
+lines(density(pops), col = "red", lwd = 2)
+
+# using ggplot + histogram + density 
+ggplot(data.frame(pops), aes(x = pops)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1) + 
+  geom_density(color = "red", linewidth = 1.2)
+
+
+# more fancy version with ggplot()
+ggplot(data.frame(pops), aes(x = pops)) +
+  geom_histogram(aes(y = ..density..), bins = 20, fill = "lightblue", color = "black", alpha = 0.6) +
+  geom_density(color = "red", linewidth = 1.2) +
+  theme_minimal() +
+  labs(title = "Histogram with Density Curve", x = "Values", y = "Density")
+ 
+```
+
+What is mean and standard deviation of the population?
+
+```{r}
+mean(pops)
+sd(pops)
+```
+
+Let's obtain $n=10$ and obtain $\bar{X}$ for 100 times from each sample.
+
+```{r}
+
+n = 10
+
+sample_get_xbar_fn <- function(n){
+ sampled_entries <- sample(pops, size = n)
+ xbar <- sum(sampled_entries) / n
+  return(xbar)
+}
+
+
+K = 1000 # simulation size is K=10000
+
+Sample_proportions <- replicate(K, sample_get_xbar_fn(n))
+
+
+
+# for loop version is also possible
+
+
+
+
+```
+
+Please also show the shape of the $\bar{X}$
+
+```{r}
+# density plot
+plot(density(Sample_proportions), col = "blue", lwd = 2, main = "Density Plot")
+
+
+# or
+
+# using ggplot + histogram + density 
+ggplot(data.frame(Sample_proportions), aes(x = Sample_proportions)) +
+  geom_histogram(aes(y = ..density..), bins = 20, fill = "lightblue", color = "black", alpha = 0.6) +
+  geom_density(color = "red", linewidth = 1.2) +
+  theme_minimal() +
+  labs(title = "Histogram with Density Curve", x = "Values", y = "Density")
+ 
+
+```
+
+2.  Show some of the obtained $\bar{X}_{i}$. Obtain the mean and the standard deviation of the $\bar{X}$.
+
+```{r}
+print("Xbar Data")
+print(head(Sample_proportions))
+print("Mean")
+print(mean(Sample_proportions))
+print("Standard devation of the data")
+print(sd(Sample_proportions))
+
+
+```
+
+3.  What is your conclusion?
+
+How can you tell the distribution follows normal distribution?
+
+```{r}
+qqnorm(Sample_proportions)
+qqline(Sample_proportions)
+```
+
+4.  Can we do when n=100 ? What do you see?
+
+```{r}
+
+
+```
+
+### Post-lab activities
+
+Recent statistics suggest that 10% of Americans rely on Social Network Sites (SNSs). We are going to have a simulation study if we can verify that CLT really works in this case too. Let's assume that US population is 300,000 for calculation purposes.
+
+Please name your submission as `lab4.R`
+
+0.  execute this `set.seed(213)`
+1.  Produce population data and assign it `population` object.
+2.  Obtain mean and standard deviation of the population and assign them to `mean_pop` and `sd_pop` accordingly.
+3.  Get the sample mean data for $n=10$ with $k=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample` and `sd_sample`.
+4.  Do one more time with the sample mean data for $n=50$ with $k=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample2` and `sd_sample2`.
+
+### Extra question?
+
+Suppose a random sample of 200 people are taken.
+
+What is the distribution of the sample proportion? Explain.
+
+What is the mean and standard deviation of the sample proportion?
+
+What is the probability that less than 32 of the people in the sample rely on SNSs?
+
+What is the probability that more than 20% of the people in the sample rely on SNSs?
+
+What is the probability that between 100 and 140 of the people in the sample rely on SNSs?
