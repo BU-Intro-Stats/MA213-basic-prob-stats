@@ -1,0 +1,59 @@
+---
+title: "MA213 - Fall 2025"
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+# **Lab Session 2: Plotting and Summaries **
+
+## Basic Statistics and Probability
+
+In this lab session, we will go over R
+
+## Pre-lab activities
+
+Let's think about
+
+-   Have you done any coding experience?
+
+-   
+
+## Lab activities
+
+1.  How to install?
+2.  activity 2
+3.  3
+4.  4
+
+```{r}
+
+
+```
+
+```{r}
+
+
+
+```
+
+```{r}
+
+
+
+```
+
+### Post-lab activities
+
+Please name your submission as `lab1.R`
+
+0.  load the `data.csv` file and assign it to `mydata` object.
+1.  
+
+### 
