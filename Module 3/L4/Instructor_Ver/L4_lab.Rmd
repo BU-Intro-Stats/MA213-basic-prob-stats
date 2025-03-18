@@ -17,7 +17,7 @@ library(ggplot2)
 
 In this lab session, we will go over central limit theorem. Can we verify central limit theorem by simulation?
 
-## Pre-lab activities
+## Pre-lab activities (more detailed !!)
 
 Let's think about
 
@@ -108,7 +108,7 @@ pops <- runif(N, min, max)
 
 ```
 
-What is the shape of the data?
+What is the shape of the data? ... more detailed...
 
 ```{r}
 
@@ -122,6 +122,11 @@ plot(density(pops), col = "blue", lwd = 2, main = "Density Plot")
 # histogram
 hist(pops)
 lines(density(pops), col = "red", lwd = 2)
+
+# instead of giving frequency... how to give the density? 
+hist(pops, freq = FALSE) # 
+
+
 
 # using ggplot + histogram + density 
 ggplot(data.frame(pops), aes(x = pops)) +
@@ -138,7 +143,7 @@ ggplot(data.frame(pops), aes(x = pops)) +
  
 ```
 
-What is mean and standard deviation of the population?
+What is mean and standard deviation of the population? .. what does it mean..?
 
 ```{r}
 mean(pops)
@@ -148,6 +153,9 @@ sd(pops)
 Let's obtain $n=10$ and obtain $\bar{X}$ for 100 times from each sample.
 
 ```{r}
+
+# we can teach them using for loops
+# we can teach them using a function + for loops
 
 n = 10
 
@@ -161,6 +169,8 @@ sample_get_xbar_fn <- function(n){
 K = 1000 # simulation size is K=10000
 
 Sample_proportions <- replicate(K, sample_get_xbar_fn(n))
+
+
 
 
 

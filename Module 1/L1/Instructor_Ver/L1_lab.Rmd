@@ -1,9 +1,9 @@
 ---
 title: "MA213 - Fall 2025"
 output:
-  pdf_document: default
   html_document:
     code_download: true 
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -15,45 +15,513 @@ library(ggplot2)
 
 ## Basic Statistics and Probability
 
-In this lab session, we will go over R
+In this lab session, we will go over how to use R
 
 ## Pre-lab activities
 
-Let's think about
+What is R?
 
--   Have you done any coding experience?
+-   R is Programming language and environment statistical computing, data manipulation and graphical display.
 
--   
+-   R is free and open source.
+
+-   Rstudio is also free and open source IDE (Integrated Development Environment) for R.
 
 ## Lab activities
 
-1.  How to install?
-2.  activity 2
-3.  3
-4.  4
+#### Let's first install R and RStudio.
+
+You can download and install R from
+
+<https://www.r-project.org/>
+
+And you can download and install RStudio from
+
+<https://posit.co/download/rstudio-desktop/>
+
+### Brief walk through about RStudio interface
+
+![RStudio overview](Screen_Shot_Rstudio.png){width="767"}
+
+window `1` : script window (text editor)
+
+window `2` : console window (this is where you type your R code and run)
+
+window `3` : plots, files, packages, help... window
+
+window `4` : environment window
+
+### Set up `working directory`
+
+-   You can go to `Session` → `set working directory` → `choose directory` and then choose your working directory.
+-   Manually you can setup your working directory as the following.
+
+```{r eval=FALSE, include=FALSE}
+
+setwd('path or your working directory')
+
+```
+
+```{r eval=FALSE, include=FALSE}
+
+# for example
+setwd('/Users/ylim2/Documents/Work/MA213') # this will set up your working directory
+getwd() # to check where you are at in term of your working directory
+
+```
+
+### Basic R syntax
+
+-   `#` comments : it is used to explain the code. Anything after `#` is NOT interpreted by the R.
+
+-   `<-` assignment operator : it assigns value/values to an object (`=` also works).
+
+-   Commands are separated by a new line or `;` sign.
+
+-   Objects : vectors, lists, matrices, factor, array, data frames.
 
 ```{r}
+# An object has a value # logical, numeric : integer, double, character types
+
+Myobject <- 123
+Myobject
+print(Myobject)
+
+
 
 
 ```
 
+Vector
+
+:   A vector in R is an ordered collection of values.
+
+    Note that the indexing in R starts from 1 not from 0.
+
 ```{r}
+# vector
+Myvector_object1 <- c(1,2,3,4,5,6,7,8,9,10)
+print(Myvector_object1)
+Myvector_object2 <- 1:5
+print(Myvector_object2)
+
+Myvector3 <- c("abc", "def", "ghi")
+Myvector3[1]
+
+# length function 
+length(Myvector3)
+
+# Accessing vector elements
+Myvector3[2]
+Myvector3[2:3]
+
+Myvector_object1[Myvector_object1>5]
+
+
+# Sorting elements of a R Vector
+Myvector4 <- c(5,1,4,30,20,16,2,4.5)
+Myvector4_sorted <- sort(Myvector4)
+Myvector4_sorted
+```
+
+Matrices
+
+:   Matrices are two-dimensional data structures in R
+
+    It can be thought as a two dimensional vector.  
+
+```{r}
+# matrices
+A = matrix(1:8,nrow = 4,ncol = 2)
+A
+
+A[3,2]
+A[3,1:2]
+A[A>5] # note here
+```
+
+Factors
+
+:   Factor is a categorical data structure in R that has a distinct levels.
+
+```{r}
+# factor
+gender <- c("M", "F", "M", "F","M", "F", "F", "F")
+gender
+
+gender_factored
+gender_factored <- factor(gender)
+
+# what if we only have three Males
+gender_data <- c("M", "M", "M")
+gender_data_factored <- factor(gender_data, levels=c("M", "F"))
+
+gender_data
+gender_data_factored
+
+
+typeof(gender_data_factored)
+```
+
+array
+
+:   An array is a multi-dimensional data structure. Like a matrix, it can hold only one type of data.
+
+```{r}
+# array 
+x <- array(1:40, dim=c(4,5,2))   # Generate a 4 by 5 by 2 array.
+x
+
+x[1,1,1] <- "hello"
+x
+```
+
+Data frame
+
+:   Data frame is an ordered collection of vectors that must have the same length but can contain different data types.
+
+```{r}
+# data frames
+diamonds
+
+
+```
+
+-   Data types : character, doubles, integers, raw, logical and complex.
+
+-   Name of an object
+
+    1.  Object name is case sensitive. `myData` and `mydata` are not the same.
+
+    2.  Do not start an object name with a number or `_`.
+
+        `2day` : not okay
+
+        `_day` : not okay
+
+        `day2` : okay
+
+        `day_2` : okay
+
+    3.  Under score, dot is okay.
+
+        `my_data` : okay
+
+        `my.data` : confusing, but it is okay in R
+
+    4.  Try to avoid function name
+
+        `mean`, `sd` ...
+
+<!-- -->
+
+-   R can be a calculator (some mathematics) : basic math operations to matrix operations
+
+-   Arithmetic operators
+
+$3+4$ : `3+4`
+
+$4-1$ : `4-1`
+
+$\frac{1}{10}$ : `1/10`
+
+$x \times y$ : `x*y`
+
+$x^{y}$ : `x^y` or `x**y`
+
+for example
+
+$(\frac{123}{456})^{-\frac{1}{3}}$
+
+```{r}
+(123/456)^(-1/3)
+#or
+(123/456)**(-1/3)
+
+```
+
+$e^{-\frac{1}{2}}$
+
+```{r}
+exp(-1/2)
+
+```
+
+$\log(10)$
+
+```{r}
+# by doing this we can show what is the base for log built-in function
+log(10)
+log10(10)
+```
+
+-   matrix operations
+
+$A \times B \text{ where } A= \begin{pmatrix} 1 & 2& 3 \\ 4 &5 & 6  \end{pmatrix} \text{ and } B= \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6   \end{pmatrix}$
+
+```{r}
+A = matrix( data = c(1,4,2,5,3,6), nrow = 2, ncol=3)
+A
+
+B = matrix( data = c(1,3,5,2,4,6), nrow = 3, ncol=2)
+B
+
+A %*% B
+
+```
+
+But A \* B performs element-wise multiplication, multiplying corresponding elements in each matrix.
+
+```{r}
+A = matrix(1:4, nrow=2, ncol=2)
+B = matrix(1:4, nrow=2, ncol=2)
+
+A
+B
+
+A*B
+
+A%*%B
+
+
+```
+
+Inverse of a matrix
+
+$$
+\boldsymbol{A}^{-1}
+$$
+
+```{r}
+
+solve(A)
+
+```
+
+-   logical operators
+
+    | Operator | Description                |
+    |----------|----------------------------|
+    | \> a     | Greater than a             |
+    | \>= a    | Greater than or equal to a |
+    | \< a     | Less than a                |
+    | \<= a    | Less than or equal to a    |
+    | == a     | Exactly equal to a         |
+    | != a     | Not equal to a             |
+    | !a       | Not a                      |
+    | a        | b                          |
+    | a & b    | a AND b                    |
+
+```{r}
+
+a <- 5
+b <- 10
+
+# Greater than
+a > 3   
+
+
+# Greater than or equal to
+b >= 20 
+
+# Less than
+a < b  
+
+# Less than or equal to
+a <= 5  # TRUE
+b <= a  # FALSE
+
+# Exactly equal to
+a == 5  # TRUE
+b == 10 # TRUE
+
+# Not equal to
+a != b  # TRUE
+b != 10 # FALSE
+
+# Not a (logical negation)
+x <- FALSE
+!x  # TRUE
+
+# OR operator
+a > 3 | b < 5  # TRUE (since a > 3 is TRUE)
+
+# AND operator
+a > 3 & b < 5  # FALSE (since b < 5 is FALSE)
+
+```
+
+### Functions and packages
+
+-   There are some built in functions (base functions)
+
+``` r
+mean()
+sd()
+sum()
+length()
+rep()
+seq()
+sqrt()
+...
+```
+
+-   Packages
+
+    ```{r}
+    # loading and installing packages
+
+    # install.packages("package name")
+    # library(package name)
+    ```
+
+-   How to look at how a function is used?
+
+    ``` r
+    ?function_name
+    help(function_name)
+
+    or 
+
+    google them
+    ```
+
+-   How to write a function
+
+    ``` r
+    function_name = function(arguments) {
+      statements
+      return(value)
+    }
+    ```
+
+Let's make a function that is calculating sum of 3 numbers
+
+```{r}
+add_three <- function(a,b,c){
+  out <- a+b+c
+  return(out)
+}
+
+add_three(1,2,3)
+
 
 
 
 ```
 
-```{r}
+-   Best coding practice?
 
+<https://waterdata.usgs.gov/blog/intro-best-practices/>
+
+### Manage data
+
+-   How to import data
+
+-   Exploring vectors, data frame and matrices
+
+1.  Data management in vectors, data frames, lists, matrices, missing values
+
+2.  dplyr syntax (optional)
+
+Importing data
+
+Boston House Prices
+
+<https://www.kaggle.com/datasets/vikrishnan/boston-house-prices?resource=download>
+
+or
+
+<https://lib.stat.cmu.edu/datasets/boston>
+
+```{r}
+data <- read.csv("Housing.csv")
+head(data)
 
 
 ```
 
-### Post-lab activities
+Data cleaning
 
-Please name your submission as `lab1.R`
+Show the houses where more than 90% of the owner-occupied units were built before 1940.
 
-0.  load the `data.csv` file and assign it to `mydata` object.
-1.  
+```{r}
 
-### 
+data[data$AGE>90,]
+
+
+```
+
+How many houses are in this data?
+
+```{r}
+
+dim(data)
+
+length(data$X)
+```
+
+How many houses where more than 90% of the owner-occupied units were built before 1940?
+
+```{r}
+
+length(data$AGE[data$AGE>90])
+
+```
+
+What is the smallest proportion of owner-occupied units that were built before 1940?
+
+What is the largest proportion of owner-occupied units that were built before 1940?
+
+```{r}
+
+min(data$AGE)
+max(data$AGE)
+
+```
+
+### Post-lab activities (This can be done during the lab ; at the end of the lab)
+
+Please name your submission as `lab1.R` on GradeScope.
+
+1.  Some mathematical questions to R
+
+Calculate these questions and assign the answers to the corresponding objects.
+
+a) $$\frac{45}{9}$$
+
+b) $$ 25^{4}$$
+
+c) $$ \exp(-10) $$
+
+For example, you would write a line of code as the following
+
+``` R
+a <- 45/9
+```
+
+d) Create a vector with
+
+(2,2,...,2,4,4,4) where there are 12 occurrences of 2 and 3 occurrences 4 and assign it to object `d` .
+
+e) You conducted a survey what courses a certain group of students are taking this semester. There are 17 for 'MA213', 5 for 'CH101' and 10 for 'MA 124'. Assign these to object `e`.
+
+f) You want to verify whether you can calculate the sum of the numbers from 1 to 1000. To do that, you want to create first object `f` that has numbers from 1 to 1000.
+
+g) Assign the sum of the numbers from 1 to 1000 that you created from f to `g` (use `f`).
+
+2.  Make a function name `quadratic` which calculate quadratic equation.
+
+    $$
+     x = \frac {-b \pm \sqrt{b^2 -4ac}} {2a}
+    $$
+
+3.  Data Question.
+
+(a). Load the csv file `Housing.csv` and assign it to object name `mydata` .
+
+(b). Among houses close to Charles River, what is the smallest proportion of owner-occupied units that were built before 1940? Assign the obtained proportion to `my_poportion`.
+
+4.  Take the logarithm of the median value of owner-occupied homes (in thousands of dollars) and assign it to `LMV`.
+
+    Find the minimum LMV value and assign it to `min_LMV`.

@@ -1,0 +1,61 @@
+---
+title: "MA213 - Fall 2025"
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+# \*\* L3: Simulation and Probability \*\*
+
+## Basic Statistics and Probability
+
+In this lab session, we will go over random variables, and compute the expectation and variance of random variables and its linear combination. We will verify if the theory works using R.
+
+## Pre-lab activities
+
+Let's think about
+
+-   What is random variable?
+
+-   How do we run a simulation study?
+
+## Lab activities
+
+Q) Let’s roll a die! You are playing a dice-rolling game with your friend, and you’re curious about how this game goes at the end. The rule is you roll it once and other player roll it once and add the outcome. How this game goes at the end? In other words, what is the expectation and variance?
+
+1.  activity 2
+2.  3
+3.  4
+
+```{r}
+
+
+
+```
+
+```{r}
+
+
+
+```
+
+```{r}
+
+
+
+```
+
+### Post-lab activities
+
+Please name your submission as `lab3.R`
+
+0.  load the `data.csv` file and assign it to `mydata` object.
+1.  
+
+### 
