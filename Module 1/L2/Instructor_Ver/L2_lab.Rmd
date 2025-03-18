@@ -11,26 +11,29 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# **Lab Session 2: Plotting and Summaries **
+# **Lab Session 2: Plotting and Summaries** 
 
 ## Basic Statistics and Probability
 
-In this lab session, we will go over R
+In this lab session, we will go over
 
 ## Pre-lab activities
 
-Let's think about
-
--   Have you done any coding experience?
-
--   
+-   Some small questions for review last time !!
 
 ## Lab activities
 
-1.  How to install?
-2.  activity 2
-3.  3
-4.  4
+Given data (how do we summarize and visualize it?)
+
+Multiple data show case
+
+1.  Scatterplot
+2.  Dot plots
+3.  Stacked dot plot
+4.  Histogram
+5.  Contingency Tables
+6.  Bar plots
+7.  Pie Charts
 
 ```{r}
 
