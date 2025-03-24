@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# **Lab Session 1: Introduction to R**
+# Basic Statistics and Probability
 
-## Basic Statistics and Probability
+## **Lab Session 1: Introduction to R**
 
 In this lab session, we will go over how to use R
 
@@ -97,10 +97,13 @@ Vector
 ```{r}
 # vector
 
+
 # length function 
 
 
 # Accessing vector elements
+
+
 
 # Sorting elements of a R Vector
 
@@ -115,6 +118,7 @@ Matrices
 ```{r}
 # matrices
 
+
 ```
 
 Factors
@@ -122,10 +126,7 @@ Factors
 :   Factor is a categorical data structure in R that has a distinct levels.
 
 ```{r}
-# factor
 
-
-# what if we only have three Males
 
 ```
 
@@ -134,7 +135,6 @@ array
 :   An array is a multi-dimensional data structure. Like a matrix, it can hold only one type of data.
 
 ```{r}
-# array 
 
 ```
 
@@ -143,7 +143,8 @@ Data frame
 :   Data frame is an ordered collection of vectors that must have the same length but can contain different data types.
 
 ```{r}
-# data frames
+
+
 
 ```
 
@@ -173,7 +174,7 @@ Data frame
 
         `mean`, `sd` ...
 
--   R can be a calculator (some mathematics) : basic math operations to matrix operations
+### R can be a calculator (some mathematics) : basic math operations to matrix operations
 
 -   Arithmetic operators
 
@@ -207,6 +208,7 @@ $\log(10)$
 
 ```{r}
 
+
 ```
 
 -   matrix operations
@@ -215,11 +217,14 @@ $A \times B \text{ where } A= \begin{pmatrix} 1 & 2& 3 \\ 4 &5 & 6  \end{pmatrix
 
 ```{r}
 
+
+
 ```
 
 But A \* B performs element-wise multiplication, multiplying corresponding elements in each matrix.
 
 ```{r}
+
 
 
 
@@ -253,32 +258,6 @@ $$
 
 ```{r}
 
-
-# Greater than
-
-
-# Greater than or equal to
-
-
-# Less than
-
-
-# Less than or equal to
-
-
-# Exactly equal to
-
-
-# Not equal to
-
-
-# Not a (logical negation)
-
-
-# OR operator
-
-
-# AND operator
 
 
 ```
@@ -332,6 +311,7 @@ Let's make a function that is calculating sum of 3 numbers
 ```{r}
 
 
+
 ```
 
 -   Best coding practice?
@@ -361,6 +341,7 @@ or
 ```{r}
 
 
+
 ```
 
 Data cleaning
@@ -368,6 +349,7 @@ Data cleaning
 Show the houses where more than 90% of the owner-occupied units were built before 1940.
 
 ```{r}
+
 
 
 ```
@@ -393,6 +375,7 @@ What is the largest proportion of owner-occupied units that were built before 19
 ```{r}
 
 
+
 ```
 
 ### Post-lab activities (This can be done during the lab ; at the end of the lab)
@@ -413,6 +396,9 @@ For example, you would write a line of code as the following
 
 ``` r
 a <- 45/9
+.
+.
+.
 ```
 
 d)  Create a vector with

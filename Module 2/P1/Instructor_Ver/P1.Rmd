@@ -17,7 +17,7 @@ library(ggplot2)
 
 ## Pre-lab activities
 
--   How to use Rmd file
+-   How to use Rmd file.
 
 -   Explain about project -\> discussion session in this time?
 

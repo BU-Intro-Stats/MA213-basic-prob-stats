@@ -11,51 +11,214 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# \*\* L3: Simulation and Probability \*\*
+# Basic Statistics and Probability
 
-## Basic Statistics and Probability
+## L3: Simulation and Probability
 
-In this lab session, we will go over random variables, and compute the expectation and variance of random variables and its linear combination. We will verify if the theory works using R.
+In this lab session, we will go over random variables and compute the expectation and variance of random variables and their linear combinations. We will verify whether the theory holds using R.
 
 ## Pre-lab activities
 
 Let's think about
 
--   What is random variable?
+-   What are the outcome and random variable in this case?
 
--   How do we run a simulation study?
+-   What is the expectation?
+
+## Q) Let’s roll a die! You are playing a dice-rolling game and you’re curious about how this game goes at the end. The rule is you roll it once and other player roll it once and add the outcome. How this game goes at the end? In other words, what is the expectation and variance?
+
+We need three people. Two people roll the dice each time and the other person record each turn.
+
+| i        | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
+|----------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| person 1 |     |     |     |     |     |     |     |     |     |     |
+| person 2 |     |     |     |     |     |     |     |     |     |     |
+| outcome  |     |     |     |     |     |     |     |     |     |     |
+
+Then, what is $E(X)$ and $Var(X)$? How do you obtain from this simulation study?
 
 ## Lab activities
 
-Q) Let’s roll a die! You are playing a dice-rolling game with your friend, and you’re curious about how this game goes at the end. The rule is you roll it once and other player roll it once and add the outcome. How this game goes at the end? In other words, what is the expectation and variance?
+Let's consider if we want to do $i=1, ..., 1000$ . How do you want to do it?
 
-1.  activity 2
-2.  3
-3.  4
+1.  Rolling dice part
+2.  Record each run
+3.  Calculation at the end
+
+### How do you roll each run using R?
+
+Sample function —
+
+### Random Samples and Permutations
+
+#### Description
+
+`sample` takes a sample of the specified size from the elements of `x` using either with or without replacement.
+
+#### Usage
+
+```         
+sample(x, size, replace = FALSE, prob = NULL)
+```
+
+#### Arguments
+
+|  |  |
+|----|----|
+| `x` | either a vector of one or more elements from which to choose, or a positive integer. See ‘Details.’ |
+| `n` | a positive number, the number of items to choose from. See ‘Details.’ |
+| `size` | a non-negative integer giving the number of items to choose. |
+| `replace` | should sampling be with replacement? |
+| `prob` | a vector of probability weights for obtaining the elements of the vector being sampled. |
+
+Let's roll one dice and show the output.
 
 ```{r}
+
+onedice <- sample(c(1,2,3,4,5,6), 1)
+onedice
+
+# or
+onedice <- sample(1:6, 1)
+onedice
+
+#so outcome from those two dice
+dice1 <- sample(1:6, 1)
+dice2 <- sample(1:6, 1)
+sum_of_two <- dice1 + dice2
+sum_of_two
+
+
+```
+
+## Loops
+
+`for` loops are used to iterate operations over items in a vector.
+
+The basic syntax is of the form:
+
+``` r
+for (item in vector) {
+  perform_action
+}
+```
+
+For example, if you want to print 1 to 10 each iteration.
+
+```{r}
+my_vector = 1:10
+
+for (i in my_vector){
+  print(i)
+}
 
 
 
 ```
 
+### Using `for loop`, assign outcome of two dice rolled into `myoutcome` from 1000 iterations.
+
 ```{r}
+
+myoutcome = rep(0, 100)
+
+for (i in 1:1000){
+  dice1 <- sample(1:6, 1)
+  dice2 <- sample(1:6, 1)
+  sum_of_two <- dice1 + dice2
+  myoutcome[i] <- sum_of_two
+}
+
+head(myoutcome)
+
 
 
 
 ```
 
+Calculate probability of each outcome.
+
+```{r}
+factored_outcome <- factor(myoutcome)
+outcome_table <- table(factored_outcome)
+n <- length(myoutcome)
+prob_outcome <- outcome_table/n
+prob_outcome 
+# how to ensure that it is proper probability? 
+sum(prob_outcome)
+
+```
+
+Calculate the simulated expected value of the random variable.
+
+```{r}
+outcome_table * prob_outcome
+names(outcome_table) # we need this
+values <- as.numeric(names(outcome_table) ) 
+# or
+values <- 2:12 
+
+
+sum(values * prob_outcome)
+mu_hat = sum(values * prob_outcome)
+
+
+```
+
+Calculate the simulated variance of the random variable.
+
 ```{r}
 
+sigma_2_hat <- sum( (values-mu_hat)^2 - prob_outcome  )
+sigma_2_hat
+```
+
+Make a function that has an input `n` and a list of output that gives you the simulated expected value and variance.
+
+```{r}
+
+sim_fn <- function(n=1000){
+ myoutcome = rep(0, n)
+
+  for (i in 1:n){
+    dice1 <- sample(1:6, 1)
+    dice2 <- sample(1:6, 1)
+    sum_of_two <- dice1 + dice2
+    myoutcome[i] <- sum_of_two
+  }
+  factored_outcome <- factor(myoutcome)
+  outcome_table <- table(factored_outcome)
+  
+  prob_outcome <- outcome_table/n
+
+  values <- as.numeric(names(outcome_table) ) 
 
 
+  mu_hat = sum(values * prob_outcome)
+  sigma_2_hat <- sum( (values-mu_hat)^2 - prob_outcome  )
+ 
+  output <- list(mu = mu_hat, sigma2 = sigma_2_hat)
+  return(output)
+}
+
+
+sim_fn(100)
+
+sim_fn(1000)
+
+sim_fn(10000)
+
+sim_fn(100000)
 ```
 
 ### Post-lab activities
 
 Please name your submission as `lab3.R`
 
-0.  load the `data.csv` file and assign it to `mydata` object.
-1.  
+This time, you invented another challenging game now. If one person roll a dice, then the value is multiplied by 3. Also when second person roll a dice, then the value is multiplied by 4. The final outcome is the sum of those values. What is the expected value and variance of the random variable? Can you think about it from the theory? Can you verify it using simulation through R?
 
-### 
+Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively.
+
+You are going to make an function named `my_sim` which takes input of `n`.
+
+(Gradescope will test with $n=10, 50$ and $100$ ).
