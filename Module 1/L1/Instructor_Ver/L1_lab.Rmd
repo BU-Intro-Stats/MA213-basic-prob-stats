@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# **Lab Session 1: Introduction to R**
+# Basic Statistics and Probability
 
-## Basic Statistics and Probability
+## **Lab Session 1: Introduction to R**
 
 In this lab session, we will go over how to use R
 
@@ -213,9 +213,7 @@ diamonds
 
         `mean`, `sd` ...
 
-<!-- -->
-
--   R can be a calculator (some mathematics) : basic math operations to matrix operations
+### R can be a calculator (some mathematics) : basic math operations to matrix operations
 
 -   Arithmetic operators
 
@@ -488,27 +486,29 @@ Please name your submission as `lab1.R` on GradeScope.
 
 Calculate these questions and assign the answers to the corresponding objects.
 
-a) $$\frac{45}{9}$$
+a)  $$\frac{45}{9}$$
 
-b) $$ 25^{4}$$
+b)  $$ 25^{4}$$
 
-c) $$ \exp(-10) $$
+c)  $$ \exp(-10) $$
 
 For example, you would write a line of code as the following
 
-``` R
+``` r
 a <- 45/9
 ```
 
-d) Create a vector with
+d)  Create a vector with
 
 (2,2,...,2,4,4,4) where there are 12 occurrences of 2 and 3 occurrences 4 and assign it to object `d` .
 
-e) You conducted a survey what courses a certain group of students are taking this semester. There are 17 for 'MA213', 5 for 'CH101' and 10 for 'MA 124'. Assign these to object `e`.
+e)  You conducted a survey what courses a certain group of students are taking this semester. There are 17 for 'MA213', 5 for 'CH101' and 10 for 'MA 124'. Assign these to object `e`.
 
-f) You want to verify whether you can calculate the sum of the numbers from 1 to 1000. To do that, you want to create first object `f` that has numbers from 1 to 1000.
+f)  You want to verify whether you can calculate the sum of the numbers from 1 to 1000. To do that, you want to create first object `f` that has numbers from 1 to 1000.
 
-g) Assign the sum of the numbers from 1 to 1000 that you created from f to `g` (use `f`).
+g)  Assign the sum of the numbers from 1 to 1000 that you created from f to `g` (use `f`).
+
+<!-- -->
 
 2.  Make a function name `quadratic` which calculate quadratic equation.
 

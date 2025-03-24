@@ -11,9 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# **Lab Session 4: Simulation and probability**
+# Basic Statistics and Probability
 
-## Basic Statistics and Probability
+## **Lab Session 4: Simulation and probability**
+
+
 
 In this lab session, we will go over central limit theorem. Can we verify central limit theorem by simulation?
 

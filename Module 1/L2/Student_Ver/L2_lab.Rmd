@@ -11,49 +11,221 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# **Lab Session 2: Plotting and Summaries **
+# Basic Statistics and Probability
 
-## Basic Statistics and Probability
+## **Lab Session 2: Plotting and Summaries**
 
-In this lab session, we will go over R
+In this lab session, we will go over
 
 ## Pre-lab activities
 
-Let's think about
-
--   Have you done any coding experience?
-
--   
+-   Let’s form another group of two. This time, choose a different person.
+-   Review of last time and questions from last time.
 
 ## Lab activities
 
-1.  How to install?
-2.  activity 2
-3.  3
-4.  4
+Load some libraries
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+Load the data from `airquality.csv` and show first 5 rows to see how this data is organized.
 
 ```{r}
 
 
 ```
 
+Let's check if we have a missing value.
+
+```{r}
+
+
+```
+
+Let's save them without missing value.
+
+```{r}
+
+
+```
+
+Let's discuss what is numerical data and what is categorical data. Also, discuss variables of interest (and possible hypothesis).
+
+```{r}
+
+
+```
+
+|                       |                 |
+|-----------------------|----------------:|
+| airquality {datasets} | R Documentation |
+
+## New York Air Quality Measurements
+
+### Description
+
+Daily air quality measurements in New York, May to September 1973.
+
+### Usage
+
+```         
+airquality
+```
+
+### Format
+
+A data frame with 153 observations on 6 variables.
+
+|        |           |         |                         |
+|-------:|:----------|:--------|:------------------------|
+| `[,1]` | `Ozone`   | numeric | Ozone (ppb)             |
+| `[,2]` | `Solar.R` | numeric | Solar R (lang)          |
+| `[,3]` | `Wind`    | numeric | Wind (mph)              |
+| `[,4]` | `Temp`    | numeric | Temperature (degrees F) |
+| `[,5]` | `Month`   | numeric | Month (1--12)           |
+| `[,6]` | `Day`     | numeric | Day of month (1--31)    |
+
+### Details
+
+Daily readings of the following air quality values for May 1, 1973 (a Tuesday) to September 30, 1973.
+
+-   `Ozone`: Mean ozone in parts per billion from 1300 to 1500 hours at Roosevelt Island
+
+-   `Solar.R`: Solar radiation in Langleys in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park
+
+-   `Wind`: Average wind speed in miles per hour at 0700 and 1000 hours at LaGuardia Airport
+
+-   `Temp`: Maximum daily temperature in degrees Fahrenheit at LaGuardia Airport.
+
+### Source
+
+The data were obtained from the New York State Department of Conservation (ozone data) and the National Weather Service (meteorological data).
+
+### References
+
+Chambers, J. M., Cleveland, W. S., Kleiner, B. and Tukey, P. A. (1983) *Graphical Methods for Data Analysis*. Belmont, CA: Wadsworth.
+
+Numerical Data
+
+mean and standard deviation
+
+1.  Make a scatter plot of `Ozone` and `Temp` .
+
 ```{r}
 
 
 
 ```
 
+2.  Make a dot plot of `Ozone`.
+
 ```{r}
 
 
 
 ```
+
+3.  Make a stacked dot plot of `Ozone` .
+
+```{r}
+
+
+```
+
+4.  Show histogram of `Ozone` .
+
+```{r}
+
+
+
+```
+
+4.  Show histogram of `Ozone` with different bins/breaks to show more information.
+
+```{r}
+
+
+
+```
+
+## Categorical Data
+
+We are going to see the famous `Titanic` dataset.
+
+Let's load the data.
+
+```{r}
+
+
+
+```
+
+Which one is numerical variable and which one is categorical variable?
+
+How do we know? Let's discuss about them.
+
+```{r}
+
+
+```
+
+1.  Show the contingency table for `Pclass` vs `Survived` .
+
+```{r}
+
+
+
+
+```
+
+2.Show Bar plot of `Survived`.
+
+```{r}
+
+
+
+```
+
+3.  Show the pie chart of `Pclass`.
+
+```{r}
+
+
+```
+
+4.  We are also interested in the average age of each class. Show the bar plot of average age per each class.
+
+    ```{r}
+
+       
+
+
+    ```
 
 ### Post-lab activities
 
-Please name your submission as `lab1.R`
+Please name your submission as `lab2.R`
 
-0.  load the `data.csv` file and assign it to `mydata` object.
-1.  
+We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
 
-### 
+0.  load the `airquality.csv` file and assign it to `my_df` object.
+
+1.  Show the scatter plot of Solar radiation and Temperature.
+
+2.  Show average Solar radiation in each month. Use bar plot.
+
+    2.1) Assign average Solar radiation into object `solar_radiation_avg` .
+
+    2.2) Show the bar plot of average Solar radiation per each month.
+
+Back to Titanic data.
+
+0.  Show the pie chart of `sex` in `titanic` data.
+
+    3.1) Load `titanic.csv` file and assign it to `my_df2` object.
+
+    3.2) Show the pie chart of `sex` .

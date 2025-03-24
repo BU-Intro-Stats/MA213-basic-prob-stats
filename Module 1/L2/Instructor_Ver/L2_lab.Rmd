@@ -11,52 +11,321 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 ```
 
-# **Lab Session 2: Plotting and Summaries** 
+# Basic Statistics and Probability
 
-## Basic Statistics and Probability
+## **Lab Session 2: Plotting and Summaries**
 
 In this lab session, we will go over
 
 ## Pre-lab activities
 
--   Some small questions for review last time !!
+-   Let’s form another group of two. This time, choose a different person.
+-   Review of last time and questions from last time.
 
 ## Lab activities
 
-Given data (how do we summarize and visualize it?)
-
-Multiple data show case
-
-1.  Scatterplot
-2.  Dot plots
-3.  Stacked dot plot
-4.  Histogram
-5.  Contingency Tables
-6.  Bar plots
-7.  Pie Charts
+Load some libraries
 
 ```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+Load the data from `airquality.csv` and show first 5 rows to see how this data is organized.
+
+```{r}
+df = read.csv("airquality.csv")
+head(df)
+```
+
+Let's check if we have a missing value.
+
+```{r}
+is.na(df)
+
+```
+
+Let's save them without missing value.
+
+```{r}
+
+df_filtered <- na.omit(df)
+df_filtered
 
 
 ```
 
+Let's discuss what is numerical data and what is categorical data. Also, discuss variables of interest (and possible hypothesis).
+
 ```{r}
+head(df_filtered)
+
+help("airquality")
+```
+
+|                       |                 |
+|-----------------------|----------------:|
+| airquality {datasets} | R Documentation |
+
+## New York Air Quality Measurements
+
+### Description
+
+Daily air quality measurements in New York, May to September 1973.
+
+### Usage
+
+```         
+airquality
+```
+
+### Format
+
+A data frame with 153 observations on 6 variables.
+
+|        |           |         |                         |
+|-------:|:----------|:--------|:------------------------|
+| `[,1]` | `Ozone`   | numeric | Ozone (ppb)             |
+| `[,2]` | `Solar.R` | numeric | Solar R (lang)          |
+| `[,3]` | `Wind`    | numeric | Wind (mph)              |
+| `[,4]` | `Temp`    | numeric | Temperature (degrees F) |
+| `[,5]` | `Month`   | numeric | Month (1--12)           |
+| `[,6]` | `Day`     | numeric | Day of month (1--31)    |
+
+### Details
+
+Daily readings of the following air quality values for May 1, 1973 (a Tuesday) to September 30, 1973.
+
+-   `Ozone`: Mean ozone in parts per billion from 1300 to 1500 hours at Roosevelt Island
+
+-   `Solar.R`: Solar radiation in Langleys in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park
+
+-   `Wind`: Average wind speed in miles per hour at 0700 and 1000 hours at LaGuardia Airport
+
+-   `Temp`: Maximum daily temperature in degrees Fahrenheit at LaGuardia Airport.
+
+### Source
+
+The data were obtained from the New York State Department of Conservation (ozone data) and the National Weather Service (meteorological data).
+
+### References
+
+Chambers, J. M., Cleveland, W. S., Kleiner, B. and Tukey, P. A. (1983) *Graphical Methods for Data Analysis*. Belmont, CA: Wadsworth.
+
+Numerical Data
+
+mean and standard deviation
+
+1.  Make a scatter plot of `Ozone` and `Temp` .
+
+```{r}
+
+plot(df_filtered$Ozone, df_filtered$Temp)
+
+# ggplot version
+ggplot(data=df_filtered, mapping=aes(x=Ozone, y=Temp)) + geom_point()
+
+
+```
+
+2.  Make a dot plot of `Ozone`.
+
+```{r}
+
+stripchart(df_filtered$Ozone)
 
 
 
 ```
 
+3.  Make a stacked dot plot of `Ozone` .
+
 ```{r}
 
+stripchart(df_filtered$Ozone, method = "stack")
+
+# ggplot version
+
+ggplot(data=df_filtered, mapping=aes(Ozone)) + geom_dotplot()
+```
+
+4.  Show histogram of `Ozone` .
+
+```{r}
+
+hist(df_filtered$Ozone)
+
+# ggplot version
+
+ggplot(data=df_filtered, mapping=aes(Ozone)) + geom_histogram()
+
+```
+
+4.  Show histogram of `Ozone` with different bins/breaks to show more information.
+
+```{r}
+
+hist(df_filtered$Ozone, breaks=30)
+
+# ggplot version
+
+ggplot(data=df_filtered, mapping=aes(Ozone)) + geom_histogram(bins = 5)
+
+
+ggplot(data=df_filtered, mapping=aes(Ozone)) + geom_histogram(bins = 30)
+```
+
+## Categorical Data
+
+We are going to see the famous `Titanic` dataset.
+
+Let's load the data.
+
+```{r}
+# loading from csv file
+df <- read.csv("titanic.csv")
+head(df)
+
+# maybe we can also show built in Titanic data
+# but this data is already table df
+
+```
+
+Which one is numerical variable and which one is categorical variable?
+
+How do we know? Let's discuss about them.
+
+```{r}
+summary(df)
 
 
 ```
+
+1.  Show the contingency table for `Pclass` vs `Survived` .
+
+```{r}
+
+df2 <- df[,2:3]
+table_data <- table(df2)
+print(table_data)
+
+
+# tidyr version
+
+table_data <- df %>% 
+  count(Pclass, Survived) %>%
+  tidyr::spread(key = Pclass, value = n, fill = 0)
+table_data
+
+
+table_data <- df %>%
+  count(Survived, Pclass) %>%
+  tidyr::pivot_wider(names_from = Pclass, values_from = n, values_fill = list(n = 0))
+
+table_data
+
+
+```
+
+2.Show Bar plot of `Survived`.
+
+```{r}
+
+barplot(df2$Survived) #try this !! this won't work
+
+# but try
+Survived_table <- table(df2$Survived)
+Survived_table
+barplot(Survived_table)
+
+# ggplot + dplyr version
+
+new_df <- df %>% count(Survived)
+
+ggplot(new_df, aes(x = factor(Survived), y=n)) +
+  geom_col() 
+
+# You can even combine dplyr + ggplot codes
+df %>% count(Survived) %>%
+  ggplot(aes(x=factor(Survived), y=n)) + 
+  geom_col()
+
+# You can assign this plot to an object
+My_bar_plot <- df %>% count(Survived) %>%
+  ggplot(aes(x=factor(Survived), y=n)) + 
+  geom_col()
+
+My_bar_plot
+
+```
+
+3.  Show the pie chart of `Pclass`.
+
+```{r}
+Pclass_table <- table(df$Pclass)
+pie(Pclass_table)
+
+pie(Pclass_table, col = c("red", "yellow", "blue"))
+
+
+
+# dplyr + ggplot
+
+Myplot <- df %>% count(Pclass) %>% 
+  mutate(Pclass = factor(Pclass), n = factor(n)) %>%
+  ggplot(aes(x=n, fill=Pclass)) + geom_bar(width = 1) + coord_polar()
+
+Myplot
+```
+
+4.  We are also interested in the average age of each class. Show the bar plot of average age per each class.
+
+    ```{r}
+
+    avg_age <- aggregate(Age ~ Pclass, data = df, FUN = mean, na.rm = TRUE)
+
+    barplot(avg_age$Age, names.arg = avg_age$Pclass)
+
+
+    # or 
+    # dplyr version
+    avg_age <- df %>% 
+      group_by(Pclass) %>%
+      summarise(Age = mean(Age, na.rm=T))
+
+
+    barplot(avg_age$Age)
+
+
+
+    # ggplot version
+    myplot <- ggplot(data = avg_age, aes(Pclass, Age)) + geom_col()
+
+    myplot 
+
+    ```
 
 ### Post-lab activities
 
-Please name your submission as `lab1.R`
+Please name your submission as `lab2.R`
 
-0.  load the `data.csv` file and assign it to `mydata` object.
-1.  
+We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
 
-### 
+0.  load the `airquality.csv` file and assign it to `my_df` object.
+
+1.  Show the scatter plot of Solar radiation and Temperature.
+
+2.  Show average Solar radiation in each month. Use bar plot.
+
+    2.1) Assign average Solar radiation into object `solar_radiation_avg` .
+
+    2.2) Show the bar plot of average Solar radiation per each month.
+
+Back to Titanic data.
+
+0.  Show the pie chart of `sex` in `titanic` data.
+
+    3.1) Load `titanic.csv` file and assign it to `my_df2` object.
+
+    3.2) Show the pie chart of `sex` .
