@@ -149,8 +149,10 @@ Factors
 gender <- c("M", "F", "M", "F","M", "F", "F", "F")
 gender
 
-gender_factored
+
 gender_factored <- factor(gender)
+gender_factored
+
 
 # what if we only have three Males
 gender_data <- c("M", "M", "M")

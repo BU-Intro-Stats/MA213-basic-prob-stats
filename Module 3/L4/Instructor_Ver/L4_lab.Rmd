@@ -1,9 +1,9 @@
 ---
 title: "MA213 - Fall 2025"
 output:
-  pdf_document: default
   html_document:
     code_download: true 
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -33,7 +33,7 @@ In this lab session, we will go over central limit theorem. Can we verify centra
 
 We have a hypothetical population that are
 
-``` R
+``` r
 pop <- c(rep("Apple", 10), rep("Android", 4))
 ```
 
@@ -82,7 +82,7 @@ ggplot(data=sample_data, aes(x=p_hat)) + geom_histogram(bins=20)
 
 4.  Now you are given much bigger hypothetical population where
 
-    ``` R
+    ``` r
     pop <- c(rep("Apple", 1000), rep("Android", 400))
     ```
 
@@ -145,6 +145,59 @@ ggplot(p_hat_data, aes(x=p_hat, y=pdf)) + geom_point() + geom_smooth()
 
 ```
 
+Can we also check that $\hat{p}$ follows a certain distribution in other ways?
+
+(hint : 68-95-99.7 rule )
+
+```{r}
+
+p_hat = my_sample(1000)
+
+p_hat_data <- data.frame(p_hat = p_hat)
+
+
+
+boxplot(p_hat_data$p_hat)
+
+
+ggplot(data=p_hat_data, aes(x=p_hat)) + geom_boxplot()
+
+
+# summary function 
+summary(p_hat_data$p_hat)
+
+# mean
+p_hat_mean = mean(p_hat_data$p_hat)
+
+# standard deviation
+p_hat_sd = sd(p_hat_data$p_hat)
+p_hat_sd
+
+
+
+# let's check 68-95-99.7 rule
+
+df <- p_hat_data$p_hat
+
+# within 1 standard deviation
+range = (df > (p_hat_mean - 1 * p_hat_sd)) & (df < (p_hat_mean + 1 * p_hat_sd))
+df_temp <- df[ range ]
+length(df_temp) / length(df)
+
+
+# within 2 standard deviation
+range = (df > (p_hat_mean - 2 * p_hat_sd)) & (df < (p_hat_mean + 2 * p_hat_sd))
+df_temp <- df[ range ]
+length(df_temp) / length(df)
+
+
+# within 3 standard deviation
+range = (df > (p_hat_mean - 3 * p_hat_sd)) & (df < (p_hat_mean + 3 * p_hat_sd))
+df_temp <- df[ range ]
+length(df_temp) / length(df)
+
+```
+
 ### Post-lab activities
 
 Recent statistics suggest that 10% of Americans rely on Social Network Sites (SNSs). We are going to have a simulation study if we can verify that CLT really works in this case too. Let's assume that US population is 300,000 for calculation purposes.
@@ -166,3 +219,5 @@ Please name your submission as `lab4.R`
     5.1) Show the shape of the sample proportion with n=10, k=1000.
 
     5.2) Show the shape of the sample proportion with n=1000, k=1000.
+
+6.  With $n=1000, K =1000$, assign within 1, 2 and 3 standard deviations of the sample proportion to `first_sd_data`, `second_sd_data` and `third_sd_data`, respectively.
