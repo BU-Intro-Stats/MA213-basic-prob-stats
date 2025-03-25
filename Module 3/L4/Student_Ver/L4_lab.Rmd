@@ -89,6 +89,19 @@ Let's sample them with $n=5$. What is the sampling distribution look like?
 
 ```
 
+Can we also check that $\hat{p}$ follows a certain distribution in other ways?
+
+(hint : 68-95-99.7 rule )
+
+```{r}
+
+p_hat = my_sample(1000)
+
+p_hat_data <- data.frame(p_hat = p_hat)
+
+
+```
+
 ### Post-lab activities
 
 Recent statistics suggest that 10% of Americans rely on Social Network Sites (SNSs). We are going to have a simulation study if we can verify that Central Limit Theorem (CLT) really works in this case too. Let's assume that US population is 300,000 for calculation purposes.
@@ -101,12 +114,14 @@ Please name your submission as `lab4.R`
 
 2.  Obtain mean and standard deviation of the population and assign them to `mean_pop` and `sd_pop` accordingly.
 
-3.  Get the sample mean data for $n=10$ with $k=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample` and `sd_sample`.
+3.  Get the sample mean data for $n=10$ with $K=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample` and `sd_sample`.
 
-4.  Do one more time with the sample mean data for $n=50$ with $k=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample2` and `sd_sample2`.
+4.  Do one more time with the sample mean data for $n=50$ with $K=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample2` and `sd_sample2`.
 
 5.  (Extra)
 
-    5.1) Show the shape of the sample proportion with n=10, k=1000.
+    5.1) Show the shape of the sample proportion with n=10, K=1000.
 
-    5.2) Show the shape of the sample proportion with n=1000, k=1000.
+    5.2) Show the shape of the sample proportion with n=1000, K=1000.
+
+6.  With $n=1000, K =1000$, assign within 1, 2 and 3 standard deviations of the sample proportion to `first_sd_data`, `second_sd_data` and `third_sd_data`, respectively.
