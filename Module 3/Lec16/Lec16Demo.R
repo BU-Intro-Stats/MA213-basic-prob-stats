@@ -1,74 +1,57 @@
 library(ggplot2)
+
+# Testing a cross-platform working directory:
+if(!require("rstudioapi")) install.packages("rstudioapi")
+#print(getSourceEditorContext()$path)
+setwd(dirname(getSourceEditorContext()$path))
+
 source("Lec16DemoFunctions.R")
 source("Lec16ShinyApp.R")
 
-# ---- 1. From last time: sampling from a population ----
+# ---- 1. From last time: sampling from a population, simulation ----
 
 pop_size <- 250000
-pop_proportion <- 0.88
+pop_proportion <- 0.65
 population <- create_population(N=pop_size, p=pop_proportion)
 
-samples_10 <- sample(population, size=10)
-samples_100 <- sample(population, size=100)
-samples_1000 <- sample(population, size=1000)
-samples_10000 <- sample(population, size=10000)
+sample_size <- 1000
+samples <- sample(population, size=sample_size)
+phat <- sum(samples == "support") / sample_size
 
-phat_10 <- sum(samples_10 == "support") / 10
-phat_100 <- sum(samples_100 == "support") / 100
-phat_1000 <- sum(samples_1000 == "support") / 1000
-phat_10000 <- sum(samples_10000 == "support") / 10000
-
-# Display table:
-phats <- matrix(c(phat_10, phat_100, phat_1000, phat_10000))
-rownames(phats) <- c("10 samples", "100 samples", "1000 samples", 
-                     "10000 samples")
-colnames(phats) <- c("p-hat")
-phats <- as.table(phats)
-phats
-
-
-# ---- 2. Central Limit Theorem ---- 
-# Take many samples from the population (simulation) to construct a dataset. 
-# Then observe the result of the Central Limit Theorem.
-
-# ---- 2a. Simulation ----
-# Q: What determines where the center or mean of the sampling distribution will
-# fall?  
 K <- 1000  # Simulation size
-simulation_100 <- replicate(K, sample_get_phat_fn(population, n=100))
+simulation <- replicate(K, sample_get_phat_fn(population, n=sample_size))
+title <- sprintf("Histogram of p-hat values from experiment with %sx%s samples", 
+                 K, sample_size)  # in case we change the sample/simulation size
 
-ggplot(data=data.frame(simulation_100), aes(x=simulation_100)) +
+ggplot(data=data.frame(simulation), aes(x=simulation)) +
   geom_vline(aes(xintercept=pop_proportion), color="red") +
   geom_histogram(bins=100, alpha=0.5, color=4, fill="white") +
-  labs(title="Histogram of p-hat values from experiment with 1000x100 samples",
-       x="Sample proportion", y="Frequency") +
+  labs(title=title, x="Sample proportion", y="Frequency") +
   xlim(c(0,1))
 
-# Q: Why have we set the xlimits of the graph to be (0,1)?
 
-# ---- 2b. Normal approximation ----
+# ---- 2. Normal approximation ----
 # Q: Where do the parameters for the Normal distribution approximating p-hat 
 # come from?
 
-# Sample from a Normal distribution with computed parameters:
-SE_phat100 <- sqrt((pop_proportion*(1-pop_proportion))/100)
-normal_dist <- rnorm(K, mean=pop_proportion, sd=SE_phat100)
+bw <- 0.01
+n_obs <- length(simulation)
+SE_phat <- sqrt((pop_proportion*(1-pop_proportion))/n_obs)
 
-# ---- 2c. Comparing our simulation to the Normal ----
-# For plotting ease, create a new dataframe with the simulation values and the
-# sampled normal values, plus a categorical variable distinguishing them
-comparison <- create_comparison_data(simulation_100, normal_dist, K)
-
-# Plot the densities using the new dataframe:
-ggplot(data=comparison, aes(x=values, color=source, fill=source)) +
-  geom_density(lwd=1, alpha=0.25) +
+# Plot the histogram with the Normal density:
+ggplot(data=as.data.frame(simulation), aes(x=simulation)) +
+  geom_histogram(binwidth=bw, alpha=0.5, color=4, fill="white") +
+  stat_function(fun = function(x) 
+    dnorm(x, mean=pop_proportion, sd=SE_phat)*bw*n_obs) +
+  xlab("Sample proportion") +
+  ggtitle(title) +
   xlim(c(0,1))
 
 
 # 3. ---- Repeat the experiment for different sample sizes ---- 
-# Now construct datasets from samples of different sizes and repeat the above. 
-
 # Q: What happens to the distributions as sample size increases?
 
 # Run Rshiny app
 shinyApp(ui = ui, server = server)
+# TODO: fix RShiny app
+
