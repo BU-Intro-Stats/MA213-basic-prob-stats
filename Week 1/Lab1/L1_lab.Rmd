@@ -1,0 +1,963 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab1"
+output:
+  html_document:
+    code_download: true 
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+# **Lab 1: Introduction to R**
+
+In this lab session, we will learn basic syntax of R and how to use R for data exploratory data analyses. We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
+
+------------------------------------------------------------------------
+
+#### Install R and RStudio.
+
+You can download and install R from
+
+<https://www.r-project.org/>
+
+And you can download and install RStudio from
+
+<https://posit.co/download/rstudio-desktop/>
+
+------------------------------------------------------------------------
+
+## Pre-lab activities
+
+-   We are going to work in groups. Let’s form pairs. You can discuss the exercise questions and post-lab activities with your members.
+
+```{r}
+# grouping code for lab
+# total number of students in the lab today
+student_list = read.csv("StudentList.csv")
+N = dim(student_list)[1]
+student_list = sort_by(student_list, student_list$Last)
+student_list$number = 1:N
+
+if (N%%2==0){ # if N is even number
+half = N/2
+}else{ # if N is odd number
+  half = round(N/2) # this will make sure half is an integer
+}
+half
+
+total_group <- 1:N
+group1 <- sample(total_group, half)
+index <- total_group %in% group1
+index <- index==FALSE # which ones are not in group1 in total_group
+group2 <- total_group[index]
+
+if (length(group1)==length(group2)){
+df = cbind(group1, group2)
+}else if(length(group1)<length(group2)){
+  group1 = append(group1, 0)
+  df = cbind(group1, group2)
+}
+
+ 
+
+group_df <- data.frame(group1, group2)
+# group_df
+
+
+group_df1 <- left_join(group_df, student_list, by=join_by(group1 == number))
+
+
+group_df_final <- left_join(group_df1, student_list, by=join_by(group2 == number))
+
+
+group_df_final
+```
+
+## Introduction of R
+
+-   R is Programming language and environment statistical computing, data manipulation and graphical display.
+
+-   R is free and open source.
+
+-   Rstudio is also free and open source IDE (Integrated Development Environment) for R.
+
+### Brief walk through about RStudio interface
+
+![RStudio overview](Screen_Shot_Rstudio.png){width="767"}
+
+window `1` : script window (text editor)
+
+window `2` : console window (this is where you type your R code and run)
+
+window `3` : plots, files, packages, help... window
+
+window `4` : environment window
+
+### Use of Rstudio with R markdown and R script files.
+
+Entering and running your R code directly in the R command line (Console window) is simple. However, it is not efficient, errors can easily occur, and it is difficult to reproduce your work.
+
+In our labs, we are going to use both R markdown file (.Rmd) and R script(.R) file.
+
+#### R markdown
+
+R markdown provides notebook where you can directly run R code chunks interactively. You can write journal articles, book, or generate websites and blogs using R markdown. It also provides to make a document in different formats such as PDF, HTML or Word.
+
+#### R script
+
+R script is a text file that contains a series of commands and comments. It can be saved for future use to rerun the stored commands. Additionally, the script can be edited to execute a modified version of the commands.
+
+We are using R script file to submit post-lab activity.
+
+#### How to run code?
+
+You can run your R chunk by pressing run button `▶` in the R chunk in your R markdown file. Selected code lines can be ran by `ctrl` + `enter` (windows) or `cmd` + `enter`.
+
+#### Set up `working directory`
+
+-   You can go to `Session` → `set working directory` → `choose directory` and then choose your working directory.
+-   Manually you can setup your working directory as the following.
+
+```{r eval=FALSE, include=FALSE}
+
+setwd('path of your working directory')
+
+```
+
+```{r eval=FALSE, include=FALSE}
+
+# for example
+setwd('/Users/ylim2/Documents/Work/MA213') # this will set up your working directory
+getwd() # to check where you are at in term of your working directory
+
+```
+
+Let's set up your working directory.
+
+```{r}
+
+
+
+```
+
+### Basic R syntax
+
+> -   `#` comments : it is used to explain the code. Anything after `#` is NOT interpreted by the R.
+>
+> -   `<-` assignment operator : it assigns value/values to an object (`=` also works).
+>
+> -   Commands are separated by a new line or `;` sign.
+>
+> -   Objects (variables) : vectors, lists, matrices, factor, array, data frames.
+>
+> -   Data types : character, doubles, integers, raw, logical and complex.
+>
+> -   Name of an object.
+>
+>     1.  Object name is case sensitive. `myData` and `mydata` are not the same.
+>
+>     2.  Do not start an object name with a number or `_`.
+>
+>         `2day` : not okay
+>
+>         `_day` : not okay
+>
+>         `day2` : okay
+>
+>         `day_2` : okay
+>
+>     3.  Under score, dot is okay.
+>
+>         `my_data` : okay
+>
+>         `my.data` : confusing, but it is okay in R
+>
+>     4.  Try to avoid function name.
+>
+>         `mean`, `sd` ...
+
+Object basic
+
+```{r}
+# An object has a value # logical, numeric : integer, double, character types
+
+Myobject <- 123
+Myobject
+print(Myobject)
+
+Myobject <- 123.3
+print(Myobject)
+
+Myobject <- "Sam"
+print(Myobject)
+
+Myobject <- TRUE
+print(Myobject)
+
+
+```
+
+How to check the type of the object?
+
+`typeof()` or `class()`
+
+```{r}
+Myobject <- 123
+class(Myobject)
+
+Myobject <- 123.3
+class(Myobject)
+
+Myobject <- "Sam"
+class(Myobject)
+
+Myobject <- TRUE
+class(Myobject)
+
+```
+
+```{r}
+Myobject <- 123
+
+typeof(Myobject)
+
+Myobject <- 123.3
+typeof(Myobject)
+
+Myobject <- "Sam"
+typeof(Myobject)
+
+Myobject <- TRUE
+typeof(Myobject)
+
+```
+
+### R can be a calculator (some mathematics) : basic math operations to matrix operations
+
+> -   Arithmetic operators
+>
+> $3+4$ : `3+4`
+>
+> $4-1$ : `4-1`
+>
+> $\frac{1}{10}$ : `1/10`
+>
+> $x \times y$ : `x*y`
+>
+> $x^{y}$ : `x^y` or `x**y`
+
+for example
+
+$(\frac{123}{456})^{-\frac{1}{3}}$
+
+```{r}
+(123/456)^(-1/3)
+#or
+(123/456)**(-1/3)
+
+```
+
+$e^{-\frac{1}{2}}$
+
+```{r}
+exp(-1/2)
+
+```
+
+$\log(10)$
+
+```{r}
+log(10)
+log10(10)
+```
+
+-   logical operators
+
+    | Operator | Description                |
+    |----------|----------------------------|
+    | `\> a`   | Greater than a             |
+    | `\>= a`  | Greater than or equal to a |
+    | `\< a`   | Less than a                |
+    | `\<= a`  | Less than or equal to a    |
+    | `== a`   | Exactly equal to a         |
+    | `!= a`   | Not equal to a             |
+    | `!a`     | Not a                      |
+    | `a & b`  | a AND b                    |
+    | `a | b`  | a or b                     |
+
+Greater than
+
+```{r}
+
+a <- 5
+b <- 10
+
+# Greater than
+a > 3   
+
+
+```
+
+Greater than or equal to & Less than
+
+```{r}
+# Greater than or equal to
+b >= 20 
+
+# Less than
+a < b  
+
+
+
+```
+
+Less than or equal to & Exactly equal to
+
+```{r}
+# Less than or equal to
+a <= 5  # TRUE
+b <= a  # FALSE
+
+# Exactly equal to
+a == 5  # TRUE
+b == 10 # TRUE
+
+
+
+```
+
+Not equal to & Not a (logical negation)
+
+```{r}
+# Not equal to
+a != b  # TRUE
+b != 10 # FALSE
+
+# Not a (logical negation)
+x <- FALSE
+!x  # TRUE
+
+
+
+```
+
+OR operator
+
+```{r}
+
+# OR operator
+a > 3 | b < 5  # TRUE (since a > 3 is TRUE)
+
+
+```
+
+AND operator
+
+```{r}
+# AND operator
+a > 3 & b < 5  # FALSE (since b < 5 is FALSE)
+
+```
+
+### Excercise
+
+1.  Calculate this
+
+    $A = \exp(3),$ $B = \frac{-3^{4}}{4!},$
+
+    $A \times B$ = ?
+
+    Hint : `help(factorial)`
+
+```{r}
+#
+
+
+```
+
+2.  Check if this is TRUE or FALSE
+
+    A = "school", B="School"
+
+    Write a statement to check if the values of A and B are equal then it gives `F`, otherwise it gives `T`.
+
+```{r}
+#
+
+
+
+```
+
+Vector
+
+:   A vector in R is an ordered collection of values.
+
+    Note that the indexing in R starts from 1 not from 0.
+
+    You can create a vector by using `c()` :Combine function
+
+```{r}
+# vector
+Myvector_object1 <- c(1,2,3,4,5,6,7,8,9,10)
+print(Myvector_object1)
+Myvector_object2 <- 1:5
+print(Myvector_object2)
+
+
+```
+
+Character type vector
+
+```{r}
+
+# Character type vector
+Myvector3 <- c("abc", "def", "ghi")
+Myvector3[1]
+
+
+```
+
+Accessing vector elements
+
+```{r}
+
+# Accessing vector elements
+Myvector3[2] # Show 2nd element in vector Myvector3
+Myvector3[2:3] # Show 2nd to 3rd element in vector Myvector3
+
+Myvector_object1[Myvector_object1>5] # Show the elements that are greater than 5
+
+
+```
+
+#### Some functions with vector
+
+```{r}
+
+# length function 
+length(Myvector3) # What is the length of the vector Myvector3
+
+
+```
+
+```{r}
+
+# Sorting elements of a R Vector
+Myvector4 <- c(5,1,4,30,20,16,2,4.5)
+Myvector4_sorted <- sort(Myvector4)
+Myvector4_sorted
+```
+
+`%in%` operator with vector
+
+`x %in% y` : This gives logical values if elements in `x` is in one of the elements in `y`.
+
+```{r}
+
+a <- c(1,3,5,7,9,5)
+b <- c(1,5)
+
+a %in% b
+
+
+
+```
+
+`seq()` function : It generate regular sequences.
+
+```{r}
+seq(3) #same as 1:3
+seq(from = 1, to = 10, by=3)
+
+```
+
+`rep()` function : It replicates the values in `x`
+
+```{r}
+# replicate 2, 10 times
+rep(2,10)
+
+# replicate "BU" 20 times
+rep("BU", 20)
+```
+
+### Exercise
+
+1.  Create a vector named numbers containing the integers from 20 to 35.
+
+```{r}
+#
+
+
+```
+
+2.  Access and print the 4th element of the numbers vector.
+
+```{r}
+#
+
+
+```
+
+3.  Print the elements from the 6th to the 15th position in the vector.
+
+```{r}
+#
+
+
+```
+
+4.  Access all elements less than 30 in the numbers vector.
+
+```{r}
+#
+
+
+```
+
+5.  Create a vector object that contains 20 `red` , 10 `black` .
+
+```{r}
+#
+
+
+```
+
+6.  `b=c(1,1,1,1,2,2,2,2,3,3,3,3,3,5,5,5,5,4,4,4,4)` .
+
+    Show only elements with 1, 3 or 5.
+
+```{r}
+#
+
+
+```
+
+### Factors
+
+: Factor is a categorical data structure in R that has a distinct levels.
+
+```{r}
+# factor
+gender <- c("M", "F", "M", "F","M", "F", "F", "F")
+gender
+
+
+gender_factored <- factor(gender)
+gender_factored
+
+
+# what if we only have three Males
+gender_data <- c("M", "M", "M")
+gender_data_factored <- factor(gender_data, levels=c("M", "F"))
+
+gender_data
+gender_data_factored
+
+
+typeof(gender_data_factored)
+class(gender_data_factored)
+```
+
+### Matrices
+
+: Matrices are two-dimensional data structures in R
+
+```         
+It can be thought as a two dimensional vector. 
+```
+
+```{r}
+# matrices
+A = matrix(1:8,nrow = 4,ncol = 2)
+A
+
+A[3,2]
+A[3,1:2]
+A[A>5] # note here that this will return a vector not a matrix
+
+```
+
+#### Matrix operations
+
+Matrix multiplication
+
+$A \times B \text{ where } A= \begin{pmatrix} 1 & 2& 3 \\ 4 &5 & 6  \end{pmatrix} \text{ and } B= \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6   \end{pmatrix}$
+
+```{r}
+A = matrix( data = c(1,4,2,5,3,6), nrow = 2, ncol=3)
+A
+
+B = matrix( data = c(1,3,5,2,4,6), nrow = 3, ncol=2)
+B
+
+A %*% B
+
+```
+
+But A \* B performs element-wise multiplication, multiplying corresponding elements in each matrix.
+
+```{r}
+A = matrix(1:4, nrow=2, ncol=2)
+B = matrix(1:4, nrow=2, ncol=2)
+
+A
+B
+
+A*B
+
+A%*%B
+
+
+```
+
+Inverse of a matrix
+
+$$
+\boldsymbol{A}^{-1}
+$$
+
+```{r}
+
+solve(A)
+
+```
+
+### Array
+
+: An array is a multi-dimensional data structure. Like a matrix, it can hold only one type of data.
+
+```{r}
+# array 
+x <- array(1:40, dim=c(4,5,2))   # Generate a 4 by 5 by 2 array.
+x
+
+x[1,1,1] <- "hello"
+x
+```
+
+### Data frame
+
+: Data frame is an ordered collection of vectors that must have the same length but can contain different data types.
+
+```{r}
+# data frames
+diamonds
+
+
+```
+
+#### Binding and appending vectors
+
+Append vectors to be one vector
+
+```{r}
+# 
+BU = rep("BU", 10)
+BC = rep("BC", 10)
+school = c(BU, BC)
+school
+
+# or
+school2 <- append(BU, BC)
+school2
+```
+
+Bind vectors
+
+```{r}
+gender = c(rep("Male", 5), rep("Female", 5), rep("Male", 5), rep("Female", 5))
+
+# row bind 
+newobj <- rbind(school, gender)
+newobj
+class(newobj)
+
+# column bind
+newobj2 <- cbind(school, gender)
+newobj2
+class(newobj2)
+
+```
+
+Change type of df
+
+```{r}
+df1 <- data.frame(newobj)
+df1
+
+df2 <- data.frame(newobj2)
+df2
+
+#or you can also use
+df1 <- as.data.frame(newobj)
+df1
+```
+
+Change type of object
+
+```{r}
+some_number = 123
+some_number_2 = as.character(some_number)
+
+some_number
+some_number_2
+class(some_number)
+class(some_number_2)
+
+```
+
+### Exercise
+
+Create the data from the table
+
+| Gender \\ Group | A   | B   | C   |
+|-----------------|-----|-----|-----|
+| Men             | 60  | 81  | 75  |
+| Women           | 75  | 87  | 86  |
+
+```{r}
+
+
+Gender <- c(rep("Men", sum(c(60, 81, 75))), rep("Women", sum(c(75, 87, 86))))
+Group <- c(rep("A", 60), rep("B", 81), rep("C", 75),
+           rep("A", 75), rep("B", 87), rep("C", 86))
+
+df <- data.frame(Gender, Group)
+
+df
+table(df)
+```
+
+### Functions and packages
+
+-   There are some built in functions (base functions)
+
+``` r
+mean()
+sd()
+sum()
+length()
+rep()
+seq()
+sqrt()
+...
+```
+
+-   Packages
+
+    ```{r}
+    # loading and installing packages
+
+    # install.packages("package name")
+    # library(package name)
+    ```
+
+-   How to look at the documentation of functions
+
+    ``` r
+    ?function_name
+    help(function_name)
+
+    or 
+
+    google them
+    ```
+
+#### Writing a function
+
+``` r
+function_name = function(arguments) {
+    statements
+    return(value)
+}
+```
+
+```         
+•   function_name: The name of your function.
+
+•   arguments: Input values (objects, data frames, parameters) that the function will use.
+
+•   statements: The operations the function performs.
+
+•   return(value): Specifies what the function should return. If return() is omitted, R returns the last evaluated expression automatically.
+```
+
+Let's make a function that is calculating sum of 3 numbers
+
+```{r}
+add_three <- function(a,b,c){
+  out <- a+b+c
+  return(out)
+}
+
+add_three(1,2,3)
+
+
+```
+
+In the add_three function,
+
+`a, b, c`: The numeric inputs.
+
+`out` which is the sum of `a`,`b` and `c` will be returned through this function `add_tree()` .
+
+#### Accessing Objects Outside the Function
+
+If a function refers to a variable that exists outside of it (in the global environment), it will use that value. However, the opposite is not true: variables created inside the function do not exist outside of it.
+
+```{r}
+d = 10
+
+add_three_and_d <- function(a,b,c){
+  out <- a+b+c+d
+  return(out)
+}
+
+add_three_and_d(1,2,3)
+
+
+```
+
+Now, if we try to access `another_value` outside the function
+
+```{r}
+
+
+add_three_and_d <- function(a,b,c){
+  another_value = 10
+  out <- a+b+c+another_value
+  return(out)
+}
+
+add_three_and_d(1,2,3)
+
+# another_value # this will give an error
+
+
+```
+
+### Exercise
+
+Make a function called `Euclidean` to calculate Euclidean distance (`D`) between two points `X` and `Y` where
+
+-   $D = \sqrt{ (x_{2} - x_{1})^{2} +(y_{2}-y_{1})^{2} }$
+
+    $X=(x_{1}, y_{1})$
+
+    $Y=(x_{2}, y_{2})$
+
+```{r}
+
+
+
+
+```
+
+### Managing data basic
+
+#### Importing data
+
+Boston House Prices
+
+<https://www.kaggle.com/datasets/vikrishnan/boston-house-prices?resource=download>
+
+or
+
+<https://lib.stat.cmu.edu/datasets/boston>
+
+```{r}
+data <- read.csv("Housing.csv")
+head(data)
+
+
+```
+
+Show the rows of the data where more than 90% of the proportion of owner-occupied units built prior to 1940
+
+```{r}
+
+head(data[data$AGE>90,])
+
+
+```
+
+How many rows are in this data?
+
+```{r}
+
+dim(data)
+
+length(data$X)
+```
+
+How many rows of the data where more than 90% of the owner-occupied units were built before 1940?
+
+```{r}
+
+length(data$AGE[data$AGE>90])
+
+```
+
+What is the smallest proportion of owner-occupied units that were built before 1940?
+
+What is the largest proportion of owner-occupied units that were built before 1940?
+
+```{r}
+
+min(data$AGE)
+max(data$AGE)
+
+```
+
+#### Best coding practice?
+
+<https://waterdata.usgs.gov/blog/intro-best-practices/>
+
+------------------------------------------------------------------------
+
+## Post-lab activities
+
+Please name your submission as `lab1.R` on GradeScope.
+
+1.  Calculate these questions and assign the answers to the corresponding objects.
+
+a). $$\frac{45}{9}$$
+
+b). $$ 25^{4}$$
+
+c). $$ \exp(-10) $$
+
+For example, you would write a line of code as the following
+
+``` r
+a <- 45/9
+```
+
+d)  Create a vector with
+
+(2,2,...,2,4,4,4) where there are 12 occurrences of 2 and 3 occurrences 4 and assign it to object `d` .
+
+e)  You conducted a survey what courses a certain group of students are taking this semester. There are 17 for 'MA213', 5 for 'CH101' and 10 for 'MA 124'. Assign these to object `e`.
+
+f)  You want to verify whether you can calculate the sum of the numbers from 1 to 1000. To do that, you want to create first object `f` that has numbers from 1 to 1000.
+
+g)  Assign the sum of the numbers from 1 to 1000 that you created from f to `g` (use `f` and use `sum()` function).
+
+h)  Make a function name `quadratic()` which calculate quadratic equation (hint : what are the parameters).
+
+    $$
+     x = \frac {-b \pm \sqrt{b^2 -4ac}} {2a}
+    $$
+
+2.1 Load the csv file `Housing.csv` and assign it to object name `mydata` .
+
+2.2 Among ones close to Charles River, what is the smallest proportion of owner-occupied units that were built before 1940? Assign the obtained proportion to `my_poportion`.
+
+3.  Take the logarithm of the median value of owner-occupied homes (in thousands of dollars) and assign it to `LMV`.
+
+    Find the minimum LMV value and assign it to `min_LMV`.
