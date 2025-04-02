@@ -14,3 +14,6 @@
 .Rhistory
 .latex.json
 beamer.cls
+*.pdf
+*.bbl
+*.blg
