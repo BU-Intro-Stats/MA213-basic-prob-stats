@@ -12,17 +12,3 @@
 *.snm
 *.fdb_latexmk
 .Rhistory
-<<<<<<< HEAD
-<<<<<<< HEAD
-.latex.json
-beamer.cls
-*.pdf
-*.bbl
-*.blg
-=======
-.latex.json
->>>>>>> 581eea3 (Initial commit for lab-branch with Lab3(Module2))
-=======
-.latex.json
-.vscode
->>>>>>> d6d59c1 (Added .vscode in gitignore)
