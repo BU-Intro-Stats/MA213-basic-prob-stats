@@ -754,24 +754,22 @@ sqrt()
 ...
 ```
 
--   Packages
+#### Packages
 
-    ```{r}
-    # loading and installing packages
+Packages are collections of R functions, data, and compiled code in a well-defined format, created to add specific functionality. As of April 2025, over 22269 packages are available on the Cromprehensive R Archive Network (CRAN).
 
-    # install.packages("package name")
-    # library(package name)
-    ```
+```{{r}}
+# loading and installing packages
 
--   How to look at the documentation of functions
+# install.packages("package name")
+# library(package name)
+```
+
+-   How to look at the documentation of a function
 
     ``` r
     ?function_name
     help(function_name)
-
-    or 
-
-    google them
     ```
 
 #### Writing a function
@@ -864,7 +862,7 @@ add_three_and_d(1,2,3)
 
 ```
 
-### Managing data basic
+### Manipulating data basic
 
 #### Importing data
 
@@ -875,6 +873,10 @@ Boston House Prices
 or
 
 <https://lib.stat.cmu.edu/datasets/boston>
+
+Background of the dataset
+
+Each record in the database describes a Boston suburb or town. The data was drawn from the Boston Standard Metropolitan Statistical Area (SMSA) in 1970.
 
 ```{r}
 data <- read.csv("Housing.csv")
