@@ -728,15 +728,10 @@ class(some_number_2)
 
 ```{r}
 
+#
+#
+#
 
-Gender <- c(rep("Men", sum(c(60, 81, 75))), rep("Women", sum(c(75, 87, 86))))
-Group <- c(rep("A", 60), rep("B", 81), rep("C", 75),
-           rep("A", 75), rep("B", 87), rep("C", 86))
-
-df <- data.frame(Gender, Group)
-
-df
-table(df)
 ```
 
 ### Functions and packages
