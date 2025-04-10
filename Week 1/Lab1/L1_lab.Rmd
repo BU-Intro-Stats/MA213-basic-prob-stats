@@ -115,7 +115,7 @@ We are using R script file to submit post-lab activity.
 
 #### How to run code?
 
-You can run your R chunk by pressing run button `▶` in the R chunk in your R markdown file. Selected code lines can be ran by `ctrl` + `enter` (windows) or `cmd` + `enter`.
+You can run your R chunk by pressing run button `▶` in the R chunk in your R markdown file. Selected code lines can be ran by `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).
 
 #### Set up `working directory`
 
@@ -402,7 +402,7 @@ Vector
 
     Note that the indexing in R starts from 1 not from 0.
 
-    You can create a vector by using `c()` :Combine function
+    You can create a vector by using `c()` : Combine function
 
 ```{r}
 # vector
