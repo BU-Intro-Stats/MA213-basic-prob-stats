@@ -83,7 +83,7 @@ The following is the description of the dataset.
 > Variables in the data frame :
 >
 > | Name | Details |
-> |------------------------------------|------------------------------------|
+> |----|----|
 > | Ozone | Mean ozone in parts per billion (ppb) from 1300 to 1500 hours at Roosevelt Island |
 > | Solar.R | Solar radiation in Langleys (lang) in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park |
 > | Wind | Average wind speed in miles per hour (mph) at 0700 and 1000 hours at LaGuardia Airport |
@@ -453,7 +453,7 @@ ggplot(df_filtered) + geom_point(aes(x=Ozone, y=Temp)) +
 
 We are going to see the famous `Titanic` dataset.
 
-#### **Survival of Passengers on the Titanic** 
+#### **Survival of Passengers on the Titanic**
 
 > **Description**:\
 > This data set provides information on the fate of passengers on the fatal maiden voyage of the ocean liner *Titanic*.
@@ -461,7 +461,7 @@ We are going to see the famous `Titanic` dataset.
 > ### **Variables in the Data Frame**
 >
 > | Variable | Definition | Key |
-> |------------------|-----------------------|--------------------------------|
+> |----|----|----|
 > | `survival` | Survival | 0 = No, 1 = Yes |
 > | `pclass` | Ticket class | 1 = 1st (Upper), 2 = 2nd (Middle), 3 = 3rd (Lower) |
 > | `sex` | Sex of the passenger | male / female |
