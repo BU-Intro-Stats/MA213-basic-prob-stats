@@ -367,11 +367,11 @@ a > 3 & b < 5  # FALSE (since b < 5 is FALSE)
 
 ##### Q1. Calculate this
 
-```         
 $A = \exp(3),$ $B = \frac{-3^{4}}{4!},$
 
 $A \times B$ = ?
 
+```         
 Hint : `help(factorial)`
 ```
 
@@ -751,7 +751,7 @@ sqrt()
 
 #### Packages
 
-Packages are collections of R functions, data, and compiled code in a well-defined format, created to add specific functionality. As of April 2025, over 22269 packages are available on the Cromprehensive R Archive Network (CRAN).
+Packages are collections of R functions, data, and compiled code in a well-defined format, created to add specific functionality. As of April 2025, over 22269 packages are available on the Comprehensive R Archive Network (CRAN).
 
 ```{{r}}
 # loading and installing packages
