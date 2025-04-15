@@ -1,9 +1,9 @@
 ---
 title: "MA213 Basic Statistics and Probability - Lab3"
 output:
-  pdf_document: default
   html_document:
     code_download: true 
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -89,7 +89,7 @@ sample(x, size, replace = FALSE, prob = NULL)
 ##### Arguments
 
 |  |  |
-|------------------------------------|------------------------------------|
+|----|----|
 | `x` | either a vector of one or more elements from which to choose, or a positive integer. See ‘Details.’ |
 | `n` | a positive number, the number of items to choose from. See ‘Details.’ |
 | `size` | a non-negative integer giving the number of items to choose. |
