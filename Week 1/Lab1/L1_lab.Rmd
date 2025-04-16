@@ -1,9 +1,9 @@
 ---
 title: "MA213 Basic Statistics and Probability - Lab1"
 output:
+  pdf_document: default
   html_document:
     code_download: true 
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +14,19 @@ library(dplyr)
 
 # **Lab 1: Introduction to R**
 
-In this lab session, we will learn basic syntax of R and how to use R for data exploratory data analyses. We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
+In this lab session, we will learn basic syntax of R and how to use R for data exploratory data analyses.
+
+------------------------------------------------------------------------
+
+#### Learning Objectives
+
+-   Understand an overview of the capabilities of R
+-   Learn basic R syntax, type of data and commands
+-   Learn how to import, process datasets
+
+------------------------------------------------------------------------
+
+We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
 
 ------------------------------------------------------------------------
 
