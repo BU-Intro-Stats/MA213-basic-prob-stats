@@ -20,6 +20,16 @@ In this lab, we learn how to analyze variables in real datasets using pre-proces
 
 We will go over also slightly advanced functions for summarization and visualization using `tidyverse` package which includes `dplyr` and `ggplot2` packages.
 
+------------------------------------------------------------------------
+
+#### Learning Objectives
+
+-   Learn to create a variety of plots to explore and present numerical and categorical data.
+-   Gain a foundational understanding of data manipulation using base R commands and the `dplyr` package.
+-   Explore the core features of the `ggplot2` package for data visualization, along with base R plotting functions.
+
+------------------------------------------------------------------------
+
 ## Pre-lab activities
 
 -   We are going to work in groups. Let’s form pairs. You can discuss the exercise questions and post-lab activities with your members.
@@ -83,7 +93,7 @@ The following is the description of the dataset.
 > Variables in the data frame :
 >
 > | Name | Details |
-> |----|----|
+> |------------------------------------|------------------------------------|
 > | Ozone | Mean ozone in parts per billion (ppb) from 1300 to 1500 hours at Roosevelt Island |
 > | Solar.R | Solar radiation in Langleys (lang) in the frequency band 4000–7700 Angstroms from 0800 to 1200 hours at Central Park |
 > | Wind | Average wind speed in miles per hour (mph) at 0700 and 1000 hours at LaGuardia Airport |
@@ -461,7 +471,7 @@ We are going to see the famous `Titanic` dataset.
 > ### **Variables in the Data Frame**
 >
 > | Variable | Definition | Key |
-> |----|----|----|
+> |------------------------|------------------------|------------------------|
 > | `survival` | Survival | 0 = No, 1 = Yes |
 > | `pclass` | Ticket class | 1 = 1st (Upper), 2 = 2nd (Middle), 3 = 3rd (Lower) |
 > | `sex` | Sex of the passenger | male / female |
