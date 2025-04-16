@@ -16,6 +16,24 @@ library(dplyr)
 
 In this lab session, we will explore key concepts of inferential statistics which include sampling distribution and central limit theorem.
 
+------------------------------------------------------------------------
+
+#### Learning Objectives
+
+-   Understand point estimates and sampling variability
+
+-   Visualize and interpret sampling distributions
+
+-   Calculate and interpret standard error
+
+-   Assess data using the normal distribution
+
+-   Apply the law of large numbers and its implications
+
+-   Model data using Bernoulli, Geometric, and Binomial distributions
+
+------------------------------------------------------------------------
+
 ## Pre-lab activities
 
 -   We are going to work in groups. This time, each group have 4 people. You can discuss the exercise questions and post-lab activities with your members.
