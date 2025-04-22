@@ -14,7 +14,7 @@ library(dplyr)
 
 # Lab 3: Simulation and Probability
 
-In this lab session, we will go over random variables and compute the expectation and variance of random variables and their linear combinations. We will verify whether the theory holds using R.
+In this lab session, we will go over random variables and compute the expectation and variance of random variables and their linear combinations. We will verify whether the expected properties holds using R.
 
 ------------------------------------------------------------------------
 
@@ -171,7 +171,7 @@ head(myoutcome)
 
 ```
 
-#### Use `replicate()`, it carries out repeated tasks more efficient way.
+#### Use `replicate()`, it carries out repeated tasks in a more computationally efficient way.
 
 ```{r}
 
