@@ -291,10 +291,10 @@ log10(10)
 
     | Operator | Description                |
     |----------|----------------------------|
-    | `\> a`   | Greater than a             |
-    | `\>= a`  | Greater than or equal to a |
-    | `\< a`   | Less than a                |
-    | `\<= a`  | Less than or equal to a    |
+    | `> a`    | Greater than a             |
+    | `>= a`   | Greater than or equal to a |
+    | `< a`    | Less than a                |
+    | `<= a`   | Less than or equal to a    |
     | `== a`   | Exactly equal to a         |
     | `!= a`   | Not equal to a             |
     | `!a`     | Not a                      |
