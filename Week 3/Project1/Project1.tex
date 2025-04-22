@@ -1,5 +1,5 @@
-\documentclass[12pt]{article}
-\usepackage[top=1.25in,bottom=1in,right=1in,left=1in]{geometry}
+\documentclass[11pt]{article}
+\usepackage[top=1in,bottom=1in,right=1in,left=1in]{geometry}
 \usepackage{pdflscape}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -15,12 +15,17 @@
 \usepackage{float}
 \usepackage{tabularx} 
 \usepackage{bm}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{fontawesome5}
+
+
 
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-% \doublespacing
+\doublespacing
 
 \begin{document}
 	
@@ -32,7 +37,7 @@
         Department of Mathematics and Statistics \\ 
 		\Large{\textbf{MA213 - Fall 2025}} \\ 
         \large{Basic Statistics and Probability} \\
-        \large{Project 1} \\ 
+        \large{Project 1 : Data Exploration} \\ 
 		\noindent\rule{16cm}{2pt}
 	\end{center}
 	
@@ -41,8 +46,10 @@
 	
 % \large{\textbf{Project 1 : Exploration of the Data}} 
 % \normalsize
-\section*{ \centering  Project 1 : Exploration of the Data}
-\begin{center}\rule{16cm}{1pt}\end{center}
+% \section*{ \centering  Project 1 : Exploration of the Data}
+% \begin{center}\rule{16cm}{1pt}\end{center}
+% \textbf{Overview of the Project \\}  
+\section*{Overview}
 Your group will select a dataset of your interest and conduct exploratory data analysis.
 This should include :
 \begin{itemize}
@@ -55,7 +62,7 @@ You will present your analyses through either:
     \item A pre-reorded video presentation
 \end{itemize}
 \begin{center}\rule{16cm}{1pt}\end{center}
-Suggested Outline
+\section*{Suggested Outline}
 \begin{itemize}
     \item Introduction
     \begin{enumerate}
@@ -86,32 +93,32 @@ Suggested Outline
         \end{enumerate} 
 \end{itemize}
 \begin{center}\rule{16cm}{1pt}\end{center}
-Project requirements 
+\section*{Project requirements}
 \begin{itemize}
     \item Source of data must be cited
     \item R code should be included (Rscript or Rmd files)
     \item References should be provided at the end
 \end{itemize}
 \begin{center}\rule{16cm}{1pt}\end{center}
-The following is the deliverables and deadlines.
+
+\section*{Deadlines}
 \begin{table}[h!]
     \centering
     \begin{tabularx}{\textwidth}{|l|X|l|}
     \hline
     \textbf{Item} & \textbf{Description} & \textbf{Due} \\
     \hline
-    Initial Submission & Brief introduction of the analysis and roles of group members & Week 5 (after Lab 3) \\
+    Deliverable & Brief introduction of the analysis and roles of group members & Week 5 (after Lab 3) \\
     \hline
     R Script or RMarkdown File & Include data preparation, analysis, and visualizations & Week 7 \\
     \hline
     Slide File & 4–5 slides (excluding Title and Reference slides); 5-minute presentation & Week 7 \\
     \hline
     \end{tabularx}
-    \caption{Deliverables and Deadlines}
-    \end{table}
+    \caption{Deliverable and Deadlines}
+\end{table}
 
-% \newpage
-
+\newpage
 \section*{Data Sources to Consider}
 \begin{itemize}
     \item \href{https://www.openintro.org/data/}{OpenIntro Datasets}
@@ -126,6 +133,59 @@ The following is the deliverables and deadlines.
 % \begin{itemize}
 %     \item 
 % \end{itemize}
+
+
+\newpage
+\section*{Evaluation Criteria}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|XXX|}
+        \hline
+        \textbf{Pass} & \textbf{Almost Pass} & \textbf{Not Yet} \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\textit{Each item is marked with \faCheck, \faCheck$-$, or \faTimes:}
+
+
+
+\begin{table}[h!]
+    \centering
+
+    % Legend Row
+    \begin{tabularx}{\textwidth}{XXX}
+        \faCheck = \textit{satisfied} &
+        \faCheck{}$-$ = \textit{mostly satisfied} &
+        \faTimes = \textit{not yet} \\
+    \end{tabularx}
+
+    % Evaluation Rows
+    \begin{tabularx}{\textwidth}{cccX}
+        \hline
+        \faCheck & \faCheck{}$-$ & \faTimes  & Introduction section correctly summarize motivation, data, result and takeaways\\
+        \faCheck & \faCheck{}$-$ & \faTimes &  Code correctly implemented (Results can be easily reproduced) \\
+        \faCheck & \faCheck{}$-$ & \faTimes  & Conclusion section is coherent and the direction for future work is interesting and plausible \\
+        \faCheck & \faCheck{}$-$ & \faTimes & Discussed shape, central tendency, spreadity in a correct manner  \\ 
+        \faCheck & \faCheck{}$-$ & \faTimes & Plots and summaries support your explanation \\
+        \faCheck & \faCheck{}$-$ & \faTimes & Well participated in the project as a group work \\ 
+        \faCheck & \faCheck{}$-$ & \faTimes & Answered one question from the presentation \\
+        \faCheck & \faCheck{}$-$ & \faTimes & Topic and the results are interesting and easy to understand \\ 
+        \faCheck & \faCheck{}$-$ & \faTimes & Asked a relevent/valid question to other group \\
+\hline
+    \end{tabularx}
+
+\end{table}
+
+
+
+
+\section*{Grading Criteria}
+\begin{itemize}
+    \item \textbf{Pass:} \faCheck on 7 of 9 rubric items, no \faTimes marks
+    \item \textbf{Almost Pass:} \faCheck on 3 of 9 rubric items, no \faTimes marks
+\end{itemize}
 
 
 
