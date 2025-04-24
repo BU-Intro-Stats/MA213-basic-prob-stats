@@ -24,9 +24,8 @@ We will go over also slightly advanced functions for summarization and visualiza
 
 #### Learning Objectives
 
--   Learn to create a variety of plots to explore and present numerical and categorical data.
--   Gain a foundational understanding of data manipulation using base R commands and the `dplyr` package.
--   Explore the core features of the `ggplot2` package for data visualization, along with base R plotting functions.
+- Classify and Analyze Variables: Categorize variables based on their types (e.g., numerical/categorical, continuous/discrete, ordinal), assess their association (positive, negative, or independent), and determine which make sense as explanatory vs. response variables.
+- Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
 
 ------------------------------------------------------------------------
 

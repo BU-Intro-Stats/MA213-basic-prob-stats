@@ -20,9 +20,9 @@ In this lab session, we will learn basic syntax of R and how to use R for data e
 
 #### Learning Objectives
 
--   Understand an overview of the capabilities of R
--   Learn basic R syntax, type of data and commands
--   Learn how to import, process datasets
+-   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
+-   Data Handling and Preprocessing: I can use R to load, clean, and preprocess real-world data sets, applying techniques such as handling missing values, transforming variables, and merging data sources.
+-   Exploratory Data Analysis (EDA) and Visualization. I can conduct exploratory data analysis in R, creating appropriate visualizations (e.g., histograms, box plots, scatterplots) and summary statistics to uncover data patterns and inform subsequent analysis.
 
 ------------------------------------------------------------------------
 

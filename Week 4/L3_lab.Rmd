@@ -20,9 +20,13 @@ In this lab session, we will go over random variables and compute the expectatio
 
 #### Learning Objectives
 
--   Understand and compute expectations and variances
--   Validate and explain probability distributions
--   Conduct simulation study for evaluation purposes
+- Conduct Hypothesis Testing Using Simulation: Set up null and alternative hypotheses to test for independence between variables, and use simulation techniques to evaluate data support for these hypotheses.
+
+- Validate and Explain Probability Distributions: Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1). 
+
+- Compute Probabilities Using Various Tools: Use logic, Venn diagrams, and probability rules to compute probabilities for events.
+
+- Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
 
 ------------------------------------------------------------------------
 
