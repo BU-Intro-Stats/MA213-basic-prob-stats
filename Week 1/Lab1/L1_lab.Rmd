@@ -22,7 +22,7 @@ In this lab session, we will learn basic syntax of R and how to use R for data e
 
 -   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
 -   Data Handling and Preprocessing: I can use R to load, clean, and preprocess real-world data sets, applying techniques such as handling missing values, transforming variables, and merging data sources.
--   Exploratory Data Analysis (EDA) and Visualization. I can conduct exploratory data analysis in R, creating appropriate visualizations (e.g., histograms, box plots, scatterplots) and summary statistics to uncover data patterns and inform subsequent analysis.
+-   Exploratory Data Analysis (EDA) and Visualization. I can conduct exploratory data analysis in R, creating appropriate visualizations (e.g., histograms, box plots, scatter plots) and summary statistics to uncover data patterns and inform subsequent analysis.
 
 ------------------------------------------------------------------------
 
@@ -47,46 +47,28 @@ And you can download and install RStudio from
 -   We are going to work in groups. Let’s form pairs. You can discuss the exercise questions and post-lab activities with your members.
 
 ```{r}
-# grouping code for lab
-# total number of students in the lab today
-student_list = read.csv("StudentList.csv")
-N = dim(student_list)[1]
-student_list = sort_by(student_list, student_list$Last)
-student_list$number = 1:N
+num_ppl_each_group = 2
+student_list <- read.csv("StudentList.csv")
+N <- nrow(student_list)
 
-if (N%%2==0){ # if N is even number
-half = N/2
-}else{ # if N is odd number
-  half = round(N/2) # this will make sure half is an integer
-}
-half
+# Sort by last name
+student_list <- student_list %>% arrange(Last)
+student_list$number <- 1:N
 
-total_group <- 1:N
-group1 <- sample(total_group, half)
-index <- total_group %in% group1
-index <- index==FALSE # which ones are not in group1 in total_group
-group2 <- total_group[index]
+# Shuffle the student numbers randomly
+shuffled <- sample(student_list$number)
 
-if (length(group1)==length(group2)){
-df = cbind(group1, group2)
-}else if(length(group1)<length(group2)){
-  group1 = append(group1, 0)
-  df = cbind(group1, group2)
-}
+# Create group
+group_ids <- rep(1:ceiling(N / num_ppl_each_group), num_ppl_each_group)[1:N]
 
- 
+# Assign data frame
+group_df <- data.frame(number = shuffled, group = group_ids)
+grouped_students <- left_join(group_df, student_list, by = "number")
 
-group_df <- data.frame(group1, group2)
-# group_df
+grouped_students <- grouped_students %>% arrange(group)
 
-
-group_df1 <- left_join(group_df, student_list, by=join_by(group1 == number))
-
-
-group_df_final <- left_join(group_df1, student_list, by=join_by(group2 == number))
-
-
-group_df_final
+# Output
+grouped_students %>% select(!number)
 ```
 
 ## Introduction of R
@@ -148,7 +130,9 @@ getwd() # to check where you are at in term of your working directory
 
 ```
 
-Let's set up your working directory.
+### Exercise
+
+#### Q0. Let's set up your working directory.
 
 ```{r}
 
@@ -197,8 +181,7 @@ Object basic
 ```{r}
 # An object has a value # logical, numeric : integer, double, character types
 
-Myobject <- 123
-Myobject
+Myobject <- 123;Myobject
 print(Myobject)
 
 Myobject <- 123.3
@@ -230,6 +213,8 @@ class(Myobject)
 Myobject <- TRUE
 class(Myobject)
 
+class(Titanic) # Titanic dataset
+
 ```
 
 ```{r}
@@ -246,6 +231,7 @@ typeof(Myobject)
 Myobject <- TRUE
 typeof(Myobject)
 
+typoef(Titanic)  # Titanic dataset
 ```
 
 ### R can be a calculator (some mathematics) : basic math operations to matrix operations
@@ -503,7 +489,7 @@ rep("BU", 20)
 
 ### Exercise
 
-##### Q3. Create a vector named numbers containing the integers from 20 to 35.
+##### Q3. Create a vector named `numbers` containing the integers from 20 to 35.
 
 ```{r}
 #
@@ -596,6 +582,7 @@ A
 
 A[3,2]
 A[3,1:2]
+A[3, ]
 A[A>5] # note here that this will return a vector not a matrix
 
 ```
@@ -702,7 +689,7 @@ class(newobj2)
 
 ```
 
-Change type of df
+Change type of dataframe object
 
 ```{r}
 df1 <- data.frame(newobj)
@@ -886,7 +873,7 @@ Background of the dataset
 Each record in the database describes a Boston suburb or town. The data was drawn from the Boston Standard Metropolitan Statistical Area (SMSA) in 1970.
 
 ```{r}
-data <- read.csv("Housing.csv")
+data <- read.csv("housing.csv")
 head(data)
 
 
@@ -969,7 +956,7 @@ h)  Make a function name `quadratic()` which calculate quadratic equation (hint 
      x = \frac {-b \pm \sqrt{b^2 -4ac}} {2a}
     $$
 
-2.1 Load the csv file `Housing.csv` and assign it to object name `mydata` .
+2.1 Load the csv file `housing.csv` and assign it to object name `mydata` .
 
 2.2 Among ones close to Charles River, what is the smallest proportion of owner-occupied units that were built before 1940? Assign the obtained proportion to `my_poportion`.
 
