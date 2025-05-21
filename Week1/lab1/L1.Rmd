@@ -12,23 +12,15 @@ library(ggplot2)
 library(dplyr)
 ```
 
-# **Lab 1: Introduction to R**
+## **Lab 1: Introduction to R**
 
-In this lab session, we will learn basic syntax of R and how to use R for data exploratory data analyses.
+In this lab session, we will learn basic syntax of R and how to use R for exploratory data analyses.
 
-------------------------------------------------------------------------
-
-#### Learning Objectives
+## Learning Objectives
 
 -   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
 -   Data Handling and Preprocessing: I can use R to load, clean, and preprocess real-world data sets, applying techniques such as handling missing values, transforming variables, and merging data sources.
 -   Exploratory Data Analysis (EDA) and Visualization. I can conduct exploratory data analysis in R, creating appropriate visualizations (e.g., histograms, box plots, scatter plots) and summary statistics to uncover data patterns and inform subsequent analysis.
-
-------------------------------------------------------------------------
-
-We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
-
-------------------------------------------------------------------------
 
 #### Install R and RStudio.
 
@@ -40,13 +32,13 @@ And you can download and install RStudio from
 
 <https://posit.co/download/rstudio-desktop/>
 
-------------------------------------------------------------------------
+We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
 
 ## Pre-lab activities
 
 -   We are going to work in groups. Let’s form pairs. You can discuss the exercise questions and post-lab activities with your members.
 
-```{r}
+```{r, eval=FALSE}
 num_ppl_each_group = 2
 student_list <- read.csv("StudentList.csv")
 N <- nrow(student_list)
@@ -79,7 +71,7 @@ grouped_students %>% select(!number)
 
 -   Rstudio is also free and open source IDE (Integrated Development Environment) for R.
 
-### Brief walk through about RStudio interface
+## Brief walk through about RStudio interface
 
 ![RStudio overview](Screen_Shot_Rstudio.png){width="767"}
 
@@ -91,7 +83,7 @@ window `3` : plots, files, packages, help... window
 
 window `4` : environment window
 
-#### Set up `working directory`
+## Set up `working directory`
 
 -   You can go to `Session` → `set working directory` → `choose directory` and then choose your working directory.
 
@@ -101,13 +93,13 @@ window `4` : environment window
 
     then paste into `setwd()` function
 
-```{r eval=FALSE, include=FALSE}
+```{r, eval=FALSE, include=FALSE}
 
 setwd('path of your working directory')
 
 ```
 
-```{r eval=FALSE, include=FALSE}
+```{r, echo=TRUE, eval=FALSE, include=FALSE}
 
 # for example
 setwd('/Users/ylim2/Documents/Work/MA213') # this will set up your working directory
@@ -119,17 +111,7 @@ or
 
 -   You can go to `Files` tap → ☸︎ →'Set As Working Directory'
 
-### Exercise
-
-#### Q0. Let's set up your working directory.
-
-```{r}
-
-
-
-```
-
-#### How to run code?
+## How to run code?
 
 1.  Directly type your command in the console window.
 
@@ -141,7 +123,7 @@ or
 Run shortcut : `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).
 ```
 
-### R is basically a big calculator (some mathematics) : basic math operations to matrix operations
+## R is basically a big calculator (some mathematics) : basic math operations to matrix operations
 
 > -   Basic math operations
 >
@@ -155,22 +137,22 @@ Run shortcut : `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).
 >
 > `^` or `**`: exponent
 
-for example
+## For example
 
 $(\frac{12}{24})^2$
 
-```{r}
+```{r, echo=TRUE}
 (12/24)^(2)
 #or
 (12/24)**(2)
 
 ```
 
-### Assign values to a variable
+## Assign values to a variable
 
 Let's say if you want to save 10 to variable `A`. You can do the following command.
 
-```{r}
+```{r, echo=TRUE}
 A <- 10
 A <<- 10
 10 -> A
@@ -182,28 +164,25 @@ A = 10
 # commonly used ones 
 ```
 
-And you can check what value the variable `A` has by calling it or using `print()` function
+## And you can check what value the variable `A` has by calling it or using `print()` function
 
-```{r}
+```{r, echo=TRUE}
 A
-```
-
-```{r}
 print(A)
 ```
 
 Assigning character type information to a variable
 
-```{r}
+```{r, echo=TRUE}
 SchoolName <- "Boston University"
 SchoolName
 ```
 
-### Assign values to a vector
+## Assign values to a vector
 
 You can assign multiple values to a vector.
 
-```{r}
+```{r, echo=TRUE}
 GPA <- c(3.2, 3.7, 3.9, 2.3, 2.7)
 FirstName <- c("Tom", "Sarah", "Nick", "Amy", "John")
 GPA
@@ -219,56 +198,34 @@ There are some useful functions for a vector
 
 -   `length(x)` : this will give you the length of vector `x`
 
-#### Examples
+## Examples
 
-```{r}
+```{r, echo=TRUE}
 my_vector = seq(1, 10, 2)
 my_vector
 
 ```
 
-```{r}
+```{r, echo=TRUE}
 another_vector = 1:10
 another_vector
 
 ```
 
-```{r}
+```{r, echo=TRUE}
 
 vector3 = rep("BU", 25)
 vector3
 
 ```
 
-### Exercise
-
-##### Q1. Use R commands to calculate those and print `C` .
-
-$A = \exp(3),$ $B = \frac{(-3)^{4}}{10},$
-
-$A \times B = C$
-
-```{r}
-#
-
-
-```
-
-##### Q2. Print `Number` vector that has number from 1 to 99 all odd numbers. And make a vector named `School` that has 20 "Boston" and 10 "New York".
-
-```{r}
-#
-
-
-```
-
-### Accessing vector elements
+## Accessing vector elements
 
 Each element in a vector is associated with index number. The index in R starts from 1 as the first item.
 
 For example,
 
-```{r}
+```{r, echo=TRUE}
 #
 SomeNames <- c("Alpha", "Bravo", "Charlie")
 
@@ -277,11 +234,13 @@ SomeNames <- c("Alpha", "Bravo", "Charlie")
 
 ![Index of Vector Elements](index.jpg)
 
+## For example
+
 You can access the third element of `SomeNames` by `SomeNames[3]` .
 
 You can also access, for example, the second and the third elements by `SomeNames[2:3]` .
 
-```{r}
+```{r, echo=TRUE}
 #
 SomeNames[3]
 
@@ -290,7 +249,7 @@ SomeNames[2:3]
 
 ```
 
-Numeric vector can be subsetted using condition
+## Numeric vector can be subsetted using condition
 
 ``` {.R style="gray"}
                          x[condition]
@@ -307,9 +266,9 @@ x >= 100
 x != 100   # x not equal to 100
 ```
 
-For example
+## For example
 
-```{R}
+```{r, echo=TRUE}
 Numbers <- c(20, 30, 50, 70, 120, 200)
 Numbers[Numbers<100]
 
@@ -318,18 +277,18 @@ Numbers[Numbers<100]
 
 ![Subsetting vector using condition](Slicing.jpg)
 
-### Importing and Subsetting Data
+## Importing and Subsetting Data
 
 You can import Data by using `read.table()` function.
 
-```{r}
+```{r, echo=TRUE}
 
 my_data <- read.csv("mtcars.csv")
 # to be able to import this file, this file needs to be in your working directory
 
 ```
 
-You can access subset of data similar way as you with a vector.
+## You can access subset data
 
 -   Specific element by `my_data[row, column]`
 
@@ -338,6 +297,8 @@ You can access subset of data similar way as you with a vector.
 -   Specific row by `my_data[row,]`
 
     -   \| for example, all the element of the third row `my_data[3,]`
+
+## Also,
 
 -   Specific column by `my_data[,column]`
 
@@ -349,7 +310,37 @@ You can access subset of data similar way as you with a vector.
 
 -   Conditional statement works similar as vectors (row wise and column wise)
 
+    -   \| for example, `my_data[my_data$hp<100,]`
+
 ### Exercise
+
+#### Q0. Let's set up your working directory.
+
+```{r, echo=TRUE}
+
+#
+
+```
+
+#### Q1. Use R commands to calculate those and print `C` .
+
+$A = \exp(3),$ $B = \frac{(-3)^{4}}{10},$
+
+$C = A \times B$
+
+```{r, echo=TRUE}
+#
+
+
+```
+
+#### Q2. Print `Number` vector that has number from 1 to 99 all odd numbers. And make a vector named `School` that has 20 "Boston" and 10 "New York".
+
+```{r, echo=TRUE}
+#
+
+
+```
 
 You are going to explore the data extracted from the 1974 *Motor Trend* US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
 
@@ -369,7 +360,7 @@ Here are some useful functions for vectors.
 
 `mean(x)` : get the mean (average) of vector `x`
 
-##### Q3. Import `mtcars.csv` to `cars_data`
+#### Q3. Import `mtcars.csv` to `cars_data`
 
 ```{r}
 #
@@ -377,7 +368,7 @@ Here are some useful functions for vectors.
 
 ```
 
-##### Q4. You are interested in first five data (first five rows). Assign first five rows to `cars_data_5` and print it.
+#### Q4. You are interested in first five data (first five rows). Assign first five rows to `cars_data_5` and print it.
 
 ```{r}
 #
@@ -385,21 +376,21 @@ Here are some useful functions for vectors.
 
 ```
 
-##### Q5. You are interested in cars with horsepower greater than 100. Show the cars that have horsepower greater than 100.
+#### Q5. You are interested in cars with horsepower greater than 100. Show the cars that have horsepower greater than 100.
 
 ```{r}
 #
 
 ```
 
-##### Q6. This time, you are only interested in 4 cylinder cars with gross horsepower(5th column) and weight in 1000lbs (7th column). Show it! (You need to show `cyl`, `hp` and `wt` column which are 3rd, 5th and 7th column).
+#### Q6. This time, you are only interested in 4 cylinder cars with gross horsepower(5th column) and weight in 1000lbs (7th column). Show it! (You need to show `cyl`, `hp` and `wt` column which are 3rd, 5th and 7th column).
 
 ```{r}
 #
 
 ```
 
-##### Q6. You are interested in the total sum of horse power and the mean of mils per gallon of all the cars in the data. Assign them to `hp_sum` and `mpg_mean`. You can use `sum()` function and `mean()` function.
+#### Q7. You are interested in the total sum of horse power and the mean of mils per gallon of all the cars in the data. Assign them to `hp_sum` and `mpg_mean`. You can use `sum()` function and `mean()` function.
 
 ```{r}
 #
