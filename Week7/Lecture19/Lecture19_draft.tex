@@ -1,0 +1,226 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Option 1: Slides with solutions
+
+\documentclass[t,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
+\def\chp5@path{.}
+
+% Option 2: Handouts without solutions
+
+%\documentclass[11pt,containsverbatim,handout]{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+%\newcommand{\soln}[1]{ }
+%\newcommand{\solnGr}{ }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{../../lec_style.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Chp 5: Foundations for inference]{Chapter 5: Foundations for inference}
+\author{OpenIntro Statistics, 4th Edition}
+\institute{$\:$ \\ {\footnotesize Slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
+Some images may be included under fair use guidelines (educational purposes).}}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\addtocounter{framenumber}{-1} 
+{\removepagenumbers 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
+
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
+
+\titlepage
+
+\end{frame}
+}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Review: Test statistics, p-values}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Last slide from last lecture:
+\begin{frame}
+\frametitle{Last time: test statistics}
+
+In order to evaluate if the observed sample proportion is unusual for the hypothesized sampling distribution, we determine how many standard errors away from the null it is, which is also called the \hl{test statistic}.
+
+\pause
+
+\[ \hat{p} \sim N \pr{ \mu = 0.50, SE = \sqrt{\frac{0.50 \times 0.50}{850} }  } \]
+
+\pause
+
+\[ Z = \frac{0.41 - 0.50}{0.0171} = -5.26 \]
+
+\pause
+
+\dq{The sample proportion is 5.26 standard errors away from the hypothesized value. Is this considered unusually low? That is, is the result \hl{statistically significant}?}
+
+\pause
+
+\soln{Yes, and we can quantify how unusual it is using a p-value.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{p-values}
+
+\begin{itemize}
+
+\item We then use this test statistic to calculate the \hl{p-value}, the probability of observing data at least as favorable to the alternative hypothesis as our current data set, if the null hypothesis were true.
+
+\pause
+
+\item If the p-value is \hl{low} (lower than the significance level, $\alpha$, which is usually 5\%) we say that it would be very unlikely to observe the data if the null hypothesis were true, and hence \hl{reject $H_0$}.
+
+\pause
+
+\item If the p-value is \hl{high} (higher than $\alpha$) we say that it is likely to observe the data even if the null hypothesis were true, and hence \hl{do not reject $H_0$}.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Facebook interest categories - p-value}
+
+\hl{p-value:} probability of observing data at least as favorable to $H_A$ as our current data set (a sample proportion lower than 0.41), if in fact $H_0$ were true (the true population proportion was 0.50).
+
+\pause
+
+\[ P(\hat{p} < 0.41~\text{ or }~\hat{p} > 0.59~|~p = 0.50) = P(|Z| > 5.26) < 0.0001 \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Facebook interest categories - Making a decision}
+
+\begin{itemize}
+
+\item p-value $<$ 0.0001
+
+\pause
+
+\begin{itemize}
+\item If 50\% of all American FB users are comfortable with FB creating these interest categories, there is less than a 0.01\% chance of observing a random sample of 850 American Facebook users where 41\% or fewer or 59\% of higher feel comfortable with it.
+\pause
+\item Pretty low probability to think that observed sample proportion, or something more extreme, is likely to happen by chance.
+\end{itemize}
+
+\pause
+\item Since p-value is \orange{low} (lower than 5\%) we \orange{reject $H_0$}.
+
+\pause
+\item The data provide convincing evidence that the proportion of American FB users who are comfortable with FB creating a list of interest categories for them is different than 50\%.
+
+\pause
+\item The difference between the null value of 0.50 and observed sample proportion of 0.41 is \orange{not due to chance} or sampling variability.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Choosing a significance level}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Choosing a significance level}
+
+\begin{itemize}
+
+\item While the the traditional level is 0.05, it is helpful to adjust the significance level based on the application. 
+
+\item Select a level that is smaller or larger than 0.05 depending on the consequences of any conclusions reached from the test.
+
+\item If making a Type 1 Error is dangerous or especially costly, we should choose a small significance level (e.g. 0.01). Under this scenario we want to be very cautious about rejecting the null hypothesis, so we demand very strong evidence favoring $H_A$ before we would reject $H_0$.
+
+\item If a Type 2 Error is relatively more dangerous or much more costly than a Type 1 Error, then we should choose a higher significance level (e.g. 0.10). Here we want to be cautious about failing to reject $H_0$ when the null is actually false.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{One vs. two sided hypothesis tests}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{One vs. two sided hypothesis tests}
+
+\begin{itemize}
+
+\item In two sided hypothesis tests we are interested in whether $p$ is either above or below some null value $p_0$: $H_A: p \ne p_0$.
+
+\item In one sided hypothesis tests we are interested in $p$ differing from the null value $p_0$ in one direction (and not the other):
+\begin{itemize}
+\item If there is only value in detecting if population parameter is less than $p_0$, then $H_A: p < p_0$.
+\item If there is only value in detecting if population parameter is greater than $p_0$, then $H_A: p > p_0$.
+\end{itemize}
+
+\item Two-sided tests are often more appropriate as we often want to detect if the data goes clearly in the opposite direction of our alternative hypothesis as well.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: p-values, significance, and errors (again)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: Interpreting p-values}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
