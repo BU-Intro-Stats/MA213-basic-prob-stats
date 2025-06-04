@@ -21,6 +21,7 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\def\chp4@path{../../Chp 4}
 \input{../../lec_style.tex}
 
 
@@ -28,9 +29,10 @@
 % Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[Chp 4: Distributions of RVs]{Chapter 4: Distributions of random variables}
+\title[Lecture 10]{MA213: Lecture 10}
+\subtitle{Module 2: Probability, Random Variables, and Distributions}
 \author{OpenIntro Statistics, 4th Edition}
-\institute{$\:$ \\ {\footnotesize Slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
 The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
 Some images may be included under fair use guidelines (educational purposes).}}
 \date{}
@@ -85,7 +87,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{itemize}
 
 \begin{center}
-%includegraphics[width=0.7\textwidth]{4-1_normal_distribution/figures/simpleNormal/simpleNormal}
+\includegraphics[width=0.7\textwidth]{\chp4@path/4-1_normal_distribution/figures/simpleNormal/simpleNormal}
 \end{center}
 
 \end{frame}
@@ -96,7 +98,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \frametitle{Heights of males}
 
 \twocol{0.5}{0.5}{
-%includegraphics[width=\textwidth]{4-1_normal_distribution/figures/ok_cupid/ok_cupid_men} \\
+\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ok_cupid/ok_cupid_men} \\
 }
 {
 \pause
@@ -116,7 +118,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \frametitle{Heights of females}
 
 \twocol{0.5}{0.5}{
-%includegraphics[width=\textwidth]{4-1_normal_distribution/figures/ok_cupid/ok_cupid_women} \\
+\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ok_cupid/ok_cupid_women} \\
 }
 {
 \pause
@@ -143,8 +145,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % \begin{center}
 % $\mu$: mean, $\sigma$: standard deviation
 % \[N(\mu = 0, \sigma = 1) \hspace{1.4cm} N(\mu = 19, \sigma = 4) \]
-% %includegraphics[width=0.6\textwidth]{4-1_normal_distribution/figures/twoSampleNormals/twoSampleNormals} \\
-% %includegraphics[width=0.6\textwidth]{4-1_normal_distribution/figures/twoSampleNormalsStacked/twoSampleNormalsStacked}
+% \includegraphics[width=0.6\textwidth]{\chp4@path/4-1_normal_distribution/figures/twoSampleNormals/twoSampleNormals} \\
+% \includegraphics[width=0.6\textwidth]{\chp4@path/4-1_normal_distribution/figures/twoSampleNormalsStacked/twoSampleNormalsStacked}
 % \end{center}
 
 % \end{frame}
@@ -165,7 +167,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \dq{SAT scores are distributed nearly normally with mean 1500 and standard deviation 300. ACT scores are distributed nearly normally with mean 21 and standard deviation 5. A college admissions officer wants to determine which of the two applicants scored better on their standardized test with respect to the other test takers: Pam, who earned an 1800 on her SAT, or Jim, who scored a 24 on his ACT?}
 
 \begin{center}
-%includegraphics[width=\textwidth]{4-1_normal_distribution/figures/satActNormals/satActNormals}
+\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/satActNormals/satActNormals}
 \end{center}
 
 \end{frame}
@@ -186,7 +188,7 @@ Since we cannot just compare these two raw scores, we instead compare how many s
 \end{itemize}
 
 \begin{center}
-%includegraphics[width=0.7\textwidth]{4-1_normal_distribution/figures/satActNormals/satActNormalsStandardized}
+\includegraphics[width=0.7\textwidth]{\chp4@path/4-1_normal_distribution/figures/satActNormals/satActNormalsStandardized}
 \end{center}
 
 \end{frame}
@@ -225,7 +227,7 @@ Since we cannot just compare these two raw scores, we instead compare how many s
 \end{itemize}
 
 \begin{center}
-%includegraphics[width=0.7\textwidth]{4-1_normal_distribution/figures/satBelow1800/satBelow1800}
+\includegraphics[width=0.7\textwidth]{\chp4@path/4-1_normal_distribution/figures/satBelow1800/satBelow1800}
 \end{center}
 
 \end{frame}
@@ -252,7 +254,7 @@ There are many ways to compute percentiles/areas under the curve:
 \begin{itemize}
 \item Applet: {\small \webURL{https://gallery.shinyapps.io/dist_calc/}}
 \begin{center}
-%includegraphics[width=0.8\textwidth]{4-1_normal_distribution/figures/applet}
+\includegraphics[width=0.8\textwidth]{\chp4@path/4-1_normal_distribution/figures/applet}
 \end{center}
 
 \end{itemize}
@@ -307,7 +309,7 @@ $Z$ & 0.00 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 & 0.08 & 0.09 \\
 ``The term \textit{six sigma process} comes from the notion that if one has six standard deviations between the process mean and the nearest specification limit, as shown in the graph, practically no items will fail to meet specifications."
 
 \begin{center}
-%includegraphics[width=0.35\textwidth]{4-1_normal_distribution/figures/sixsigma}
+\includegraphics[width=0.35\textwidth]{\chp4@path/4-1_normal_distribution/figures/sixsigma}
 \end{center}
 
 \ct{\webURL{http://en.wikipedia.org/wiki/Six_Sigma}}
@@ -326,7 +328,7 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 \pause
 \twocol{0.4}{0.6}{
 \begin{center}
-%includegraphics[width=\textwidth]{4-1_normal_distribution/figures/ketchup/ketchupLT358}
+\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
 \end{center}
 }
 {
@@ -402,17 +404,17 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 % \begin{columns}[c]
 % \column{0.3\textwidth}
 % \pause
-% %includegraphics[width=\textwidth]{4-1_normal_distribution/figures/ketchup/ketchupBET}
+% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupBET}
 % \column{0.05\textwidth}
 % =
 % \pause
 % \column{0.3\textwidth}
-% %includegraphics[width=\textwidth]{4-1_normal_distribution/figures/ketchup/ketchupLT362}
+% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupLT362}
 % \column{0.05\textwidth}
 % -
 % \pause
 % \column{0.3\textwidth}
-% %includegraphics[width=\textwidth]{4-1_normal_distribution/figures/ketchup/ketchupLT358}
+% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
 % \end{columns}
 % \pause
 % \begin{eqnarray*}
@@ -439,7 +441,7 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 
 % \twocol{0.3}{0.7}
 % {
-% %includegraphics[width=\textwidth]{4-1_normal_distribution/figures/temp/tempLOW3PERC}
+% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/temp/tempLOW3PERC}
 % }
 % {
 % \pause
@@ -484,7 +486,7 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 % \pause
 % \twocol{0.3}{0.7}
 % {
-% %includegraphics[width=\textwidth]{4-1_normal_distribution/figures/temp/tempHIGH10PERC}
+% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/temp/tempHIGH10PERC}
 % }
 % {
 % \pause
