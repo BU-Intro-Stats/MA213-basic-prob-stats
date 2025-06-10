@@ -67,13 +67,199 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Sampling Review}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Sampling}
+\section{Sampling from a small population}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling with replacement}
+
+When sampling \hl{with replacement}, you put back what you just drew.
+
+\pause
+
+\begin{itemize}
+
+\item Imagine you have a bag with 5 red, 3 blue and 2 orange chips in it. What is the probability that the first chip you draw is blue?
+\begin{center}
+5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+\end{center}
+
+\pause
+
+\[ Prob(1^{st} \text{ chip } B) = \frac{3}{5 + 3 + 2} = \frac{3}{10} = 0.3 \]
+
+\pause
+
+\item Suppose you did indeed pull a blue chip in the first draw. If drawing with replacement, what is the probability of drawing a blue chip in the second draw?
+
+\pause
+
+\begin{center}
+$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
+
+\pause
+
+$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+\end{center}
+
+\pause
+
+\[ Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B) = \frac{3}{10} = 0.3 \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling with replacement (cont.)}
+
+\begin{itemize}
+
+\item Suppose you actually pulled an orange chip in the first draw. If drawing with replacement, what is the probability of drawing a blue chip in the second draw?
+
+\pause
+
+\begin{center}
+$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
+\pause
+$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+\end{center}
+\pause
+\[ Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } O) = \frac{3}{10} = 0.3 \]
+
+\pause
+\item If drawing with replacement, what is the probability of drawing two blue chips in a row?
+\begin{center}
+
+\pause
+$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
+$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+\end{center}
+\pause
+\[ Prob(1^{st} \text{ chip } B) \cdot Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B) = 0.3 \times 0.3 \]
+\[ = 0.3^2 = 0.09 \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling with replacement (cont.)}
+
+\begin{itemize}
+
+\item When drawing with replacement, probability of the second chip being blue does not depend on the color of the first chip since whatever we draw in the first draw gets put back in the bag.
+\[ Prob(B | B) = Prob(B | O) \]
+
+\item In addition, this probability is equal to the probability of drawing a blue chip in the first draw, since the composition of the bag never changes when sampling with replacement.
+\[ Prob(B | B) = Prob(B) \]
+
+\item \hl{When drawing with replacement, draws are independent.}
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling without replacement}
+
+When drawing \hl{without replacement} you do not put back what you just drew.
+
+\begin{itemize}
+
+\pause
+
+\item Suppose you pulled a blue chip in the first draw. If drawing without replacement, what is the probability of drawing a blue chip in the second draw?
+\pause
+\begin{center}
+$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
+\pause
+$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+\end{center}
+\pause
+\[ Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B) = \frac{2}{9} = 0.22 \]
+
+\pause
+
+\item If drawing without replacement, what is the probability of drawing two blue chips in a row?
+\begin{center}
+
+\pause
+$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
+$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+\end{center}
+\pause
+\[ Prob(1^{st} \text{ chip } B) \cdot Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B)  = 0.3 \times 0.22 \]
+\[ = 0.066 \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling without replacement (cont.)}
+
+\begin{itemize}
+
+\item When drawing without replacement, the probability of the second chip being blue given the first was blue is not equal to the probability of drawing a blue chip in the first draw since the composition of the bag changes with the outcome of the first draw.
+\[ Prob(B | B) \ne Prob(B) \]
+
+\pause
+
+\item \hl{When drawing without replacement, draws are not independent.}
+
+\pause
+
+\item This is especially important to take note of when the sample sizes are small. If we were dealing with, say, 10,000 chips in a (giant) bag, taking out one chip of any color would not have as big an impact on the probabilities in the second draw.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Practice}
+
+% \pq{In most card games cards are dealt without replacement. What is the probability of being dealt an ace and then a 3? Choose the closest answer.}
+
+% \twocol{0.3}{0.6}{
+% \begin{enumerate}[(a)]
+% \item 0.0045
+% \item 0.0059
+% \solnMult{0.0060}
+% \item 0.1553
+% \end{enumerate}
+% }
+% {
+% \soln{
+% \pause
+% \[ P(ace~then~3) = \frac{4}{52} \times \frac{4}{51} \approx 0.0060 \]
+% }}
+
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{R Demonstration: Sampling}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -111,6 +297,53 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Distribution of a discrete random variable}
+
+\dq{In a game of cards you win \$1 if you draw a heart, \$5 if you draw an ace (including the ace of hearts), \$10 if you draw the king of spades and nothing for any other card you draw. Write the probability model for your winnings, and calculate your expected winning.}
+
+\pause
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l | c | c | c }
+Event		& $X$ 		& $P(X)$        		 \\
+\hline
+Heart (not ace)	& $1$		& $\frac{12}{52}$	 \\
+Ace			& $5$		& $\frac{4}{52}$	 \\	
+King of spades	& $10$		& $\frac{1}{52}$	 \\	
+All else		& $0$		& $\frac{35}{52}$	\\
+\hline
+Total			&			&		1		
+\end{tabular}
+
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Distribution of a discrete random variable}
+
+Below is a visual representation of the probability distribution of winnings from this game:
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chp3@path/3-4_random_variables/figures/card_game/card_game}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Expectation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -136,8 +369,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \dq{In a game of cards you win \$1 if you draw a heart, \$5 if you draw an ace (including the ace of hearts), \$10 if you draw the king of spades and nothing for any other card you draw. Write the probability model for your winnings, and calculate your expected winning.}
 
-\pause
-
 \begin{center}
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{l | c | c | c }
@@ -148,22 +379,9 @@ Ace			& $5$		& $\frac{4}{52}$	& $\frac{20}{52}$ \\
 King of spades	& $10$		& $\frac{1}{52}$	& $\frac{10}{52}$ \\	
 All else		& $0$		& $\frac{35}{52}$	& $0$ \\
 \hline
-Total			&			&				& $E(X) = \frac{42}{52} \approx 0.81$
+Total			&			&		1		& $E(X) = \frac{42}{52} \approx 0.81$
 \end{tabular}
 
-\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Expected value of a discrete random variable (cont.)}
-
-Below is a visual representation of the probability distribution of winnings from this game:
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{\chp3@path/3-4_random_variables/figures/card_game/card_game}
 \end{center}
 
 \end{frame}
@@ -245,8 +463,10 @@ where $a$ and $b$ are some fixed numbers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{Calculating the expectation of a linear combination}
+\begin{frame}
+\frametitle{Calculating the expectation of a linear combination}
+
+(TODO: E[aX+bY])
 
 % \dq{On average you take 10 minutes for each statistics homework problem and 15 minutes for each chemistry homework problem. This week you have 5 statistics and 4 chemistry homework problems assigned. What is the total time you expect to spend on statistics and chemistry homework for the week?}
 
@@ -260,7 +480,7 @@ where $a$ and $b$ are some fixed numbers.
 % \end{align*}
 % }
 
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -291,8 +511,10 @@ where $a$ and $b$ are some fixed numbers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{Calculating the variance of a linear combination}
+\begin{frame}
+\frametitle{Calculating the variance of a linear combination}
+
+(TODO: Var[aX+bY])
 
 % \dq{The standard deviation of the time you take for each statistics homework problem is 1.5 minutes, and it is 2 minutes for each chemistry problem. What is the standard deviation of the time you expect to spend on statistics and physics homework for the week if you have 5 statistics and 4 chemistry homework problems assigned? Suppose that the time it takes to complete each problem is independent of another.}
 
@@ -306,7 +528,7 @@ where $a$ and $b$ are some fixed numbers.
 % \end{align*}
 % }
 
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -314,138 +536,7 @@ where $a$ and $b$ are some fixed numbers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Recap}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% \frametitle{Practice}
-
-% \pq{A casino game costs \$5 to play. If the first card you draw is red, then you get to draw a second card (without replacement). If the second card is the ace of clubs, you win \$500. If not, you don't win anything, i.e. lose your \$5. What is your expected profits/losses from playing this game? {\small Remember: profit/loss = winnings - cost.}}
-
-% \begin{multicols}{2}
-% \begin{enumerate}[(a)]
-% \item A profit of 5\textcent
-% \solnMult{A loss of 10\textcent}
-% \item A loss of 25\textcent
-% \item A loss of 30\textcent
-% \end{enumerate}
-% \end{multicols}
-
-% \soln{
-% \only<2>{
-% {\small
-% \renewcommand\arraystretch{1.25}
-% \begin{tabular}{l c c c r}
-% Event				& Win	& Profit: $X$	& $P(X)$	& $ X \times P(X)$	\\
-% \hline
-% \orange{Red}, {A}{$\clubsuit$}		& 500		& 500 - 5 = 495	& $\frac{26}{52} \times \frac{1}{51} = 	0.0098$ & 	 $495 \times 0.0098 = 4.851$ \\
-% Other	& 0 			& 0 - 5 = -5	& $1 - 0.0098 = 0.9902$ & $-5 \times 0.9902 = -4.951$ \\  
-% \hline
-% 					&			&			& 			& $E(X) = -0.1$
-% \end{tabular}
-% }
-% }
-% }
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Fair game}
-
-A \hl{fair} game is defined as a game that costs as much as its expected payout, i.e. expected profit is 0.
-
-\pause
-
-$\:$
-
-\dq{Do you think casino games in Vegas cost more or less than their expected payouts?}
-
-\soln{
-\pause
-\begin{columns}[c]
-\column{0.6\textwidth}
-If those games cost less than their expected payouts, it would mean that the casinos would be losing money on average, and hence they wouldn't be able to pay for all this:
-\column{0.4\textwidth}
-\includegraphics[width=\textwidth]{\chp3@path/3-4_random_variables/figures/bellagio.jpg}
-\end{columns}
-\ct{Image by Moyan\_Brenn on Flickr \webURL{http://www.flickr.com/photos/aigle\_dore/5951714693}.}
-}
-
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Simplifying random variables}
-
-Random variables do not work like normal algebraic variables:
-\[ X + X \ne 2X \]
-
-\pause
-
-{\small
-\twocol{0.45}{0.45}
-{
-\begin{align*}
-E(X + X) &= E(X) + E(X) \\
-&= 2 E(X) \\
-&~  \\
-E(2X) &= 2 E(X) \\
-&~ 
-\end{align*}
-}
-{
-\begin{align*}
-Var(X + X) &= Var(X) + Var(X)~{\scriptsize \text{(assuming independence)}} \\
-&= 2~Var(X) \\
-&~  \\
-Var(2X) &= 2^2~Var(X) \\
-&= 4~Var(X)
-\end{align*}
-}
-}
-
-
-\pause
-
-\vspace{3mm}
-
-\mathhl{E(X + X)  = E(2X)}, but \mathhl{Var(X + X) \ne Var(2X)}.
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Adding or multiplying?}
-
-\dq{A company has 5 Lincoln Town Cars in its fleet. Historical data show that annual maintenance cost for each car is on average \$2,154 with a standard deviation of \$132. What is the mean and the standard deviation of the total annual maintenance cost for this fleet?}
-
-\pause
-
-Note that we have 5 cars each with the given annual maintenance cost $(X_1 + X_2 + X_3 + X_4 + X_5)$, not one car that had 5 times the given annual maintenance cost $(5X)$.
-
-\pause
-
-{\small
-\begin{eqnarray*} 
-E(X_1 + X_2 + X_3 + X_4 + X_5) &=& E(X_1) + E(X_2) + E(X_3) + E(X_4) + E(X_5) \\
-\pause
-&=& 5 \times E(X) = 5 \times 2,154 = \$ 10,770 \\
-\pause
-Var(X_1 + X_2 + X_3 + X_4 + X_5) &=& Var(X_1) + Var(X_2) + Var(X_3) + Var(X_4) + Var(X_5) \\
-\pause
-&=& 5 \times V(X) = 5 \times 132^2 = \$ 87,120 \\
-\pause
-SD(X_1 + X_2 + X_3 + X_4 + X_5) &=& \sqrt{87,120} =  295.16
-\end{eqnarray*}
-}
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
