@@ -31,7 +31,7 @@ library(dplyr)
 
 ## Pre-lab activities
 
-#### Q) Let’s roll a die! You are playing a dice-rolling game and you’re curious about how this game goes at the end. The rule is you roll it once and other player roll it once and add the outcome. What can you expect from this game in the end? What is the long-term average and dispersion of the game results? In other words, what are the expected value and variance?
+#### Let’s roll a die! You are playing a dice-rolling game, and you’re curious about how the game plays out in the end. The rule is that you roll the die once, and the other player rolls it once as well, then you add the outcomes together. What can you expect from this game in the end? What is the long-term average and dispersion of the game results? In other words, what are the expected value and variance?
 
 We let $X_1$ be the number on the top face of the first die rolled, and $X_2$ be the number on the top face of the second die rolled.
 
@@ -359,6 +359,8 @@ ggplot(data=sim_df, aes(x=Difference_prop)) + geom_dotplot()
 
 Based on the simulation results, we do not reject the null hypothesis that the treatment (aspirin vs. placebo) has no significant effect on the proportion of deaths due to myocardial infarction. The simulated differences in death rates between the two groups were consistent with chance variability observed in the study. Therefore, the evidence does not support the claim that aspirin is effective in reducing mortality from myocardial infarction.
 
+------------------------------------------------------------------------
+
 ## Lab activities
 
 ## This time, you invented another challenging game now. If one person roll a dice, then the outcome is multiplied by 3. Also when second person roll a dice, then the outcome is multiplied by 4. The final outcome is the sum of those two values. What is the expected value and variance of the random variable?
@@ -401,9 +403,9 @@ Q. What is the expected value of one die? And variance of one die? ($E(X)$ and $
 
 Please name your submission as `lab4.R`
 
-Now, You flip a slightly biased coin where $P(head)=0.49$ and $P(tail)=0.51$. If the result is head, you are given \$10, otherwise you pay \$20. How much money you have at the end?
+Now, You flip a slightly biased coin where $P(head)=0.40$ and $P(tail)=0.60$. If the result is head, you earn \$20, otherwise you pay \$15. How much money you have at the end?
 
-1.  Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively.
+1.  Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively. (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` )
 2.  You are going to make an function named `my_sim` which takes input of `n` and gives an output list of `mu` and `sigma_2` .
 
 for example
