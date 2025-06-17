@@ -219,7 +219,7 @@ mu_hat = sum(values * prob_outcome)
 
 ```{r}
 
-sigma_2_hat <- sum( (values-mu_hat)^2 - prob_outcome  )
+sigma_2_hat <- sum( (values-mu_hat)^2 * prob_outcome  )
 sigma_2_hat
 ```
 
@@ -245,7 +245,7 @@ sim_fn <- function(n=1000){
 
 
   mu_hat = sum(values * prob_outcome)
-  sigma_2_hat <- sum( (values-mu_hat)^2 - prob_outcome  )
+  sigma_2_hat <- sum( (values-mu_hat)^2 * prob_outcome  )
  
   output <- list(mu = mu_hat, sigma2 = sigma_2_hat)
   return(output)
