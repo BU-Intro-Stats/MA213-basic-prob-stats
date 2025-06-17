@@ -68,6 +68,139 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Recap}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Practice}
+
+\pq{A casino game costs \$5 to play. If the first card you draw is red, then you get to draw a second card (without replacement). If the second card is the ace of clubs, you win \$500. If not, you don't win anything, i.e. lose your \$5. What is your expected profits/losses from playing this game? {\small Remember: profit/loss = winnings - cost.}}
+
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item A profit of 5\textcent
+\solnMult{A loss of 10\textcent}
+\item A loss of 25\textcent
+\item A loss of 30\textcent
+\end{enumerate}
+\end{multicols}
+
+\soln{
+\only<2>{
+{\small
+\renewcommand\arraystretch{1.25}
+\begin{tabular}{l c c c r}
+Event				& Win	& Profit: $X$	& $P(X)$	& $ X \times P(X)$	\\
+\hline
+\orange{Red}, {A}{$\clubsuit$}		& 500		& 500 - 5 = 495	& $\frac{26}{52} \times \frac{1}{51} = 	0.0098$ & 	 $495 \times 0.0098 = 4.851$ \\
+Other	& 0 			& 0 - 5 = -5	& $1 - 0.0098 = 0.9902$ & $-5 \times 0.9902 = -4.951$ \\  
+\hline
+					&			&			& 			& $E(X) = -0.1$
+\end{tabular}
+}
+}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Fair game}
+
+A \hl{fair} game is defined as a game that costs as much as its expected payout, i.e. expected profit is 0.
+
+\pause
+
+$\:$
+
+\dq{Do you think casino games in Vegas cost more or less than their expected payouts?}
+
+\soln{
+\pause
+\begin{columns}[c]
+\column{0.6\textwidth}
+If those games cost less than their expected payouts, it would mean that the casinos would be losing money on average, and hence they wouldn't be able to pay for all this:
+\column{0.4\textwidth}
+\includegraphics[width=\textwidth]{\chp3@path/3-4_random_variables/figures/bellagio.jpg}
+\end{columns}
+\ct{Image by Moyan\_Brenn on Flickr \webURL{http://www.flickr.com/photos/aigle\_dore/5951714693}.}
+}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Simplifying random variables}
+
+Random variables do not work like normal algebraic variables:
+\[ X + X \ne 2X \]
+
+\pause
+
+{\small
+\twocol{0.45}{0.45}
+{
+\begin{align*}
+E(X + X) &= E(X) + E(X) \\
+&= 2 E(X) \\
+&~  \\
+E(2X) &= 2 E(X) \\
+&~ 
+\end{align*}
+}
+{
+\begin{align*}
+Var(X + X) &= Var(X) + Var(X)~{\scriptsize \text{(assuming independence)}} \\
+&= 2~Var(X) \\
+&~  \\
+Var(2X) &= 2^2~Var(X) \\
+&= 4~Var(X)
+\end{align*}
+}
+}
+
+
+\pause
+
+\vspace{3mm}
+
+\mathhl{E(X + X)  = E(2X)}, but \mathhl{Var(X + X) \ne Var(2X)}.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Adding or multiplying?}
+
+\dq{A company has 5 Lincoln Town Cars in its fleet. Historical data show that annual maintenance cost for each car is on average \$2,154 with a standard deviation of \$132. What is the mean and the standard deviation of the total annual maintenance cost for this fleet?}
+
+\pause
+
+Note that we have 5 cars each with the given annual maintenance cost $(X_1 + X_2 + X_3 + X_4 + X_5)$, not one car that had 5 times the given annual maintenance cost $(5X)$.
+
+\pause
+
+{\small
+\begin{eqnarray*} 
+E(X_1 + X_2 + X_3 + X_4 + X_5) &=& E(X_1) + E(X_2) + E(X_3) + E(X_4) + E(X_5) \\
+\pause
+&=& 5 \times E(X) = 5 \times 2,154 = \$ 10,770 \\
+\pause
+Var(X_1 + X_2 + X_3 + X_4 + X_5) &=& Var(X_1) + Var(X_2) + Var(X_3) + Var(X_4) + Var(X_5) \\
+\pause
+&=& 5 \times V(X) = 5 \times 132^2 = \$ 87,120 \\
+\pause
+SD(X_1 + X_2 + X_3 + X_4 + X_5) &=& \sqrt{87,120} =  295.16
+\end{eqnarray*}
+}
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Continuous distributions}
