@@ -1,0 +1,71 @@
+\documentclass[14pt]{article}
+\usepackage{booktabs}    % For enhanced table formatting
+\usepackage{array}       % For improved array and tabular environments
+\usepackage{geometry}    % To adjust page margins
+\usepackage{multirow}    % For multi-row cells
+\usepackage{caption}     % For customizing captions
+
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\title{Distribution of the Sum of Two Dice}
+\author{}
+\date{}
+\maketitle
+
+\begin{table}[htbp]
+\centering
+\large
+\setlength{\tabcolsep}{14pt}  % Increase column separation
+\caption{Outcomes, Number of Ways, and Probabilities for the Sum of Two Six-Sided Dice (Fill in the Blanks)}
+\label{table:sum_two_dice_empty}
+\begin{tabular}{@{}l *{11}{c@{\hspace{1cm}}} @{}} 
+\toprule
+\textbf{Category} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\ \midrule
+\textbf{\# of Ways} & & & & & & & & & & & \\
+ & & & & & & & & & & & \\ \\ \\ 
+ & & & & & & & & & & & \\ \\ \\
+ & & & & & & & & & & & \\ \\ \\
+ & & & & & & & & & & & \\ \\ \\
+ & & & & & & & & & & & \\ \midrule
+\textbf{$P(X_1 + X_2)$} & & & & & & & & & & & \\ \bottomrule
+\end{tabular}
+\end{table}
+
+               
+
+% \newpage
+
+% % \begin{table}[h!]
+% % \centering
+% % \caption{Outcomes, Number of Ways, and Probabilities for the Sum of Two Six-Sided Dice}
+% % \label{table:sum_two_dice}
+% % \begin{tabular}{@{}l *{11}{c} @{}} % 1 + 11 columns
+% % \toprule
+% %  & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\ \midrule
+% % \textbf{\# of Ways} & (1,1) & (1,2) & (1,3) & (1,4) & (1,5) & (1,6) & (2,6) & (3,6) & (4,6) & (5,6) & (6,6) \\
+% %  & & (2,1) & (2,2) & (2,3) & (2,4) & (2,5) & (2,4) & (3,5) & (4,5) & (5,5) & \\
+% %  & & & (3,1) & (3,2) & (3,3) & (3,4) & (3,3) & (3,4) & (3,3) & & \\
+% %  & & & & (4,1) & (4,2) & (4,3) & (4,2) & (4,3) & & & \\
+% %  & & & & & (5,1) & (5,2) & (5,3) & & & \\
+% %  & & & & & & (6,1) & (6,2) & & & \\ \midrule
+% % \textbf{$P(X_1 + X_2)$} & $\frac{1}{36}$ & $\frac{2}{36}$ & $\frac{3}{36}$ & $\frac{4}{36}$ & $\frac{5}{36}$ & $\frac{6}{36}$ & $\frac{5}{36}$ & $\frac{4}{36}$ & $\frac{3}{36}$ & $\frac{2}{36}$ & $\frac{1}{36}$ \\ \bottomrule
+% % \end{tabular}
+% % \end{table}
+
+% % $$
+% % \begin{aligned}
+% % E(X_1 + X_2) &= 2 \times \frac{1}{36} + 3 \times \frac{2}{36} + 4 \times \frac{3}{36} + \dots + 12 \times \frac{1}{36} \\
+% %                &= \mu = 7 
+% % \end{aligned}
+% % $$
+
+% % $$
+% % \begin{align}
+% %     Var(X_1+X_2) &= (2-7)^2 \frac{1}{36} + (3-7)^2 \frac{2}{36} + \dots + (12-7)^2 \frac{1}{36} \\
+% %                 &= \sigma^2 = 5.83
+% % \end{align}
+% % $$
+
+\end{document}
