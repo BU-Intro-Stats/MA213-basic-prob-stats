@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Prompt the user for the Rmd file name
-read -p "Enter the name of the Rmd file (e.g., lab1.Rmd): " RMD_FILE
+# Check if the user provided an Rmd file name as an argument
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <Rmd file name>"
+  exit 1
+fi
+
+RMD_FILE="$1"
 
 # Check if the input file exists
 if [ ! -f "$RMD_FILE" ]; then
@@ -11,18 +16,17 @@ fi
 
 # Automatically generate the Qmd file name and title
 QMD_FILE="${RMD_FILE%.Rmd}.qmd"      # Replace .Rmd with .qmd
-TITLE="${RMD_FILE%.Rmd}"            # Remove .Rmd to derive the title
+TITLE="${RMD_FILE%.Rmd}"              # Remove .Rmd to derive the title
 
 # Define qmd YAML front matter with dynamic title
-cat << EOF > $QMD_FILE
+cat << EOF > "$QMD_FILE"
 ---
-title: "${TITLE}"
+title: "$TITLE"
 format: revealjs
 editor: visual
 ---
 
 EOF
-
 
 # Extract content strictly from the first "## " up to "## Lab Activities" (case-sensitive), without copying anything after "## Lab Activities"
 awk '
@@ -34,4 +38,4 @@ in_section { print }
 
 # Notify user of success
 echo "Conversion completed: $RMD_FILE -> $QMD_FILE"
-echo "Title set to: '${TITLE}'
+echo "Title set to: '$TITLE'"
