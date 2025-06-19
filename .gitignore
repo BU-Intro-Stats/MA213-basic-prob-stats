@@ -18,4 +18,4 @@ beamer.cls
 *.bbl
 *.blg
 lectureDraftArchives/
-dummy_survey_data.txt
+lecture_1_classroom_survey.csv
