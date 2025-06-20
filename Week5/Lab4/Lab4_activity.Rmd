@@ -41,7 +41,7 @@ Calculate them by filling out the table given.
 
 ------------------------------------------------------------------------
 
-Now, let’s consider implementing a simulation. We will run 10 simulation trials. How would you like to proceed?
+Now, let’s consider implementing a simulation for the game. We will run 10 simulation trials. How would you like to proceed?
 
 We need these parts
 
@@ -57,7 +57,7 @@ We need three people: two to roll the dice each time, and one to record the resu
 | person 2 |     |     |     |     |     |     |     |     |     |     |
 | outcome  |     |     |     |     |     |     |     |     |     |     |
 
-Calculate observed expected value and the variance and compare with the answer above.
+Calculate observed expected value and the variance and compare with the answers above.
 
 ------------------------------------------------------------------------
 
@@ -65,13 +65,12 @@ Calculate observed expected value and the variance and compare with the answer a
 
 ## This time, you have a new challenging game. The first player rolls a die, and their outcome is multiplied by 3. The second player then rolls a die, and their outcome is multiplied by 4. The final result is the sum of these two values. What are the expected value and variance of the resulting random variable?
 
-Q. What is the expected value of the total outcome?
+Q. What are the theoretical expected value and variance of the total outcome?
 
 ```         
-
 ```
 
-Q. Let's simulate it. Make a function to obtain one output from this setting.
+Q. Let's simulate it. Make a function to obtain one trial from this setting.
 
 ```{r}
 #
@@ -95,10 +94,9 @@ Q. Using the function above, could you make a plot with the x-axis is `n` and th
 #
 ```
 
-Q. What is the expected value of one die? And variance of one die? ($E(X)$ and $Var(X)$)? Compare your answers to $3E( X_1) + 4E( X_2)$. Also, What is $Var(3X_1) + Var(4 X_2)$?
+Q. Let $X$ be the number on the top face of a rolled die. What are the theoretical values of $E(X)$ and $Var(X)$? Using $E(X)$ and $Var(X)$, calculate $E(3X_1 + 4X_2)$ and $Var(3X_1 + 4X_2)$. Then, compare these to the simulation results above.
 
 ```         
-
 ```
 
 ------------------------------------------------------------------------
@@ -109,12 +107,18 @@ Please name your submission as `lab4.R`
 
 Now, You flip a slightly biased coin where $P(head)=0.40$ and $P(tail)=0.60$. If the result is head, you earn \$20, otherwise you pay \$15. How much money you have at the end?
 
-1.  Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively. (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` )
-2.  You are going to make an function named `my_sim` which takes input of `n` and gives an output list of `mu_sim` and `sigma_2_sim` .
-
-for example
+1.  Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively.
 
 ``` r
+# for example,
+mu <- 7
+sigma_2 <- 14
+```
+
+2.  You are going to make an function named `my_sim(n)` which takes input of `n` and gives an output list of `mu_simulated` and `sigma_2_``simulated` (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` ).
+
+``` r
+# for example
 my_sim(10)
 $mu
 [1] 7.44
@@ -128,6 +132,10 @@ $sigma2
 [1] 7.44
 >out$sigma2
 [1] 111.1296
+
+# assign them to object
+mu_simulated <- out$mu
+sigma_2_simulated <- out$sigma2
 ```
 
 3.  (Optional with extra credit)
