@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\def\chp1@path{../../Chp 1}
 \input{../../lec_style.tex}
 
 
@@ -27,9 +27,10 @@
 % Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[Chp 1: Intro. to data]{Chapter 1: Introduction to data}
+\title[Lecture 2]{MA213: Lecture 2}
+\subtitle{Module 1: Exploratory Data Analysis and Study Design}
 \author{OpenIntro Statistics, 4th Edition}
-\institute{$\:$ \\ {\footnotesize Slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
 The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
 Some images may be included under fair use guidelines (educational purposes).}}
 \date{}
@@ -59,10 +60,245 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 }
 
+\include{Lecture2_agenda}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Jumping in: Data basics}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Observations and variables}
+
+\begin{frame}
+\frametitle{Classroom survey}
+
+A survey was conducted on students in an introductory statistics course. Below are a few of the questions on the survey, and the corresponding variables the data from the responses were stored in:
+
+\begin{itemize}
+\item \var{gender}: What is your gender? 
+\item \var{intro\_extra}: Do you consider yourself introverted or extraverted? 
+\item \var{sleep}: How many hours do you sleep at night, on average?
+\item \var{bedtime}: What time do you usually go to bed?
+\item \var{countries}: How many countries have you visited?
+\item \var{dread}: On a scale of 1-5, how much do you dread being here?
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Data matrix}
+
+Data collected on students in a statistics class on a variety of variables:
+
+\begin{center}
+\begin{tabular}{l cccc l}
+		& \hl{variable} \\
+		& \hl{$\downarrow$}	 \\
+\cline{1-5}
+Stu.	&	\var{gender}	&	\var{intro\_extra} & $\cdots$ & \var{dread} \\
+\cline{1-5}
+1 & male   & extravert  & $\cdots$  & 3 \\ 
+2 & female & extravert  & $\cdots$  & 2 \\ 
+3 & female & introvert  & $\cdots$  & 4 & \hl{$\leftarrow$}  \\ 
+4 & female & extravert  & $\cdots$  & 2 & \hl{observation} \\
+$\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
+86	& male & extravert  & $\cdots$  & 3 \\
+\cline{1-5}
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Types of variables}
+
+\begin{frame}
+\frametitle{Types of variables}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{\chp1@path/1-2_data_basics/figures/variables/variables}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Types of variables (cont.)}
+
+\begin{center}
+{\footnotesize
+\begin{tabular}{c ccc cc}
+  \hline
+ & \var{gender} & \var{sleep} & \var{bedtime} & \var{countries} & \var{dread} \\
+  \hline
+1 & male & 5 & 12-2 & 13 & 3 \\ 
+  2 & female & 7 & 10-12 & 7 & 2 \\ 
+  3 & female & 5.5 & 12-2 & 1 & 4 \\ 
+  4 & female & 7 & 12-2 &  & 2 \\ 
+  5 & female & 3 & 12-2 & 1 & 3 \\ 
+  6 & female & 3 & 12-2 & 9 & 4 \\ 
+  \hline
+\end{tabular}
+}
+\end{center}
+
+\begin{itemize}
+\item \var{gender}: \pause \soln{\only<2->{categorical}} \pause
+\item \var{sleep}: \pause \soln{\only<4->{numerical, continuous}} \pause
+\item \var{bedtime}: \pause \soln{\only<6->{categorical, ordinal}} \pause
+\item \var{countries}: \pause \soln{\only<8->{numerical, discrete}} \pause
+\item \var{dread}: \pause \soln{\only<10->{categorical, ordinal - could also be used as numerical}}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Practice}
+
+% \pq{What type of variable is a telephone area code?}
+
+% \begin{enumerate}[(a)]
+% \item numerical, continuous
+% \item numerical, discrete
+% \solnMult{categorical}
+% \item categorical, ordinal
+% \end{enumerate}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{R Demo: Loading and Visualizing Data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Relationships among variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Relationships among variables}
+
+\dq{Does there appear to be a relationship between GPA and number of hours students study per week?}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chp1@path/1-2_data_basics/figures/gpa_study_hours/gpa_study_hours}
+\end{center}
+
+\pause
+
+\dq{Can you spot anything unusual about any of the data points?}
+
+\soln{\pause{There is one student with GPA $>$ 4.0, this is likely a data error.}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Explanatory and response variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Explanatory and response variables}
+
+\begin{itemize}
+
+\item To identify the explanatory variable in a pair of variables, identify which of the two is suspected of affecting the other:
+
+\begin{center}
+explanatory variable $\xrightarrow{might~affect}$response variable
+\end{center}
+
+\item Labeling variables as explanatory and response does not guarantee the relationship between the two is actually causal, even if there is an association identified between the two variables. We use these labels only to keep track of which variable we suspect affects the other.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Introducing observational studies and experiments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Two primary types of data collection}
+
+\begin{itemize}
+
+\item \hl{Observational studies:} Collect data in a way that does not directly interfere with how the data arise (e.g. surveys).
+\begin{itemize}
+\item Can provide evidence of a naturally occurring association between variables, but they cannot by themselves show a causal connection.
+\end{itemize}
+
+\pause
+
+\item \hl{Experiment:} Researchers randomly assign subjects to various treatments in order to establish causal connections between the explanatory and response variables.
+
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Association vs. causation}
+
+\begin{itemize}
+
+\item When two variables show some connection with one another, they are called \hl{associated} variables.
+\begin{itemize}
+\item Associated variables can also be called \hl{dependent} variables and vice-versa.
+\end{itemize}
+
+\item If two variables are not associated, i.e. there is no evident connection between the two, then they are said to be \hl{independent}.
+
+\item In general, association does not imply causation, and causation can only be inferred from a randomized experiment.
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{\chp1@path/1-2_data_basics/figures/xkcd_correlation} \\
+{\tiny \webURL{http://xkcd.com/552/}}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Practice}
+
+% \twocol{0.5}{0.5}
+% {
+% \pq{Based on the scatterplot on the right, which of the following statements is correct about the head and skull lengths of possums?}
+% }
+% {
+% %\includegraphics[width=\textwidth]{1-2_data_basics/figures/possum_head_skull/possum_head_skull}
+% }
+
+% \begin{enumerate}[(a)]
+% \item There is no relationship between head length and skull width, i.e. the variables are independent.
+% \solnMult{Head length and skull width are positively associated.}
+% \item Skull width and head length are negatively associated.
+% \item A longer head causes the skull to be wider.
+% \item A wider skull causes the head to be longer.
+% \end{enumerate}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Sampling principles and strategies}
 
@@ -77,7 +313,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 	\twocol{0.5}{0.5}{
 	\begin{center}
-	%\includegraphics[width=\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/1-3_sampling_principles_strategies/figures/running.png}
+	\includegraphics[width=\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/running.png}
 	\end{center}
 	\vspace{-0.5cm}
 	{\tiny \webURL{http://well.blogs.nytimes.com/2012/08/29/finding-your-ideal-running-form}}
@@ -155,6 +391,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz: population vs sample}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -181,8 +419,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{R Demonstration: exploratory analysis}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 	\frametitle{Sampling bias}
@@ -193,8 +429,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 		\item \hl{Voluntary response:} Occurs when the sample consists of people who volunteer to respond because they have strong opinions on the issue. Such a sample will also not be representative of the population.
 		\pause
 		\begin{center}
-		%\includegraphics[width=0.25\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/vol_resp_bias/vol_resp_bias_q}\pause
-		%\includegraphics[width=0.25\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/vol_resp_bias/vol_resp_bias_res} \\
+		\includegraphics[width=0.25\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/vol_resp_bias/vol_resp_bias_q}\pause
+		\includegraphics[width=0.25\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/vol_resp_bias/vol_resp_bias_res} \\
 		{\tiny cnn.com, Jan 14, 2012}
 		\end{center}
 		\pause
@@ -215,11 +451,11 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 	\begin{columns}[c]
 		\column{0.35\textwidth}
-		%\includegraphics[width= \textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/landon_fdr/landon}
+		\includegraphics[width= \textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/landon_fdr/landon}
 		\column{0.3\textwidth}
 		In 1936, Landon sought the Republican presidential nomination opposing the re-election of FDR.
 		\column{0.35\textwidth}
-		%\includegraphics[width= \textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/landon_fdr/fdr}
+		\includegraphics[width= \textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/landon_fdr/fdr}
 	\end{columns}
 
 \end{frame}
@@ -240,7 +476,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 		\column{0.3\textwidth}
 
-		%\includegraphics[width= \textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/literaryDigest}
+		\includegraphics[width= \textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/literaryDigest}
 	\end{columns}
 
 	\begin{itemize}
@@ -307,8 +543,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 % \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Observational studies}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -348,7 +582,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	Randomly select cases from the population, where there is no implied connection between the points that are selected.
 
 	\begin{center}
-	%\includegraphics[width=0.9\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/sampling_methods/simple}
+	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/simple}
 	\end{center}
 
 \end{frame}
@@ -361,7 +595,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	\hl{Strata} are made up of similar observations. We take a simple random sample from \underline{each} stratum.
 
 	\begin{center}
-	%\includegraphics[width=0.9\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/sampling_methods/stratified}
+	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/stratified}
 	\end{center}
 
 \end{frame}
@@ -374,7 +608,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	\hl{Clusters} are usually not made up of homogeneous observations. We take a simple random sample of clusters, and then sample \underline{all} observations in that cluster. Usually preferred for economical reasons.
 
 	\begin{center}
-	%\includegraphics[width=0.9\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/sampling_methods/cluster}
+	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/cluster}
 	\end{center}
 
 \end{frame}
@@ -387,7 +621,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	\hl{Clusters} are usually not made up of homogeneous observations.  We take a simple random sample of clusters, and then take a simple random sample of observations from the sampled clusters.
 
 	\begin{center}
-	%\includegraphics[width=0.9\textwidth]{../../Chp 1/1-3_sampling_principles_strategies/figures/sampling_methods/multistage}
+	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/multistage}
 	\end{center}
 
 \end{frame}
@@ -409,143 +643,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Sampling}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Experiments}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Principles of experimental design}
-
-	\begin{enumerate}
-		\item \hl{Control:} Control for the (potential) effect of variables other than the ones directly being studied.
-		\item \hl{Randomize:} Randomly assign subjects to treatments, and randomly sample from the population whenever possible.
-		\item \hl{Replicate:} Within a study, replicate by collecting a sufficiently large sample. Or replicate the entire study.
-		\item \hl{Block:} If there are variables that are known or suspected to affect the response variable, first group subjects into \hl{blocks} based on these variables, and then randomize cases within each block to treatment groups.
-	\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{More on blocking}
-
-	\twocol{0.25}{0.75}
-	{
-	\begin{center}
-	%\includegraphics[width=\textwidth]{../../Chp 1/1-4_experiments/figures/gu}
-	\end{center}
-	}
-	{
-	\begin{itemize}
-		\item We would like to design an experiment to investigate if energy gels makes you run faster:
-		\pause
-		\begin{itemize}
-			\item Treatment: energy gel
-			\item Control: no energy gel
-		\end{itemize}
-		\pause
-		\item It is suspected that energy gels might affect pro and amateur athletes differently, therefore we block for pro status:
-		\pause
-		\begin{itemize}
-			\item Divide the sample to pro and amateur
-			\item Randomly assign pro athletes to treatment and control groups
-			\item Randomly assign amateur athletes to treatment and control groups
-			\item Pro/amateur status is equally represented in the resulting treatment and control groups
-		\end{itemize}
-	\end{itemize}
-	}
-
-	\pause
-	\dq{Why is this important? Can you think of other variables to block for?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% 	\frametitle{Practice}
-
-% 	\pq{A study is designed to test the effect of light level and noise level on exam performance of students. The researcher also believes that light and noise levels might have different effects on males and females, so wants to make sure both genders are equally represented in each group. Which of the below is correct?}
-
-% 	\begin{enumerate}[(a)]
-% 		\item There are 3 explanatory variables (light, noise, gender) and 1 response variable (exam performance)
-% 		\solnMult{There are 2 explanatory variables (light and noise), 1 blocking variable (gender), and 1 response variable (exam performance)}
-% 		\item There is 1 explanatory variable (gender) and 3 response variables (light, noise, exam performance)
-% 		\item There are 2 blocking variables (light and noise), 1 explanatory variable (gender), and 1 response variable (exam performance)
-% 	\end{enumerate}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{Difference between blocking and explanatory variables}
-
-	\begin{itemize}
-		\item Factors are conditions we can impose on the experimental units.
-		\item Blocking variables are characteristics that the experimental units come with, that we would like to control for.
-		\item Blocking is like stratifying, except used in experimental settings when randomly assigning, as opposed to when sampling.
-	\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{More experimental design terminology...}
-
-	\begin{itemize}
-		\item \hl{Placebo:} fake treatment, often used as the control group for medical studies
-		\item \hl{Placebo effect:} experimental units showing improvement simply because they believe they are receiving a special treatment
-		\item \hl{Blinding:} when experimental units do not know whether they are in the control or treatment group
-		\item \hl{Double-blind:} when both the experimental units and the researchers who interact with the patients do not know who is in the control and who is in the treatment group
-
-	\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% 	\frametitle{Practice}
-
-% 	\pq{What is the main difference between observational studies and experiments?}
-
-% 	\begin{enumerate}[(a)]
-% 		\item Experiments take place in a lab while observational studies do not need to.
-% 		\item In an observational study we only look at what happened in the past.
-% 		\solnMult{Most experiments use random assignment while observational studies do not.}
-% 		\item Observational studies are completely useless since no causal inference can be made based on their findings.
-% 	\end{enumerate}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{Random assignment vs. random sampling}
-
-	\begin{center}
-	%\includegraphics[width=\textwidth]{../../Chp 1/1-4_experiments/figures/random_sample_assignment}
-	\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Think/pair/share: sampling/bias}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
