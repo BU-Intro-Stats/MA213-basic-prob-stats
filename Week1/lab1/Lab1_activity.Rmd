@@ -12,9 +12,13 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## **Lab 1: Introduction to R** Lab Activities
+## **Lab 1: Introduction to R** 
 
-#### Q0. Let's set up your working directory.
+------------------------------------------------------------------------
+
+## Lab Activities
+
+#### Q1. Let's set up your working directory.
 
 ```{r, echo=TRUE}
 
@@ -22,7 +26,7 @@ library(dplyr)
 
 ```
 
-#### Q1. Use R commands to calculate those and print `C` .
+#### Q2. Use R commands to calculate the following and print `C` .
 
 $A = \exp(3),$ $B = \frac{(-3)^{4}}{10},$
 
@@ -34,7 +38,7 @@ $C = A \times B$
 
 ```
 
-#### Q2. You are going to explore the data extracted from the 1974 *Motor Trend* US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+#### Q3. You are going to explore the data extracted from the 1974 *Motor Trend* US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
 
 You can look at the description of the data by `help(mtcars)` .
 
