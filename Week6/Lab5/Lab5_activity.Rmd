@@ -14,8 +14,6 @@ library(dplyr)
 
 # **Lab 5: Simulation and probability**
 
-In this lab session, we will explore key concepts of inferential statistics which include sampling distribution and central limit theorem.
-
 ------------------------------------------------------------------------
 
 #### Learning Objectives
@@ -192,7 +190,7 @@ The goal of today is to see the sampling distribution of sample statistic (sampl
 
 ```
 
-1.  Obtain a sample of size $n$ from the population.
+1.  Obtain a sample of size $n$ from the population. (You can have arbitrary sample sizes `n=10, 50, 100` )
 
 ```{r}
 #

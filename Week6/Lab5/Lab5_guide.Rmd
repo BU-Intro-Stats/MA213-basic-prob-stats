@@ -135,11 +135,12 @@ ggplot(data=sample_data, aes(x=p_hat)) + geom_histogram(bins=20)
 
     ```
 
-5.  Using `my_sample()` function, show the probability mass function (pmf) of the sampling distribution of the statistic. Change `n` from 10 to 1000. What do you conclude?
+5.  Using `my_sample_phat``()` function, show the probability mass function (pmf) of the sampling distribution of $\hat{p}$. Set `n=1000` . What do you conclude?
 
 ```{r}
 library(dplyr)
-p_hat_vector = my_sample_phat(1000)
+n=1000
+p_hat_vector = my_sample_phat(n)
 
 p_hat_data <- data.frame(p_hat = p_hat_vector)
 
@@ -161,7 +162,8 @@ ggplot(p_hat_data, aes(x=p_hat, y=pmf)) + geom_point() + geom_smooth()
 Easier version to show the shape of the distribution is to show histogram of sampled `p_hat_vector`.
 
 ```{r}
-p_hat_vector = my_sample_phat(1000)
+n=1000
+p_hat_vector = my_sample_phat(n)
 p_hat_data <- data.frame(p_hat = p_hat_vector)
 ggplot(data=p_hat_data, aes(x = p_hat)) + geom_histogram(bin=30)
 
@@ -169,7 +171,9 @@ ggplot(data=p_hat_data, aes(x = p_hat)) + geom_histogram(bin=30)
 
 ```
 
-Can we also check that $\hat{p}$ follows a certain distribution in other ways?
+Can we also check whether $\hat{p}$ follows normal distribution in a different way?
+
+We can check it through 68-95-99.7 rule.
 
 ```{r}
 
