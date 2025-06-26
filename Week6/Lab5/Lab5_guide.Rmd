@@ -62,12 +62,13 @@ Let's sample them with $n=5$. What does the sampling distribution look like?
 
 ```{r}
 pop <- c(rep("Apple", 10), rep("Android", 4)) # population
-true_proportion <- sum(pop == "Apple") / n
+true_proportion <- sum(pop == "Apple") / 14
 true_proportion  # population proportion p
 
 
 n = 5 #sample size
 my_sample <- sample(pop, n)
+my_sample # your sample
 p_hat <- sum(my_sample == "Apple") / n
 p_hat # sample proportion p_hat
 ```
@@ -135,7 +136,7 @@ ggplot(data=sample_data, aes(x=p_hat)) + geom_histogram(bins=20)
 
     ```
 
-5.  Using `my_sample_phat``()` function, show the probability mass function (pmf) of the sampling distribution of $\hat{p}$. Set `n=1000` . What do you conclude?
+5.  Using ``` my_sample_phat``() ``` function, show the probability mass function (pmf) of the sampling distribution of $\hat{p}$. Set `n=1000` . What do you conclude?
 
 ```{r}
 library(dplyr)
