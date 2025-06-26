@@ -10,7 +10,7 @@ source("Lecture3_demoFunctions.R")
 
 # ---- 1. Generate data ----
 
-datasets <- generate_data()
+datasets <- generate_data1()
 
 data1 <- datasets$data1
 head(data1)
@@ -47,3 +47,17 @@ ggplot(data=data2, aes(x=x2)) +
   geom_vline(xintercept=mean(data2$x2), col='red') +
   geom_vline(xintercept=median(data2$x2), col='orange')
 
+
+# ---- 2. Comparing shapes of distributions and their outliers ----
+
+# Let's try changing the variance of our distribution and see how its 
+# shape changes:
+data5 <- generate_data2()
+head(data5)
+
+ggplot(data=data5, aes(x=x, fill=as.factor(variance))) +
+  geom_histogram(col='gray', alpha=0.6)
+
+# We can also examine these data with boxplots:
+ggplot(data=data5, aes(x=x, color=as.factor(variance))) +
+  geom_boxplot()
