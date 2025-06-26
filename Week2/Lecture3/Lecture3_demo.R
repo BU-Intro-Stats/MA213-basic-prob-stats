@@ -61,3 +61,22 @@ ggplot(data=data5, aes(x=x, fill=as.factor(variance))) +
 # We can also examine these data with boxplots:
 ggplot(data=data5, aes(x=x, color=as.factor(variance))) +
   geom_boxplot()
+
+ggplot(data=data5, aes(x=x, fill=as.factor(variance))) +
+  geom_histogram(col='gray', alpha=0.6) +
+  geom_boxplot
+
+# Now let's look at the highest-variance distribution more closely:
+data6 <- data5[data5$variance == 100,] 
+lower_sd <- mean(data6$x) - 2*sd(data6$x)
+upper_sd <- mean(data6$x) + 2*sd(data6$x)
+
+# Q: keep the boxplot in this histogram? feels a little crowded
+ggplot(data=data6, aes(x=x)) +
+  geom_histogram(col='gray')  +
+  geom_histogram(col='gray', alpha=0.6) +
+  geom_boxplot(outlier.color='black',   
+               outlier.shape=16, outlier.size=2, notch=FALSE) +
+  geom_vline(xintercept=mean(data6$x), col='red') +
+  geom_vline(xintercept=lower_sd, col='orange') +
+  geom_vline(xintercept=upper_sd, col='orange')
