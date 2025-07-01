@@ -44,54 +44,64 @@ In this lab session, we will explore key concepts of inferential statistics whic
 
 ![](Sampling_diag.jpeg){width="100%"}
 
-\
+Here are steps for the simulation study.
+
+## Step 0 : Create a hypothetical population
+
+![](1.jpg)
+
+## Step 1 : [Sample `n` samples from the population]{.underline} and [get the sample statistic from the sample]{.underline}
+
+![](2.jpg)
+
+## Step 2 : Repeat Step 1 `K` times to obtain `K` many sample statistics
+
+![](3.jpg)
+
+## Example
 
 We have a hypothetical population that are
 
 ``` r
-pop <- c(rep("Apple", 10), rep("Android", 4))
+pop <- c(rep("Apple", 10000), rep("Android", 4000))
 ```
 
-So that the true proportion of having apple device is $p=\frac{10}{14}$.
+So that the true proportion of having apple device is $p=\frac{10000}{14000} = 0.7142$.
 
-Let's sample them with $n=5$. What does the sampling distribution look like?
+Let's sample them with $n=500$. What does the sampling distribution look like?
 
 1.  Let's take a sample from the population `pop` and assign it to an object called `p_hat`.
 
     (Hint: Use the `sample()` function. Also, count how many apples are in the sample.)
 
 ```{r}
-pop <- c(rep("Apple", 10), rep("Android", 4)) # population
-true_proportion <- sum(pop == "Apple") / 14
+# Step 0
+pop <- c(rep("Apple", 10000), rep("Android", 4000)) # population
+true_proportion <- sum(pop == "Apple") / 14000
 true_proportion  # population proportion p
 
-
-n = 5 #sample size
+# Step 1 
+n = 1000 # sample size
 my_sample <- sample(pop, n)
-my_sample # your sample
+glimpse(my_sample) # your sample
 p_hat <- sum(my_sample == "Apple") / n
-p_hat # sample proportion p_hat
+p_hat
 ```
 
-2.  What is the sampling distribution looks like?
-
-1). Obtain sample from population
-
-2). Obtain sample statistics `p_hat` from the sample
-
-3). Repeat steps 1 and 2 $K$ times
+2.  What is the sampling distribution looks like? To answer this question we need `K` many sample statistics. In other words, we need to repeat steps 1 and 2 $K$ times.
 
 (hint : Use `for loop` )
 
-```{r}
-K = 100
+```{r, eval=False}
+# Step 2
+
+K = 500
 p_hat_vector <-rep(0,K)
 
-for (k in 1:K){
-  my_sample <- sample(pop, n)
-  p_hat <- sum(my_sample == "Apple") / n
-  p_hat_vector[k] <- p_hat
-}
+#
+# for loop
+#
+
 p_hat_vector
 
 
@@ -99,90 +109,31 @@ p_hat_vector
 
 3.  Using `p_hat_vector` , show the shape of sampling distribution.
 
+```{r, echo=FALSE, include=FALSE}
+p_hat_vector = read.csv("p_hat_vector.csv")
+p_hat_vector = p_hat_vector$x
+```
+
 ```{r}
+
 sample_data <- data.frame(p_hat = p_hat_vector) #p_hat is the name of the column
 
+# Histogram of p_hat
 ggplot(data=sample_data, aes(x=p_hat)) + geom_histogram(bins=20)
 
 
 ```
 
-4.  Let's increase the population size to 1,400. Now you are given a much larger population:
-
-    ``` r
-    pop <- c(rep("Apple", 1000), rep("Android", 400))
-    ```
-
-    You know the true population proportion of "Apple" is $p = 0.7142$. Let's create a function `my_sample_phat()` that takes a sample size `n` as input and returns a vector of sample proportions named `p_hat_vector` based on repeated sampling.
-
-    ```{r}
-    # population
-    pop <- c(rep("Apple", 1000), rep("Android", 400))
-
-    # Function to calculate sample proportions over K samples
-    my_sample_phat <- function(n, K = 500){
-      p_hat_vector <- numeric(K)         # Initialize vector to store sample proportions
-      
-      for (k in 1:K){
-        my_sample <- sample(pop, n, replace = TRUE)   
-        p_hat_vector[k] <- sum(my_sample == "Apple") / n    # Calculate proportion of "Apple"
-      }
-      return(p_hat_vector)
-    }
-
-    # Example usage
-    head(my_sample_phat(10))
-    head(my_sample_phat(100))
-
-    ```
-
-5.  Using ``` my_sample_phat``() ``` function, show the probability mass function (pmf) of the sampling distribution of $\hat{p}$. Set `n=1000` . What do you conclude?
-
-```{r}
-library(dplyr)
-n=1000
-p_hat_vector = my_sample_phat(n)
-
-p_hat_data <- data.frame(p_hat = p_hat_vector)
-
-
-p_hat_data <- p_hat_data %>%
-  count(p_hat) %>%
-  mutate(pmf = n/sum(n))
-
-
-mean(p_hat_data$p_hat)
-sd(p_hat_data$p_hat)
-
-ggplot(p_hat_data, aes(x=p_hat, y=pmf)) + geom_point() + geom_smooth()
-
-
-
-```
-
-Easier version to show the shape of the distribution is to show histogram of sampled `p_hat_vector`.
-
-```{r}
-n=1000
-p_hat_vector = my_sample_phat(n)
-p_hat_data <- data.frame(p_hat = p_hat_vector)
-ggplot(data=p_hat_data, aes(x = p_hat)) + geom_histogram(bin=30)
-
-
-
-```
+## Empirical Rule to check Normality
 
 Can we also check whether $\hat{p}$ follows normal distribution in a different way?
 
 We can check it through 68-95-99.7 rule.
 
 ```{r}
-
-p_hat_vector = my_sample_phat(1000)
+# get the sample mean and standard deviation of the sampled proportions
 
 p_hat_data <- data.frame(p_hat = p_hat_vector)
-
-
 
 # mean
 p_hat_mean = mean(p_hat_data$p_hat)
@@ -192,26 +143,36 @@ p_hat_sd = sd(p_hat_data$p_hat)
 p_hat_sd
 
 
+```
+
+Is within 1 standard deviation data approximately 68% ?
+
+```{r}
+
 
 # let's check 68-95-99.7 rule
 
 df <- p_hat_data$p_hat
 
-# within 1 standard deviation
-range = (df > (p_hat_mean - 1 * p_hat_sd)) & (df < (p_hat_mean + 1 * p_hat_sd))
+# within 1 standard deviation 
+range <-  (df > (p_hat_mean - 1 * p_hat_sd)) & (df < (p_hat_mean + 1 * p_hat_sd))
+
 df_temp <- df[ range ]
-length(df_temp) / length(df)
+
+rate <- length(df_temp) / length(df)
+rate
 
 
-# within 2 standard deviation
-range = (df > (p_hat_mean - 2 * p_hat_sd)) & (df < (p_hat_mean + 2 * p_hat_sd))
-df_temp <- df[ range ]
-length(df_temp) / length(df)
+
+```
+
+How close is this rate to 68% ? Is the difference in the rate less than 0.05?
+
+```{r}
 
 
-# within 3 standard deviation
-range = (df > (p_hat_mean - 3 * p_hat_sd)) & (df < (p_hat_mean + 3 * p_hat_sd))
-df_temp <- df[ range ]
-length(df_temp) / length(df)
+abs(rate - 0.68) < 0.05 # abs function gives absolute value
+
+
 
 ```

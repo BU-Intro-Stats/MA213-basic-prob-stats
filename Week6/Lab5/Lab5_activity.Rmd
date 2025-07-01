@@ -28,7 +28,7 @@ $$ is distributed when samples are drawn independently from your chosen populati
 
 Sample $n= 500$ from your chosen population. The population parameters are given here.
 
-Population 1 : Normal distribution
+## Population 1 : Normal distribution
 
 ```{r, eval=FALSE}
 sigma <- 0.447
@@ -53,7 +53,7 @@ ggplot(df, aes(x = X)) +
   theme_minimal()
 ```
 
-Population 2 : Bernoulli distribution
+## Population 2 : Bernoulli distribution
 
 ```{r, eval=FALSE}
 
@@ -61,7 +61,8 @@ N <- 100000
 n = 500
 prob = 0.3
 pop <- rbinom(N, 1, prob)
-
+#sqrt(prob * (1-prob))
+sigma <- sd(pop) # since pop is finite here
 
 ```
 
@@ -70,7 +71,6 @@ N <- 100000
 n = 500
 prob = 0.3
 pop <- rbinom(N, 1, prob)
-
 df = data.frame(X=pop)
 
 ggplot(df, aes(x = X)) + 
@@ -81,7 +81,7 @@ ggplot(df, aes(x = X)) +
   theme_minimal()
 ```
 
-Population 3 : Poisson distribution
+## Population 3 : Poisson distribution
 
 ```{r, eval=FALSE}
 sigma <- 0.447
@@ -108,7 +108,7 @@ ggplot(df, aes(x = X)) +
   theme_minimal()
 ```
 
-Population 4 : Exponential distribution
+## Population 4 : Exponential distribution
 
 ```{r, eval=FALSE}
 N <- 100000
@@ -133,7 +133,7 @@ ggplot(df, aes(x = X)) +
   theme_minimal()
 ```
 
-Population 5 : Gamma Distribution
+## Population 5 : Gamma Distribution
 
 ```{r, eval=FALSE}
 sigma <- 0.447
@@ -166,7 +166,7 @@ ggplot(df, aes(x = X)) +
 
 The goal of today is to see the sampling distribution of sample statistic (sample mean).
 
-0.  Make your population from one of the populations above.
+### 0. Make your population from one of the populations above.
 
 ```{r}
 #
@@ -175,7 +175,9 @@ The goal of today is to see the sampling distribution of sample statistic (sampl
 
 ```
 
-1.  Obtain a sample of size $n$ from the population. Also, obtain the sample mean. (You can have arbitrary sample sizes `n=10, 50, 100` )
+### 1. Obtain one sample of size $n$ from the population. Then, obtain the sample mean $\hat{\mu}$ from the sample.
+
+(Set `n=100` this time)
 
 ```{r}
 #
@@ -184,17 +186,7 @@ The goal of today is to see the sampling distribution of sample statistic (sampl
 
 ```
 
-2.  Using the above population in step 0, obtain a sample of size $n=100$ from the population and obtain the sample mean. Repeat the sampling process $K=100$ times.
-
-```{r}
-#
-#
-#
-
-
-```
-
-3.  Make the above process as a function of $n$ (input : n, output : $\hat{\mu}$ vector output) for repeating procedure.
+### 2. Now we are going to obtain `K` many sample means $\hat{\mu}$'s from `K` different sample from the population. Obtain a sample of size $n=100$ from the population and obtain the sample mean. Repeat the sampling process $K=100$ times.
 
 ```{r}
 #
@@ -203,7 +195,7 @@ The goal of today is to see the sampling distribution of sample statistic (sampl
 
 ```
 
-4.  Using the function above, obtain the sample mean vector `mu_hat_vector` (using `n=10, K=200` ).
+### 3. Make the above process as a function of $n$ and $K$ (input : n and `K`, output : $\hat{\mu}$ vector output) and obtain the output with `n=100`, `K=100`. Compare your result with question 2. Think about how you can compare them?
 
 ```{r}
 #
@@ -212,49 +204,86 @@ The goal of today is to see the sampling distribution of sample statistic (sampl
 
 ```
 
-5.  Let's check the shape of sampling distribution of $\hat{\mu}$. Obtain histogram of `mu_hat_vector` .
+### 4. Now using the function, obtain the histogram of $\hat{\mu}$. First, start with `n=20, K=1000`, `n=200, K=1000` and `n=1000, K=1000`. What do you see?
 
 ```{r}
 #
-#
+# n=20, K=1000
 #
 
 ```
 
-6.  Let's sample n=10,000 with K=200 and obtain histogram of `mu_hat_vector` again. What do you find from the histogram?
-
 ```{r}
-
 #
-#
-#
-
-```
-
-7.  Check 68-95-99.7 rule to see if the sampling distribution $\hat{\mu}$ follows normal.
-
-```{r}
-
-#
-#
-#
-
-
-
-```
-
-8.  Now obtain the standard deviation of the population obtain $\sqrt{\frac{\sigma^2}{n}}$ where $\sigma$ is the population standard deviation. Compare this value with the standard deviation of `mu_hat_vector`. Also, compare your standard deviation of sampling distribution with standard deviation of sampling distribution from other groups. What do you conclude?
-
-```{r}
-
-#
-#
+# n=200, K=1000
 #
 
 
 ```
 
-### Post-lab activities
+```{r}
+#
+# n=1000, K=1000
+#
+
+```
+
+### 5. Now using the function, obtain the histogram of $\hat{\mu}$. First, start with `n=1000, K=20`, `n=1000, K=200` and `n=1000, K=1000`. What do you see?
+
+```{r}
+#
+# n=1000, K=20
+#
+
+```
+
+```{r}
+#
+# n=1000, K=200
+#
+
+```
+
+```{r}
+#
+# n=1000, K=1000
+#
+
+```
+
+### 5. Using the function, set $K=5000$. Using the empirical rule (68-95-99.7 rule), how big should $n$ be to pass the rule within 0.005?
+
+Let `rate1`, `rate2` and `rate3` be the rate within 1, 2 and 3 standard deviations from the $\hat{\mu}$ samples, respectively. To pass the test, use the code `all(abs(c(rate1-0.68, rate2-0.95, rate3-0.997))< 0.005)`
+
+```{r}
+#
+#
+# all(abs(c(rate1-0.68, rate2-0.95, rate3-0.997))< 0.005)
+# True to be expected
+
+
+```
+
+### 6. Obtain standard error where
+
+$$
+SE = \frac{\sigma}{\sqrt{n}}
+$$
+
+### Compare this with the standard deviation of `mu_hat_vector` (Set `n=1000` and `k=1000`). Are they close?
+
+### Also, compare obtained standard error to other groups. What do you conclude?
+
+```{r}
+
+#
+#
+#
+
+
+```
+
+## Post-lab activities
 
 Recent statistics suggest that 10% of Americans rely on Social Network Sites (SNSs). We are going to have a simulation study if we can verify that CLT really works in this case too. Let's assume that US population is 300,000 for calculation purposes.
 
