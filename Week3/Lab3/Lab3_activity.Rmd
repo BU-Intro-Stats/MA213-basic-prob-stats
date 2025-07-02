@@ -1,0 +1,139 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab3 Activity"
+bibliography: references.bib
+link-citations: true
+output:
+  html_document:
+    code_download: true 
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## **Lab 3:** Lab activities
+
+------------------------------------------------------------------------
+
+### **New York Air Quality Dataset**
+
+#### Q0. Import the `airquality.csv` file.
+
+```{r}
+#
+#
+# 
+df <- read.csv("airquality.csv")
+head(df)
+names(df)
+```
+
+#### Q1. You are interested in Ozone level excluding May. You want to see how Ozone level is distributed in June, July, August and September by looking at a plot.
+
+```{r}
+
+
+```
+
+#### Q3. You want to see how average speed of wind changes over time (Month). Can you visualize it?
+
+```{r}
+
+
+```
+
+#### Q4. Do you see any patterns of level of Ozone over time?
+
+```{r}
+
+
+
+```
+
+#### Q5. Show the scatter plot of Solar radiation and Temperature.
+
+```{r}
+#
+#
+#
+ggplot(df, aes(x=Solar.R, y=Temp)) + geom_point()
+```
+
+#### Show the bar plot of average Solar radiation per each month.
+
+```{r}
+#
+#
+#
+df2 <- na.omit(df)
+
+df2 %>% 
+  group_by(Month) %>%
+  summarise(avg_mth = mean(Solar.R, na.rm=TRUE)) %>%
+  ggplot(aes(x=factor(Month), y=avg_mth)) +
+  geom_col()
+```
+
+### **Survival of Passengers on the Titanic**
+
+#### Import the `titanic.csv` file.
+
+```{r}
+#
+#
+#
+
+```
+
+#### You are interested in how the data is categorized by sex visually. Show the pie chart of `sex`
+
+```{r}
+#
+#
+#
+```
+
+#### You are interested in whether sex is related to survival in the Titanic disaster. How would you visualize or summarize this relationship?
+
+```{r}
+#
+#
+#
+```
+
+#### You are also interested in exploring whether age is associated with survival. How would you go about visualizing or summarizing this relationship?
+
+```{r}
+#
+#
+#
+```
+
+### Post-lab activities
+
+Please name your submission as `lab2.R`
+
+We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
+
+1.  load the `airquality.csv` file and assign it to `my_df` object.
+
+2.  Show the scatter plot of Solar radiation and Temperature.
+
+3.  Show average Solar radiation in each month. Use bar plot.
+
+    2.1) Assign average Solar radiation into object `solar_radiation_avg` .
+
+    2.2) Show the bar plot of average Solar radiation per each month.
+
+Back to Titanic data.
+
+1.  Show the pie chart of `sex` in `titanic` data.
+
+    3.1) Load `titanic.csv` file and assign it to `my_df2` object.
+
+    3.2) Show the pie chart of `sex` .
+
+### References
