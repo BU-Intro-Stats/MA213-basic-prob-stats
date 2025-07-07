@@ -17,18 +17,6 @@ library(dplyr)
 
 ------------------------------------------------------------------------
 
-## Learning Objectives
-
--   Validate and Explain Probability Distributions: Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1).
-
--   Compute Probabilities Using Various Tools: Use logic, Venn diagrams, and probability rules to compute probabilities for events.
-
--   Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
-
--   Conduct Hypothesis Testing Using Simulation: Set up null and alternative hypotheses to test for independence between variables, and use simulation techniques to evaluate data support for these hypotheses.
-
-------------------------------------------------------------------------
-
 ## Pre-lab activities
 
 #### Let’s roll a die! You are playing a die-rolling game and are curious about how the game will play out in the end. The rule is that you roll the die once, and the other player rolls it once as well; then you add the outcomes together. What can you expect from this game in the end? Specifically, what are the long-term average and the variability of the game results? In other words, what are the expected value and variance?
@@ -115,7 +103,7 @@ mu <- 7
 sigma_2 <- 14
 ```
 
-2.  You are going to make an function named `my_sim(n)` which takes input of `n` and gives an output list of `mu_simulated` and `sigma_2_``simulated` (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` ).
+2.  You are going to make an function named `my_sim(n)` which takes input of `n` and gives an output list of `mu_simulated` and `sigma_2_simulated` (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` ).
 
 ``` r
 # for example
