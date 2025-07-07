@@ -49,7 +49,7 @@ In short,
 
 [![ggplot function overview (\<https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf\> )](ggplot.jpg)](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
 
-## Plots to show **New York Air Quality Data**
+# Plots to show **New York Air Quality Data**
 
 We want to examine the shape of `Ozone` to see whether the data is symmetric, skewed or how the mean is centered and where...? Let's see how this `Ozone` data is shaped by using several different methods.
 
@@ -97,6 +97,8 @@ ggplot(data=df ) +
 
 ## 5. Histogram with different bin option
 
+by choosing how many observations in each bin (e.g. `bins=5` means each bin contains 5 observations).
+
 ```{r, echo=TRUE}
 
 
@@ -135,7 +137,7 @@ ggplot(df) + geom_point(aes(x=Ozone, y=Temp)) +
 
 ```
 
-## Titanic Data
+# Titanic Data
 
 We are going to work with titanic data `titanic.csv`. Let's import the data.
 
@@ -147,7 +149,7 @@ glimpse(df)
 
 ```
 
-## Barplot for `Survived`
+## 8. Barplot for `Survived`
 
 ```{r, echo=TRUE}
 
@@ -158,7 +160,7 @@ ggplot(new_df, aes(x = Survived, y=n)) +
 
 ```
 
-## Barplot of `Survived` and `Class`
+## 9. Barplot of `Survived` and `Class`
 
 This shows summary table of `Survived` and `Class`
 
@@ -187,7 +189,7 @@ df %>%
 
 ```
 
-## Pie chart of `Class`
+## 10. Pie chart of `Class`
 
 We need `table` class data first in order to show a pie chart
 
@@ -207,7 +209,7 @@ table_data
 
 ```
 
-Using this `table` class object `table_data`, we obtain pie chart.
+Using this `table` class object `table_data`, we obtain a pie chart.
 
 ```{r}
 ggplot(data = table_data, aes(x="", y=n, fill=Class)) +
@@ -221,53 +223,4 @@ ggplot(data = table_data, aes(x="", y=n, fill=Class)) +
   geom_col() + 
   coord_polar(theta="y") +
   theme_void()
-```
-
-#### **New York Air Quality Dataset**
-
-#### Import the `airquality.csv` file.
-
-```{r}
-#
-#
-# 
-df <- read.csv("airquality.csv")
-glimpse(df)
-names(df) # it shows what columns in the df
-```
-
-#### Show the scatter plot of Solar radiation and Temperature.
-
-```{r}
-#
-#
-#
-ggplot(df, aes(x=Solar.R, y=Temp)) + geom_point()
-```
-
-#### Show the bar plot of average Solar radiation per each month.
-
-```{r}
-#
-#
-#
-df2 <- na.omit(df) # you can omit NAs (missing values) in the data
-
-df2 %>% 
-  group_by(Month) %>%
-  summarise(avg_mth = mean(Solar.R, na.rm=TRUE)) %>%
-  ggplot(aes(x=factor(Month), y=avg_mth)) +
-  geom_col()
-```
-
-#### You are interested in ozone levels. Show histogram ozone levels for June, July, August, and September using a plot
-
-```{r}
-#
-#
-#
-df2 %>% 
-  filter(Month != 5) %>%
-  ggplot(aes(x=Ozone)) +
-  geom_histogram(bins=20) 
 ```
