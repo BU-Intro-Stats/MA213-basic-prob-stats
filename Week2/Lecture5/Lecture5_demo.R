@@ -8,64 +8,93 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 
 # ---- 1. Generate data ----
 
-set.seed(8535)
-
 # Our dataset consists of 24 male and 24 female employees (48 total)
-gender <- c(rep('male', 24), rep('female', 24))
-
 # Of these, 21 male employees were promoted (and 3 not promoted), while
-# 14 female employees were promoted (and 10 not promoted)
-outcome <- c(rep(c('promoted', 'not promoted'), c(21, 3)), rep(c('promoted', 'not promoted'), c(14, 10)))
+# 14 female employees were promoted (and 10 not promoted):
+#
+#           Yes (promoted)    No (not promoted)   Total
+# Male         21                   3              24
+# Female       14                  10              24  
+#
 
-# Create a data table
-data <- data.frame(unlist(gender), unlist(outcome))
-colnames(data)[1] <- "gender"
-colnames(data)[2] <- "outcome"
+# We take 21+14 "yes" and 3+10 "no" as the total
+data <- c(rep("yes", 35), rep("no", 13))
 head(data)
 
+
+# ---- 2. Setting the null and alternative hypotheses ----
+
 # What are the null and alternative hypotheses in this study?
+#
+# Based on the data, 21/24=87.5% of male employees were promoted,
+# while 14/24=58.33% of female employees were promoted, leading to a difference
+# in proportions of 29.167%. 
+#
+# H0: The employees' gender and their promotion outcomes are independent.
+# That is, they have no relationship and the observed difference between the 
+# proportion of employees who were promoted in each group, 29.167%, is due to 
+# chance.
+#
+# Ha: The employees' gender and their promotion outcomes are dependent. That is,
+# the observed promotion outcomes are not due to chance and gender had an effect.
 
-# ---- 2. Set up a simulation ----
 
-# TODO: rework into the style of lab 4
-nsim  = 100
-n     = length(gender)
-group = gender
-var1  = outcome
-success = "promoted"
-sim   = matrix(NA, nrow = n, ncol = nsim)
-n1    = n2 = 24
+# ---- 3. Sampling once from the study population ----
 
-statistic <- function(var1, group){	
-  t1 <- var1 == success & group == levels(as.factor(group))[1]
-  t2 <- var1 == success & group == levels(as.factor(group))[2]
-  sum(t1)/n1 - sum(t2)/n2 
+# Randomly sample the male and female employees, independent of outcome
+# (i.e. under the null hypothesis):
+index <- sample(1:length(data), 24) 
+Male <- data[index]
+Female <- data[-index]
+
+# Create a contingency table
+
+group <- c(rep("Male", length(Male)), rep("Female", length(Female)))
+outcome <- c(Male, Female)
+df <- data.frame(Group = group, Outcome = outcome)
+df_table <- table(df)
+df_table
+
+# Get the sample proportions and difference
+
+ratio1 = df_table[3] / 24
+ratio2 = df_table[4] / 24
+ratio2-ratio1
+
+
+# ---- 4. Repeat the sampling many times in a simulation ----
+
+# First, create a function for sampling (like we did above):
+
+simulation <- function() {
+  index <- sample(1:48, 24)
+  Male <- data[index]
+  Female <- data[-index]
+  
+  df <- data.frame(Group = group, Outcome = outcome)
+  df_table <- table(df)
+  df_table
+  
+  ratio1 = df_table[3] / 24
+  ratio2 = df_table[4] / 24
+  result <- ratio2-ratio1
+  
+  return(result)
 }
 
-for(i in 1:nsim){
-  sim[,i] = sample(group, n, replace = FALSE)
+# Now repeat many times:
+
+Nsim <- 100
+simulated_rates <- rep(0, Nsim)
+
+for(i in 1:Nsim) {
+  simulated_rates[i] <- simulation()
 }
 
-sim_dist = apply(sim, 2, statistic, var1 = outcome)
-diffs    = sim_dist
-pval     = sum(diffs >= 0.29) / nsim
-values  <- table(sim_dist)
+# Plot the results:
 
+simulation_df <- data.frame(DifferenceProportion=simulated_rates)
+ggplot(data=simulation_df, aes(x=DifferenceProportion)) +
+  geom_dotplot()
 
-X <- c()
-Y <- c()
-for(i in 1:length(diffs)){
-  x   <- diffs[i]
-  rec <- sum(sim_dist == x)
-  X   <- append(X, rep(x, rec))
-  Y   <- append(Y, 1:rec)
-}
-
-
-# ---- 3. Plot simulation results ----
-
-# TODO: rewrite with ggplot
-#myPDF('discRandDotPlot.pdf', mar=c(3.4, 0.5, 0.5, 0.5), mgp=c(2.35,0.6,0))
-#plot(X, Y, xlim=range(diffs)+c(-1,1)*sd(diffs)/4, xlab = "Difference in promotion rates", axes = FALSE, ylim=c(0,max(Y)), col=COL[1], cex=0.8, pch=20)
-#axis(1, at = seq(-0.4,0.4,0.1), labels = c(-0.4,"",-0.2,"",0,"",0.2,"",0.4))
-#abline(h=0)
+# FIXME: simulation results in same difference of proportions for all 100 runs
