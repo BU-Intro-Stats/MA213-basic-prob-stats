@@ -71,10 +71,12 @@ simulation <- function() {
   Male <- data[index]
   Female <- data[-index]
   
+  group <- c(rep("Male", length(Male)), rep("Female", length(Female)))
+  outcome <- c(Male, Female)
+  
   df <- data.frame(Group = group, Outcome = outcome)
   df_table <- table(df)
-  df_table
-  
+
   ratio1 = df_table[3] / 24
   ratio2 = df_table[4] / 24
   result <- ratio2-ratio1
@@ -97,4 +99,4 @@ simulation_df <- data.frame(DifferenceProportion=simulated_rates)
 ggplot(data=simulation_df, aes(x=DifferenceProportion)) +
   geom_dotplot()
 
-# FIXME: simulation results in same difference of proportions for all 100 runs
+# What can we conclude?
