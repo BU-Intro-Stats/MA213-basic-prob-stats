@@ -1,0 +1,215 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab4 Activity"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 6: **Confidence Interval and Hypothesis Test**
+
+## Lab activities
+
+## A study asks people in Boston with this question.
+
+```         
+Are you satisfied with your current work-from-home setup? 
+(Yes/No)
+```
+
+We will do simulation study from this hypothetical population. The goal is to see how many intervals cover the true population proportion. How do you do it?
+
+Let's conduct simulation study using the following steps.
+
+1.  Sample $n=150$
+2.  Get the estimate
+3.  Calculate the lower bound, upper bound
+4.  Record them in the dataset
+5.  Do these steps (step 1 to 4) $K=1000$ times (1000 rows)
+
+The confidence interval for $p$ is given by
+
+$$
+\hat{p} \pm z^{*} \times SE
+$$
+
+where $z^{*} = 1.96$ for a 95% CI and
+
+$$
+SE = \sqrt{\frac{p(1-p)}{n}   }
+$$ We will use the substitution approximation of $p \approx \hat{p}$.
+
+#### Exercise 1
+
+Population -\> Let's assume that all the people in the population have an answer for the question, Are you satisfied with your current work-from-home setup? (Yes/No).
+
+```{r}
+pop <- c(rep("Yes", 1500000), rep("No", 300000))
+N <- length(pop)
+true_prop = sum(pop == "Yes") / N
+N # population size
+true_prop # true proportion
+
+```
+
+Our goal is to make a table as the following
+
+| \# of Simulation | Proportion Estimate | Lower Bound | Upper Bound | included |
+|------------------|---------------------|-------------|-------------|----------|
+| 1                | 0.75                | 0.6988      | 0.8611      | No       |
+| 2                | 0.63                | 0.6119      | 0.8080      | No       |
+| 3                | 0.77                | 0.6762      | 0.8437      | Yes      |
+| 4                | 0.72                | 0.6651      | 0.8348      | Yes      |
+| ...              | ...                 | ...         | ...         | No       |
+| K                | 0.77                | 0.7021      | 0.8012      | No       |
+
+: Sample Simulated CI Table
+
+How do we obtain it? and how many intervals cover the true proportion?
+
+Let's work on R file `Lab6_activity1.R` .
+
+### Testing Hypotheses using confidence intervals
+
+Suppose that a market research company is tasked with determining the percentage of adults in Boston who own cell phones. Two hundred randomly selected residents in Boston are surveyed to answer whether they have cell phones. 127 responded yes to the question "do you have a cell phone?"
+
+#### Exercise 2
+
+Construct 95% confidence interval for the proportion of Boston residents who have cell phones and interpret the confidence interval you found.
+
+```{r}
+#
+#
+#
+
+```
+
+We want to evaluate whether the proportion of Boston residents who have cell phones is different from 50%. Could you explain from the results above using Statistical language?
+
+---
+#
+---
+
+### Chi-Square test for independence
+
+Let's explore more on `Titanic` dataset.
+
+```{r}
+# loading from csv file
+df <- read.csv("titanic.csv")
+
+df2 <- df[,2:3]
+head(df2)
+
+```
+
+We want to see whether there is a statistically significant difference in death from passenger class. How do we do it?
+
+Expected Cell Count is
+
+$$
+E = \frac{(\text{row total}) \times (\text{column total})}{\text{total sample size}}
+$$
+
+Chi-Square Test Statistic $X^2$ is given by
+
+$$
+X^{2} = \frac{(O_{11} - E_{11})^2}{E_{11}} + \frac{(O_{12} - E_{12})^2}{E_{12}} + \dots +  \frac{(O_{rc} - E_{rc})^2}{E_{rc}} 
+$$
+
+Obtain the p-value using this Chi-Square Test Statistic $X^2$ where degrees of freedom is $df=(r-1) \times (c-1)$ in a two way table.
+
+p-value is $P(\chi^2 \geq X^{2})$
+
+```{r}
+
+draw_chisq_p_value <- function(test_stat, df){
+x <- seq(0,25, 0.01)
+y <- dchisq(x, df=df)
+df_temp <- data.frame(x=x, y=y)
+ggplot(data = df_temp, aes(x = x, y = y)) +
+  geom_line() +
+  geom_area(data = subset(df_temp, x >= test_stat), aes(x = x, y = y), fill = "red", alpha = 0.5)
+}
+
+# if the calculated chi-square test statistic is 6 and degrees of freedom is 4
+draw_chisq_p_value(6,4)
+
+
+
+
+```
+
+And the actual p-value can be calculated by
+
+```{r}
+
+1-pchisq(5,4)
+
+# or
+
+pchisq(5,4, lower.tail = FALSE)
+
+
+```
+
+#### Exercise 3
+
+We are interested in whether survival depends on the class of passengers. Conduct a chi-square test for the data to check whether there is a statistically significant difference in survival based on the class of passengers. (Use a significance level of $\alpha = 0.05$.)
+
+1.  Let's obtain a two way table of `Survived` vs `Pclass` from the dataset.
+
+```{r}
+# loading from csv file
+df <- read.csv("titanic.csv")
+
+
+
+```
+
+2.  Calculate the expected counts for each cell.
+
+```{r}
+#
+#
+#
+
+
+
+```
+
+3.  Obtain the p-value using the Chi-Square test statistic.
+
+```{r}
+#
+#
+#
+
+
+
+```
+
+4.  What do you conclude?
+
+---
+##
+---
+
+## Post-lab activities
+
+Please name your submission as `lab6.R`
+
+1.  Suppose that a market research company is tasked with determining the percentage of adults in Boston who own a bike. Three hundred randomly selected residents in Boston are surveyed to answer whether they have a bike. 180 responded yes to the question "Do you have a bike?"
+
+    Obtain 95% CI for $p$. Assign the lower bound and upper bound of the CI to objects `lower` and `upper`, respectively.
+
+2.  (`Titanic` dataset) We are interested in whether survival depends on the gender of passengers. Conduct a chi-square test for the data to check whether there is a statistically significant difference in survival based on their gender. (Use a significance level of $\alpha = 0.05$.)
+
+    Obtain the Chi-Square test statistic and assign it to object `chisquare`.
