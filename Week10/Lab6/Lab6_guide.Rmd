@@ -1,0 +1,215 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab6 guide"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 6: **Confidence Interval and Hypothesis Test**
+
+------------------------------------------------------------------------
+
+## Learning Objectives
+
+-   **Understand Errors and Significance Levels**: Identify Type I and Type II errors and explain how they are influenced by changes in the significance level.
+
+-   **Calculate Sample Size for Confidence Intervals**: Calculate the required minimum sample size for a given margin of error and confidence level.
+
+-   **Conduct and Interpret Hypothesis Tests for Proportions**: Design, execute, and interpret hypothesis tests for population proportions.
+
+-   **Conduct and Interpret Chi-Square Tests**: Assess whether the conditions for a chi-square test (goodness of fit or independence) are met, and if so, design, execute, and interpret the test.
+
+-   **Explain and Use the t-Distribution**: Explain how the t-distribution differs from the normal distribution and why it is used for population mean inference.
+
+-   **Conduct and Interpret t-Tests**: Design, execute, and interpret t-tests for a single population mean, a difference of paired means, and a difference of independent means, calculating the standard error appropriately for each. Describe how to obtain a p-value for a t-test and a critical t-score for a confidence interval.
+
+-   **Calculate Test Power and Evaluate Factors**: Calculate the power of a test for a given effect size and significance level, and explain how the power would change with variations in effect size, sample size, significance level, or standard error.
+
+-   **Conduct and Interpret ANOVA**: Assess whether conditions for an ANOVA are met, and if so, design, execute, and interpret the test to compare sample means across several groups.
+
+## Let's discuss this statement.
+
+### Based on a 2025 Research poll of 1,500 adults, we are 95% confident that between 60% and 64% of Americans prefer chocolate ice-cream.
+
+## What does it mean?
+
+It means that the true proportion of all people who like chocolate ice cream falls somewhere between 60% and 64%.
+
+## Let's find out using simulation
+
+What do we need?
+
+## 1. Population with true proportion
+
+![](images/Simulation_pop.jpg)
+
+## 2. Sample from the population K times
+
+![](images/Simulation_prop.gif)
+
+## 3. Results should be
+
+Our goal is to make a table as the following
+
+| Number of Simulation | Proportion Estimate | Lower Bound | Upper Bound |
+|----------------------|---------------------|-------------|-------------|
+| 1                    | 0.75                | 0.6988      | 0.8611      |
+| 2                    | 0.63                | 0.6119      | 0.8080      |
+| 3                    | 0.77                | 0.6762      | 0.8437      |
+| 4                    | 0.72                | 0.6651      | 0.8348      |
+| ...                  | ...                 | ...         | ...         |
+| K                    | 0.77                | 0.7021      | 0.8012      |
+
+: Sample Simulated CI Table
+
+------------------------------------------------------------------------
+
+We are going to make a hypothetical population where people prefer chocolate ice-cream and the others prefer other flavors. The total number of population is 1.4 million.
+
+```{r}
+#
+pop <- c(rep("Chocolate", 1000000), rep("Other", 400000))
+N <- length(pop)
+true_prop = sum(pop == "Chocolate") / N
+
+```
+
+This means that we are going to construct $K$ confidence intervals. For example, in this plot, we conducted 10 confidence intervals. Nine of them captures the true population proportion while one does not. The dots are the sample proportion estimates.
+
+![Confidence Interval Example](CI_Plot.jpeg)
+
+Let’s think about how to do this. For each row (each simulation for an interval), we need to sample from the population and obtain the proportion estimate, along with the lower and upper bounds. Once we have those, we need to record them in our dataframe (one row per simulation).
+
+## Let's conduct simulation study using the following steps.
+
+1.  Sample $n=100$
+2.  Get the estimate
+3.  Calculate the lower bound, upper bound
+4.  Record them in the dataframe
+5.  Do these steps (step 1 to 4) $K=1000$ times (1000 rows)
+
+The confidence interval for $p$ is given by
+
+$$
+\hat{p} \pm z^{*} \times SE
+$$
+
+where $z^{*} = 1.96$ for a 95% CI and
+
+$$
+SE = \sqrt{\frac{p(1-p)}{n}   }
+$$ We will use the substitution approximation of $p \approx \hat{p}$.
+
+```{r}
+# 95% CI for one sampled data
+#
+# 
+n = 100
+sample_data <- sample(pop, n)
+p_hat <- sum(sample_data == "Chocolate") / n
+p_hat
+
+```
+
+Getting $SE$
+
+```{r}
+# SE
+SE = sqrt( p_hat * (1-p_hat) /n)
+SE
+
+
+```
+
+Confidence Interval
+
+```{r}
+# CI
+
+Lower_bound = p_hat - 1.96 * SE
+Upper_bound = p_hat + 1.96 * SE
+CI = c(Lower_bound, Upper_bound)
+CI
+
+```
+
+Does it cover the true proportion?
+
+```{r}
+# check if true_prop is within CI
+CI[1] <= true_prop & true_prop <= CI[2] 
+
+```
+
+We will do these steps K times
+
+## Chi-Square test for independence
+
+Let's explore more on `Titanic` dataset.
+
+```{r}
+# loading from csv file
+df <- read.csv("titanic.csv")
+
+df2 <- df[,2:3]
+head(df2)
+
+```
+
+We want to see whether there is a statistically significant difference in death from passenger class. How do we do it?
+
+Expected Cell Count is
+
+$$
+E = \frac{(\text{row total}) \times (\text{column total})}{\text{total sample size}}
+$$
+
+Chi-Square Test Statistic $X^2$ is given by
+
+$$
+X^{2} = \frac{(O_{11} - E_{11})^2}{E_{11}} + \frac{(O_{12} - E_{12})^2}{E_{12}} + \dots +  \frac{(O_{rc} - E_{rc})^2}{E_{rc}} 
+$$
+
+Obtain the p-value using this Chi-Square Test Statistic $X^2$ where degrees of freedom is $df=(r-1) \times (c-1)$ in a two way table.
+
+p-value is $P(\chi^2 \geq X^{2})$
+
+```{r}
+
+draw_chisq_p_value <- function(test_stat, df){
+x <- seq(0,25, 0.01)
+y <- dchisq(x, df=df)
+df_temp <- data.frame(x=x, y=y)
+ggplot(data = df_temp, aes(x = x, y = y)) +
+  geom_line() +
+  geom_area(data = subset(df_temp, x >= test_stat), aes(x = x, y = y), fill = "red", alpha = 0.5)
+}
+
+# if the calculated chi-square test statistic is 6 and degrees of freedom is 4
+draw_chisq_p_value(6,4)
+
+
+
+
+```
+
+And the actual p-value can be calculated by
+
+```{r}
+
+1-pchisq(5,4)
+
+# or
+
+pchisq(5,4, lower.tail = FALSE)
+
+
+```
