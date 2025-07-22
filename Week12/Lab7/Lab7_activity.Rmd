@@ -1,0 +1,94 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab7 Activity"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 7: Linear Regression
+
+### Lab activities
+
+#### Exercise Q6
+
+Choose one dataset and perform data analysis using simple linear regression. Your group can choose a data from
+
+[Survey of Duke students on GPA, studying, and more](https://www.openintro.org/data/index.php?data=gpa)
+
+[US Crime Rates](https://www.openintro.org/data/index.php?data=us_crime_rates)
+
+[Normal Body Temperature](https://www.openintro.org/data/index.php?data=thermometry)
+
+[State-level data](https://www.openintro.org/data/index.php?data=state_stats)
+
+[SAT and GPA data](https://www.openintro.org/data/index.php?data=satgpa)
+
+[Pierce County House Sales Data for 2020](https://www.openintro.org/data/index.php?data=pierce_county_house_sales)
+
+0.  Import the data
+
+```{r}
+
+#
+#
+#
+
+
+```
+
+1.  Check the relationship between response variable and explanatory variable.
+
+```{r}
+#
+#
+#
+
+```
+
+2.  Obtain the least square line and get the residuals.
+
+```{r}
+#
+#
+#
+
+```
+
+3.  Show some plots to check model assumption.
+
+```{r}
+#
+#
+#
+
+```
+
+### Post-lab activities
+
+The Toluca Company manufactures refrigeration equipments as well as many replacement parts. In the past, one of the replacement parts has been produced periodically in lots of varying sizes. When a cost improvement program was undertaken, company officials wished to determine the optimum lot size for producing this part. The production of this part involves setting up the production process (which must be done no matter what is the lot size) and machining and assembly operations. One key input for the model to ascertain the optimum lot size was the relationship between lot size and labour hours required to produce the lot. To determine this relationship, data on lot size and work hours for 25 recent production runs were utilized. The production conditions were stable during the six-month period in which the 25 runs were made and were expected to continue to be the same during the next three years, the planning period for which the cost improvement program was being conducted.
+
+Please name your submission as `lab7.R`
+
+Data here is given in `toluca.csv` .
+
+1.  Calculate the correlation coefficient and save it to object `r2.`
+
+2.  Obtain standard deviations of `X` and `Y`, `sx` and `sy`, respectively.
+
+3.  Obtain the sum of `X` and `Y`, `sumx` and `sumy`, respectively.
+
+4.  Obtain `b0` estimate for $\beta_0$.
+
+5.  Obtain the slope estimate `b1` .
+
+6.  Obtain `R2` .
+
+7.  What is the 5th residual value? Assign it to object `resid5` .
