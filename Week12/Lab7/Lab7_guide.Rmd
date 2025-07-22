@@ -1,0 +1,221 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab7 guide"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 7: Linear Regression
+
+------------------------------------------------------------------------
+
+## Learning Objectives
+
+-   **Compute and Interpret Correlation and R²**: Compute and interpret correlation coefficients and R² values, while recognizing that correlation does not imply causation.
+-   **Describe and Assess Relationships Between Two Variables**: Describe the association between two numerical variables in a scatter plot in terms of direction, shape (linear or nonlinear), and strength, and assess whether linear regression is an appropriate model.
+-   **Fit and Interpret Linear Models Using Least Squares**: Fit the intercept and slope of a linear model to data using the least squares method, interpret the fitted values, and use the model to predict responses to new inputs.
+-   **Perform Inference for Regression Coefficients**: Use fit summary and parameter estimates (e.g., $\hat{\beta_1}$ and $\hat{\sigma^2}$ ) to perform hypothesis tests or construct confidence intervals for the slope, and interpret the results.
+
+### Lab activities
+
+***Beauty in the class***
+
+Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. However, the use of these student evaluations as an indicator of course quality and teaching eﬀectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor. Researchers at University of Texas, Austin collected data on teaching evaluation score (higher score means better) and standardized beauty score (a score of 0 means average, negative score means below average, and a positive score means above average) for a sample of 463 professors. (The data was originally considered by @hamermesh2005beauty.)
+
+> Variables in the data frame :
+>
+> | Name | Details |
+> |------------------------------------|------------------------------------|
+> | minority | is the professor from a non-Caucasian ethnic minority? |
+> | age | the professor’s age. |
+> | gender | a factor indicating the professor’s gender. |
+> | credits | a factor indicating whether the course is a single-credit elective (e.g. scuba diving or ballroom dancing, coded “single”) or an academic course (coded “more”). |
+> | beauty | a rating of the professor’s physical attractiveness, as judged by a panel of six students. (The score was averaged across all six panelists, and shifted to have a mean of zero) |
+> | eval | the professor’s average teaching evaluation for courses in the sample, on a scale of 1 to 5. |
+> | division | whether the course is an upper or lower division course. |
+> | native | whether the professor is a native English speaker. |
+> | tenure | whether the professor is tenured/tenure-track, or not. |
+> | students | the number of students that participated in the evaluation. |
+> | allstudents | the number of students enrolled in the course. |
+> | prof | a unique numerical identifier for the professor being rated. |
+
+1.  Let's import the data. What are your interests? What could be the response and explanatory variables?
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+df <- read.csv("beauty.csv")
+
+glimpse(df)
+head(df)
+
+
+
+```
+
+We can think `eval` as response (dependent) variable and `beauty` as explanatory (independent) variable.
+
+Here are some statistics of the `beauty` and `eval`.
+
+|                    | beauty | eval  |
+|--------------------|--------|-------|
+| Min                | -1.450 | 2.100 |
+| Median             | -0.068 | 4.000 |
+| Mean               | 0.000  | 3.998 |
+| Max                | 1.970  | 5.000 |
+| Standard Deviation | 0.788  | 0.554 |
+
+: Descriptive Statistics of beauty and eval (obtained from `summary()` )
+
+2.  Let's first see how response variable and explanatory variable are related.
+
+We can look at scatter plot to see how `beauty` and `eval` (course ratings) are related.
+
+```{r}
+
+ggplot(data=df, mapping = aes(x=beauty, y=eval)) + geom_point()
+
+#
+#
+#
+
+```
+
+Let's also check correlation between `beauty` and `eval`.
+
+Correlation $$
+R = \frac{1}{n-1} \sum_{i=1}^{n} \frac{x_i - \bar{x}}{s_{x}} \frac{y_i - \bar{y}}{s_{y}}
+$$ where $s_x$ is the standard deviation of explanatory variable $x$ and $s_y$ is the standard deviation of response variable.
+
+let's obtain the correlation between `beauty` and `eval`, $R$, using R.
+
+```{r}
+#
+#
+# 
+n = dim(df)[1]
+X = df$beauty
+Y = df$eval
+
+xbar = mean(X)
+ybar = mean(Y)
+
+sx = sd(X)
+sy = sd(Y)
+
+R = 0 # initialize R
+for (i in 1:n){
+  R = R+((X[i] - xbar)/sx) * ((Y[i] - ybar)/sy)
+}
+R = R/(n-1)
+R
+
+
+# or vector wise calculation can be done as following
+# sum(((X-xbar)/sx )* ((Y-ybar)/sy )) / (n-1)
+```
+
+Based on the correlation, what does it tell you?
+
+-\> Weak and positive relationship.
+
+3.  Let's obtain least squares line where the model is $$
+    y = \beta_0 + \beta_1 x + \epsilon
+    $$ The estimates are $$
+    b_1 = \hat{\beta_1} =  (\frac{s_y}{s_x}) R,
+    $$
+
+$$
+b_0 = \hat{\beta_0} = \bar{y} - b_1 \bar{x}
+$$
+
+Let's obtain the least squares line. Obtain `b0` and `b1`.
+
+```{r}
+
+#
+#
+#
+b1 = (sy/sx)*R
+b1
+
+b0 = ybar-b1*xbar
+b0
+
+```
+
+We can check some of the assumptions (conditions) for the least square lines.
+
+Obtain residuals and show plot of residuals against explanatory variable
+
+```{r}
+
+#
+#
+# Residuals = y - yhat
+yhat = b0+b1*X
+Residuals = Y - yhat
+
+df = data.frame(Beauty = X, Residuals)
+
+ggplot(data = df, aes(x=Beauty, y=Residuals)) + geom_point()
+
+
+```
+
+We can check how residuals are distributed.
+
+How do you check if residuals are normally distributed?
+
+Show histogram plot of residuals
+
+```{r}
+#
+#
+#
+ggplot(data = df) + geom_histogram(mapping = aes(Residuals))
+
+```
+
+We can also check QQ plot, quantile-quantile plot. It is a graphical tool to assess if data comes from theoretical distribution (normal distribution in this case). We are expected to see If the points are on the diagonal line.
+
+```{r}
+
+qqnorm(Residuals)
+qqline(Residuals) #this will draw 45 degree line for reference purposes.
+```
+
+Let's calculate $R^2$ to describe the strength of a fit
+
+```{r}
+#
+#
+#
+R_Squared = R^2
+R_Squared
+
+```
+
+What does it mean?
+
+-\> **This means that about 3.5% of the variation in the data can be explained by using information about beauty to predict class evaluation.**
+
+Now, let us walk through the output from `lm()` function in R.
+
+```{r}
+
+#
+model = lm(Y~X)
+summary(model)
+
+
+```
