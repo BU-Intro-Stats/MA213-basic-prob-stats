@@ -14,7 +14,7 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## **Lab 3:** Lab activities
+## **Lab 3:** **Plotting and Summaries** activities
 
 ------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ names(df)
 #
 #
 #
-ggplot(df, aes(x=Solar.R, y=Temp)) + geom_point()
+
 ```
 
 #### Show the bar plot of average Solar radiation per each month.
@@ -68,13 +68,7 @@ ggplot(df, aes(x=Solar.R, y=Temp)) + geom_point()
 #
 #
 #
-df2 <- na.omit(df)
 
-df2 %>% 
-  group_by(Month) %>%
-  summarise(avg_mth = mean(Solar.R, na.rm=TRUE)) %>%
-  ggplot(aes(x=factor(Month), y=avg_mth)) +
-  geom_col()
 ```
 
 ### **Survival of Passengers on the Titanic**
@@ -114,7 +108,7 @@ df2 %>%
 
 ### Post-lab activities
 
-Please name your submission as `lab2.R`
+Please name your submission as `lab3.R`
 
 We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
 
