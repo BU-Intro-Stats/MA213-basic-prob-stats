@@ -1,5 +1,5 @@
 ---
-title: "MA213 Basic Statistics and Probability - Lab4 Activity"
+title: "MA213 Basic Statistics and Probability - Lab6 Activity"
 bibliography: references.bib
 output:
   pdf_document: default
