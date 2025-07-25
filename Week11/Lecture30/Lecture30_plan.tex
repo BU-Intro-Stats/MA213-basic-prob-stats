@@ -4,12 +4,14 @@
 \begin{frame}
     \frametitle{Lesson Plan}
     \begin{itemize}
-        \item xx min Lecture: Motivate linear regression, modeling numerical variables
-        \item xx min R Demonstration: scatter plots, response/explanatory variable(s), determining relationships  % like slide 2
-        \item xx min Edfinity quiz: from scatter plots, practice determining response/explanatory and relationship between variables for different examples
-        \item xx min Lecture: residuals, correlation
-        \item xx min Edfinity quiz: guessing and then assessing correlation (like slides 9-11)
-        \item xx min Lecture: motivate line-fitting (next time)
+        \item xx min Lecture: ANOVA review. Which means differ? Motivate multiple comparisons
+        \item xx min R demo: multiple testing type I error, introduce concept of familywise error rate
+        \item xx min Board work: derive familywise error rate for independent tests
+        \item xx min Edfinity quiz: how to choose alpha to control FWER?
+        \item xx min R demo: multiple testing with Bonferroni
+        \item xx min Lecture: Go through t tests for ANOVA example
+        \item xx min Case study: Garden of forking paths, statistical vs practical significance
+        \item xx min Lecture: Best practices (avoid HT when inappropriate, preregistration, report effect size and CIs, data splitting for exploratory work)
     \end{itemize}
 \end{frame}
 
@@ -19,12 +21,20 @@
 \begin{frame}
     \frametitle{Learning Objectives}
     \begin{itemize}
-        \item \textbf{M1, LO1: Classify and Analyze Variables:} Categorize variables based on their types (e.g., numerical/categorical, continuous/discrete, ordinal), assess their association (positive, negative, or independent), and determine which make sense as explanatory vs. response variables.
         \item \textbf{M1, LO3: Use R for Data Management and Exploration:} Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
-        \item \textbf{M1, LO4: Visualize and Describe Data Distributions:} Select appropriate visualizations (scatterplots, histograms, box plots, bar plots) to depict data, and describe distributions qualitatively (shape, center, spread, outliers) and quantitatively (mean, median, mode, range, IQR, standard deviation).
-        \item \textbf{M5, LO1: Describe and Assess Relationships Between Two Variables:} Describe the association between two numerical variables in a scatter plot in terms of direction, shape (linear or nonlinear), and strength, and assess whether linear regression is an appropriate model.    
+        \item \textbf{M3, LO1: Understand Point Estimates and Sampling Variability:} Define a sample statistic (point estimate) for a population parameter, and explain how it varies across different samples.
+        \item \textbf{M3, LO3: Calculate and Interpret Standard Error:} Calculate the standard error for proportions and interpret it as a measure of sampling variability.
+        \item \textbf{M3, LO4: Explain Hypothesis Testing and Its Limitations:} Discuss the use cases and potential issues with hypothesis testing, including the interpretation of results.
+        \item \textbf{M3, LO6: Distinguish Statistical vs. Practical Significance:} Differentiate between statistical significance and practical significance, and explain the implications of each.
+        \item \textbf{M4, LO2: Design and Interpret Confidence Intervals:} Design, execute, and interpret confidence intervals for the population proportion.
+        \item \textbf{M4: LO8: Conduct and Interpret ANOVA:} Assess whether conditions for an ANOVA are met, and if so, design, execute, and interpret the test to compare sample means across several groups.
     \end{itemize}
 \end{frame}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO: Adapt drafted slides
+% TODO: Make this lecture 30
+% TODO: R demo simulating multiple testing with no effect
+% TODO: Prep board work deriving FWER
+% TODO: Edfinity quiz: adjusting alpha brainstorm
+% TODO: Find a good case study for garden of forking paths, statistical vs practical significance (e.g. look at Gelman blog), prep it
+% TODO: Prep lecture slides on garden of forking paths, best practices

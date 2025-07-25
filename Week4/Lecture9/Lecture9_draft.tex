@@ -177,7 +177,7 @@ Var(2X) &= 2^2~Var(X) \\
 \begin{frame}
 \frametitle{Adding or multiplying?}
 
-\dq{A company has 5 Lincoln Town Cars in its fleet. Historical data show that annual maintenance cost for each car is on average \$2,154 with a standard deviation of \$132. What is the mean and the standard deviation of the total annual maintenance cost for this fleet?}
+\dq{A company has 5 Lincoln Town Cars in its fleet. Historical data show that annual maintenance cost for each car is on average \$2,154 with a standard deviation of \$132. What is the mean and the standard deviation of the total annual maintenance cost for this fleet, assuming independence?}
 
 \pause
 
@@ -193,13 +193,44 @@ E(X_1 + X_2 + X_3 + X_4 + X_5) &=& E(X_1) + E(X_2) + E(X_3) + E(X_4) + E(X_5) \\
 \pause
 Var(X_1 + X_2 + X_3 + X_4 + X_5) &=& Var(X_1) + Var(X_2) + Var(X_3) + Var(X_4) + Var(X_5) \\
 \pause
-&=& 5 \times V(X) = 5 \times 132^2 = \$ 87,120 \\
+&=& 5 \times V(X) = 5 \times 132^2 = \$^2 87,120 \\
 \pause
-SD(X_1 + X_2 + X_3 + X_4 + X_5) &=& \sqrt{87,120} =  295.16
+SD(X_1 + X_2 + X_3 + X_4 + X_5) &=& \sqrt{87,120} =  \$ 295.16
 \end{eqnarray*}
 }
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Adding or multiplying?}
+
+\dq{A client rents one Lincoln Town car, and their contract requires them to pay 1/5 of the maintenance cost of the car. Historical data show that annual maintenance cost for each car is on average \$2,154 with a standard deviation of \$132. What is the mean and the standard deviation of the annual maintenance cost that the client will pay?}
+
+\pause
+
+Note that now we have 1 car, with the annual maintenance cost $\frac{X}{5}$.
+
+\pause 
+
+{\small
+\begin{eqnarray*} 
+E\left(\frac{X}{5}\right) &=& E\left(X\times \frac{1}{5}\right) = E(X) \times \frac{1}{5} = \frac{2154}{5}  = \$ 430.8 \\
+\pause
+Var\left(\frac{X}{5}\right) &=& Var\left(X\times \frac{1}{5}\right) = Var(X) \times \left(\frac{1}{5}\right)^2 = \frac{132^2}{5^2} = \$^2 696.96 \\
+\pause
+SD\left(\frac{X}{5}\right) &=& \sqrt{696.96} =  \$ 26.4
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

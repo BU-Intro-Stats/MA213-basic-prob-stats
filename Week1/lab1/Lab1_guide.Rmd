@@ -1,8 +1,36 @@
 ---
-title: "Lab1"
-format: revealjs
-editor: visual
+title: "MA213 Basic Statistics and Probability - Lab1 Guide"
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## **Lab 1: Introduction to R**
+
+In this lab session, we will learn basic syntax of R.
+
+## Learning Objectives
+
+-   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
+
+#### Install R and RStudio.
+
+You can download and install R from
+
+<https://www.r-project.org/>
+
+And you can download and install RStudio from
+
+<https://posit.co/download/rstudio-desktop/>
+
+We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
 
 ## Introduction of R
 

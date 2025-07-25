@@ -19,9 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \def\chp8@path{../../Chp 8}
 \input{../../lec_style.tex}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preamble
@@ -61,134 +61,78 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 }
 
-\include{Lecture33_agenda}
+\include{Lecture32_agenda}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Linear regression so far}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Recap: Our tools for inference so far}
+\section{Review}
 
 \begin{frame}
-    \frametitle{Tools we already have...}
+    \frametitle{Last time: linear regression, $R^2$, extrapolation}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Inference for linear regression}
+\section{Types of outliers in linear regression}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Understanding regression output from software}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Nature or nurture?}
+\frametitle{Types of outliers}
 
-{\small In 1966 Cyril Burt published a paper called ``The genetic determination of differences in intelligence: A study of monozygotic twins reared together and apart". The data consist of IQ scores for [an assumed random sample of] 27 identical twins, one raised by foster parents, the other by the biological parents.}
+\twocol{0.5}{0.5}
+{
+\dq{How do outliers influence the least squares line in this plot?}
 
-\begin{center}
-\includegraphics[width=0.7\textwidth]{\chp8@path/8-4_inf_lin_reg/figures/twins/twins_IQ}
-\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{}
-
-\pq{Which of the following is \underline{false}?}
-
-{\footnotesize
-\begin{verbatim}
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)    
-(Intercept)       9.20760    9.29990   0.990    0.332    
-bioIQ             0.90144    0.09633   9.358  1.2e-09
-
-Residual standard error: 7.729 on 25 degrees of freedom
-Multiple R-squared: 0.7779,	Adjusted R-squared: 0.769 
-F-statistic: 87.56 on 1 and 25 DF,  p-value: 1.204e-09 
-\end{verbatim}
+To answer this question think of where the regression line would be with and without the outlier(s). Without the outliers the regression line would be steeper, and lie closer to the larger group of observations. With the outliers the line is pulled up and away from some of the observations in the larger group. 
 }
-
-\begin{enumerate}[(a)]
-\item Additional 10 points in the biological twin's IQ is associated with additional 9 points in the foster twin's IQ, on average.
-\solnMult{Roughly 78\% of the foster twins' IQs can be accurately predicted by the model.}
-\item The linear model is $\widehat{fosterIQ} = 9.2 + 0.9 \times bioIQ$.
-\item Foster twins with IQs higher than average IQs tend to have biological twins with higher than average IQs as well.
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Hypotheses for testing for the slope}  % To replace slide below, then do t-test together
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Testing for the slope}
-
-\pq{Assuming that these 27 twins comprise a representative sample of all twins separated at birth, we would like to test if these data provide convincing evidence that the IQ of the biological twin is a significant predictor of IQ of the foster twin. What are the appropriate hypotheses?}
-
-\begin{enumerate}[(a)]
-\item \mathhl{H_0:} $b_0 = 0$; \mathhl{H_A:} $b_0 \ne 0$ 
-\item \mathhl{H_0:} $\beta_0 = 0$; \mathhl{H_A:} $\beta_0 \ne 0$ 
-\item \mathhl{H_0:} $b_1 = 0$; \mathhl{H_A:} $b_1 \ne 0$ 
-\solnMult{ \mathhl{H_0:} $\beta_1 = 0$; \mathhl{H_A:} $\beta_1 \ne 0$ }
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Testing for the slope (cont.)}
-
-{\footnotesize
+{
 \begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
-  bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
-   \hline
-\end{tabular}
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/outlierPlots/out4}
 \end{center}
 }
 
-\pause
+\end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Types of outliers}
+
+\twocol{0.4}{0.6}
+{
+\dq{How do outliers influence the least squares line in this plot?} \\
+\soln{\only<2>{Without the outlier there is no evident relationship between $x$ and $y$.}}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/outlierPlots/out5}
+\end{center}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Some terminology}
+ 
 \begin{itemize}
 
-\item We always use a $t$-test in inference for regression. $\:$ \\
+\item \hl{Outliers} are points that lie away from the cloud  of points.
 
 \pause
 
-\Remember{Test statistic, $T = \frac{point~estimate - null~value}{SE}$}
+\item Outliers that lie horizontally away from the center of the cloud are called \hl{high leverage} points.
 
 \pause
 
-\item Point estimate = $b_1$ is the observed slope.
+\item High leverage points that actually influence the \underline{slope} of the regression line are called \hl{influential} points.
 
 \pause
 
-\item $SE_{b_1}$ is the standard error associated with the slope.
-
-\pause
-
-\item Degrees of freedom associated with the slope is $df = n - 2$, where $n$ is the sample size. $\:$ \\
-\pause
-\Remember{We lose 1 degree of freedom for each parameter we estimate, and in simple linear regression we estimate 2 parameters, $\beta_0$ and $\beta_1$.}
+\item In order to determine if a point is influential, visualize the regression line with and without the point. Does the slope of the line change considerably? If so, then the point is influential. If not, then it?s not an influential point.
 
 \end{itemize}
 
@@ -197,39 +141,109 @@ F-statistic: 87.56 on 1 and 25 DF,  p-value: 1.204e-09
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Testing for the slope (cont.)}
+\frametitle{Influential points}
 
-{\small
+Data are available on the log of the surface temperature and the log of the light intensity of 47 stars in the star cluster CYG OB1.
+
+\twocol{0.7}{0.3}
+{
 \begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) &  9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
-  bioIQ & \orange{0.9014}  &   \green{0.0963} & \orange{9.36} & \textcolor{blue}{0.0000} \\ 
-   \hline
-\end{tabular}
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/stars/star}
 \end{center}
 }
-
-\pause
-
-\begin{eqnarray*}
-T &=& \frac{\orange{0.9014} - 0}{\green{0.0963}} = \orange{9.36} \\
-\pause
-df &=& 27 - 2 = 25 \\
-\pause
-p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
-\end{eqnarray*}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/stars/cyg}
+\end{center}
+}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: $t$-test for the slope}
+\begin{frame}
+\frametitle{Types of outliers}
+
+\twocol{0.4}{0.6}
+{
+\pq{Which of the below best describes the outlier?}
+\begin{enumerate}[(a)]
+\item influential
+\solnMult{high leverage}
+\item none of the above
+\item there are no outliers
+\end{enumerate}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/outlierPlots/out6}
+\end{center}
+}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Types of outliers}
+
+\twocol{0.4}{0.6}
+{
+\dq{Does this outlier influence the slope of the regression line?}
+\soln{\only<2>{Not much...}}
+
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/outlierPlots/out1}
+\end{center}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Influential points and the best-fit line}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap}
+
+\pq{Which of following is \underline{true}?}
+
+\begin{enumerate}[(a)]
+\item Influential points always change the intercept of the regression line.
+\item Influential points always reduce $R^2$.
+\item It is much more likely for a low leverage point to be influential, than a high leverage point.
+\item When the data set includes an influential point, the relationship between the explanatory variable and the response variable is always nonlinear.
+\solnMult{None of the above.}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap (cont.)}
+
+\vspace{-1cm}
+
+\twocol{0.5}{0.5}
+{
+\begin{center}
+\[ R = 0.08, R^2 = 0.0064 \]
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/outlierPlots/out5-1}
+\end{center}
+}
+{
+\begin{center}
+\[ R = 0.79, R^2 = 0.6241 \]
+\includegraphics[width=\textwidth]{\chp8@path/8-3_outliers/figures/outlierPlots/out5}
+\end{center}
+}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document

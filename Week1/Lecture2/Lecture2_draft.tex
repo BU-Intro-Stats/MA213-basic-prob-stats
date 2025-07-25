@@ -83,7 +83,6 @@ A survey was conducted on students in an introductory statistics course. Below a
 \item \var{sleep}: How many hours do you sleep at night, on average?
 \item \var{bedtime}: What time do you usually go to bed?
 \item \var{countries}: How many countries have you visited?
-\item \var{dread}: On a scale of 1-5, how much do you dread being here?
 \end{itemize}
 
 \end{frame}
@@ -100,14 +99,14 @@ Data collected on students in a statistics class on a variety of variables:
 		& \hl{variable} \\
 		& \hl{$\downarrow$}	 \\
 \cline{1-5}
-Stu.	&	\var{gender}	&	\var{intro\_extra} & $\cdots$ & \var{dread} \\
+Stu.	&	\var{gender}	&	\var{intro\_extra} & $\cdots$ & \var{countries} \\
 \cline{1-5}
-1 & male   & extravert  & $\cdots$  & 3 \\ 
-2 & female & extravert  & $\cdots$  & 2 \\ 
-3 & female & introvert  & $\cdots$  & 4 & \hl{$\leftarrow$}  \\ 
-4 & female & extravert  & $\cdots$  & 2 & \hl{observation} \\
+1 & male   & extravert  & $\cdots$  & 13 \\ 
+2 & female & extravert  & $\cdots$  & 7 \\ 
+3 & female & introvert  & $\cdots$  & 1 & \hl{$\leftarrow$}  \\ 
+4 & female & extravert  & $\cdots$  & 5 & \hl{observation} \\
 $\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
-86	& male & extravert  & $\cdots$  & 3 \\
+86	& male & extravert  & $\cdots$  & 9 \\
 \cline{1-5}
 \end{tabular}
 \end{center}
@@ -136,14 +135,14 @@ $\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
 {\footnotesize
 \begin{tabular}{c ccc cc}
   \hline
- & \var{gender} & \var{sleep} & \var{bedtime} & \var{countries} & \var{dread} \\
+ & \var{gender} & \var{sleep} & \var{bedtime} & \var{countries}  \\
   \hline
-1 & male & 5 & 12-2 & 13 & 3 \\ 
-  2 & female & 7 & 10-12 & 7 & 2 \\ 
-  3 & female & 5.5 & 12-2 & 1 & 4 \\ 
-  4 & female & 7 & 12-2 &  & 2 \\ 
-  5 & female & 3 & 12-2 & 1 & 3 \\ 
-  6 & female & 3 & 12-2 & 9 & 4 \\ 
+1 & male & 5 & 12-2 & 13  \\ 
+  2 & female & 7 & 10-12 & 7  \\ 
+  3 & female & 5.5 & 12-2 & 1  \\ 
+  4 & female & 7 & 12-2 &   \\ 
+  5 & female & 3 & 12-2 & 1  \\ 
+  6 & female & 3 & 12-2 & 9  \\ 
   \hline
 \end{tabular}
 }
@@ -154,26 +153,11 @@ $\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
 \item \var{sleep}: \pause \soln{\only<4->{numerical, continuous}} \pause
 \item \var{bedtime}: \pause \soln{\only<6->{categorical, ordinal}} \pause
 \item \var{countries}: \pause \soln{\only<8->{numerical, discrete}} \pause
-\item \var{dread}: \pause \soln{\only<10->{categorical, ordinal - could also be used as numerical}}
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% \frametitle{Practice}
-
-% \pq{What type of variable is a telephone area code?}
-
-% \begin{enumerate}[(a)]
-% \item numerical, continuous
-% \item numerical, discrete
-% \solnMult{categorical}
-% \item categorical, ordinal
-% \end{enumerate}
-
-% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{R Demo: Loading and Visualizing Data}
@@ -276,27 +260,6 @@ explanatory variable $\xrightarrow{might~affect}$response variable
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% \frametitle{Practice}
-
-% \twocol{0.5}{0.5}
-% {
-% \pq{Based on the scatterplot on the right, which of the following statements is correct about the head and skull lengths of possums?}
-% }
-% {
-% %\includegraphics[width=\textwidth]{1-2_data_basics/figures/possum_head_skull/possum_head_skull}
-% }
-
-% \begin{enumerate}[(a)]
-% \item There is no relationship between head length and skull width, i.e. the variables are independent.
-% \solnMult{Head length and skull width are positively associated.}
-% \item Skull width and head length are negatively associated.
-% \item A longer head causes the skull to be wider.
-% \item A wider skull causes the head to be longer.
-% \end{enumerate}
-
-% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -517,32 +480,6 @@ explanatory variable $\xrightarrow{might~affect}$response variable
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}[shrink]
-% 	\frametitle{Practice}
-
-% 	{\small
-% 	\pq{A school district is considering whether it will no longer allow high school students to park at school after two recent accidents where students were severely injured. As a first step, they survey parents by mail, asking them whether or not the parents would object to this policy change. Of 6,000 surveys that go out, 1,200 are returned. Of these 1,200 surveys that were completed, 960 agreed with the policy change and 240 disagreed. Which of the following statements are true?}
-
-% 	\begin{enumerate}[I.]
-% 		\item Some of the mailings may have never reached the parents.
-% 		\item The school district has strong support from parents to move forward with the policy approval.
-% 		\item It is possible that majority of the parents of high school students disagree with the policy change.
-% 		\item The survey results are unlikely to be biased because all parents were mailed a survey. 
-% 	\end{enumerate}
-
-% 	\begin{multicols}{5}
-% 		\begin{enumerate}[(a)]
-% 			\item Only I
-% 			\item I and II
-% 			\solnMult{I and III}
-% 			\item III and IV
-% 			\item Only IV
-% 		\end{enumerate}
-% 	\end{multicols}
-% 	}
-
-% \end{frame}
-
 \subsection{Observational studies}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -628,23 +565,37 @@ explanatory variable $\xrightarrow{might~affect}$response variable
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% 	\frametitle{Practice}
-
-% 	\pq{A city council has requested a household survey be conducted in a suburban area of their city. The area is broken into many distinct and unique neighborhoods, some including large homes, some with only apartments. Which approach would likely be the \emph{least} effective?}
-
-% 	\begin{enumerate}[(a)]
-% 		\item Simple random sampling
-% 		\solnMult{Cluster sampling}
-% 		\item Stratified sampling
-% 		\item Blocked sampling
-% 	\end{enumerate}
-
-% \end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Think/pair/share: sampling/bias}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{TPS Instructions}
+
+	After reading the question (on the next slide)...
+
+	\begin{itemize}
+		\item \textbf{Step 1: Think (3 minute):} Think to yourself about how you would answer the question. You can briefly write down your thoughts for the next steps.
+		\item \textbf{Step 2: Pair (2 minutes):} Get into pairs, get to know each other, and discuss the question together. 
+		\item \textbf{Step 3: Share (3 minutes):} Share your and your partner's thoughts on the forum, and read others' responses.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{TPS Question}
+
+	A school district purchases language arts software to supplement the teaching of reading to students in grade 2. 
+	After 3 months of using the software, the school wants to determine whether use of the program has led to improved reading levels. 
+	There is concern that the program may not be as effective for students who are not accustomed to using a computer at home. 
+	The district is considering two sampling techniques:
+
+	\begin{enumerate}
+		\item Randomly sampling students who have a computer at home and students who don't, and assessing their reading skills. 
+		\item Randomly sampling students regardless of whether they have a computer at home or not, and assessing their reading skills. 
+	\end{enumerate}
+
+	What is/are the population(s) of interest? Which sampling technique do you think they should use? Why?
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document

@@ -1,0 +1,138 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab2 Activity"
+bibliography: references.bib
+link-citations: true
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Lab 2:** Data transformation
+
+------------------------------------------------------------------------
+
+## Load packages for Data
+
+If you didn't install `tidyverse` package
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+```
+
+Load package
+
+```{r, echo=TRUE}
+library(tidyverse)
+```
+
+------------------------------------------------------------------------
+
+## Lab Activities
+
+#### Q1. Import `airquality` data. Discuss which variable should be response variable and explanatory variables. You might consider using functions such as `glimpse(), head()`
+
+```{r}
+#
+# 
+# 
+```
+
+#### Q2. You are interested in viewing temperature in Celsius. Create a column named `Temp_C`. Below is the formula for Celsius.
+
+$$
+C = (F-32) \times \frac{5}{9}
+$$
+
+```{r}
+#
+#
+# 
+```
+
+#### Q3. Show average Ozone level in each month.
+
+```{r}
+#
+#
+# 
+```
+
+#### Q4. Based on Beaufort wind scale, wind speed(mph) can be categorized into
+
+```         
+Calm: Wind speed less than 1 mph. 
+Light Air: 1-4 mph. 
+Light Breeze: 4-7 mph. 
+Gentle Breeze: 7-12 mph. 
+Moderate Breeze: 12-18 mph. 
+Fresh Breeze: 18-24 mph. 
+Strong Breeze: Wind speed greater than 24 mph.
+```
+
+Also, we can categorize Ozone level into two levels as the following.
+
+```         
+Low : if less than median of Ozone
+High : if greater than median of Ozone
+```
+
+Create a contingency table to examine the relationship between Categorized_wind and Ozone level.
+
+```{r}
+#
+#
+#
+
+```
+
+#### Q5. Import the Titanic dataset, identify numerical and categorical variables, and discuss which variable should be the response variable and which should be the explanatory variables.
+
+```{r}
+#
+#
+# 
+```
+
+#### Q6. Create a contingency table to examine the relationship between Class and Survived.
+
+```{r}
+#
+#
+#
+```
+
+#### Q7. Create a contingency table to examine the relationship between Sex and Survived.
+
+```{r}
+#
+#
+#
+```
+
+## Post-lab activities
+
+Please name your submission as `lab2.R`
+
+We are going to analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving in terms of Temperature.
+
+We are going to work without missing values again.
+
+0.  load the `airquality.csv` file and assign it to `my_df` object. And assign the data without `NA` value to `new_df`
+
+    ```{r, eval=FALSE}
+    my_df <- read.csv("airquality.csv")
+    # new_df <- ?
+    ```
+
+1.  How many observations are in the data without missing value? In other words, how many rows in the data without missing value? Assign it to `n`
+
+2.  What is the maximum daily temperature at LaGuardia airport? Assign it to `max_temp`
+
+3.  What is the maximum Ozone(ppb) in month of June? Assign it to `max_ozone_june`
+
+4.  You are interested in the median value of `wind` in August. Assign the value to `median_august_wind`

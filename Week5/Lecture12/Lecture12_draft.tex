@@ -146,36 +146,36 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Board work: Deriving the Geometric distribution}
+\subsection{Geometric distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Geometric distribution}
+\section{Board work: Deriving the Geometric distribution}
 
-\begin{frame}
-\frametitle{Geometric distribution}
+% \begin{frame}
+% \frametitle{Geometric distribution}
 
-{\small
+% {\small
 
-\dq{Dr. Smith wants to repeat Milgram's experiments but she only wants to sample people until she finds someone who will not inflict a severe shock. What is the probability that she stops after the first person?}
+% \dq{Dr. Smith wants to repeat Milgram's experiments but she only wants to sample people until she finds someone who will not inflict a severe shock. What is the probability that she stops after the first person?}
 
-\[ P(1^{st}~person~refuses) = 0.35 \]
+% \[ P(1^{st}~person~refuses) = 0.35 \]
 
-\pause
+% \pause
 
-\dq{... the third person?}
-\[ P(1^{st}~and~2^{nd}~shock,~3^{rd}~refuses) = \slot{S}{0.65} \times \slot{S}{0.65} \times  \slot{R}{0.35} = 0.65^2 \times 0.35 \approx 0.15 \]
+% \dq{... the third person?}
+% \[ P(1^{st}~and~2^{nd}~shock,~3^{rd}~refuses) = \slot{S}{0.65} \times \slot{S}{0.65} \times  \slot{R}{0.35} = 0.65^2 \times 0.35 \approx 0.15 \]
 
-\pause
+% \pause
 
-\dq{... the tenth person?}
-\soln{
-\pause
-\[ P(9~shock,~10^{th}~refuses) = \underbrace{\slot{S}{0.65} \times \cdots \times \slot{S}{0.65}}_{9~of~these} \times  \slot{R}{0.35} = 0.65^9 \times 0.35 \approx 0.0072 \]
-}
-}
+% \dq{... the tenth person?}
+% \soln{
+% \pause
+% \[ P(9~shock,~10^{th}~refuses) = \underbrace{\slot{S}{0.65} \times \cdots \times \slot{S}{0.65}}_{9~of~these} \times  \slot{R}{0.35} = 0.65^9 \times 0.35 \approx 0.0072 \]
+% }
+% }
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -199,23 +199,44 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\section{Todo: Geometric pmf as table, figure}
 
-\pq{Can we calculate the probability of rolling a 6 for the first time on the 6$^{th}$ roll of a die using the geometric distribution? Note that what was a success (rolling a 6) and what was a failure (not rolling a 6) are clearly defined and one or the other must happen for each trial.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{enumerate}[(a)]
-\item no, on the roll of a die there are more than 2 possible outcomes
-\only<1>{\item yes, why not}
-\soln{\only<2>{\item \orange{yes, why not}}}
-\end{enumerate}
+\section{Edfinity Quiz: Using the Geometric distribution}
 
-\soln{
-\only<2>{
-\[P(6~on~the~6^{th}~roll) = \pr{ \frac{5}{6} }^5 \pr{ \frac{1}{6} } \approx 0.067 \]
-}
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+
+% \pq{Can we calculate the probability of rolling a 6 for the first time on the 6$^{th}$ roll of a die using the geometric distribution? Note that what was a success (rolling a 6) and what was a failure (not rolling a 6) are clearly defined and one or the other must happen for each trial.}
+
+% \begin{enumerate}[(a)]
+% \item no, on the roll of a die there are more than 2 possible outcomes
+% \only<1>{\item yes, why not}
+% \soln{\only<2>{\item \orange{yes, why not}}}
+% \end{enumerate}
+
+% \soln{
+% \only<2>{
+% \[P(6~on~the~6^{th}~roll) = \pr{ \frac{5}{6} }^5 \pr{ \frac{1}{6} } \approx 0.067 \]
+% }
+% }
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Bernoulli Random Variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Board work: Deriving the Geometric distribution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -226,7 +247,23 @@ $\:$ \\
 
 \pause
 
-The expected value, or the mean, of a geometric distribution is defined as $\frac{1}{p}$.
+TODO: set up the problem of computing the expected value of the geometric, using a table and the formula as we did before. 
+Point out that it is a complicated infinite sum, so we will give them the answer.
+give the answer $=...=\frac{1}{p}$
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Expected value}
+
+\dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
+
+\pause
+
+The expected value, or the mean, of a geometric distribution is $\frac{1}{p}$.
 \[ \mu = \frac{1}{p} = \frac{1}{0.35} = 2.86 \]
 
 \pause

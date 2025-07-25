@@ -81,19 +81,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 Today we will discuss another distribution related to the Bernoulli, but first let's do some counting review.
 \end{frame}
 
-\begin{frame}
-\frametitle{Factorials and combinations}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity quiz: Counting review}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Board work: Deriving the Binomial distribution}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Binomial distribution}
@@ -129,6 +116,10 @@ The probability of exactly one 1 of 4 people refusing to administer the shock is
 \[ 0.0961+ 0.0961 + 0.0961 + 0.0961 = 4 \times 0.0961 = 0.3844 \]
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Board work: Deriving the Binomial distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -183,6 +174,10 @@ SSSSSSS\orange{R}\orange{R} \\
 writing out all possible scenarios would be incredibly tedious and prone to errors.
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Board work: Deriving the Choose Function}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -267,90 +262,95 @@ If $p$ represents probability of success, $(1-p)$ represents probability of fail
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{}
-
-\pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
-
-\begin{enumerate}[(a)]
-\item pretty high
-\solnMult{pretty low}
-\end{enumerate}
-
-\vfill
-
-\ct{Gallup: \webURL{http://www.gallup.com/poll/160061/obesity-rate-stable-2012.aspx}, January 23, 2013.} 
-
-\end{frame}
+\section{Edfinity quiz: Using the Binomial Distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-
-\pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
-
-\begin{enumerate}[(a)]
-\item $0.262^8 \times 0.738^2$
-\item ${8 \choose 10} \times 0.262^8 \times 0.738^2$
-\solnMult{${10 \choose 8} \times 0.262^8 \times 0.738^2$} \soln{\orange{\only<2>{$ = 45 \times  0.262^8 \times 0.738^2 = 0.0005$}}}
-\item ${10 \choose 8} \times 0.262^2 \times 0.738^8$
-\end{enumerate}
-
-
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{The birthday problem}
+% \begin{frame}
+% \frametitle{}
 
-\dq{What is the probability that 2 randomly chosen people share a birthday?}
+% \pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
 
-\pause
+% \begin{enumerate}[(a)]
+% \item pretty high
+% \solnMult{pretty low}
+% \end{enumerate}
 
-Pretty low, $\frac{1}{365} \approx 0.0027$.
+% \vfill
 
-\pause
+% \ct{Gallup: \webURL{http://www.gallup.com/poll/160061/obesity-rate-stable-2012.aspx}, January 23, 2013.} 
 
-\dq{What is the probability that at least 2 people out of 366 people share a birthday?}
+% \end{frame}
 
-\pause
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Exactly 1! (Excluding the possibility of a leap year birthday.)
+% \begin{frame}
 
-\end{frame}
+% \pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
+
+% \begin{enumerate}[(a)]
+% \item $0.262^8 \times 0.738^2$
+% \item ${8 \choose 10} \times 0.262^8 \times 0.738^2$
+% \solnMult{${10 \choose 8} \times 0.262^8 \times 0.738^2$} \soln{\orange{\only<2>{$ = 45 \times  0.262^8 \times 0.738^2 = 0.0005$}}}
+% \item ${10 \choose 8} \times 0.262^2 \times 0.738^8$
+% \end{enumerate}
+
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{The birthday problem (cont.)}
+% \begin{frame}
+% \frametitle{The birthday problem}
 
-\dq{What is the probability that at least 2 people (1 match) out of 121 people share a birthday?}
+% \dq{What is the probability that 2 randomly chosen people share a birthday?}
 
-\pause
+% \pause
 
-Somewhat complicated to calculate, but we can think of it as the complement of the probability that there are no matches in 121 people.
+% Pretty low, $\frac{1}{365} \approx 0.0027$.
 
-\vspace{-0.75cm}
+% \pause
 
-\begin{eqnarray*}
-P(no~matches) &=& 1 \times \pr{1 - \frac{1}{365}} \times \pr{1 - \frac{2}{365}} \times \cdots \times \pr{1 - \frac{120}{365}} \\
-\pause
-&=& \frac{365 \times 364 \times \cdots \times 245}{365^{121}} \\
-\pause
-&=& \frac{365!}{365^{121} \times (365-121)!} \\
-\pause
-&=& \frac{121! \times {365 \choose 121}}{365^{121}} 
-\pause
-\approx 0 \\
-\pause
-P(at~least~1~match) &\approx& 1
-\end{eqnarray*}
+% \dq{What is the probability that at least 2 people out of 366 people share a birthday?}
 
-\end{frame}
+% \pause
+
+% Exactly 1! (Excluding the possibility of a leap year birthday.)
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{The birthday problem (cont.)}
+
+% \dq{What is the probability that at least 2 people (1 match) out of 121 people share a birthday?}
+
+% \pause
+
+% Somewhat complicated to calculate, but we can think of it as the complement of the probability that there are no matches in 121 people.
+
+% \vspace{-0.75cm}
+
+% \begin{eqnarray*}
+% P(no~matches) &=& 1 \times \pr{1 - \frac{1}{365}} \times \pr{1 - \frac{2}{365}} \times \cdots \times \pr{1 - \frac{120}{365}} \\
+% \pause
+% &=& \frac{365 \times 364 \times \cdots \times 245}{365^{121}} \\
+% \pause
+% &=& \frac{365!}{365^{121} \times (365-121)!} \\
+% \pause
+% &=& \frac{121! \times {365 \choose 121}}{365^{121}} 
+% \pause
+% \approx 0 \\
+% \pause
+% P(at~least~1~match) &\approx& 1
+% \end{eqnarray*}
+
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
