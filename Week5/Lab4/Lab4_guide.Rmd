@@ -1,0 +1,232 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab4 guide"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 4: Simulation and Probability R guide
+
+------------------------------------------------------------------------
+
+## Learning Objectives
+
+-   Validate and Explain Probability Distributions: Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1).
+
+-   Compute Probabilities Using Various Tools: Use logic, Venn diagrams, and probability rules to compute probabilities for events.
+
+-   Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
+
+-   Conduct Hypothesis Testing Using Simulation: Set up null and alternative hypotheses to test for independence between variables, and use simulation techniques to evaluate data support for these hypotheses.
+
+## How do you roll each run using R?
+
+`sample()` will randomly sample `size` many sample from the vector `x`
+
+`sample(x, size, replace = FALSE, prob = NULL)`
+
+```{r, echo=TRUE}
+# example
+x <- c("apple", "pear", "strawberry", "orange", "lemon")
+
+sample(x, 3) # picks 3 unique fruits from the vector (without replacement)
+sample(x, 10, replace=TRUE) # picks 10 fruits, allowing repeats (sampling with replacement)
+
+```
+
+## Loops
+
+Loops repeatedly execute a block of code for various elements.
+
+```{r, echo=TRUE}
+# Example: Print numbers from 1 to 5
+for (i in 1:5) {
+  print(i)
+}
+
+# Example: Simulate rolling a die 5 times and record it
+rolls <- rep(0, 5) # Initialize a vector of length 5 with zeros to store roll results
+for (i in 1:5) {
+  rolls[i] <- sample(1:6, 1)   # Sample one number between 1 and 6 and assign it to the i-th position
+}
+rolls
+
+```
+
+## Function
+
+Functions allow you to encapsulate reusable blocks of code and parameters.
+
+```{r, echo=TRUE}
+# Example: Function to calculate (a+b)^2
+square <- function(a, b) {
+  value = (a + b)^2  # Calculate the square of the sum of a and b
+  return(value)      # Return the calculated value
+}
+square(1,2) # Output: 9
+square(2,3) # Ouptut: 25
+
+
+```
+
+## Function + Loop
+
+Combine loops and functions for repeated tasks.
+
+```{r, echo=TRUE}
+# Example: Roll a die 3 times using a loop within a function
+roll_multiple <- function(runs) {
+  rolls <- rep(0, runs) # create rolls vector of 0
+ 
+   for (i in 1:runs) {
+    rolls[i] <- sample(1:6, 1)
+  }
+  
+  return(rolls)
+}
+roll_multiple(5)
+
+
+
+```
+
+## Let's roll one dice and show the output.
+
+```{r}
+
+#Outcome from those two dice
+
+dice1 <- sample(1:6, 1)
+dice2 <- sample(1:6, 1)
+
+sum_of_two <- dice1 + dice2
+sum_of_two
+
+
+```
+
+## Using `for loop`, assign outcome of two dice rolled into `myoutcome` from 100 iterations.
+
+```{r}
+
+myoutcome = rep(0, 100) # make a vector of size 100 that has all zero's
+
+for (i in 1:100){
+  dice1 <- sample(1:6, 1)
+  dice2 <- sample(1:6, 1)
+  sum_of_two <- dice1 + dice2
+  myoutcome[i] <- sum_of_two
+}
+
+head(myoutcome) # print first 6 entries
+
+
+```
+
+## Use `replicate()`, it carries out repeated tasks in a more computationally efficient way.
+
+```{r}
+
+twodice_outcome <- function(){
+  dice1 <- sample(1:6, 1)
+  dice2 <- sample(1:6, 1)
+  
+  sum_of_two <- dice1 + dice2
+  myoutcome <- sum_of_two
+  
+  return(myoutcome)
+}
+twodice_outcome() # this function works as one simulation run
+
+
+myoutcome <- replicate(n=30, twodice_outcome()) # 10 runs
+myoutcome
+
+
+
+```
+
+## Calculate probability of each outcome.
+
+```{r}
+myoutcome <- replicate(n=30, twodice_outcome())
+outcome_table <- table(myoutcome)
+n <- length(myoutcome)
+prob_outcome <- outcome_table/n
+prob_outcome 
+
+# how to ensure that it is proper probability? 
+sum(prob_outcome) # it needs to add up to 1
+
+```
+
+## Calculate the simulated expected value of the random variable.
+
+```{r}
+outcome_table * prob_outcome
+names(outcome_table) # we need this
+values <- as.numeric(names(outcome_table) ) 
+
+# or
+# values <- 2:12 
+
+sum(values * prob_outcome)
+mu_hat = sum(values * prob_outcome)
+
+
+```
+
+## Calculate the simulated variance of the random variable.
+
+```{r}
+
+
+sigma_2_hat <- sum( (values-mu_hat)^2 * prob_outcome  )
+sigma_2_hat
+```
+
+## Make a function that has an input `n` and a list of output that gives you the simulated expected value and variance.
+
+```{r}
+
+sim_fn <- function(n=1000){
+ myoutcome = rep(0, n)
+
+  for (i in 1:n){
+    dice1 <- sample(1:6, 1)
+    dice2 <- sample(1:6, 1)
+    sum_of_two <- dice1 + dice2
+    myoutcome[i] <- sum_of_two
+  }
+
+  outcome_table <- table(myoutcome)
+  
+  prob_outcome <- outcome_table/n
+
+  values <- as.numeric(names(outcome_table) ) 
+
+
+  mu_hat = sum(values * prob_outcome)
+
+  sigma_2_hat <- sum( (values-mu_hat)^2 * prob_outcome  )
+  output <- list(mu = mu_hat, sigma2 = sigma_2_hat)
+  return(output)
+}
+
+
+sim_fn(100)
+
+sim_fn(1000)
+
+sim_fn(10000)
+
+sim_fn(100000)
+```

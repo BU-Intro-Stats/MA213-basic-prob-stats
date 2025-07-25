@@ -1,0 +1,148 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab4 Activity"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 4: Simulation and Probability Lab Activity
+
+------------------------------------------------------------------------
+
+## Pre-lab activities
+
+#### Let’s roll a die! You are playing a die-rolling game and are curious about how the game will play out in the end. The rule is that you roll the die once, and the other player rolls it once as well; then you add the outcomes together. What can you expect from this game in the end? Specifically, what are the long-term average and the variability of the game results? In other words, what are the expected value and variance?
+
+We let $X_1$ be the number on the top face of the first die rolled, and $X_2$ be the number on the top face of the second die rolled.
+
+Then, what is $E(X_1 + X_2)$ and $Var(X_1 + X_2)$?
+
+Calculate them by filling out the table given.
+
+------------------------------------------------------------------------
+
+Now, let’s consider implementing a simulation for the game. We will run 10 simulation trials. How would you like to proceed?
+
+We need these parts
+
+> 1.  Rolling the dice
+> 2.  Record the result of each run.
+> 3.  Perform the calculations at the end.
+
+We need three people: two to roll the dice each time, and one to record the results of each turn.
+
+| i        | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
+|----------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| person 1 |     |     |     |     |     |     |     |     |     |     |
+| person 2 |     |     |     |     |     |     |     |     |     |     |
+| outcome  |     |     |     |     |     |     |     |     |     |     |
+
+Calculate observed expected value and the variance and compare with the answers above.
+
+------------------------------------------------------------------------
+
+## Lab activities
+
+## This time, you have a new challenging game. The first player rolls a die, and their outcome is multiplied by 3. The second player then rolls a die, and their outcome is multiplied by 4. The final result is the sum of these two values. What are the expected value and variance of the resulting random variable?
+
+Q. What are the theoretical expected value and variance of the total outcome?
+
+```         
+```
+
+Q. Let's simulate it. Make a function to obtain one trial from this setting.
+
+```{r}
+#
+#
+#
+```
+
+Q. Using the function above, Make an another function to obtain the expected value and variance from $n$ iteration.
+
+```{r}
+#
+#
+#
+```
+
+Q. Using the function above, could you make a plot with the x-axis is `n` and the y-axis representing the expected value of the outcome?
+
+```{r}
+#
+#
+#
+```
+
+Q. Let $X$ be the number on the top face of a rolled die. What are the theoretical values of $E(X)$ and $Var(X)$? Using $E(X)$ and $Var(X)$, calculate $E(3X_1 + 4X_2)$ and $Var(3X_1 + 4X_2)$. Then, compare these to the simulation results above.
+
+```         
+```
+
+------------------------------------------------------------------------
+
+## Post-lab activities
+
+Please name your submission as `lab4.R`
+
+Now, You flip a slightly biased coin where $P(head)=0.40$ and $P(tail)=0.60$. If the result is head, you earn \$20, otherwise you pay \$15. How much money you have at the end?
+
+1.  Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively.
+
+``` r
+# for example,
+mu <- 7
+sigma_2 <- 14
+```
+
+2.  You are going to make an function named `my_sim(n)` which takes input of `n` and gives an output list of `mu_simulated` and `sigma_2_simulated` (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` ).
+
+``` r
+# for example
+my_sim(10)
+$mu
+[1] 7.44
+
+$sigma2
+[1] 111.1296
+
+# and it is expected that
+>out <- my_sim(100)
+>out$mu
+[1] 7.44
+>out$sigma2
+[1] 111.1296
+
+# assign them to object
+mu_simulated <- out$mu
+sigma_2_simulated <- out$sigma2
+```
+
+3.  (Optional with extra credit)
+
+To do this, you include `Optional=TRUE` in your file.
+
+The table below summarizes the survival outcomes from the Titanic disaster based on gender.
+
+``` r
+          Survived
+          Yes   No    Total
+female    307   156   463
+male      142   708   850
+```
+
+We want to simulate the null hypothesis where we pretend that the gender of the passenger and survival are independent.
+
+Create the **`sim_function()`** for one simulation run to calculate the difference in the proportion of survival between females and males.
+
+Obtain 100 simulation runs to calculate the difference rates and assign them to **`rates`**.
+
+Would you reject the null hypothesis or not? Include `Reject_H_not = TRUE` or `Reject_H_not = FALSE`
