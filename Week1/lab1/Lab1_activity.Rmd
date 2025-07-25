@@ -12,7 +12,7 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## **Lab 1: Introduction to R** 
+## **Lab 1: Introduction to R**
 
 ------------------------------------------------------------------------
 
