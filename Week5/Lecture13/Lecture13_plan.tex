@@ -4,14 +4,18 @@
 \begin{frame}
     \frametitle{Lesson Plan}
     \begin{itemize}
-        \item xx min Lecture: Review of Bernoulli distribution, Bernoulli random variables
-        \item xx min Lecture: Review of factorials, combinations
-        \item xx min Lecture: Binomial distribution, derivation from Bernoulli
-        \begin{enumerate}
+        \item xx min Lecture: Motivation for Binomial using Milgram, enumerating possibilities
+        \item xx min Board work: Derivation of Binomial distribution (as # ways * p^k*(1-p)^(n-k))
+        \item xx min Lecture: Binomial distribution and setting up combinations rule
+        \item xx min Board work: Review of factorials, deriving combinations
+        \item xx min Lecture: Full Binomial distribution and examples
+        \item xx min Edfinity Quiz: Using the binomial pmf
+        \item xx min Lecture: proprties of the Binomial distribution
+        \begin{itemize}
             \item Probability mass function
             \item Formulas for expectation and variance
             \item Variability
-        \end{enumerate}
+        \end{itemize}
         \item xx min Lecture: Normal approximation to the Binomial
         \item xx min R Demonstration: sampling from Binomial, different parameters, normal approximation
         \item xx min Edfinity quiz: when does modeling with a Binomial distribution make sense?
@@ -26,13 +30,18 @@
     \frametitle{Learning Objectives}
     \begin{itemize}
         \item \textbf{M1 LO3: Use R for Data Management and Exploration:} Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
-        \item \textbf{M6 LO1: Validate and Explain Probability Distributions:} Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1).
-        \item \textbf{M6 LO4: Understand and Compute Expectations and Variances:} Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
-        \item \textbf{M6 LO5: Model Data Using Bernoulli, Geometric, and Binomial Distributions:} Recognize when to appropriately model data using the Bernoulli, geometric, and binomial distributions, and compute quantities of interest such as mean, standard deviation, and tail probabilities.
+        \item \textbf{M2 LO1: Validate and Explain Probability Distributions:} Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1).
+        \item \textbf{M2 LO4: Understand and Compute Expectations and Variances:} Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
+        \item \textbf{M2 LO5: Model Data Using Bernoulli, Geometric, and Binomial Distributions:} Recognize when to appropriately model data using the Bernoulli, geometric, and binomial distributions, and compute quantities of interest such as mean, standard deviation, and tail probabilities.
     \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO: Copy and adapt these slides base on the lesson plan
-\input{../Ch 4/4-3_binomial_distribution/4-3_binomial_distribution.tex}
-
+% Note this is a very full lecture
+% TODO: prep board work for first binomial derivation: # ways * p^k*(1-p)^(n-k)
+% TODO: prep board work for reviewing factorials and deriving the choose function (break up the problem into the number of ways that you can order the elements, divided out the orderings that you don't care about) This may take too much time
+% TODO: Add a figure of an example pmf to the final Binomial distribution slide (currently slide 7), with mean and +/- 1 std, +/- 2 std
+% TODO: Edfinity quiz on using the binomial pmf (can use obesity survey from commented slides)
+% TODO: Consider putting birthday problem back in, but not using these slides
+% TODO: R demo on sampling from binomial, normal approximation
+% TODO: edfinity quiz: normal approx to the binomial

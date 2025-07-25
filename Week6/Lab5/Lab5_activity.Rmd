@@ -1,0 +1,308 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab5 activity"
+output:
+  html_document:
+    code_download: true 
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+# **Lab 5: Simulation and probability**
+
+------------------------------------------------------------------------
+
+## Lab activities
+
+![](Sampling_diag.jpeg){width="100%"}
+
+You are given a hypothetical population. Each group will work with a different population. Your goal is to examine how the sample mean, given by
+
+$$
+\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n}x_i
+$$ is distributed when samples are drawn independently from your chosen population.
+
+Sample $n= 500$ from your chosen population. The population parameters are given here.
+
+## Population 1 : Normal distribution
+
+```{r, eval=FALSE}
+sigma <- 0.447
+N <- 100000
+n = 500
+pop <- rnorm(N, mean=2, sd=sigma)
+
+```
+
+```{r echo=FALSE}
+sigma <- 0.447
+N <- 100000
+n = 500
+pop <- rnorm(N, mean=2, sd=sigma)
+df = data.frame(X=pop)
+
+ggplot(df, aes(x = X)) + 
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  labs(title = "Histogram of Population Distribution",
+       x = "X",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+## Population 2 : Bernoulli distribution
+
+```{r, eval=FALSE}
+
+N <- 100000
+n = 500
+prob = 0.3
+pop <- rbinom(N, 1, prob)
+#sqrt(prob * (1-prob))
+sigma <- sd(pop) # since pop is finite here
+
+```
+
+```{r echo=FALSE}
+N <- 100000
+n = 500
+prob = 0.3
+pop <- rbinom(N, 1, prob)
+df = data.frame(X=pop)
+
+ggplot(df, aes(x = X)) + 
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  labs(title = "Histogram of Population Distribution",
+       x = "X",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+## Population 3 : Poisson distribution
+
+```{r, eval=FALSE}
+sigma <- 0.447
+N <- 100000
+n = 500
+lambda_pois <- sigma^2
+pop <- rpois(N, lambda = lambda_pois)
+```
+
+```{r echo=FALSE}
+sigma <- 0.447
+N <- 100000
+n = 500
+lambda_pois <- sigma^2
+pop <- rpois(N, lambda = lambda_pois)
+
+df = data.frame(X=pop)
+
+ggplot(df, aes(x = X)) + 
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  labs(title = "Histogram of Population Distribution",
+       x = "X",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+## Population 4 : Exponential distribution
+
+```{r, eval=FALSE}
+N <- 100000
+sigma <- 0.447
+lambda_exp <- 1 / sigma
+pop <- rexp(N, rate = lambda_exp)
+```
+
+```{r echo=FALSE}
+N <- 100000
+sigma <- 0.447
+lambda_exp <- 1 / sigma
+pop <- rexp(N, rate = lambda_exp)
+
+df = data.frame(X=pop)
+
+ggplot(df, aes(x = X)) + 
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  labs(title = "Histogram of Population Distribution",
+       x = "X",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+## Population 5 : Gamma Distribution
+
+```{r, eval=FALSE}
+sigma <- 0.447
+n = 500
+N <- 100000
+alpha_gamma <- 4  
+beta_gamma <- sqrt(alpha_gamma) / sigma
+pop <- rgamma(N, shape = alpha_gamma, rate = beta_gamma)
+```
+
+```{r echo=FALSE}
+sigma <- 0.447
+n = 500
+N <- 100000
+alpha_gamma <- 4  
+beta_gamma <- sqrt(alpha_gamma) / sigma
+pop <- rgamma(N, shape = alpha_gamma, rate = beta_gamma)
+
+df = data.frame(X=pop)
+
+ggplot(df, aes(x = X)) + 
+  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
+  labs(title = "Histogram of Population Distribution",
+       x = "X",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+The goal of today is to see the sampling distribution of sample statistic (sample mean).
+
+### 0. Make your population from one of the populations above.
+
+```{r}
+#
+#
+#
+
+```
+
+### 1. Obtain one sample of size $n$ from the population. Then, obtain the sample mean $\hat{\mu}$ from the sample.
+
+(Set `n=100` this time)
+
+```{r}
+#
+#
+#
+
+```
+
+### 2. Now we are going to obtain `K` many sample means $\hat{\mu}$'s from `K` different sample from the population. Obtain a sample of size $n=100$ from the population and obtain the sample mean. Repeat the sampling process $K=100$ times.
+
+```{r}
+#
+#
+#
+
+```
+
+### 3. Make the above process as a function of $n$ and $K$ (input : n and `K`, output : $\hat{\mu}$ vector output) and obtain the output with `n=100`, `K=100`. Compare your result with question 2. Think about how you can compare them?
+
+```{r}
+#
+#
+#
+
+```
+
+### 4. Now using the function, obtain the histogram of $\hat{\mu}$. First, start with `n=20, K=1000`, `n=200, K=1000` and `n=1000, K=1000`. What do you see?
+
+```{r}
+#
+# n=20, K=1000
+#
+
+```
+
+```{r}
+#
+# n=200, K=1000
+#
+
+
+```
+
+```{r}
+#
+# n=1000, K=1000
+#
+
+```
+
+### 5. Now using the function, obtain the histogram of $\hat{\mu}$. First, start with `n=1000, K=20`, `n=1000, K=200` and `n=1000, K=1000`. What do you see?
+
+```{r}
+#
+# n=1000, K=20
+#
+
+```
+
+```{r}
+#
+# n=1000, K=200
+#
+
+```
+
+```{r}
+#
+# n=1000, K=1000
+#
+
+```
+
+### 5. Using the function, set $K=5000$. Using the empirical rule (68-95-99.7 rule), how big should $n$ be to pass the rule within 0.005?
+
+Let `rate1`, `rate2` and `rate3` be the rate within 1, 2 and 3 standard deviations from the $\hat{\mu}$ samples, respectively. To pass the test, use the code `all(abs(c(rate1-0.68, rate2-0.95, rate3-0.997))< 0.005)`
+
+```{r}
+#
+#
+# all(abs(c(rate1-0.68, rate2-0.95, rate3-0.997))< 0.005)
+# True to be expected
+
+
+```
+
+### 6. Obtain standard error where
+
+$$
+SE = \frac{\sigma}{\sqrt{n}}
+$$
+
+### Compare this with the standard deviation of `mu_hat_vector` (Set `n=1000` and `k=1000`). Are they close?
+
+### Also, compare obtained standard error to other groups. What do you conclude?
+
+```{r}
+
+#
+#
+#
+
+
+```
+
+## Post-lab activities
+
+Recent statistics suggest that 10% of Americans rely on Social Network Sites (SNSs). We are going to have a simulation study if we can verify that CLT really works in this case too. Let's assume that US population is 300,000 for calculation purposes.
+
+Please name your submission as `lab5.R`
+
+0.  execute this `set.seed(213)`
+
+1.  Produce population data and assign it `population` object.
+
+2.  Obtain mean and standard deviation of the population and assign them to `mean_pop` and `sd_pop` accordingly.
+
+3.  Get the sample mean data for $n=10$ with $k=1000$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample` and `sd_sample`.
+
+4.  Do one more time with the sample mean data for $n=50$ with $k=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample2` and `sd_sample2`.
+
+5.  (Extra)
+
+    5.1) Show the shape of the distribution of the sample proportion with n=10, k=1000.
+
+    5.2) Show the shape of the distribution of the sample proportion with n=1000, k=1000.
+
+6.  With $n=1000, K =1000$, assign within 1, 2 and 3 standard deviations of the sample proportions to `first_sd_data`, `second_sd_data` and `third_sd_data`, respectively.

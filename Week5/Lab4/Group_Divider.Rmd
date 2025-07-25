@@ -1,0 +1,39 @@
+---
+title: "Group Divider"
+author: "Yongho Lim"
+date: "2025-06-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Group Divider
+
+```{r, eval=FALSE, echo=FALSE}
+library(dplyr)
+
+num_ppl_each_group = 2
+student_list <- read.csv("StudentList.csv")
+N <- nrow(student_list)
+
+# Sort by last name
+student_list <- student_list %>% arrange(Last)
+student_list$number <- 1:N
+
+# Shuffle the student numbers randomly
+shuffled <- sample(student_list$number)
+
+# Create group
+group_ids <- rep(1:ceiling(N / num_ppl_each_group), num_ppl_each_group)[1:N]
+
+# Assign data frame
+group_df <- data.frame(number = shuffled, group = group_ids)
+grouped_students <- left_join(group_df, student_list, by = "number")
+
+grouped_students <- grouped_students %>% arrange(group)
+
+# Output
+grouped_students %>% select(!number)
+```
