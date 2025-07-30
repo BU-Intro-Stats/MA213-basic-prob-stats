@@ -1,0 +1,47 @@
+\usepackage{mathtools,amssymb}
+\usepackage{enumitem}
+\usepackage{datetime}
+\usepackage{fancyhdr}
+\usepackage{ifthen}
+\usepackage{pifont}
+\usepackage{mathrsfs}
+\usepackage[normalem]{ulem}
+%\RequirePackage[usenames,dvipsnames]{color}
+
+
+%% showing solutions 
+\newboolean{showsols}
+\setboolean{showsols}{false}
+\newcommand{\showsolutions}{\setboolean{showsols}{true}}
+\newlength{\solspace}
+\setlength{\solspace}{16em}
+\newcommand{\nosolspace}{\setlength{\solspace}{0em}}
+
+\newcommand{\solution}[2]{\ifthenelse{\boolean{showsols}}{{\par\textcolor{red}{Rubric criterion: #1}\newline\textcolor{blue}{#2}}}{\vspace{\solspace}}}
+\newcommand{\npforprint}{\ifthenelse{\boolean{showsols}}{}{\newpage}}
+\newcommand{\vsforprint}[1]{\ifthenelse{\boolean{showsols}}{}{\vspace{#1}}}
+
+%% grading
+\newcommand{\grades}[1]{~\newline\noindent\framebox[\textwidth][c]{Pass \quad \quad Almost Pass \quad \quad Not Yet}}
+
+\newcommand{\questiongrades}{\noindent\emph{Each item is marked $\checkmark$, $\checkmark\!-$, or \ding{55}:}\begin{center}\emph{$\checkmark$ = capable  $~~$ $\checkmark\!-$ = mostly capable  $~~$ \ding{55} = not yet}\end{center} }
+
+\newcommand{\triAssessments}{$\checkmark\quad\checkmark\!-\quad$\ding{55}\quad}
+\newcommand{\biAssessments}{$\checkmark\quad$\ding{55}\quad}
+
+%% line for writing name and BUID
+\newcommand{\nameBUID}{\noindent\textbf{Name:}\underline{\phantom{XXXXXXXXXXXXXXXXXXX}}\hfill\textbf{BUID:}\underline{\phantom{XXXXXXXXXXXXX}}\newline}
+
+
+%% formatting 
+%\allowdisplaybreaks[3]
+\renewcommand{\headrulewidth}{.4mm} % header line width
+\renewcommand{\arraystretch}{1.25}
+
+
+%% page style 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Fall 2025}
+\lhead{CAS MA 213: Basic Statistics and Probability}
+%\rfoot{\thepage}
