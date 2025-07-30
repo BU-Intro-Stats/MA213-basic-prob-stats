@@ -119,4 +119,3 @@ succession_phat_fn <- function(pop, n) {
 
 sample_plot_sampling_dist_fn(250000, 0.01, 20, 5000, succession_phat_fn)
 
-
