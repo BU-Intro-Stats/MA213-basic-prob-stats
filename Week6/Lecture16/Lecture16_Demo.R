@@ -53,5 +53,4 @@ ggplot(data=as.data.frame(simulation), aes(x=simulation)) +
 
 # Run Rshiny app
 shinyApp(ui = ui, server = server)
-# TODO: fix RShiny app
 
