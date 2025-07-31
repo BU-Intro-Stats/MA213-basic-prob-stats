@@ -4,8 +4,6 @@
 library(ggplot2)
 set.seed(213)
 
-# ---- 1. A two-sided hypothesis test with p-values in R ----
-
 # In this demonstration, we will recreate the analysis done in 2015 by James Scott
 # on bookdown.org for a series titled Data Science in R: A Gentle Introduction
 # (https://bookdown.org/jgscott/DSGI/p-values.html).
