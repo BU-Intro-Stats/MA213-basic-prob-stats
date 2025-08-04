@@ -10,16 +10,20 @@ set.seed(213)
 #
 # This example examines the chances (via a hypothesis test and p-values) that 
 # the Patriots, notorious for cheating as well as for winning often, cheated
-# during the 2014-2015 seasons specifically during the pre-game coin flips,
-# which determine which team starts a game with the ball. 
-
-# Our data: during 25 games in 2014-2015, the Patriots won 19 coin flips, for a
-# p-hat of 76%. How would you set up the hypotheses for this test?
+# during the 2014-2015 regular seasons specifically during the opening kickoff.
+# The referee flips a coin and teams call it, and the team to win the flip gets
+# to kickoff the game with the ball (though the winning team can choose to 
+# defer and allow the other team to kickoff instead).
+# 
+# Our data: during 25 regular games in 2014-2015, the Patriots won 19 
+# consecutive kickoff flips, for a p-hat of 76%. 
+# How would you set up the hypotheses for this test?
 
 
 # ---- 1. Computing p-values using the standard normal distribution ----
 
 # How would you compute the test statistic?
+
 SE <- sqrt((0.5*0.5)/25)
 Z <- (0.76-0.5)/SE  
 
@@ -54,7 +58,7 @@ sum(data >= 19)  # 77 / 10000, or 0.77% -- very unlikely!
 data$group = ifelse(data$successes < 19, 'less than 19', 'at least 19')
 ggplot(data, aes(x=successes, fill=group)) + 
   geom_histogram(aes(x=successes), binwidth=1) +
-  geom_vline(xintercept=18.5)  # intercept=18.5 because the binwidth is 0.5
+  geom_vline(xintercept=18.5)  # intercept=18.5 because of the binwidth
 
 
 # We still find that achieving at least 19 successes out of 25 coin flips is
