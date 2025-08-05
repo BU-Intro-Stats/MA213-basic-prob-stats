@@ -24,6 +24,19 @@ polygon(M + c(-2,2,0)*0.01, c(0.25, 0.25, 0.5), border=COL[4], col=COL[4])
 
 dev.off()
 
+# with median
+
+myPDF('gpa_dot_plot_median.pdf', 7, 1.5, mar=c(4,0.5,0.5,0.5), cex.lab = 1.5, cex.axis = 1.25)
+
+openintro::dotPlot(gpa, pch = 19, col = COL[1,4], xlab = "GPA", xlim = c(2.5,4), ylab = "")
+M <- mean(d$gpa[d$gpa <= 4], na.rm = TRUE)
+polygon(M + c(-2,2,0)*0.01, c(0.25, 0.25, 0.5), border=COL[7], col=COL[7])
+Med <- median(d$gpa[d$gpa <= 4], na.rm = TRUE)
+polygon(Med + c(-2,2,0)*0.01, c(0.25, 0.25, 0.5), border=COL[4], col=COL[4])
+
+dev.off()
+
+
 # stacked
 
 
