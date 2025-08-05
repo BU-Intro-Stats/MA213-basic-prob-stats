@@ -295,6 +295,49 @@ where $x_1, x_2, \cdots, x_n$ represent the \hl{n} observed values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\begin{frame}
+\frametitle{Dot plots \& median}
+
+\begin{center}
+\includegraphics[width=\textwidth]{\chpii@path/2-1_numerical_data/figures/gpa_dot_plot/gpa_dot_plot_median}
+\end{center}
+
+\begin{itemize}
+
+\item The \hl{median} is the value that splits the data in half when ordered in ascending order. It is another way to measure the center of a distribution.
+
+\item The mean GPA is 3.59, but the median GPA is 3.63.
+
+\end{itemize} 
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Median}
+
+\begin{itemize}
+
+\item The \hl{median} is the value that splits the data in half when ordered in ascending order.
+
+\[ 0,1,\orange{2},3,4 \]
+
+\item If there are an even number of observations, then the median is the average of the two values in the middle.
+
+\[ 0,1,\underline{2,3},4,5 \rightarrow \frac{2 + 3}{2} = \orange{2.5} \]
+
+\item Since the median is the midpoint of the data, 50\% of the values are below it. Hence, we also call it the \hl{$50^{th}$ percentile}.
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Stacked dot plot}
 
@@ -460,26 +503,6 @@ symmetric \\
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Median}
-
-\begin{itemize}
-
-\item The \hl{median} is the value that splits the data in half when ordered in ascending order.
-
-\[ 0,1,\orange{2},3,4 \]
-
-\item If there are an even number of observations, then the median is the average of the two values in the middle.
-
-\[ 0,1,\underline{2,3},4,5 \rightarrow \frac{2 + 3}{2} = \orange{2.5} \]
-
-\item Since the median is the midpoint of the data, 50\% of the values are below it. Hence, it is also the \hl{$50^{th}$ percentile}.
-
-\end{itemize}
-
-\end{frame}
 
 
 
@@ -634,10 +657,19 @@ The \hl{standard deviation} is the square root of the variance, and has the same
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Box plots and quartiles}
+\subsection{Box plots, percentiles, and quartiles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Percentiles}
 
+\hl{Percentiles}: for any (large) set of n measurements (arranged in ascending or descending order), the $p$th percentile is a number such that $p\%$ of the measurements fall below that number and $(100-p)\%$ are equal to or above it.
+
+\hl{Quantiles}: Percentiles expressed in decimal form.  E.g. The .37 quantile is equivalent to the 37th percentile.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
 \frametitle{Q1, Q3, and IQR}
 
