@@ -97,6 +97,7 @@ for(i in 1:Nsim) {
 
 simulation_df <- data.frame(DifferenceProportion=simulated_rates)
 ggplot(data=simulation_df, aes(x=DifferenceProportion)) +
-  geom_dotplot()
+  geom_dotplot() + 
+  geom_vline(xintercept = .29167, color = "red", linetype = "dashed")
 
 # What can we conclude?

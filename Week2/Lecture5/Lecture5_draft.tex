@@ -8,6 +8,9 @@
 \newcommand{\soln}[1]{\textit{#1}}
 \newcommand{\solnGr}[1]{#1}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes, positioning}
+
 % Option 2: Handouts without solutions
 
 %\documentclass[11pt,containsverbatim,handout]{beamer}
@@ -33,7 +36,9 @@
 \author{OpenIntro Statistics, 4th Edition}
 \institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
 The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
-Some images may be included under fair use guidelines (educational purposes).}}
+Some images may be included under fair use guidelines (educational purposes).\\
+\\
+Dolphin Case Study adapted from Nathan Tintle et al., ``Teaching Statistics with Active Investigations'', April 8, 2025, Instats.}}
 \date{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,7 +78,239 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% TODO: Dolphin experiment setup slides (based on TeachingIntroStats_Session1)
+\begin{frame}
+  \frametitle{Can dolphins communicate abstract ideas?}
+    \begin{block}{Research Question}
+        Can dolphins communicate more than simple emotions---can they send abstract messages to each other (e.g., ``Push the \textbf{left} button'')?
+    \end{block}
+    \vspace{0.5cm}
+    \begin{itemize}
+        \item Dolphins are known to communicate simple feelings.
+        \item Dr. Jarvis Bastian designed an experiment to test for more complex communication.
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+      \begin{tikzpicture}[scale=1.5]
+        \node at (-1,0) {\includegraphics[width=2.5cm]{dolphin.pdf}};
+        \node at (1,0) {\reflectbox{\includegraphics[width=2.5cm]{dolphin.pdf}}};
+        \node at (0,-0.5) {\Large\bfseries ?};
+      \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Training Phase 1: Learning Button Signals}
+    \begin{block}{Setup}
+        \begin{itemize}
+            \item Each dolphin has two buttons: left and right.
+            \item Steady headlight: \textbf{Push right button.}
+            \item Blinking headlight: \textbf{Push left button.}
+            \item Correct response = fish reward!
+        \end{itemize}
+    \end{block}
+    \bigskip
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            % Pool
+            \draw[cyan, thick, fill=cyan!10] (-1.2,-0.5) rectangle (5.2,1.5);
+            % Dolphins (unflipped left, flipped right)
+            \node at (0,0.5) {\includegraphics[width=1.8cm]{dolphin.pdf}};
+            \node at (4,0.5) {\reflectbox{\includegraphics[width=1.8cm]{dolphin.pdf}}};
+            % Buttons for Doris (left dolphin)
+            \draw[fill=red] (-0.6,1.25) circle (0.09);
+            \draw[fill=green!60!black] (0.6,1.25) circle (0.09);
+            % Buttons for Buzz (right dolphin)
+            \draw[fill=red] (3.4,1.25) circle (0.09);
+            \draw[fill=green!60!black] (4.6,1.25) circle (0.09);
+            % Headlight (center, above pool)
+            \node[star,star points=5,fill=yellow!80!orange!70,minimum size=0.32cm,draw] at (2,1.7) {};
+            \node at (2,2.0) {\scriptsize Headlight (steady/blink)};
+            % Labels
+            \node at (0,-0.1) {Doris};
+            \node at (4,-0.1) {Buzz};
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Training Phase 2: Buzz before Doris}
+    \begin{itemize}
+        \item Now, both must push correct buttons \textbf{in order:}
+        \begin{itemize}
+            \item Buzz goes first,
+            \item then Doris.
+        \end{itemize}
+        \item Only correct order earns reward!
+        \item Dolphins learn the new, more complex rule.
+    \end{itemize}
+    \vspace{0.3cm}
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            % Pool
+            \draw[cyan, thick, fill=cyan!10] (-1.2,-0.5) rectangle (5.2,1.5);
+            % Dolphins
+            \node at (0,0.5) {\includegraphics[width=1.8cm]{dolphin.pdf}};
+            \node at (4,0.5) {\reflectbox{\includegraphics[width=1.8cm]{dolphin.pdf}}};
+            % Buttons for Doris
+            \draw[fill=red] (-0.6,1.25) circle (0.09);
+            \draw[fill=green!60!black] (0.6,1.25) circle (0.09);
+            % Buttons for Buzz
+            \draw[fill=red] (3.4,1.25) circle (0.09);
+            \draw[fill=green!60!black] (4.6,1.25) circle (0.09);
+            % Headlight
+            \node[star,star points=5,fill=yellow!80!orange!70,minimum size=0.32cm,draw] at (2,1.7) {};
+            \node at (2,2.0) {\scriptsize Headlight};
+            % Arrow for order
+             \draw[->,blue,very thick] (3.3,1.0) .. controls (2.7,1.5) and (1.2,1.5) .. (0.7,1.0);
+            \node[blue] at (2,1.1) {\scriptsize Buzz first, then Doris};
+            % Labels
+            \node at (0,-0.1) {Doris};
+            \node at (4,-0.1) {Buzz};
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Final Phase: The Curtain Test}
+    \begin{itemize}
+        \item A curtain is placed between the dolphins.
+        \item Only Doris can see the headlight; Buzz cannot.
+        \item Can Doris \textbf{tell} Buzz which button to push, using only sounds?
+    \end{itemize}
+    \vspace{0.25cm}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      % Pool
+      \draw[cyan, thick, fill=cyan!10] (-1.2,-0.5) rectangle (5.2,1.5);
+      % Curtain
+      \draw[very thick,gray] (2,1.5) -- (2,-0.5);
+      \node[gray!80!black,rotate=90] at (1.8,0.3) {\small Curtain};
+      % Dolphins (one flipped)
+      \node at (0,0.5) {\includegraphics[width=1.8cm]{dolphin.pdf}};
+      \node at (4,0.5) {\reflectbox{\includegraphics[width=1.8cm]{dolphin.pdf}}};
+      % Headlight only on Doris's side
+      \node[star,star points=5,fill=yellow!80!orange!70,minimum size=0.32cm,draw] at (0,1.7) {};
+      \node at (0,2.0) {\scriptsize Headlight };
+      % Whistling arrow
+      \draw[->,blue,very thick] (0.7,1.0) .. controls (1.2,1.5) and (2.7,1.5) .. (3.3,1.0);
+      \node[blue] at (2,1.1) {\footnotesize whistling};
+      % Buttons
+      \draw[fill=red] (-0.6,1.25) circle (0.09);
+      \draw[fill=green!60!black] (0.6,1.25) circle (0.09);
+      \draw[fill=red] (3.4,1.25) circle (0.09);
+      \draw[fill=green!60!black] (4.6,1.25) circle (0.09);
+      % Labels
+      \node at (0,-0.1) {Doris};
+      \node at (4,-0.1) {Buzz};
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Measurement}
+    \begin{block}{Results}
+        In one phase of the study:
+        \begin{itemize}
+            \item Buzz was given 16 trials to push the correct button,
+            \item He chose correctly \textbf{15 out of 16 times.}
+        \end{itemize}
+    \end{block}
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item Proportion correct: \[\frac{15}{16} = 0.9375\; (93.75\%)\]
+        \item What does this suggest? How likely is this by chance?
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tikzpicture}[scale=1.1]
+            \draw[fill=gray!40] (0,0) rectangle (4,0.6);
+            \draw[fill=green!70!black!80] (0,0) rectangle (3.75,0.6);
+            \node[white] at (2,0.3) {\large 15 correct};
+            \node at (4.4,0.3) {\large / 16 trials};
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Think/Pair/Share}
+    \begin{block}{2 mins Think, 5 mins Pair, 5 mins Share:}
+        \begin{enumerate}
+            \item Based on these data, do you think Buzz somehow knew which button to push?
+            \item What are the two possible explanations for Buzz pushing the correct button most of the time?
+            \item If you were trying to convince someone that Buzz \emph{wasn't just guessing}, how could you do it?
+        \end{enumerate}
+    \end{block}
+    \vspace{0.6cm}
+    \begin{center}
+        \begin{tikzpicture}[scale=1.5]
+            \node at (-1,0) {\includegraphics[width=2.5cm]{dolphin.pdf}};
+            \node at (1,0) {\reflectbox{\includegraphics[width=2.5cm]{dolphin.pdf}}};
+            \node at (0,-0.5) {\Large \textit{Let's talk about it!}};
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Possible Explanations}
+    \begin{block}{Two possible explanations for Buzz's performance:}
+        \begin{itemize}
+            \item \textbf{Chance:} Buzz was just lucky, guessing correctly 15 out of 16 times.
+            \item \textbf{Communication:} Doris communicated the correct button to push, and Buzz understood her signals.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Convincing Someone Else}
+    \begin{block}{Convincing someone that Buzz wasn't just guessing:}
+        \begin{itemize}
+            \item We can simulate the situation using coin flips.
+            \item Each coin flip represents a trial where Buzz guesses.
+            \item If we flip a coin 16 times, how many heads (correct guesses) do we expect?
+            \item We can repeat this many times to see how often Buzz would get at least 15 heads by chance.
+        \end{itemize}
+    \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Applet: \href{https://www.isi-stats.com/isi2nd/ISIapplets2021.html}{Coin Flips}}
+% https://www.isi-stats.com/isi2nd/ISIapplets2021.html
+% One Proportion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Parallels between simulation and real study}
+\begin{table}
+    \renewcommand{\arraystretch}{1.4} % increases table row height for readability
+    \rowcolors{2}{white}{blue!4!white}
+    \begin{tabular}{p{3.0cm} c p{6.0cm}}
+        \rowcolor{blue!30!black!15} 
+        \textbf{Simulation} & & \textbf{Real Study}\\
+        \hline
+        Coin flip         & = & guess by Buzz \\
+        Heads             & = & correct guess \\
+        Tails             & = & wrong guess \\
+        Chance of heads   & = & $1/2$, probability of correct button when Buzz is just guessing \\
+        One repetition    & = & one set of 16 simulated attempts by Buzz \\
+    \end{tabular}
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Simulation-Based Inference: Big Picture}
+    \begin{itemize}
+        \item \hl{Statistic: }Compute the statistic from the observed data.
+        \item \hl{Simulate: } Identify a model that represents a chance explanation. Repeatedly simulate 
+        values of the statistic that could have happened when the chance model is true and form a distribution. 
+        \item \hl{Strength of evidence: }Consider whether the value of the observed statistic is unlikely to occur
+    \end{itemize}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
