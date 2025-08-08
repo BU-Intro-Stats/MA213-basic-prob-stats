@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="339.26511"
+   id="svg1"
+   sodipodi:docname="dolphin.svg"
+   style="fill:#000000;fill-opacity:0.5;stroke:none"
+   width="528.00574"
+   version="1.1"
+   inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>dolphin</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>mammal</rdf:li>
+            <rdf:li />
+            <rdf:li>animal</rdf:li>
+            <rdf:li>dolphin</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Enrique Meza C</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Enrique Meza C</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Enrique Meza C</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.2198747"
+     inkscape:cx="274.2085"
+     inkscape:cy="252.89483"
+     inkscape:window-width="1390"
+     inkscape:window-height="1205"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 298.8111,54.588215 C 292.59584,51.285532 299.19226,40.788599 297.21086,29.104562 281.18267,6.6920405 277.58301,2.8058872 285.92068,0.16393097 293.63294,-1.0349983 299.88382,3.909949 312.13007,29.460125 c 8.83025,25.020747 -7.97218,24.255166 -13.31897,25.12809 z"
+     id="path15"
+     sodipodi:nodetypes="ccccc"
+     style="fill:#7f7f7f;fill-opacity:1;stroke:none;stroke-width:1.12036pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="m 282.98727,143.15105 c 49.5209,-36.22474 138.90529,-0.49377 197.41247,14.3416 32.16268,17.36457 20.72419,-27.43369 24.53932,-4.38202 3.34705,17.02321 6.20194,18.46801 -62.70261,10.29141 -7.02107,15.49585 -121.91362,-35.56585 -195.19086,31.8173 -63.56992,38.89841 14.27101,-41.4784 35.94168,-52.06829 z"
+     id="path11"
+     sodipodi:nodetypes="cccccc"
+     style="fill:#fcf5fd;fill-opacity:1;stroke:none;stroke-width:1.65293pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="M 292.88215,53.876829 C 302.19539,50.025093 304.5564,42.427996 304.37227,31.692037 303.6323,17.175787 279.70561,9.6183825 284.33985,1.6211879 c 27.36152,-7.1430173 58.58634,35.7039731 52.50658,50.1995821 7.63713,0.296898 17.51309,-2.768931 28.41123,-0.474719 71.41528,0 116.89734,47.133753 129.94311,77.536429 3.18529,5.95225 10.78284,11.5949 11.45914,43.04704 6.38435,5.99988 17.23431,18.41562 19.74331,29.8708 7.85052,10.32316 -27.6988,13.36359 -40.2025,-3.93906 -16.64062,-11.11542 -52.25877,-22.08477 -69.69959,-23.11359 -14.23659,-2.82291 -13.47425,2.35613 -25.71122,-0.46678 -11.4729,6.35076 -22.94409,12.70152 -34.417,19.05228 -4.5895,2.11639 -9.17729,4.23437 -13.7668,6.35076 -10.70712,0.70493 -21.41597,1.41145 -32.1231,2.11639 9.17729,-4.93931 18.3563,-9.87861 27.5336,-14.81791 1.52983,0 3.05967,0 4.5895,0 3.4417,-4.23437 11.41957,-21.24647 14.86127,-25.48084 -30.69136,0.88276 -54.39435,8.62751 -74.45258,15.48157 -15.82149,5.51246 -51.21077,19.88264 -65.73991,33.43198 -84.75531,80.37522 -129.743487,68.19764 -130.065286,73.20045 -0.132506,8.72753 -47.397372,60.62912 -54.721309,55.26114 -7.323938,-5.36957 6.344774,-32.40317 4.713408,-46.74477 -0.953351,-8.61163 -12.589739,-6.06497 -8.747081,-15.05289 2.176876,-4.86786 -10.860284,-12.96666 -18.390724,-15.71495 -11.1597118,-3.67551 -15.8455864,-5.3791 0.887959,-7.98291 17.203337,-2.27992 57.627825,16.76601 71.840325,3.82475 C 184.84031,163.06545 121.3788,127.22176 292.88215,53.876829 Z"
+     id="path33"
+     sodipodi:nodetypes="csccccccccccccccccssssssssc"
+     style="fill:#5c729b;fill-opacity:1;stroke:none;stroke-width:1.65293pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="m 307.87592,138.00058 c 85.0358,-10.8852 99.56838,6.2301 118.60442,13.34454 21.32306,2.03065 40.57593,18.34099 75.40077,13.87006 5.46886,-9.71984 5.53253,0.28896 2.41435,3.2881 -4.62564,2.30057 -12.75494,3.60088 -59.88214,-3.5977 -32.40877,3.90254 7.25855,12.4586 18.98958,15.93564 15.97293,5.40132 25.29133,25.35541 43.03846,26.87007 15.42054,0.33659 27.5749,-7.41134 18.38728,1.51307 -15.02302,13.92563 -46.85874,-16.48023 -54.13966,-18.22827 -5.63234,-1.26539 -13.38477,-0.43503 -23.6789,-3.06901 -18.69015,-3.39607 -33.6581,-8.00195 -56.22017,-12.58879 -9.94307,-0.53029 -44.57517,-5.08537 -63.75232,-2.09734 -19.77085,1.92428 -48.26124,9.38484 -72.59406,20.34942 -69.16613,32.29679 13.8081,-51.35383 53.43239,-55.58979 z"
+     id="path12"
+     sodipodi:nodetypes="cccccscssccscc"
+     style="fill:#cdcbd4;fill-opacity:1;stroke:none;stroke-width:1.65293pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="m 414.35523,181.33499 c 8.03121,1.41146 22.3504,4.61701 30.38161,6.02846 9.51286,1.19077 17.42361,-1.06216 -3.20594,7.37006 -45.93637,14.42099 -47.53848,1.19871 -27.17567,-13.39852 z"
+     id="path8"
+     sodipodi:nodetypes="cccc"
+     style="fill:#5c749c;fill-opacity:1;stroke:none;stroke-width:1.65293pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="m 423.64782,154.30298 c 8.80732,-4.34392 19.56779,8.22265 41.99047,11.32182 5.53597,0.63984 33.00762,5.76014 37.63326,1.64167 1.58835,-1.39875 5.39659,-8.43063 3.77555,3.23254 -1.15469,2.68002 -8.60253,7.87335 -53.40314,0.71922 -5.21934,-0.9796 -18.56453,-2.30691 -29.45407,-9.25305 -4.11971,-2.56889 -2.7654,-0.86053 -0.54207,-7.6622 z"
+     id="path9"
+     sodipodi:nodetypes="cscccsc"
+     style="fill:#7f7f7f;fill-opacity:1;stroke:none;stroke-width:1.65293pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="m 435.77559,155.02559 c -3.21405,-2.92069 -7.12418,-3.19212 -11.07001,-2.4492 -5.41625,0.33386 -4.52521,8.90481 -1.05442,11.2406 4.22042,2.49253 5.86795,4.17206 10.74463,3.16026 6.48302,-1.2297 5.45057,-7.61394 1.3798,-11.95166 z"
+     id="path6"
+     sodipodi:nodetypes="ccccc"
+     style="fill:#d6d6d6;fill-opacity:1;stroke:none;stroke-width:1.3227pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="m 383.61913,163.56398 c -12.23696,-0.48583 -16.20696,3.2246 -25.00223,7.10491 -23.18329,0.74939 -25.95386,21.73865 -35.94339,23.0612 -6.69239,1.94016 -32.55332,13.75892 20.79303,7.01124 20.36282,-8.64339 61.32937,-25.22522 40.15259,-37.17735 z"
+     id="path7"
+     sodipodi:nodetypes="ccccc"
+     style="fill:#5c739c;fill-opacity:1;stroke:none;stroke-width:1.65293pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <ellipse
+     cx="432.59152"
+     cy="160.60294"
+     id="ellipse13"
+     rx="6.1284075"
+     ry="5.4260802"
+     style="fill:#040203;fill-opacity:1;stroke:none;stroke-width:1.20241px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <ellipse
+     cx="433.42352"
+     cy="163.37297"
+     id="ellipse14"
+     rx="1.5875877"
+     ry="1.474584"
+     style="fill:#fbfbfb;fill-opacity:1;stroke:none;stroke-width:0.351016px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <ellipse
+     cx="471.84271"
+     cy="109.35338"
+     id="ellipse16"
+     rx="4.378418"
+     ry="1.67608"
+     style="fill:#494d57;fill-opacity:1;stroke:none;stroke-width:0.564862px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+</svg>
