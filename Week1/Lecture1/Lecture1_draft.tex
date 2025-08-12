@@ -60,8 +60,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 }
 
-\include{Lecture1_agenda}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,50 +69,252 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% Welcome
 \begin{frame}
-	\frametitle{Class Logistics / Weekly Pattern} % TODO
+	\frametitle{Welcome to MA213: Basic Probability and Statistics}
+	This is a newly redesigned course!
+	\begin{itemize}
+		\item \hl{We tried to design the course to be} accessible, engaging, and relevant.
+		\item \hl{We want you to feel} connected to the course as a community and supported in your learning.
+		\item \hl{We hope you will take away}
+		\begin{itemize}
+			\item A conceptual understanding of randomness and variability
+			\item Practical skills for analyzing and interpreting data
+			\item Confidence in your ability to work with data
+			\item An appreciation for the beauty of statistics!
+		\end{itemize}
+		\item \hl{We will need your help} to make this course a success!
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Logistics
+\begin{frame}
+	\frametitle{Class Logistics}
+	\begin{itemize}
+		\item \hl{Lectures}: Mon, Wed, Fri 11:15am-12:05pm
+		\item \hl{Labs}: Fridays
+		\begin{itemize}
+			\item Check your schedule for your time and location
+			\item Work in groups, practice analyzing data in R
+			\item Start this week!
+		\end{itemize}
+		\item \hl{Discussions}: Once a week
+		\begin{itemize}
+			\item Check your schedule for your time and location
+			\item Quizzes, review, practice problems
+			\item Start next week!
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % People
-
 \begin{frame}
-	\frametitle{People} % TODO
+	\frametitle{People}
+	\begin{itemize}
+		\item \hl{Instructor:} Prof. Emily Stephen
+		\item \hl{Labs:} Dr. Yongho Lim
+		\item \hl{Graduate Teaching Fellows (TFs):} 
+		\begin{itemize}
+			\item 1
+			\item 2
+			\item 3
+		\end{itemize}
+		\item \hl{Undergraduate Learning Assistants (LAs):}
+		\begin{itemize}
+			\item Yao Lu
+			\item Jack Hincks
+		\end{itemize}
+	\end{itemize}
+
+	See the course website for office hours and contact info
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Course Webpage
 
 \begin{frame}
-	\frametitle{Course Webpage} % TODO
+	\frametitle{Course Webpage} 
+	\begin{itemize}
+		\item \hl{Course website (Blackboard):} \url{https://learn.bu.edu} \\
+		(Log in with your BU credentials)
+		\item \hl{What's there:}
+		\begin{itemize}
+			\item Announcements
+			\item Course documents: Syllabus (with Office Hours and Calendar), GenAI Policy, Learning Objectives
+			\item Links to Textbook, Edfinity, Gradescope
+			\item Course Forum
+			\item Lecture slides and videos
+			\item Lab materials
+			\item Your gradebook
+		\end{itemize}
+	\end{itemize}	
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Textbook
 
 \begin{frame}
-	\frametitle{Textbook} % TODO
+	\frametitle{Textbook: OpenIntro}
+	\begin{columns}
+		\column{0.6\textwidth}
+		\begin{minipage}[t]{\linewidth}
+		\vspace{0pt}
+			\hl{OpenIntro Statistics}, 4th Edition \\
+			David Diez, Mine \c{C}etinkaya-Rundel, and Christopher Barr \\
+			\\
+			\webLink{https://www.openintro.org/book/os/}{https://www.openintro.org/book/os/} \\
+			\\
+			Free download as PDF or \$25 for print copy
+		\end{minipage}
+		\column{0.4\textwidth}
+		\begin{minipage}[t]{\linewidth}
+		\vspace{0pt}
+		\centering
+		\includegraphics[width=0.9\columnwidth]{openintro_cover.jpeg}
+		\end{minipage}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Learning Objectives
+
+\begin{frame}
+	\frametitle{Learning Objectives}
+
+	\hl{Core Learning Objectives:} 19 core learning objectives \\
+	\hl{Auxiliary Learning Objectives:} 11 auxiliary learning objectives \\
+
+	\vspace{10pt}
+	Module 1: Exploratory Data Analysis and Study Design \\(Chapters 1-2)
+	\begin{enumerate}
+		\item (core, Q1) Classify and analyze variables 
+		\item (core, Q1) Evaluate Study Design and Its Implications 
+		\item (core, Q1) Use R for Data Management and Exploration (core, Q1)
+		\item (core, Q1) Visualize and Describe Data Distributions 
+		\item (aux, Q1) Conduct Hypothesis Testing Using Simulation 
+	\end{enumerate}
+	See the syllabus for details
+\end{frame}
+
+\begin{frame}
+	\frametitle{Learning Objectives}
+	Module 6: Global module (core)
+	\begin{enumerate}
+		\item I can carry out a complete, reproducible statistical workflow in R using the inference methods from the course [Lab Projects] 
+		\item Given R code for a statistical analysis, I can explain what it does and why, and identify both programmatic and statistical errors [Quizzes] 
+		\item When solving probability and statistics problems, I can support my answers by writing out the steps using the notation and conventions of statistical exposition [Quizzes] 
+		\item I can recognize whether a statistical workflow is appropriate for the given data and data analysis goals, and explain the results of a statistical analysis to stakeholders [Lab Projects]
+	\end{enumerate}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Labs
 
 \begin{frame}
-	\frametitle{Labs} % TODO
+	\frametitle{Labs} 
+	Led by Yongho Lim, with support from TFs and LAs
+	\begin{itemize}
+		\item \hl{Weekly labs} on Fridays, starting this week
+		\item Practice analyzing data and running simulations in R
+		\item \hl{Skills labs}
+		\begin{itemize}
+			\item Work in pairs
+			\item Analyze data and run simulations in R
+			\item Post-lab questions to be submitted on Gradescope
+		\end{itemize}
+		\item \hl{Lab projects}
+		\begin{itemize}
+			\item Work in groups to explore real data
+			\item Project 1: Data analysis video presentation
+			\item Project 2: Statistical report
+		\end{itemize}
+	\end{itemize}
+	More details in Lab!
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Assignments/Grading structure
+% Assignments and Grading Structure
 
 \begin{frame}
-	\frametitle{Assignments} % TODO
+	\frametitle{Assignments}
+	\begin{itemize}
+		\item 12 Weekly Edfinity \hl{homeworks}
+		\begin{itemize}
+			\item Due Mondays at 3:00pm
+			\item Low-stakes, graded for completion
+			\item Can revise and resubmit for full credit
+			\item \hl{Homework 1} due Monday
+		\end{itemize} 
+		\item 5 \hl{Quizzes} 
+		\begin{itemize}
+			\item 19 Core Learning Objectives, 11 Auxiliary Learning Objectives
+			\item 5-6 written problems, graded pass / almost pass / not yet
+			\item In discussion sections, see calendar in Syllabus
+			\item Can \textbf{qualify} to retake 3 quizzes at the end of the semester (details later)
+		\end{itemize}
+		\item 7 \hl{Skills Labs}
+		\item 2 \hl{Lab Projects}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Grading Structure}
+	\begin{table}[ht]
+	\centering
+	\small
+	\begin{tabular}{|l|c|c|c|}
+	\hline
+	 & \textbf{A} & \textbf{B} & \textbf{C} \\
+	\hline
+	Homeworks & 12/12 complete & 11/12 complete & 10/12 complete \\
+	\hline
+	Quizzes (Core) & 18/19 passed & 15/19 passed & 12/19 passed \\
+	\hline
+	Quizzes (Aux) & 9/11 passed & 6/11 passed & 0/11 passed \\
+	\hline
+	Skills Labs & 7/7 passed & Labs 1-6 passed & Labs 1-6 passed \\
+	\hline
+	Lab Projects & 2 satisfactory & 2 satisfactory & 2 satisfactory \\
+	\hline
+	Lectures & $>$34 attended & $>$28 attended & $>$20 attended \\
+	\hline
+	\end{tabular}
+	\end{table}
+
+	\hl{Additional factors:}
+	\begin{itemize}
+		\item Grades between letter grades will be determined by how close you are to the next letter grade
+		\item Each ``unsatisfactory'' project will drop your course grade by half of a letter grade (e.g. B becomes B-)
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-	\frametitle{Grading Structure} % TODO
+	\frametitle{Class Policies} 
+	\begin{itemize}
+		\item \hl{Attendance and participation:} 
+		\begin{itemize}
+			\item Expected to attend all lectures, labs, and discussions. 
+			\item In-class activities and participation will be part of your grade.
+			\item Email the instructor or your TF if you need to miss class/discussion/lab
+		\end{itemize}
+		\item \hl{Academic integrity:} 
+		\begin{itemize}
+			\item All work must be your own. 
+			\item Collaboration is allowed on homeworks and labs/projects, but \textbf{not on quizzes}. 
+			\item See syllabus for details.
+		\end{itemize}
+		\item \hl{Use of Generative AI tools (e.g. ChatGPT):}
+		\begin{itemize}
+			\item Quizzes: \textbf{Not allowed}.
+			\item Homeworks: Use at your own discretion
+			\item Labs/Projects: Allowed for \textbf{specific uses} with \textbf{proper documentation}.
+			\item See syllabus and GenAI policy document for details.
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -156,6 +356,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Final announcements (Plan for next time, Reading, Edfinity survey, labs/discussions start week 2) TODO
+\include{Lecture1_agenda}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
