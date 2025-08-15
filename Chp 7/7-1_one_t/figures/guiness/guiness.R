@@ -31,17 +31,30 @@ df <- tres$parameter
 pval <- tres$p.value
 
 # P-value plot
-myPDF('guinessPvalue.pdf', 4, 2, mar=c(1.6,1,0.1,1), mgp=c(5,0.45,0))
+myPDF('guinessPvalue.pdf', 4, 2, mar=c(4,1,0.1,1), mgp=c(5,0.45,0))
 
 plot(c(-4, 4), c(0, dnorm(0)), type='n', axes=FALSE, ylab = "", xlab = "")
 mean_alc <- mean(alcohol)
 symm_val <- 2*target - mean_alc
+
+# Top axis: normalized t values
 axis(1, at = c(-5, -tstat, 0, tstat, 5),
-  labels = c(NA,
-       bquote(.(round(symm_val,2))),
-       expression(paste(mu, "= 4.5")),
-       bquote(bar(X) == .(round(mean_alc,2))),
-       NA))
+     labels = c(NA, 
+                bquote(-.(round(tstat,2))), 
+                "0", 
+                bquote("T" == .(round(tstat,2))), 
+                NA),
+     line=0)
+
+# Bottom axis: data coordinate values (already present)
+axis(1, at = c(-5, -tstat, 0, tstat, 5),
+     labels = c(NA,
+                bquote(.(round(symm_val,2))),
+                expression(paste(mu, "= 4.5")),
+                bquote(bar(X) == .(round(mean_alc,2))),
+                NA),
+     line=2.5)
+
 abline(h=0)
 
 X <- seq(-8, 8, 0.01)

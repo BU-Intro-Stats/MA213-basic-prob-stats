@@ -123,7 +123,7 @@ $\:$ \\
 
 \dq{Each row in the data set represents the alcohol content measured from a batch of Guiness stout. Are the batch measurements independent?}
 
-\soln{\pause Yes, if batches are produced independently.}
+\soln{\pause Yes, we will assume that batches are produced independently.}
 
 \end{frame}
 
@@ -155,7 +155,7 @@ $\:$ \\
 \item \hl{Independence:} We assume each batch is produced independently.
 \pause
 \item \hl{Sample size / skew:} $\:$ \\
-\pause\twocol{0.75}{0.35}
+\pause\twocol{0.6}{0.4}
 {
 {\tiny
 \begin{itemize}
@@ -349,15 +349,12 @@ df &=& 8 - 1 = 7
 \frametitle{Finding the p-value}
 
 \begin{itemize}
-\item The p-value is, once again, calculated as the tail area under the $t$ distribution.
+\item The p-value is calculated as the tail area under the $t$ distribution.
 \pause
 \item Using R:
 \begin{verbatim}
 > 2 * pt(2.73, df = 7, lower.tail = FALSE)
-
-# TODO two-sided
-
-[1] 0.523
+[1] 0.029
 \end{verbatim}
 \pause
 \item Visualized below:
@@ -380,7 +377,7 @@ df &=& 8 - 1 = 7
 
 \pause
 
-Since the p-value is high, we do not have evidence that the mean alcohol content differs from the target value of 4.5\% ABV.
+Since the p-value is low, we have evidence that the mean alcohol content differs from the target value of 4.5\% ABV.
 
 \end{frame}
 
@@ -395,7 +392,7 @@ Since the p-value is high, we do not have evidence that the mean alcohol content
 \frametitle{What is the mean alcohol content?}
 
 \begin{itemize}
-\item We did not find evidence that the mean alcohol content differs from the target.
+\item We found evidence that the mean alcohol content differs from the target.
 \pause
 \item But it would be more interesting to estimate the mean alcohol content itself.
 \pause
@@ -405,7 +402,7 @@ Since the p-value is high, we do not have evidence that the mean alcohol content
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: What is the difference? Try for yourself!}
+\section{Edfinity Quiz: What is the mean alcohol content? Try for yourself!}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -445,19 +442,19 @@ Using R:
 \frametitle{Constructing a CI for a small sample mean}
 
 \pq{Which of the following is the correct calculation of a 95\% confidence interval for the mean alcohol content?}
-\[ \bar{x} = 4.46 \qquad s = 0.17 \qquad n = 8 \qquad SE = 0.060 \]
+\[ \bar{x} = 4.66 \qquad s = 0.17 \qquad n = 8 \qquad SE = 0.060 \]
 
-	wocol{0.35}{0.65}
+\twocol{0.35}{0.65}
 {
 \begin{enumerate}[(a)]
-\item $4.46 \pm 1.96 \times 0.060$
-\solnMult{ $4.46 \pm 2.36 \times 0.060$}
-\item $4.46 \pm -2.36 \times 0.060$
-\item $4.46 \pm 2.36 \times 0.17$
+\item $4.66 \pm 1.96 \times 0.060$
+\solnMult{ $4.66 \pm 2.36 \times 0.060$}
+\item $4.66 \pm -2.36 \times 0.060$
+\item $4.66 \pm 2.36 \times 0.17$
 \end{enumerate}
 }
 {
-\soln{\only<2>{\orange{$\rightarrow$ (9.77, 10.23)}}}
+\soln{\only<2>{\orange{$\rightarrow$ (4.52, 4.80)}}}
 \vspace{0.25cm}
 }
 
@@ -470,16 +467,15 @@ Using R:
 \frametitle{Interpreting the CI}
 
 \pq{Which of the following is the \orange{best} interpretation for the confidence interval we just calculated?
-\[ \mu = (4.32, 4.60) \]
+\[ \mu = (4.52, 4.80) \]
 }
 
 We are 95\% confident that ...
 
 \begin{enumerate}[(a)]
-\item the mean alcohol content of Guinness stout is between 4.32\% and 4.60\% ABV.
+\solnMult{the mean alcohol content of Guinness stout is between 4.52\% and 4.80\% ABV.}
 \item the mean alcohol content is at least 4.5\% ABV.
 \item the mean alcohol content is less than 4.7\% ABV.
-\solnMult{(a) is correct.}
 \end{enumerate}
 
 \end{frame}
@@ -501,11 +497,11 @@ $\:$ \\
 
 $\:$ \\
 
-\dq{Do you think the findings of this study suggests that people believe Friday 13$^{\text{th}}$ is   a day of bad luck?}
+\dq{What does this mean for the Guinness quality control process?}
 
 $\:$ \\
 
-\soln{\only<3>{No, this is an observational study. We have just observed a significant difference between the number of cars on the road on these two days. We have not tested for people's beliefs.}}
+\soln{\only<3>{The mean alcohol content of this batch of beer is likely different from their target, so they shouldn't sell this batch, and maybe they should check their manufacturing process for issues.}}
 
 \end{frame}
 
@@ -536,12 +532,6 @@ $\:$ \\
 \item Confidence interval: $\text{point estimate} \pm t_{df}^\star \times SE$
 
 \end{itemize}
-
-\pause
-
-\vspace{-0.25cm}
-
-\Note{The example we used was for paired means (difference between dependent groups). We took the difference between the observations and used only these differences (one sample) in our analysis, therefore the mechanics are the same as when we are working with just one sample.}
 
 \end{frame}
 
