@@ -23,6 +23,7 @@
 \def\chpii@path{../../Chp 2}
 \input{../../lec_style.tex}
 
+\usetikzlibrary{overlay-beamer-styles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preamble
@@ -142,9 +143,90 @@ The box in a \hl{box plot} represents the middle 50\% of the data, and the thick
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz and Forum Brainstorm}
+\section{Edfinity Quiz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{How many outliers?}
+\begin{center}
+\begin{tikzpicture}
+  % Image
+  \node[anchor=south west,inner sep=0] (img) at (0,0) {\includegraphics[width=0.95\textwidth]{avg_coffee.png}};
+  % --- Stage 1: Median line ---
+  \draw[red,thick] (-0.3,2.4) -- (0.0,2.4); % Median
+  \node[anchor=east, text=red, font=\bfseries\small, visible on=<1>] at (-0.4,2.4) {Med};
+  \pause
+  % --- Stage 2: Q1 and Q3 lines ---
+  \draw[red,thick] (-0.3,2.1) -- (0.0,2.1); % Q1
+  \draw[red,thick] (-0.3,3.2) -- (0.0,3.2); % Q3
+  \node[anchor=east, text=red, font=\bfseries\small, visible on=<2>] at (-0.4,2.1) {Q1};
+  \node[anchor=east, text=red, font=\bfseries\small, visible on=<2>] at (-0.4,3.2) {Q2};
+ \pause
+  % --- Stage 3: Box verticals ---
+  \draw[red,thick] (-0.3,2.1) -- (-0.3,3.2); % left vertical
+  \draw[red,thick] (0.0,2.1) -- (0.0,3.2);  % right vertical
+  \draw[red,thick, visible on=<3>] (-0.4,2.1) -- (-0.5,2.1) -- (-0.5,3.2) -- (-0.4,3.2);
+  \node[anchor=east, text=red, font=\bfseries\small, visible on=<3>] at (-0.5,2.7) {IQR};
+  \pause
+  % --- Stage 4: Whiskers ---
+  \draw[red,thick] (-0.3,0.6) -- (0.0,0.6); % Lower whisker
+  \draw[red,thick] (-0.15,2.1) -- (-0.15,0.6); % Lower whisker
+  \draw[red,thick] (-0.3,4.7) -- (0.0,4.7); % Upper whisker
+  \draw[red,thick] (-0.15,3.2) -- (-0.15,4.7); % Upper whisker
+  \pause
+  % --- Outlier circles and Impossible label ---
+  \draw[red,thick] (7.2,6.1) circle [radius=0.4]; % High outlier
+  \pause
+  \draw[red,thick] (2.7,1.4) circle [radius=0.4]; % Low outlier
+  \node[anchor=west, text=red, font=\bfseries\large] at (3.2,1.4) {Impossible};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Forum Brainstorm: Outliers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What to do with outliers?}
+\begin{itemize}
+\item \hl{Think:} 
+\begin{itemize}
+  \item What are some examples of outliers? 
+  \item Are they errors or interesting features of the data?
+  \item Under what circumstances would you keep or remove them?
+\end{itemize}
+\item \hl{Share:} Share an example with the class in the forum, and your thoughts on what do with it/why
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{What to do with outliers? It's a judgment call!}
+\begin{itemize}
+  \item Considerations:
+  \begin{itemize}
+    \item Are they consistent with the rest of the data, e.g. a "long tail"?
+    \item Are they errors in data collection or entry, or data points from a different population?
+    \item How will your analysis be affected by their presence?
+  \end{itemize}
+  \item Remove?
+  \begin{itemize}
+    \item If they are errors in data collection or entry
+    \item If they are from a different population
+  \end{itemize}
+  \item Keep?
+  \begin{itemize}
+    \item Consider using robust statistics
+    \item Consider using transformations e.g. to account for skewness
+    \item (Advanced) Consider using a different model for your population
+  \end{itemize}
+  \item Look into them!
+\end{itemize}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Robust statistics}
@@ -292,11 +374,11 @@ When data are extremely skewed, transforming them might make modeling easier. A 
 
 $\:$ \\
 \pause
-The histograms on the left shows the distribution of number of basketball games attended by students. The histogram on the right shows the distribution of log of number of games attended.
+The histogram on the left shows the distribution of number of basketball games attended by students. The histogram on the right shows the distribution of log of number of games attended.
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-1_numerical_data/figures/basket_games/basket_games_hist}
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-1_numerical_data/figures/basket_games/basket_games_hist_log}
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-1_numerical_data/figures/basket_games/basket_games_hist}
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-1_numerical_data/figures/basket_games/basket_games_hist_log}
 \end{center}
 
 \end{frame}
@@ -480,9 +562,9 @@ information, for proportions.
 \dq{What are the differences between the three visualizations shown below?}
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_seg_bar}
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_seg_bar_dodge} \\
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_rel_seg_bar}
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_seg_bar}
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_seg_bar_dodge} \\
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_rel_seg_bar}
 \end{center}
 
 \end{frame}
@@ -499,8 +581,8 @@ information, for proportions.
 \dq{What is the difference between the two visualizations shown below?}
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_rel_seg_bar}
-\includegraphics[width=0.5\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_mosaic}
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_rel_seg_bar}
+\includegraphics[width=0.45\textwidth]{\chpii@path/2-2_categorical_data/figures/titanic_age_survival/titanic_mosaic}
 \end{center}
 
 \end{frame}
