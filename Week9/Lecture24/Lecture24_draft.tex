@@ -69,76 +69,61 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{One-sample means with the $t$ distribution}
+
+\section{One-sample means with the \texorpdfstring{$t$}{t} distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Friday the 13$^{\text{th}}$}
 
-\dq{Between 1990 - 1992 researchers in the UK collected data on traffic flow, accidents, and hospital admissions on Friday 13$^{\text{th}}$ and the previous Friday, Friday 6$^{\text{th}}$. Below is an excerpt from this data set on traffic flow. We can assume that traffic flow on given day at locations 1 and 2 are independent.}
+\begin{frame}
+\frametitle{Guinness Quality Control: The Origin of the $t$-test}
+
+\dq{William Sealy Gosset, working at the Guinness Brewery in the early 1900s, wanted to ensure the quality of stout. He would take a small sample of batches and measure a quality metric, (e.g. alcohol content). Suppose the target mean for alcohol content is 4.5\% ABV (percent alcohol by volume). Below is a sample of 8 batches.}
 
 {\scriptsize
-\texttt{
 \begin{center}
-\begin{tabular}{rllrrrl}
-  \hline
- & type & date & 6$^{\text{th}}$ & 13$^{\text{th}}$ & diff & location  \\ 
-  \hline
-1 & traffic & 1990,  July & 139246 & 138548 & 698 & loc 1 \\
-  \rowcolor[gray]{.9}
-  2 & traffic & 1990,  July & 134012 & 132908 & 1104 & loc 2 \\
-  3 & traffic & 1991,  September & 137055 & 136018 & 1037 & loc 1 \\
-  \rowcolor[gray]{.9}
-  4 & traffic & 1991,  September & 133732 & 131843 & 1889 & loc 2 \\
-  5 & traffic & 1991,  December & 123552 & 121641 & 1911 & loc 1 \\
-  \rowcolor[gray]{.9}
-  6 & traffic & 1991,  December & 121139 & 118723 & 2416 & loc 2 \\
-  7 & traffic & 1992,  March & 128293 & 125532 & 2761 & loc 1 \\
-  \rowcolor[gray]{.9}
-  8 & traffic & 1992,  March & 124631 & 120249 & 4382 & loc 2 \\
-  9 & traffic & 1992,  November & 124609 & 122770 & 1839 & loc 1 \\
-  \rowcolor[gray]{.9}
-  10 & traffic & 1992,  November & 117584 & 117263 & 321 & loc 2 \\
-   \hline
+\begin{tabular}{r|c}
+Batch & Alcohol Content (\% ABV) \\
+\hline
+1 & 4.8 \\
+2 & 4.6 \\
+3 & 4.7 \\
+4 & 4.5 \\
+5 & 4.9 \\
+6 & 4.6 \\
+7 & 4.8 \\
+8 & 4.4 \\
 \end{tabular}
 \end{center}
-}}
+}
 
 \vfill
-
 \rule{2.5cm}{0.25pt} \\
-{\tiny Scanlon, T.J., Luben, R.N., Scanlon, F.L., Singleton, N. (1993), ``Is Friday the 13th Bad For Your Health?," BMJ, 307, 1584-1586.}
+{\tiny Inspired by the original work of W.S. Gosset ("Student") at Guinness Brewery.}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{frame}
-\frametitle{Friday the 13$^{\text{th}}$}
+\frametitle{Guinness Quality Control: Framing the Question}
 
 \begin{itemize}
-
-\item We want to investigate if people's behavior is different on Friday 13$^{\text{th}}$ compared to Friday 6$^{\text{th}}$.
-
+\item We want to investigate if the mean alcohol content of Guinness stout batches differs from the target value of 4.5\% ABV.
 \pause
-
-\item One approach is to compare the traffic flow on these two days.
-
+\item One approach is to take a small sample of batches and compare the sample mean alcohol content to the target.
 \pause
-
-\item $H_0:$ Average traffic flow on Friday 6$^{\text{th}}$ and 13$^{\text{th}}$ are equal. \\
-$H_A:$ Average traffic flow on Friday 6$^{\text{th}}$ and 13$^{\text{th}}$ are different.
-
+\item $H_0:$ The average alcohol content is equal to 4.5\% ABV. \\
+$H_A:$ The average alcohol content is different from 4.5\% ABV.
 \pause
-
 \end{itemize}
 
 $\:$ \\
 
-\dq{Each case in the data set represents traffic flow recorded at the same location in the same month of the same year: one count from Friday 6$^{\text{th}}$ and the other Friday 13$^{\text{th}}$. Are these two counts independent?}
+\dq{Each row in the data set represents the alcohol content measured from a batch of Guiness stout. Are the batch measurements independent?}
 
-\soln{\pause No}
+\soln{\pause Yes, if batches are produced independently.}
 
 \end{frame}
 
@@ -147,59 +132,45 @@ $\:$ \\
 \begin{frame}
 \frametitle{Hypotheses}
 
-\pq{What are the hypotheses for testing for a difference between the average traffic flow between Friday 6$^{\text{th}}$ and 13$^{\text{th}}$?}
+\pq{What are the hypotheses for testing whether the mean alcohol content differs from the target value?}
 
 \begin{enumerate}[(a)]
-\item  \mathhl{H_0:} $\mu_{6th} = \mu_{13th}$ \\
-\mathhl{H_A:} $\mu_{6th} \ne \mu_{13th}$
-\item  \mathhl{H_0:} $p_{6th} = p_{13th}$ \\
-\mathhl{H_A:} $p_{6th} \ne p_{13th}$
-\solnMult{ \mathhl{H_0:} $\mu_{diff} = 0$ \\
-\mathhl{H_A:} $\mu_{diff} \ne 0$ }
-\item  \mathhl{H_0:} $\bar{x}_{diff} = 0$ \\
-\mathhl{H_A:} $\bar{x}_{diff} = 0$
+\item  \mathhl{H_0:} $\mu = 0$ \\
+\mathhl{H_A:} $\mu \ne 0$
+\solnMult{  \mathhl{H_0:} $\mu = 4.5$ \\
+\mathhl{H_A:} $\mu \ne 4.5$}
+\item  \mathhl{H_0:} $p = 4.5$ \\
+\mathhl{H_A:} $p \ne 4.5$
 \end{enumerate}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{frame}
 \frametitle{Conditions}
 
 \begin{itemize}
-
-\item \hl{Independence:} We are told to assume that cases (rows) are independent.
-
+\item \hl{Independence:} We assume each batch is produced independently.
 \pause
-
 \item \hl{Sample size / skew:} $\:$ \\
-
-\pause
-
-\twocol{0.75}{0.35}
+\pause\twocol{0.75}{0.35}
 {
 {\tiny
 \begin{itemize}
-
-\item The sample distribution does not appear to be extremely skewed, but it's very difficult to assess with such a small sample size. We might want to think about whether we would expect the population distribution to be skewed or not -- probably not, it should be equally likely to have days with lower than average traffic and higher than average traffic.
-
+\item The sample distribution does not appear to be extremely skewed, but it's difficult to assess with such a small sample size. For alcohol levels, we might expect scores to be fairly symmetric around the target.
 \item We do not know $\sigma$ and $n$ is too small to assume $s$ is a reliable estimate for $\sigma$.
 \end{itemize}
 }
 }
 {
-\includegraphics[width=\textwidth]{\chp7@path/7-1_one_t/figures/friday/trafficHist}
+\includegraphics[width=\textwidth]{\chp7@path/7-1_one_t/figures/guiness/guinessHist}
 }
-
 \end{itemize}
-
 $\:$ \\
-
 \pause
-
 \dq{So what do we do when the sample size is small?}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -257,7 +228,7 @@ As long as observations are independent, and the population distribution is not 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Introducing the $t$ distribution}
+\subsection{Introducing the \texorpdfstring{$t$}{t} distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -315,55 +286,34 @@ As long as observations are independent, and the population distribution is not 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Evaluating hypotheses using the $t$ distribution}
+\subsection{Evaluating hypotheses using the \texorpdfstring{$t$}{t} distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Try with $t$ distribution}
+
+\section{R Demonstration: Try with \texorpdfstring{$t$}{t} distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Back to Friday the 13$^{\text{th}}$}
+\frametitle{Back to Guinness: Sample Statistics}
 
-\vspace{-1cm}
-
-{\footnotesize
-\texttt{
-\begin{center}
-\begin{tabular}{rllrr || r || l}
-  \hline
- & type & date & 6$^{\text{th}}$ & 13$^{\text{th}}$ & diff & location  \\ 
-  \hline
-1 & traffic & 1990,  July & 139246 & 138548 & 698 & loc 1 \\
-  \rowcolor[gray]{.9}
-  2 & traffic & 1990,  July & 134012 & 132908 & 1104 & loc 2 \\
-  3 & traffic & 1991,  September & 137055 & 136018 & 1037 & loc 1 \\
-  \rowcolor[gray]{.9}
-  4 & traffic & 1991,  September & 133732 & 131843 & 1889 & loc 2 \\
-  5 & traffic & 1991,  December & 123552 & 121641 & 1911 & loc 1 \\
-  \rowcolor[gray]{.9}
-  6 & traffic & 1991,  December & 121139 & 118723 & 2416 & loc 2 \\
-  7 & traffic & 1992,  March & 128293 & 125532 & 2761 & loc 1 \\
-  \rowcolor[gray]{.9}
-  8 & traffic & 1992,  March & 124631 & 120249 & 4382 & loc 2 \\
-  9 & traffic & 1992,  November & 124609 & 122770 & 1839 & loc 1 \\
-  \rowcolor[gray]{.9}
-  10 & traffic & 1992,  November & 117584 & 117263 & 321 & loc 2 \\
-   \hline
-\end{tabular}
-\end{center}
-}}
+\begin{itemize}
+\item Sample mean ($\bar{x}$): 4.66
+\item Sample standard deviation ($s$): 0.17
+\item Sample size ($n$): 8
+\end{itemize}
 
 \begin{align*}
-\hspace{6cm} &\orange{$\bar{x}_{diff} = 1836$} \\
-& \orange{$s_{diff} = 1176$} \\
-& \orange{$n = 10$} 
+\orange{$\bar{x} = 4.66$} \\
+\orange{s = 0.17} \\
+\orange{n = 8}
 \end{align*}
- 
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}
 \frametitle{Finding the test statistic}
@@ -378,18 +328,18 @@ As long as observations are independent, and the population distribution is not 
 
 \hl{in context...}
 \begin{eqnarray*}
-point~estimate &=& \bar{x}_{diff} = 1836 \\
+point~estimate &=& \bar{x} = 4.66 \\
 \pause
-SE &=& \frac{s_{diff}}{\sqrt{n}} = \frac{1176}{\sqrt{10}} = 372 \\
+SE &=& \frac{s}{\sqrt{n}} = \frac{0.17}{\sqrt{8}} = 0.060 \\
 \pause
-T &=& \frac{1836 - 0}{372} = 4.94 \\
+T &=& \frac{4.66 - 4.5}{0.060} = 2.73 \\
 \pause
-df &=& 10 - 1 = 9
+df &=& 8 - 1 = 7
 \end{eqnarray*}
 
 \vspace{-0.25cm}
 
-\Note{Null value is 0 because in the null hypothesis we set $\mu_{diff} = 0$.}
+\Note{Null value is 4.5 because in the null hypothesis we set $\mu = 4.5$.}
 
 \end{frame}
 
@@ -399,33 +349,28 @@ df &=& 10 - 1 = 9
 \frametitle{Finding the p-value}
 
 \begin{itemize}
-
-\item The p-value is, once again, calculated as the area tail area under the $t$ distribution.
-
+\item The p-value is, once again, calculated as the tail area under the $t$ distribution.
 \pause
-
 \item Using R:
 \begin{verbatim}
-> 2 * pt(4.94, df = 9, lower.tail = FALSE)
+> 2 * pt(2.73, df = 7, lower.tail = FALSE)
 
-[1] 0.0008022394
+# TODO two-sided
+
+[1] 0.523
 \end{verbatim}
-
 \pause
-
-\item Using a web app:
-
-\href{https://gallery.shinyapps.io/dist_calc/}{\textcolor{oiB}{https://gallery.shinyapps.io/dist\_calc/}}
-
+\item Visualized below:
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chp7@path/7-1_one_t/figures/guiness/guinessPvalue}
+\end{center}
 \pause
-
 \item Or when these aren't available, we can use a $t$-table.
-
 \end{itemize}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 \begin{frame}
@@ -435,33 +380,27 @@ df &=& 10 - 1 = 9
 
 \pause
 
-Since the p-value is quite low, we conclude that the data provide strong evidence of a difference between traffic flow on Friday 6$^{\text{th}}$ and 13$^{\text{th}}$.
+Since the p-value is high, we do not have evidence that the mean alcohol content differs from the target value of 4.5\% ABV.
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Constructing confidence intervals using the $t$ distribution}
+\subsection{Constructing confidence intervals using the \texorpdfstring{$t$}{t} distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{frame}
-\frametitle{What is the difference?}
+\frametitle{What is the mean alcohol content?}
 
 \begin{itemize}
-
-\item We concluded that there is a difference in the traffic flow between Friday 6$^{\text{th}}$ and 13$^{\text{th}}$.
-
+\item We did not find evidence that the mean alcohol content differs from the target.
 \pause
-
-\item But it would be more interesting to find out what exactly this difference is.
-
+\item But it would be more interesting to estimate the mean alcohol content itself.
 \pause
-
-\item We can use a confidence interval to estimate this difference.
-
+\item We can use a confidence interval to estimate the mean.
 \end{itemize}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -470,68 +409,55 @@ Since the p-value is quite low, we conclude that the data provide strong evidenc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{frame}
 \frametitle{Confidence interval for a small sample mean}
 
 \begin{itemize}
-
 \item Confidence intervals are always of the form
 \[ \text{point estimate} \pm {ME} \]
-
 \pause
-
 \item ME is always calculated as the product of a critical value and SE.
-
 \pause
-
 \item Since small sample means follow a $t$ distribution (and not a $z$ distribution), the critical value is a $t^\star$ (as opposed to a $z^\star$).
 \[ \text{point estimate} \pm t^{\star} \times SE \]
-
 \end{itemize}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}[fragile]
 \frametitle{Finding the critical $t$ ($t^\star$)}
 
-
 Using R:
 \begin{verbatim}
+> qt(p = 0.975, df = 7)
 
-> qt(p = 0.975, df = 9)
-
-[1] 2.262157
-
+[1] 2.364624
 \end{verbatim}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{frame}
 \frametitle{Constructing a CI for a small sample mean}
 
-\pq{Which of the following is the correct calculation of a 95\% confidence interval for the difference between the traffic flow between Friday 6$^{\text{th}}$ and 13$^{\text{th}}$?}
-\[ \bar{x}_{diff} = 1836 \qquad s_{diff} = 1176 \qquad n = 10 \qquad SE = 372 \]
+\pq{Which of the following is the correct calculation of a 95\% confidence interval for the mean alcohol content?}
+\[ \bar{x} = 4.46 \qquad s = 0.17 \qquad n = 8 \qquad SE = 0.060 \]
 
-\twocol{0.35}{0.65}
+	wocol{0.35}{0.65}
 {
 \begin{enumerate}[(a)]
-
-\item $1836 \pm 1.96 \times 372$
-
-\solnMult{ $1836 \pm 2.26 \times 372$}
-
-\item $1836 \pm -2.26 \times 372$
-
-\item $1836 \pm 2.26 \times 1176$
-
+\item $4.46 \pm 1.96 \times 0.060$
+\solnMult{ $4.46 \pm 2.36 \times 0.060$}
+\item $4.46 \pm -2.36 \times 0.060$
+\item $4.46 \pm 2.36 \times 0.17$
 \end{enumerate}
 }
 {
-\soln{\only<2>{\orange{$\rightarrow$ (995, 2677)}}}
+\soln{\only<2>{\orange{$\rightarrow$ (9.77, 10.23)}}}
 \vspace{0.25cm}
 }
 
@@ -539,25 +465,21 @@ Using R:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \begin{frame}
 \frametitle{Interpreting the CI}
 
 \pq{Which of the following is the \orange{best} interpretation for the confidence interval we just calculated?
-\[ \mu_{diff: 6th - 13th} = (995, 2677) \]
+\[ \mu = (4.32, 4.60) \]
 }
 
 We are 95\% confident that ...
 
 \begin{enumerate}[(a)]
-
-\item the difference between the average number of cars on the road on Friday 6$^{\text{th}}$ and 13$^{\text{th}}$ is between 995 and 2,677.
-
-\item on Friday 6$^{\text{th}}$ there are 995 to 2,677 fewer cars on the road than on the Friday 13$^{\text{th}}$, on average.
-
-\item on Friday 6$^{\text{th}}$ there are 995 fewer to 2,677 more cars on the road than on the Friday 13$^{\text{th}}$, on average.
-
-\solnMult{ on Friday 13$^{\text{th}}$ there are 995 to 2,677 fewer cars on the road than on the Friday 6$^{\text{th}}$, on average.}
-
+\item the mean alcohol content of Guinness stout is between 4.32\% and 4.60\% ABV.
+\item the mean alcohol content is at least 4.5\% ABV.
+\item the mean alcohol content is less than 4.7\% ABV.
+\solnMult{(a) is correct.}
 \end{enumerate}
 
 \end{frame}
