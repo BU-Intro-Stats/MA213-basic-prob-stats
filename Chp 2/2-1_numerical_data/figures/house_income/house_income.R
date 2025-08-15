@@ -5,6 +5,10 @@ d = read.csv("house_income.csv")
 
 house_income = d$house_income[!is.na(d$house_income) & d$house_income < 4000000]
 
+# Sort the cleaned house_income vector and save as a new CSV
+house_income_sorted <- sort(house_income)
+write.csv(data.frame(house_income = house_income_sorted), file = "house_income_sorted.csv", row.names = FALSE)
+
 
 myPDF('house_income_dot_stacked.pdf', 7, 3, mar=c(4,2,0.5,0.5), cex.lab = 1.5, cex.axis = 1.25)
 
