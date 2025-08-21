@@ -1,42 +1,37 @@
 \documentclass{article}
 
 % --- LaTeX Packages ---
-\usepackage[utf8]{inputenc} % For international characters
-\usepackage[T1]{fontenc}    % Recommended font encoding
-\usepackage{geometry}       % For setting page margins
-\geometry{letterpaper, margin=1in} % Set page size and margins
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}    
+\usepackage{geometry}       
+\geometry{letterpaper, margin=1in} 
 
-\usepackage{enumitem}       % For customizing lists (useful for instructions/scales)
-\usepackage{tabularx}       % For tables with flexible column widths (essential for evaluation criteria)
-\usepackage{ragged2e}       % For \RaggedRight in tabularx cells
-\usepackage{array}          % Enhanced array and tabular environments
+\usepackage{enumitem}      
+\usepackage{tabularx}       
+\usepackage{array}         
 
 \begin{document}
 
-% Title centered only
+% --- Peer Evaluation Form ---
 \begin{center}
-  {\Huge\bfseries Peer Evaluation Form\textsuperscript{*}} % Main title
+  {\Huge\bfseries Peer Evaluation Form \textsuperscript{*}} % Main title
   \vspace{0.5cm}
 
   \hrule % Horizontal line
   \vspace{0.5cm}
 \end{center}
 
-% Instructions - left aligned for readability
+
 Please write the names of all your team members, INCLUDING YOURSELF, and rate the degree
 to which each member fulfilled his/her responsibilities in completing the group assignments.
 Use the following rating system:
 
+
 \begin{itemize}[leftmargin=*, label=\textbullet]
-    \item \textbf{Excellent}: Consistently went above and beyond the call of duty, tutored teammates, carried more than his/her fair share of the load.
-    \item \textbf{Very good}: Consistently did what he/she was supposed to do, was very well prepared and cooperative.
-    \item \textbf{Satisfactory}: Usually did what he/she was supposed to do, was acceptably prepared and cooperative.
-    \item \textbf{Ordinary}: Often did what he/she was supposed to do, was minimally prepared and cooperative.
-    \item \textbf{Marginal}: Sometimes failed to show up or complete assignments, was rarely prepared.
-    \item \textbf{Deficient}: Often failed to show up or complete assignments, was rarely prepared.
-    \item \textbf{Unsatisfactory}: Consistently failed to show up or complete assignments, was unprepared.
-    \item \textbf{Superficial}: Had practically no participation.
-    \item \textbf{No show}: Had no participation at all.
+    \item \textbf{Excellent}: Outstanding contribution, extra effort, and leadership.
+    \item \textbf{Satisfactory}: Completed responsibilities adequately, met expectations.
+    \item \textbf{Unsatisfactory}: Frequently missed or did incomplete work, did not meet expectations.
+    \item \textbf{Failing}: Had no participation at all. No effort was made to attend meetings or complete responsibilities.
 \end{itemize}
 
 \vspace{0.5cm}
@@ -66,10 +61,20 @@ These ratings should reflect each individual's level of participation and effort
 
 \vspace{1cm}
 
+
+
+\begin{center}
+\begin{tabularx}{0.8\textwidth}{X}
+\textbf{\Large Comments} \\
+\hline
+\vspace{5cm} \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
 \hrule
+\end{tabularx}
+\end{center}
 
-\vspace{0.2cm}
 
+\hrule
+\vspace{0.5cm}
 \noindent * Adapted from Kaufman, D.M., Felder, R.M. and Fuller H (2000). Accounting for Individual Effort in Cooperative Learning Teams. \textit{Journal of Engineering Education}, April 2000, 133–140.
 
 \end{document}
