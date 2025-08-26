@@ -24,10 +24,22 @@ samples <- sample(outcomes, 1000, replace=TRUE, prob=probabilities)
 samples <- as.data.frame(samples)
 print(samples)
 
+# plot a histogram of the counts...
 ggplot(data=samples, aes(x=samples)) +
-  geom_histogram(color="black", fill="blue") +
+  geom_histogram(color="black", fill="blue", binwidth=1) +
   scale_x_continuous(breaks=c(0:10))
 
+# ... or the proportions
+ggplot(data=samples, aes(x=samples)) +
+  geom_histogram(aes(y=..density..), color="black", fill="blue", binwidth=1) +
+  scale_x_continuous(breaks=c(0:10))
+
+# Compare the histogram of proportions to the theoretical distribution
+# (a bar chart of the probabilities of each outcome)
+theoretical <- data.frame(outcomes, probabilities)
+ggplot(data=theoretical, aes(x=outcomes, y=probabilities)) +
+  geom_bar(stat="identity") +
+  scale_x_continuous(breaks=c(0:10))
 
 # ---- 3. Comparing the samples and the theoretical distribution ----
 
