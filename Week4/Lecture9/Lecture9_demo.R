@@ -10,6 +10,12 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 m = 3 # Mean parameter for Normal distribution
 s = 2 # Standard Deviation for Normal distribution
 
+# rnorm(n, mean=0, sd=1) samples n times from the distribution
+#   the default mean is 0 and standard deviation is 1
+# dnorm(x, mean=0, sd=1) evaluates the distribution (probability density function) 
+#   x is the value(s) that you want to compute the distribution for
+# ... this pattern (of d for distribution and r for random sample) will extend to other probability models
+
 samples_norm_500 <- rnorm(500, mean=m, sd=s)
 samples <- data.frame(samples=samples_norm_500)
 
