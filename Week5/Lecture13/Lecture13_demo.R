@@ -32,7 +32,7 @@ ggplot(data=data.frame(samples2), aes(x=samples2)) +
 
 # ---- 3. Normal approximation ----
 
-samples3 <- rbinom(n=1000, size=10, prob=0.5)
+samples3 <- rbinom(n=10000, size=10, prob=0.5)
 head(samples3)
 mean(samples3)
 sd(samples3)**2
@@ -41,10 +41,25 @@ sd(samples3)**2
 
 mean <- 10*0.5  # E[X] = np
 var <- 10*0.5*(1-0.5)  # var(X) = np(1-p)
-ybreaks = seq(0,50,5) 
 
-# Note: histogram and density here have different areas (not scaled)
+# Note that the histogram and density here have different areas (not scaled)...
 ggplot(data=data.frame(samples3), aes(x=samples3)) +
   geom_histogram(aes(y=after_stat(density)), binwidth=0.5) + 
+  stat_function(fun=dnorm, args=list(mean=mean, sd=sqrt(var)), color='steelblue') +
+  xlab("x")
+
+# ... but if the bin width is set to 1, they line up better ...
+ggplot(data=data.frame(samples3), aes(x=samples3)) +
+  geom_histogram(aes(y=after_stat(density)), binwidth=1) + 
+  stat_function(fun=dnorm, args=list(mean=mean, sd=sqrt(var)), color='steelblue') +
+  xlab("x")
+# ... but we're still limited to x values between 0 and 10
+
+# What if we change the size parameter?
+samples4 <- rbinom(n=10000, size=100, prob=0.5)
+mean <- 100*0.5  # E[X] = np
+var <- 100*0.5*(1-0.5)  # var(X) = np(1-p)
+ggplot(data=data.frame(samples4), aes(x=samples4)) +
+  geom_histogram(aes(y=after_stat(density)), binwidth=1) + 
   stat_function(fun=dnorm, args=list(mean=mean, sd=sqrt(var)), color='steelblue') +
   xlab("samples")
