@@ -1,5 +1,5 @@
 library(shiny)
-source("Lec16DemoFunctions.R")
+source("Lecture16_DemoFunctions.R")
 
 # ---- UI ----
 ui <- fluidPage(
@@ -38,7 +38,7 @@ server <- function(input, output) {
       
       bw <- 0.01
       n_obs <- length(simulation)
-      SE <- sqrt((input$p*(1-input$p))/n_obs)
+      SE <- sqrt((input$p*(1-input$p))/input$n)
 
       # Create & display histogram plot
       ggplot(data=as.data.frame(simulation), aes(x=simulation)) +

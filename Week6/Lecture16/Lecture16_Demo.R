@@ -5,8 +5,8 @@ if(!require("rstudioapi")) install.packages("rstudioapi")
 #print(getSourceEditorContext()$path)
 setwd(dirname(getSourceEditorContext()$path))
 
-source("Lec16DemoFunctions.R")
-source("Lec16ShinyApp.R")
+source("Lecture16_DemoFunctions.R")
+source("Lecture16_ShinyApp.R")
 
 # ---- 1. From last time: sampling from a population, simulation ----
 
