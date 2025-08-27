@@ -5,7 +5,7 @@ if(!require("rstudioapi")) install.packages("rstudioapi")
 #print(getSourceEditorContext()$path)
 setwd(dirname(getSourceEditorContext()$path))
 
-source("Lec15DemoFunctions.R")
+source("Lecture15_DemoFunctions.R")
 
 # ---- 1. Sampling from a population ----
 
