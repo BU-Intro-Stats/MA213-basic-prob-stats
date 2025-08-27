@@ -38,3 +38,9 @@ colnames(tab) <- c('alpha', 'CI Lower Limit', 'CI Upper Limit', 'CI Width',
 rownames(tab) <- c(1:7)
 print(as.table(tab))
 
+# ---- 2. Simulate repeating the survey many times ----
+# How does the coverage change when we chagne the alpha level?
+
+source("Lecture17_CIShinyApp.R")
+shinyApp(ui = ui, server = server)
+

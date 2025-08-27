@@ -22,14 +22,8 @@ p_hat + c(-1,1)*1.96*SE
 
 
 # ---- 2. Simulate repeating the survey many times ----
+# If the true population proportion is 0.7, how often will a confidence interval
+# computed like this contain the true value?
+source("Lecture17_CIShinyApp.R")
+shinyApp(ui = ui, server = server)
 
-samples <- rbinom(n=10000, size=850, prob=0.67)
-p_hats <- samples / 850
-
-SEs <- sqrt(p_hats*(1-p_hats)/850)
-sim_intervals <- p_hats + c(-1,1)*1.96*SEs
-
-min(sim_intervals)
-max(sim_intervals)
-
-# TODO: Was something like this the intention? 
