@@ -8,7 +8,7 @@ setwd(dirname(getSourceEditorContext()$path))
 library(ggplot2)
 
 # Load data
-data <- read.csv("scores.csv")
+scores <- read.csv("scores.csv")
 
 # As before, add a column for the difference between the reading and writing scores
 scores$diff <- scores$read - scores$write
@@ -28,7 +28,7 @@ Tstat = (xbar - 0) / SE
 
 
 # Calculate the tail area of the t distribution
-2*pt(Tstat, df=200-1)
+2*pt(Tstat, df=200-1, lower.tail=FALSE)
 
 # TODO: Emily please check, feel like I'm going crazy trying to make sense of
 # the computation in the slides (slide 9)
