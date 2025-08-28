@@ -73,6 +73,18 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Motivation}
+
+\begin{frame}
+  \frametitle{Motivating paired data}
+
+  Last time we learned how to do inference for one-sample data. 
+  
+  Now we're returning to the setting with multiple samples, but we have observations that don't appear independent - like in the next example. 
+
+\end{frame}
+
+
 \subsection{Paired observations}
 
 \begin{frame}
@@ -86,36 +98,41 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commenting out the below since it'll be included in the Edfinity quiz
 
-\begin{frame}
+% \begin{frame}
 
-\pq{The same students took a reading and writing test and their scores are shown below. Are the reading and writing scores of each student independent of each other?}
+% \pq{The same students took a reading and writing test and their scores are shown below. Are the reading and writing scores of each student independent of each other?}
 
-{\small
-\begin{center}
-\begin{tabular}{rrrr}
-  \hline
- & id & read & write \\ 
-  \hline
-1 & 70 & 57 & 52 \\ 
-  2 & 86 & 44 & 33 \\ 
-  3 & 141 & 63 & 44 \\ 
-  4 & 172 & 47 & 52 \\ 
-  $\vdots$ &   $\vdots$  &   $\vdots$ &   $\vdots$  \\
-  200 & 137 & 63 & 65 \\ 
-   \hline
-\end{tabular}
-\end{center}
-}
+% {\small
+% \begin{center}
+% \begin{tabular}{rrrr}
+%   \hline
+%  & id & read & write \\ 
+%   \hline
+% 1 & 70 & 57 & 52 \\ 
+%   2 & 86 & 44 & 33 \\ 
+%   3 & 141 & 63 & 44 \\ 
+%   4 & 172 & 47 & 52 \\ 
+%   $\vdots$ &   $\vdots$  &   $\vdots$ &   $\vdots$  \\
+%   200 & 137 & 63 & 65 \\ 
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
 
-\begin{multicols}{2}
-\begin{enumerate}[(a)]
-\item Yes
-\solnMult{No}
-\end{enumerate}
-\end{multicols}
+% \begin{multicols}{2}
+% \begin{enumerate}[(a)]
+% \item Yes
+% \solnMult{No}
+% \end{enumerate}
+% \end{multicols}
 
-\end{frame}
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Do the data appear independent?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -163,27 +180,11 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Do the data appear independent?}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{R Demonstration: Examining the difference}  % Test statistic & point estimates, like slide 4
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: How would you set up the hypotheses?}  % Like slides 5-7
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Computations}  % Like slide 8
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Interpret the results}  % Like slides 9-10 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Computing the Confidence Interval} 
+\section{Think/pair/share: How would you set up the hypotheses?}  % Like slides 5-7
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -271,6 +272,10 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R Demonstration: Computations}  % Like slide 8
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}[shrink]
 \frametitle{Calculating the test-statistic and the p-value}
@@ -301,6 +306,10 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Interpret the results}  % Like slides 9-10 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Interpretation of p-value}
 
@@ -316,6 +325,10 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Computing the Confidence Interval} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \frametitle{HT $\leftrightarrow$ CI}
