@@ -146,3 +146,7 @@ Create the **`sim_function()`** for one simulation run to calculate the differen
 Obtain 100 simulation runs to calculate the difference rates and assign them to **`rates`**.
 
 Would you reject the null hypothesis or not? Include `Reject_H_not = TRUE` or `Reject_H_not = FALSE`
+
+## Reminder
+
+You are required to submit the project 1 deliverable 2 : **project presentation plan** and **R code** by next Friday at 8:00 AM. Please discuss this with your team and make a plan to complete and submit it on time.
