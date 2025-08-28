@@ -19,10 +19,10 @@ experiment <- function(N, mu_0, mu, sigma) {
 # Now let's try graphing the results with the t distribution instead
 
 data = as.data.frame(replicate(n=1000, experiment(5, 4.5, 4.5, 0.17)))
-colnames(data) <- c("Z")
+colnames(data) <- c("t")
 
-ggplot(data, aes(x=Z)) +
-  geom_histogram(aes(y=..density..), alpha=0.5) +
+ggplot(data, aes(x=t)) +
+  geom_histogram(aes(y=after_stat(density)), alpha=0.5, bins=20) +
   stat_function(fun=dt, args=list(df=7), col="blue")
 
 # FIXME: doesn't look quite right

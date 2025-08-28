@@ -25,11 +25,12 @@ colnames(data1) <- c("Z")
 
 # Does this histogram look familiar?
 ggplot(data1, aes(x=Z)) +
-  geom_histogram(aes(y=..density..), alpha=0.5) +
+  geom_histogram(aes(y=after_stat(density)), alpha=0.5, bins=20) +
   stat_function(fun=dnorm, args=list(mean=0.0, sd=1.0), col="blue") +
-  xlim(-3,3)
+  scale_x_continuous(breaks=-3:3)
 
-# FIXME: normalize the y-axis
+# TODO: ylim's don't seem to match for the histogram and the density -
+# need to normalize in another way?
 
 
 # 3. ---- Now run the experiment 1000 times for N=5, mu_0=mu ----
@@ -39,10 +40,8 @@ colnames(data2) <- c("Z")
 
 # Now what's wrong with this histogram?
 ggplot(data2, aes(x=Z)) +
-  geom_histogram(aes(y=..density..), alpha=0.5) +
+  geom_histogram(aes(y=after_stat(density)), alpha=0.5, bins=20) +
   stat_function(fun=dnorm, args=list(mean=0.0, sd=1.0), col="blue") +
-  xlim(-3,3)
-
-# FIXME: normalize the y-axis
+  xlim(-3, 3)
 
 # Looks like we'll need a new distribution!
