@@ -44,16 +44,16 @@ server <- function(input, output) {
     power <- pnorm(z_lower) + (1 - pnorm(z_upper))
     ggplot(plot_df, aes(x = x, y = y, color = dist)) +
       geom_line(size = 1) +
-      scale_color_manual(values = c("Null" = "blue", "Alternative" = "darkgreen")) +
-      geom_vline(xintercept = c(-critical_value, critical_value), linetype = "dashed", color = "blue") +
+      scale_color_manual(values = c("Null" = "steelblue", "Alternative" = "darkgreen")) +
+      geom_vline(xintercept = c(-critical_value, critical_value), linetype = "dashed", color = "steelblue") +
       geom_area(
         data = subset(plot_df, dist=="Alternative" & x >= critical_value),
         aes(y = y),
-        fill = 'lightgreen', alpha = 0.5) +
+        fill = 'darkgreen', alpha = 0.5) +
       geom_area(
         data = subset(plot_df, dist=="Alternative" & x <= -critical_value),
         aes(y = y),
-        fill = 'lightgreen', alpha = 0.5) +
+        fill = 'darkgreen', alpha = 0.5) +
       labs(title = "Null and Alternative Hypothesis Distributions",
            x = "Difference in Sample Means",
            y = "Density",

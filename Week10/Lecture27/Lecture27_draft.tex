@@ -143,10 +143,6 @@ If the alternative hypothesis is actually true, what is the chance that we make 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Decision errors (review)}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
 \frametitle{Example - Blood Pressure (BP), hypotheses}
 
@@ -203,9 +199,9 @@ For what values of the difference between the observed averages of blood pressur
 \pause
 
 The difference should be at least 
-\[ 1.96 * 1.70 = 3.332 \] 
+\[ 1.96 * 1.70 = 3.326 \] 
 or at most 
-\[ -1.96 * 1.70 = -3.332. \]
+\[ -1.96 * 1.70 = -3.326. \]
 
 \end{frame}
 
@@ -225,17 +221,78 @@ Suppose that the company researchers care about finding any effect on blood pres
 
 \pause
 
-\[ Z = \frac{-3.332 - (-3)}{1.70} = -0.20 \]
+\[ Z = \frac{-3.326 - (-3)}{1.70} = -0.19 \]
 
 \pause
 
-\[ P(Z < -0.20) = 0.4207 \]
+\[ P(Z < -0.19) = 0.4239 \]
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Sample size for desired power}
+\section{Edfinity Quiz: Steps for computing power}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Steps for computing power}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{enumerate}
+        \item Plot distribution of $\bar{x}_1 - \bar{x}_2$ under $H_0$.
+        \item Find rejection region for $\bar{x}_1 - \bar{x}_2$.
+        \item Plot distribution of $\bar{x}_1 - \bar{x}_2$ under $H_A$.
+        \item Power $= $ area under $f_A$ in rejection region.
+        \item $\beta = 1 - $ Power
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{figures/power_2sample_schematic_twosided.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Think/Pair/Share}
+% TODO
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demo: Power calculation and intuition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What if we increase the effect size?}
+  \begin{center}
+      \includegraphics[height=0.75\textheight]{figures/whatif_baseline_effect.png}
+  \end{center}
+  Distributions separate, $\downarrow\beta$, $\uparrow$ power
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What if we decrease the alpha level?}
+  \begin{center}
+      \includegraphics[height=0.75\textheight]{figures/whatif_baseline_alpha.png}
+  \end{center}
+  Rejection boundaries expand, $\uparrow\beta$, $\downarrow$ power
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What if we increase the sample size?}
+  \begin{center}
+      \includegraphics[height=0.75\textheight]{figures/whatif_baseline_samplesize.png}
+  \end{center}
+  Distributions narrow, $\downarrow\beta$, $\uparrow$ power
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
