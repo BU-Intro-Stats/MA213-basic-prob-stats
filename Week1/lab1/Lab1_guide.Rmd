@@ -280,3 +280,45 @@ my_data <- read.csv("mtcars.csv")
 -   Conditional statement works similar as vectors (row wise and column wise)
 
     -   \| for example, `my_data[my_data$hp<100,]`
+
+## Multiple conditions can be combined
+
+You can combine multiple logical conditions using & (AND), \| (OR), and ! (NOT) operators inside the row index to filter rows. For example
+
+-   Rows where `hp` is less than 100 AND `cyl` equals 4:
+
+```{r, echo=TRUE}
+
+my_data[(my_data$hp < 100) & (my_data$cyl == 4), ]
+
+```
+
+-   Rows where `hp` is less than 100 OR `cyl` equals 4:
+
+```{r, echo=TRUE}
+
+my_data[my_data$hp < 100 | my_data$cyl == 4, ]
+
+```
+
+Rows where `hp` is NOT less than 100:
+
+```{r, echo=TRUE}
+
+my_data[! (my_data$hp < 100), ]
+
+```
+
+### If an expression or condition is True or False, programming language gives two answers `TRUE` or `FALSE` . It is sometimes can be shown to `1` or `0`. 
+
+```{r, echo=TRUE}
+3==3 # True
+10 == 3 # False
+
+
+```
+
+```{r, echo=TRUE}
+my_data$hp < 100 # if the horse power of the car is less than 100 it gives 1, 0 otherwise. 
+my_data[my_data$hp < 100,] # this is how we are only printing the cars data with horse power < 100. 
+```
