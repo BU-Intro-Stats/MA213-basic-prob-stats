@@ -78,7 +78,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 A survey was conducted on students in an introductory statistics course. Below are a few of the questions on the survey, and the corresponding variables the data from the responses were stored in:
 
 \begin{itemize}
-\item \var{gender}: What is your gender? 
+\item \var{zodiac}: What is your Zodiac star sign? 
 \item \var{intro\_extra}: Do you consider yourself introverted or extraverted? 
 \item \var{sleep}: How many hours do you sleep at night, on average?
 \item \var{bedtime}: What time do you usually go to bed?
@@ -99,14 +99,14 @@ Data collected on students in a statistics class on a variety of variables:
 		& \hl{variable} \\
 		& \hl{$\downarrow$}	 \\
 \cline{1-5}
-Stu.	&	\var{gender}	&	\var{intro\_extra} & $\cdots$ & \var{countries} \\
+Stu.	&	\var{zodiac}	&	\var{intro\_extra} & $\cdots$ & \var{countries} \\
 \cline{1-5}
-1 & male   & extravert  & $\cdots$  & 13 \\ 
-2 & female & extravert  & $\cdots$  & 7 \\ 
-3 & female & introvert  & $\cdots$  & 1 & \hl{$\leftarrow$}  \\ 
-4 & female & extravert  & $\cdots$  & 5 & \hl{observation} \\
+1 & Leo   & extravert  & $\cdots$  & 13 \\ 
+2 & Capricorn & extravert  & $\cdots$  & 7 \\ 
+3 & Gemini & introvert  & $\cdots$  & 1 & \hl{$\leftarrow$}  \\ 
+4 & Libra & extravert  & $\cdots$  & 5 & \hl{observation} \\
 $\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
-86	& male & extravert  & $\cdots$  & 9 \\
+86	& Leo & extravert  & $\cdots$  & 9 \\
 \cline{1-5}
 \end{tabular}
 \end{center}
@@ -135,21 +135,21 @@ $\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
 {\footnotesize
 \begin{tabular}{c ccc cc}
   \hline
- & \var{gender} & \var{sleep} & \var{bedtime} & \var{countries}  \\
+ & \var{zodiac} & \var{sleep} & \var{bedtime} & \var{countries}  \\
   \hline
-1 & male & 5 & 12-2 & 13  \\ 
-  2 & female & 7 & 10-12 & 7  \\ 
-  3 & female & 5.5 & 12-2 & 1  \\ 
-  4 & female & 7 & 12-2 &   \\ 
-  5 & female & 3 & 12-2 & 1  \\ 
-  6 & female & 3 & 12-2 & 9  \\ 
+1 & Leo & 5 & 12-2 & 13  \\ 
+  2 & Capricorn & 7 & 10-12 & 7  \\ 
+  3 & Gemini & 5.5 & 12-2 & 1  \\ 
+  4 & Libra & 7 & 12-2 &   \\ 
+  5 & Aries & 8 & 12-2 & 1  \\ 
+  6 & Leo & 8 & 12-2 & 9  \\ 
   \hline
 \end{tabular}
 }
 \end{center}
 
 \begin{itemize}
-\item \var{gender}: \pause \soln{\only<2->{categorical}} \pause
+\item \var{zodiac}: \pause \soln{\only<2->{categorical}} \pause
 \item \var{sleep}: \pause \soln{\only<4->{numerical, continuous}} \pause
 \item \var{bedtime}: \pause \soln{\only<6->{categorical, ordinal}} \pause
 \item \var{countries}: \pause \soln{\only<8->{numerical, discrete}} \pause
@@ -570,23 +570,21 @@ explanatory variable $\xrightarrow{might~affect}$response variable
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Think/pair/share: sampling/bias}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-	\frametitle{TPS Instructions}
+	\frametitle{Think/pair/share: sampling/bias}
 
 	After reading the question (on the next slide)...
 
 	\begin{itemize}
-		\item \textbf{Step 1: Think (3 minute):} Think to yourself about how you would answer the question. You can briefly write down your thoughts for the next steps.
-		\item \textbf{Step 2: Pair (2 minutes):} Get into pairs, get to know each other, and discuss the question together. 
+		\item \textbf{Step 1: Think (2 minute):} Think to yourself about how you would answer the question. You can briefly write down your thoughts for the next steps.
+		\item \textbf{Step 2: Pair (3 minutes):} Get into pairs, get to know each other, and discuss the question together. 
 		\item \textbf{Step 3: Share (3 minutes):} Share your and your partner's thoughts on the forum, and read others' responses.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{TPS Question}
+	\frametitle{Think/pair/share: sampling/bias}
 
 	A school district purchases language arts software to supplement the teaching of reading to students in grade 2. 
 	After 3 months of using the software, the school wants to determine whether use of the program has led to improved reading levels. 

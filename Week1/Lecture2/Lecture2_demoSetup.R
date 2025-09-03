@@ -12,11 +12,11 @@ head(data_clean)
 # Rename the remaining columns to be more useful
 colnames(data_clean) <- c("sleep", "bedtime", "countries",
                           "caffeine", "class", "zodiac", 
-                          "int-ext")
+                          "intro_extra")
 
 # Instead of A/B for introverted/extroverted, replace with the words
-data_clean$`int-ext`[data_clean$`int-ext` == "A"] <- "introverted"
-data_clean$`int-ext`[data_clean$`int-ext` == "B"] <- "extraverted"
+data_clean$`intro_extra`[data_clean$`intro_extra` == "A"] <- "introverted"
+data_clean$`intro_extra`[data_clean$`intro_extra` == "B"] <- "extraverted"
 
 # Save the now-clean and -anonymized data into a new .csv file
 write.csv(data_clean, "lecture_1_survey_data_clean.csv", row.names=FALSE)
