@@ -152,7 +152,7 @@ $\vdots$	 &	$\vdots$	&	$\vdots$  &	$\vdots$ &	$\vdots$ \\
 \item \var{zodiac}: \pause \soln{\only<2->{categorical}} \pause
 \item \var{sleep}: \pause \soln{\only<4->{numerical, continuous}} \pause
 \item \var{bedtime}: \pause \soln{\only<6->{categorical, ordinal}} \pause
-\item \var{countries}: \pause \soln{\only<8->{numerical, discrete}} \pause
+\item \var{countries}: \pause \soln{\only<8->{numerical, discrete}} 
 \end{itemize}
 
 \end{frame}
@@ -482,122 +482,122 @@ explanatory variable $\xrightarrow{might~affect}$response variable
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Observational studies}
+% \subsection{Observational studies}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-	\frametitle{Observational studies}
+% \begin{frame}
+% 	\frametitle{Observational studies}
 
-	\begin{itemize}
-		\item Researchers collect data in a way that does not directly interfere with how the data arise.
-		\item Results of an observational study can generally be used to establish an association between the explanatory and response variables.
-	\end{itemize}
+% 	\begin{itemize}
+% 		\item Researchers collect data in a way that does not directly interfere with how the data arise.
+% 		\item Results of an observational study can generally be used to establish an association between the explanatory and response variables.
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Four sampling methods}
+% \subsection{Four sampling methods}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-	\frametitle{Obtaining good samples}
+% \begin{frame}
+% 	\frametitle{Obtaining good samples}
 
-	\begin{itemize}
-		\item Almost all statistical methods are based on the notion of implied randomness. 
-		\item If observational data are not collected in a random framework from a population, these statistical methods -- the estimates and errors associated with the estimates -- are not reliable.
-		\item Most commonly used random sampling techniques are \hl{simple}, \hl{stratified}, and \hl{cluster} sampling.
-	\end{itemize}
+% 	\begin{itemize}
+% 		\item Almost all statistical methods are based on the notion of implied randomness. 
+% 		\item If observational data are not collected in a random framework from a population, these statistical methods -- the estimates and errors associated with the estimates -- are not reliable.
+% 		\item Most commonly used random sampling techniques are \hl{simple}, \hl{stratified}, and \hl{cluster} sampling.
+% 	\end{itemize}
 
-\end{frame}
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% 	\frametitle{Simple random sample}
+
+% 	Randomly select cases from the population, where there is no implied connection between the points that are selected.
+
+% 	\begin{center}
+% 	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/simple}
+% 	\end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% 	\frametitle{Stratified sample}
+
+% 	\hl{Strata} are made up of similar observations. We take a simple random sample from \underline{each} stratum.
+
+% 	\begin{center}
+% 	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/stratified}
+% 	\end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% 	\frametitle{Cluster sample}
+
+% 	\hl{Clusters} are usually not made up of homogeneous observations. We take a simple random sample of clusters, and then sample \underline{all} observations in that cluster. Usually preferred for economical reasons.
+
+% 	\begin{center}
+% 	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/cluster}
+% 	\end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% 	\frametitle{Multistage sample}
+
+% 	\hl{Clusters} are usually not made up of homogeneous observations.  We take a simple random sample of clusters, and then take a simple random sample of observations from the sampled clusters.
+
+% 	\begin{center}
+% 	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/multistage}
+% 	\end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-	\frametitle{Simple random sample}
+% \begin{frame}
+% 	\frametitle{Think/pair/share: sampling/bias}
 
-	Randomly select cases from the population, where there is no implied connection between the points that are selected.
+% 	After reading the question (on the next slide)...
 
-	\begin{center}
-	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/simple}
-	\end{center}
+% 	\begin{itemize}
+% 		\item \textbf{Step 1: Think (2 minute):} Think to yourself about how you would answer the question. You can briefly write down your thoughts for the next steps.
+% 		\item \textbf{Step 2: Pair (3 minutes):} Get into pairs, get to know each other, and discuss the question together. 
+% 		\item \textbf{Step 3: Share (3 minutes):} Share your and your partner's thoughts on the forum, and read others' responses.
+% 	\end{itemize}
+% \end{frame}
 
-\end{frame}
+% \begin{frame}
+% 	\frametitle{Think/pair/share: sampling/bias}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	A school district purchases language arts software to supplement the teaching of reading to students in grade 2. 
+% 	After 3 months of using the software, the school wants to determine whether use of the program has led to improved reading levels. 
+% 	There is concern that the program may not be as effective for students who are not accustomed to using a computer at home. 
+% 	The district is considering two sampling techniques:
 
-\begin{frame}
-	\frametitle{Stratified sample}
+% 	\begin{enumerate}
+% 		\item Randomly sampling students who have a computer at home and students who don't, and assessing their reading skills. 
+% 		\item Randomly sampling students regardless of whether they have a computer at home or not, and assessing their reading skills. 
+% 	\end{enumerate}
 
-	\hl{Strata} are made up of similar observations. We take a simple random sample from \underline{each} stratum.
-
-	\begin{center}
-	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/stratified}
-	\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{Cluster sample}
-
-	\hl{Clusters} are usually not made up of homogeneous observations. We take a simple random sample of clusters, and then sample \underline{all} observations in that cluster. Usually preferred for economical reasons.
-
-	\begin{center}
-	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/cluster}
-	\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{Multistage sample}
-
-	\hl{Clusters} are usually not made up of homogeneous observations.  We take a simple random sample of clusters, and then take a simple random sample of observations from the sampled clusters.
-
-	\begin{center}
-	\includegraphics[width=0.9\textwidth]{\chp1@path/1-3_sampling_principles_strategies/figures/sampling_methods/multistage}
-	\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{Think/pair/share: sampling/bias}
-
-	After reading the question (on the next slide)...
-
-	\begin{itemize}
-		\item \textbf{Step 1: Think (2 minute):} Think to yourself about how you would answer the question. You can briefly write down your thoughts for the next steps.
-		\item \textbf{Step 2: Pair (3 minutes):} Get into pairs, get to know each other, and discuss the question together. 
-		\item \textbf{Step 3: Share (3 minutes):} Share your and your partner's thoughts on the forum, and read others' responses.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Think/pair/share: sampling/bias}
-
-	A school district purchases language arts software to supplement the teaching of reading to students in grade 2. 
-	After 3 months of using the software, the school wants to determine whether use of the program has led to improved reading levels. 
-	There is concern that the program may not be as effective for students who are not accustomed to using a computer at home. 
-	The district is considering two sampling techniques:
-
-	\begin{enumerate}
-		\item Randomly sampling students who have a computer at home and students who don't, and assessing their reading skills. 
-		\item Randomly sampling students regardless of whether they have a computer at home or not, and assessing their reading skills. 
-	\end{enumerate}
-
-	What is/are the population(s) of interest? Which sampling technique do you think they should use? Why?
-\end{frame}
+% 	What is/are the population(s) of interest? Which sampling technique do you think they should use? Why?
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
