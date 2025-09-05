@@ -36,6 +36,11 @@ ggplot(data=survey_data, aes(x=bedtime)) +
 # Bar plot of Zodiac signs:
 ggplot(data=survey_data, aes(x=zodiac)) +
   geom_bar() +
+  xlab("Zodiac sign")
+
+# ...rotate the x labels so they are readable
+ggplot(data=survey_data, aes(x=zodiac)) +
+  geom_bar() +
   xlab("Zodiac sign") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
@@ -45,7 +50,7 @@ ggplot(data=survey_data, aes(x=caffeine, y=sleep)) +
   xlab("Number of caffeinated drinks") +
   ylab("Hours of sleep")
 
-# What if more than one person had the same combination of answers?
+# ...What if more than one person had the same combination of answers?
 ggplot(data=survey_data, aes(x=caffeine, y=sleep)) +
   geom_jitter() +
   xlab("Number of caffeinated drinks") +
