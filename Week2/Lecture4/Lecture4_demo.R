@@ -40,11 +40,11 @@ ggplot(data=airquality2, aes(y=Wind)) +
 # Note: This is the code we used last time to plot the IQR:
 ggplot(data=airquality2, aes(x = Wind)) +
   geom_histogram() +
-  geom_boxplot(aes(x = Wind),  # Place boxplot below x-axis
+  geom_boxplot(aes(x = Wind),  
                width = 1, 
-               outlier.shape = NA,
-               coef = 0,
-               position = position_nudge(y = -2)
+               #outlier.shape = NA,              # Use default outlier marker
+               #coef = 0,                        # Use default whisker length (1.5x IQR)
+               position = position_nudge(y = -2) # Place boxplot below x-axis
   ) 
 guides(fill = "none")
 
