@@ -68,6 +68,138 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \input{Lecture4_agenda.tex}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Examining numerical data (cont'd)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Variance and standard deviation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Variance}
+
+\hl{Variance} is roughly the average squared deviation from the mean.
+
+\formula{
+\[ s^2 = \frac{\sum_{i = 1}^n (x_i - \bar{x})^2}{n - 1} \]
+}
+
+\pause
+
+\twocol{0.5}{0.5}
+{
+\begin{itemize}
+
+\item The sample mean is $\bar{x} = 6.71$, and the sample size is $n = 217$.
+
+\onslide<3->{\item The variance of amount of sleep students get per night can be calculated as:}
+\end{itemize}
+}
+{
+\onslide<2->{
+\begin{center}
+\includegraphics[width=\textwidth]{\chpii@path/2-1_numerical_data/figures/sleep_hist/sleep_hist}
+\end{center}
+}
+}
+$\:$
+\onslide<3->{
+\[ s^2 = \frac{(5 - 6.71)^2 + (9 - 6.71)^2 + \cdots + (7 - 6.71)^2}{217 - 1} = 4.11~hours^2 \]
+}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Variance (cont.)}
+
+\dq{Why do we use the squared deviation in the calculation of variance?}
+
+\soln{\pause
+\begin{itemize}
+\item To get rid of negatives so that observations equally distant from the mean are weighed equally.
+\item To weigh larger deviations more heavily.
+\end{itemize}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Standard deviation}
+
+The \hl{standard deviation} is the square root of the variance, and has the same units as the data
+
+\formula{
+\[ s = \sqrt{s^2} \]
+}
+
+\pause
+
+\twocol{0.5}{0.5}
+{
+\begin{itemize}
+
+\item The standard deviation of amount of sleep students get per night can be calculated as:
+\[ s = \sqrt{4.11} = 2.03~hours\]
+
+\onslide<3->{\item We can see that all of the data are within 3 standard deviations of the mean.}
+\end{itemize}
+}
+{
+\onslide<2->{
+\begin{center}
+\includegraphics[width=\textwidth]{\chpii@path/2-1_numerical_data/figures/sleep_hist/sleep_hist}
+\end{center}
+}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Box plots, percentiles, and quartiles}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Percentiles}
+
+\hl{Percentiles}: for any (large) set of n measurements (arranged in ascending or descending order), the $p$th percentile is a number such that $p\%$ of the measurements fall below that number and $(100-p)\%$ are equal to or above it.
+
+\hl{Quantiles}: Percentiles expressed in decimal form.  E.g. The .37 quantile is equivalent to the 37th percentile.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Q1, Q3, and IQR}
+
+\begin{itemize}
+
+\item The $25^{th}$ percentile is also called the first quartile, \hl{Q1}.
+
+\item The $50^{th}$ percentile is also called the median.
+
+\item The $75^{th}$ percentile is also called the third quartile, \hl{Q3}.
+
+\item Between Q1 and Q3 is the middle 50\% of the data. The range these data span is called the \hl{interquartile range}, or the \hl{IQR}.
+\formula{\[ IQR = Q3 - Q1 \]}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{R Demo: Measures of Variability (Lecture 3 Demo 2)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \begin{frame}
 \frametitle{Box plot}
 
@@ -190,22 +322,22 @@ The box in a \hl{box plot} represents the middle 50\% of the data, and the thick
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Forum Brainstorm: Outliers}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Forum Brainstorm: Outliers}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{What to do with outliers?}
-\begin{itemize}
-\item \hl{Think:} 
-\begin{itemize}
-  \item What are some examples of outliers? 
-  \item Are they errors or interesting features of the data?
-  \item Under what circumstances would you keep or remove them?
-\end{itemize}
-\item \hl{Share:} Share an example with the class in the forum, and your thoughts on what do with it/why
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{What to do with outliers?}
+% \begin{itemize}
+% \item \hl{Think:} 
+% \begin{itemize}
+%   \item What are some examples of outliers? 
+%   \item Are they errors or interesting features of the data?
+%   \item Under what circumstances would you keep or remove them?
+% \end{itemize}
+% \item \hl{Share:} Share an example with the class in the forum, and your thoughts on what do with it/why
+% \end{itemize}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -254,7 +386,7 @@ The box in a \hl{box plot} represents the middle 50\% of the data, and the thick
 \begin{frame}
 \frametitle{Robust statistics applet}
 \begin{enumerate}
-  \item  https://www.isi-stats.com/isi2nd/ISIapplets2021.html
+  \item  \webURL{https://www.isi-stats.com/isi2nd/ISIapplets2021.html}
   \item \hl{Quantitative $\rightarrow$ Descriptive Statistics:}
   \item Load the house income data (house\_income\_sorted.csv)
   \item Add boxplot with outliers $\rightarrow$ The data is skewed, so the box plot has a few ``outliers"
