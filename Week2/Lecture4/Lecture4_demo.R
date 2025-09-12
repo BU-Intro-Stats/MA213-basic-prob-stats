@@ -5,8 +5,6 @@ library(ggplot2)  # load the graphing library
 if(!require("rstudioapi")) install.packages("rstudioapi")
 setwd(dirname(getSourceEditorContext()$path))  # set working directory
 
-set.seed(42)
-
 # ---- 1. Load data ----
 data(airquality)
 
