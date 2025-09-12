@@ -29,7 +29,9 @@ head(data)
 # Based on the data, 21/24=87.5% of male employees were promoted,
 # while 14/24=58.33% of female employees were promoted, leading to a difference
 # in proportions of 29.167%. 
-#
+obs_diff = 21/24-14/24
+
+
 # H0: The employees' gender and their promotion outcomes are independent.
 # That is, they have no relationship and the observed difference between the 
 # proportion of employees who were promoted in each group, 29.167%, is due to 
@@ -86,7 +88,7 @@ simulation <- function() {
 
 # Now repeat many times:
 
-Nsim <- 100
+Nsim <- 500
 simulated_rates <- rep(0, Nsim)
 
 for(i in 1:Nsim) {
@@ -97,7 +99,8 @@ for(i in 1:Nsim) {
 
 simulation_df <- data.frame(DifferenceProportion=simulated_rates)
 ggplot(data=simulation_df, aes(x=DifferenceProportion)) +
-  geom_dotplot() + 
-  geom_vline(xintercept = .29167, color = "red", linetype = "dashed")
+  geom_histogram() +
+  geom_vline(xintercept = obs_diff, color = "red", linetype = "dashed")
 
-# What can we conclude?
+# How often did we get a more extreme gender difference in the chance model than the actual data?
+print(sum(simulated_rates >= obs_diff)/Nsim)
