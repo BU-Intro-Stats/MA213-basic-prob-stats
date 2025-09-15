@@ -1,9 +1,9 @@
 ---
 title: "MA213 Basic Statistics and Probability - Lab1 Guide"
 output:
-  pdf_document: default
   html_document:
-    code_download: true 
+    code_download: false 
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -42,7 +42,7 @@ We assume that you have already installed R and Rstudio (You need to install fir
 
 ## Brief walk through about RStudio interface
 
-![RStudio overview](Screen_Shot_Rstudio.png){width="767"}
+![RStudio overview](images/Screen_Shot_Rstudio.png){width="767"}
 
 window `1` : script window (text editor)
 
@@ -201,7 +201,7 @@ SomeNames <- c("Alpha", "Bravo", "Charlie")
 
 ```
 
-![Index of Vector Elements](index.jpg)
+![Index of Vector Elements](images/index.jpg)
 
 ## For example
 
@@ -244,7 +244,7 @@ Numbers[Numbers<100]
 
 ```
 
-![Subsetting vector using condition](Slicing.jpg)
+![Subsetting vector using condition](images/Slicing.jpg)
 
 ## Importing and Subsetting Data
 
@@ -252,7 +252,7 @@ You can import Data by using `read.table()` function.
 
 ```{r, echo=TRUE}
 
-my_data <- read.csv("mtcars.csv")
+my_data <- read.csv("data/mtcars.csv")
 # to be able to import this file, this file needs to be in your working directory
 
 ```
@@ -309,7 +309,7 @@ my_data[! (my_data$hp < 100), ]
 
 ```
 
-### If an expression or condition is True or False, programming language gives two answers `TRUE` or `FALSE` . It is sometimes can be shown to `1` or `0`. 
+### If an expression or condition is True or False, programming language gives two answers `TRUE` or `FALSE` . It is sometimes can be shown to `1` or `0`.
 
 ```{r, echo=TRUE}
 3==3 # True
