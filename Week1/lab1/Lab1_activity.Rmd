@@ -115,4 +115,4 @@ a <- 45/9
 
     Import `mtcars.csv` to the variable `cars_data`. Create a new variable `cars_data_sub` containing only the data for automatic transmission cars with weight over 3000 lbs (Make sure you end up with two variables: `cars_data` and `cars_data_sub`).
 
-3.  You are interested in how many different number of cylinders of the cars in the datasets. You can count them and distinguish them in this dataset. However, if it is a large data, it is not possible to do it manually. Assign unique number of cylinders of the cars in the data by using `unique()` function and assign it to variable `unique_cyl` .
+3.  You are interested in how many different number of cylinders of the cars in the datasets. You can count them and distinguish them in this dataset. However, if it is a large data, it is not possible to do it manually. Assign distinct cylinders of the cars in the data by using `unique()` function and assign it to variable `unique_cyl` .
