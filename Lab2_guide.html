@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>MA213 Basic Statistics and Probability - Lab2 Guide</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Lab1_guide.html">Lab1</a>
+</li>
+<li>
+  <a href="Lab2_guide.html">Lab2</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">MA213 Basic Statistics and Probability -
+Lab2 Guide</h1>
+
+</div>
+
+
+<div id="lab-2-data-transformation" class="section level2">
+<h2><strong>Lab 2:</strong> Data transformation</h2>
+<p>Data transformation is a crucial part in exploratory data analysis
+(EDA). EDA includes the processes of importing, cleaning, and
+visualizing data to uncover the patterns, relationships and hidden
+insights within the data.</p>
+<p>In this lab, we will learn data processing and subsetting to see more
+insights from the data.</p>
+<hr />
+</div>
+<div id="learning-objectives" class="section level2">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Use R for Data Management and Exploration: Utilize R to load,
+pre-process, and explore data through visualization and summarization
+techniques.</li>
+<li>Classify and Analyze Variables: Categorize variables based on their
+types (e.g., numerical/categorical, continuous/discrete, ordinal),
+assess their association (positive, negative, or independent), and
+determine which make sense as explanatory vs. response variables.</li>
+</ul>
+<hr />
+</div>
+<div id="load-packages-for-data" class="section level2">
+<h2>Load packages for Data</h2>
+<p>If you didn’t install <code>tidyverse</code> package</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>Load package</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ───────────────
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ lubridate 1.9.4     ✔ tibble    3.3.0
+## ✔ purrr     1.0.4     ✔ tidyr     1.3.1
+## ✔ readr     2.1.5     
+## ── Conflicts ────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div id="new-york-air-quality-data" class="section level2">
+<h2><strong>New York Air Quality Data</strong></h2>
+<p>Daily air quality measurements in New York, May to September 1973
+stored within a data frame with 153 observations on 6 variables. It is
+obtained from the New York State Department of Conservation (ozone data)
+and the National Weather Service (meteorological data). It is cited by
+<span class="citation">Chambers (<a
+href="#ref-chambers2018graphical">2018</a>)</span>.</p>
+<p>You can find the details fo the data description <a
+href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html">here</a>.</p>
+</div>
+<div id="import-the-data" class="section level2">
+<h2>Import the Data</h2>
+<p>You can use <code>airquality</code> object from base R data. You can
+also <code>airquality.csv</code> file where the data is stored as a
+comma separated value (CSV) file. Each row holds information for a
+single observation.</p>
+<p>Import the data from <code>airquality.csv</code> and show first 6
+rows to see how this data is organized.</p>
+<pre class="r"><code>df = read.csv(&quot;Lab2/data/airquality.csv&quot;)</code></pre>
+</div>
+<div id="glimpse-to-take-a-quick-peek-at-your-data"
+class="section level2">
+<h2><code>glimpse()</code> to take a quick peek at your data</h2>
+<pre class="r"><code>glimpse(df)</code></pre>
+<pre><code>## Rows: 153
+## Columns: 7
+## $ X       &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
+## $ Ozone   &lt;int&gt; 41, 36, 12, 18, NA, 28, 23, 19, 8, NA, 7, 16, 11, 14, 18, 14, …
+## $ Solar.R &lt;int&gt; 190, 118, 149, 313, NA, NA, 299, 99, 19, 194, NA, 256, 290, 27…
+## $ Wind    &lt;dbl&gt; 7.4, 8.0, 12.6, 11.5, 14.3, 14.9, 8.6, 13.8, 20.1, 8.6, 6.9, 9…
+## $ Temp    &lt;int&gt; 67, 72, 74, 62, 56, 66, 65, 59, 61, 69, 74, 69, 66, 68, 58, 64…
+## $ Month   &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+## $ Day     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…</code></pre>
+</div>
+<div id="to-view-the-names-of-the-variables" class="section level2">
+<h2>To view the names of the variables</h2>
+<pre class="r"><code>names(df)</code></pre>
+<pre><code>## [1] &quot;X&quot;       &quot;Ozone&quot;   &quot;Solar.R&quot; &quot;Wind&quot;    &quot;Temp&quot;    &quot;Month&quot;   &quot;Day&quot;</code></pre>
+</div>
+<div id="to-view-the-first-6-rows" class="section level2">
+<h2>To view the first 6 rows</h2>
+<pre class="r"><code>head(df)</code></pre>
+<pre><code>##   X Ozone Solar.R Wind Temp Month Day
+## 1 1    41     190  7.4   67     5   1
+## 2 2    36     118  8.0   72     5   2
+## 3 3    12     149 12.6   74     5   3
+## 4 4    18     313 11.5   62     5   4
+## 5 5    NA      NA 14.3   56     5   5
+## 6 6    28      NA 14.9   66     5   6</code></pre>
+</div>
+<div id="the-pipe-operator" class="section level2">
+<h2>The pipe operator</h2>
+<p><code>dplyr</code> (one of data packages in <code>tidyverse</code>)
+provides the <code>%&gt;%</code> operator from magrittr.
+<code>x %&gt;% f(y)</code> turns into <code>f(x, y)</code> so the result
+from one step is then “piped” into the next step.</p>
+<p><code>df %&gt;% filter(Month==5)</code> means “Select all rows with
+May”</p>
+<pre class="r"><code>df %&gt;% filter(Month==5)</code></pre>
+<pre><code>##     X Ozone Solar.R Wind Temp Month Day
+## 1   1    41     190  7.4   67     5   1
+## 2   2    36     118  8.0   72     5   2
+## 3   3    12     149 12.6   74     5   3
+## 4   4    18     313 11.5   62     5   4
+## 5   5    NA      NA 14.3   56     5   5
+## 6   6    28      NA 14.9   66     5   6
+## 7   7    23     299  8.6   65     5   7
+## 8   8    19      99 13.8   59     5   8
+## 9   9     8      19 20.1   61     5   9
+## 10 10    NA     194  8.6   69     5  10
+## 11 11     7      NA  6.9   74     5  11
+## 12 12    16     256  9.7   69     5  12
+## 13 13    11     290  9.2   66     5  13
+## 14 14    14     274 10.9   68     5  14
+## 15 15    18      65 13.2   58     5  15
+## 16 16    14     334 11.5   64     5  16
+## 17 17    34     307 12.0   66     5  17
+## 18 18     6      78 18.4   57     5  18
+## 19 19    30     322 11.5   68     5  19
+## 20 20    11      44  9.7   62     5  20
+## 21 21     1       8  9.7   59     5  21
+## 22 22    11     320 16.6   73     5  22
+## 23 23     4      25  9.7   61     5  23
+## 24 24    32      92 12.0   61     5  24
+## 25 25    NA      66 16.6   57     5  25
+## 26 26    NA     266 14.9   58     5  26
+## 27 27    NA      NA  8.0   57     5  27
+## 28 28    23      13 12.0   67     5  28
+## 29 29    45     252 14.9   81     5  29
+## 30 30   115     223  5.7   79     5  30
+## 31 31    37     279  7.4   76     5  31</code></pre>
+</div>
+<div id="the-pipe-operator-can-be-added" class="section level2">
+<h2>The pipe operator can be added</h2>
+<p>You can use the pipe to rewrite multiple operations that you can read
+left-to-right, top-to-bottom (reading the pipe operator as “then”)
+(<code>%&gt;%</code> and <code>|&gt;</code> are equivalent)</p>
+<pre class="r"><code>df |&gt; 
+  select(Ozone, Wind, Month) |&gt;
+  filter(Month==5)</code></pre>
+<pre><code>##    Ozone Wind Month
+## 1     41  7.4     5
+## 2     36  8.0     5
+## 3     12 12.6     5
+## 4     18 11.5     5
+## 5     NA 14.3     5
+## 6     28 14.9     5
+## 7     23  8.6     5
+## 8     19 13.8     5
+## 9      8 20.1     5
+## 10    NA  8.6     5
+## 11     7  6.9     5
+## 12    16  9.7     5
+## 13    11  9.2     5
+## 14    14 10.9     5
+## 15    18 13.2     5
+## 16    14 11.5     5
+## 17    34 12.0     5
+## 18     6 18.4     5
+## 19    30 11.5     5
+## 20    11  9.7     5
+## 21     1  9.7     5
+## 22    11 16.6     5
+## 23     4  9.7     5
+## 24    32 12.0     5
+## 25    NA 16.6     5
+## 26    NA 14.9     5
+## 27    NA  8.0     5
+## 28    23 12.0     5
+## 29    45 14.9     5
+## 30   115  5.7     5
+## 31    37  7.4     5</code></pre>
+<pre class="r"><code># </code></pre>
+</div>
+<div id="dplyr-data-manipulation-functions" class="section level2">
+<h2><code>Dplyr</code> data manipulation functions</h2>
+<ul>
+<li><p>Rows:</p>
+<ul>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a>
+chooses rows based on column values.</p></li>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/slice.html"><code>slice()</code></a>
+chooses rows based on location.</p></li>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a>
+changes the order of the rows.</p></li>
+</ul></li>
+<li><p>Columns:</p>
+<ul>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a>
+changes whether or not a column is included.</p></li>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/rename.html"><code>rename()</code></a>
+changes the name of columns.</p></li>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/mutate.html"><code>mutate()</code></a>
+changes the values of columns and creates new columns.</p></li>
+<li><p><a
+href="https://dplyr.tidyverse.org/reference/relocate.html"><code>relocate()</code></a>
+changes the order of the columns.</p></li>
+</ul></li>
+<li><p>Groups of rows:</p>
+<ul>
+<li><a
+href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a>
+collapses a group into a single row.</li>
+</ul></li>
+</ul>
+</div>
+<div id="some-useful-resources" class="section level2">
+<h2>Some useful resources</h2>
+<p><a
+href="https://openintrostat.github.io/oilabs-tidy/02_intro_to_data/intro_to_data.html"
+class="uri">https://openintrostat.github.io/oilabs-tidy/02_intro_to_data/intro_to_data.html</a></p>
+<p><a href="https://dplyr.tidyverse.org/articles/dplyr.html"
+class="uri">https://dplyr.tidyverse.org/articles/dplyr.html</a></p>
+<p><a
+href="https://rstudio.github.io/cheatsheets/html/data-transformation.html"
+class="uri">https://rstudio.github.io/cheatsheets/html/data-transformation.html</a></p>
+</div>
+<div id="creating-new-column-using-dplyr" class="section level2">
+<h2>Creating new column using <code>Dplyr</code></h2>
+<p>You can create new columns or modify existing ones using the
+<code>mutate()</code> function.</p>
+<p>For example, to create a new column that categorizes temperature:</p>
+<pre class="r"><code>df &lt;- df %&gt;%
+  mutate(Temp_Category = ifelse(Temp &gt; 80, &quot;High&quot;, &quot;Moderate&quot;)) # if Temp&gt;80 -&gt; &quot;High&quot; otherwise &quot;Moderate&quot;
+
+head(df)</code></pre>
+<pre><code>##   X Ozone Solar.R Wind Temp Month Day Temp_Category
+## 1 1    41     190  7.4   67     5   1      Moderate
+## 2 2    36     118  8.0   72     5   2      Moderate
+## 3 3    12     149 12.6   74     5   3      Moderate
+## 4 4    18     313 11.5   62     5   4      Moderate
+## 5 5    NA      NA 14.3   56     5   5      Moderate
+## 6 6    28      NA 14.9   66     5   6      Moderate</code></pre>
+</div>
+<div id="contingency-table-using-dplyr" class="section level2">
+<h2>Contingency Table using <code>dplyr</code></h2>
+<p>A contingency table displays the frequency distribution of variables.
+You can create contingency tables using <code>dplyr</code> in
+combination with <code>tidyr</code>.</p>
+<p>For example, to create a contingency table of Month
+vs. Ozone_Level:</p>
+<pre class="r"><code>df &lt;- df %&gt;%
+  mutate(Ozone_Level = ifelse(Ozone &gt; median(Ozone, na.rm=TRUE), &quot;High&quot;, &quot;Low&quot;))
+
+contingency_table &lt;- df %&gt;%
+  group_by(Month, Ozone_Level) %&gt;%
+  summarise(Count = n()) %&gt;%
+  pivot_wider(names_from = Ozone_Level, values_from = Count)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;Month&#39;. You
+## can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>print(contingency_table)</code></pre>
+<pre><code>## # A tibble: 5 × 4
+## # Groups:   Month [5]
+##   Month  High   Low  `NA`
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1     5     7    19     5
+## 2     6     3     6    21
+## 3     7    21     5     5
+## 4     8    18     8     5
+## 5     9     9    20     1</code></pre>
+</div>
+<div id="contingency-table-with-new-categorized-variable"
+class="section level2">
+<h2>Contingency Table with new categorized variable</h2>
+<p>You can categorize <code>solar.R</code> by</p>
+<pre><code>Solar.R &lt;= 115       : Low
+115&lt; Solar.R &lt;= 185  : Medium
+258&lt; Solar.R         : High</code></pre>
+<p>Create a contingency table for categorized <code>solar.R</code> vs
+<code>Ozone_level</code></p>
+<pre class="r"><code> contingency_table2 &lt;- df %&gt;%
+  mutate(solar_cat = case_when(
+    Solar.R &lt;= 115 ~ &quot;Low&quot;,
+    Solar.R &gt; 115 &amp; Solar.R &lt;= 185 ~ &quot;Medium&quot;,
+    Solar.R &gt; 258 ~ &quot;High&quot;
+  )) %&gt;%
+  group_by(solar_cat, Ozone_Level) %&gt;%
+  summarise(Count = n()) %&gt;%
+  pivot_wider(
+    names_from = Ozone_Level,
+    values_from = Count
+  )</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;solar_cat&#39;.
+## You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code> print(contingency_table2)</code></pre>
+<pre><code>## # A tibble: 4 × 4
+## # Groups:   solar_cat [4]
+##   solar_cat  High   Low  `NA`
+##   &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1 High         15    12    10
+## 2 Low           6    23     8
+## 3 Medium        7     7     8
+## 4 &lt;NA&gt;         30    16    11</code></pre>
+</div>
+<div id="filtering-out-missing-values" class="section level2">
+<h2>Filtering out missing values</h2>
+<p>We have <code>NA</code> values in <code>Ozone</code>,
+<code>Solar.R</code> and so on.</p>
+<pre class="r"><code> print(head(df))</code></pre>
+<pre><code>##   X Ozone Solar.R Wind Temp Month Day Temp_Category Ozone_Level
+## 1 1    41     190  7.4   67     5   1      Moderate        High
+## 2 2    36     118  8.0   72     5   2      Moderate        High
+## 3 3    12     149 12.6   74     5   3      Moderate         Low
+## 4 4    18     313 11.5   62     5   4      Moderate         Low
+## 5 5    NA      NA 14.3   56     5   5      Moderate        &lt;NA&gt;
+## 6 6    28      NA 14.9   66     5   6      Moderate         Low</code></pre>
+<p>Let’s filter out those <code>NA</code> values from <code>df</code>
+and make it to <code>filtered_df</code> .</p>
+<ol style="list-style-type: decimal">
+<li>Filter out based on specific column. For example, we are going to
+remove <code>NA</code> values based on <code>Ozone</code> column.</li>
+</ol>
+<pre class="r"><code>filtered_df &lt;- df %&gt;%
+  filter(!is.na(Ozone)) 
+  
+
+print(filtered_df[1:10,])</code></pre>
+<pre><code>##     X Ozone Solar.R Wind Temp Month Day Temp_Category Ozone_Level
+## 1   1    41     190  7.4   67     5   1      Moderate        High
+## 2   2    36     118  8.0   72     5   2      Moderate        High
+## 3   3    12     149 12.6   74     5   3      Moderate         Low
+## 4   4    18     313 11.5   62     5   4      Moderate         Low
+## 5   6    28      NA 14.9   66     5   6      Moderate         Low
+## 6   7    23     299  8.6   65     5   7      Moderate         Low
+## 7   8    19      99 13.8   59     5   8      Moderate         Low
+## 8   9     8      19 20.1   61     5   9      Moderate         Low
+## 9  11     7      NA  6.9   74     5  11      Moderate         Low
+## 10 12    16     256  9.7   69     5  12      Moderate         Low</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Filter out based on multiple columns. For example, we are going to
+remove <code>NA</code> values based on <code>Ozone</code> and
+<code>Solar.R</code>columns.</li>
+</ol>
+<pre class="r"><code>filtered_df &lt;- df %&gt;%
+  filter(!is.na(Ozone)) %&gt;%
+  filter(!is.na(Solar.R))
+
+print(filtered_df[1:10,])</code></pre>
+<pre><code>##     X Ozone Solar.R Wind Temp Month Day Temp_Category Ozone_Level
+## 1   1    41     190  7.4   67     5   1      Moderate        High
+## 2   2    36     118  8.0   72     5   2      Moderate        High
+## 3   3    12     149 12.6   74     5   3      Moderate         Low
+## 4   4    18     313 11.5   62     5   4      Moderate         Low
+## 5   7    23     299  8.6   65     5   7      Moderate         Low
+## 6   8    19      99 13.8   59     5   8      Moderate         Low
+## 7   9     8      19 20.1   61     5   9      Moderate         Low
+## 8  12    16     256  9.7   69     5  12      Moderate         Low
+## 9  13    11     290  9.2   66     5  13      Moderate         Low
+## 10 14    14     274 10.9   68     5  14      Moderate         Low</code></pre>
+<pre class="r"><code># filtered_df &lt;- df %&gt;%
+#   filter(!is.na(Ozone) &amp; !is.na(Solar.R)). ## this is equivalent code</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Filter out based on all the columns.</li>
+</ol>
+<pre class="r"><code>filtered_df &lt;- df %&gt;%
+  filter(complete.cases(.))
+
+print(filtered_df[1:10,])</code></pre>
+<pre><code>##     X Ozone Solar.R Wind Temp Month Day Temp_Category Ozone_Level
+## 1   1    41     190  7.4   67     5   1      Moderate        High
+## 2   2    36     118  8.0   72     5   2      Moderate        High
+## 3   3    12     149 12.6   74     5   3      Moderate         Low
+## 4   4    18     313 11.5   62     5   4      Moderate         Low
+## 5   7    23     299  8.6   65     5   7      Moderate         Low
+## 6   8    19      99 13.8   59     5   8      Moderate         Low
+## 7   9     8      19 20.1   61     5   9      Moderate         Low
+## 8  12    16     256  9.7   69     5  12      Moderate         Low
+## 9  13    11     290  9.2   66     5  13      Moderate         Low
+## 10 14    14     274 10.9   68     5  14      Moderate         Low</code></pre>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-chambers2018graphical" class="csl-entry">
+Chambers, John M. 2018. <em>Graphical Methods for Data Analysis</em>.
+Chapman; Hall/CRC.
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

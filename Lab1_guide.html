@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>MA213 Basic Statistics and Probability - Lab1 Guide</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Lab1_guide.html">Lab1</a>
+</li>
+<li>
+  <a href="Lab2_guide.html">Lab2</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">MA213 Basic Statistics and Probability -
+Lab1 Guide</h1>
+
+</div>
+
+
+<div id="lab-1-introduction-to-r" class="section level2">
+<h2><strong>Lab 1: Introduction to R</strong></h2>
+<p>In this lab session, we will learn basic syntax of R.</p>
+</div>
+<div id="learning-objectives" class="section level2">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Use R for Data Management and Exploration: Utilize R to load,
+pre-process, and explore data through visualization and summarization
+techniques.</li>
+</ul>
+<div id="install-r-and-rstudio." class="section level4">
+<h4>Install R and RStudio.</h4>
+<p>You can download and install R from</p>
+<p><a href="https://www.r-project.org/"
+class="uri">https://www.r-project.org/</a></p>
+<p>And you can download and install RStudio from</p>
+<p><a href="https://posit.co/download/rstudio-desktop/"
+class="uri">https://posit.co/download/rstudio-desktop/</a></p>
+<p>We assume that you have already installed R and Rstudio (You need to
+install first R and then install Rstudio because Rstudio is an IDE for
+R).</p>
+</div>
+</div>
+<div id="introduction-of-r" class="section level2">
+<h2>Introduction of R</h2>
+<ul>
+<li><p>R is Programming language and environment statistical computing,
+data manipulation and graphical display.</p></li>
+<li><p>R is free and open source.</p></li>
+<li><p>Rstudio is also free and open source IDE (Integrated Development
+Environment) for R.</p></li>
+</ul>
+</div>
+<div id="brief-walk-through-about-rstudio-interface"
+class="section level2">
+<h2>Brief walk through about RStudio interface</h2>
+<div class="float">
+<img src="lab1/images/Screen_Shot_Rstudio.png" width="767"
+alt="RStudio overview" />
+<div class="figcaption">RStudio overview</div>
+</div>
+<p>window <code>1</code> : script window (text editor)</p>
+<p>window <code>2</code> : console window (this is where you type your R
+code and run)</p>
+<p>window <code>3</code> : plots, files, packages, help… window</p>
+<p>window <code>4</code> : environment window</p>
+</div>
+<div id="set-up-working-directory" class="section level2">
+<h2>Set up <code>working directory</code></h2>
+<ul>
+<li><p>You can go to <code>Session</code> →
+<code>set working directory</code> → <code>choose directory</code> and
+then choose your working directory.</p>
+<p>or</p></li>
+<li><p>You can go to <code>Files</code> tap → ☸︎ →‘copy folder path to
+Clipboard’</p>
+<p>then paste into <code>setwd()</code> function</p></li>
+</ul>
+<p>or</p>
+<ul>
+<li>You can go to <code>Files</code> tap → ☸︎ →‘Set As Working
+Directory’</li>
+</ul>
+</div>
+<div id="how-to-run-code" class="section level2">
+<h2>How to run code?</h2>
+<ol style="list-style-type: decimal">
+<li><p>Directly type your command in the console window.</p></li>
+<li><p>You can run your R chunk by pressing run button <code>▶</code> in
+the R chunk in your R markdown file.</p></li>
+<li><p>You can write your commands on your R script file and highlight
+the commands and press <code>run</code></p></li>
+</ol>
+<pre><code>Run shortcut : `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).</code></pre>
+</div>
+<div
+id="r-is-basically-a-big-calculator-some-mathematics-basic-math-operations-to-matrix-operations"
+class="section level2">
+<h2>R is basically a big calculator (some mathematics) : basic math
+operations to matrix operations</h2>
+<blockquote>
+<ul>
+<li>Basic math operations</li>
+</ul>
+<p><code>+</code>: add</p>
+<p><code>-</code> : substract</p>
+<p><code>*</code> : multiply</p>
+<p><code>/</code> : divide</p>
+<p><code>^</code> or <code>**</code>: exponent</p>
+</blockquote>
+</div>
+<div id="for-example" class="section level2">
+<h2>For example</h2>
+<p><span class="math inline">\((\frac{12}{24})^2\)</span></p>
+<pre class="r"><code>(12/24)^(2)</code></pre>
+<pre><code>## [1] 0.25</code></pre>
+<pre class="r"><code>#or
+(12/24)**(2)</code></pre>
+<pre><code>## [1] 0.25</code></pre>
+</div>
+<div id="assign-values-to-a-variable" class="section level2">
+<h2>Assign values to a variable</h2>
+<p>Let’s say if you want to save 10 to variable <code>A</code>. You can
+do the following command.</p>
+<pre class="r"><code>A &lt;- 10
+A &lt;&lt;- 10
+10 -&gt; A
+10 -&gt;&gt; A
+A = 10
+
+# A &lt;- 10
+# A = 10 
+# commonly used ones </code></pre>
+</div>
+<div
+id="and-you-can-check-what-value-the-variable-a-has-by-calling-it-or-using-print-function"
+class="section level2">
+<h2>And you can check what value the variable <code>A</code> has by
+calling it or using <code>print()</code> function</h2>
+<pre class="r"><code>A</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>print(A)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<p>Assigning character type information to a variable</p>
+<pre class="r"><code>SchoolName &lt;- &quot;Boston University&quot;
+SchoolName</code></pre>
+<pre><code>## [1] &quot;Boston University&quot;</code></pre>
+</div>
+<div id="assign-values-to-a-vector" class="section level2">
+<h2>Assign values to a vector</h2>
+<p>You can assign multiple values to a vector.</p>
+<pre class="r"><code>GPA &lt;- c(3.2, 3.7, 3.9, 2.3, 2.7)
+FirstName &lt;- c(&quot;Tom&quot;, &quot;Sarah&quot;, &quot;Nick&quot;, &quot;Amy&quot;, &quot;John&quot;)
+GPA</code></pre>
+<pre><code>## [1] 3.2 3.7 3.9 2.3 2.7</code></pre>
+<pre class="r"><code>FirstName</code></pre>
+<pre><code>## [1] &quot;Tom&quot;   &quot;Sarah&quot; &quot;Nick&quot;  &quot;Amy&quot;   &quot;John&quot;</code></pre>
+<p>There are some useful functions for a vector</p>
+<ul>
+<li><p><code>seq(from=a, to=b, by=c)</code> : this generates a sequence
+vector from value a to b by c increment.</p></li>
+<li><p><code>rep(x, times = n)</code> : this replicate element
+<code>x</code> for n times.</p></li>
+<li><p><code>length(x)</code> : this will give you the length of vector
+<code>x</code></p></li>
+</ul>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<pre class="r"><code>my_vector = seq(1, 10, 2)
+my_vector</code></pre>
+<pre><code>## [1] 1 3 5 7 9</code></pre>
+<pre class="r"><code>another_vector = 1:10
+another_vector</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>vector3 = rep(&quot;BU&quot;, 25)
+vector3</code></pre>
+<pre><code>##  [1] &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot;
+## [16] &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot; &quot;BU&quot;</code></pre>
+</div>
+<div id="accessing-vector-elements" class="section level2">
+<h2>Accessing vector elements</h2>
+<p>Each element in a vector is associated with index number. The index
+in R starts from 1 as the first item.</p>
+<p>For example,</p>
+<pre class="r"><code>#
+SomeNames &lt;- c(&quot;Alpha&quot;, &quot;Bravo&quot;, &quot;Charlie&quot;)</code></pre>
+<div class="float">
+<img src="lab1/images/index.jpg" alt="Index of Vector Elements" />
+<div class="figcaption">Index of Vector Elements</div>
+</div>
+</div>
+<div id="for-example-1" class="section level2">
+<h2>For example</h2>
+<p>You can access the third element of <code>SomeNames</code> by
+<code>SomeNames[3]</code> .</p>
+<p>You can also access, for example, the second and the third elements
+by <code>SomeNames[2:3]</code> .</p>
+<pre class="r"><code>#
+SomeNames[3]</code></pre>
+<pre><code>## [1] &quot;Charlie&quot;</code></pre>
+<pre class="r"><code>SomeNames[2:3]</code></pre>
+<pre><code>## [1] &quot;Bravo&quot;   &quot;Charlie&quot;</code></pre>
+</div>
+<div id="numeric-vector-can-be-subsetted-using-condition"
+class="section level2">
+<h2>Numeric vector can be subsetted using condition</h2>
+<pre class="R" style="gray"><code>                         x[condition]</code></pre>
+<p>the conditional statements (condition) you can use could be</p>
+<pre class="R" style="yellow"><code>x == 20    # x equals to 20
+x &lt; 100
+x &lt;= 100
+x &gt; 100
+x &gt;= 100
+x != 100   # x not equal to 100</code></pre>
+</div>
+<div id="for-example-2" class="section level2">
+<h2>For example</h2>
+<pre class="r"><code>Numbers &lt;- c(20, 30, 50, 70, 120, 200)
+Numbers[Numbers&lt;100]</code></pre>
+<pre><code>## [1] 20 30 50 70</code></pre>
+<div class="float">
+<img src="lab1/images/Slicing.jpg"
+alt="Subsetting vector using condition" />
+<div class="figcaption">Subsetting vector using condition</div>
+</div>
+</div>
+<div id="importing-and-subsetting-data" class="section level2">
+<h2>Importing and Subsetting Data</h2>
+<p>You can import Data by using <code>read.table()</code> function.</p>
+<pre class="r"><code>my_data &lt;- read.csv(&quot;lab1/data/mtcars.csv&quot;)
+# to be able to import this file, this file needs to be in your working directory</code></pre>
+</div>
+<div id="you-can-access-subset-data" class="section level2">
+<h2>You can access subset data</h2>
+<ul>
+<li><p>Specific element by <code>my_data[row, column]</code></p>
+<ul>
+<li>| for example, the element in the third row and the fourth column
+<code>my_data[3,4]</code></li>
+</ul></li>
+<li><p>Specific row by <code>my_data[row,]</code></p>
+<ul>
+<li>| for example, all the element of the third row
+<code>my_data[3,]</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="also" class="section level2">
+<h2>Also,</h2>
+<ul>
+<li><p>Specific column by <code>my_data[,column]</code></p>
+<ul>
+<li>| for example, all the element of the fifth column
+<code>my_data[,5]</code></li>
+</ul></li>
+<li><p>Access the column by using <code>$</code> sign such as
+<code>my_data$column_name</code></p>
+<ul>
+<li>| for example, <code>hp</code> column from <code>my_data</code> is
+<code>my_data$hp</code></li>
+</ul></li>
+<li><p>Conditional statement works similar as vectors (row wise and
+column wise)</p>
+<ul>
+<li>| for example, <code>my_data[my_data$hp&lt;100,]</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="multiple-conditions-can-be-combined" class="section level2">
+<h2>Multiple conditions can be combined</h2>
+<p>You can combine multiple logical conditions using &amp; (AND), |
+(OR), and ! (NOT) operators inside the row index to filter rows. For
+example</p>
+<ul>
+<li>Rows where <code>hp</code> is less than 100 AND <code>cyl</code>
+equals 4:</li>
+</ul>
+<pre class="r"><code>my_data[(my_data$hp &lt; 100) &amp; (my_data$cyl == 4), ]</code></pre>
+<pre><code>##                 X  mpg cyl  disp hp drat    wt  qsec vs am gear carb
+## 3      Datsun 710 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1
+## 8       Merc 240D 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2
+## 9        Merc 230 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2
+## 18       Fiat 128 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1
+## 19    Honda Civic 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2
+## 20 Toyota Corolla 33.9   4  71.1 65 4.22 1.835 19.90  1  1    4    1
+## 21  Toyota Corona 21.5   4 120.1 97 3.70 2.465 20.01  1  0    3    1
+## 26      Fiat X1-9 27.3   4  79.0 66 4.08 1.935 18.90  1  1    4    1
+## 27  Porsche 914-2 26.0   4 120.3 91 4.43 2.140 16.70  0  1    5    2</code></pre>
+<ul>
+<li>Rows where <code>hp</code> is less than 100 OR <code>cyl</code>
+equals 4:</li>
+</ul>
+<pre class="r"><code>my_data[my_data$hp &lt; 100 | my_data$cyl == 4, ]</code></pre>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 3      Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 8       Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9        Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 18       Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19    Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20 Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21  Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 26      Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 32     Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<p>Rows where <code>hp</code> is NOT less than 100:</p>
+<pre class="r"><code>my_data[! (my_data$hp &lt; 100), ]</code></pre>
+<pre><code>##                      X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1            Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2        Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 4       Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5    Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6              Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7           Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 10            Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11           Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 12          Merc 450SE 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13          Merc 450SL 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14         Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16 Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 22    Dodge Challenger 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23         AMC Javelin 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24          Camaro Z28 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25    Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 28        Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29      Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 30        Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 31       Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32          Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<div
+id="if-an-expression-or-condition-is-true-or-false-programming-language-gives-two-answers-true-or-false-.-it-is-sometimes-can-be-shown-to-1-or-0."
+class="section level3">
+<h3>If an expression or condition is True or False, programming language
+gives two answers <code>TRUE</code> or <code>FALSE</code> . It is
+sometimes can be shown to <code>1</code> or <code>0</code>.</h3>
+<pre class="r"><code>3==3 # True</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>10 == 3 # False</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>my_data$hp &lt; 100 # if the horse power of the car is less than 100 it gives 1, 0 otherwise. </code></pre>
+<pre><code>##  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE
+## [13] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE
+## [25] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>my_data[my_data$hp &lt; 100,] # this is how we are only printing the cars data with horse power &lt; 100. </code></pre>
+<pre><code>##                 X  mpg cyl  disp hp drat    wt  qsec vs am gear carb
+## 3      Datsun 710 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1
+## 8       Merc 240D 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2
+## 9        Merc 230 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2
+## 18       Fiat 128 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1
+## 19    Honda Civic 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2
+## 20 Toyota Corolla 33.9   4  71.1 65 4.22 1.835 19.90  1  1    4    1
+## 21  Toyota Corona 21.5   4 120.1 97 3.70 2.465 20.01  1  0    3    1
+## 26      Fiat X1-9 27.3   4  79.0 66 4.08 1.935 18.90  1  1    4    1
+## 27  Porsche 914-2 26.0   4 120.3 91 4.43 2.140 16.70  0  1    5    2</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
