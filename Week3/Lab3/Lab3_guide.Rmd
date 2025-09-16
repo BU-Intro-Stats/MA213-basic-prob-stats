@@ -3,9 +3,9 @@ title: "MA213 Basic Statistics and Probability - Lab3 Guide"
 bibliography: references.bib
 link-citations: true
 output:
+  pdf_document: default
   html_document:
     code_download: true 
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -206,7 +206,13 @@ table_data <- df %>%
 
 table_data
 
+# alternate way using group_by() + summarise()
 
+table_data2 <- df %>% 
+  group_by(Class) %>%
+  summarise(N = n())
+
+table_data2
 
 
 ```
@@ -222,6 +228,13 @@ ggplot(data = table_data, aes(x="", y=n, fill=Class)) +
 
 # or simply 
 ggplot(data = table_data, aes(x="", y=n, fill=Class)) +
+  geom_col() + 
+  coord_polar(theta="y") +
+  theme_void()
+
+
+# using table_data2
+ggplot(data = table_data2, aes(x="", y=N, fill=Class)) +
   geom_col() + 
   coord_polar(theta="y") +
   theme_void()

@@ -31,21 +31,20 @@ head(df)
 names(df)
 ```
 
-#### Q1. You are interested in Ozone level excluding May. You want to see how Ozone level is distributed in June, July, August and September by looking at a plot.
+#### Q1. How is Ozone distributed? You want to look at the histogram of `Ozone`. Make a histogram of `Ozone` and assign it to `Hist_Ozone`. Then print it.
+
+```{r}
+
+```
+
+#### Q2. How is Wind distributed? You are interested in looking at shape of `Wind`. This time create Box plot of `Wind` and Histogram of `Wind`.
 
 ```{r}
 
 
 ```
 
-#### Q3. You want to see how average speed of wind changes over time (Month). Can you visualize it?
-
-```{r}
-
-
-```
-
-#### Q4. Do you see any patterns of level of Ozone over time?
+#### Q3. Let's compare those plots you obtained from Q2. What do you see and what are the differences? Think also about what you need to do more.
 
 ```{r}
 
@@ -53,81 +52,83 @@ names(df)
 
 ```
 
-#### Q5. Show the scatter plot of Solar radiation and Temperature.
+#### Q4. Show the scatter plot of Solar radiation and Temperature. What are the patterns? Let's talk about it.
 
 ```{r}
-#
-#
-#
+
 
 ```
 
-#### Show the bar plot of average Solar radiation per each month.
+#### Q5. Show the bar plot of average Solar radiation per each month. What do you see from the plot?
 
 ```{r}
-#
-#
-#
 
 ```
 
 ### **Survival of Passengers on the Titanic**
 
-#### Import the `titanic.csv` file.
+#### Q6. Import the `titanic.csv` file.
 
 ```{r}
-#
-#
-#
+
+df2 <- read.csv("titanic.csv")
+head(df2)
+names(df2)
+```
+
+#### Q7. You are interested in how the data is categorized by sex visually. You are interested in seeing how many people in each category of `Sex`. Obtain the table showing `Sex` by `N` (how many people are counted in each category). Assign it to `table_data` and print it.
+
+```{r}
 
 ```
 
-#### You are interested in how the data is categorized by sex visually. Show the pie chart of `sex`
+#### Q8. Using this `table_data` variable, obtain pie chart.
 
 ```{r}
-#
-#
-#
+
 ```
 
-#### You are interested in whether sex is related to survival in the Titanic disaster. How would you visualize or summarize this relationship?
+#### Q9. You are also interested in exploring whether age is associated with survival. How would you go about visualizing or summarizing this relationship?
 
 ```{r}
-#
-#
-#
-```
 
-#### You are also interested in exploring whether age is associated with survival. How would you go about visualizing or summarizing this relationship?
-
-```{r}
-#
-#
-#
 ```
 
 ### Post-lab activities
 
 Please name your submission as `lab3.R`
 
-We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
+We are going to also analyze a synthetic data `somedata.csv`.
 
-1.  load the `airquality.csv` file and assign it to `my_df` object.
+``` r
+> head(my_df)
+  X N        A    B     C        D E
+1 1 1  1.42830 -5.0 25.00 4.945988 D
+2 2 2  0.12983 -4.9 24.01 5.267488 E
+3 3 3 -0.02932 -4.8 23.04 5.295265 E
+4 4 4 -0.05000 -4.7 22.09 4.519594 C
+5 5 5  0.71453 -4.6 21.16 3.943522 E
+6 6 6 -0.35986 -4.5 20.25 4.860658 D
+```
 
-2.  Show the scatter plot of Solar radiation and Temperature.
+1.  load the `somedata.csv` file and assign it to `my_df` object.
 
-3.  Show average Solar radiation in each month. Use bar plot.
+2.  Get box plot of `A` in `my_df`. Looking at the box plot, how many suspected outliers can you see? assign it to `n_suspected` . (For example, you can do `n_suspected <- 1`).
 
-    2.1) Assign average Solar radiation into object `solar_radiation_avg` .
+3.  Obtain the scatter plot of `B` and `C` . What kind of relationship can you see? You can choose from those two
 
-    2.2) Show the bar plot of average Solar radiation per each month.
+    `linear` , `nonlinear`
 
-Back to Titanic data.
+    You can answer this by assigning a variable `relationship` . (For example, you can do `relationship <- "linear"` or \``relationship <- "nonlinear"` ).
 
-1.  Show the pie chart of `sex` in `titanic` data.
+4.  You are interested in looking at this mysterious variable `D` in the data. Look at the distribution of the data by producing a plot, answer if the shape of `D` is one of
 
-    3.1) Load `titanic.csv` file and assign it to `my_df2` object.
+    `right skew` , `left skew` , `uniform` , `symmetric`
 
-    3.2) Show the pie chart of `sex` .
+    You can answer this by assigning a variable `shape` . (For example, you can do `shape <- "right skew"` or \``shape <- "uniform"` ... )
 
-### References
+5.  Obtain a barplot of `E` in the data. If you create a barplot showing counts on Y axis and categories (from A to E) on X axis, what is the pattern of this barplot? You can answer if it is one of
+
+    `increasing` , `decreasing` , `flat`
+
+    You can answer this by assigning a variable `pattern` . (For example, you can do `pattern <- "increasing"` or \``pattern <- "decreasing"` ... )
