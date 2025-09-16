@@ -63,9 +63,269 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 
 \include{Lecture7_agenda}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Union (or) and Intersection (and)}
+
+\begin{columns}
+	\column{0.48\textwidth}
+		\textbf{Union (or):} $A \cup B$\\
+	$A$ or $B$ or both\\
+	$P(A~or~B) \equiv P(A \cup B)$\\
+	\vspace{2mm}
+	\begin{center}
+		\begin{tikzpicture}
+       		\draw[thick] (-1.2,-1.2) rectangle (2.4,1.2);
+			\path[fill=orange!40, opacity=0.7] 
+				(0,0) circle(0.8)
+				-- ++(1.2,0) circle(0.8);
+			\draw[thick] (0,0) circle(0.8);
+			\draw[thick] (1.2,0) circle(0.8);
+			\node at (0,0) {$A$};
+			\node at (1.2,0) {$B$};
+		\end{tikzpicture}
+	\end{center}
+
+	\column{0.48\textwidth}
+		\textbf{Intersection (and):} $A \cap B$\\
+	$A$ and $B$\\
+	$P(A~and~B) \equiv P(A \cap B)  \equiv P(A,B)$\\
+	\vspace{2mm}
+	\begin{center}
+		\begin{tikzpicture}
+       		\draw[thick] (-1.2,-1.2) rectangle (2.4,1.2);
+			\draw[thick] (0,0) circle(0.8);
+			\draw[thick] (1.2,0) circle(0.8);
+			% Fill intersection only
+			\begin{scope}
+			  \clip (0,0) circle(0.8);
+			  \fill[blue!40,opacity=0.7] (1.2,0) circle(0.8);
+			\end{scope}
+			\node at (0,0) {$A$};
+			\node at (1.2,0) {$B$};
+		\end{tikzpicture}
+	\end{center}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\formula{Checking for independence}{If P(A occurs, given that B is true) = $P(A~|~B) = P(A)$, then A and B are independent.}
+
+% $\:$ \\
+% \small{
+% \soln{\pause{
+% Proportion(prefers in-person work) = 0.58 \\
+% \pause
+% $\:$ \\
+% P(randomly selected employee prefers in-person work, given that the employee is in the IT department) = ? \\ 
+% Proportion(prefers in-person $|$ IT) = 0.67 \\
+% $\:$ \\
+% Proportion(prefers in-person $|$ HR) = 0.28 \\
+% $\:$ \\
+% Proportion(prefers in-person $|$ Sales) = 0.64 \\
+% $\:$ \\
+% \pause
+% P(prefers in-person work) seems to vary by department, therefore preference for in-person vs remote work and department are most likely dependent.
+% }}
+% }
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Determining dependence based on sample data}
+
+% \begin{itemize}
+
+% \item If conditional proportions calculated based on sample data suggest dependence between two variables, the next step is to conduct a hypothesis test to determine if the observed difference between the proportions is likely or unlikely to have happened by chance.
+
+% \item If the observed difference between the conditional proportions is large, then there is stronger evidence that the difference is real.
+
+% \item If a sample is large, then even a small difference can provide strong evidence of a real difference.
+
+% \end{itemize}
+
+% \pause
+
+% \dq{{\small We saw that Proportion(prefers in-person $|$ IT) = 0.67 and Proportion(prefers in-person $|$ Sales) = 0.64. Under which condition would you be more convinced of a real difference between the proportions of IT and Sales employees who prefer in-person work? $n = 500$ or $n = 50,000$}} \pause \soln{$n = 50,000$}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\formula{Product rule for independent events}{If A and B are independent, then \\
+\[P(A~and~B) = P(A) \times P(B) \]
+\small{Or more generally, $P(A_1~and~\cdots~and~A_k) = P(A_1) \times \cdots \times P(A_k)$}}
+
+\pause
+\vspace{2mm}
+This is also a definition of independence: \\
+If $P(A~and~B) = P(A) \times P(B)$, then A and B are independent.
+
+\pause
+
+\vspace{2mm}
+\dq{You toss a coin twice, what is the probability of getting two tails in a row?}
+
+\pause
+
+\[ P(\text{T on the first toss}) \times  P(\text{T on the second toss}) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4} \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Practice}
+
+\pq{A recent Gallup poll suggests that 25.5\% of Texans do not have health insurance as of June 2012. Assuming that the uninsured rate stayed constant, what is the probability that two randomly selected Texans are both uninsured?}
+
+\twocol{0.4}{0.6}
+{
+\begin{enumerate}[(a)]
+\item $25.5^2$
+\solnMult{ $0.255^2$ }
+\item $0.255 \times 2$
+\item $(1 - 0.255)^2$
+\end{enumerate}
+}
+{
+\includegraphics[width=0.9\textwidth]{\chp3@path/3-1_define_probability/figures/uninsured}
+}
+
+\ct{ \webURL{http://www.gallup.com/poll/156851/uninsured-rate-stable-across-states-far-2012.aspx}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Disjoint vs. complementary}
+
+\dq{Do the sum of probabilities of two disjoint events always add up to 1?}
+
+\pause
+
+\soln{Not necessarily, there may be more than 2 events in the sample space, e.g. party affiliation.}
+
+\pause
+$\:$ \\
+
+\dq{Do the sum of probabilities of two complementary events always add up to 1?}
+
+\pause
+
+\soln{Yes, that's the definition of complementary, e.g. heads and tails. }
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Disjoint vs independent}
+
+	% --- Diagram for mutually exclusive and independent events ---
+	\begin{minipage}{0.48\textwidth}
+		Mutually exclusive events:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0.5,0.7) rectangle (1.7,1.7);
+		\draw[fill=cyan!40] (2.3,0.7) rectangle (3.5,1.7);
+		\node at (1.1,1.2) {\textbf{B}};
+		\node at (2.9,1.2) {\textbf{A}};
+	\end{tikzpicture}
+	\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.48\textwidth}
+		Independent events:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0,1) rectangle (2,2);
+		\draw[fill=cyan!40] (2,0) rectangle (4,1);
+		\draw[fill=teal!60,opacity=0.7] (0,0) rectangle (2,1);
+		\draw[thick,red] (0,0) rectangle (2,1);
+		\node at (1,1.5) {\textbf{B}};
+		\node at (3,0.5) {\textbf{A}};
+		\node at (1,0.5) {\textbf{$A\cap B$}};
+	\end{tikzpicture}
+	\end{center}
+	\end{minipage}
+
+	\vspace{1em}
+	\begin{itemize}
+		\item For disjoint (mutually exclusive) events, $P(A~and~B) = 0$
+		\item For independent events, $P(A~and~B) = P(A) \times P(B)$
+	\end{itemize}
+
+	\dq{Can two events be disjoint and independent at the same time?}
+	\pause
+	\soln{Only if $P(A) = 0$ or $P(B) = 0$.}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Putting everything together...}
+
+\dq{If we were to randomly select 5 Texans, what is the probability that at least one is uninsured?}
+
+\begin{itemize}
+
+\item If we were to randomly select 5 Texans, the sample space for the number of Texans who are uninsured would be:
+\[ S = \{0, 1, 2, 3, 4, 5\} \]
+
+\item We are interested in instances where at least one person is uninsured:
+\[ S = \{0, \orange{$1, 2, 3, 4, 5$} \} \]
+
+\item So we can divide up the sample space into two categories:
+\[ S = \{0, \orange{at~least~one} \} \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Putting everything together...}
+
+Since the probability of the sample space must add up to 1:
+\begin{eqnarray*}
+Prob(at~least~1~uninsured) &=& 1 - Prob(none~uninsured) \\
+\pause
+&=& 1 - [(1-0.255)^5] \\
+\pause
+&=& 1- 0.745^5 \\
+\pause
+&=& 1 - 0.23 \\
+\pause
+&=& 0.77
+\end{eqnarray*}
+
+$\:$ \\
+$\:$ \\
+
+\formula{At least 1}{\[P(at~least~one) = 1 - P(none)\]}
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -294,11 +554,6 @@ P(placebo $|$  relapse) = $\frac{20}{48} \approx 0.42$ \\
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{General multiplication rule}
@@ -394,11 +649,6 @@ Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be indep
 \section{Edfinity Quiz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Board Work}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tree diagrams}
@@ -462,11 +712,6 @@ Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be indep
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Edfinity Quiz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Board Work}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 % \begin{frame}
 % \frametitle{Practice}
@@ -547,10 +792,6 @@ where $A_2$, $\cdots$, $A_k$ represent all other possible outcomes of variable 1
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Edfinity Quiz}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Board Work}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

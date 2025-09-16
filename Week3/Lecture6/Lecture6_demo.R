@@ -9,49 +9,59 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 
 # ---- 1. Toss a single coin ----
 
-outcomes <- c(0,1)  # sample space: 0 == Heads, 1 == Tails
+outcomes <- c(0,1)  # sample space: 0 == Tails, 1 == Heads
 probabilities <- c(0.5, 0.5)  # let's say we have a fair coin
 toss <- sample(outcomes, 1, replace=TRUE, prob=probabilities)  # make the toss
 
 print(toss)
 
 
-# ---- 2. Toss many more coins and observe the sample means ----
+# ---- 2. Toss many more coins and observe the proportion of heads ----
 
-tossCoin <- function(p=0.5, max_n=100) {
+tossCoins <- function(p=0.5, n=100) {
   
-  # Now repeat the toss n times:
-  outcomes <- c(0,1)  # same sample space: 0 == Heads, 1 == Tails
-  probabilities <- c(p, 1-p)  # now we can modify the probability
+  outcomes <- c(0,1)  # same sample space: 0 == Tails, 1 == Heads
+  probabilities <- c(1-p, p)  # now we can modify the probability
   
-  # Create a vector to store our mean values
-  means <- rep(0, max_n)
-  sizes <- c(1:max_n)
+  # Create vectors to store our tosses and our proportions
+  tosses <- rep(0,n)
+  proportions <- rep(0, n)
+  counts <- rep(0,n)
   
-  for(n in sizes) {
-    toss <- sample(outcomes, n, replace=TRUE, prob=probabilities)  # toss
-    means[n] <- mean(toss)  # store mean value
+  # loop n times
+  for(i in 1:n) {
+    # toss the coin
+    tosses[i] <- sample(outcomes, 1, replace=TRUE, prob=probabilities)
+    
+    # compute the proportion of heads so far
+    proportions[i] <- mean(tosses[1:i])
+    
+    # store the number of tosses you've done so far
+    counts[i] <- i
   }
   
   # Combine everything into a dataframe
-  return(data.frame(sizes, means))
+  return(data.frame(tosses, proportions, counts))
 }
 
 
-# ---- 3. Plot the results ----
+# ---- 3. Simulate 100 coin tosses and plot the results ----
 
-trial <- tossCoin(p=0.5, max_n=1000)
-last_mean <- tail(trial$means, 1)
+Ntoss = 100
+prob = 1/2
 
-ggplot(data=trial, aes(x=sizes, y=means)) +
+trial <- tossCoins(p=prob, n=Ntoss)
+last_proportion <- tail(trial$proportions, 1)
+
+ggplot(data=trial, aes(x=counts, y=proportions)) +
   geom_line(color='dark blue') +
-  geom_hline(yintercept=0.5, color='red') +
-  labs(x = "n (number of tosses)", 
-       y = "Sample mean") +
-  annotate("text", x=500, y=.8,
+  geom_hline(yintercept=prob, color='red') +
+  labs(x = "Number of tosses", 
+       y = "Proportion of heads") +
+  annotate("text", x=Ntoss*.75, y=.8,
            label=paste("P(Heads) = 0.50")) +
-  annotate("text", x=500, y=.65,
-           label=paste("Final sample mean =", last_mean))
+  annotate("text", x=Ntoss*.75, y=.7,
+           label=paste("Final sample mean =", last_proportion))
 
 # What do you observe?
 # What do you think would happen for different values of p?
