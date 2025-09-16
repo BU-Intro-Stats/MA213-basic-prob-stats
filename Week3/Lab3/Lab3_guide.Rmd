@@ -112,7 +112,9 @@ ggplot(data=df, aes(Ozone)) +
 
 ```
 
-## 6. Labels in plot
+## 6. Labels in ggplot
+
+With `labs(x='x lable', y='y lable', title = 'name for your plot')` you can name your plot.
 
 ```{r, echo=TRUE}
 
@@ -125,9 +127,9 @@ ggplot(data=df, aes(Ozone)) +
 
 ```
 
-### We want to examine whether there is a relationship between ozone and temperature. How do we want to approach this?
-
 ## 7. Scatter plot of `Ozone` and `Temp` .
+
+### We want to examine whether there is a relationship between ozone and temperature (both numerical). How do we want to approach this?
 
 ```{r, echo=TRUE}
 
