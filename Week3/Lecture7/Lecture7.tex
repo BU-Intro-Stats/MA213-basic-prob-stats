@@ -169,11 +169,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \small{Or more generally, $P(A_1~and~\cdots~and~A_k) = P(A_1) \times \cdots \times P(A_k)$}}
 
 \pause
-\vspace{2mm}
-This is also a definition of independence: \\
-If $P(A~and~B) = P(A) \times P(B)$, then A and B are independent.
-
-\pause
 
 \vspace{2mm}
 \dq{You toss a coin twice, what is the probability of getting two tails in a row?}
@@ -210,10 +205,6 @@ If $P(A~and~B) = P(A) \times P(B)$, then A and B are independent.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
 \frametitle{Disjoint vs. complementary}
 
@@ -234,51 +225,6 @@ $\:$ \\
 
 \end{frame}
 
-\begin{frame}
-	\frametitle{Disjoint vs independent}
-
-	% --- Diagram for mutually exclusive and independent events ---
-	\begin{minipage}{0.48\textwidth}
-		Mutually exclusive events:
-	\begin{center}
-	\begin{tikzpicture}[scale=0.8]
-		\draw[fill=gray!20] (0,0) rectangle (4,2);
-		\draw[fill=green!60] (0.5,0.7) rectangle (1.7,1.7);
-		\draw[fill=cyan!40] (2.3,0.7) rectangle (3.5,1.7);
-		\node at (1.1,1.2) {\textbf{B}};
-		\node at (2.9,1.2) {\textbf{A}};
-	\end{tikzpicture}
-	\end{center}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.48\textwidth}
-		Independent events:
-	\begin{center}
-	\begin{tikzpicture}[scale=0.8]
-		\draw[fill=gray!20] (0,0) rectangle (4,2);
-		\draw[fill=green!60] (0,1) rectangle (2,2);
-		\draw[fill=cyan!40] (2,0) rectangle (4,1);
-		\draw[fill=teal!60,opacity=0.7] (0,0) rectangle (2,1);
-		\draw[thick,red] (0,0) rectangle (2,1);
-		\node at (1,1.5) {\textbf{B}};
-		\node at (3,0.5) {\textbf{A}};
-		\node at (1,0.5) {\textbf{$A\cap B$}};
-	\end{tikzpicture}
-	\end{center}
-	\end{minipage}
-
-	\vspace{1em}
-	\begin{itemize}
-		\item For disjoint (mutually exclusive) events, $P(A~and~B) = 0$
-		\item For independent events, $P(A~and~B) = P(A) \times P(B)$
-	\end{itemize}
-
-	\dq{Can two events be disjoint and independent at the same time?}
-	\pause
-	\soln{Only if $P(A) = 0$ or $P(B) = 0$.}
-
-
-\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -326,7 +272,8 @@ $\:$ \\
 
 \end{frame}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conditional probability}
@@ -363,30 +310,6 @@ total			& 48		& 24		& 72
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-
-\dq{What is the probability that a patient did not relapse?}
-
-
-{\small
-\begin{center}
-\begin{tabular}{l | c c | c}
-			& 		& no 		&  \\
-			& relapse	& relapse	& total \\
-\hline
-desipramine	& 10		& 14		& 24 \\
-lithium		& 18		& 6		& 24 \\
-placebo		& 20		& 4		& 24 \\
-\hline
-total			& 48		& 24		& 72
-\end{tabular}
-\end{center}
-}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Marginal and joint probabilities}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -394,7 +317,7 @@ total			& 48		& 24		& 72
 \begin{frame}
 \frametitle{Marginal probability}
 
-\dq{What is the probability that a patient relapsed?}
+\dq{What is the probability that a randomly selected patient relapsed?}
 
 {\small
 \begin{center}
@@ -420,7 +343,7 @@ total			& \only<1>{48}\only<2->{\red{48}}		& 24		&  \only<1>{72}\only<2->{\red{7
 \begin{frame}
 \frametitle{Joint probability}
 
-\dq{What is the probability that a patient received the antidepressant (desipramine) \underline{and} relapsed?}
+\dq{What is the probability that a randomly selected patient received the antidepressant (desipramine) \underline{and} relapsed?}
 
 {\small
 \begin{center}
@@ -494,7 +417,7 @@ total			& 48		& 24		&  72
 \begin{frame}
 \frametitle{Conditional probability (cont.)}
 
-\dq{If we know that a patient received the antidepressant (desipramine), what is the probability that they relapsed?}
+\dq{If we know that a randomly selected patient received the antidepressant (desipramine), what is the probability that they relapsed?}
 
 {\small
 \begin{center}
@@ -527,7 +450,7 @@ P(relapse $|$  placebo) = $\frac{20}{24} \approx 0.83$ \\
 \begin{frame}
 \frametitle{Conditional probability (cont.)}
 
-\dq{If we know that a patient relapsed, what is the probability that they received the antidepressant (desipramine)?}
+\dq{If we know that a randomly selected patient relapsed, what is the probability that they received the antidepressant (desipramine)?}
 
 {\small
 \begin{center}
@@ -554,6 +477,64 @@ P(placebo $|$  relapse) = $\frac{20}{48} \approx 0.42$ \\
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Conditional probability redefines the sample space}
+
+\formula{Conditional probability}{
+The conditional probability of $A$ given $B$ is:
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+\]
+}
+
+\vspace{2mm}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+	% Left: Full sample space
+	\begin{scope}
+		% B region
+		\draw[fill=green!60, opacity=0.8] (0.2,0.2) rectangle (2.0,2.3);
+		% B^c region
+		\draw[fill=gray!20, opacity=0.7] (2.0,0.2) rectangle (3.0,2.3);
+		% A region
+		\draw[fill=cyan!40, opacity=0.8] (1.0,0.8) rectangle (2.7,1.7);
+		% Intersection A ∩ B
+		\draw[fill=teal!60, opacity=0.7] (1.0,0.8) rectangle (2.0,1.7);
+		% Labels
+		\node at (0.6,2.0) {\Large $B$};
+		\node at (2.5,2.0) {\large $B^{c}$};
+		\node at (1.5,1.25) {\large $A \cap B$};
+		\node at (2.5,1.25) {\large $A$};
+	\end{scope}
+
+	% Arrow
+	\draw[thick,->] (3.3,1.25) -- (3.9,1.25);
+
+	% Right: Reduced sample space (B only)
+	\begin{scope}[shift={(4.1,0)}]
+		% B region as new sample space
+		\draw[fill=green!60, opacity=0.8] (0.2,0.2) rectangle (2.0,2.3);
+		% A ∩ B region
+		\draw[fill=teal!60, opacity=0.7] (1.0,0.8) rectangle (2.0,1.7);
+		% A label (partial, only in B)
+		\node at (1.5,1.25) {\large $A \cap B$};
+		\node at (0.6,2.0) {\Large $B$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\vspace{1mm}
+\textbf{Interpretation:} Conditioning on $B$ restricts the sample space to $B$ (right). 
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{General multiplication rule}
@@ -571,7 +552,7 @@ P(placebo $|$  relapse) = $\frac{20}{48} \approx 0.42$ \\
 
 \item If $A$ and $B$ represent two outcomes or events, then
 \formula{\[ P(A~and~B) = P(A|B) \times P(B) \]}
-Note that this formula is simply the conditional probability formula, rearranged.
+Note that this formula is simply the conditional probability formula, rearranged: $P(A|B)= P(A~and~B) / P(B)$
 \pause
 
 \item It is useful to think of $A$ as the outcome of interest and $B$ as the condition.
@@ -589,7 +570,7 @@ Note that this formula is simply the conditional probability formula, rearranged
 \begin{frame}
 \frametitle{Independence and conditional probabilities}
 
-Consider the following (hypothetical) distribution of gender and major of students in an introductory statistics class:
+Consider the following (hypothetical) distribution of class year and major of students in an introductory statistics class:
 
 {\small
 \begin{center}
@@ -597,8 +578,8 @@ Consider the following (hypothetical) distribution of gender and major of studen
 			& social	& non-social 		&  \\
 			& science	& science	& total \\
 \hline
-female		& 30		& 20		& 50 \\
-male			& 30		& 20		& 50 \\
+freshman		& 30		& 20		& 50 \\
+sophomore			& 30		& 20		& 50 \\
 \hline
 total			& 60		& 40		& 100
 \end{tabular}
@@ -613,11 +594,11 @@ total			& 60		& 40		& 100
 
 \pause
 
-\item The probability that a randomly selected student is a social science major given that they are female is \pause $\frac{30}{50} = 0.6$. 
+\item The probability that a randomly selected student is a social science major given that they are a freshman is \pause $\frac{30}{50} = 0.6$. 
 
 \pause
 
-\item Since $P(SS | M)$ also equals 0.6, major of students in this class does not depend on their gender: P(SS $|$ F) = P(SS).
+\item Since $P(SS | F)$ also equals 0.6, major of students in this class does not depend on their class year: $P(SS | S) = P(SS)$.
 
 \end{itemize}
 
@@ -643,13 +624,72 @@ Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be indep
 
 \end{itemize}
 
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0,1) rectangle (2,2);
+		\draw[fill=cyan!40] (2,0) rectangle (4,1);
+		\draw[fill=teal!60,opacity=0.7] (0,0) rectangle (2,1);
+		\node at (1,1.5) {\textbf{B}};
+		\node at (3,0.5) {\textbf{A}};
+		\node at (1,0.5) {\textbf{$A\cap B$}};
+	\end{tikzpicture}
+	\end{center}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Disjoint vs independent}
+
+	% --- Diagram for mutually exclusive and independent events ---
+	\begin{minipage}{0.48\textwidth}
+		Mutually exclusive events:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0.5,0.7) rectangle (1.7,1.7);
+		\draw[fill=cyan!40] (2.3,0.7) rectangle (3.5,1.7);
+		\node at (1.1,1.2) {\textbf{B}};
+		\node at (2.9,1.2) {\textbf{A}};
+	\end{tikzpicture}
+	\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.48\textwidth}
+		Independent events:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0,1) rectangle (2,2);
+		\draw[fill=cyan!40] (2,0) rectangle (4,1);
+		\draw[fill=teal!60,opacity=0.7] (0,0) rectangle (2,1);
+		\draw[thick,red] (0,0) rectangle (2,1);
+		\node at (1,1.5) {\textbf{B}};
+		\node at (3,0.5) {\textbf{A}};
+		\node at (1,0.5) {\textbf{$A\cap B$}};
+	\end{tikzpicture}
+	\end{center}
+	\end{minipage}
+
+	\vspace{1em}
+	\begin{itemize}
+		\item For disjoint (mutually exclusive) events, $P(A~and~B) = 0$
+		\item For independent events, $P(A~and~B) = P(A) \times P(B)$
+	\end{itemize}
+
+	\dq{Can two events be disjoint and independent at the same time?}
+	\pause
+	\soln{Only if $P(A) = 0$ or $P(B) = 0$.}
+
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Edfinity Quiz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tree diagrams}
 
@@ -710,9 +750,6 @@ Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be indep
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % \begin{frame}
 % \frametitle{Practice}
 
@@ -762,38 +799,110 @@ Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be indep
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Bayes' Theorem}
+\frametitle{Bayes' Theorem: Version 1}
 
-\begin{itemize}
+The conditional probability formula we have seen so far is a special case of \hl{Bayes' Theorem}, which lets us switch the conditioning.
 
-\item The conditional probability formula we have seen so far is a special case of the Bayes' Theorem, which is applicable even when events have more than just two outcomes.
+\vspace{2mm}
+\[
+P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(B|A)P(A)
+\]
+\pause
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}
+\]
 
-\pause 
+\pause
+\vspace{2mm}
 
-\item \hl{Bayes' Theorem:}
-\formula{
-\[ P(outcome~A_1~of~variable~1~|~outcome~B~of~variable~2) \]
-\[ = \frac{P(B|A_1)P(A_1)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k)} \]
+\formula{Bayes' Theorem (1):}{
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\]
 }
-where $A_2$, $\cdots$, $A_k$ represent all other possible outcomes of variable 1.
-
-\end{itemize}
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% --- Bayes' Theorem Step 2 ---
 \begin{frame}
-\frametitle{Bayes' Theorem}
+\frametitle{Bayes' Theorem: Version 2}
+We often don't know the marginal probability $P(B)$ by itself, so we split the denominator:
+\formula{Bayes' Theorem (2):}{
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
+\]
+}
 
-(TODO: Venn diagram description of Law of Total Probability)
+\pause
+\vspace{2mm}
+
+\begin{center}
+	\begin{tikzpicture}[scale=1.0]
+		% Draw the main rectangle (sample space)
+		\draw[thick] (0,0) rectangle (4,2);
+
+		% (right half, bottom)
+		\fill[cyan!60] (2,0) rectangle (4,1);
+
+		% (top left)
+		\fill[green!60] (0,1) rectangle (2,2);
+
+		% (bottom left)
+		\fill[teal!60] (0,0) rectangle (2,1);
+
+		% Labels
+		\node[red] at (3.7,0.3) {\large B};
+		\node at (0.2,1.7) {\large A};
+		\node at (3,0.7) { $B \cap A^c$};
+		\node at (1,0.7) { $B \cap A$}; 
+
+		% Draw A and B outlines
+		\draw[thick, black, line width=1pt] (0,0) rectangle (2,2);
+		\draw[thick, red, line width=2pt] (0,0) rectangle (4,1);
+	\end{tikzpicture}
+\end{center}
+\pause
+\small{Note: $P(B \cap A)=P(B|A)P(A)$ and $P(B \cap A^c)=P(B|A^c)P(A^c)$, by the conditional probability formula (again!)}
+
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Bayes' Theorem Step 3 ---
+\begin{frame}
+\frametitle{Bayes' Theorem: Version 3}
 
+
+This trick can be extended to more than two mutually exclusive events $A_1, A_2, \ldots, A_k$ that \hl{partition} the sample space.
+
+\formula{Bayes' Theorem (3):}{
+\[ P(A_1|B) = \frac{P(B|A_1)P(A_1)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k)} \]
+\[ = \frac{P(B|A_1)P(A_1)}{\sum_{i=1}^k P(B|A_i)P(A_i)}\]
+}
+\pause
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+	% Draw universal set
+	\draw[thick] (0,0) rectangle (6,2.5);
+	% Draw A1, A2, A3, A4
+	\foreach \i/\col in {1/green!40,2/lime!60,3/cyan!40,4/blue!40} {
+		\fill[\col] (1.5*\i-1.5,0.0) rectangle (1.5*\i,2.5);
+		\node at (-0.75+1.5*\i,2.2) {$A_{\i}$};
+	}
+	% Draw B as a horizontal bar
+	\draw[thick,red, line width=2pt] (0,0.0) rectangle (6,1.2);
+	% Label intersections
+	\foreach \i in {1,2,3,4} {
+		\node at (-0.75+1.5*\i,0.85) {$A_{\i} \cap B$};
+	}
+	% Label B
+	\node[red] at (5.7,0.3) {B};
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \begin{frame}
 % \frametitle{Application activity: Inverting probabilities}
@@ -821,6 +930,35 @@ where $A_2$, $\cdots$, $A_k$ represent all other possible outcomes of variable 1
 
 % \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Bayes' Theorem Example: Weather Prediction}
+
+\begin{itemize}
+	\item Let $A_1$ = \{rain tomorrow\}, $A_2$ = \{cloudy tomorrow\}, $A_3$ = \{clear tomorrow\}, $B$ = \{weatherman predicts rain\}.
+	\item Assume $P(A_1) = 0.2$, $P(A_2) = 0.15$, $P(A_3) = 0.65$
+	\item $P(B|A_1) = 0.8$, $P(B|A_2) = 0.4$, $P(B|A_3) = 0.2$
+	\item What is $P(A_1|B)$?
+\end{itemize}
+
+\vspace{2mm}
+\pause
+\[
+P(A_1|B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2) + P(A_3)P(B|A_3)}
+\]
+
+\begin{align*}
+P(A_1|B) &= \frac{0.2 \times 0.8}{0.2 \times 0.8 + 0.15 \times 0.4 + 0.65 \times 0.2} \\
+				&= \frac{0.16}{0.16 + 0.06 + 0.13} \\
+				&= \frac{0.16}{0.35} \\
+				&= 0.46
+\end{align*}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
