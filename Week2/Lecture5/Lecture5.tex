@@ -83,7 +83,7 @@ When data are extremely skewed, transforming them might make modeling easier. A 
 
 $\:$ \\
 \pause
-The histogram on the left shows the distribution of number of basketball games attended by students. The histogram on the right shows the distribution of log of number of games attended.
+The histogram on the left shows the distribution of number of basketball games attended by students. The histogram on the right shows the distribution of the natural log of number of games attended \hl{plus 1} (Can you think of why?).
 
 \begin{center}
 \includegraphics[width=0.45\textwidth]{\chpii@path/2-1_numerical_data/figures/basket_games/basket_games_hist}
@@ -110,6 +110,7 @@ log(\# of games)	& 4.25	& 3.91 	& 3.22 	 	& $\cdots$
 $\:$ \\
 
 \item However, results of an analysis in log units of the measured variable might be difficult to interpret.
+\item Also, transformations can cause their own problems (e.g. what happens to the log transform for 0 games?)
 
 \end{itemize}
 
