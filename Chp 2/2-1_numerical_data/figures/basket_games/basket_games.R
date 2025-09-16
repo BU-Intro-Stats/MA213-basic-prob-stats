@@ -17,7 +17,7 @@ dev.off()
 
 myPDF('basket_games_hist_log.pdf', 7, 4, mar=c(4,3,0.5,0.5), cex.lab = 1.5, cex.axis = 1.25)
 
-histPlot(log(basket_games), col = COL[1], xlab = "# of basketball games attended", ylab = "")
+histPlot(log(1+basket_games), col = COL[1], xlab = "ln(1 + # of basketball games attended)", ylab = "")
 
 dev.off()
 
