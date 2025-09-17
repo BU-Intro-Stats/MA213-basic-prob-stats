@@ -5,14 +5,14 @@ library(tidyverse)
 set.seed(100)
 
 # Parameters
-N <- 96
-extra_n <- 4
+N <- 97
+extra_n <- 3
 total_n <- N + extra_n
 
 # ---- A: Generate data for boxplot ----
 A <- rnorm(N, mean = 0, sd = 1)
 # Append extra values
-A <- c(A, c(5.001023, 4.23992, 3.5232323, 4.212323))
+A <- c(A, c(5.001023, 4.23992, 6.212323))
 A <- round(A, 5)
 # Randomize order
 A <- sample(A)

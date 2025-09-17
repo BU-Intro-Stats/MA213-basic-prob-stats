@@ -34,7 +34,7 @@ invisible(lapply(required_pkg, library, character.only = TRUE))
 
 
 
-# Q3. Obtain the scatter plot of B and C . What kind of relationship can you see? You can choose from those two
+# Q3. Obtain the scatter plot of B and C (x-axis for B, y-axis for C). What kind of relationship can you see? You can choose from those two
 # linear , nonlinear
 # You can answer this by assigning a variable relationship. 
 # (For example, you can do relationship <- "linear" or `relationship <- "nonlinear" ).
