@@ -67,6 +67,92 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Probability distributions}
+
+A \hl{probability distribution} lists all possible events and the probabilities with which they occur.
+
+\begin{itemize}
+\item The probability distribution for the gender of one kid:
+{\footnotesize 
+\begin{center}
+\begin{tabular}{r | c | c}
+Event    & Male		& Female \\
+\hline
+Probability	& 0.5		& 0.5 \\
+\end{tabular}
+\end{center}
+}
+
+\vspace{2em}
+\item Rules for probability distributions:
+\begin{enumerate}
+\item The events listed must be disjoint
+\item Each probability must be between 0 and 1
+\item The probabilities must total 1
+\end{enumerate}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Disjoint and Complementary outcomes}
+
+\begin{columns}
+	\column{0.48\textwidth}
+	\textbf{$A$ and $B$ are Disjoint} \\ 
+	Events $A$ and $B$ cannot both happen \\
+	$P(A~and~B) = 0$
+	\vspace{1em}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Disjoint sets (left)
+			\begin{scope}
+			% Draw sample space box
+			\draw[thick] (-1.5,-1.2) rectangle (3.7,1.2);
+			\draw[thick] (0,0) circle (1);
+			\node at (0,0) {A};
+			\draw[thick] (2.2,0) circle (1);
+			\node at (2.2,0) {B};
+			\node at (1.1,-1.7) {\textbf{Disjoint}};
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+
+
+	\column{0.48\textwidth}
+	\textbf{$A$ and $A^c$ are Complementary} \\
+	$A$ and $A^c$ are disjoint and cover the entire sample space \\
+	$P(A)+P(A^c)=1$ \\
+	$A^c \equiv$ ``not A'' \\
+	\vspace{1em}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Complement (right): One event A, shade A^c
+			% Draw sample space box
+			\draw[thick] (-1.5,-1.2) rectangle (3,1.2);
+			% Shade A complement (everything outside A)
+			\begin{scope}
+			\clip (-1.5,-1.2) rectangle (3,1.2);
+			\fill[gray!40, opacity=0.7] (-1.5,-1.2) rectangle (3,1.2);
+			\fill[white] (0.75,0) circle (1);
+			\end{scope}
+			\node at (2.2,0.8) {$A^c$};
+			% Draw circle for A
+			\draw[thick] (0.75,0) circle (1);
+			\node at (0.75,0) {A};
+			\node at (.75,-1.7) {\textbf{Complementary}};
+		\end{tikzpicture}
+	\end{center}
+\end{columns}
+\end{frame}	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Union (or) and Intersection (and)}
 
@@ -119,6 +205,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \formula{Checking for independence}{If P(A occurs, given that B is true) = $P(A~|~B) = P(A)$, then A and B are independent.}
 
+Knowing that event B occurred does not change the probability that event A occurs.
 % $\:$ \\
 % \small{
 % \soln{\pause{
@@ -315,6 +402,32 @@ total			& 48		& 24		& 72
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
+\frametitle{Joint probability}
+
+\dq{What is the probability that a randomly selected patient received the antidepressant (desipramine) \underline{and} relapsed?}
+
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+desipramine	& \only<1>{10} \only<2->{\red{10}}		& 14		& 24 \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20		& 4		& 24 \\
+\hline
+total			& 48	& 24		&  \only<1>{72} \only<2->{\red{72}}
+\end{tabular}
+\end{center}
+}
+
+\onslide<2->{P(relapsed and desipramine) = $\frac{10}{72} \approx 0.14$} \\
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
 \frametitle{Marginal probability}
 
 \dq{What is the probability that a randomly selected patient relapsed?}
@@ -336,31 +449,11 @@ total			& \only<1>{48}\only<2->{\red{48}}		& 24		&  \only<1>{72}\only<2->{\red{7
 
 \onslide<2->{P(relapsed) = $\frac{48}{72} \approx 0.67$} \\
 
-\end{frame}
+\vspace{2mm}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Joint probability}
-
-\dq{What is the probability that a randomly selected patient received the antidepressant (desipramine) \underline{and} relapsed?}
-
-{\small
-\begin{center}
-\begin{tabular}{l | c c | c}
-			& 		& no 		&  \\
-			& relapse	& relapse	& total \\
-\hline
-desipramine	& \only<1>{10} \only<2->{\red{10}}		& 14		& 24 \\
-lithium		& 18		& 6		& 24 \\
-placebo		& 20		& 4		& 24 \\
-\hline
-total			& 48	& 24		&  \only<1>{72} \only<2->{\red{72}}
-\end{tabular}
-\end{center}
-}
-
-\onslide<2->{P(relapsed and desipramine) = $\frac{10}{72} \approx 0.14$} \\
+\onslide<2->{P(relapsed) = \\
+P(relapsed and des.)+P(relapsed and lith.)+P(relapsed and plac.)= \\
+$\frac{10}{72}+\frac{18}{72}+\frac{20}{72}$ = $\frac{48}{72} \approx 0.67$} \\
 
 \end{frame}
 
