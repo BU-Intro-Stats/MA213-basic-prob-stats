@@ -44,9 +44,9 @@ invisible(lapply(required_pkg, library, character.only = TRUE))
 
 
 # Q4. You are interested in looking at this mysterious variable D in the data. Look at the distribution of the data by producing a plot, answer if the shape of D is one of
-# right skew , left skew , uniform , symmetric
+# right skewed , left skewed , uniform , symmetric
 # You can answer this by assigning a variable shape. 
-# (For example, you can do shape <- "right skew" or `shape <- "uniform" ... )
+# (For example, you can do shape <- "right skewed" or `shape <- "uniform" ... )
 
 
 

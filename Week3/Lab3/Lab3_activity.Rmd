@@ -123,9 +123,9 @@ We are going to also analyze a synthetic data `somedata.csv`.
 
 4.  You are interested in looking at this mysterious variable `D` in the data. Look at the distribution of the data by producing a plot, answer if the shape of `D` is one of
 
-    `right skew` , `left skew` , `uniform` , `symmetric`
+    `right skewed` , `left skewed` , `uniform` , `symmetric`
 
-    You can answer this by assigning a variable `shape` . (For example, you can do `shape <- "right skew"` or `shape <- "uniform"` ... )
+    You can answer this by assigning a variable `shape` . (For example, you can do `shape <- "right skewed"` or `shape <- "uniform"` ... )
 
 5.  Obtain a barplot of `E` in the data. If you create a barplot showing counts on Y axis and categories (from A to E) on X axis, what is the pattern of this barplot? You can answer if it is one of
 
