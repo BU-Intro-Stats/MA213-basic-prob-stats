@@ -842,216 +842,174 @@ Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be indep
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}
-% \frametitle{Practice}
-
-% \pq{Suppose a woman who gets tested once and obtains a positive result wants to get tested again. In the second test, what should we assume to be the probability of this specific woman having cancer?}
-
-% \begin{enumerate}[(a)]
-% \item 0.017
-% \solnMult{0.12}
-% \item 0.0133
-% \item 0.88
-% \end{enumerate}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% \frametitle{Practice}
-
-% \pq{What is the probability that this woman has cancer if this second mammogram also yielded a positive result?}
-
-% \twocol{0.2}{0.7}
-% {
-% \begin{enumerate}[(a)]
-% \item 0.0936
-% \item 0.088
-% \item 0.48
-% \solnMult{0.52}
-% \end{enumerate}
-% }
-% {
-% \solnGr{\only<2->{
-% \includegraphics[width=\textwidth]{\chp3@path/3-2_conditional_probability/figures/cancer_tree/cancer_tree_second} 
-% }}
-% }
-
-% \soln{\only<3->{
-% {\small \[P(C | +) = \frac{P(C~and~+)}{P(+)} = \frac{0.0936}{0.0936+0.088} = 0.52\]}
-% }}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Bayes' Theorem}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Bayes' Theorem: Version 1}
-
-The conditional probability formula we have seen so far is a special case of \hl{Bayes' Theorem}, which lets us switch the conditioning.
-
-\vspace{2mm}
-\[
-P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(B|A)P(A)
-\]
-\pause
-\[
-P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}
-\]
-
-\pause
-\vspace{2mm}
-
-\formula{Bayes' Theorem (1):}{
-\[
-P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-\]
-}
-
-\end{frame}
-
-% --- Bayes' Theorem Step 2 ---
-\begin{frame}
-\frametitle{Bayes' Theorem: Version 2}
-We often don't know the marginal probability $P(B)$ by itself, so we split the denominator:
-\formula{Bayes' Theorem (2):}{
-\[
-P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
-\]
-}
-
-\pause
-\vspace{2mm}
-
-\begin{center}
-	\begin{tikzpicture}[scale=1.0]
-		% Draw the main rectangle (sample space)
-		\draw[thick] (0,0) rectangle (4,2);
-
-		% (right half, bottom)
-		\fill[cyan!60] (2,0) rectangle (4,1);
-
-		% (top left)
-		\fill[green!60] (0,1) rectangle (2,2);
-
-		% (bottom left)
-		\fill[teal!60] (0,0) rectangle (2,1);
-
-		% Labels
-		\node[red] at (3.7,0.3) {\large B};
-		\node at (0.2,1.7) {\large A};
-		\node at (3,0.7) { $B \cap A^c$};
-		\node at (1,0.7) { $B \cap A$}; 
-
-		% Draw A and B outlines
-		\draw[thick, black, line width=1pt] (0,0) rectangle (2,2);
-		\draw[thick, red, line width=2pt] (0,0) rectangle (4,1);
-	\end{tikzpicture}
-\end{center}
-\pause
-\small{Note: $P(B \cap A)=P(B|A)P(A)$ and $P(B \cap A^c)=P(B|A^c)P(A^c)$, by the conditional probability formula (again!)}
-
-
-\end{frame}
-
-% --- Bayes' Theorem Step 3 ---
-\begin{frame}
-\frametitle{Bayes' Theorem: Version 3}
-
-
-This trick can be extended to more than two mutually exclusive events $A_1, A_2, \ldots, A_k$ that \hl{partition} the sample space.
-
-\formula{Bayes' Theorem (3):}{
-\[ P(A_1|B) = \frac{P(B|A_1)P(A_1)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k)} \]
-\[ = \frac{P(B|A_1)P(A_1)}{\sum_{i=1}^k P(B|A_i)P(A_i)}\]
-}
-\pause
-
-\begin{center}
-\begin{tikzpicture}[scale=1.0]
-	% Draw universal set
-	\draw[thick] (0,0) rectangle (6,2.5);
-	% Draw A1, A2, A3, A4
-	\foreach \i/\col in {1/green!40,2/lime!60,3/cyan!40,4/blue!40} {
-		\fill[\col] (1.5*\i-1.5,0.0) rectangle (1.5*\i,2.5);
-		\node at (-0.75+1.5*\i,2.2) {$A_{\i}$};
-	}
-	% Draw B as a horizontal bar
-	\draw[thick,red, line width=2pt] (0,0.0) rectangle (6,1.2);
-	% Label intersections
-	\foreach \i in {1,2,3,4} {
-		\node at (-0.75+1.5*\i,0.85) {$A_{\i} \cap B$};
-	}
-	% Label B
-	\node[red] at (5.7,0.3) {B};
-\end{tikzpicture}
-\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-% \frametitle{Application activity: Inverting probabilities}
-
-% \app{{\footnotesize A common epidemiological model for the spread of diseases is the SIR model, where the population is partitioned into three groups: Susceptible, Infected, and Recovered. This is a reasonable model for diseases like chickenpox where a single infection usually provides immunity to subsequent infections. Sometimes these diseases can also be difficult to detect. \vspace{2mm} \\
-% Imagine a population in the midst of an epidemic where 60\% of the population is considered susceptible, 10\% is infected, and 30\% is recovered. The only test for the disease is accurate 95\% of the time for susceptible individuals, 99\% for infected individuals, but 65\% for recovered individuals. (Note: In this case accurate means returning a negative result for susceptible and recovered individuals and a positive result for infected individuals). \vspace{2mm} \\
-% Draw a probability tree to reflect the information given above. If the individual has tested positive, what is the probability that they are actually infected?
-% }}
-
-% \end{frame}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% \subsection{Bayes' Theorem}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % \begin{frame}
-% \frametitle{Application activity: Inverting probabilities (cont.)}
+% \frametitle{Bayes' Theorem: Version 1}
 
-% \vspace{-0.5cm}
+% The conditional probability formula we have seen so far is a special case of \hl{Bayes' Theorem}, which lets us switch the conditioning.
 
-% \includegraphics[width=\textwidth]{\chp3@path/3-2_conditional_probability/figures/sir_tree/sir_tree} 
+% \vspace{2mm}
+% \[
+% P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(B|A)P(A)
+% \]
+% \pause
+% \[
+% P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}
+% \]
 
 % \pause
+% \vspace{2mm}
 
-% \[ P(inf | +) = \frac{P(inf~and~+)}{P(+)} = \frac{0.099}{0.03 + 0.099 + 0.105} \approx 0.423 \]
+% \formula{Bayes' Theorem (1):}{
+% \[
+% P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+% \]
+% }
+
+% \end{frame}
+
+% % --- Bayes' Theorem Step 2 ---
+% \begin{frame}
+% \frametitle{Bayes' Theorem: Version 2}
+% We often don't know the marginal probability $P(B)$ by itself, so we split the denominator:
+% \formula{Bayes' Theorem (2):}{
+% \[
+% P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
+% \]
+% }
+
+% \pause
+% \vspace{2mm}
+
+% \begin{center}
+% 	\begin{tikzpicture}[scale=1.0]
+% 		% Draw the main rectangle (sample space)
+% 		\draw[thick] (0,0) rectangle (4,2);
+
+% 		% (right half, bottom)
+% 		\fill[cyan!60] (2,0) rectangle (4,1);
+
+% 		% (top left)
+% 		\fill[green!60] (0,1) rectangle (2,2);
+
+% 		% (bottom left)
+% 		\fill[teal!60] (0,0) rectangle (2,1);
+
+% 		% Labels
+% 		\node[red] at (3.7,0.3) {\large B};
+% 		\node at (0.2,1.7) {\large A};
+% 		\node at (3,0.7) { $B \cap A^c$};
+% 		\node at (1,0.7) { $B \cap A$}; 
+
+% 		% Draw A and B outlines
+% 		\draw[thick, black, line width=1pt] (0,0) rectangle (2,2);
+% 		\draw[thick, red, line width=2pt] (0,0) rectangle (4,1);
+% 	\end{tikzpicture}
+% \end{center}
+% \pause
+% \small{Note: $P(B \cap A)=P(B|A)P(A)$ and $P(B \cap A^c)=P(B|A^c)P(A^c)$, by the conditional probability formula (again!)}
 
 
 % \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Bayes' Theorem Example: Weather Prediction}
-
-\begin{itemize}
-	\item Let $A_1$ = \{rain tomorrow\}, $A_2$ = \{cloudy tomorrow\}, $A_3$ = \{clear tomorrow\}, $B$ = \{weatherman predicts rain\}.
-	\item Assume $P(A_1) = 0.2$, $P(A_2) = 0.15$, $P(A_3) = 0.65$
-	\item $P(B|A_1) = 0.8$, $P(B|A_2) = 0.4$, $P(B|A_3) = 0.2$
-	\item What is $P(A_1|B)$?
-\end{itemize}
-
-\vspace{2mm}
-\pause
-\[
-P(A_1|B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2) + P(A_3)P(B|A_3)}
-\]
-
-\begin{align*}
-P(A_1|B) &= \frac{0.2 \times 0.8}{0.2 \times 0.8 + 0.15 \times 0.4 + 0.65 \times 0.2} \\
-				&= \frac{0.16}{0.16 + 0.06 + 0.13} \\
-				&= \frac{0.16}{0.35} \\
-				&= 0.46
-\end{align*}
-\end{frame}
+% % --- Bayes' Theorem Step 3 ---
+% \begin{frame}
+% \frametitle{Bayes' Theorem: Version 3}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This trick can be extended to more than two mutually exclusive events $A_1, A_2, \ldots, A_k$ that \hl{partition} the sample space.
+
+% \formula{Bayes' Theorem (3):}{
+% \[ P(A_1|B) = \frac{P(B|A_1)P(A_1)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k)} \]
+% \[ = \frac{P(B|A_1)P(A_1)}{\sum_{i=1}^k P(B|A_i)P(A_i)}\]
+% }
+% \pause
+
+% \begin{center}
+% \begin{tikzpicture}[scale=1.0]
+% 	% Draw universal set
+% 	\draw[thick] (0,0) rectangle (6,2.5);
+% 	% Draw A1, A2, A3, A4
+% 	\foreach \i/\col in {1/green!40,2/lime!60,3/cyan!40,4/blue!40} {
+% 		\fill[\col] (1.5*\i-1.5,0.0) rectangle (1.5*\i,2.5);
+% 		\node at (-0.75+1.5*\i,2.2) {$A_{\i}$};
+% 	}
+% 	% Draw B as a horizontal bar
+% 	\draw[thick,red, line width=2pt] (0,0.0) rectangle (6,1.2);
+% 	% Label intersections
+% 	\foreach \i in {1,2,3,4} {
+% 		\node at (-0.75+1.5*\i,0.85) {$A_{\i} \cap B$};
+% 	}
+% 	% Label B
+% 	\node[red] at (5.7,0.3) {B};
+% \end{tikzpicture}
+% \end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{Application activity: Inverting probabilities}
+
+% % \app{{\footnotesize A common epidemiological model for the spread of diseases is the SIR model, where the population is partitioned into three groups: Susceptible, Infected, and Recovered. This is a reasonable model for diseases like chickenpox where a single infection usually provides immunity to subsequent infections. Sometimes these diseases can also be difficult to detect. \vspace{2mm} \\
+% % Imagine a population in the midst of an epidemic where 60\% of the population is considered susceptible, 10\% is infected, and 30\% is recovered. The only test for the disease is accurate 95\% of the time for susceptible individuals, 99\% for infected individuals, but 65\% for recovered individuals. (Note: In this case accurate means returning a negative result for susceptible and recovered individuals and a positive result for infected individuals). \vspace{2mm} \\
+% % Draw a probability tree to reflect the information given above. If the individual has tested positive, what is the probability that they are actually infected?
+% % }}
+
+% % \end{frame}
+
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{Application activity: Inverting probabilities (cont.)}
+
+% % \vspace{-0.5cm}
+
+% % \includegraphics[width=\textwidth]{\chp3@path/3-2_conditional_probability/figures/sir_tree/sir_tree} 
+
+% % \pause
+
+% % \[ P(inf | +) = \frac{P(inf~and~+)}{P(+)} = \frac{0.099}{0.03 + 0.099 + 0.105} \approx 0.423 \]
+
+
+% % \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Bayes' Theorem Example: Weather Prediction}
+
+% \begin{itemize}
+% 	\item Let $A_1$ = \{rain tomorrow\}, $A_2$ = \{cloudy tomorrow\}, $A_3$ = \{clear tomorrow\}, $B$ = \{weatherman predicts rain\}.
+% 	\item Assume $P(A_1) = 0.2$, $P(A_2) = 0.15$, $P(A_3) = 0.65$
+% 	\item $P(B|A_1) = 0.8$, $P(B|A_2) = 0.4$, $P(B|A_3) = 0.2$
+% 	\item What is $P(A_1|B)$?
+% \end{itemize}
+
+% \vspace{2mm}
+% \pause
+% \[
+% P(A_1|B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2) + P(A_3)P(B|A_3)}
+% \]
+
+% \begin{align*}
+% P(A_1|B) &= \frac{0.2 \times 0.8}{0.2 \times 0.8 + 0.15 \times 0.4 + 0.65 \times 0.2} \\
+% 				&= \frac{0.16}{0.16 + 0.06 + 0.13} \\
+% 				&= \frac{0.16}{0.35} \\
+% 				&= 0.46
+% \end{align*}
+% \end{frame}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Edfinity Quiz}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
