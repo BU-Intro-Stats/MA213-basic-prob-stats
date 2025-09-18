@@ -68,6 +68,198 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Tree diagrams}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Inverting probabilities}
+
+\dq{When a patient goes through breast cancer screening there are two competing claims: patient had cancer and patient doesn't have cancer. If a mammogram yields a positive result, what is the probability that patient actually has cancer?}
+
+\twocol{0.7}{0.3}{
+\includegraphics[width=\textwidth]{\chp3@path/3-2_conditional_probability/figures/cancer_tree/cancer_tree_first} 
+}
+{
+\pause
+{\footnotesize
+\begin{eqnarray*}
+&&P(C | +) \\
+\pause
+&&= \frac{P(C~and~+)}{P(+)} \\
+\pause
+&&= \frac{0.0133}{0.0133 + 0.0983} \\
+\pause
+&&= 0.12
+\end{eqnarray*}
+}
+}
+
+\pause
+
+\Note{Tree diagrams are useful for inverting probabilities: we are given $P(+|C)$ and asked for $P(C|+)$.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Bayes' Theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Bayes' Theorem: Version 1}
+
+The conditional probability formula we have seen so far is a special case of \hl{Bayes' Theorem}, which lets us switch the conditioning.
+
+\vspace{2mm}
+\[
+P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(B|A)P(A)
+\]
+\pause
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}
+\]
+
+\pause
+\vspace{2mm}
+
+\formula{Bayes' Theorem (1):}{
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\]
+}
+
+\end{frame}
+
+% --- Bayes' Theorem Step 2 ---
+\begin{frame}
+\frametitle{Bayes' Theorem: Version 2}
+We often don't know the marginal probability $P(B)$ by itself, so we split the denominator:
+\formula{Bayes' Theorem (2):}{
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
+\]
+}
+
+\pause
+\vspace{2mm}
+
+\begin{center}
+	\begin{tikzpicture}[scale=1.0]
+		% Draw the main rectangle (sample space)
+		\draw[thick] (0,0) rectangle (4,2);
+
+		% (right half, bottom)
+		\fill[cyan!60] (2,0) rectangle (4,1);
+
+		% (top left)
+		\fill[green!60] (0,1) rectangle (2,2);
+
+		% (bottom left)
+		\fill[teal!60] (0,0) rectangle (2,1);
+
+		% Labels
+		\node[red] at (3.7,0.3) {\large B};
+		\node at (0.2,1.7) {\large A};
+		\node at (3,0.7) { $B \cap A^c$};
+		\node at (1,0.7) { $B \cap A$}; 
+
+		% Draw A and B outlines
+		\draw[thick, black, line width=1pt] (0,0) rectangle (2,2);
+		\draw[thick, red, line width=2pt] (0,0) rectangle (4,1);
+	\end{tikzpicture}
+\end{center}
+\pause
+\small{Note: $P(B \cap A)=P(B|A)P(A)$ and $P(B \cap A^c)=P(B|A^c)P(A^c)$, by the conditional probability formula (again!)}
+
+
+\end{frame}
+
+% --- Bayes' Theorem Step 3 ---
+\begin{frame}
+\frametitle{Bayes' Theorem: Version 3}
+
+
+This trick can be extended to more than two mutually exclusive events $A_1, A_2, \ldots, A_k$ that \hl{partition} the sample space.
+
+\formula{Bayes' Theorem (3):}{
+\[ P(A_1|B) = \frac{P(B|A_1)P(A_1)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k)} \]
+\[ = \frac{P(B|A_1)P(A_1)}{\sum_{i=1}^k P(B|A_i)P(A_i)}\]
+}
+\pause
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+	% Draw universal set
+	\draw[thick] (0,0) rectangle (6,2.5);
+	% Draw A1, A2, A3, A4
+	\foreach \i/\col in {1/green!40,2/lime!60,3/cyan!40,4/blue!40} {
+		\fill[\col] (1.5*\i-1.5,0.0) rectangle (1.5*\i,2.5);
+		\node at (-0.75+1.5*\i,2.2) {$A_{\i}$};
+	}
+	% Draw B as a horizontal bar
+	\draw[thick,red, line width=2pt] (0,0.0) rectangle (6,1.2);
+	% Label intersections
+	\foreach \i in {1,2,3,4} {
+		\node at (-0.75+1.5*\i,0.85) {$A_{\i} \cap B$};
+	}
+	% Label B
+	\node[red] at (5.7,0.3) {B};
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Law of Total Probability}
+The trick we used in the denominator of Bayes' Theorem is called the \hl{Law of Total Probability}.
+
+\vspace{1em}
+\formula{Law of Total Probability}{
+\[ P(B) = P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k) \]
+\[ P(B) = \sum_{i=1}^k P(B|A_i)P(A_i) \]
+} 
+
+\vspace{1em}
+\begin{itemize}
+  \item The events $A_1, A_2, \ldots, A_k$ must be mutually exclusive and exhaustive (i.e. partition the sample space).
+  \item We are computing the \hl{marginal probability} of $B$ by \hl{marginalizing} over the $A_i$'s.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Bayes' Theorem Example: Weather Prediction}
+
+\begin{itemize}
+	\item Let $A_1$ = \{rain tomorrow\}, $A_2$ = \{cloudy tomorrow\}, $A_3$ = \{clear tomorrow\}, $B$ = \{weatherman predicts rain\}.
+	\item Assume $P(A_1) = 0.2$, $P(A_2) = 0.15$, $P(A_3) = 0.65$
+	\item $P(B|A_1) = 0.8$, $P(B|A_2) = 0.4$, $P(B|A_3) = 0.2$
+	\item What is $P(A_1|B)$?
+\end{itemize}
+
+\vspace{2mm}
+\pause
+\[
+P(A_1|B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2) + P(A_3)P(B|A_3)}
+\]
+
+\begin{align*}
+P(A_1|B) &= \frac{0.2 \times 0.8}{0.2 \times 0.8 + 0.15 \times 0.4 + 0.65 \times 0.2} \\
+				&= \frac{0.16}{0.16 + 0.06 + 0.13} \\
+				&= \frac{0.16}{0.35} \\
+				&= 0.46
+\end{align*}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Sampling from a small population}
@@ -90,7 +282,7 @@ When sampling \hl{with replacement}, you put back what you just drew.
 
 \pause
 
-\[ Prob(1^{st} \text{ chip } B) = \frac{3}{5 + 3 + 2} = \frac{3}{10} = 0.3 \]
+\[ Prob(B_1) = \frac{3}{5 + 3 + 2} = \frac{3}{10} = 0.3 \]
 
 \pause
 
@@ -108,7 +300,7 @@ $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 
 
 \pause
 
-\[ Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B) = \frac{3}{10} = 0.3 \]
+\[ Prob(B_2 | B_1) = \frac{3}{10} = 0.3 \]
 
 \end{itemize}
 
@@ -131,7 +323,7 @@ $1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 
 $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
 \end{center}
 \pause
-\[ Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } O) = \frac{3}{10} = 0.3 \]
+\[ Prob(B_2 | O_1) = \frac{3}{10} = 0.3 \]
 
 \pause
 \item If drawing with replacement, what is the probability of drawing two blue chips in a row?
@@ -142,7 +334,7 @@ $1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 
 $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
 \end{center}
 \pause
-\[ Prob(1^{st} \text{ chip } B) \cdot Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B) = 0.3 \times 0.3 \]
+\[ Prob(B_1) \cdot Prob(B_2 | B_1) = 0.3 \times 0.3 \]
 \[ = 0.3^2 = 0.09 \]
 
 \end{itemize}
@@ -157,10 +349,10 @@ $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 
 \begin{itemize}
 
 \item When drawing with replacement, probability of the second chip being blue does not depend on the color of the first chip since whatever we draw in the first draw gets put back in the bag.
-\[ Prob(B | B) = Prob(B | O) \]
+\[ Prob(B_2 | B_1) = Prob(B_2 | O_1) \]
 
 \item In addition, this probability is equal to the probability of drawing a blue chip in the first draw, since the composition of the bag never changes when sampling with replacement.
-\[ Prob(B | B) = Prob(B) \]
+\[ Prob(B_2 | B_1) = Prob(B_1) \]
 
 \item \hl{When drawing with replacement, draws are independent.}
 
@@ -188,7 +380,7 @@ $1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 
 $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
 \end{center}
 \pause
-\[ Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B) = \frac{2}{9} = 0.22 \]
+\[ Prob(B_2 | B_1) = \frac{2}{9} = 0.22 \]
 
 \pause
 
@@ -200,7 +392,7 @@ $1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 
 $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
 \end{center}
 \pause
-\[ Prob(1^{st} \text{ chip } B) \cdot Prob(2^{nd} \text{ chip } B | 1^{st} \text{ chip } B)  = 0.3 \times 0.22 \]
+\[ Prob(B_1) \cdot Prob(B_2 | B_1)  = 0.3 \times 0.22 \]
 \[ = 0.066 \]
 
 \end{itemize}
@@ -215,7 +407,7 @@ $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 
 \begin{itemize}
 
 \item When drawing without replacement, the probability of the second chip being blue given the first was blue is not equal to the probability of drawing a blue chip in the first draw since the composition of the bag changes with the outcome of the first draw.
-\[ Prob(B | B) \ne Prob(B) \]
+\[ Prob(B_2 | B_1) \ne Prob(B_1) \]
 
 \pause
 
@@ -256,10 +448,6 @@ $2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Edfinity Quiz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \section{R Demonstration: Sampling}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -437,12 +625,6 @@ $X$ & $P(X)$         & $X ~ P(X)$      & \multicolumn{1}{c|}{$(X - E(X))^2$}  & 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{R Demonstration}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -478,19 +660,18 @@ where $a$ and $b$ are some fixed numbers.
 \begin{frame}
 \frametitle{Calculating the expectation of a linear combination}
 
-(TODO: E[aX+bY])
+\dq{On average, a statistics homework has 20.3 problems and a physics homework has 5.4 problems. You take 5 minutes for each statistics problem and 25 minutes for each physics problem. On average, how much time should you expect to spend on homework every week?}
 
-% \dq{On average you take 10 minutes for each statistics homework problem and 15 minutes for each chemistry homework problem. This week you have 5 statistics and 4 chemistry homework problems assigned. What is the total time you expect to spend on statistics and chemistry homework for the week?}
-
-% \soln{
-% \pause
-% \begin{align*} 
-% E(S + S + S + S + S + C + C + C + C) &= 5 \times E(S) + 4 \times E(C) \\
-% &= 5 \times 10 + 4 \times 15 \\
-% &= 50 + 60 \\
-% &= 110~min 
-% \end{align*}
-% }
+\soln{
+\pause
+Let $S$ be the number of statistics problems and $P$ be the number of physics problems. 
+\begin{align*} 
+E(5S+25P) &= 5 \times E(S) + 25 \times E(P) \\
+&= 5 \times 20.3 + 25 \times 5.4 \\
+&= 101.5 + 135 \\
+&= 236.5~min = 3.94~hours
+\end{align*}
+}
 
 \end{frame}
 
@@ -526,25 +707,25 @@ where $a$ and $b$ are some fixed numbers.
 \begin{frame}
 \frametitle{Calculating the variance of a linear combination}
 
-(TODO: Var[aX+bY])
+\dq{The standard deviation of the number of statistics problems per homework is 2.3 problems, and it is 0.5 problems for physics homeworks. What is the standard deviation of the time you expect to spend on homework for the week? Assume that the number of problems on your statistics homework is independent of the number of problems on your physics homework.}
 
-% \dq{The standard deviation of the time you take for each statistics homework problem is 1.5 minutes, and it is 2 minutes for each chemistry problem. What is the standard deviation of the time you expect to spend on statistics and physics homework for the week if you have 5 statistics and 4 chemistry homework problems assigned? Suppose that the time it takes to complete each problem is independent of another.}
-
-% \soln{
-% \pause
-% \begin{align*} 
-% V(S + S + S + S + S + C + C + C + C) &= V(S) + V(S) + V(S) + V(S) + V(S) + V(C) + V(C) + V(C) + V(C) \\
-% &= 5 \times V(S) + 4 \times V(C) \\
-% &= 5 \times 1.5^2 + 4 \times 2^2 \\
-% &= 27.25
-% \end{align*}
-% }
+\soln{
+\pause
+\begin{align*} 
+V(5S+25P) &= V(5S) + V(25P) \\
+&= 5^2 \times V(S) + 25^2 \times V(P) \\
+&= 25 \times 2.3^2 + 625 \times 0.5^2 \\
+&= 288.5
+\end{align*}
+\pause
+The standard deviation is $\sqrt{288.5} = 16.99~min = 0.28~hours$
+}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz}
+% \section{Edfinity Quiz}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
