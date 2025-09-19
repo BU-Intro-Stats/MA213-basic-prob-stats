@@ -530,204 +530,204 @@ Below is a visual representation of the probability distribution of winnings fro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Expectation}
+% \subsection{Expectation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Expectation}
+% \begin{frame}
+% \frametitle{Expectation}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item We are often interested in the average outcome of a random variable.
+% \item We are often interested in the average outcome of a random variable.
 
-\item We call this the \hl{expected value} (mean), and it is a weighted average of the possible outcomes
-\formula{\[\mu = E(X) = \sum_{i = 1}^k x_i ~ P(X = x_i)\]}
+% \item We call this the \hl{expected value} (mean), and it is a weighted average of the possible outcomes
+% \formula{\[\mu = E(X) = \sum_{i = 1}^k x_i ~ P(X = x_i)\]}
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Expected value of a discrete random variable}
+% \begin{frame}
+% \frametitle{Expected value of a discrete random variable}
 
-\dq{In a game of cards you win \$1 if you draw a heart, \$5 if you draw an ace (including the ace of hearts), \$10 if you draw the king of spades and nothing for any other card you draw. Write the probability model for your winnings, and calculate your expected winning.}
+% \dq{In a game of cards you win \$1 if you draw a heart, \$5 if you draw an ace (including the ace of hearts), \$10 if you draw the king of spades and nothing for any other card you draw. Write the probability model for your winnings, and calculate your expected winning.}
 
-\begin{center}
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{l | c | c | c }
-Event		& $X$ 		& $P(X)$        		& $X ~ P(X)$ \\
-\hline
-Heart (not ace)	& $1$		& $\frac{12}{52}$	& $\frac{12}{52}$ \\
-Ace			& $5$		& $\frac{4}{52}$	& $\frac{20}{52}$ \\	
-King of spades	& $10$		& $\frac{1}{52}$	& $\frac{10}{52}$ \\	
-All else		& $0$		& $\frac{35}{52}$	& $0$ \\
-\hline
-Total			&			&		1		& $E(X) = \frac{42}{52} \approx 0.81$
-\end{tabular}
+% \begin{center}
+% \renewcommand{\arraystretch}{1.5}
+% \begin{tabular}{l | c | c | c }
+% Event		& $X$ 		& $P(X)$        		& $X ~ P(X)$ \\
+% \hline
+% Heart (not ace)	& $1$		& $\frac{12}{52}$	& $\frac{12}{52}$ \\
+% Ace			& $5$		& $\frac{4}{52}$	& $\frac{20}{52}$ \\	
+% King of spades	& $10$		& $\frac{1}{52}$	& $\frac{10}{52}$ \\	
+% All else		& $0$		& $\frac{35}{52}$	& $0$ \\
+% \hline
+% Total			&			&		1		& $E(X) = \frac{42}{52} \approx 0.81$
+% \end{tabular}
 
-\end{center}
+% \end{center}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Variability in random variables}
+% \subsection{Variability in random variables}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Variability}
+% \begin{frame}
+% \frametitle{Variability}
 
-We are also often interested in the variability in the values of a random variable.
+% We are also often interested in the variability in the values of a random variable.
 
-\formula{
-\[ \sigma^2 = Var(X) = \sum_{i = 1}^k (x_i - E(X))^2 P(X = x_i) \]
-\[ \sigma = SD(X) = \sqrt{Var(X)} \]
-}
+% \formula{
+% \[ \sigma^2 = Var(X) = \sum_{i = 1}^k (x_i - E(X))^2 P(X = x_i) \]
+% \[ \sigma = SD(X) = \sqrt{Var(X)} \]
+% }
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Variability of a discrete random variable}
+% \begin{frame}
+% \frametitle{Variability of a discrete random variable}
 
-\dq{For the previous card game example, how much would you expect the winnings to vary from game to game?}
+% \dq{For the previous card game example, how much would you expect the winnings to vary from game to game?}
 
-\vspace{2mm}
-\only<2->{
-{\footnotesize
-\begin{center}
-\renewcommand{\arraystretch}{2}
-\begin{tabular}{c | c | c | l | p{4cm}}
-$X$ & $P(X)$         & $X ~ P(X)$      & \multicolumn{1}{c|}{$(X - E(X))^2$}  & \multicolumn{1}{c}{$P(X) ~ (X - E(X))^2$}  \\
-\hline
-1 & $\frac{12}{52}$  & $1 \times \frac{12}{52} = \frac{12}{52}$ & $(1 - 0.81)^2 = 0.0361$ &  $\frac{12}{52} \times 0.0361 = 0.0083$ \\
-\hline
-5 & $\frac{4}{52}$   & $5 \times \frac{4}{52} = \frac{20}{52}$ & $(5 - 0.81)^2 = 17.5561$  & $\frac{4}{52} \times 17.5561 = 1.3505$ \\
-\hline
-10  & $\frac{1}{52}$ & $10 \times \frac{1}{52} = \frac{10}{52}$  & $(10 - 0.81)^2 = 84.4561$   & $\frac{1}{52} \times 84.0889 = 1.6242$ \\
-\hline
-0 & $\frac{35}{52}$  & $0 \times \frac{35}{52} = 0$  & $(0 - 0.81)^2 = 0.6561$ & $\frac{35}{52} \times 0.6561 = 0.4416$ \\
-\hline
-  &       & $E(X) = 0.81$ & & \soln{\only<3->{$V(X) = 3.4246$}} \\
- &       &                                                         & & \soln{\only<4>{$SD(X) = \sqrt{3.4246} = 1.85$}} \\
-\end{tabular}
-\end{center}
-}
-}
-\end{frame}
+% \vspace{2mm}
+% \only<2->{
+% {\footnotesize
+% \begin{center}
+% \renewcommand{\arraystretch}{2}
+% \begin{tabular}{c | c | c | l | p{4cm}}
+% $X$ & $P(X)$         & $X ~ P(X)$      & \multicolumn{1}{c|}{$(X - E(X))^2$}  & \multicolumn{1}{c}{$P(X) ~ (X - E(X))^2$}  \\
+% \hline
+% 1 & $\frac{12}{52}$  & $1 \times \frac{12}{52} = \frac{12}{52}$ & $(1 - 0.81)^2 = 0.0361$ &  $\frac{12}{52} \times 0.0361 = 0.0083$ \\
+% \hline
+% 5 & $\frac{4}{52}$   & $5 \times \frac{4}{52} = \frac{20}{52}$ & $(5 - 0.81)^2 = 17.5561$  & $\frac{4}{52} \times 17.5561 = 1.3505$ \\
+% \hline
+% 10  & $\frac{1}{52}$ & $10 \times \frac{1}{52} = \frac{10}{52}$  & $(10 - 0.81)^2 = 84.4561$   & $\frac{1}{52} \times 84.0889 = 1.6242$ \\
+% \hline
+% 0 & $\frac{35}{52}$  & $0 \times \frac{35}{52} = 0$  & $(0 - 0.81)^2 = 0.6561$ & $\frac{35}{52} \times 0.6561 = 0.4416$ \\
+% \hline
+%   &       & $E(X) = 0.81$ & & \soln{\only<3->{$V(X) = 3.4246$}} \\
+%  &       &                                                         & & \soln{\only<4>{$SD(X) = \sqrt{3.4246} = 1.85$}} \\
+% \end{tabular}
+% \end{center}
+% }
+% }
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration}
+% \section{R Demonstration}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Linear combinations of random variables}
+% \subsection{Linear combinations of random variables}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Linear combinations}
+% \begin{frame}
+% \frametitle{Linear combinations}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item A \hl{linear combination} of random variables $X$ and $Y$ is given by
+% \item A \hl{linear combination} of random variables $X$ and $Y$ is given by
 
-\[ aX + bY \]
+% \[ aX + bY \]
 
-where $a$ and $b$ are some fixed numbers.
+% where $a$ and $b$ are some fixed numbers.
 
-\pause
+% \pause
 
-\item The average value of a linear combination of random variables is given by
-\formula{\[ E(aX + bY) = a \times E(X) + b \times E(Y) \]}
+% \item The average value of a linear combination of random variables is given by
+% \formula{\[ E(aX + bY) = a \times E(X) + b \times E(Y) \]}
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Calculating the expectation of a linear combination}
+% \begin{frame}
+% \frametitle{Calculating the expectation of a linear combination}
 
-\dq{On average, a statistics homework has 20.3 problems and a physics homework has 5.4 problems. You take 5 minutes for each statistics problem and 25 minutes for each physics problem. On average, how much time should you expect to spend on homework every week?}
+% \dq{On average, a statistics homework has 20.3 problems and a physics homework has 5.4 problems. You take 5 minutes for each statistics problem and 25 minutes for each physics problem. On average, how much time should you expect to spend on homework every week?}
 
-\soln{
-\pause
-Let $S$ be the number of statistics problems and $P$ be the number of physics problems. 
-\begin{align*} 
-E(5S+25P) &= 5 \times E(S) + 25 \times E(P) \\
-&= 5 \times 20.3 + 25 \times 5.4 \\
-&= 101.5 + 135 \\
-&= 236.5~min = 3.94~hours
-\end{align*}
-}
+% \soln{
+% \pause
+% Let $S$ be the number of statistics problems and $P$ be the number of physics problems. 
+% \begin{align*} 
+% E(5S+25P) &= 5 \times E(S) + 25 \times E(P) \\
+% &= 5 \times 20.3 + 25 \times 5.4 \\
+% &= 101.5 + 135 \\
+% &= 236.5~min = 3.94~hours
+% \end{align*}
+% }
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Variability in linear combinations of random variables}
+% \subsection{Variability in linear combinations of random variables}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Linear combinations}
+% \begin{frame}
+% \frametitle{Linear combinations}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item The variability of a linear combination of two independent random variables is calculated as
-\formula{\[ V(aX + bY) = a^2 \times V(X) + b^2 \times V(Y) \]}
+% \item The variability of a linear combination of two independent random variables is calculated as
+% \formula{\[ V(aX + bY) = a^2 \times V(X) + b^2 \times V(Y) \]}
 
-\pause 
+% \pause 
 
-\item The standard deviation of the linear combination is the square root of the variance.
+% \item The standard deviation of the linear combination is the square root of the variance.
 
-\end{itemize}
+% \end{itemize}
 
-\pause 
-\vfill
+% \pause 
+% \vfill
 
-\Note{If the random variables are not independent, the variance calculation gets a little more complicated and is beyond the scope of this course.}
+% \Note{If the random variables are not independent, the variance calculation gets a little more complicated and is beyond the scope of this course.}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Calculating the variance of a linear combination}
+% \begin{frame}
+% \frametitle{Calculating the variance of a linear combination}
 
-\dq{The standard deviation of the number of statistics problems per homework is 2.3 problems, and it is 0.5 problems for physics homeworks. What is the standard deviation of the time you expect to spend on homework for the week? Assume that the number of problems on your statistics homework is independent of the number of problems on your physics homework.}
+% \dq{The standard deviation of the number of statistics problems per homework is 2.3 problems, and it is 0.5 problems for physics homeworks. What is the standard deviation of the time you expect to spend on homework for the week? Assume that the number of problems on your statistics homework is independent of the number of problems on your physics homework.}
 
-\soln{
-\pause
-\begin{align*} 
-V(5S+25P) &= V(5S) + V(25P) \\
-&= 5^2 \times V(S) + 25^2 \times V(P) \\
-&= 25 \times 2.3^2 + 625 \times 0.5^2 \\
-&= 288.5
-\end{align*}
-\pause
-The standard deviation is $\sqrt{288.5} = 16.99~min = 0.28~hours$
-}
+% \soln{
+% \pause
+% \begin{align*} 
+% V(5S+25P) &= V(5S) + V(25P) \\
+% &= 5^2 \times V(S) + 25^2 \times V(P) \\
+% &= 25 \times 2.3^2 + 625 \times 0.5^2 \\
+% &= 288.5
+% \end{align*}
+% \pause
+% The standard deviation is $\sqrt{288.5} = 16.99~min = 0.28~hours$
+% }
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \section{Edfinity Quiz}
+% % \section{Edfinity Quiz}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
