@@ -20,7 +20,7 @@ print(draw)
 
 # ---- 2. Draw many ----
 
-samples <- sample(outcomes, 1000, replace=TRUE, prob=probabilities)
+samples <- sample(outcomes, 100, replace=TRUE, prob=probabilities)
 samples <- as.data.frame(samples)
 print(samples)
 
@@ -61,4 +61,9 @@ colnames(tab) <- c("Mean", "Variance")
 rownames(tab) <- c("Sample", "Theoretical")
 
 print(tab)
+
+# Now go back and simulate 1000 samples instead of 100
+# Notice that the sample proportions are closer to the population probabilities
+#   (This is the Law of Large Numbers again!)
+
 

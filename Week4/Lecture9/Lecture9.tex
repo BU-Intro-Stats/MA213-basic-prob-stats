@@ -68,6 +68,66 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Random variables}
+
+\begin{itemize}
+
+\item A \hl{random variable} is a numeric quantity whose value depends on the outcome of a random event
+\begin{itemize}
+\item We use a capital letter, like $X$, to denote a random variable
+\item The values of a random variable are denoted with a lowercase letter, in this case $x$
+\item For example, $P(X = x)$
+\end{itemize}
+
+\item There are two types of random variables:
+\begin{itemize}
+\item \hl{Discrete random variables} often take only integer values
+\begin{itemize}
+\item Example: Number of credit hours, Difference in number of credit hours this term vs last
+\end{itemize}
+\item \hl{Continuous random variables} take real (decimal) values
+\begin{itemize}
+\item Example: Cost of books this term, Difference in cost of books this term vs last
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Distribution of a discrete random variable}
+
+\dq{In a game of cards you win \$1 if you draw a heart, \$5 if you draw an ace (including the ace of hearts), \$10 if you draw the king of spades and nothing for any other card you draw. Write the probability model for your winnings, and calculate your expected winning.}
+
+\pause
+\begin{small}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l | c | c | c }
+Event		& $X$ 		& $P(X)$        		 \\
+\hline
+Heart (not ace)	& $1$		& $\frac{12}{52}$	 \\
+Ace			& $5$		& $\frac{4}{52}$	 \\	
+King of spades	& $10$		& $\frac{1}{52}$	 \\	
+All else		& $0$		& $\frac{35}{52}$	\\
+\hline
+Total			&			&		1		
+\end{tabular}
+
+\end{center}
+\end{small}
+
+\pause
+
+The distribution of a discrete random variable is also called a \hl{probability mass function} or \hl{PMF}.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Expectation}
@@ -83,7 +143,13 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \item We call this the \hl{expected value} (mean), and it is a weighted average of the possible outcomes
 \formula{\[\mu = E(X) = \sum_{i = 1}^k x_i ~ P(X = x_i)\]}
-
+Here, the $x_i$'s are the possible values of the random variable, and the weights are the probabilities of each value.
+\pause
+\begin{small}
+\item Compare this to the formula for the sample mean of a dataset:
+\formula{\[\bar{x} = \frac{1}{n} \sum_{i = 1}^n x_i\]}
+Here, the $x_i$'s are the observed data points, and each point is weighted equally ($\frac{1}{n}$).
+\end{small}
 \end{itemize}
 
 \end{frame}
@@ -121,12 +187,20 @@ Total			&			&		1		& $E(X) = \frac{42}{52} \approx 0.81$
 \begin{frame}
 \frametitle{Variability}
 
-We are also often interested in the variability in the values of a random variable.
+We are also often interested in the variability in the values of a random variable. We call this the \hl{variance}
 
 \formula{
 \[ \sigma^2 = Var(X) = \sum_{i = 1}^k (x_i - E(X))^2 P(X = x_i) \]
 \[ \sigma = SD(X) = \sqrt{Var(X)} \]
 }
+Again, the $x_i$'s are the possible values of the random variable, and the weights are the probabilities of each value.
+
+\pause
+\begin{small}
+Compare this to the formula for the sample variance of a dataset:
+\formula{\[ s^2 = \frac{1}{n-1} \sum_{i = 1}^n (x_i - \bar{x})^2 \]}
+Again, the $x_i$'s are the observed data points, and each point is weighted equally ($\frac{1}{n-1}$).
+\end{small}
 
 \end{frame}
 
@@ -180,14 +254,14 @@ $X$ & $P(X)$         & $X ~ P(X)$      & \multicolumn{1}{c|}{$(X - E(X))^2$}  & 
 
 \item A \hl{linear combination} of random variables $X$ and $Y$ is given by
 
-\[ aX + bY \]
+\[ aX + bY + c\]
 
-where $a$ and $b$ are some fixed numbers.
+where $a$, $b$, and $c$ are some fixed numbers (\hl{constants}).
 
 \pause
 
 \item The average value of a linear combination of random variables is given by
-\formula{\[ E(aX + bY) = a \times E(X) + b \times E(Y) \]}
+\formula{\[ E(aX + bY + c) = a \times E(X) + b \times E(Y) + c\]}
 
 \end{itemize}
 
@@ -203,6 +277,7 @@ where $a$ and $b$ are some fixed numbers.
 \soln{
 \pause
 Let $S$ be the number of statistics problems and $P$ be the number of physics problems. 
+\pause
 \begin{align*} 
 E(5S+25P) &= 5 \times E(S) + 25 \times E(P) \\
 &= 5 \times 20.3 + 25 \times 5.4 \\
@@ -224,8 +299,8 @@ E(5S+25P) &= 5 \times E(S) + 25 \times E(P) \\
 
 \begin{itemize}
 
-\item The variability of a linear combination of two independent random variables is calculated as
-\formula{\[ V(aX + bY) = a^2 \times V(X) + b^2 \times V(Y) \]}
+\item The variability of a linear combination of two \hl{independent} random variables is calculated as
+\formula{\[ V(aX + bY + c) = a^2 \times V(X) + b^2 \times V(Y) \]}
 
 \pause 
 
@@ -263,12 +338,9 @@ The standard deviation is $\sqrt{288.5} = 16.99~min = 0.28~hours$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \section{Edfinity Quiz}
+\section{Edfinity Quiz}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\end{document}
 
 \subsection{Recap}
 
@@ -293,12 +365,12 @@ The standard deviation is $\sqrt{288.5} = 16.99~min = 0.28~hours$
 {\small
 \renewcommand\arraystretch{1.25}
 \begin{tabular}{l c c c r}
-Event				& Win	& Profit: $X$	& $P(X)$	& $ X \times P(X)$	\\
+Event					& Profit: $X$	& $P(X)$	& $ X \times P(X)$	\\
 \hline
-\orange{Red}, {A}{$\clubsuit$}		& 500		& 500 - 5 = 495	& $\frac{26}{52} \times \frac{1}{51} = 	0.0098$ & 	 $495 \times 0.0098 = 4.851$ \\
-Other	& 0 			& 0 - 5 = -5	& $1 - 0.0098 = 0.9902$ & $-5 \times 0.9902 = -4.951$ \\  
+\orange{Red}, {A}{$\clubsuit$}			& 500 - 5 = 495	& $\frac{26}{52} \times \frac{1}{51} = 	0.0098$ & 	 $495 \times 0.0098 = 4.851$ \\
+Other		& 0 - 5 = -5	& $1 - 0.0098 = 0.9902$ & $-5 \times 0.9902 = -4.951$ \\  
 \hline
-					&			&			& 			& $E(X) = -0.1$
+					&				& 			& $E(X) = -0.1$
 \end{tabular}
 }
 }
@@ -430,87 +502,117 @@ SD\left(\frac{X}{5}\right) &=& \sqrt{696.96} =  \$ 26.4
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Continuous distributions}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
-\frametitle{Continuous distributions}
+\frametitle{Think/Pair/Share}
+\dq{Given an independent sample $X_1, X_2, \ldots, X_n$, where $E[X_i]=\mu$ and $Var[X_i]=\sigma^2$. 
 
-\begin{itemize}
+The sample mean is defined as:
 
-\item Below is a histogram of the distribution of heights of US adults. 
+\begin{center}$\bar{X}=\frac{1}{n}\left(X_1 + X_2 + \ldots + X_n\right)=\frac{1}{n}\sum_{1}^{n} X_i$\end{center}
 
-\item The proportion of data that falls in the shaded bins gives the probability that a randomly sampled US adult is between 180 cm and 185 cm (about 5'11" to 6'1").
+What is $E[\bar{X}]$? What is $Var[\bar{X}]$? What is $StdDev[\bar{X}]$?}
 
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=\textwidth]{\chp3@path/3-5_continuous_distributions/figures/usHeightsHist180185/usHeightsHist180185}
-\end{center}
-
+\soln{
+\only<2>{
+\begin{eqnarray*} 
+E[\bar{X}] &=& E\left[\frac{1}{n}\sum_{i=1}^{n} X_i\right] = \frac{1}{n}\sum_{i=1}^{n} E[X_i] = \frac{1}{n}\times n \times \mu = \mu \\
+\pause
+Var[\bar{X}] &=& Var\left[\frac{1}{n}\sum_{i=1}^{n} X_i\right] = \frac{1}{n^2}\sum_{i=1}^{n} Var[X_i] = \frac{1}{n^2}\times n \times \sigma^2 = \frac{\sigma^2}{n} \\
+StdDev[\bar{X}] &=& \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}
+\end{eqnarray*} 
+}
+}
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{From histograms to continuous distributions}
-
 \begin{frame}
-\frametitle{From histograms to continuous distributions}
-
-Since height is a continuous numerical variable, its \hl{probability density function} is a smooth curve.
-
-\begin{center}
-\includegraphics[width=\textwidth]{\chp3@path/3-5_continuous_distributions/figures/fdicHeightContDist/fdicHeightContDist}
-\end{center}
-
+  \frametitle{What we just did is profound!}
+  \begin{itemize}
+    \item We modeled a \hl{dataset} using \hl{random variables} (Probability Theory)
+    \item We defined a \hl{statistic} (the sample mean) as a \hl{function} of these random variables (the linear combination).
+    \item We \emph{derived} the theoretical \hl{mean} and \hl{standard deviation} of this statistic.
+    \item This is the foundation of \hl{statistical inference}, which we will cover later in the course.
+  \end{itemize}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Probabilities from continuous distributions}
+% \section{Continuous distributions}
 
-\begin{frame}
-\frametitle{Probabilities from continuous distributions}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Therefore, the probability that a randomly sampled US adult is between 180 cm and 185 cm can also be estimated as the shaded area under the curve.
+% \begin{frame}
+% \frametitle{Continuous distributions}
 
-\begin{center}
-\includegraphics[width=\textwidth]{\chp3@path/3-5_continuous_distributions/figures/fdicHeightContDistFilled/fdicHeightContDistFilled}
-\end{center}
+% \begin{itemize}
+
+% \item Below is a histogram of the distribution of heights of US adults. 
+
+% \item The proportion of data that falls in the shaded bins gives the probability that a randomly sampled US adult is between 180 cm and 185 cm (about 5'11" to 6'1").
+
+% \end{itemize}
+
+% \begin{center}
+% \includegraphics[width=\textwidth]{\chp3@path/3-5_continuous_distributions/figures/usHeightsHist180185/usHeightsHist180185}
+% \end{center}
 
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{By definition...}
+% \subsection{From histograms to continuous distributions}
 
-Since continuous probabilities are estimated as ``the area under the curve", the probability of a person being exactly 180 cm (or any exact value) is defined as 0.
+% \begin{frame}
+% \frametitle{From histograms to continuous distributions}
 
-\begin{center}
-\includegraphics[width=0.8\textwidth]{\chp3@path/3-5_continuous_distributions/figures/fdicHeightContDist180}
-\end{center}
+% Since height is a continuous numerical variable, its \hl{probability density function} is a smooth curve.
 
-\end{frame}
+% \begin{center}
+% \includegraphics[width=\textwidth]{\chp3@path/3-5_continuous_distributions/figures/fdicHeightContDist/fdicHeightContDist}
+% \end{center}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \end{frame}
 
-\section{R Demonstration}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{Probabilities from continuous distributions}
 
-\section{Edfinity quiz}
+% \begin{frame}
+% \frametitle{Probabilities from continuous distributions}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Therefore, the probability that a randomly sampled US adult is between 180 cm and 185 cm can also be estimated as the shaded area under the curve.
+
+% \begin{center}
+% \includegraphics[width=\textwidth]{\chp3@path/3-5_continuous_distributions/figures/fdicHeightContDistFilled/fdicHeightContDistFilled}
+% \end{center}
+
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{By definition...}
+
+% Since continuous probabilities are estimated as ``the area under the curve", the probability of a person being exactly 180 cm (or any exact value) is defined as 0.
+
+% \begin{center}
+% \includegraphics[width=0.8\textwidth]{\chp3@path/3-5_continuous_distributions/figures/fdicHeightContDist180}
+% \end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{R Demonstration}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{Edfinity quiz}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
