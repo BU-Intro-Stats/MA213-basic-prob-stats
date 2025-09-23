@@ -127,6 +127,27 @@ Therefore, the probability that a randomly sampled US adult is between 180 cm an
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
+\frametitle{Probabilities from continuous distributions}
+
+How do we compute $P(a<X<b)$, the area under the probability density function $f(x)$ between two points $a$ and $b$?
+\begin{itemize}
+  \item Approximate it with rectangles
+  \item Compute it using calculus: $P(a<X<b) = \int_a^b f(x) dx$
+  \begin{itemize}
+    \item Sometimes, we will give you a formula for $P(X<b)$ or similar
+  \end{itemize}
+  \item Use statistical software 
+  \begin{itemize}
+    \item e.g. in R, \texttt{pnorm(b)} computes $P(X<b)$ for the Normal distribution
+  \end{itemize}
+  \item Use a Probability table for $P(X<b)$ or $P(0<X<b)$
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
 \frametitle{By definition...}
 
 Since continuous probabilities are estimated as ``the area under the curve", the probability of a person being exactly 180 cm (or any exact value) is defined as 0.
