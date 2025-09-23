@@ -10,8 +10,10 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 
 x <- seq(-8,8,0.1)  # xaxis values
 
+# Recall:
+# dnorm(x, mean=0, sd=1) evaluates the distribution (probability density function) 
 ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=dnorm, args=list(mean=0, sd=1), color='steelblue') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), n=1000, color='steelblue') +
   scale_x_continuous(breaks=c(-8:8))
 
 
@@ -21,25 +23,25 @@ ggplot(data.frame(x), aes(x)) +
 # ---- 2. Changing the sd ----
 
 ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=dnorm, args=list(mean=0, sd=1), color='steelblue') +
-  stat_function(fun=dnorm, args=list(mean=0, sd=5), color='dark green') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), n=1000, color='steelblue') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=5), n=1000, color='dark green') +
   scale_x_continuous(breaks=c(-8:8))
 
 
 # ---- 3. Changing the mean ----
 
 ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=dnorm, args=list(mean=0, sd=1), color='steelblue') +
-  stat_function(fun=dnorm, args=list(mean=0, sd=5), color='dark green') +
-  stat_function(fun=dnorm, args=list(mean=-4, sd=1), color='orange') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), n=1000, color='steelblue') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=5), n=1000, color='dark green') +
+  stat_function(fun=dnorm, args=list(mean=-4, sd=1), n=1000, color='orange') +
   scale_x_continuous(breaks=c(-8:8))
   
   
 # ---- 4. Changing both the mean and sd ----
   
 ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=dnorm, args=list(mean=0, sd=1), color='steelblue') +
-  stat_function(fun=dnorm, args=list(mean=0, sd=5), color='dark green') +
-  stat_function(fun=dnorm, args=list(mean=-4, sd=1), color='orange') + 
-  stat_function(fun=dnorm, args=list(mean=3, sd=2), color='pink') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), n=1000, color='steelblue') +
+  stat_function(fun=dnorm, args=list(mean=0, sd=5), n=1000, color='dark green') +
+  stat_function(fun=dnorm, args=list(mean=-4, sd=1), n=1000, color='orange') + 
+  stat_function(fun=dnorm, args=list(mean=3, sd=2), n=1000, color='pink') +
   scale_x_continuous(breaks=c(-8:8))
