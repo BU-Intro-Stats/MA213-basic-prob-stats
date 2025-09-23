@@ -21,7 +21,8 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp4@path{../../Chp 4}
+\def\chpiii@path{../../Chp 3}
+\def\chpiv@path{../../Chp 4}
 \input{../../lec_style.tex}
 
 
@@ -70,6 +71,84 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Continuous distributions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Continuous distributions}
+
+\begin{itemize}
+
+\item Below is a histogram of the distribution of heights of US adults. 
+
+\item The proportion of data that falls in the shaded bins gives the probability that a randomly sampled US adult is between 180 cm and 185 cm (about 5'11" to 6'1").
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=\textwidth]{\chpiii@path/3-5_continuous_distributions/figures/usHeightsHist180185/usHeightsHist180185}
+\end{center}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{From histograms to continuous distributions}
+
+\begin{frame}
+\frametitle{From histograms to continuous distributions}
+
+Since height is a continuous numerical variable, its \hl{probability density function} is a smooth curve.
+
+\begin{center}
+\includegraphics[width=\textwidth]{\chpiii@path/3-5_continuous_distributions/figures/fdicHeightContDist/fdicHeightContDist}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Probabilities from continuous distributions}
+
+\begin{frame}
+\frametitle{Probabilities from continuous distributions}
+
+Therefore, the probability that a randomly sampled US adult is between 180 cm and 185 cm can also be estimated as the shaded area under the curve.
+
+\begin{center}
+\includegraphics[width=\textwidth]{\chpiii@path/3-5_continuous_distributions/figures/fdicHeightContDistFilled/fdicHeightContDistFilled}
+\end{center}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{By definition...}
+
+Since continuous probabilities are estimated as ``the area under the curve", the probability of a person being exactly 180 cm (or any exact value) is defined as 0.
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chpiii@path/3-5_continuous_distributions/figures/fdicHeightContDist180}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Normal distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,7 +167,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{itemize}
 
 \begin{center}
-\includegraphics[width=0.7\textwidth]{\chp4@path/4-1_normal_distribution/figures/simpleNormal/simpleNormal}
+\includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/simpleNormal/simpleNormal}
 \end{center}
 
 \end{frame}
@@ -99,7 +178,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \frametitle{Heights of males}
 
 \twocol{0.5}{0.5}{
-\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ok_cupid/ok_cupid_men} \\
+\includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ok_cupid/ok_cupid_men} \\
 }
 {
 \pause
@@ -119,7 +198,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \frametitle{Heights of females}
 
 \twocol{0.5}{0.5}{
-\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ok_cupid/ok_cupid_women} \\
+\includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ok_cupid/ok_cupid_women} \\
 }
 {
 \pause
@@ -146,8 +225,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \begin{center}
 $\mu$: mean, $\sigma$: standard deviation
 \[N(\mu = 0, \sigma = 1) \hspace{1.4cm} N(\mu = 19, \sigma = 4) \]
-\includegraphics[width=0.6\textwidth]{\chp4@path/4-1_normal_distribution/figures/twoSampleNormals/twoSampleNormals} \\
-\includegraphics[width=0.6\textwidth]{\chp4@path/4-1_normal_distribution/figures/twoSampleNormalsStacked/twoSampleNormalsStacked}
+\includegraphics[width=0.6\textwidth]{\chpiv@path/4-1_normal_distribution/figures/twoSampleNormals/twoSampleNormals} \\
+\includegraphics[width=0.6\textwidth]{\chpiv@path/4-1_normal_distribution/figures/twoSampleNormalsStacked/twoSampleNormalsStacked}
 \end{center}
 
 \end{frame}
@@ -168,7 +247,7 @@ $\mu$: mean, $\sigma$: standard deviation
 \dq{SAT scores are distributed nearly normally with mean 1500 and standard deviation 300. ACT scores are distributed nearly normally with mean 21 and standard deviation 5. A college admissions officer wants to determine which of the two applicants scored better on their standardized test with respect to the other test takers: Pam, who earned an 1800 on her SAT, or Jim, who scored a 24 on his ACT?}
 
 \begin{center}
-\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/satActNormals/satActNormals}
+\includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/satActNormals/satActNormals}
 \end{center}
 
 \end{frame}
@@ -189,7 +268,7 @@ Since we cannot just compare these two raw scores, we instead compare how many s
 \end{itemize}
 
 \begin{center}
-\includegraphics[width=0.7\textwidth]{\chp4@path/4-1_normal_distribution/figures/satActNormals/satActNormalsStandardized}
+\includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/satActNormals/satActNormalsStandardized}
 \end{center}
 
 \end{frame}
@@ -228,7 +307,7 @@ Since we cannot just compare these two raw scores, we instead compare how many s
 \end{itemize}
 
 \begin{center}
-\includegraphics[width=0.7\textwidth]{\chp4@path/4-1_normal_distribution/figures/satBelow1800/satBelow1800}
+\includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/satBelow1800/satBelow1800}
 \end{center}
 
 \end{frame}
@@ -255,7 +334,7 @@ There are many ways to compute percentiles/areas under the curve:
 \begin{itemize}
 \item Applet: {\small \webURL{https://gallery.shinyapps.io/dist_calc/}}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{\chp4@path/4-1_normal_distribution/figures/applet}
+\includegraphics[width=0.8\textwidth]{\chpiv@path/4-1_normal_distribution/figures/applet}
 \end{center}
 
 \end{itemize}
@@ -310,7 +389,7 @@ $Z$ & 0.00 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 & 0.08 & 0.09 \\
 % ``The term \textit{six sigma process} comes from the notion that if one has six standard deviations between the process mean and the nearest specification limit, as shown in the graph, practically no items will fail to meet specifications."
 
 % \begin{center}
-% \includegraphics[width=0.35\textwidth]{\chp4@path/4-1_normal_distribution/figures/sixsigma}
+% \includegraphics[width=0.35\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sixsigma}
 % \end{center}
 
 % \ct{\webURL{http://en.wikipedia.org/wiki/Six_Sigma}}
@@ -329,7 +408,7 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 \pause
 \twocol{0.4}{0.6}{
 \begin{center}
-\includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
+\includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
 \end{center}
 }
 {
@@ -412,17 +491,17 @@ TODO: show a table to compute the probability in the Quality Control example
 % \begin{columns}[c]
 % \column{0.3\textwidth}
 % \pause
-% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupBET}
+% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupBET}
 % \column{0.05\textwidth}
 % =
 % \pause
 % \column{0.3\textwidth}
-% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupLT362}
+% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupLT362}
 % \column{0.05\textwidth}
 % -
 % \pause
 % \column{0.3\textwidth}
-% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
+% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
 % \end{columns}
 % \pause
 % \begin{eqnarray*}
@@ -449,7 +528,7 @@ TODO: show a table to compute the probability in the Quality Control example
 
 % \twocol{0.3}{0.7}
 % {
-% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/temp/tempLOW3PERC}
+% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/temp/tempLOW3PERC}
 % }
 % {
 % \pause
@@ -494,7 +573,7 @@ TODO: show a table to compute the probability in the Quality Control example
 % \pause
 % \twocol{0.3}{0.7}
 % {
-% \includegraphics[width=\textwidth]{\chp4@path/4-1_normal_distribution/figures/temp/tempHIGH10PERC}
+% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/temp/tempHIGH10PERC}
 % }
 % {
 % \pause
