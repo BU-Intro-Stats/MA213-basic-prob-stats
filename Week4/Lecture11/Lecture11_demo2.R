@@ -71,7 +71,7 @@ n50 = rnorm(50, mean=0, sd=3)
 n500 = rnorm(500, mean=0, sd=3)
 empirical_rule_test(n50, "Simulated N(0,3) Data, N=50")
 empirical_rule_test(n500, "Simulated N(0,3) Data, N=500")
-empirical_rule_test(trees$Height, "trees$Height (Girth of Black Cherry Trees)")
+empirical_rule_test(mpg$hwy, "mpg$hwy (Highway Gas Mileage)")
 empirical_rule_test(airquality$Ozone, "airquality$Ozone (Ozone)")
 empirical_rule_test(faithful$eruptions, "faithful$eruptions (Old Faithful)")
 
@@ -93,8 +93,8 @@ plot_with_sd <- function(x, name) {
 }
 
 par(mfrow = c(2,2))
-plot_with_sd(n50, "Normal N(0,3), N=50")
-plot_with_sd(trees$Height, "trees$Height")
+plot_with_sd(n500, "Normal N(0,3), N=500")
+plot_with_sd(mpg$hwy, "mpg$hwy")
 plot_with_sd(airquality$Ozone, "airquality$Ozone")
 plot_with_sd(faithful$eruptions, "faithful$eruptions")
 par(mfrow = c(1,1))
