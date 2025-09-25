@@ -15,7 +15,7 @@ s = 2 # Standard Deviation
 x <- seq(-5,11,0.1)  # xaxis values
 
 ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=dnorm, args=list(mean=m, sd=s), color='steelblue')
+  stat_function(fun=dnorm, args=list(mean=m, sd=s), n=1000, color='steelblue')
 
 # Now, we can calculate probabilities using pnorm(), the distribution function
 # for the Normal. 
@@ -28,17 +28,20 @@ pnorm(0.1, mean=m, sd=s)  # P(X <= 0.1)
 
 # What is the pnorm function doing?
 ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=pnorm, args=list(mean=m, sd=s), color='steelblue')
+  stat_function(fun=pnorm, args=list(mean=m, sd=s), n=1000, color='steelblue')
 
-# ---- 2. Calculate other normal distribution probabilities ----
 
-# Let's look at an extreme example:
-m = 10
-s = 1
-pnorm(-5, mean=m, sd=s)  # P(X <= -5) when X is tightly concentrated around +10
+###### Heinz Quality Control problem
+m = 36
+s = 0.11
 
-x <- seq(-10,20,0.1)
-ggplot(data.frame(x), aes(x)) +
-  stat_function(fun=dnorm, args=list(mean=m, sd=s), color='steelblue') +
-  geom_vline(xintercept=-5, color='red')
+# What percent of bottles have less than 35.8 oz of Ketchup?
+pnorm(35.8, m, s)
+# OR, compute the percentile using the z score
+pnorm((35.8-m)/s, 0, 1)
+pnorm(-1.82, 0, 1)
+
+# Pass if 35.8<X<36.2
+# What percent of bottles pass the quality control inspection?
+pnorm(36.2, m, s) - pnorm(35.8, m, s)
 

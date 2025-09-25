@@ -134,13 +134,13 @@ How do we compute $P(a<X<b)$, the area under the probability density function $f
   \item Approximate it with rectangles
   \item Compute it using calculus: $P(a<X<b) = \int_a^b f(x) dx$
   \begin{itemize}
-    \item Sometimes, we will give you a formula for $P(X<b)$ or similar
+    \item Sometimes, we will give you a formula for $P(X<x)$ or similar
   \end{itemize}
   \item Use statistical software 
   \begin{itemize}
-    \item e.g. in R, \texttt{pnorm(b)} computes $P(X<b)$ for the Normal distribution
+    \item e.g. in R, \texttt{pnorm(x)} computes $P(X<x)$ for the Normal distribution
   \end{itemize}
-  \item Use a Probability table for $P(X<b)$ or $P(0<X<b)$
+  \item Use a Probability table for $P(X<x)$ or $P(0<X<x)$
 \end{itemize}
 
 \end{frame}
@@ -305,9 +305,12 @@ Since we cannot just compare these two raw scores, we instead compare how many s
 
 \item Z score of an observation is the number of standard deviations it falls above or below the mean.
 \formula{\[Z = \frac{observation - mean}{SD}\]}
+\pause
 
 \item Z scores are defined for distributions of any shape, but only when the distribution is normal can we use Z scores to calculate percentiles.
+\item If $X \sim N(\mu, \sigma)$, then $Z = \frac{X - \mu}{\sigma} \sim N(0, 1)$.
 
+\pause
 \item Observations that are more than 2 SD away from the mean ($|Z| > 2$) are usually considered unusual.
 
 \end{itemize}
@@ -472,16 +475,19 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 
 % \end{frame}
 
+
 \begin{frame}
 \frametitle{Quality Control}
 
-TODO: show a table to compute the probability in the Quality Control example
+\begin{center}
+\includegraphics[width=0.75\textheight]{figures/Normal_Table}
+\end{center}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Z scores, percentiles}
+% \section{Edfinity Quiz: Z scores, percentiles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -489,124 +495,6 @@ TODO: show a table to compute the probability in the Quality Control example
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{Practice}
-
-% \pq{What percent of bottles \underline{pass} the quality control inspection?}
-
-% \vspace{-0.5cm}
-% \begin{multicols}{2}
-% \begin{enumerate}[(a)]
-% \item 1.82\%
-% \item 3.44\%
-% \item 6.88\%
-% \solnMult{93.12\%}
-% \item 96.56\%
-% \item[]
-% \end{enumerate}
-% \end{multicols}
-
-% \soln{
-% \vspace{-0.5cm}
-% \pause
-% \begin{columns}[c]
-% \column{0.3\textwidth}
-% \pause
-% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupBET}
-% \column{0.05\textwidth}
-% =
-% \pause
-% \column{0.3\textwidth}
-% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupLT362}
-% \column{0.05\textwidth}
-% -
-% \pause
-% \column{0.3\textwidth}
-% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/ketchup/ketchupLT358}
-% \end{columns}
-% \pause
-% \begin{eqnarray*}
-% Z_{35.8} &=& \frac{35.8 - 36}{0.11} = -1.82 \\ \pause
-% Z_{36.2} &=& \frac{36.2 - 36}{0.11} = 1.82 \\ \pause
-% P(35.8 < X < 36.2) &=& P(-1.82 < Z < 1.82) = 0.9656 - 0.0344 = 0.9312
-% \end{eqnarray*}
-% }
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Cutoff points / Geometric logic of the Normal distribution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}[fragile]
-% \frametitle{Finding cutoff points}
-
-% \dq{Body temperatures of healthy humans are distributed nearly normally with mean 98.2$\degree$F and standard deviation 0.73$\degree$F. What is the cutoff for the lowest 3\% of human body temperatures?}
-
-% \pause
-
-% \twocol{0.3}{0.7}
-% {
-% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/temp/tempLOW3PERC}
-% }
-% {
-% \pause
-% \begin{eqnarray*}
-% P(X < x) &=& 0.03 \rightarrow P(Z < \orange{-1.88}) = 0.03 \\ \pause
-% Z &=& \frac{obs~-~mean}{SD} \rightarrow \frac{x - 98.2}{0.73} = -1.88 \\ \pause
-% x &=& (-1.88 \times 0.73) + 98.2 = 96.8\degree F
-% \end{eqnarray*}
-% }
-% $\:$ \\
-% \begin{beamerboxesrounded}[shadow = true, lower = code body]{}
-% {\small \begin{verbatim}
-% > qnorm(0.03)
-% [1] -1.880794
-% \end{verbatim}
-% }
-% \end{beamerboxesrounded}
-
-% \ct{Mackowiak, Wasserman, and Levine (1992), \textit{A Critical Appraisal of 98.6 Degrees F, the Upper Limit of the Normal Body Temperature, and Other Legacies of Carl Reinhold August Wunderlick}.}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}[fragile]
-% \frametitle{Practice}
-
-% \pq{Body temperatures of healthy humans are distributed nearly normally with mean 98.2$\degree$F and standard deviation 0.73$\degree$F. What is the cutoff for the highest 10\% of human body temperatures?}
-
-% \vspace{-0.5cm}
-% \begin{multicols}{2}
-% \begin{enumerate}[(a)]
-% \item 97.3$\degree$F
-% \solnMult{99.1$\degree$F}
-% \item 99.4$\degree$F
-% \item 99.6$\degree$F
-% \end{enumerate}
-% \end{multicols}
-
-% \soln{
-% \vspace{-0.5cm}
-% \pause
-% \twocol{0.3}{0.7}
-% {
-% \includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/temp/tempHIGH10PERC}
-% }
-% {
-% \pause
-% \begin{eqnarray*}
-% P(X > x) &=& 0.10 \rightarrow P(Z < \orange{1.28}) = 0.90 \\ \pause
-% Z &=& \frac{obs~-~mean}{SD} \rightarrow \frac{x - 98.2}{0.73} = 1.28 \\ \pause
-% x &=& (1.28 \times 0.73) + 98.2 = 99.1
-% \end{eqnarray*}
-% }
-% }
-
-% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
