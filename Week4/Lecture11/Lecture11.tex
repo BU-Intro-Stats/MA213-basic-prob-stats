@@ -130,9 +130,9 @@ $\mu$: mean, $\sigma$: standard deviation
 
 \begin{itemize}
 
-\item \hl{Percentile} is the percentage of observations that fall below a given data point. 
+\item Recall from Chapter 2: the $p$th \hl{percentile} is a number such that $p\%$ of the observations fall below that number and $(100 - p)\%$ are equal to or above it
 
-\item Graphically, percentile is the area below the probability distribution curve to the left of that observation.
+\item For continuous distributions, you can compute an observations's percentile by finding the area below the probability distribution curve to the left of that observation.
 
 \end{itemize}
 
@@ -140,6 +140,31 @@ $\mu$: mean, $\sigma$: standard deviation
 \includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/satBelow1800/satBelow1800}
 \end{center}
 
+\end{frame}
+
+\begin{frame}
+\frametitle{Cumulative distribution function (CDF)}
+\begin{itemize}
+\item The \hl{cumulative distribution function (CDF)} of a random variable $X$ is the function $F(x) = P(X \leq x)$.
+\item The CDF gives the probability that the random variable takes on a value less than or equal to $x$.
+\item For continuous distributions, the CDF is the area under the probability density function (PDF) curve to the left of $x$, $F(x) = \int_{-\infty}^{x} f(t) dt$.
+\end{itemize}
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\begin{center}
+\textbf{Probability Density Function (PDF)}\\
+\includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/satBelow1800/satBelow1800}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\begin{center}
+\textbf{Cumulative Distribution Function (CDF)}\\
+\includegraphics[width=\textwidth]{\chpiv@path/4-1_normal_distribution/figures/satBelow1800/satBelow1800_CDF}
+\end{center}
+\end{minipage}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -308,120 +333,120 @@ $\:$ \\
 
 \section{Edfinity quiz: cutoff points}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{68-95-99.7 rule}
+% \subsection{68-95-99.7 rule}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{68-95-99.7 Rule}
+% \begin{frame}
+% \frametitle{68-95-99.7 Rule}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item For nearly normally distributed data, 
-\begin{itemize}
-\item about 68\% falls within 1 SD of the mean,
-\item about 95\% falls within 2 SD of the mean,
-\item about 99.7\% falls within 3 SD of the mean.
-\end{itemize}
+% \item For nearly normally distributed data, 
+% \begin{itemize}
+% \item about 68\% falls within 1 SD of the mean,
+% \item about 95\% falls within 2 SD of the mean,
+% \item about 99.7\% falls within 3 SD of the mean.
+% \end{itemize}
 
-\item It is possible for observations to fall 4, 5, or more standard deviations away from the mean, but these occurrences are very rare if the data are nearly normal.
+% \item It is possible for observations to fall 4, 5, or more standard deviations away from the mean, but these occurrences are very rare if the data are nearly normal.
 
-\end{itemize}
+% \end{itemize}
 
-\begin{center}
-\includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/6895997/6895997}
-\end{center}
+% \begin{center}
+% \includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/6895997/6895997}
+% \end{center}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Describing variability using the 68-95-99.7 Rule}
+% \begin{frame}
+% \frametitle{Describing variability using the 68-95-99.7 Rule}
 
-SAT scores are distributed nearly normally with mean 1500 and standard deviation 300.
+% SAT scores are distributed nearly normally with mean 1500 and standard deviation 300.
 
-\pause
-\begin{itemize}
+% \pause
+% \begin{itemize}
 
-\item $\sim$68\% of students score between 1200 and 1800 on the SAT. 
+% \item $\sim$68\% of students score between 1200 and 1800 on the SAT. 
 
-\item $\sim$95\% of students score between 900 and 2100 on the SAT. 
+% \item $\sim$95\% of students score between 900 and 2100 on the SAT. 
 
-\item $\sim$99.7\% of students score between 600 and 2400 on the SAT. 
+% \item $\sim$99.7\% of students score between 600 and 2400 on the SAT. 
 
-\end{itemize}
+% \end{itemize}
 
-\begin{center}
-\includegraphics[width=0.65\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sat_empirical/sat_empirical}
-\end{center}
+% \begin{center}
+% \includegraphics[width=0.65\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sat_empirical/sat_empirical}
+% \end{center}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity quiz: Geometric logic}  
+% \section{Edfinity quiz: Geometric logic}  
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]
-\frametitle{Number of hours of sleep on school nights}
+% \begin{frame}[fragile]
+% \frametitle{Number of hours of sleep on school nights}
 
-\only<1 | handout:0>{
-\begin{center}
-\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist} 
-\end{center}
-\vspace{-0.25cm}
-\begin{itemize}
-\item Mean = 6.88 hours, SD = 0.92 hrs
-\item[] \textcolor{white}{72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$}
-\item[] \textcolor{white}{92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$}
-\item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
-\end{itemize}
-}
+% \only<1 | handout:0>{
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist} 
+% \end{center}
+% \vspace{-0.25cm}
+% \begin{itemize}
+% \item Mean = 6.88 hours, SD = 0.92 hrs
+% \item[] \textcolor{white}{72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$}
+% \item[] \textcolor{white}{92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$}
+% \item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
+% \end{itemize}
+% }
 
-\only<2 | handout:0>{
-\begin{center}
-\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd1} 
-\end{center}
-\vspace{-0.25cm}
-\begin{itemize}
-\item Mean = 6.88 hours, SD = 0.92 hrs
-\item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
-\item[] \textcolor{white}{92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$}
-\item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
-\end{itemize}
-}
+% \only<2 | handout:0>{
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd1} 
+% \end{center}
+% \vspace{-0.25cm}
+% \begin{itemize}
+% \item Mean = 6.88 hours, SD = 0.92 hrs
+% \item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
+% \item[] \textcolor{white}{92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$}
+% \item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
+% \end{itemize}
+% }
 
-\only<3 | handout:0>{
-\begin{center}
-\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd2} 
-\end{center}
-\vspace{-0.25cm}
-\begin{itemize}
-\item Mean = 6.88 hours, SD = 0.92 hrs
-\item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
-\item 92\% of the data are within 1 SD of the mean: $6.88 \pm 2 \times 0.93$
-\item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
-\end{itemize}
-}
+% \only<3 | handout:0>{
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd2} 
+% \end{center}
+% \vspace{-0.25cm}
+% \begin{itemize}
+% \item Mean = 6.88 hours, SD = 0.92 hrs
+% \item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
+% \item 92\% of the data are within 1 SD of the mean: $6.88 \pm 2 \times 0.93$
+% \item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
+% \end{itemize}
+% }
 
-\only<4>{
-\begin{center}
-\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd3} 
-\end{center}
-\vspace{-0.25cm}
-\begin{itemize}
-\item Mean = 6.88 hours, SD = 0.92 hrs
-\item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
-\item 92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$
-\item 99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$
-\end{itemize}
-}
+% \only<4>{
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd3} 
+% \end{center}
+% \vspace{-0.25cm}
+% \begin{itemize}
+% \item Mean = 6.88 hours, SD = 0.92 hrs
+% \item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
+% \item 92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$
+% \item 99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$
+% \end{itemize}
+% }
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
