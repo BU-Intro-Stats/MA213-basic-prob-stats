@@ -21,7 +21,7 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp4@path{../../Chp 4}
+\def\chpiv@path{../../Chp 4}
 \input{../../lec_style.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,7 +66,120 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Normal distribution (cont.)}
 
+\subsection{68-95-99.7 rule}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{68-95-99.7 Rule}
+
+\begin{itemize}
+
+\item For nearly normally distributed data, 
+\begin{itemize}
+\item about 68\% falls within 1 SD of the mean,
+\item about 95\% falls within 2 SD of the mean,
+\item about 99.7\% falls within 3 SD of the mean.
+\end{itemize}
+
+\item It is possible for observations to fall 4, 5, or more standard deviations away from the mean, but these occurrences are very rare if the data are nearly normal.
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chpiv@path/4-1_normal_distribution/figures/6895997/6895997}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Describing variability using the 68-95-99.7 Rule}
+
+SAT scores are distributed nearly normally with mean 1500 and standard deviation 300.
+
+\pause
+\begin{itemize}
+
+\item $\sim$68\% of students score between 1200 and 1800 on the SAT. 
+
+\item $\sim$95\% of students score between 900 and 2100 on the SAT. 
+
+\item $\sim$99.7\% of students score between 600 and 2400 on the SAT. 
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.65\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sat_empirical/sat_empirical}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: Geometric logic}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Number of hours of sleep on school nights}
+
+\only<1 | handout:0>{
+\begin{center}
+\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist} 
+\end{center}
+\vspace{-0.25cm}
+\begin{itemize}
+\item Mean = 6.88 hours, SD = 0.92 hrs
+\item[] \textcolor{white}{72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$}
+\item[] \textcolor{white}{92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$}
+\item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
+\end{itemize}
+}
+
+\only<2 | handout:0>{
+\begin{center}
+\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd1} 
+\end{center}
+\vspace{-0.25cm}
+\begin{itemize}
+\item Mean = 6.88 hours, SD = 0.92 hrs
+\item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
+\item[] \textcolor{white}{92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$}
+\item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
+\end{itemize}
+}
+
+\only<3 | handout:0>{
+\begin{center}
+\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd2} 
+\end{center}
+\vspace{-0.25cm}
+\begin{itemize}
+\item Mean = 6.88 hours, SD = 0.92 hrs
+\item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
+\item 92\% of the data are within 1 SD of the mean: $6.88 \pm 2 \times 0.93$
+\item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
+\end{itemize}
+}
+
+\only<4>{
+\begin{center}
+\includegraphics[width=0.75\textwidth]{\chpiv@path/4-1_normal_distribution/figures/sleep/sleep-hist-sd3} 
+\end{center}
+\vspace{-0.25cm}
+\begin{itemize}
+\item Mean = 6.88 hours, SD = 0.92 hrs
+\item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
+\item 92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$
+\item 99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$
+\end{itemize}
+}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -96,7 +209,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 {
 \begin{center}
-\includegraphics[width=\textwidth]{\chp4@path/4-2_geometric_distribution/figures/milgram}
+\includegraphics[width=\textwidth]{\chpiv@path/4-2_geometric_distribution/figures/milgram}
 \end{center}
 \ct{\webURL{http://en.wikipedia.org/wiki/File:Milgram_Experiment_v2.png}}
 }
