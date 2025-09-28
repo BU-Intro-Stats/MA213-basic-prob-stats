@@ -194,7 +194,7 @@ SAT scores are distributed nearly normally with mean 1500 and standard deviation
 \begin{frame}
 \frametitle{Milgram experiment}
 
-\twocol{0.6}{0.4}{
+\twocol{0.65}{0.35}{
 
 \begin{itemize}
 
@@ -251,6 +251,29 @@ SAT scores are distributed nearly normally with mean 1500 and standard deviation
 
 \end{itemize}
 
+\twocol{0.3}{0.4}{
+    \begin{center}
+        \begin{align*}
+            X &\sim \text{Bernoulli}(p) \\
+            Pr(X=x) &= p^x (1-p)^{1-x}, \quad x = 0, 1
+        \end{align*}
+    \end{center}
+}{
+    % Bernoulli Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event      & $X$   & $P(X)$      \\
+    \hline
+    Success    & $1$   & $p$         \\
+    Failure    & $0$   & $1-p$       \\
+    \hline
+    Total      &       & $1$         
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -263,32 +286,30 @@ SAT scores are distributed nearly normally with mean 1500 and standard deviation
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Board work: Deriving the Geometric distribution}
+\begin{frame}
+\frametitle{Geometric distribution}
 
-% \begin{frame}
-% \frametitle{Geometric distribution}
+{\small
 
-% {\small
+\dq{Dr. Smith wants to repeat Milgram's experiments but she only wants to sample people until she finds someone who will not inflict a severe shock. What is the probability that she stops after the first person?}
 
-% \dq{Dr. Smith wants to repeat Milgram's experiments but she only wants to sample people until she finds someone who will not inflict a severe shock. What is the probability that she stops after the first person?}
+\[ P(1^{st}~person~refuses) = 0.35 \]
 
-% \[ P(1^{st}~person~refuses) = 0.35 \]
+\pause
 
-% \pause
+\dq{... the third person?}
+\[ P(1^{st}~and~2^{nd}~shock,~3^{rd}~refuses) = \slot{S}{0.65} \times \slot{S}{0.65} \times  \slot{R}{0.35} = 0.65^2 \times 0.35 \approx 0.15 \]
 
-% \dq{... the third person?}
-% \[ P(1^{st}~and~2^{nd}~shock,~3^{rd}~refuses) = \slot{S}{0.65} \times \slot{S}{0.65} \times  \slot{R}{0.35} = 0.65^2 \times 0.35 \approx 0.15 \]
+\pause
 
-% \pause
+\dq{... the tenth person?}
+\soln{
+\pause
+\[ P(9~shock,~10^{th}~refuses) = \underbrace{\slot{S}{0.65} \times \cdots \times \slot{S}{0.65}}_{9~of~these} \times  \slot{R}{0.35} = 0.65^9 \times 0.35 \approx 0.0072 \]
+}
+}
 
-% \dq{... the tenth person?}
-% \soln{
-% \pause
-% \[ P(9~shock,~10^{th}~refuses) = \underbrace{\slot{S}{0.65} \times \cdots \times \slot{S}{0.65}}_{9~of~these} \times  \slot{R}{0.35} = 0.65^9 \times 0.35 \approx 0.0072 \]
-% }
-% }
-
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -312,42 +333,66 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Todo: Geometric pmf as table, figure}
+\begin{frame}
+\frametitle{Geometric distribution}
+        $X \sim \text{Geometric}(p) \qquad
+        Pr(X=n) = (1-p)^{n-1} p, 
+        \quad n = 1, 2, 3, \ldots$
+
+\twocol{0.4}{0.6}{
+    \begin{center}
+        \includegraphics[width=0.35\paperwidth]{figures/geometric_pmf.png}
+        \includegraphics[width=0.35\paperwidth]{figures/geometric_cdf.png}
+    \end{center}
+}{
+    % Geometric Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event                        & $X$   & $P(X)$              \\
+    \hline
+    First success on 1st trial   & $1$   & $p$                 \\
+    First success on 2nd trial   & $2$   & $(1-p)p$            \\
+    First success on 3rd trial   & $3$   & $(1-p)^2 p$         \\
+    $\vdots$                     & $\vdots$ & $\vdots$         \\
+    First success on $n$th trial & $n$   & $(1-p)^{n-1} p$     \\
+    \hline
+    Total                        &       & $1$                 \\
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\pq{Can we calculate the probability of rolling a 6 for the first time on the 6$^{th}$ roll of a die using the geometric distribution? Note that what was a success (rolling a 6) and what was a failure (not rolling a 6) are clearly defined and one or the other must happen for each trial.}
+
+\begin{enumerate}[(a)]
+\item no, on the roll of a die there are more than 2 possible outcomes
+\only<1>{\item yes, why not}
+\soln{\only<2>{\item \orange{yes, why not}}}
+\end{enumerate}
+
+\soln{
+\only<2>{
+\[P(6~on~the~6^{th}~roll) = \pr{ \frac{5}{6} }^5 \pr{ \frac{1}{6} } \approx 0.067 \]
+}
+}
+
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Edfinity Quiz: Using the Geometric distribution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-
-% \pq{Can we calculate the probability of rolling a 6 for the first time on the 6$^{th}$ roll of a die using the geometric distribution? Note that what was a success (rolling a 6) and what was a failure (not rolling a 6) are clearly defined and one or the other must happen for each trial.}
-
-% \begin{enumerate}[(a)]
-% \item no, on the roll of a die there are more than 2 possible outcomes
-% \only<1>{\item yes, why not}
-% \soln{\only<2>{\item \orange{yes, why not}}}
-% \end{enumerate}
-
-% \soln{
-% \only<2>{
-% \[P(6~on~the~6^{th}~roll) = \pr{ \frac{5}{6} }^5 \pr{ \frac{1}{6} } \approx 0.067 \]
-% }
-% }
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Bernoulli Random Variables}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Board work: Deriving the Geometric distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -360,9 +405,23 @@ $\:$ \\
 
 \pause
 
-TODO: set up the problem of computing the expected value of the geometric, using a table and the formula as we did before. 
-Point out that it is a complicated infinite sum, so we will give them the answer.
-give the answer $=...=\frac{1}{p}$
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c | c | c }
+$X$   & $P(X)$              & $X ~ P(X)$         \\
+\hline
+$1$   & $p$                 & $1 \times p$       \\
+$2$   & $(1-p)p$            & $2 \times (1-p)p$  \\
+$3$   & $(1-p)^2 p$         & $3 \times (1-p)^2 p$ \\
+$\vdots$   & $\vdots$       & $\vdots$           \\
+$n$   & $(1-p)^{n-1} p$     & $n \times (1-p)^{n-1} p$ \\
+\hline
+      & $1$                 & $E(X) = \sum_{n=1}^{\infty} n (1-p)^{n-1} p \only<3>{=... \textcolor{orange}{= \frac{1}{p}}}$ \\
+\end{tabular}
+\end{center}
+\pause
+
+\textit{This is a complicated infinite sum, so we give you the answer.}
 
 \end{frame}
 
@@ -373,8 +432,6 @@ give the answer $=...=\frac{1}{p}$
 \frametitle{Expected value}
 
 \dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
-
-\pause
 
 The expected value, or the mean, of a geometric distribution is $\frac{1}{p}$.
 \[ \mu = \frac{1}{p} = \frac{1}{0.35} = 2.86 \]
@@ -420,7 +477,7 @@ But how can she test a non-whole number of people?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Sampling from Geometric}
+\section{R Demonstration}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
