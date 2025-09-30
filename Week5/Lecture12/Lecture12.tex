@@ -183,7 +183,7 @@ SAT scores are distributed nearly normally with mean 1500 and standard deviation
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Geometric distribution}
+\section{Discrete distributions}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -278,6 +278,85 @@ SAT scores are distributed nearly normally with mean 1500 and standard deviation
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Bernoulli random variables}
+
+        $X \sim \text{Bernoulli}(p) \qquad
+        Pr(X=x) = p^x (1-p)^{1-x}, \quad x = 0, 1$
+
+\twocol{0.4}{0.6}{
+    \begin{center}
+        \includegraphics[width=0.35\paperwidth]{figures/Bernoulli_PMF.png}
+        \includegraphics[width=0.35\paperwidth]{figures/Bernoulli_CDF.png}
+    \end{center}
+}{
+    % Bernoulli Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event      & $X$   & $P(X)$      \\
+    \hline
+    Success    & $1$   & $p$         \\
+    Failure    & $0$   & $1-p$       \\
+    \hline
+    Total      &       & $1$         
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Mean of the Bernoulli Random Variable}
+
+\vspace{0.5cm}
+
+\twocol{0.4}{0.6}{
+\begin{center}
+\textbf{Mean}
+\begin{align*}
+E[X] &= \sum_x x \cdot \Pr(X = x) \\
+     &= 0 \cdot \Pr(X=0) + 1 \cdot \Pr(X=1) \\
+     &= 0 \cdot (1-p) + 1 \cdot p \\
+     &= p
+\end{align*}
+\end{center}
+}{
+    % Bernoulli Distribution PMF Table with X*P(X) column
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c | c }
+    Event      & $X$   & $P(X)$      & $X \cdot P(X)$ \\
+    \hline
+    Success    & $1$   & $p$         & $1 \times p = p$ \\
+    Failure    & $0$   & $1-p$       & $0 \times (1-p) = 0$ \\
+    \hline
+    Total      &       & $1$         & $p$ \\
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{Variance of the Bernoulli Random Variable}
+\begin{center}
+\textbf{Variance}
+\begin{align*}
+\mathrm{Var}[X] &= \sum_x (x - \mu)^2 \cdot \Pr(X = x) \\
+    &= (0 - p)^2 \cdot \Pr(X=0) + (1 - p)^2 \cdot \Pr(X=1) \\
+    &= p^2 (1-p) + (1-p)^2 p \\
+    &= p^2 (1-p) + p(1 - 2p + p^2) \\
+    &= p^2 - p^3 + p - 2p^2 + p^3 \\
+    &= p - p^2 \\
+    &= p(1-p)
+\end{align*}
+\end{center}
+\end{frame}
+
 \section{Edfinity Quiz: Bernoulli Random Variables}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -341,8 +420,8 @@ $\:$ \\
 
 \twocol{0.4}{0.6}{
     \begin{center}
-        \includegraphics[width=0.35\paperwidth]{figures/geometric_pmf.png}
-        \includegraphics[width=0.35\paperwidth]{figures/geometric_cdf.png}
+        \includegraphics[width=0.35\paperwidth]{figures/Geometric_PMF.png}
+        \includegraphics[width=0.35\paperwidth]{figures/Geometric_CDF.png}
     \end{center}
 }{
     % Geometric Distribution PMF Table
@@ -396,92 +475,92 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Expected value}
+% \begin{frame}
+% \frametitle{Expected value}
 
-\dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
+% \dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
 
-\pause
+% \pause
 
-\begin{center}
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{c | c | c }
-$X$   & $P(X)$              & $X ~ P(X)$         \\
-\hline
-$1$   & $p$                 & $1 \times p$       \\
-$2$   & $(1-p)p$            & $2 \times (1-p)p$  \\
-$3$   & $(1-p)^2 p$         & $3 \times (1-p)^2 p$ \\
-$\vdots$   & $\vdots$       & $\vdots$           \\
-$n$   & $(1-p)^{n-1} p$     & $n \times (1-p)^{n-1} p$ \\
-\hline
-      & $1$                 & $E(X) = \sum_{n=1}^{\infty} n (1-p)^{n-1} p \only<3>{=... \textcolor{orange}{= \frac{1}{p}}}$ \\
-\end{tabular}
-\end{center}
-\pause
+% \begin{center}
+% \renewcommand{\arraystretch}{1.5}
+% \begin{tabular}{c | c | c }
+% $X$   & $P(X)$              & $X ~ P(X)$         \\
+% \hline
+% $1$   & $p$                 & $1 \times p$       \\
+% $2$   & $(1-p)p$            & $2 \times (1-p)p$  \\
+% $3$   & $(1-p)^2 p$         & $3 \times (1-p)^2 p$ \\
+% $\vdots$   & $\vdots$       & $\vdots$           \\
+% $n$   & $(1-p)^{n-1} p$     & $n \times (1-p)^{n-1} p$ \\
+% \hline
+%       & $1$                 & $E(X) = \sum_{n=1}^{\infty} n (1-p)^{n-1} p \only<3>{=... \textcolor{orange}{= \frac{1}{p}}}$ \\
+% \end{tabular}
+% \end{center}
+% \pause
 
-\textit{This is a complicated infinite sum, so we give you the answer.}
+% \textit{This is a complicated infinite sum, so we give you the answer.}
 
-\end{frame}
+% \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Expected value}
+% \begin{frame}
+% \frametitle{Expected value}
 
-\dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
+% \dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
 
-The expected value, or the mean, of a geometric distribution is $\frac{1}{p}$.
-\[ \mu = \frac{1}{p} = \frac{1}{0.35} = 2.86 \]
+% The expected value, or the mean, of a geometric distribution is $\frac{1}{p}$.
+% \[ \mu = \frac{1}{p} = \frac{1}{0.35} = 2.86 \]
 
-\pause
+% \pause
 
-She is expected to test 2.86 people before finding the first one that refuses to administer the shock. 
+% She is expected to test 2.86 people before finding the first one that refuses to administer the shock. 
 
-\pause
+% \pause
 
-But how can she test a non-whole number of people?
+% But how can she test a non-whole number of people?
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Expected value and its variability}
+% \begin{frame}
+% \frametitle{Expected value and its variability}
 
-\formula{Mean and standard deviation of geometric distribution}{
-\[ \mu = \frac{1}{p} \qquad \qquad \sigma = \sqrt{\frac{1-p}{p^2}} \] 
-}
+% \formula{Mean and standard deviation of geometric distribution}{
+% \[ \mu = \frac{1}{p} \qquad \qquad \sigma = \sqrt{\frac{1-p}{p^2}} \] 
+% }
 
-\pause
+% \pause
 
-\begin{itemize}
+% \begin{itemize}
 
-\item Going back to Dr. Smith's experiment:
+% \item Going back to Dr. Smith's experiment:
 
-\[ \sigma = \sqrt{\frac{1-p}{p^2}} = \sqrt{\frac{1-0.35}{0.35^2}} = 2.3 \]
+% \[ \sigma = \sqrt{\frac{1-p}{p^2}} = \sqrt{\frac{1-0.35}{0.35^2}} = 2.3 \]
 
-\pause
+% \pause
 
-\item Dr. Smith is expected to test 2.86 people before finding the first one that refuses to administer the shock, give or take 2.3 people.
+% \item Dr. Smith is expected to test 2.86 people before finding the first one that refuses to administer the shock, give or take 2.3 people.
 
-\pause
+% \pause
 
-\item These values only make sense in the context of repeating the experiment many many times.
+% \item These values only make sense in the context of repeating the experiment many many times.
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration}
+% \section{R Demonstration}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Geometric Random Variables}
+% \section{Edfinity Quiz: Geometric Random Variables}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
