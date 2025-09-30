@@ -57,3 +57,34 @@ geom_cdf_plot <- ggplot(data = theoretical_cdf, aes(x = outcomes, y = cumulative
        x = "Trial of First Success",
        y = "Cumulative Probability")
 ggsave("Geometric_CDF.png", geom_cdf_plot, width = 4, height = 2.5, units = "in")
+
+# Binomial PMF
+n_binom <- 10
+binom_outcomes <- 0:n_binom
+binom_pmf <- dbinom(binom_outcomes, size = n_binom, prob = p)
+binom_pmf_df <- data.frame(
+  successes = binom_outcomes,
+  probability = binom_pmf
+)
+
+binom_pmf_plot <- ggplot(binom_pmf_df, aes(x = successes, y = probability)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  scale_x_continuous(breaks = binom_outcomes) +
+  labs(title = paste0("Binomial PMF (n = ", n_binom, ", p = ", p, ")"),
+       x = "Number of Successes",
+       y = "Probability")
+ggsave("Binomial_PMF.png", binom_pmf_plot, width = 4, height = 2.5, units = "in")
+
+# Binomial CDF
+binom_cdf <- pbinom(binom_outcomes, size = n_binom, prob = p)
+binom_cdf_df <- data.frame(
+  successes = c(-0.5, binom_outcomes, n_binom + 0.5),
+  cumulative = c(0, binom_cdf, 1)
+)
+binom_cdf_plot <- ggplot(binom_cdf_df, aes(x = successes, y = cumulative)) +
+  geom_step(direction = "hv", size = 1.2, color = "darkorange") +
+  scale_x_continuous(breaks = binom_outcomes) +
+  labs(title = paste0("Binomial CDF (n = ", n_binom, ", p = ", p, ")"),
+       x = "Number of Successes",
+       y = "Cumulative Probability")
+ggsave("Binomial_CDF.png", binom_cdf_plot, width = 4, height = 2.5, units = "in") 

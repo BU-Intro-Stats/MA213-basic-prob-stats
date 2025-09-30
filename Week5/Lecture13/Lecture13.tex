@@ -228,19 +228,6 @@ But how can she test a non-whole number of people?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Review}
-
-\begin{frame}
-\frametitle{Last time}
-
-\begin{itemize}
-    \item Bernoulli distribution
-    \item Geometric distribution arising from Bernoulli
-\end{itemize}
-
-Today we will discuss another distribution related to the Bernoulli, but first let's do some counting review.
-\end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Binomial distribution}
@@ -399,6 +386,45 @@ then the probability of $k$ successes in $n$ trials is given by
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Binomial distribution}
+
+\hl{Binomial distribution} describes the number of successes in a fixed number of \hl{iid} Bernoulli trials.
+
+\begin{small}
+$X \sim \text{Binomial}(n, p) \quad
+Pr(X=k) = {n \choose k} p^k (1-p)^{n-k}, 
+\quad k = 0, 1, 2, \ldots, n$
+\end{small}
+\vspace{-0.5cm}
+\twocol{0.4}{0.6}{
+    \begin{center}
+        \includegraphics[width=0.35\paperwidth]{\weekv@path/figures/Binomial_PMF.png}
+        \includegraphics[width=0.35\paperwidth]{\weekv@path/figures/Binomial_CDF.png}
+    \end{center}
+}{
+    % Binomial Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event                  & $X$   & $P(X)$                        \\
+    \hline
+    $0$ successes          & $0$   & ${n \choose 0} p^0 (1-p)^n$   \\
+    $1$ success            & $1$   & ${n \choose 1} p^1 (1-p)^{n-1}$ \\
+    $\vdots$               & $\vdots$ & $\vdots$                   \\
+    $k$ successes          & $k$   & ${n \choose k} p^k (1-p)^{n-k}$ \\
+    $\vdots$               & $\vdots$ & $\vdots$                   \\
+    $n$ successes          & $n$   & ${n \choose n} p^n (1-p)^0$   \\
+    \hline
+    Total                  &       & $1$                           \\
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -437,6 +463,10 @@ k&=2 \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: Using the Binomial Distribution}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -454,10 +484,6 @@ k&=2 \\
 \ct{Gallup: \webURL{http://www.gallup.com/poll/160061/obesity-rate-stable-2012.aspx}, January 23, 2013.} 
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity quiz: Using the Binomial Distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
