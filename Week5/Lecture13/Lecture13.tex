@@ -21,7 +21,8 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp4@path{../../Chp 4}
+\def\chpiv@path{../../Chp 4}
+\def\weekv@path{../../Week5}
 \input{../../lec_style.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,6 +67,77 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Bernoulli random variables}
+
+The \hl{Bernoulli distribution} describes a random variable with two possible outcomes: \hl{success} (with probability $p$) and \hl{failure} (with probability $1-p$).
+
+$X \sim \text{Bernoulli}(p) \qquad
+Pr(X=x) = p^x (1-p)^{1-x}, \quad x = 0, 1$
+
+\vspace{-0.75cm}
+
+\twocol{0.4}{0.6}{
+    \begin{center}
+        \includegraphics[width=0.35\paperwidth]{\weekv@path/figures/Bernoulli_PMF.png}
+        \includegraphics[width=0.35\paperwidth]{\weekv@path/figures/Bernoulli_CDF.png}
+    \end{center}
+}{
+    % Bernoulli Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event      & $X$   & $P(X)$      \\
+    \hline
+    Success    & $1$   & $p$         \\
+    Failure    & $0$   & $1-p$       \\
+    \hline
+    Total      &       & $1$         
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Geometric distribution}
+
+\hl{Geometric distribution} describes the number of trials until a success for \hl{iid} Bernoulli random variables.
+
+$X \sim \text{Geometric}(p) \qquad
+Pr(X=n) = (1-p)^{n-1} p, 
+\quad n = 1, 2, 3, \ldots$
+\vspace{-0.5cm}
+\twocol{0.4}{0.6}{
+    \begin{center}
+        \includegraphics[width=0.35\paperwidth]{\weekv@path/figures/Geometric_PMF.png}
+        \includegraphics[width=0.35\paperwidth]{\weekv@path/figures/Geometric_CDF.png}
+    \end{center}
+}{
+    % Geometric Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event                        & $X$   & $P(X)$              \\
+    \hline
+    First success on 1st trial   & $1$   & $p$                 \\
+    First success on 2nd trial   & $2$   & $(1-p)p$            \\
+    First success on 3rd trial   & $3$   & $(1-p)^2 p$         \\
+    $\vdots$                     & $\vdots$ & $\vdots$         \\
+    First success on $n$th trial & $n$   & $(1-p)^{n-1} p$     \\
+    \hline
+    Total                        &       & $1$                 \\
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -530,7 +602,7 @@ Using the notion that \hl{observations that are more than 2 standard deviations 
 
 \only<1>{
 \begin{center}
-\includegraphics[width=0.8\textwidth]{\chp4@path/4-3_binomial_distribution/figures/homeschool}
+\includegraphics[width=0.8\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/homeschool}
 \end{center}
 }
 
@@ -598,7 +670,7 @@ Using the notion that \hl{observations that are more than 2 standard deviations 
 \dq{Hollow histograms of samples from the binomial model where $p = 0.10$ and $n = 10$, $30$, $100$, and $300$. What happens as $n$ increases?}
 
 \begin{center}
-\includegraphics[width=0.60\textwidth]{\chp4@path/4-3_binomial_distribution/figures/fourBinomialModelsShowingApproxToNormal/fourBinomialModelsShowingApproxToNormal}
+\includegraphics[width=0.60\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fourBinomialModelsShowingApproxToNormal/fourBinomialModelsShowingApproxToNormal}
 \end{center}
 
 \end{frame}
@@ -695,7 +767,7 @@ The sample size is considered large enough if the expected number of successes a
 % \item $Bin(n = 245, p = 0.25) \approx N(\mu = 61.25, \sigma = 6.78)$.
 
 % \begin{center}
-% \includegraphics[width=0.5\textwidth]{\chp4@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user}
+% \includegraphics[width=0.5\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user}
 % \end{center}
 
 % \end{itemize}
@@ -713,7 +785,7 @@ The sample size is considered large enough if the expected number of successes a
 
 % \twocol{0.5}{0.5}{
 % \begin{center}
-% \includegraphics[width=\textwidth]{\chp4@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user_norm}
+% \includegraphics[width=\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user_norm}
 % \end{center}
 % }
 % {
