@@ -1,33 +1,66 @@
-# Demo: Binomial PMF approaches normal as n increases
+# ---- 0. Setup and load libraries, if any ----
 
-set.seed(123)
-library(ggplot2)
-library(tidyr)
-library(dplyr)
+library(ggplot2)  # load the graphing library
 
-# 1. Sample from binomial with increasing n, plot histograms using ggplot2
-n_vals <- c(10, 30, 100)
-p <- 0.1
-size <- 10000
 
-samples_df <- data.frame()
-for (n in n_vals) {
-  temp <- data.frame(
-    successes = rbinom(size, n, p),
-    n = factor(n, levels = n_vals)
-  )
-  samples_df <- rbind(samples_df, temp)
-}
+# ---- 1. Binomial Distribution ----
+# let X1 be the number of successes if you flip a coin 10 times and the 
+# probability of a heads is 0.1. Simulate X 10000 times
 
-ggplot(samples_df, aes(x = successes)) +
-  geom_histogram(aes(y = ..density..), bins = 10, fill = NA, color = "darkblue") +
-  facet_wrap(~ n, scales = "free_x") +
-  labs(title = "Binomial samples for increasing n",
-       x = "Number of successes", y = "Density")
+# draw 10000 samples from Binomial(10, 0.1)
+# WARINING: the "n" argument in rbinom is the number of samples/simulations, 
+# *not* the number of trials in Binomial(n,p)
+samples1 <- rbinom(n=10000, size=10, prob=0.1) 
+head(samples1)
+mean(samples1)
+sd(samples1)
 
-# 2. Plot binomial PMF and overlay normal PDF for increasing n using ggplot2
-pmf_df <- data.frame()
-for (n in n_vals) {
+ggplot(data=data.frame(samples1), aes(x=samples1)) +
+  geom_histogram(binwidth=1, boundary=0) +
+  xlab("samples")
+
+# let X2 be the number of successes if you flip a coin 100 times and the 
+# probability of a heads is 0.1. Simulate X 10000 times
+
+# draw 10000 samples from Binomial (100, 0.1)
+samples2 <- rbinom(n=10000, size=100, prob=0.1) 
+head(samples2)
+mean(samples2)
+sd(samples2)
+
+ggplot(data=data.frame(samples2), aes(x=samples2)) +
+  geom_histogram(binwidth=1, boundary=0) +
+  xlab("samples")
+
+# let X3 be the number of successes if you flip a coin 300 times and the 
+# probability of a heads is 0.1. Simulate X 10000 times
+
+# draw 10000 samples from Binomial (300, 0.1)
+samples3 <- rbinom(n=10000, size=300, prob=0.1) 
+head(samples3)
+mean(samples3)
+sd(samples3)
+
+ggplot(data=data.frame(samples3), aes(x=samples3)) +
+  geom_histogram(binwidth=1, boundary=0) +
+  xlab("samples")
+
+
+# ---- 2. Normal approximation ----
+
+mean1 <- 10*0.1  
+var1 <- 10*0.1*(1-0.1) 
+
+mean2 <- 100*0.1  
+var2 <- 100*0.1*(1-0.1)  
+
+mean3 <- 300*0.1  
+var3 <- 300*0.1*(1-0.1)  
+
+# Let's plot the binomial pmfs for each case, and see if they are 
+# well-approximated by a normal distribution with the same mean and std dev.
+# Recall that for a binomial, E[X] = np and Var(X) = np(1-p)
+plot_binomial_and_normal <- function(n,p) {
   x <- 0:n
   # compute the binomial PMF
   pmf <- dbinom(x, n, p)
@@ -41,38 +74,42 @@ for (n in n_vals) {
   norm_pdf <- dnorm(x_norm, mean = mu, sd = sigma)
   
   # save it all in dataframes
-  temp_pmf <- data.frame(
+  binomial_pmf_df <- data.frame(
     x = x,
     prob = pmf,
     type = "Binomial PMF",
-    n = factor(n, levels = n_vals),
     mu = mu,
     sigma = sigma
   )
-  temp_norm <- data.frame(
+  normal_pdf_df <- data.frame(
     x = x_norm,
     prob = norm_pdf,
     type = "Normal PDF",
-    n = factor(n, levels = n_vals),
     mu = mu,
     sigma = sigma
   )
-  pmf_df <- rbind(pmf_df, temp_pmf, temp_norm)
+  data = rbind(binomial_pmf_df, normal_pdf_df)
+  
+  # plot the pmf and pdf on top of each other
+  ggplot(data, aes(x = x, y = prob, color = type, fill = type)) +
+    geom_bar(
+      data = subset(data, type == "Binomial PMF"),
+      stat = "identity", position = "identity", alpha = 0.7, color = "darkblue", fill = "darkblue"
+    ) +
+    geom_line(
+      data = subset(data, type == "Normal PDF"),
+      size = 1.2, color = "darkred"
+    ) +
+    labs(title = paste("Binomial PMF vs Normal PDF for Binomial(",n,",",p,")"),
+         x = "Number of successes", y = "Probability") +
+    annotate("text", x = Inf, y = Inf, label = paste("Matched\nE[X] =", mu, "\nStdDev(X) =",
+                                                     round(sigma,2)), 
+             hjust = 1.1, vjust = 1.1, size = 5) +
+    theme_minimal()
 }
 
-# Plot them
-ggplot(pmf_df, aes(x = x, y = prob, color = type, fill = type)) +
-  geom_bar(
-    data = subset(pmf_df, type == "Binomial PMF"),
-    stat = "identity", position = "identity", alpha = 0.7, color = "darkblue", fill = "blue"
-  ) +
-  geom_line(
-    data = subset(pmf_df, type == "Normal PDF"),
-    size = 1.2, color = "red"
-  ) +
-  facet_wrap(~ n, scales = "free_x") +
-  labs(title = "Binomial PMF (bars) vs Normal PDF (line) for increasing n",
-       x = "Number of successes", y = "Probability") +
-  scale_color_manual(values = c("blue", "red")) +
-  scale_fill_manual(values = c("blue", "red")) +
-  theme_minimal()
+plot_binomial_and_normal(10,0.1)
+plot_binomial_and_normal(30,0.1)
+plot_binomial_and_normal(100,0.1)
+plot_binomial_and_normal(300, 0.1)
+
