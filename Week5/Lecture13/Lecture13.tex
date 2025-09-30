@@ -67,13 +67,101 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Expected value}
+
+\dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
+
+\pause
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c | c | c }
+$X$   & $P(X)$              & $X ~ P(X)$         \\
+\hline
+$1$   & $p$                 & $1 \times p$       \\
+$2$   & $(1-p)p$            & $2 \times (1-p)p$  \\
+$3$   & $(1-p)^2 p$         & $3 \times (1-p)^2 p$ \\
+$\vdots$   & $\vdots$       & $\vdots$           \\
+$n$   & $(1-p)^{n-1} p$     & $n \times (1-p)^{n-1} p$ \\
+\hline
+      & $1$                 & $E(X) = \sum_{n=1}^{\infty} n (1-p)^{n-1} p \only<3>{=... \textcolor{orange}{= \frac{1}{p}}}$ \\
+\end{tabular}
+\end{center}
+\pause
+
+\textit{This is a complicated infinite sum, so we give you the answer.}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Expected value}
+
+\dq{How many people is Dr. Smith expected to test before finding the first one that refuses to administer the shock?}
+
+The expected value, or the mean, of a geometric distribution is $\frac{1}{p}$.
+\[ \mu = \frac{1}{p} = \frac{1}{0.35} = 2.86 \]
+
+\pause
+
+She is expected to test 2.86 people before finding the first one that refuses to administer the shock. 
+
+\pause
+
+But how can she test a non-whole number of people?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Expected value and its variability}
+
+\formula{Mean and standard deviation of geometric distribution}{
+\[ \mu = \frac{1}{p} \qquad \qquad \sigma = \sqrt{\frac{1-p}{p^2}} \] 
+}
+
+\pause
+
+\begin{itemize}
+
+\item Going back to Dr. Smith's experiment:
+
+\[ \sigma = \sqrt{\frac{1-p}{p^2}} = \sqrt{\frac{1-0.35}{0.35^2}} = 2.3 \]
+
+\pause
+
+\item Dr. Smith is expected to test 2.86 people before finding the first one that refuses to administer the shock, give or take 2.3 people.
+
+\pause
+
+\item These values only make sense in the context of repeating the experiment many many times.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Geometric Random Variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Review}
 
 \begin{frame}
 \frametitle{Last time}
 
 \begin{itemize}
-    \item Bernoulli random variables
     \item Bernoulli distribution
     \item Geometric distribution arising from Bernoulli
 \end{itemize}
@@ -116,10 +204,6 @@ The probability of exactly one 1 of 4 people refusing to administer the shock is
 \[ 0.0961+ 0.0961 + 0.0961 + 0.0961 = 4 \times 0.0961 = 0.3844 \]
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Board work: Deriving the Binomial distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -177,10 +261,6 @@ writing out all possible scenarios would be incredibly tedious and prone to erro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Board work: Deriving the Choose Function}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}[fragile]
 \frametitle{Calculating the \# of scenarios}
 
@@ -218,19 +298,19 @@ The \hl{choose function} is useful for calculating the number of ways to choose 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}[fragile]
-% \frametitle{Properties of the choose function}
+\begin{frame}[fragile]
+\frametitle{Properties of the choose function}
 
-% \pq{Which of the following is false?}
+\pq{Which of the following is false?}
 
-% \begin{enumerate}[(a)]
-% \item There are $n$ ways of getting 1 success in $n$ trials, ${n \choose 1} = n$.
-% \item There is only 1 way of getting $n$ successes in $n$ trials, ${n \choose n} = 1$.
-% \item There is only 1 way of getting $n$ failures in $n$ trials, ${n \choose 0} = 1$.
-% \solnMult{There are $n-1$ ways of getting $n-1$ successes in $n$ trials, ${n \choose n-1} = n-1$.}
-% \end{enumerate}
+\begin{enumerate}[(a)]
+\item There are $n$ ways of getting 1 success in $n$ trials, ${n \choose 1} = n$.
+\item There is only 1 way of getting $n$ successes in $n$ trials, ${n \choose n} = 1$.
+\item There is only 1 way of getting $n$ failures in $n$ trials, ${n \choose 0} = 1$.
+\solnMult{There are $n-1$ ways of getting $n-1$ successes in $n$ trials, ${n \choose n-1} = n-1$.}
+\end{enumerate}
 
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -240,13 +320,33 @@ The \hl{choose function} is useful for calculating the number of ways to choose 
 \formula{Binomial probabilities}
 {
 If $p$ represents probability of success, $(1-p)$ represents probability of failure, $n$ represents number of independent trials, and $k$ represents number of successes 
-\[P(k~successes~in~n~trials) = {n \choose k}~p^k~(1-p)^{(n-k)} \]
+\[X\sim Binomial(n, p)\]
+then the probability of $k$ successes in $n$ trials is given by
+\[P(X=k) = {n \choose k}~p^k~(1-p)^{(n-k)} \]
 } 
-
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Binomial Example}
+If there is a 35\% probability that a participant will refuse to administer the shock, what is the probability that exactly 2 out of 9 randomly selected participants will refuse to administer the shock?
+
+\pause
+
+\begin{align*}
+n&=9  \\
+p&=0.35 \\
+k&=2 \\
+\end{align*}
+
+\pause
+
+\[X\sim Binomial(9, 0.35)\]
+\[P(X=2) = {9 \choose 2}~(0.35)^2~(0.65)^{(9-2)} = 0.216\]
+
+\end{frame}
 
 \begin{frame}
 
@@ -264,43 +364,43 @@ If $p$ represents probability of success, $(1-p)$ represents probability of fail
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
+
+\begin{enumerate}[(a)]
+\item pretty high
+\solnMult{pretty low}
+\end{enumerate}
+
+\vfill
+
+\ct{Gallup: \webURL{http://www.gallup.com/poll/160061/obesity-rate-stable-2012.aspx}, January 23, 2013.} 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Edfinity quiz: Using the Binomial Distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
 
-% \begin{frame}
-% \frametitle{}
+\begin{enumerate}[(a)]
+\item $0.262^8 \times 0.738^2$
+\item ${8 \choose 10} \times 0.262^8 \times 0.738^2$
+\solnMult{${10 \choose 8} \times 0.262^8 \times 0.738^2$} \soln{\orange{\only<2>{$ = 45 \times  0.262^8 \times 0.738^2 = 0.0005$}}}
+\item ${10 \choose 8} \times 0.262^2 \times 0.738^8$
+\end{enumerate}
 
-% \pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
-
-% \begin{enumerate}[(a)]
-% \item pretty high
-% \solnMult{pretty low}
-% \end{enumerate}
-
-% \vfill
-
-% \ct{Gallup: \webURL{http://www.gallup.com/poll/160061/obesity-rate-stable-2012.aspx}, January 23, 2013.} 
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}
-
-% \pq{A 2012 Gallup survey suggests that 26.2\% of Americans are obese. Among a random sample of 10 Americans, what is the probability that exactly 8 are obese?}
-
-% \begin{enumerate}[(a)]
-% \item $0.262^8 \times 0.738^2$
-% \item ${8 \choose 10} \times 0.262^8 \times 0.738^2$
-% \solnMult{${10 \choose 8} \times 0.262^8 \times 0.738^2$} \soln{\orange{\only<2>{$ = 45 \times  0.262^8 \times 0.738^2 = 0.0005$}}}
-% \item ${10 \choose 8} \times 0.262^2 \times 0.738^8$
-% \end{enumerate}
-
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -351,7 +451,6 @@ If $p$ represents probability of success, $(1-p)$ represents probability of fail
 % \end{eqnarray*}
 
 % \end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

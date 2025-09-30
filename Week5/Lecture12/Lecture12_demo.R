@@ -16,10 +16,9 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 samples1 <- rgeom(n=100, p=0.5)
 head(samples1)
 mean(samples1)
-sd(samples1)**2
+sd(samples1)
 
-# What do the parameters mean? What underlying Bernoulli distribution do they
-# correspond to?
+# What do the parameters mean? 
 
 # What if we decrease the success probability - what do you think will happen
 # to the sample outcomes?
@@ -27,17 +26,18 @@ sd(samples1)**2
 samples2 <- rgeom(n=100, p=0.0001)
 head(samples2)
 mean(samples2)
-sd(samples2)**2
+sd(samples2)
 
 # Plot the probability mass function using dgeom
-x <- 0:20
-y <- dgeom(x, prob = 0.5)
+p = 0.5
+x <- 0:(round(1/p)*10)
+y <- dgeom(x, prob = p)
 df <- data.frame(x = x, y = y)
 
 ggplot(df, aes(x = x, y = y)) +
-  geom_col(fill = "steelblue", width = 0.8) +
+  geom_col(fill = "steelblue") +
   labs(
-    title = "Geometric Distribution PMF (p = 0.5)",
+    title = paste("Geometric Distribution PMF (p =", p, ")"),
     x = "Number of Failures before First Success",
     y = "Probability"
   )
