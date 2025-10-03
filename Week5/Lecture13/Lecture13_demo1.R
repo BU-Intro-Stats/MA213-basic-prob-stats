@@ -12,13 +12,20 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 # For the Geometric Distribution we have rgeom (to sample) and dgeom (the 
 # distribution or probability *mass* function)
 
-# Sample from Geom(n=100, p=0.5)
+# Sample from Geom(0.5)
 samples1 <- rgeom(n=100, p=0.5)
 head(samples1)
+# What do the parameters mean? WARNING: the "n" argument in rgeom is the number 
+# of samples/simulations, *not* the number of trials until you see a success
+
+# Compare the sample mean/sd to the theoretical mean/sd
 mean(samples1)
 sd(samples1)
 
-# What do the parameters mean? 
+mu = 1/0.5
+sigma = sqrt((1-0.5)/0.5^2)
+print(mu)
+print(sigma)
 
 # What if we decrease the success probability - what do you think will happen
 # to the sample outcomes?
@@ -27,6 +34,27 @@ samples2 <- rgeom(n=100, p=0.0001)
 head(samples2)
 mean(samples2)
 sd(samples2)
+
+mu2 = 1/0.0001
+sigma2 = sqrt((1-0.0001)/0.0001^2)
+print(mu2)
+print(sigma2)
+
+# Note that we just copied and pasted code -- we could have used a function
+sample_and_compare_means <- function(nsamples,p){
+  samples <- rgeom(n=nsamples, p=p)
+  head(samples)
+  print(mean(samples))
+  print(sd(samples))
+  
+  mu = 1/p
+  sigma = sqrt((1-p)/p^2)
+  print(mu)
+  print(sigma)
+}
+
+sample_and_compare_means(100,0.5)
+sample_and_compare_means(100,0.0001)
 
 # Plot the probability mass function using dgeom
 p = 0.5
