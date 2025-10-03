@@ -1,30 +1,54 @@
 # ---- 0. Setup and load libraries, if any ----
 
-library(ggplot2)  # load the graphing library
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(gridExtra)
 
+# ---- Binomial vs Poisson Approximation Demo ----
 
-# ---- 1. Binomial distribution with large n and small p ----
+# Function to generate a single Binomial plot
+plot_binom <- function(n, p, title, xvals) {
+  binom_probs <- dbinom(xvals, size = n, prob = p)
+  df <- data.frame(x = xvals, Probability = binom_probs)
+  mean_text <- paste0("n*p = ", n * p)
+  ggplot(df, aes(x = x, y = Probability)) +
+    geom_bar(stat = "identity", fill = "steelblue", color = "steelblue", alpha = 0.7) +
+    labs(title = title, x = "x", y = "P(X = x)") +
+    annotate("text", x = 12, y = 0.3, label = mean_text, size = 5, color = "steelblue") +
+    ylim(0, 0.65) +
+    theme_minimal()
+}
 
-samples1 <- rbinom(n=1000, size=1000, prob=0.01)
+# Function to generate a single Poisson plot
+plot_pois <- function(lambda, title, xvals) {
+  pois_probs <- dpois(xvals, lambda = lambda)
+  df <- data.frame(x = xvals, Probability = pois_probs)
+  mean_text <- bquote(lambda == .(lambda))
+  ggplot(df, aes(x = x, y = Probability)) +
+    geom_bar(stat = "identity", fill = "black", color = "black", alpha = 0.7) +
+    labs(title = title, x = "x", y = "P(X = x)") +
+    annotate("text", x = 12, y = 0.3, label = mean_text, size = 5, color = "black") +
+    ylim(0, 0.65) +
+    theme_minimal()
+}
 
-# What do the parameters mean? What underlying Bernoulli distribution do they
-# correspond to?
+# First row: np = lambda = 0.5
+xvals <- 0:20
+plots1 <- list(
+  plot_binom(5, 0.1, "Binomial(5, 0.1)", xvals),
+  plot_binom(10, 0.05, "Binomial(10, 0.05)", xvals),
+  plot_binom(100, 0.005, "Binomial(100, 0.005)", xvals),
+  plot_pois(0.5, "Poisson(0.5)", xvals)
+)
 
-ggplot(data=data.frame(samples1), aes(x=samples1)) +
-  geom_histogram() +
-  xlab("samples")
+# Second row: np = lambda = 3
+plots2 <- list(
+  plot_binom(5, 0.6, "Binomial(5, 0.6)", xvals),
+  plot_binom(10, 0.3, "Binomial(10, 0.3)", xvals),
+  plot_binom(100, 0.03, "Binomial(100, 0.03)", xvals),
+  plot_pois(3, "Poisson(3)", xvals)
+)
 
-
-# ---- 2. Poisson limiting behavior ----
-
-# How would you calculate the lambda parameter for the Poisson distribution,
-# given the Binomial samples we took above?
-
-lambda = 1000*0.01
-
-ggplot(data=data.frame(samples1), aes(x=samples1)) +
-  geom_histogram(aes(y=after_stat(density)), binwidth=0.5) +
-  stat_function(fun=dpois, args=list(lambda=lambda), color='steelblue') +
-  xlab("samples")
-
-# FIXME: Poisson density doesn't show on histogram
+# Show plots in a 2x4 grid
+grid.arrange(grobs = c(plots1,plots2), nrow = 2)
