@@ -127,9 +127,9 @@ Pr(X=n) = (1-p)^{n-1} p,
     \hline
     First success on 1st trial   & $1$   & $p$                 \\
     First success on 2nd trial   & $2$   & $(1-p)p$            \\
-    First success on 3rd trial   & $3$   & $(1-p)^2 p$         \\
     $\vdots$                     & $\vdots$ & $\vdots$         \\
     First success on $n$th trial & $n$   & $(1-p)^{n-1} p$     \\
+    $\vdots$                     & $\vdots$ & $\vdots$         \\
     \hline
     Total                        &       & $1$                 \\
     \end{tabular}
@@ -158,6 +158,7 @@ $2$   & $(1-p)p$            & $2 \times (1-p)p$  \\
 $3$   & $(1-p)^2 p$         & $3 \times (1-p)^2 p$ \\
 $\vdots$   & $\vdots$       & $\vdots$           \\
 $n$   & $(1-p)^{n-1} p$     & $n \times (1-p)^{n-1} p$ \\
+$\vdots$   & $\vdots$       & $\vdots$           \\
 \hline
       & $1$                 & $E(X) = \sum_{n=1}^{\infty} n (1-p)^{n-1} p \only<3>{=... \textcolor{orange}{= \frac{1}{p}}}$ \\
 \end{tabular}
@@ -658,199 +659,199 @@ Using the notion that \hl{observations that are more than 2 standard deviations 
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Sampling from the Binomial, Normal Approximation}
-% Note: replacing slide below
+% \section{R Demonstration: Sampling from the Binomial, Normal Approximation}
+% % Note: replacing slide below
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \subsection{Normal approximation to the binomial}
+% % \subsection{Normal approximation to the binomial}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{}
+% % \begin{frame}
+% % \frametitle{}
 
-% \app{Shapes of binomial distributions}
-% {
-% For this activity you will use a web applet. Go to \webURL{https://gallery.shinyapps.io/dist_calc/} and choose Binomial coin experiment in the drop down menu on the left.
-% \begin{itemize}
-% \item Set the number of trials to 20 and the probability of success to 0.15. Describe the shape of the distribution of number of successes. 
-% \item Keeping $p$ constant at 0.15, determine the minimum sample size required to obtain a unimodal and symmetric distribution of number of successes. Please submit only one response per team.
-% \item Further considerations:
-% \begin{itemize}
-% \item What happens to the shape of the distribution as $n$ stays constant and $p$ changes?
-% \item What happens to the shape of the distribution as $p$ stays constant and $n$ changes?
-% \end{itemize}
-% \end{itemize}
-% }
+% % \app{Shapes of binomial distributions}
+% % {
+% % For this activity you will use a web applet. Go to \webURL{https://gallery.shinyapps.io/dist_calc/} and choose Binomial coin experiment in the drop down menu on the left.
+% % \begin{itemize}
+% % \item Set the number of trials to 20 and the probability of success to 0.15. Describe the shape of the distribution of number of successes. 
+% % \item Keeping $p$ constant at 0.15, determine the minimum sample size required to obtain a unimodal and symmetric distribution of number of successes. Please submit only one response per team.
+% % \item Further considerations:
+% % \begin{itemize}
+% % \item What happens to the shape of the distribution as $n$ stays constant and $p$ changes?
+% % \item What happens to the shape of the distribution as $p$ stays constant and $n$ changes?
+% % \end{itemize}
+% % \end{itemize}
+% % }
 
-% \end{frame}
+% % \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Distributions of number of successes}
-
-\dq{Hollow histograms of samples from the binomial model where $p = 0.10$ and $n = 10$, $30$, $100$, and $300$. What happens as $n$ increases?}
-
-\begin{center}
-\includegraphics[width=0.60\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fourBinomialModelsShowingApproxToNormal/fourBinomialModelsShowingApproxToNormal}
-\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{How large is large enough?}
-
-The sample size is considered large enough if the expected number of successes and failures are both at least 10.
-\[ np \ge 10 \qquad \text{ and } \qquad n(1-p) \ge 10 \]
-
-\soln{\only<2->{$10 \times 0.13 = 1.3; 10 \times (1 - 0.13) = 8.7$}}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{}
-
-\pq{Below are four pairs of Binomial distribution parameters. Which distribution can be approximated by the normal distribution?}
-
-\begin{enumerate}[(a)]
-\item $n = 100, p = 0.95$
-\solnMult{$n = 25, p = 0.45$} \soln{\only<2>{\orange{$\rightarrow 25 \times 0.45 = 11.25; 25 \times 0.55 = 13.75$}}}
-\item $n = 150, p = 0.05$
-\item $n = 500, p = 0.015$
-\end{enumerate}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity quiz: Modeling with the Binomial distribution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \begin{frame}
-% \frametitle{An analysis of Facebook users}
+% \frametitle{Distributions of number of successes}
 
-% \dq{A recent study found that ``Facebook users get more than they give". For example:
-% \begin{itemize}
-% \item 40\% of Facebook users in our sample made a friend request, but 63\% received at least one request
-% \item Users in our sample pressed the like button next to friends' content an average of 14 times, but had their content ``liked" an average of 20 times
-% \item Users sent 9 personal messages, but received 12
-% \item 12\% of users tagged a friend in a photo, but 35\% were themselves tagged in a photo
-% \end{itemize}
-% Any guesses for how this pattern can be explained?
-% }
+% \dq{Hollow histograms of samples from the binomial model where $p = 0.10$ and $n = 10$, $30$, $100$, and $300$. What happens as $n$ increases?}
 
-% \soln{\only<2>{Power users contribute much more content than the typical user.}}
-
-% \ct{\webURL{http://www.pewinternet.org/Reports/2012/Facebook-users/Summary.aspx}}
+% \begin{center}
+% \includegraphics[width=0.60\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fourBinomialModelsShowingApproxToNormal/fourBinomialModelsShowingApproxToNormal}
+% \end{center}
 
 % \end{frame}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \begin{frame}
-% \frametitle{}
+% \frametitle{How large is large enough?}
 
-% \dq{This study also found that approximately 25\% of Facebook users are considered power users. The same study found that the average Facebook user has 245 friends. What is the probability that the average Facebook user with 245 friends has 70 or more friends who would be considered power users? Note any assumptions you must make.}
+% The sample size is considered large enough if the expected number of successes and failures are both at least 10.
+% \[ np \ge 10 \qquad \text{ and } \qquad n(1-p) \ge 10 \]
 
-% We are given that $n = 245, p = 0.25$, and we are asked for the probability $P(K \ge 70)$. To proceed, we need independence, which we'll assume but could check if we had access to more Facebook data.
-
-% \pause
-
-% \begin{align*}
-% P(X \ge 70) &= P(K = 70\text{ or }K = 71\text{ or }K = 72\text{ or }\cdots\text{ or } K = 245) \\
-% &= P(K = 70) + P(K = 71) + P(K = 72) + \cdots + P(K = 245)
-% \end{align*}
-
-% \pause
-
-% This seems like an awful lot of work...
+% \soln{\only<2->{$10 \times 0.13 = 1.3; 10 \times (1 - 0.13) = 8.7$}}
 
 % \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \begin{frame}
-% \frametitle{Normal approximation to the binomial}
-
-% When the sample size is large enough, the binomial distribution with parameters $n$ and $p$ can be approximated by the normal model with parameters $\mu = np$ and $\sigma = \sqrt{np(1-p)}$.
-
-% \begin{itemize}
-
-% \item In the case of the Facebook power users, $n = 245$ and $p = 0.25$.
-% \[ \mu = 245 \times 0.25 = 61.25 \qquad \sigma = \sqrt{245 \times 0.25 \times 0.75} = 6.78 \]
-
-% \item $Bin(n = 245, p = 0.25) \approx N(\mu = 61.25, \sigma = 6.78)$.
-
-% \begin{center}
-% \includegraphics[width=0.5\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user}
-% \end{center}
-
-% \end{itemize}
-
-% \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}[fragile]
 % \frametitle{}
 
-% \dq{What is the probability that the average Facebook user with 245 friends has 70 or more friends who would be considered power users?}
+% \pq{Below are four pairs of Binomial distribution parameters. Which distribution can be approximated by the normal distribution?}
 
-% \pause
-
-% \twocol{0.5}{0.5}{
-% \begin{center}
-% \includegraphics[width=\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user_norm}
-% \end{center}
-% }
-% {
-% \[ Z = \frac{obs - mean}{SD} = \frac{70 - 61.25}{6.78} = 1.29 \]
-% \[ P(Z > 1.29) = 1 - 0.9015 = 0.0985 \]
-% }
-
-% \begin{beamerboxesrounded}[shadow = true, lower = code body]{}
-% {\small \begin{verbatim}
-% > pnorm(1.29)
-% [1] 0.9014747
-% \end{verbatim}
-% }
-% \end{beamerboxesrounded}
+% \begin{enumerate}[(a)]
+% \item $n = 100, p = 0.95$
+% \solnMult{$n = 25, p = 0.45$} \soln{\only<2>{\orange{$\rightarrow 25 \times 0.45 = 11.25; 25 \times 0.55 = 13.75$}}}
+% \item $n = 150, p = 0.05$
+% \item $n = 500, p = 0.015$
+% \end{enumerate}
 
 % \end{frame}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \subsection{The normal approximation breaks down on small intervals}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{The normal approximation breaks down on small intervals}
+% \section{Edfinity quiz: Modeling with the Binomial distribution}
 
-% \begin{itemize}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \item The normal approximation to the binomial distribution tends to perform poorly when estimat- ing the probability of a small range of counts, even when the conditions are met.
 
-% \item This approximation for intervals of values is usually improved if cutoff values are extended by 0.5 in both directions.
+% % \begin{frame}
+% % \frametitle{An analysis of Facebook users}
 
-% \item The tip to add extra area when applying the normal approximation is most often useful when examining a range of observations. While it is possible to also apply this correction when computing a tail area, the benefit of the modification usually disappears since the total interval is typically quite wide.
+% % \dq{A recent study found that ``Facebook users get more than they give". For example:
+% % \begin{itemize}
+% % \item 40\% of Facebook users in our sample made a friend request, but 63\% received at least one request
+% % \item Users in our sample pressed the like button next to friends' content an average of 14 times, but had their content ``liked" an average of 20 times
+% % \item Users sent 9 personal messages, but received 12
+% % \item 12\% of users tagged a friend in a photo, but 35\% were themselves tagged in a photo
+% % \end{itemize}
+% % Any guesses for how this pattern can be explained?
+% % }
 
-% \end{itemize}
+% % \soln{\only<2>{Power users contribute much more content than the typical user.}}
 
-% \end{frame}
+% % \ct{\webURL{http://www.pewinternet.org/Reports/2012/Facebook-users/Summary.aspx}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % \end{frame}
+
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{}
+
+% % \dq{This study also found that approximately 25\% of Facebook users are considered power users. The same study found that the average Facebook user has 245 friends. What is the probability that the average Facebook user with 245 friends has 70 or more friends who would be considered power users? Note any assumptions you must make.}
+
+% % We are given that $n = 245, p = 0.25$, and we are asked for the probability $P(K \ge 70)$. To proceed, we need independence, which we'll assume but could check if we had access to more Facebook data.
+
+% % \pause
+
+% % \begin{align*}
+% % P(X \ge 70) &= P(K = 70\text{ or }K = 71\text{ or }K = 72\text{ or }\cdots\text{ or } K = 245) \\
+% % &= P(K = 70) + P(K = 71) + P(K = 72) + \cdots + P(K = 245)
+% % \end{align*}
+
+% % \pause
+
+% % This seems like an awful lot of work...
+
+% % \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{Normal approximation to the binomial}
+
+% % When the sample size is large enough, the binomial distribution with parameters $n$ and $p$ can be approximated by the normal model with parameters $\mu = np$ and $\sigma = \sqrt{np(1-p)}$.
+
+% % \begin{itemize}
+
+% % \item In the case of the Facebook power users, $n = 245$ and $p = 0.25$.
+% % \[ \mu = 245 \times 0.25 = 61.25 \qquad \sigma = \sqrt{245 \times 0.25 \times 0.75} = 6.78 \]
+
+% % \item $Bin(n = 245, p = 0.25) \approx N(\mu = 61.25, \sigma = 6.78)$.
+
+% % \begin{center}
+% % \includegraphics[width=0.5\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user}
+% % \end{center}
+
+% % \end{itemize}
+
+% % \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}[fragile]
+% % \frametitle{}
+
+% % \dq{What is the probability that the average Facebook user with 245 friends has 70 or more friends who would be considered power users?}
+
+% % \pause
+
+% % \twocol{0.5}{0.5}{
+% % \begin{center}
+% % \includegraphics[width=\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user_norm}
+% % \end{center}
+% % }
+% % {
+% % \[ Z = \frac{obs - mean}{SD} = \frac{70 - 61.25}{6.78} = 1.29 \]
+% % \[ P(Z > 1.29) = 1 - 0.9015 = 0.0985 \]
+% % }
+
+% % \begin{beamerboxesrounded}[shadow = true, lower = code body]{}
+% % {\small \begin{verbatim}
+% % > pnorm(1.29)
+% % [1] 0.9014747
+% % \end{verbatim}
+% % }
+% % \end{beamerboxesrounded}
+
+% % \end{frame}
+
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \subsection{The normal approximation breaks down on small intervals}
+
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{The normal approximation breaks down on small intervals}
+
+% % \begin{itemize}
+
+% % \item The normal approximation to the binomial distribution tends to perform poorly when estimat- ing the probability of a small range of counts, even when the conditions are met.
+
+% % \item This approximation for intervals of values is usually improved if cutoff values are extended by 0.5 in both directions.
+
+% % \item The tip to add extra area when applying the normal approximation is most often useful when examining a range of observations. While it is possible to also apply this correction when computing a tail area, the benefit of the modification usually disappears since the total interval is typically quite wide.
+
+% % \end{itemize}
+
+% % \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
