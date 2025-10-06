@@ -66,20 +66,134 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Review}
+\section{Sampling distributions}
 
 \begin{frame}
-\frametitle{Last time: Point estimates and sampling variability (Ch. 5)}
-\begin{itemize}
-    \item Point estimates, sample size, variability
-    \item Sampling distributions
-    \item Binomial distribution
-    \item Rule of succession for small samples
-\end{itemize}
+    \frametitle{}
+    
+    \dq{Suppose that you don't have access to the population of all American adults, which is a quite likely scenario. In order to estimate the proportion of American adults who support solar power expansion, you might sample from the population and use your sample proportion as the best guess for the unknown population proportion.}
+    
+    \begin{itemize}
+    
+    \item Sample 1000 American adults from the population, and record whether they support or not solar power expansion.
+    
+    \item Find the sample proportion.
+    
+    \item Repeat this process many times and plot the distribution of the sample proportions obtained by this experimental design.
+    
+    \end{itemize}
+    
+A \hl{Sampling Distribution} is the distribution of a statistic (e.g., sample proportion), where the randomness comes from sampling randomly from a population.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+    \frametitle{Edfinity Quiz}
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{../Lecture15/sampling_distribution.png}
+    \end{center}
+    
+    \soln{
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+         & Middle? & Symm? & Wider/Narrower/Same? \\ 
+        \hline
+        p=0.88, n=1000 & $\sim0.88$ & Yes & Same \\ 
+        \hline
+        p=0.5, n=100 & $\sim0.5$ & Yes & Wider \\ 
+        \hline
+        p=0.99, n=100 & $\sim0.99$ & No & Same? \\ 
+        \hline
+        \end{tabular}
+    \end{table}
+    }
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Edfinity Quiz}
+    What would happen if the sample size were 10?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demo: What would happen if...}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Board work: Deriving theoretical sampling distribution of the sample proportion}
+
+\begin{frame}
+\frametitle{Summary: theoretical sampling distribution of the sample proportion}
+\begin{itemize}
+    \item For a sample of size $n$ and population proportion $p$, the number of successes $X \sim \text{Binomial}(n, p)$
+    \item The sample proportion is a rescaled version of $X$: $\hat{p} = \frac{X}{n}$
+    \pause
+    \item So the sampling distribution of $\hat{p}$ is just like the binomial distribution, but for values from $0$ to $1$ instead of $0$ to $n$
+    \pause
+    \item $Pr(\hat{p} = \frac{k}{n}) = Pr(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$ for $\frac{k}{n}$ in $\left\{0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n-1}{n}, 1\right\}$
+    \pause
+    \item $E[\hat{p}] = p$
+    \item $Var[\hat{p}] = \frac{p(1-p)}{n}$
+\end{itemize}
+The \hl{Standard Error} is the standard deviation of the sampling distribution. Here, $SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Rule of succession}
+
+    There can be multiple statistics that estimate the same population parameter
+    \begin{itemize}
+
+        \item \hl{The Rule Of Succession} (Laplace, 18th Century)
+        \item What is the probability that the sun will rise tomorrow, given that it has risen every day for the last 5000 years?
+        \item 0 is an unsatisfying answer
+        \item Approach: Pretend we have seen one success and one failure
+    
+    \end{itemize}
+
+    Sample proportion:
+     \begin{align}
+        \hat{p}=\frac{k}{n}
+    \end{align}
+ 
+    Rule of Succession:
+    \begin{align}
+        \hat{p}^*=\frac{k +1}{n+2}
+    \end{align}
+ 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demo: Comparing different estimators based on their sampling distributions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Comparing different estimators based on their sampling distributions}
+
+    \begin{itemize}
+        \item We can use simulations to compare different estimators for the same population parameter
+        \item In general, we want an estimator that
+        \begin{itemize}
+            \item is unbiased, i.e. the mean of the sampling distribution is equal to the population parameter
+            \item has low variability, i.e. the standard error is small
+        \end{itemize}
+        \item But sometimes it is helpful to have some bias for small samples, as long as the bias goes away for large samples (e.g. the rule of succession)
+        \item And often, there is a trade-off between bias and variability
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Sampling distribution for the sample mean of a Normal population}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -115,7 +229,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \item It wasn't a coincidence that the sampling distribution we saw earlier was symmetric, and centered at the true population proportion.
 
-\item We won't go through a detailed proof of why $SE =  \sqrt{\frac{p~(1-p)}{n}}$, but note that as $n$ increases $SE$ decreases.
+\item The standard error $SE =  \sqrt{\frac{p~(1-p)}{n}}$ is what we derived on the board for $\hat{p}$. Note that as $n$ increases $SE$ decreases.
 \begin{itemize}
 \item As $n$ increases samples will yield more consistent $\hat{p}$s, i.e. variability among $\hat{p}$s will be lower.
 \end{itemize}

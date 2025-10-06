@@ -21,7 +21,8 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp5@path{../../Chp 5}
+\def\chpv@path{../../Chp 5}
+\def\weekv@path{../../Week5}
 \input{../../lec_style.tex}
 
 
@@ -69,6 +70,132 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \include{Lecture15_agenda}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Poisson distribution}
+
+The \hl{Poisson distribution} models the count of events occurring in a fixed interval of time or space, given a constant average rate and independence between events.
+
+\begin{small}
+$X \sim \text{Poisson}(\lambda) \quad
+Pr(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}, 
+\quad k = 0, 1, 2, \ldots$
+\end{small}
+% \vspace{-0.5cm}
+\twocol{0.4}{0.6}{
+    \begin{center}
+        \includegraphics[height=0.25\paperheight]{\weekv@path/figures/Poisson_PMF.png}
+        \includegraphics[height=0.25\paperheight]{\weekv@path/figures/Poisson_CDF.png}
+    \end{center}
+}{
+    % Poisson Distribution PMF Table
+    \begin{small}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l | c | c }
+    Event                  & $X$   & $P(X)$                        \\
+    \hline
+    $0$ events             & $0$   & $e^{-\lambda}$   \\
+    $1$ event              & $1$   & $\frac{\lambda^1 e^{-\lambda}}{1!}$   \\
+    $\vdots$               & $\vdots$ & $\vdots$                   \\
+    $k$ events             & $k$   & $\frac{\lambda^k e^{-\lambda}}{k!}$   \\
+    $\vdots$               & $\vdots$ & $\vdots$                   \\
+    \hline
+    Total                  &       & $1$                           \\
+    \end{tabular}
+    \end{center}
+    \end{small}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\dq{Suppose that in a rural region of a developing country electricity power failures occur following a Poisson distribution with an average of 2 failures every week. Calculate the probability that on a given \underline{day} the electricity fails three times.}
+
+\pause
+
+We are given the weekly failure rate, but to answer this question we need to first calculate the average rate of failure on a given day: $\lambda_{day} = \frac{2}{7} = 0.2857$. Note that we are assuming that the probability of power failure is the same on any day of the week, i.e. we assume independence.
+
+\pause
+
+\begin{eqnarray*}
+P(\text{3 failures on a given day}) &=& \frac{0.2857^3 \times e^{-0.2857}}{3!} \\
+\pause
+&=& \frac{0.2857^3 \times e^{-0.2857}}{6} \\
+\pause
+&=& 0.0029
+\end{eqnarray*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: Modeling with the Poisson distribution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Is it Poisson?}
+\begin{small}
+\begin{itemize}
+
+\item A random variable may follow a Poisson distribution if the events occur independently of each other (typically, when the population is large and the events are rare) and the rate of events is constant
+
+\item However we can think of situations where the rate is not constant. For example, if we are interested in count of weddings over one summer, we should take into consideration that weekends are more popular for weddings.
+
+\item In this case, a Poisson model may sometimes still be reasonable if we allow it to have a different rate for different times; we could model the rate as higher on weekends than on weekdays.
+
+\item The idea of modeling rates for a Poisson distribution against a second variable (day of the week) forms the
+foundation of some more advanced methods called \hl{generalized linear models}. There are beyond the scope of this course, but we will discuss a foundation of linear models in Chapters 7 and 8.
+
+\end{itemize}
+\end{small}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Comparing Binomial and Poisson Distributions}
+
+The Poisson and Binomial distributions both count occurrences of independent events
+
+\vspace{0.3cm}
+
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Binomial $(n, p)$} & \textbf{Poisson $(\lambda)$} \\
+\hline
+Counting \# successes out of $n$ trials, each with probability $p$ & Counting \# events in a time (or space) interval, with rate $\lambda$ \\
+\hline
+Trials are independent & Events are independent \\
+\hline
+$Pr(X = x) = \dbinom{n}{x} p^x (1-p)^{n-x}$ \newline $x \in \{0,1,2,\ldots,n\}$ & $Pr(X = x) = \dfrac{\lambda^x e^{-\lambda}}{x!}$ \newline $x \in \{0,1,2,\ldots\}$ \\
+\hline
+$E[X] = np$ & $E[X] = \lambda$ \\
+\hline
+$Var[X] = np(1-p)$ & $Var[X] = \lambda$ \\
+\hline
+\end{tabular}
+
+\small{For more detail on the relationship between the Binomial and Poisson distributions, see the slides that we didn't cover in Lecture 14 and the R demo Lecture14\_demo3.R.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: Choosing Probability Models}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Module 3: Foundations for inference}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
     \frametitle{Module 3: Foundations for inference}
@@ -142,9 +269,9 @@ Some images may be included under fair use guidelines (educational purposes).}}
     \frametitle{}
     
     \begin{center}
-    \includegraphics[width=0.95\textwidth]{\chp5@path/5-1_point_est_sampling_var/figures/pew/pew1} \\
-    \includegraphics[width=0.95\textwidth]{\chp5@path/5-1_point_est_sampling_var/figures/pew/pew2} \\
-    \includegraphics[width=0.95\textwidth]{\chp5@path/5-1_point_est_sampling_var/figures/pew/pew3}
+    \includegraphics[width=0.95\textwidth]{\chpv@path/5-1_point_est_sampling_var/figures/pew/pew1} \\
+    \includegraphics[width=0.95\textwidth]{\chpv@path/5-1_point_est_sampling_var/figures/pew/pew2} \\
+    \includegraphics[width=0.95\textwidth]{\chpv@path/5-1_point_est_sampling_var/figures/pew/pew3}
     \end{center}
     
     \ct{\webURL{http://pewresearch.org/pubs/2191/young-adults-workers-labor-market-pay-careers-advancement-recession}}
@@ -157,7 +284,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
     \frametitle{Margin of error}
     
     \begin{center}
-    \includegraphics[width=0.95\textwidth]{\chp5@path/5-1_point_est_sampling_var/figures/pew/pew4}
+    \includegraphics[width=0.95\textwidth]{\chpv@path/5-1_point_est_sampling_var/figures/pew/pew4}
     \end{center}
     
     \begin{itemize}
@@ -192,20 +319,17 @@ Some images may be included under fair use guidelines (educational purposes).}}
     
     \begin{itemize}
     
-    \item Sample, with replacement, 1000 American adults from the population, and record whether they support or not solar power expansion.
+    \item Sample 1000 American adults from the population, and record whether they support or not solar power expansion.
     
     \item Find the sample proportion.
     
-    \item Plot the distribution of the sample proportions obtained by members of the class.
+    \item Repeat this process many times and plot the distribution of the sample proportions obtained by this experimental design.
     
     \end{itemize}
     
+A \hl{Sampling Distribution} is the distribution of a statistic (e.g., sample proportion), where the randomness comes from sampling randomly from a population.
 \end{frame}
     
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demo: Sampling distributions}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -220,6 +344,10 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demo: Sampling distributions}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -228,94 +356,126 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-    \frametitle{Edfinity Quiz}
+% \begin{frame}
+%     \frametitle{Edfinity Quiz}
 
-    \begin{itemize}
+%     \begin{itemize}
 
-        \item If the population proportion were 0.2 and the sample size were 100:
-        \begin{itemize}
-            \item Where would you expect the middle of the sampling distribution to be?
-            \item Would the sampling distribution be symmetrical?
-            \item Would the sampling distribution be wider/narrower/the same?
-        \end{itemize}
-        \item If the population proportion were 0.99 and the sample size were 100:
-        \begin{itemize}
-            \item Where would you expect the middle of the sampling distribution to be?
-            \item Would the sampling distribution be symmetrical?
-            \item Would the sampling distribution be wider/narrower/the same?
-        \end{itemize}
+%         \item If the population proportion were 0.2 and the sample size were 100:
+%         \begin{itemize}
+%             \item Where would you expect the middle of the sampling distribution to be?
+%             \item Would the sampling distribution be symmetrical?
+%             \item Would the sampling distribution be wider/narrower/the same?
+%         \end{itemize}
+%         \item If the population proportion were 0.99 and the sample size were 100:
+%         \begin{itemize}
+%             \item Where would you expect the middle of the sampling distribution to be?
+%             \item Would the sampling distribution be symmetrical?
+%             \item Would the sampling distribution be wider/narrower/the same?
+%         \end{itemize}
  
-    \end{itemize}
+%     \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-    \frametitle{Edfinity Quiz}
-    \begin{center}
-        \includegraphics[width=0.75\textwidth]{sampling_distribution.png}
-    \end{center}
+% \begin{frame}
+%     \frametitle{Edfinity Quiz}
+%     \begin{center}
+%         \includegraphics[width=0.75\textwidth]{sampling_distribution.png}
+%     \end{center}
     
-    \begin{table}[h!]
-        \centering
-        \begin{tabular}{|c|c|c|c|}
-        \hline
-         & Middle? & Symm? & Wider/Narrower/Same? \\ 
-        \hline
-        p=0.88, n=1000 & $\sim0.88$ & Yes & Same \\ 
-        \hline
-        p=0.2, n=100 &  &  &  \\ 
-        \hline
-        p=0.99, n=100 &  &  &  \\ 
-        \hline
-        \end{tabular}
-    \end{table}
-\end{frame}
+%     \soln{
+%     \begin{table}[h!]
+%         \centering
+%         \begin{tabular}{|c|c|c|c|}
+%         \hline
+%          & Middle? & Symm? & Wider/Narrower/Same? \\ 
+%         \hline
+%         p=0.88, n=1000 & $\sim0.88$ & Yes & Same \\ 
+%         \hline
+%         p=0.5, n=100 & $\sim0.5$ & Yes & Wider \\ 
+%         \hline
+%         p=0.99, n=100 & $\sim0.99$ & No & Same? \\ 
+%         \hline
+%         \end{tabular}
+%     \end{table}
+%     }
+% \end{frame}
 
-\begin{frame}
-    \frametitle{Edfinity Quiz}
-    What would happen if the sample size were 10?
-\end{frame}
+% \begin{frame}
+%     \frametitle{Edfinity Quiz}
+%     What would happen if the sample size were 10?
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demo: What would happen if...}
+% \section{R Demo: What would happen if...}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Board work: Deriving theoretical sampling distribution in the Binomial case}
+% \section{Board work: Deriving theoretical sampling distribution of the sample proportion}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Summary: theoretical sampling distribution of the sample proportion}
+% \begin{itemize}
+%     \item For a sample of size $n$ and population proportion $p$, the number of successes $X \sim \text{Binomial}(n, p)$
+%     \item The sample proportion is a rescaled version of $X$: $\hat{p} = \frac{X}{n}$
+%     \pause
+%     \item So the sampling distribution of $\hat{p}$ is just like the binomial distribution, but for values from $0$ to $1$ instead of $0$ to $n$
+%     \pause
+%     \item $Pr(\hat{p} = \frac{k}{n}) = Pr(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$ for $\frac{k}{n}$ in $\left\{0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n-1}{n}, 1\right\}$
+%     \pause
+%     \item $E[\hat{p}] = p$
+%     \item $Var[\hat{p}] = \frac{p(1-p)}{n}$
+% \end{itemize}
+% The \hl{Standard Error} is the standard deviation of the sampling distribution. Here, $SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-    \frametitle{Rule of succession}
+% \begin{frame}
+%     \frametitle{Rule of succession}
 
-    There can be multiple statistics that estimate the same population parameter
-    \begin{itemize}
+%     There can be multiple statistics that estimate the same population parameter
+%     \begin{itemize}
 
-        \item \hl{The Rule Of Succession} (Laplace, 18th Century)
-        \item What is the probability that the sun will rise tomorrow, given that it has risen every day for the last 5000 years?
-        \item 0 is an unsatisfying answer
-        \item Approach: Pretend we have seen one success and one failure
+%         \item \hl{The Rule Of Succession} (Laplace, 18th Century)
+%         \item What is the probability that the sun will rise tomorrow, given that it has risen every day for the last 5000 years?
+%         \item 0 is an unsatisfying answer
+%         \item Approach: Pretend we have seen one success and one failure
     
-    \end{itemize}
+%     \end{itemize}
 
-    Sample proportion:
-     \begin{align}
-        \hat{p}=\frac{k}{n}
-    \end{align}
+%     Sample proportion:
+%      \begin{align}
+%         \hat{p}=\frac{k}{n}
+%     \end{align}
  
-    Rule of Succession:
-    \begin{align}
-        \hat{p}^*=\frac{k +1}{n+2}
-    \end{align}
+%     Rule of Succession:
+%     \begin{align}
+%         \hat{p}^*=\frac{k +1}{n+2}
+%     \end{align}
  
-\end{frame}
+% \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demo: Comparing different estimators based on their sampling distributions}
+% \section{R Demo: Comparing different estimators based on their sampling distributions}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+%     \frametitle{Comparing different estimators based on their sampling distributions}
+
+%     \begin{itemize}
+%         \item We can use simulations to compare different estimators for the same population parameter
+%         \item In general, we want an estimator that
+%         \begin{itemize}
+%             \item is unbiased, i.e. the mean of the sampling distribution is equal to the population parameter
+%             \item has low variability, i.e. the standard error is small
+%         \end{itemize}
+%         \item Often, there is a trade-off between bias and variability
+%     \end{itemize}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
