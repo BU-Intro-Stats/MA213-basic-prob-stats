@@ -195,9 +195,66 @@ The \hl{Standard Error} is the standard deviation of the sampling distribution. 
 
 \section{Sampling distribution for the sample mean of a Normal population}
 
+\begin{frame}
+\frametitle{Sampling distribution for the sample mean of a Normal population}
+\begin{itemize}
+    \item So far we've studied estimators for population proportions
+    \item We can also use the same framework to study estimators for population means
+\end{itemize}
+If the population is Normal with mean $\mu$ and standard deviation $\sigma$, what is the sampling distribution of the sample mean $\bar{X}$?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Sampling distribution for the sample mean of a Normal population}
+\begin{itemize}
+    \item Let $X_1, X_2, \ldots, X_n$ be an iid random sample where $X_i \sim Normal(\mu, \sigma)$
+    \item What is the distribution of $\bar{X}=\frac{1}{n}(X_1 + X_2 + \ldots + X_n)=\frac{1}{n}\sum_{i=1}^{n} X_i$?
+    \pause
+    \item It turns out that linear combinations of independent Normal random variables are also Normal
+    \item So $\bar{X}\sim Normal\left(\mu_{\bar{X}}, \sigma_{\bar{X}}\right)$ for some $\mu_{\bar{X}}$ and $\sigma_{\bar{X}}$. What are they?
+    \pause
+    \item We already solved this in Lecture 9!
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pair work from Lecture 9}
+\dq{Given an independent sample $X_1, X_2, \ldots, X_n$, where $E[X_i]=\mu$ and $Var[X_i]=\sigma^2$. 
+
+The sample mean is defined as:
+
+\begin{center}$\bar{X}=\frac{1}{n}\left(X_1 + X_2 + \ldots + X_n\right)=\frac{1}{n}\sum_{1}^{n} X_i$\end{center}
+
+What is $E[\bar{X}]$? What is $Var[\bar{X}]$? What is $StdDev[\bar{X}]$?}
+
+\begin{eqnarray*} 
+E[\bar{X}] &=& E\left[\frac{1}{n}\sum_{i=1}^{n} X_i\right] = \frac{1}{n}\sum_{i=1}^{n} E[X_i] = \frac{1}{n}\times n \times \mu = \mu \\
+\pause
+Var[\bar{X}] &=& Var\left[\frac{1}{n}\sum_{i=1}^{n} X_i\right] = \frac{1}{n^2}\sum_{i=1}^{n} Var[X_i] = \frac{1}{n^2}\times n \times \sigma^2 = \frac{\sigma^2}{n} \\
+StdDev[\bar{X}] &=& \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}
+\end{eqnarray*} 
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demo: Motivate CLT}
+\begin{frame}
+\frametitle{Sampling distribution for the sample mean of a Normal population}
+\begin{itemize}
+    \item Let $X_1, X_2, \ldots, X_n$ be a random sample from a Normal population with mean $\mu$ and standard deviation $\sigma$
+    \item What is the distribution of $\bar{X}=\frac{X_1 + X_2 + \ldots + X_n}{n}$?
+\end{itemize}
+\begin{align*}
+ \bar{X} &\sim Normal\left(\mu_{\bar{X}}=\mu, \sigma_{\bar{X}}=\frac{\sigma}{\sqrt{n}}\right)
+\end{align*}
+
+So the sample mean is an \hl{unbiased} estimator for the population mean, and the standard error (standard deviation of the sampling distribution) gets smaller with the square root of the sample size
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{For large samples, does the sample proportion also have a Normal sampling distribution? (Central Limit Theorem)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -227,8 +284,7 @@ The \hl{Standard Error} is the standard deviation of the sampling distribution. 
 
 \begin{itemize}
 
-\item It wasn't a coincidence that the sampling distribution we saw earlier was symmetric, and centered at the true population proportion.
-
+\item This comes from the fact that the Binomial distribution converges to the Normal distribution as $n$ increases.
 \item The standard error $SE =  \sqrt{\frac{p~(1-p)}{n}}$ is what we derived on the board for $\hat{p}$. Note that as $n$ increases $SE$ decreases.
 \begin{itemize}
 \item As $n$ increases samples will yield more consistent $\hat{p}$s, i.e. variability among $\hat{p}$s will be lower.
