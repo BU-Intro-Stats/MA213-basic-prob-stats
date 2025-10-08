@@ -36,18 +36,28 @@ server <- function(input, output) {
       title <- sprintf("Histogram of p-hat values from experiment with %sx%s samples", 
                        K, input$n)
       
-      bw <- 0.01
-      n_obs <- length(simulation)
       SE <- sqrt((input$p*(1-input$p))/input$n)
 
-      # Create & display histogram plot
+      # Normal PDF
+      x_vals = seq(0, 1, length.out = 1000)
+      normal_pdf_df <- data.frame(
+        x = x_vals,
+        prob = dnorm(x_vals, mean = input$p, sd = SE)
+      )
+      
+      # Plot the histogram with the Normal density:
       ggplot(data=as.data.frame(simulation), aes(x=simulation)) +
-        geom_histogram(binwidth=bw, alpha=0.5, color=4, fill="white") +
-        stat_function(fun = function(x) 
-          dnorm(x, mean=input$p, sd=SE)*bw*n_obs) +
+        geom_histogram(aes(y=..density..), 
+                       breaks=seq(0,1,0.01), alpha=0.5, color=4, fill="white") +
+        geom_line(
+          data = normal_pdf_df,
+          aes(x=x, y=prob),
+          color = "darkred"
+        ) +
         xlab("Sample proportion") +
         ggtitle(title) +
         xlim(c(0,1))
+      
     })
   })
 }

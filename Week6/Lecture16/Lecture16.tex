@@ -83,7 +83,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
     
     \end{itemize}
     
-A \hl{Sampling Distribution} is the distribution of a statistic (e.g., sample proportion), where the randomness comes from sampling randomly from a population.
+A \hl{Sampling Distribution} is the distribution of a \hl{statistic} (any function of the data, e.g., sample proportion), where the randomness comes from sampling randomly from a population.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -126,24 +126,94 @@ A \hl{Sampling Distribution} is the distribution of a statistic (e.g., sample pr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Board work: Deriving theoretical sampling distribution of the sample proportion}
+\begin{frame}
+\frametitle{Sampling distribution of the sample proportion}
+    \begin{itemize}
+        \item For a sample of size $n$ and population proportion $p$, the number of successes $X \sim \text{Binomial}(n, p)$
+        \item The sample proportion is a rescaled version of $X$: $\hat{p} = \frac{X}{n}$
+        \item So the sampling distribution of $\hat{p}$ is just like the binomial distribution, but for values from $0$ to $1$ instead of $0$ to $n$
+    \end{itemize}
+    \vspace{2em}
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \vspace{2em} 
+            \footnotesize{\textcolor{red}{Note:} Assumes that the population is much larger than the sample, so that sampling with replacement is a good approximation to sampling without replacement.}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \includegraphics[width=\textwidth]{sampling_dist_of_phat.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Summary: theoretical sampling distribution of the sample proportion}
-\begin{itemize}
-    \item For a sample of size $n$ and population proportion $p$, the number of successes $X \sim \text{Binomial}(n, p)$
-    \item The sample proportion is a rescaled version of $X$: $\hat{p} = \frac{X}{n}$
-    \pause
-    \item So the sampling distribution of $\hat{p}$ is just like the binomial distribution, but for values from $0$ to $1$ instead of $0$ to $n$
-    \pause
-    \item $Pr(\hat{p} = \frac{k}{n}) = Pr(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$ for $\frac{k}{n}$ in $\left\{0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n-1}{n}, 1\right\}$
-    \pause
-    \item $E[\hat{p}] = p$
-    \item $Var[\hat{p}] = \frac{p(1-p)}{n}$
-\end{itemize}
+\frametitle{Sampling distribution of the sample proportion}
+
+$X \sim \text{Binomial}(n, p)$ \\
+$\hat{p}  = \frac{X}{n}$ \\
+\pause
+\vspace{1em}
+\textcolor{orange}{$Pr(\hat{p}  = \frac{k}{n}) = Pr(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$} \\
+for $\frac{k}{n} \in \left\{0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n-1}{n}, 1\right\}$
+\pause
+
+This is the theoretical \hl{sampling distribution} of $\hat{p}$!
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling distribution of the sample proportion}
+
+$X \sim \text{Binomial}(n, p)$ \\
+$\hat{p}  = \frac{X}{n}$ \\
+
+\vspace{1em}
+\textcolor{orange}{$Pr(\hat{p}  = \frac{k}{n}) = Pr(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$} \\
+for $\frac{k}{n} \in \left\{0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n-1}{n}, 1\right\}$
+
+
+This is the theoretical \hl{sampling distribution} of $\hat{p}$!
+\vspace{1em}
+
+\soln{
+$E[\hat{p}] = \frac{1}{n}E[X] = \frac{1}{n}np = p$\\
+$Var[\hat{p}] = \frac{1}{n^2}Var[X] = \frac{1}{n^2}np(1-p) = \frac{p(1-p)}{n}$
+}
+\pause
+
+\vspace{1em}
 The \hl{Standard Error} is the standard deviation of the sampling distribution. Here, $SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What we just did is profound!}
+\begin{itemize}
+    \item We modeled the sample proportion (a data summary statistic) using our tools from probability (the Binomial distribution).
+    \pause
+    \item Using this model, we wrote down the \emph{theoretical} sampling distribution of the sample proportion $\hat{p}$ \\
+    (not just a simulated sampling distribution).
+    \pause
+    \item We used the rules for linear combinations of random variables to derive the mean and variance of the sampling distribution.
+    \pause
+    \item We can use these results to evaluate the quality of $\hat{p}$ as an estimator for $p$:
+    \begin{itemize}
+        \item $\hat{p}$ is an \hl{unbiased} estimator for $p$ since $E[\hat{p}] = p$
+        \item The standard error $SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$ gets smaller as $n$ increases, so larger samples give more consistent estimates of $p$.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Different estimators for the same parameter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
     \frametitle{Rule of succession}
@@ -160,12 +230,12 @@ The \hl{Standard Error} is the standard deviation of the sampling distribution. 
 
     Sample proportion:
      \begin{align}
-        \hat{p}=\frac{k}{n}
+        \hat{p}=\frac{X}{n}
     \end{align}
  
     Rule of Succession:
     \begin{align}
-        \hat{p}^*=\frac{k +1}{n+2}
+        \hat{p}^*=\frac{X +1}{n+2}
     \end{align}
  
 \end{frame}
@@ -206,16 +276,25 @@ If the population is Normal with mean $\mu$ and standard deviation $\sigma$, wha
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Sampling distribution for the sample mean of a Normal population}
-\begin{itemize}
-    \item Let $X_1, X_2, \ldots, X_n$ be an iid random sample where $X_i \sim Normal(\mu, \sigma)$
-    \item What is the distribution of $\bar{X}=\frac{1}{n}(X_1 + X_2 + \ldots + X_n)=\frac{1}{n}\sum_{i=1}^{n} X_i$?
-    \pause
-    \item It turns out that linear combinations of independent Normal random variables are also Normal
-    \item So $\bar{X}\sim Normal\left(\mu_{\bar{X}}, \sigma_{\bar{X}}\right)$ for some $\mu_{\bar{X}}$ and $\sigma_{\bar{X}}$. What are they?
-    \pause
-    \item We already solved this in Lecture 9!
-\end{itemize}
+\frametitle{Sampling distribution for the sample mean}
+Let $X_1, X_2, \ldots, X_n$ be an iid random sample where $X_i \sim Normal(\mu, \sigma)$
+
+What is the distribution of: 
+\begin{align}
+    \bar{X}=\frac{1}{n}(X_1 + X_2 + \ldots + X_n)=\frac{1}{n}\sum_{i=1}^{n} X_i
+\end{align}
+\pause 
+
+It turns out that linear combinations of independent Normal random variables are also Normal
+
+So: \textcolor{orange}{
+$\bar{X}\sim Normal\left(\mu_{\bar{X}}, \sigma_{\bar{X}}\right)$
+}
+for some $\mu_{\bar{X}}$ and $\sigma_{\bar{X}}$. What are they?
+
+\pause
+We already solved this in Lecture 9!
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -241,43 +320,50 @@ StdDev[\bar{X}] &=& \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}
 
 \begin{frame}
 \frametitle{Sampling distribution for the sample mean of a Normal population}
-\begin{itemize}
-    \item Let $X_1, X_2, \ldots, X_n$ be a random sample from a Normal population with mean $\mu$ and standard deviation $\sigma$
-    \item What is the distribution of $\bar{X}=\frac{X_1 + X_2 + \ldots + X_n}{n}$?
-\end{itemize}
+Let $X_1, X_2, \ldots, X_n$ be an iid random sample where $X_i \sim Normal(\mu, \sigma)$
+
+What is the distribution of: 
+\begin{align}
+    \bar{X}=\frac{1}{n}(X_1 + X_2 + \ldots + X_n)=\frac{1}{n}\sum_{i=1}^{n} X_i
+\end{align}
+\textcolor{orange}{
 \begin{align*}
  \bar{X} &\sim Normal\left(\mu_{\bar{X}}=\mu, \sigma_{\bar{X}}=\frac{\sigma}{\sqrt{n}}\right)
 \end{align*}
-
-So the sample mean is an \hl{unbiased} estimator for the population mean, and the standard error (standard deviation of the sampling distribution) gets smaller with the square root of the sample size
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{For large samples, does the sample proportion also have a Normal sampling distribution? (Central Limit Theorem)}
+\section{Edfinity quiz}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Quality of the sample mean as an estimator for the population mean}
+\textcolor{orange}{
+\begin{align*}
+ \bar{X} &\sim Normal\left(\mu_{\bar{X}}=\mu, \sigma_{\bar{X}}=\frac{\sigma}{\sqrt{n}}\right)
+\end{align*}
+}
+\dq{What does this tell us about the quality of $\bar{X}$ as an estimator for $\mu$?}
+\soln{
+The sample mean is an \hl{unbiased} estimator for the population mean, and the standard error (standard deviation of the sampling distribution) gets smaller with the square root of the sample size}
 
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Board work: Binomial distribution converges to Normal}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demo: Binomial to Normal}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Central Limit Theorem (Ch. 5.1-5.2)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R Demo: For large samples, does the sample proportion also have a Normal sampling distribution? }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Central Limit Theorem}
 
-\formula{Central limit theorem}
+\formula{Central limit theorem (sample proportion)}
 {Sample proportions will be nearly normally distributed with mean equal to the population proportion, $p$, and standard error equal to $\sqrt{\frac{p~(1-p)}{n}}$.
 \[ \hat{p} \sim N \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
 }
@@ -339,8 +425,22 @@ This is difficult to verify if you don't know the population proportion (or can'
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity quiz}
+\begin{frame}
+\frametitle{CLT for the sample mean}
 
+\formula{Central limit theorem (sample mean)}
+{Sample means will be nearly normally distributed with mean equal to the population mean, $\mu$, and standard error equal to $\frac{\sigma}{\sqrt{n}}$.
+\[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
+}
+
+\begin{itemize}
+    \item This is exactly true if the population distribution is Normal, regardless of sample size $n$ (we derived this earlier)
+    \item But it is also true \emph{regardless of the shape of the population distribution}, as long as the sample size $n$ is sufficiently large.
+    \item Different distributions will require different sample sizes for the CLT to ``kick in''.
+    \item This is the topic of Lab 5, and we will revisit it in more detail in Chapter 7.
+\end{itemize}
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -354,16 +454,17 @@ This is difficult to verify if you don't know the population proportion (or can'
 
 \begin{itemize}
 
-\item The strategy of using a sample statistic to estimate a parameter is quite common, and it's a strategy that we can apply to other statistics besides a proportion.
+\item The strategy of using a sample statistic to estimate a parameter is quite common, and it's a strategy that we can apply to other statistics besides a proportion or a mean.
 
+\item The principles and general ideas from this chapter apply to other parameters as well, even if the details change a little. 
 \begin{itemize}
-\item Take a random sample of students at a college and ask them how many extracurricular activities they are involved in to estimate the average number of extra curricular activities all students in this college are interested in.
+    \item Using statistics (functions of data) to estimate parameters (population values)
+    \item Modeling the sampling process and the statistic using probability tools
+    \item Deriving or Simulating the sampling distribution of the statistic
+    \item Evaluating bias (is the mean of the sampling distribution equal to the parameter?)
+    \item Evaluating variability (how does the standard error change with sample size?)
 \end{itemize}
-
-\item The principles and general ideas are from this chapter apply to other parameters as well, even if the details change a little. 
-
 \end{itemize}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
