@@ -50,7 +50,6 @@ binom_pmf_df <- data.frame(
 
 p <- ggplot(binom_pmf_df, aes(x = successes, y = probability)) +
   geom_bar(stat = "identity", fill = "skyblue") +
-  scale_x_continuous(breaks = binom_outcomes) +
   labs(title = paste0("Binomial PMF (n = ", n_binom, ", p = ", p_binom, ")"),
        x = "Number of Successes (out of 10)",
        y = "Probability")
@@ -62,8 +61,9 @@ axis_labels <- as.character(axis_vals)
 axis_breaks <- axis_vals * 10
 
 # Add the secondary axis using ggplot2's sec_axis
-p2 <- p + scale_x_continuous(
+p2 <- p + scale_x_continuous(breaks = binom_outcomes,
   sec.axis = sec_axis(~ . , name = "Proportion of successes (out of 1)", breaks = axis_breaks, labels = axis_labels)
 )
 
 print(p2)
+#ggsave("sampling_dist_of_phat.png", p2, width = 4, height = 2.5, units = "in")
