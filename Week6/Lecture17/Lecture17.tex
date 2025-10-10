@@ -21,7 +21,8 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp5@path{../../Chp 5}
+\def\chpiv@path{../../Chp 4}
+\def\chpv@path{../../Chp 5}
 \input{../../lec_style.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,6 +67,204 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Sampling distribution of the sample proportion}
+    \begin{itemize}
+        \item For a sample of size $n$ and population proportion $p$, the number of successes $X \sim \text{Binomial}(n, p)$
+        \item The sample proportion is a rescaled version of $X$: $\hat{p} = \frac{X}{n}$
+        \item So the sampling distribution of $\hat{p}$ is just like the binomial distribution, but for values from $0$ to $1$ instead of $0$ to $n$
+    \end{itemize}
+    \vspace{2em}
+    \begin{columns}[T] 
+        \begin{column}{0.4\textwidth}
+            \vspace{2em} 
+            \footnotesize{\textcolor{red}{Note:} Assumes that the population is much larger than the sample, so that sampling with replacement is a good approximation to sampling without replacement.}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \includegraphics[width=\textwidth]{../Lecture16/sampling_dist_of_phat.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling distribution of the sample proportion}
+
+$X \sim \text{Binomial}(n, p)$ \\
+$\hat{p}  = \frac{X}{n}$ \\
+
+\vspace{1em}
+\textcolor{orange}{$Pr(\hat{p}  = \frac{k}{n}) = Pr(X = k) = \dbinom{n}{k} p^k (1-p)^{n-k}$} \\
+for $\frac{k}{n} \in \left\{0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n-1}{n}, 1\right\}$
+
+
+This is the theoretical \hl{sampling distribution} of $\hat{p}$!
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Normal approximation to the Binomial}
+
+When the sample size is large enough ($np \ge 10$  and  $n(1-p) \ge 10$), the binomial distribution with parameters $n$ and $p$ can be approximated by the normal model with parameters $\mu = np$ and $\sigma = \sqrt{np(1-p)}$.
+
+\[Binomial(n,p) \approx Normal(\mu = np, \sigma = \sqrt{np(1-p)})\]
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{\chpiv@path/4-3_binomial_distribution/figures/fb_power_user/fb_power_user}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Central Limit Theorem (Ch. 5.1-5.2)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demo: For large samples, does the sample proportion also have a Normal sampling distribution? }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Central Limit Theorem}
+
+\formula{Central limit theorem (sample proportion)}
+{Sample proportions will be nearly normally distributed with mean equal to the population proportion, $p$, and standard error equal to $\sqrt{\frac{p~(1-p)}{n}}$.
+\[ \hat{p} \sim N \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
+}
+
+\begin{itemize}
+
+\item This comes from the fact that the Binomial distribution converges to the Normal distribution as $n$ increases.
+\item The standard error $SE =  \sqrt{\frac{p~(1-p)}{n}}$ is what we derived on the board for $\hat{p}$. Note that as $n$ increases $SE$ decreases.
+\begin{itemize}
+\item As $n$ increases samples will yield more consistent $\hat{p}$s, i.e. variability among $\hat{p}$s will be lower.
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{CLT - conditions}
+
+Certain conditions must be met for the CLT to apply:
+
+\begin{enumerate}
+
+\item \hlGr{Independence:} Sampled observations must be independent. \\
+
+This is difficult to verify, but is more likely if
+\begin{itemize}
+\item random sampling/assignment is used, and
+\item if sampling without replacement, $n$ $<$ 10\% of the population.
+\end{itemize}
+
+\pause
+
+\item \hlGr{Sample size:} There should be at least 10 expected successes and 10 expected failures in the observed sample.
+
+This is difficult to verify if you don't know the population proportion (or can't assume a value for it). In those cases we look for the number of observed successes and failures to be at least 10.
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{When $p$ is unknown}
+
+\begin{itemize}
+
+\item The CLT states $SE = \sqrt{\frac{p~(1-p)}{n}}$, with the condition that $np$ and $n(1-p)$ are at least 10, however we often don't know the value of $p$, the population proportion
+
+\item In these cases we substitute $\hat{p}$ for $p$
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\dq{What happens when $np$ and/or $n(1-p)$ $<$ 10?}
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{\chpv@path/5-1_point_est_sampling_var/figures/clt_prop_grid/clt_prop_grid_1.pdf}
+\includegraphics[width=0.45\textwidth]{\chpv@path/5-1_point_est_sampling_var/figures/clt_prop_grid/clt_prop_grid_2.pdf}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{When the conditions are not met...}
+
+\begin{itemize}
+
+\item When either $np$ or $n(1-p)$ is small, the distribution is more discrete.
+\item When $np$ or $n(1-p)$ $<$ 10, the distribution is more skewed.
+\item The larger both $np$ and $n(1-p)$, the more normal the distribution.
+\item When $np$ and $n(1-p)$ are both very large, the discreteness of the distribution is hardly evident, and the distribution looks much more like a normal distribution.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{CLT for the sample mean}
+
+\formula{Central limit theorem (sample mean)}
+{Sample means will be nearly normally distributed with mean equal to the population mean, $\mu$, and standard error equal to $\frac{\sigma}{\sqrt{n}}$.
+\[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
+}
+
+\begin{itemize}
+    \item This is exactly true if the population distribution is Normal, regardless of sample size $n$ (we derived this in Lecture 16)
+    \item But it is also true \emph{regardless of the shape of the population distribution}, as long as the sample size $n$ is sufficiently large.
+    \item Different distributions will require different sample sizes for the CLT to ``kick in''.
+    \item This is the topic of Lab 5, and we will revisit it in more detail in Chapter 7.
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Extending the framework for other statistics}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Extending the framework for other statistics}
+
+\begin{itemize}
+
+\item The strategy of using a sample statistic to estimate a parameter is quite common, and it's a strategy that we can apply to other statistics besides a proportion or a mean.
+
+\item The principles and general ideas from this chapter apply to other parameters as well, even if the details change a little. 
+\begin{itemize}
+    \item Using statistics (functions of data) to estimate parameters (population values)
+    \item Modeling the sampling process and the statistic using probability tools
+    \item Deriving or Simulating the sampling distribution of the statistic
+    \item Evaluating bias (is the mean of the sampling distribution equal to the parameter?)
+    \item Evaluating variability (how does the standard error change with sample size?)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Confidence intervals for a proportion}
@@ -88,13 +287,13 @@ $\:$ \\
 $\:$ \\
 \begin{columns}[c]
 \column{0.25\textwidth}
-\includegraphics[width=\textwidth]{\chp5@path/5-2_ci_prop/figures/spear}
+\includegraphics[width=\textwidth]{\chpv@path/5-2_ci_prop/figures/spear}
 \column{0.5\textwidth}
 {\small
 We can throw a spear where we saw a fish but we will probably miss. If we toss a net in that area, we have a good chance of catching the fish.
 }
 \column{0.25\textwidth}
-\includegraphics[width=\textwidth]{\chp5@path/5-2_ci_prop/figures/net}
+\includegraphics[width=\textwidth]{\chpv@path/5-2_ci_prop/figures/net}
 \end{columns}
 $\:$ \\
 \item If we report a point estimate, we probably won't hit the exact population parameter. If we report a range of plausible values we have a good shot at capturing the parameter. 
@@ -107,10 +306,6 @@ $\:$ \\
 % net fig: http://www.flickr.com/photos/fischerfotos/7439791462/sizes/q/
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Board work: derivation of interval with target level}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -141,12 +336,12 @@ The approximate 95\% confidence interval is defined as
 
 \pause
 
-\vspace{-0.25cm}
+\vspace{-0.3cm}
 \[ SE = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.67 \times 0.33}{850}} \approx 0.016 \]
 
 \pause
 
-\vspace{-0.25cm}
+\vspace{-0.3cm}
 \begin{eqnarray*}
 \hat{p} \pm 1.96 \times SE &=& 0.67 \pm 1.96 \times 0.016 \\
 \pause
@@ -154,7 +349,10 @@ The approximate 95\% confidence interval is defined as
 \pause
 &=& (0.64, 0.70)
 \end{eqnarray*}
+\pause
 
+\vspace{-3em}
+\Note{Here, we have used the sample proportion $\hat{p}$ in the standard error formula, since we don't have the population proportion $p$.}
 
 \end{frame}
 
@@ -190,6 +388,10 @@ We are 95\% confident that
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -207,7 +409,7 @@ $\:$ \\
 
 \dq{Can you see any drawbacks to using a wider interval?}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{\chp5@path/5-2_ci_prop/figures/garfield}
+\includegraphics[width=0.9\textwidth]{\chpv@path/5-2_ci_prop/figures/garfield}
 \end{center}
 
 \pause
@@ -268,7 +470,7 @@ $\:$ \\
 
 \soln{\only<2>{
 \begin{center}
-\includegraphics[width=0.7\textwidth]{\chp5@path/5-2_ci_prop/figures/middle98/middle98}
+\includegraphics[width=0.7\textwidth]{\chpv@path/5-2_ci_prop/figures/middle98/middle98}
 \end{center}
 }}
 
