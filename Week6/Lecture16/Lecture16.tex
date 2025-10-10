@@ -352,120 +352,120 @@ The sample mean is an \hl{unbiased} estimator for the population mean, and the s
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Central Limit Theorem (Ch. 5.1-5.2)}
+% \section{Central Limit Theorem (Ch. 5.1-5.2)}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demo: For large samples, does the sample proportion also have a Normal sampling distribution? }
+% \section{R Demo: For large samples, does the sample proportion also have a Normal sampling distribution? }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Central Limit Theorem}
+% \begin{frame}
+% \frametitle{Central Limit Theorem}
 
-\formula{Central limit theorem (sample proportion)}
-{Sample proportions will be nearly normally distributed with mean equal to the population proportion, $p$, and standard error equal to $\sqrt{\frac{p~(1-p)}{n}}$.
-\[ \hat{p} \sim N \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
-}
+% \formula{Central limit theorem (sample proportion)}
+% {Sample proportions will be nearly normally distributed with mean equal to the population proportion, $p$, and standard error equal to $\sqrt{\frac{p~(1-p)}{n}}$.
+% \[ \hat{p} \sim N \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
+% }
 
-\begin{itemize}
+% \begin{itemize}
 
-\item This comes from the fact that the Binomial distribution converges to the Normal distribution as $n$ increases.
-\item The standard error $SE =  \sqrt{\frac{p~(1-p)}{n}}$ is what we derived on the board for $\hat{p}$. Note that as $n$ increases $SE$ decreases.
-\begin{itemize}
-\item As $n$ increases samples will yield more consistent $\hat{p}$s, i.e. variability among $\hat{p}$s will be lower.
-\end{itemize}
+% \item This comes from the fact that the Binomial distribution converges to the Normal distribution as $n$ increases.
+% \item The standard error $SE =  \sqrt{\frac{p~(1-p)}{n}}$ is what we derived on the board for $\hat{p}$. Note that as $n$ increases $SE$ decreases.
+% \begin{itemize}
+% \item As $n$ increases samples will yield more consistent $\hat{p}$s, i.e. variability among $\hat{p}$s will be lower.
+% \end{itemize}
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{CLT - conditions}
+% \begin{frame}
+% \frametitle{CLT - conditions}
 
-Certain conditions must be met for the CLT to apply:
+% Certain conditions must be met for the CLT to apply:
 
-\begin{enumerate}
+% \begin{enumerate}
 
-\item \hlGr{Independence:} Sampled observations must be independent. \\
+% \item \hlGr{Independence:} Sampled observations must be independent. \\
 
-This is difficult to verify, but is more likely if
-\begin{itemize}
-\item random sampling/assignment is used, and
-\item if sampling without replacement, $n$ $<$ 10\% of the population.
-\end{itemize}
+% This is difficult to verify, but is more likely if
+% \begin{itemize}
+% \item random sampling/assignment is used, and
+% \item if sampling without replacement, $n$ $<$ 10\% of the population.
+% \end{itemize}
 
-\pause
+% \pause
 
-\item \hlGr{Sample size:} There should be at least 10 expected successes and 10 expected failures in the observed sample.
+% \item \hlGr{Sample size:} There should be at least 10 expected successes and 10 expected failures in the observed sample.
 
-This is difficult to verify if you don't know the population proportion (or can't assume a value for it). In those cases we look for the number of observed successes and failures to be at least 10.
+% This is difficult to verify if you don't know the population proportion (or can't assume a value for it). In those cases we look for the number of observed successes and failures to be at least 10.
 
-\end{enumerate}
+% \end{enumerate}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{When the conditions are not met...}
+% \begin{frame}
+% \frametitle{When the conditions are not met...}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item When either $np$ or $n(1-p)$ is small, the distribution is more discrete.
-\item When $np$ or $n(1-p)$ $<$ 10, the distribution is more skewed.
-\item The larger both $np$ and $n(1-p)$, the more normal the distribution.
-\item When $np$ and $n(1-p)$ are both very large, the discreteness of the distribution is hardly evident, and the distribution looks much more like a normal distribution.
+% \item When either $np$ or $n(1-p)$ is small, the distribution is more discrete.
+% \item When $np$ or $n(1-p)$ $<$ 10, the distribution is more skewed.
+% \item The larger both $np$ and $n(1-p)$, the more normal the distribution.
+% \item When $np$ and $n(1-p)$ are both very large, the discreteness of the distribution is hardly evident, and the distribution looks much more like a normal distribution.
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{CLT for the sample mean}
+% \begin{frame}
+% \frametitle{CLT for the sample mean}
 
-\formula{Central limit theorem (sample mean)}
-{Sample means will be nearly normally distributed with mean equal to the population mean, $\mu$, and standard error equal to $\frac{\sigma}{\sqrt{n}}$.
-\[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
-}
+% \formula{Central limit theorem (sample mean)}
+% {Sample means will be nearly normally distributed with mean equal to the population mean, $\mu$, and standard error equal to $\frac{\sigma}{\sqrt{n}}$.
+% \[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
+% }
 
-\begin{itemize}
-    \item This is exactly true if the population distribution is Normal, regardless of sample size $n$ (we derived this earlier)
-    \item But it is also true \emph{regardless of the shape of the population distribution}, as long as the sample size $n$ is sufficiently large.
-    \item Different distributions will require different sample sizes for the CLT to ``kick in''.
-    \item This is the topic of Lab 5, and we will revisit it in more detail in Chapter 7.
-\end{itemize}
+% \begin{itemize}
+%     \item This is exactly true if the population distribution is Normal, regardless of sample size $n$ (we derived this earlier)
+%     \item But it is also true \emph{regardless of the shape of the population distribution}, as long as the sample size $n$ is sufficiently large.
+%     \item Different distributions will require different sample sizes for the CLT to ``kick in''.
+%     \item This is the topic of Lab 5, and we will revisit it in more detail in Chapter 7.
+% \end{itemize}
 
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Extending the framework for other statistics}
+% \subsection{Extending the framework for other statistics}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Extending the framework for other statistics}
+% \begin{frame}
+% \frametitle{Extending the framework for other statistics}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item The strategy of using a sample statistic to estimate a parameter is quite common, and it's a strategy that we can apply to other statistics besides a proportion or a mean.
+% \item The strategy of using a sample statistic to estimate a parameter is quite common, and it's a strategy that we can apply to other statistics besides a proportion or a mean.
 
-\item The principles and general ideas from this chapter apply to other parameters as well, even if the details change a little. 
-\begin{itemize}
-    \item Using statistics (functions of data) to estimate parameters (population values)
-    \item Modeling the sampling process and the statistic using probability tools
-    \item Deriving or Simulating the sampling distribution of the statistic
-    \item Evaluating bias (is the mean of the sampling distribution equal to the parameter?)
-    \item Evaluating variability (how does the standard error change with sample size?)
-\end{itemize}
-\end{itemize}
-\end{frame}
+% \item The principles and general ideas from this chapter apply to other parameters as well, even if the details change a little. 
+% \begin{itemize}
+%     \item Using statistics (functions of data) to estimate parameters (population values)
+%     \item Modeling the sampling process and the statistic using probability tools
+%     \item Deriving or Simulating the sampling distribution of the statistic
+%     \item Evaluating bias (is the mean of the sampling distribution equal to the parameter?)
+%     \item Evaluating variability (how does the standard error change with sample size?)
+% \end{itemize}
+% \end{itemize}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document

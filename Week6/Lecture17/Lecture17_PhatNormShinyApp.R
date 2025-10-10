@@ -1,5 +1,5 @@
+library(ggplot2)
 library(shiny)
-source("Lecture16_DemoFunctions.R")
 
 # ---- UI ----
 ui <- fluidPage(
@@ -9,6 +9,7 @@ ui <- fluidPage(
       sliderInput("n", "Sample Size (n):", min=0, max=500, value=10, step=10),
       sliderInput("p", "Population Proportion (p):", min=0.01, max=1, 
                   value=0.25, step=0.05),
+      checkboxInput("use_succession", "Rule of Succession-adjusted p-hat ((X+1)/(n+2))", value = FALSE),
       actionButton("simulate", "Run Simulation"),
       hr()
     ), mainPanel(plotOutput("histPlot"))))
@@ -25,24 +26,34 @@ server <- function(input, output) {
     return(possible_entries)
   })
   
-  # TODO: add checkbox for adjusted estimators (small sample sizes)
   observeEvent(input$simulate, {
     output$histPlot <- renderPlot({
-      K <- 1000  # Number of simulations 
+      K <- 5000  # Number of simulations 
       population <- population_result()  # Get updated population
       
-      # Run simulation
-      simulation <- replicate(K, sample_get_phat_fn(population, input$n))
-      title <- sprintf("Histogram of p-hat values from experiment with %sx%s samples", 
-                       K, input$n)
+      # choose sampling function based on checkbox
+      sampler_fn <- if (isTRUE(input$use_succession)) succession_phat_fn else sample_get_phat_fn
       
-      SE <- sqrt((input$p*(1-input$p))/input$n)
+      # Run simulation
+      simulation <- replicate(K, sampler_fn(population, input$n))
+      
+      title <- sprintf("Histogram of p-hat values from experiment with %sx%s samples%s", 
+                       K, input$n, ifelse(isTRUE(input$use_succession), " (succession-adjusted)", ""))
+      
+      # set Normal approx mean and SE depending on estimator
+      if (isTRUE(input$use_succession)) {
+        mean_norm <- (input$p * input$n + 1) / (input$n + 2)   # E[(X+1)/(n+2)] = (np+1)/(n+2)
+        SE <- sqrt((input$p * (1 - input$p)) / (input$n + 2))  # approximate variance for adjusted estimator
+      } else {
+        mean_norm <- input$p
+        SE <- sqrt((input$p*(1-input$p))/input$n)
+      }
 
       # Normal PDF
       x_vals = seq(0, 1, length.out = 1000)
       normal_pdf_df <- data.frame(
         x = x_vals,
-        prob = dnorm(x_vals, mean = input$p, sd = SE)
+        prob = dnorm(x_vals, mean = mean_norm, sd = SE)
       )
       
       # Plot the histogram with the Normal density:
@@ -54,6 +65,7 @@ server <- function(input, output) {
           aes(x=x, y=prob),
           color = "darkred"
         ) +
+        geom_vline(aes(xintercept=input$p), color="red") +
         xlab("Sample proportion") +
         ggtitle(title) +
         xlim(c(0,1))
@@ -61,3 +73,18 @@ server <- function(input, output) {
     })
   })
 }
+
+# ------ Functions ---------
+
+sample_get_phat_fn <- function(population, n) {
+  sampled_entries <- sample(population, size = n)
+  phat <- sum(sampled_entries == "support") / n
+  return(phat)
+}
+
+succession_phat_fn <- function(pop, n) {
+  sampled_entries <- sample(pop, size = n)
+  phat <- (sum(sampled_entries == "support")+1) / (n+2)
+  return(phat)
+}
+

@@ -7,17 +7,19 @@ ui <- fluidPage(
     sidebarPanel(
       numericInput("N", "Sample size (N):", value = 850, min = 1),
       numericInput("p_true", "True population proportion (p):", value = 0.7, min = 0, max = 1, step = 0.01),
-      numericInput("alpha", "Significance level (alpha):", value = 0.05, min = 0, max = 1, step = 0.01),
-  actionButton("run1", "Run 1 Experiment"),
-  actionButton("run10", "Run 10 Experiments"),
-  actionButton("reset", "Reset Results", style = "color: white; background-color: #d9534f;"),
+      numericInput("conf", "Confidence level (conf):", value = 0.95, min = 0, max = 1, step = 0.01),
+      actionButton("run1", "Run 1 Experiment"),
+      actionButton("run10", "Run 10 Experiments"),
+      actionButton("reset", "Reset Results", style = "color: white; background-color: #d9534f;"),
       hr(),
       verbatimTextOutput("coverage")
     ),
     mainPanel(
-      plotOutput("ciPlot", height = "600px"),
+      # CI plot: occupy 3/4 of the viewport height
+      plotOutput("ciPlot", height = "75vh"),
       hr(),
-      plotOutput("coveragePlot", height = "250px")
+      # Coverage plot: occupy 1/4 of the viewport height
+      plotOutput("coveragePlot", height = "25vh")
     )
   )
 )
@@ -43,7 +45,8 @@ server <- function(input, output, session) {
   add_trials <- function(n) {
     N <- input$N
     p_true <- input$p_true
-    alpha <- input$alpha
+    conf <- input$conf
+    alpha <- 1 - conf
     z <- qnorm(1 - alpha/2)
     samples <- rbinom(n = n, size = N, prob = p_true)
     p_hats <- samples / N
@@ -89,7 +92,7 @@ server <- function(input, output, session) {
     df_cov <- data.frame(trial = seq_len(nrow(vals$df)), running_coverage = running_coverage)
     ggplot(df_cov, aes(x = trial, y = running_coverage)) +
       geom_line(color = "blue") +
-      geom_hline(yintercept = 1 - input$alpha, linetype = "dashed", color = "darkgreen") +
+      geom_hline(yintercept = input$conf, linetype = "dashed", color = "darkgreen") +
       ylim(0, 1) +
       labs(x = "Number of Experiments", y = "Running Coverage",
            title = "Running Coverage vs. Nominal Confidence Level") +
