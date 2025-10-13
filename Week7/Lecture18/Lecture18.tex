@@ -21,7 +21,7 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp5@path{../../Chp 5}
+\def\chpv@path{../../Chp 5}
 \input{../../lec_style.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,6 +66,181 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Facebook's categorization of user interests}
+
+\dq{Most commercial websites (e.g. social media platforms, news outlets, online retailers) collect a data about their users' behaviors and use these data to deliver tageted content, recommendations, and ads. To understand whether Americans think their lives line up with how the algorithm-driven classification systems categorizes them, Pew Research asked a representative sample of 850 American Facebook users how accurately they feel the list of categories Facebook has listed for them on the page of their supposed interests actually represents them and their interests. 67\% of the respondents said that the listed categories were accurate. Estimate the true proportion of American Facebook users who think the Facebook categorizes their interests accurately.}
+
+\ct{\webURL{https://www.pewinternet.org/2019/01/16/facebook-algorithms-and-personal-data/}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Facebook's categorization of user interests}
+
+\[ \hat{p} = 0.67 \qquad n = 850 \]
+
+% \pause
+
+The approximate 95\% confidence interval is defined as 
+\[ point~estimate \pm 1.96 \times SE \]
+
+% \pause
+
+\vspace{-0.3cm}
+\[ SE = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.67 \times 0.33}{850}} \approx 0.016 \]
+
+% \pause
+
+\vspace{-0.3cm}
+\begin{eqnarray*}
+\hat{p} \pm 1.96 \times SE &=& 0.67 \pm 1.96 \times 0.016 \\
+\pause
+&=& (0.67 - 0.03, 0.67 + 0.03) \\
+\pause
+&=& (0.64, 0.70)
+\end{eqnarray*}
+% \pause
+
+\vspace{-3em}
+\Note{Here, we have used the sample proportion $\hat{p}$ in the standard error formula, since we don't have the population proportion $p$.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What does 95\% confident mean?}
+
+"We are 95\% confident that the interval we calculated from our sample (0.64, 0.70) contains the true population proportion."
+\pause
+\begin{itemize}
+
+\item Suppose we took many samples and built a confidence interval from each sample using the equation $point~estimate \pm 1.96 \times SE$.
+
+\item Then about 95\% of those intervals would contain the true population proportion ($p$). 
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Width of an interval}
+
+\dq{If we want to be more certain that we capture the population parameter, i.e. increase our confidence level, should we use a wider interval or a smaller interval?}
+
+\pause
+
+\soln{A wider interval.}
+
+$\:$ \\
+
+% \pause
+
+\dq{Can you see any drawbacks to using a wider interval?}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{\chpv@path/5-2_ci_prop/figures/garfield}
+\end{center}
+
+% \pause
+
+\soln{If the interval is too wide it may not be very informative.}
+
+{\scriptsize Image source: http://web.as.uky.edu/statistics/users/earo227/misc/garfield\_weather.gif}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: Facebook example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Changing the confidence level}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Changing the confidence level}
+
+\[ point~estimate\pm z^\star \times SE \] 
+
+\begin{itemize}
+
+\item In a confidence interval, $z^\star \times SE$ is called the \hl{margin of error}, and for a given sample, the margin of error changes as the confidence level changes.
+
+\item In order to change the confidence level we need to adjust $z^\star$ in the above formula.
+
+\item Commonly used confidence levels in practice are 90\%, 95\%, 98\%, and 99\%.
+
+\item For a 95\% confidence interval, $z^\star = 1.96$.
+
+\item However, using the standard normal ($z$) distribution, it is possible to find the appropriate $z^\star$ for any confidence level.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\pq{Which of the below Z scores is the appropriate $z^\star$ when calculating a 98\% confidence interval?}
+
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item $Z = 2.05$
+\item $Z = 1.96$
+\solnMult{$Z = 2.33$}
+\item $Z = -2.33$
+\item $Z = -1.65$
+\item[]
+\end{enumerate}
+\end{multicols}
+
+\soln{\only<2>{
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chpv@path/5-2_ci_prop/figures/middle98/middle98}
+\end{center}
+}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Interpreting confidence intervals}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpreting confidence intervals}
+
+Confidence intervals are ...
+
+\begin{itemize}
+
+\item always about the population
+
+\item not probability statements 
+
+\item only about population parameters, not individual observations
+
+\item only reliable if the sample statistic they're based on is an unbiased estimator of the population parameter
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration (Shiny App): Effect of confidence level}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -117,7 +292,7 @@ Possible explanations:
 \frametitle{Result}
 
 \begin{center}
-\includegraphics[width=0.75\textwidth]{\chp5@path/5-3_ht_prop/figures/discRandDotPlot/discRandDotPlot}
+\includegraphics[width=0.75\textwidth]{\chpv@path/5-3_ht_prop/figures/discRandDotPlot/discRandDotPlot}
 \end{center}
 
 \pause
@@ -172,7 +347,7 @@ We'll formally introduce the hypothesis testing framework using an example on te
 
 \pause
 
-\item This is a quick-and-dirty approach for hypothesis testing, but it doesn't tell us the likelihood of certain outcomes under the null hypothesis (p-value).
+\item This is a quick-and-dirty approach for hypothesis testing, but it doesn't tell us the likelihood of certain outcomes under the null hypothesis.
 
 \end{itemize}
 
@@ -181,10 +356,6 @@ We'll formally introduce the hypothesis testing framework using an example on te
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{R Demonstration: Experiments}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity quiz: Confidence levels}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -271,11 +442,8 @@ Which type of error is being committed in the following circumstances?
 
 \begin{itemize}
 
-\item As a general rule we reject $H_0$ when the p-value is less than 0.05, i.e. we use a \hl{significance level} of 0.05, \mathhl{\alpha = 0.05}.
-
-\pause
-
-\item This means that, for those cases where $H_0$ is actually true, we do not want to incorrectly reject it more than 5\% of those times. 
+% \item As a general rule we reject $H_0$ when the p-value is less than 0.05, i.e. we use a \hl{significance level} of 0.05, \mathhl{\alpha = 0.05}.
+\item When designing a hypothesis test, we first choose a \hl{significance level}, e.g. \mathhl{\alpha = 0.05}, and we design the hypothesis test so that if $H_0$ is true, we reject it no more than 5\% of the time.
 
 \pause
 
@@ -292,112 +460,108 @@ Which type of error is being committed in the following circumstances?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Intervals and decision errors}
+\section{Edfinity Quiz: Significance levels}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Formal testing using p-values}
+% \subsection{Formal testing using p-values}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Facebook interest categories}
+% \begin{frame}
+% \frametitle{Facebook interest categories}
 
-\dq{ The same survey asked the 850 respondents how comfortable they are with Facebook creating a list of categories for them. 41\% of the respondents said they are comfortable. Do these data provide convincing evidence that the proportion of American Facebook users are comfortable with Facebook creating a list of interest categories for them is different than 50\%?}
+% \dq{ The same survey asked the 850 respondents how comfortable they are with Facebook creating a list of categories for them. 41\% of the respondents said they are comfortable. Do these data provide convincing evidence that the proportion of American Facebook users are comfortable with Facebook creating a list of interest categories for them is different than 50\%?}
 
-\vfill
+% \vfill
 
-\ct{\webURL{https://www.pewinternet.org/2019/01/16/facebook-algorithms-and-personal-data/}}
+% \ct{\webURL{https://www.pewinternet.org/2019/01/16/facebook-algorithms-and-personal-data/}}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Setting the hypotheses}
+% \begin{frame}
+% \frametitle{Setting the hypotheses}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item The \hl{parameter of interest} is the proportion of \underline{all} American Facebook users who are comfortable with Facebook creating categories of interests for them.
+% \item The \hl{parameter of interest} is the proportion of \underline{all} American Facebook users who are comfortable with Facebook creating categories of interests for them.
 
-\pause
+% \pause
 
-\item There may be two explanations why our sample proportion is lower than 0.50 (minority).
-\begin{itemize}
-\item The true population proportion is different than 0.50.
-\item The true population mean is 0.50, and the difference between the true population proportion and the sample proportion is simply due to natural sampling variability.
-\end{itemize}
+% \item There may be two explanations why our sample proportion is lower than 0.50 (minority).
+% \begin{itemize}
+% \item The true population proportion is different than 0.50.
+% \item The true population mean is 0.50, and the difference between the true population proportion and the sample proportion is simply due to natural sampling variability.
+% \end{itemize}
 
- \end{itemize}
+%  \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Setting the hypotheses}
+% \begin{frame}
+% \frametitle{Setting the hypotheses}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item We start with the assumption that 50\% of American Facebook users are comfortable with Facebook creating categories of interests for them
-\[ \mathhl{H_0:}~p = 0.50 \]
+% \item We start with the assumption that 50\% of American Facebook users are comfortable with Facebook creating categories of interests for them
+% \[ \mathhl{H_0:}~p = 0.50 \]
 
-\pause
+% \pause
 
-\item We test the claim that the proportion of American Facebook users who are comfortable with Facebook creating categories of interests for them is different than 50\%
-\[ \mathhl{H_A:}~p \ne 0.50 \]
+% \item We test the claim that the proportion of American Facebook users who are comfortable with Facebook creating categories of interests for them is different than 50\%
+% \[ \mathhl{H_A:}~p \ne 0.50 \]
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Facebook interest categories - conditions}
+% \begin{frame}
+% \frametitle{Facebook interest categories - conditions}
 
-\pq{Which of the following is \emph{not} a condition that needs to be met to proceed with this hypothesis test?}
+% \pq{Which of the following is \emph{not} a condition that needs to be met to proceed with this hypothesis test?}
 
-\begin{enumerate}[(a)]
-\item Respondents in the sample should be independent of each other with respect to whether or not they feel comfortable with their interests being categorized by Facebook.
-\item Sampling should have been done randomly.
-\item The sample size should be less than 10\% of the population of all American Facebook users.
-\solnMult{ There should be at least 30 respondents in the sample.}
-\item There should be at least 10 expected successes and 10 expected failure.
-\end{enumerate}
+% \begin{enumerate}[(a)]
+% \item Respondents in the sample should be independent of each other with respect to whether or not they feel comfortable with their interests being categorized by Facebook.
+% \item Sampling should have been done randomly.
+% \item The sample size should be less than 10\% of the population of all American Facebook users.
+% \solnMult{ There should be at least 30 respondents in the sample.}
+% \item There should be at least 10 expected successes and 10 expected failure.
+% \end{enumerate}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Edfinity quiz: Decision errors, concept check
+% \begin{frame}
+% \frametitle{Intro to test statistics}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% In order to evaluate if the observed sample proportion is unusual for the hypothesized sampling distribution, we determine how many standard errors away from the null it is, which is also called the \hl{test statistic}.
 
-\begin{frame}
-\frametitle{Intro to test statistics}
+% \pause
 
-In order to evaluate if the observed sample proportion is unusual for the hypothesized sampling distribution, we determine how many standard errors away from the null it is, which is also called the \hl{test statistic}.
+% \[ \hat{p} \sim N \pr{ \mu = 0.50, SE = \sqrt{\frac{0.50 \times 0.50}{850} }  } \]
 
-\pause
+% \pause
 
-\[ \hat{p} \sim N \pr{ \mu = 0.50, SE = \sqrt{\frac{0.50 \times 0.50}{850} }  } \]
+% \[ Z = \frac{0.41 - 0.50}{0.0171} = -5.26 \]
 
-\pause
+%  \pause
 
-\[ Z = \frac{0.41 - 0.50}{0.0171} = -5.26 \]
+% \dq{The sample proportion is 5.26 standard errors away from the hypothesized value. Is this considered unusually low? That is, is the result \hl{statistically significant}?}
 
- \pause
+% \pause
 
-\dq{The sample proportion is 5.26 standard errors away from the hypothesized value. Is this considered unusually low? That is, is the result \hl{statistically significant}?}
+% \soln{Yes, and we can quantify how unusual it is using a p-value.}
 
-\pause
+% \end{frame}
 
-\soln{Yes, and we can quantify how unusual it is using a p-value.}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

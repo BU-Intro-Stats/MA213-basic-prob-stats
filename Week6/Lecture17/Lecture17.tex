@@ -422,88 +422,88 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R demonstration: Facebook example}
+% \section{R demonstration: Facebook example}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Changing the confidence level}
+% \subsection{Changing the confidence level}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Changing the confidence level}
+% \begin{frame}
+% \frametitle{Changing the confidence level}
 
-\[ point~estimate\pm z^\star \times SE \] 
+% \[ point~estimate\pm z^\star \times SE \] 
 
-\begin{itemize}
+% \begin{itemize}
 
-\item In a confidence interval, $z^\star \times SE$ is called the \hl{margin of error}, and for a given sample, the margin of error changes as the confidence level changes.
+% \item In a confidence interval, $z^\star \times SE$ is called the \hl{margin of error}, and for a given sample, the margin of error changes as the confidence level changes.
 
-\item In order to change the confidence level we need to adjust $z^\star$ in the above formula.
+% \item In order to change the confidence level we need to adjust $z^\star$ in the above formula.
 
-\item Commonly used confidence levels in practice are 90\%, 95\%, 98\%, and 99\%.
+% \item Commonly used confidence levels in practice are 90\%, 95\%, 98\%, and 99\%.
 
-\item For a 95\% confidence interval, $z^\star = 1.96$.
+% \item For a 95\% confidence interval, $z^\star = 1.96$.
 
-\item However, using the standard normal ($z$) distribution, it is possible to find the appropriate $z^\star$ for any confidence level.
+% \item However, using the standard normal ($z$) distribution, it is possible to find the appropriate $z^\star$ for any confidence level.
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+% \begin{frame}
 
-\pq{Which of the below Z scores is the appropriate $z^\star$ when calculating a 98\% confidence interval?}
+% \pq{Which of the below Z scores is the appropriate $z^\star$ when calculating a 98\% confidence interval?}
 
-\begin{multicols}{2}
-\begin{enumerate}[(a)]
-\item $Z = 2.05$
-\item $Z = 1.96$
-\solnMult{$Z = 2.33$}
-\item $Z = -2.33$
-\item $Z = -1.65$
-\item[]
-\end{enumerate}
-\end{multicols}
+% \begin{multicols}{2}
+% \begin{enumerate}[(a)]
+% \item $Z = 2.05$
+% \item $Z = 1.96$
+% \solnMult{$Z = 2.33$}
+% \item $Z = -2.33$
+% \item $Z = -1.65$
+% \item[]
+% \end{enumerate}
+% \end{multicols}
 
-\soln{\only<2>{
-\begin{center}
-\includegraphics[width=0.7\textwidth]{\chpv@path/5-2_ci_prop/figures/middle98/middle98}
-\end{center}
-}}
+% \soln{\only<2>{
+% \begin{center}
+% \includegraphics[width=0.7\textwidth]{\chpv@path/5-2_ci_prop/figures/middle98/middle98}
+% \end{center}
+% }}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Interpreting confidence intervals}
+% \subsection{Interpreting confidence intervals}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Interpreting confidence intervals}
+% \begin{frame}
+% \frametitle{Interpreting confidence intervals}
 
-Confidence intervals are ...
+% Confidence intervals are ...
 
-\begin{itemize}
+% \begin{itemize}
 
-\item always about the population
+% \item always about the population
 
-\item not probability statements 
+% \item not probability statements 
 
-\item only about population parameters, not individual observations
+% \item only about population parameters, not individual observations
 
-\item only reliable if the sample statistic they're based on is an unbiased estimator of the population parameter
+% \item only reliable if the sample statistic they're based on is an unbiased estimator of the population parameter
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R demonstration: Effect of confidence level}
+% \section{R demonstration: Effect of confidence level}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

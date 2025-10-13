@@ -1,42 +1,77 @@
 # ---- 0. Setup and load libraries, if any ----
 set.seed(213)
 
-# ---- 1. Type 1 Errors (False Positives) ----
+# ---- 1. Hypothesis Testing Example: Facebook survey ----
 
-# Simulate some data with a true p=0.5
-data <- rbinom(n=100, size=25, p=0.5)
+N = 850
+p_hat = 0.67
+survey_results <- c(rep("accurate", p_hat*N), rep("not accurate", (1-p_hat)*N))
 
-# Compute a CI with a significance level alpha=0.05
+# View the data
+table(survey_results)
 
-p_hat <- mean(data/50)
-alpha <- 0.05  
-SE <- sqrt(p_hat*(1-p_hat)/50)
+# How would you set up a hypothesis test for this example?
+
+# Recall our confidence interval from last time:
+alpha <- 0.05
+SE <- sqrt(p_hat*(1-p_hat)/N)
 p_hat + c(-1,1)*qnorm(1-alpha/2)*SE
 
 # What can you conclude from the CI?
-# What factors do you think affected the outcome of the hypothesis test?
-
-# Now what if we tried changing the alpha value to 0.1?
-# How will this affect the width of the CI compared to last time?
-# What do you think the confidence level is, given this alpha value?
-
-alpha <- 0.1 
-p_hat + c(-1,1)*qnorm(1-alpha/2)*SE
-
-# Has your conclusion from the hypothesis test changed?
 
 
-# ---- 2. Type 2 Errors (False Negatives) ----
-# Simulate some data with a true p=0.2 (quite low! our data will be skewed)
+# ---- 2. Hypothesis test can sometimes give a wrong answer! ----
 
-data <- rbinom(n=100, size=100, p=0.2)
+# Generate some new data where the null hypothesis is actually true (a correct decision would be to not reject H0)
 
-# Compute a CI with a significance level alpha=0.05
+# Sample size: 30
+# Test statistic: phat
+# True proportion: p=0.5
+# Repeat the experiment 100 times
+data = rbinom(n=100, size=30, p=0.5) 
+p_hats = data/30
 
-p_hat <- mean(data/50)
-alpha <- 0.05  
-SE <- sqrt(p_hat*(1-p_hat)/50)
-p_hat + c(-1,1)*qnorm(1-alpha/2)*SE
+# Compute a 95% CI for each simulated experiment
+alpha <- 0.05
+error_count1 <-0
+for (i in 1:100) {
+    # compute the CI
+    SE <- sqrt(p_hats[i]*(1-p_hats[i])/30)
+    CI <- p_hats[i] + c(-1,1)*qnorm(1-alpha/2)*SE
 
-# What do you conclude this time? 
-# What factors do you think led to this outcome?
+    # does it contain the true value of p=0.5?
+    if (CI[1] > 0.5 | CI[2] < 0.5) {
+        cat("Experiment", i, ": reject H0 (CI:", round(CI,2), ")\n")
+    } else {
+        cat("Experiment", i, ": do not reject H0 (CI:", round(CI,2), ")\n")
+        error_count2 <- error_count1 + 1
+    }   
+}
+cat("Error Count (Type 1): ",error_count1, "/100")
+
+# Generate some new data where the null hypothesis is actually false (a correct decision would be to reject H0)
+
+# Sample size: 30
+# Test statistic: phat
+# True proportion: p=0.7
+# Repeat the experiment 100 times
+data = rbinom(n=100, size=30, p=0.7)
+p_hats = data/30
+
+# Compute a 95% CI for each simulated experiment
+alpha <- 0.05
+error_count2 <-0
+for (i in 1:100) {
+    # compute the CI
+    SE <- sqrt(p_hats[i]*(1-p_hats[i])/30)
+    CI <- p_hats[i] + c(-1,1)*qnorm(1-alpha/2)*SE
+
+    # does it contain the null value of p=0.5?
+    if (CI[1] > 0.5 | CI[2] < 0.5){
+        cat("Experiment", i, ": reject H0 (CI:", round(CI,2), ")\n")
+        error_count2 <- error_count2 + 1
+    } else {
+        cat("Experiment", i, ": do not reject H0 (CI:", round(CI,2), ")\n")
+    }
+}
+cat("Error Count (Type 2): ",error_count2, "/100")    

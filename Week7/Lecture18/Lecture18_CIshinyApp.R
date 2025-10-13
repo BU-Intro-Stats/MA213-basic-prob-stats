@@ -16,10 +16,10 @@ ui <- fluidPage(
     ),
     mainPanel(
       # CI plot: occupy 3/4 of the viewport height
-      plotOutput("ciPlot", height = "75vh"),
-      hr(),
+      plotOutput("ciPlot", height = "70vh"),
+      #hr(),
       # Coverage plot: occupy 1/4 of the viewport height
-      plotOutput("coveragePlot", height = "25vh")
+      plotOutput("coveragePlot", height = "20vh")
     )
   )
 )
