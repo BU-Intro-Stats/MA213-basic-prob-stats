@@ -42,9 +42,9 @@ for (i in 1:100) {
     # does it contain the true value of p=0.5?
     if (CI[1] > 0.5 | CI[2] < 0.5) {
         cat("Experiment", i, ": reject H0 (CI:", round(CI,2), ")\n")
+        error_count1 <- error_count1 + 1
     } else {
         cat("Experiment", i, ": do not reject H0 (CI:", round(CI,2), ")\n")
-        error_count2 <- error_count1 + 1
     }   
 }
 cat("Error Count (Type 1): ",error_count1, "/100")
@@ -68,10 +68,10 @@ for (i in 1:100) {
 
     # does it contain the null value of p=0.5?
     if (CI[1] > 0.5 | CI[2] < 0.5){
-        cat("Experiment", i, ": reject H0 (CI:", round(CI,2), ")\n")
-        error_count2 <- error_count2 + 1
+      cat("Experiment", i, ": reject H0 (CI:", round(CI,2), ")\n")
     } else {
-        cat("Experiment", i, ": do not reject H0 (CI:", round(CI,2), ")\n")
+      cat("Experiment", i, ": do not reject H0 (CI:", round(CI,2), ")\n")
+      error_count2 <- error_count2 + 1
     }
 }
 cat("Error Count (Type 2): ",error_count2, "/100")    

@@ -72,14 +72,14 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \begin{itemize}
 \item We start with a \hl{null hypothesis ($H_0$)} that represents the status quo.
-\pause
+% \pause
 \item We also have an \hl{alternative hypothesis ($H_A$)} that represents our research question, i.e. what we're testing for.
-\pause
+% \pause
 \item We conduct a hypothesis test under the assumption that the null hypothesis is true, either via simulation or traditional methods based on the central limit theorem (coming up next...).
-\pause
+% \pause
 \item If the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, we stick with the null hypothesis. If they do, then we reject the null hypothesis in favor of the alternative.
 \end{itemize}
-\pause
+% \pause
 We'll formally introduce the hypothesis testing framework using an example on testing a claim about a proportion.
 
 \end{frame}
@@ -90,22 +90,22 @@ We'll formally introduce the hypothesis testing framework using an example on te
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Decision errors}
+% \begin{frame}
+% \frametitle{Decision errors}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item Hypothesis tests are not flawless.
+% \item Hypothesis tests are not flawless.
 
-\item In the court system innocent people are sometimes wrongly convicted and the guilty sometimes walk free.
+% \item In the court system innocent people are sometimes wrongly convicted and the guilty sometimes walk free.
 
-\item Similarly, we can make a wrong decision in statistical hypothesis tests as well. 
+% \item Similarly, we can make a wrong decision in statistical hypothesis tests as well. 
 
-\item The difference is that we have the tools necessary to quantify how often we make errors in statistics.
+% \item The difference is that we have the tools necessary to quantify how often we make errors in statistics.
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -114,25 +114,23 @@ We'll formally introduce the hypothesis testing framework using an example on te
 
 There are two competing hypotheses: the null and the alternative. In a hypothesis test, we make a decision about which might be true, but our choice might be incorrect. \\
 
-\pause
-
 \begin{center}
 \begin{tabular}{l l | c c}
 \multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Decision}} \\
 & & fail to reject $H_0$ &  reject $H_0$ \\
-  \cline{2-4}
-& $H_0$ true & \onslide<3->{\green{$\checkmark$}} &  \onslide<5->{\orange{Type 1 Error}} \\
-\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true & \onslide<6->{\orange{Type 2 Error}} & \onslide<4->{\green{$\checkmark$}} \\
-  \cline{2-4}
+    \cline{2-4}
+& $H_0$ true & {\green{$\checkmark$}} &  {\orange{Type 1 Error}} \\
+\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true & {\orange{Type 2 Error}} & {\green{$\checkmark$}} \\
+    \cline{2-4}
 \end{tabular}
 \end{center}
 
 \begin{itemize}
-\item \onslide<5->{A \hl{Type 1 Error} is rejecting the null hypothesis when $H_0$ is true.}
+\item A \hl{Type 1 Error} is rejecting the null hypothesis when $H_0$ is true.
 
-\item \onslide<6->{A \hl{Type 2 Error} is failing to reject the null hypothesis when $H_A$ is true.}
+\item A \hl{Type 2 Error} is failing to reject the null hypothesis when $H_A$ is true.
 
-\item \onslide<7->{We (almost) never know if $H_0$ or $H_A$ is true, but we need to consider all possibilities.}
+\item We (almost) never know if $H_0$ or $H_A$ is true, but we need to consider all possibilities.
 
 \end{itemize}
 
@@ -140,27 +138,27 @@ There are two competing hypotheses: the null and the alternative. In a hypothesi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[shrink]
-\frametitle{Hypothesis Test as a trial}
+% \begin{frame}[shrink]
+% \frametitle{Hypothesis Test as a trial}
 
-If we again think of a hypothesis test as a criminal trial then it makes sense to frame the verdict in terms of the null and alternative hypotheses:
-\begin{align*}
-H_0&:\text{ Defendant is innocent} \\
-H_A&:\text{ Defendant is guilty}
-\end{align*}
+% If we again think of a hypothesis test as a criminal trial then it makes sense to frame the verdict in terms of the null and alternative hypotheses:
+% \begin{align*}
+% H_0&:\text{ Defendant is innocent} \\
+% H_A&:\text{ Defendant is guilty}
+% \end{align*}
 
-Which type of error is being committed in the following circumstances?
+% Which type of error is being committed in the following circumstances?
 
-\begin{itemize}
-\item Declaring the defendant innocent when they are actually guilty
-\soln{\only<2->{\begin{center}\hl{Type 2 error}\end{center}}}
-\item Declaring the defendant guilty when they are actually innocent
-\soln{\only<3->{\begin{center}\hl{Type 1 error}\end{center}}}
-\end{itemize}
+% \begin{itemize}
+% \item Declaring the defendant innocent when they are actually guilty
+% \soln{\only<2->{\begin{center}\hl{Type 2 error}\end{center}}}
+% \item Declaring the defendant guilty when they are actually innocent
+% \soln{\only<3->{\begin{center}\hl{Type 1 error}\end{center}}}
+% \end{itemize}
 
-\only<4->{Which error do you think is the worse error to make?}
-\only<5>{\begin{center}{\footnotesize ``better that ten guilty persons escape than that one innocent suffer''\\ -- William Blackstone}\end{center}}
-\end{frame}
+% \only<4->{Which error do you think is the worse error to make?}
+% \only<5>{\begin{center}{\footnotesize ``better that ten guilty persons escape than that one innocent suffer''\\ -- William Blackstone}\end{center}}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -189,7 +187,7 @@ Which type of error is being committed in the following circumstances?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Significance levels}
+% \section{Edfinity Quiz: Significance levels}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -253,7 +251,7 @@ Which type of error is being committed in the following circumstances?
 \begin{frame}
 \frametitle{Facebook interest categories - conditions}
 
-\pq{Which of the following is \emph{not} a condition that needs to be met to proceed with this hypothesis test?}
+\pq{Which of the following is \emph{not} a condition that needs to be met to proceed with this hypothesis test (based on a Normal approximation)?}
 
 \begin{enumerate}[(a)]
 \item Respondents in the sample should be independent of each other with respect to whether or not they feel comfortable with their interests being categorized by Facebook.
@@ -424,6 +422,87 @@ In order to evaluate if the observed sample proportion is unusual for the hypoth
 \item \textbf{Inference:} Either \hl{reject} $H_0$ if the p-value is less than $\alpha$, or \hl{fail to reject} $H_0$ if the p-value is greater than $\alpha$.
 \end{itemize}
 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Inference for a single proportion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{6.1 Inference for a single proportion}
+We used inference for a single proportion in Chapter 5 to motivate confidence intervals and hypothesis tests.
+
+Chapter 6.1 provides a review of inference for a single proportion, including:
+    \begin{itemize}
+        \item The sampling distribution of the sample proportion
+        \item Confidence intervals for a single proportion
+        \item Hypothesis tests for a single proportion
+        \item (New) Choosing a sample size for a desired margin of error
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling distribution of \(\hat{p}\)}
+
+The sampling distribution for \(\hat{p}\) based on a sample of size \(n\) from a population with true proportion \(p\) is nearly normal when:
+
+\begin{enumerate}
+  \item The sample's observations are independent (e.g., from a simple random sample).
+  \item We expect at least 10 successes and 10 failures in the sample, i.e. \(np \ge 10\) and \(n(1-p) \ge 10\) (the success-failure condition).
+\end{enumerate}
+
+When these conditions are met, \(\hat{p}\) is approximately normal with
+\[ \hat{p} \sim Normal \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Confidence interval for a single proportion}
+
+If a confidence interval is appropriate:
+
+\begin{description}
+  \item[\hl{Prepare.}] Identify $\hat{p}$ and $n$, and choose the confidence level (e.g. 95\%).
+  \item[\hl{Check.}] Verify conditions for approximate normality: independence (random sample / 10\% rule) and success-failure. For confidence intervals use $\hat{p}$ in the success-failure check: $\;n\hat{p}\ge10\;$ and $\;n(1-\hat{p})\ge10$.
+  \item[\hl{Calculate.}] Compute the standard error using $\hat{p}$ and find the critical value $z^\star$:
+  \[
+    SE(\hat{p})=\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n}}, \qquad
+    \text{CI: }\hat{p}\pm z^\star \,SE(\hat{p}).
+  \]
+  \item[\hl{Conclude.}] Interpret the interval in context (what the confidence level means for the parameter).
+\end{description}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Hypothesis testing for a single proportion}
+
+If a hypothesis test is appropriate:
+
+\begin{small}
+\begin{description}
+  \item[\hl{Prepare.}] State the parameter, write $H_0$ and $H_A$ (one or two-sided), choose significance level $\alpha$, and record $\hat{p}$ and $n$.
+  \item[\hl{Check.}] Verify independence (random sample / 10\% rule) and the success-failure condition \emph{using the null value} $p_0$: \[
+    np_0 \ge 10 \quad\text{and}\quad n(1-p_0)\ge 10.
+  \]
+  \item[\hl{Calculate.}] Use $p_0$ to compute the standard error and then the Z statistic:
+  \[
+    SE = \sqrt{\dfrac{p_0(1-p_0)}{n}}, \qquad
+    Z=\dfrac{\hat{p}-p_0}{SE}.
+  \]
+  Find the p-value corresponding to $Z$ (one- or two-sided).
+  \item[\hl{Conclude.}] Compare the p-value to $\alpha$: reject $H_0$ if p-value $<\alpha$, otherwise fail to reject. State the result in context.
+\end{description}
+\end{small}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

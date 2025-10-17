@@ -22,16 +22,25 @@ set.seed(213)
 
 # ---- 1. Computing p-values using the standard normal distribution ----
 
-# How would you compute the test statistic?
+# H0: p=0.5
+# HA: p>0.5 (one-sided)
+# Test statistic: z=(phat-0.5)/SE
+# Alpha: 0.05
 
-SE <- sqrt((0.5*0.5)/25)
-Z <- (0.76-0.5)/SE  
+# Observed phat: 0.76
+
+# How would you compute the test statistic?
+p0 <- 0.5 # the value of p under the Null hypothesis
+N <- 25
+SE <- sqrt((p0*(1-p0))/N)
+Z <- (0.76-p0)/SE  
 
 # The sample proportion is 2.6 standard deviations away from the hypothesized
 # value (fair coin, p=0.5). Is this statistically significant?
 # How would you calculate the p-value?
 
-pval <- 1-pnorm(Z)  # 0.0047 - smaller than, for example, an alpha=0.05
+pval <- 1-pnorm(Z)  # one-sided hypothesis test, so we want the upper tail probability
+print(pval) # 0.0047 - smaller than, for example, an alpha=0.05
 
 # What do you conclude from this p-value?
 
@@ -39,22 +48,17 @@ pval <- 1-pnorm(Z)  # 0.0047 - smaller than, for example, an alpha=0.05
 # ---- 2. Simulation ----
 
 # First, let's see what happens when we flip 25 coins:
-rbinom(n=1, size=25, prob=0.5)  # far from 19 successes
+rbinom(n=1, size=N, prob=p0)  # far from 19 successes
 
 # Now simulate the experiment (25 coin flips) many times:
-data <- data.frame(rbinom(n=10000, size=25, prob=0.5))
+data <- data.frame(rbinom(n=10000, size=N, prob=p0))
 colnames(data) <- c('successes')
 head(data)
-
-# Graph the outcomes:
-ggplot(data) + 
-  geom_histogram(aes(x=successes), binwidth=1)
 
 # How many times were there at least 19/25 successes?
 sum(data >= 19)  # 77 / 10000, or 0.77% -- very unlikely!
 
 # Graph the likelihood:
-
 data$group = ifelse(data$successes < 19, 'less than 19', 'at least 19')
 ggplot(data, aes(x=successes, fill=group)) + 
   geom_histogram(aes(x=successes), binwidth=1) +
@@ -64,3 +68,24 @@ ggplot(data, aes(x=successes, fill=group)) +
 # We still find that achieving at least 19 successes out of 25 coin flips is
 # very unlikely. But even if we can reject H0, do you think we can conclude that 
 # the Patriots cheated on the coin flips in their 25-game streak? 
+
+
+# Calculate z-scores for each simulated outcome
+data$zscore <- (data$successes/N - p0) / SE
+
+# Plot histogram of z-scores
+ggplot(data, aes(x = zscore)) +
+  geom_histogram(aes(y = ..density..), binwidth = 1/N/SE, fill = "lightblue", color = "black") +
+  stat_function(fun = dnorm, color = "black", size = 1) +
+  geom_area(
+    stat = "function",
+    fun = dnorm,
+    xlim = c((18.5/N - p0) / SE, 3.5),
+    fill = "orange",
+    alpha = 0.8
+  ) +
+  labs(
+    title = "Histogram of Simulated Z-scores with Standard Normal Overlay",
+    x = "Z-score",
+    y = "Density"
+  )
