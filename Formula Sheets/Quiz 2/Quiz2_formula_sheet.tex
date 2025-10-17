@@ -87,13 +87,13 @@ $X$, $Y$ random variables. $a$, $b$, $c$ constants.
 % Add common distributions here
 \textbf{Common Distributions}
 
-\textit{Normal($\mu,\sigma^2$):}
+\textit{Normal($\mu,\sigma$):}
 \begin{align*}
     &E(X) = \mu \qquad \mathrm{Var}(X) = \sigma^2 \\
 \end{align*}
 
 \vspace{-2em}
-if $X \sim \text{Normal}(\mu, \sigma^2)$, then $Z = \frac{X - \mu}{\sigma} \sim \text{Normal}(0,1)$
+if $X \sim \text{Normal}(\mu, \sigma)$, then $Z = \frac{X - \mu}{\sigma} \sim \text{Normal}(0,1)$
 
 \begin{center}
 \includegraphics[width=0.3\textwidth]{\chpiv@path/4-1_normal_distribution/figures/6895997/6895997}
@@ -116,7 +116,7 @@ if $X \sim \text{Normal}(\mu, \sigma^2)$, then $Z = \frac{X - \mu}{\sigma} \sim 
     &P(X = k) = \binom{n}{k}p^k(1-p)^{n-k},\quad k=0,\ldots,n \\
     &E(X) = np \qquad \mathrm{Var}(X) = np(1-p)\\
     &\text{if } np \ge 10 \text{ and } n(1-p) \ge 10, \\
-    &\hspace{2em}\text{ then } X \sim \text{Binomial}(n,p) \approx \text{Normal}(np, np(1-p))
+    &\hspace{2em}\text{ then } X \sim \text{Binomial}(n,p) \approx \text{Normal}(np, \sqrt{np(1-p)})
 \end{align*}
 
 

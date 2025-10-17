@@ -72,6 +72,87 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
+\frametitle{6.1 Inference for a single proportion}
+We used inference for a single proportion in Chapter 5 to motivate confidence intervals and hypothesis tests.
+
+Chapter 6.1 provides a review of inference for a single proportion, including:
+    \begin{itemize}
+        \item The sampling distribution of the sample proportion
+        \item Confidence intervals for a single proportion
+        \item Hypothesis tests for a single proportion
+        \item (New) Choosing a sample size for a desired margin of error
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling distribution of \(\hat{p}\)}
+
+The sampling distribution for \(\hat{p}\) based on a sample of size \(n\) from a population with true proportion \(p\) is nearly normal when:
+
+\begin{enumerate}
+  \item The sample's observations are independent (e.g., from a simple random sample).
+  \item We expect at least 10 successes and 10 failures in the sample, i.e. \(np \ge 10\) and \(n(1-p) \ge 10\) (the success-failure condition).
+\end{enumerate}
+
+When these conditions are met, \(\hat{p}\) is approximately normal with
+\[ \hat{p} \sim Normal \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Confidence interval for a single proportion}
+
+If a confidence interval is appropriate:
+
+\begin{description}
+  \item[\hl{Prepare.}] Identify $\hat{p}$ and $n$, and choose the confidence level (e.g. 95\%).
+  \item[\hl{Check.}] Verify conditions for approximate normality: independence (random sample / 10\% rule) and success-failure. For confidence intervals use $\hat{p}$ in the success-failure check: $\;n\hat{p}\ge10\;$ and $\;n(1-\hat{p})\ge10$.
+  \item[\hl{Calculate.}] Compute the standard error using $\hat{p}$ and find the critical value $z^\star$:
+  \[
+    SE(\hat{p})=\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n}}, \qquad
+    \text{CI: }\hat{p}\pm z^\star \,SE(\hat{p}).
+  \]
+  \item[\hl{Conclude.}] Interpret the interval in context (what the confidence level means for the parameter).
+\end{description}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Hypothesis testing for a single proportion}
+
+If a hypothesis test is appropriate:
+
+\begin{small}
+\begin{description}
+  \item[\hl{Prepare.}] State the parameter, write $H_0$ and $H_A$ (one or two-sided), choose significance level $\alpha$, and record $\hat{p}$ and $n$.
+  \item[\hl{Check.}] Verify independence (random sample / 10\% rule) and the success-failure condition \emph{using the null value} $p_0$: \[
+    np_0 \ge 10 \quad\text{and}\quad n(1-p_0)\ge 10.
+  \]
+  \item[\hl{Calculate.}] Use $p_0$ to compute the standard error and then the Z statistic:
+  \[
+    SE = \sqrt{\dfrac{p_0(1-p_0)}{n}}, \qquad
+    Z=\dfrac{\hat{p}-p_0}{SE}.
+  \]
+  Find the p-value corresponding to $Z$ (one- or two-sided).
+  \item[\hl{Conclude.}] Compare the p-value to $\alpha$: reject $H_0$ if p-value $<\alpha$, otherwise fail to reject. State the result in context.
+\end{description}
+\end{small}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: problem setup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
 
 \pq{Two scientists want to know if a certain drug is effective against high blood pressure. The first scientist wants to give the drug to 1000 people with high blood pressure and see how many of them experience lower blood pressure levels. The second scientist wants to give the drug to 500 people with high blood pressure, and not give the drug to another 500 people with high blood pressure, and see how many in both groups experience lower blood pressure levels. Which is the better way to test this drug?}
 
@@ -99,6 +180,10 @@ Total						& 670
 \end{center}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: parameter and point estimate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -158,6 +243,10 @@ Total						& 670
 
 \subsection{Identifying when a sample proportion is nearly normal}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: conditions for inference on a proportion}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -171,12 +260,10 @@ Sample proportions will be nearly normally distributed with mean equal to the po
 
 But of course this is true only under certain conditions...
 
-\dq{Any guesses?}
-
-\soln{\pause{Independent observations, at least 10 successes and 10 failures}}
+\soln{\pause{Independent observations (random sample and the sample size is less than 10\% of the population)\\Binomial convergence to Normal (at least 10 successes and 10 failures)}}
 
 \pause
-
+\vspace{-1em}
 \Note{If $p$ is unknown (most cases), we use $\hat{p}$ in the calculation of the standard error.}
 
 \end{frame}
@@ -226,6 +313,10 @@ But of course this is true only under certain conditions...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Confidence intervals for a proportion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity quiz: confidence interval for a proportion} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -284,48 +375,48 @@ Given: $n = 670, \hat{p} = 0.85$. First, check conditions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \subsection{Choosing a sample size when estimating a proportion}
+\subsection{Choosing a sample size when estimating a proportion}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{Choosing a sample size}
+\begin{frame}
+\frametitle{Choosing a sample size}
 
-% \dq{How many people should you sample in order to cut the margin of error of a 95\% confidence interval down to 1\%.}
-% \pause
-% \[ ME = z^\star \times SE\]
-% \pause
-% \begin{eqnarray*}
-% 0.01 &\ge& 1.96 \times \sqrt{\frac{0.85 \times 0.15}{n}} \orange{$\rightarrow$ \text{Use $\hat{p}$ from previous study}} \\
-% \pause
-% 0.01^2 &\ge& 1.96^2 \times \frac{0.85 \times 0.15}{n} \\
-% \pause
-% n &\ge& \frac{1.96^2 \times 0.85 \times 0.15}{0.01^2} \\
-% \pause
-% n &\ge& 4898.04 \pause \orange{~$\rightarrow$ n \text{ should be at least 4,899}}
-% \end{eqnarray*}
+\dq{How many people should you sample in order to cut the margin of error of a 95\% confidence interval down to 1\%.}
+\pause
+\[ ME = z^\star \times SE\]
+\pause
+\begin{eqnarray*}
+0.01 &\ge& 1.96 \times \sqrt{\frac{0.85 \times 0.15}{n}} \orange{$\rightarrow$ \text{Use $\hat{p}$ from previous study}} \\
+\pause
+0.01^2 &\ge& 1.96^2 \times \frac{0.85 \times 0.15}{n} \\
+\pause
+n &\ge& \frac{1.96^2 \times 0.85 \times 0.15}{0.01^2} \\
+\pause
+n &\ge& 4898.04 \pause \orange{~$\rightarrow$ n \text{ should be at least 4,899}}
+\end{eqnarray*}
 
-% \end{frame}
+\end{frame}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-% \frametitle{What if there isn't a previous study?}
+\begin{frame}
+\frametitle{What if there isn't a previous study?}
 
-% ... use $\hat{p} = 0.5$
+... use $\hat{p} = 0.5$
 
-% \vspace{1cm}
+\vspace{1cm}
 
-% \dq{why?}
-% \pause
+\dq{why?}
+\pause
 
-% \begin{itemize}
-% \item if you don't know any better, 50-50 is a good guess
-% \pause
-% \item $\hat{p} = 0.5$ gives the most conservative estimate -- highest possible sample size
-% \end{itemize}
+\begin{itemize}
+\item if you don't know any better, 50-50 is a good guess
+\pause
+\item $\hat{p} = 0.5$ gives the most conservative estimate -- highest possible sample size
+\end{itemize}
 
-% \end{frame}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
