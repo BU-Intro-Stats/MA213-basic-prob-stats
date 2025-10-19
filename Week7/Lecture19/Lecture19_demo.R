@@ -75,7 +75,7 @@ data$zscore <- (data$successes/N - p0) / SE
 
 # Plot histogram of z-scores
 ggplot(data, aes(x = zscore)) +
-  geom_histogram(aes(y = ..density..), binwidth = 1/N/SE, fill = "lightblue", color = "black") +
+  geom_histogram(aes(y = ..density..), binwidth = 1/N/SE, boundary=0, fill = "lightblue", color = "black") +
   stat_function(fun = dnorm, color = "black", size = 1) +
   geom_area(
     stat = "function",
