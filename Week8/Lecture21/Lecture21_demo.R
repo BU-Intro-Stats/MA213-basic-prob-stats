@@ -60,4 +60,3 @@ p_hat_diff + c(-1,1)*qnorm(1-alpha/2)*SE_diff
 
 # Have your conclusions changed?
 
-# TODO: double check sample size vs n1 and n2

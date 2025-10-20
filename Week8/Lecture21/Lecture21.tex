@@ -70,6 +70,104 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \section{Review: Inference for one proportion}
 
+\begin{frame}
+\frametitle{6.1 Inference for a single proportion}
+We used inference for a single proportion in Chapter 5 to motivate confidence intervals and hypothesis tests.
+
+Chapter 6.1 provides a review of inference for a single proportion, including:
+    \begin{itemize}
+        \item The sampling distribution of the sample proportion
+        \item Confidence intervals for a single proportion
+        \item Hypothesis tests for a single proportion
+        \item (New) Choosing a sample size for a desired margin of error
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling distribution of \(\hat{p}\)}
+
+The sampling distribution for \(\hat{p}\) based on a sample of size \(n\) from a population with true proportion \(p\) is nearly normal when:
+
+\begin{enumerate}
+  \item The sample's observations are independent (e.g., from a simple random sample).
+  \item We expect at least 10 successes and 10 failures in the sample, i.e. \(np \ge 10\) and \(n(1-p) \ge 10\) (the success-failure condition).
+\end{enumerate}
+
+When these conditions are met, \(\hat{p}\) is approximately normal with
+\[ \hat{p} \sim Normal \pr{ mean = p, SE = \sqrt{\frac{p~(1-p)}{n}} } \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Confidence interval for a single proportion}
+
+If a confidence interval is appropriate:
+
+\begin{description}
+  \item[\hl{Prepare.}] Identify $\hat{p}$ and $n$, and choose the confidence level (e.g. 95\%).
+  \item[\hl{Check.}] Verify conditions for approximate normality: independence (random sample / 10\% rule) and success-failure. For confidence intervals use $\hat{p}$ in the success-failure check: $\;n\hat{p}\ge10\;$ and $\;n(1-\hat{p})\ge10$.
+  \item[\hl{Calculate.}] Compute the standard error using $\hat{p}$ and find the critical value $z^\star$:
+  \[
+    SE(\hat{p})=\sqrt{\dfrac{\hat{p}(1-\hat{p})}{n}}, \qquad
+    \text{CI: }\hat{p}\pm z^\star \,SE(\hat{p}).
+  \]
+  \item[\hl{Conclude.}] Interpret the interval in context (what the confidence level means for the parameter).
+\end{description}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Hypothesis testing for a single proportion}
+
+If a hypothesis test is appropriate:
+
+\begin{small}
+\begin{description}
+  \item[\hl{Prepare.}] State the parameter, write $H_0$ and $H_A$ (one or two-sided), choose significance level $\alpha$, and record $\hat{p}$ and $n$.
+  \item[\hl{Check.}] Verify independence (random sample / 10\% rule) and the success-failure condition \emph{using the null value} $p_0$: \[
+    np_0 \ge 10 \quad\text{and}\quad n(1-p_0)\ge 10.
+  \]
+  \item[\hl{Calculate.}] Use $p_0$ to compute the standard error and then the Z statistic:
+  \[
+    SE = \sqrt{\dfrac{p_0(1-p_0)}{n}}, \qquad
+    Z=\dfrac{\hat{p}-p_0}{SE}.
+  \]
+  Find the p-value corresponding to $Z$ (one- or two-sided).
+  \item[\hl{Conclude.}] Compare the p-value to $\alpha$: reject $H_0$ if p-value $<\alpha$, otherwise fail to reject. State the result in context.
+\end{description}
+\end{small}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{CI vs. HT for proportions}
+
+\begin{itemize}
+
+\item Success-failure condition:
+\begin{itemize}
+\item CI: At least 10 \orange{observed} successes and failures
+\item HT: At least 10 \orange{expected} successes and failures, calculated using the null value
+\end{itemize}
+
+\item Standard error:
+\begin{itemize}
+\item CI: calculate using observed sample proportion: $SE = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+\item HT: calculate using the null value: $SE = \sqrt{\frac{p_0(1-p_0)}{n}}$
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Difference of two proportions}
@@ -241,14 +339,98 @@ $\hat{p}$		& 0.657		& 0.668
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz: Interpreting the CI}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{R Demonstration: Sample size for proportions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Comparing Two Online Ads: Small Study}
+\small
+Imagine a company tests two versions of an online ad by showing each to 10{,}000 users.
+
+\medskip
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{lccc}
+\textbf{Ad} & Clicked & Total & \(\hat p\) \\
+\hline
+A & 510 & 10{,}000 & 0.051 \\
+B & 550 & 10{,}000 & 0.055 \\
+\end{tabular}
+
+\medskip
+\[
+\hat{p}_B - \hat{p}_A = 0.004
+\]
+
+\[
+SE = \sqrt{\frac{0.051(1-0.051)}{10{,}000} + \frac{0.055(1-0.055)}{10{,}000}} \approx 0.0031
+\]
+
+\[
+95\%~CI = 0.004 \pm 1.96(0.0031) = (-0.002,\, 0.010)
+\]
+
+\textbf{Interpretation:} The interval includes 0, so we \textbf{do not have statistical evidence}
+that Ad B performs better than Ad A.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Comparing Two Online Ads: Large Study}
+\small
+Now imagine they did the same thing, but each ad shown to 1{,}000{,}000 users. And they observed the same proportions (5.1\% vs 5.5\%).
+
+\medskip
+\[
+SE = \sqrt{\frac{0.051(1-0.051)}{1{,}000{,}000} + \frac{0.055(1-0.055)}{1{,}000{,}000}}
+      \approx 0.00031
+\]
+\[
+95\%~CI = 0.004 \pm 1.96(0.00031) = (0.0034,\, 0.0046)
+\]
+
+\textbf{Interpretation:} The interval no longer includes 0.  
+The difference is \textbf{statistically significant.}
+
+\medskip
+\textbf{But...} the effect size is only \(\mathbf{0.004}\) (0.4 percentage points) --  
+does that matter in practice?
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{HT for comparing proportions}
+\begin{frame}{Statistical vs.\ Practical Significance}
+\small
+\begin{center}
+\begin{tabular}{lccc}
+\textbf{Scenario} & \textbf{Sample Size} & \textbf{95\% CI} & \textbf{Stat.\ Sig.?} \\
+\hline
+Small study & 10{,}000 per ad & (-0.002,\; 0.010) & No \\
+Large study & 1{,}000{,}000 per ad & (0.0034,\; 0.0046) & Yes \\
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Takeaways:}
+\begin{itemize}
+  \item Statistical significance depends on both \hl{effect size} and \hl{sample size}.
+  \item Practical significance depends on whether the effect is \hl{large enough to matter}.
+  \item With large enough data, even tiny effects can be statistically significant.
+\end{itemize}
+
+\bigskip
+\textit{Statistical significance tells you it's unlikely to be due to chance.  \\
+Practical significance tells you if it matters.}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{HT for comparing proportions}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -274,7 +456,7 @@ $H_A:  p_{Duke} < p_{US}$
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz: Experimental design, HT}
+\section{Edfinity Quiz: HT for difference in proportions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -389,10 +571,6 @@ p-value &=& 2 \times P(Z < -0.22) \pause = 2 \times 0.41 = 0.82
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edfinity Quiz: HT for a difference in proportions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -416,7 +594,7 @@ p-value &=& 2 \times P(Z < -0.22) \pause = 2 \times 0.41 = 0.82
 - random sample and 10\% condition met for both groups
 \item independence between groups
 \item at least 10 successes and failures in each group\\ 
-- if not $\rightarrow$ randomization (Section 6.4)
+- if not $\rightarrow$ randomization (i.e. simulation-based inference)
 \end{itemize}
 
 \pause
@@ -438,40 +616,40 @@ p-value &=& 2 \times P(Z < -0.22) \pause = 2 \times 0.41 = 0.82
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Reference - standard error calculations}
+% \begin{frame}
+% \frametitle{Reference - standard error calculations}
 
-\begin{center}
-\begin{tabular}{l | l | l}
-			& one sample					& two samples \\ 
-\hline
-& & \\
-mean		& $SE = \frac{s}{\sqrt{n}}$			& $SE = \sqrt{ \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$ \\
-& & \\
-\hline
-& & \\
-proportion		& $SE = \sqrt{ \frac{p(1-p)}{n} }$	& $SE = \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2} }$	 \\	
-& & \\
-\end{tabular}
-\end{center}
+% \begin{center}
+% \begin{tabular}{l | l | l}
+% 			& one sample					& two samples \\ 
+% \hline
+% & & \\
+% mean		& $SE = \frac{s}{\sqrt{n}}$			& $SE = \sqrt{ \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$ \\
+% & & \\
+% \hline
+% & & \\
+% proportion		& $SE = \sqrt{ \frac{p(1-p)}{n} }$	& $SE = \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2} }$	 \\	
+% & & \\
+% \end{tabular}
+% \end{center}
 
-\pause
+% \pause
 
-\begin{itemize}
+% \begin{itemize}
 
-\item When working with means, it's very rare that $\sigma$ is known, so we usually use $s$.
+% \item When working with means, it's very rare that $\sigma$ is known, so we usually use $s$.
 
-\pause
+% \pause
 
-\item When working with proportions, 
-\begin{itemize}
-\item if doing a hypothesis test, $p$ comes from the null hypothesis
-\item if constructing a confidence interval, use $\hat{p}$ instead
-\end{itemize}
+% \item When working with proportions, 
+% \begin{itemize}
+% \item if doing a hypothesis test, $p$ comes from the null hypothesis
+% \item if constructing a confidence interval, use $\hat{p}$ instead
+% \end{itemize}
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
