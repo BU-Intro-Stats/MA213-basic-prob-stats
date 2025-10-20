@@ -1,0 +1,102 @@
+\documentclass[8pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[
+    left=0.5in,
+    right=0.5in,
+    top=0.5in,
+    bottom=0.5in
+]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multicol} % Added for two columns
+\usepackage{tabularx} % For better tables
+\usepackage{array}    % For column formatting
+
+\setlength{\parindent}{0pt}
+% \setlength{\parskip}{0pt}
+\def\chpiv@path{../../Chp 4}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{MA213 Quiz 3 Formula Sheet}}
+\end{center}
+
+\vspace{1em}
+
+\input{../fsheet_pg1}
+
+\clearpage
+
+\begin{multicols}{2} % Begin two columns
+
+\textbf{Common Point Estimates and their Sampling Distributions}
+
+\textit{Sample Proportion ($\hat{p}$):}
+\begin{align*}
+    &\hat{p} = \frac{X}{n} \quad \text{(Sample proportion)} \\
+    &Pr\left(\hat{p}=\frac{k}{n}\right) = \binom{n}{k} p^k (1-p)^{n-k} \\
+    &\hat{p} \stackrel{\text{approx}}{\sim} \text{Normal}\left(p, \sqrt{\frac{p(1-p)}{n}}\right) \\
+\end{align*}
+Conditions for normal approximation: 
+\begin{itemize}
+    \item Random sample/independent observations
+    \item 10\% condition: $n \leq 0.1N$
+    \item Success-failure condition: $np \ge 10$ and $n(1-p) \ge 10$
+\end{itemize}
+
+\textit{Sample Mean ($\bar{X}$):}
+\begin{align*}
+    &\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i \\
+    &\bar{X} \stackrel{\text{approx}}{\sim} \text{Normal}\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+\end{align*}
+
+Conditions for normality:
+\begin{itemize}
+    \item Exact when the population distribution is Normal
+    \item Approximate when $n$ is large [we will define ``large" later]
+\end{itemize}
+
+\textbf{Confidence Intervals}
+
+\textit{General Form:}
+\begin{align*}
+    &\text{point estimate} &\pm& \text{margin of error} \\
+    &\text{point estimate} &\pm& (\text{critical value}) \times (\text{standard error})
+\end{align*}
+
+\textit{CI for a Proportion:}
+When computing SE, can substitute $\hat{p}$ for $p$
+
+
+% Common critical values for CI table TODO
+\vspace{1em}
+
+\textbf{Hypothesis Tests}
+
+\begin{itemize}
+    \item Null hypothesis ($H_0$): Default
+    \item Alternative hypothesis ($H_A$): Research question
+    \item Test statistic
+    \item P-value: Prob of observing test stat at least as extreme as observed test stat under $H_0$
+    \item Significance level ($\alpha$): $\alpha=Pr(Type\; 1\; error | H_0\; true)$
+    \item Inference: reject or fail to reject $H_0$
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{l l | c c}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Decision}} \\
+& & fail to reject $H_0$ &  reject $H_0$ \\
+  \cline{2-4}
+& $H_0$ true & $\checkmark$ &  Type 1 Error \\
+\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true & Type 2 Error & $\checkmark$ \\
+  \cline{2-4}
+\end{tabular}
+\end{center}
+
+% Common critical values for HT table
+
+\end{multicols} % End two columns
+
+\end{document}
