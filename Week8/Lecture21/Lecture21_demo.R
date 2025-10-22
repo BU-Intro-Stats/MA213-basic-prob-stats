@@ -30,10 +30,10 @@ p_hat_diff + c(-1,1)*qnorm(1-alpha/2)*SE_diff
 # proportions - but few samples
 n1 <- 25
 n2 <- 25
-data1 <- rbinom(15, size=n1, prob=0.8)  
-data2 <- rbinom(15, size=n2, prob=0.6)  
-p_hat1 <- mean(data1/n1)
-p_hat2 <- mean(data2/n2)
+data1 <- rbinom(1, size=n1, prob=0.6)  
+data2 <- rbinom(1, size=n2, prob=0.5)  
+p_hat1 <- data1/n1
+p_hat2 <- data2/n2
 p_hat_diff <- p_hat1 - p_hat2
 
 # What is the null hypothesis here?
@@ -47,12 +47,12 @@ p_hat_diff + c(-1,1)*qnorm(1-alpha/2)*SE_diff
 
 # Now increase the sample sizes and repeat:
 
-n1 <- 100
-n2 <- 100
-data1 <- rbinom(15, size=n1, prob=0.8)  
-data2 <- rbinom(15, size=n2, prob=0.6)  
-p_hat1 <- mean(data1/n1)
-p_hat2 <- mean(data2/n2)
+n1 <- 1000
+n2 <- 1000
+data1 <- rbinom(1, size=n1, prob=0.6)  
+data2 <- rbinom(1, size=n2, prob=0.5)  
+p_hat1 <- data1/n1
+p_hat2 <- data2/n2
 p_hat_diff <- p_hat1 - p_hat2
 SE_diff <- sqrt((p_hat1*(1-p_hat1)/n1) + (p_hat2*(1-p_hat2))/n2)
 alpha <- 0.05
@@ -60,3 +60,18 @@ p_hat_diff + c(-1,1)*qnorm(1-alpha/2)*SE_diff
 
 # Have your conclusions changed?
 
+# Now let's see what happens when the effect size is very small, but the 
+# sample size is very big:
+
+n1 <- 1000000
+n2 <- 1000000
+data1 <- rbinom(1, size=n1, prob=0.8)  
+data2 <- rbinom(1, size=n2, prob=0.79)  
+p_hat1 <- data1/n1
+p_hat2 <- data2/n2
+p_hat_diff <- p_hat1 - p_hat2
+SE_diff <- sqrt((p_hat1*(1-p_hat1)/n1) + (p_hat2*(1-p_hat2))/n2)
+alpha <- 0.05
+p_hat_diff + c(-1,1)*qnorm(1-alpha/2)*SE_diff
+
+# How should we interpret this confidence interval?
