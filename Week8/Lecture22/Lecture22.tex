@@ -68,16 +68,41 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Review}
-
 \begin{frame}
-    \frametitle{Last time: pooled proportion}
+\frametitle{Recap - comparing two proportions}
+
+\begin{itemize}
+
+\item Population parameter: $(p_1 - p_2)$, point estimate: $(\hat{p}_1 - \hat{p}_2)$
+
+\pause
+
+\item Conditions:
+\pause
+\begin{itemize}
+\item independence within groups \\
+- random sample and 10\% condition met for both groups
+\item independence between groups
+\item at least 10 successes and failures in each group\\ 
+- if not $\rightarrow$ randomization (i.e. simulation-based inference)
+\end{itemize}
+
+\pause
+
+\item $SE_{(\hat{p}_1 - \hat{p}_2)} = \sqrt{ \frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2} }$
+\begin{itemize}
+\item for CI: use $\hat{p}_1$ and $\hat{p}_2$
+\item for HT:
+\begin{itemize}
+\item when $H_0: p_1 = p_2$: use $\hat{p}_{pool} = \frac{\#~suc_1 + \#suc_2}{n_1 + n_2}$
+\item when $H_0: p_1 - p_2 = $ \textit{(some value other than 0)}: use $\hat{p}_1$ and $\hat{p}_2$ \\
+- this is pretty rare
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
+
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: inference about one vs two proportions}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Chi-square test of GOF}
@@ -175,6 +200,10 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Expected counts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Expected counts}
 
@@ -221,10 +250,6 @@ Total		& 315,672		& 315,672
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Hypotheses about Labby's dice}  % to replace slides below
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
 \frametitle{Setting the hypotheses}
 
@@ -233,11 +258,11 @@ Total		& 315,672		& 315,672
 \pause
 
 \begin{itemize}
-\item[$H_0$:] There is no inconsistency between the observed and the expected counts. \hlGr{The observed counts follow the same distribution as the expected counts.}
+\item[$H_0$:] There is no inconsistency between the observed and the expected counts. \hlGr{The observed counts have the same proportions as the expected counts.} The differences in counts can be explained by chance variation alone.
 
 \pause
 
-\item[$H_A$:] There is an inconsistency between the observed and the expected counts. \hlGr{The observed counts \orange{do not} follow the same distribution as the expected counts.} There is a bias in which side comes up on the roll of a die.
+\item[$H_A$:] There is an inconsistency between the observed and the expected counts. \hlGr{The observed counts \orange{do not} have the same proportions as the expected counts.} There is a bias in which side comes up on the roll of a die.
 \end{itemize}
 
 \end{frame}
@@ -395,7 +420,11 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Sampling from chi-squared distribution}
+\section{R Demonstration: Simulating Libby's experiment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Degrees of freedom}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -544,8 +573,8 @@ As the df increases,
 
 \item The hypotheses were:
 \begin{itemize}
-\item[$H_0$:] There is no inconsistency between the observed and the expected counts. The observed counts follow the same distribution as the expected counts.
-\item[$H_A$:] There is an inconsistency between the observed and the expected counts. The observed counts \orange{do not} follow the same distribution as the expected counts. There is a bias in which side comes up on the roll of a die.
+\item[$H_0$:] There is no inconsistency between the observed and the expected counts. The observed counts have the same proportions as the expected counts.
+\item[$H_A$:] There is an inconsistency between the observed and the expected counts. The observed counts \orange{do not} have the same proportions as the expected counts. There is a bias in which side comes up on the roll of a die.
 \end{itemize}
 
 \pause
@@ -596,6 +625,10 @@ p-value = $P(\chi^2_{df = 5} > 24.67)$\\ is less than 0.001
 }
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Conclusion of the hypothesis test}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -693,7 +726,7 @@ Failing to check conditions may unintentionally affect the test's error rates.
 \begin{frame}
 \frametitle{2009 Iran Election}
 
-\dq{There was lots of talk of election fraud in the 2009 Iran election. We'll compare the data from a poll conducted before the election (observed data) to the reported votes in the election to see if the two follow the same distribution.}
+\dq{There was lots of talk of election fraud in the 2009 Iran election. We'll compare the data from a poll conducted before the election (observed data) to the reported votes in the election to see if the two have the same proportions.}
 
 \begin{center}
 \begin{tabular}{l | r r}
@@ -724,8 +757,8 @@ Total			& 504	& 100\% \\
 \soln{
 \only<2>{
 \begin{itemize}
-\item[$H_0$:] The observed counts from the poll follow the same distribution as the reported votes.
-\item[$H_A$:] The observed counts from the poll do not follow the same distribution as the reported votes.
+\item[$H_0$:] The observed counts from the poll have the same proportions as the reported votes.
+\item[$H_A$:] The observed counts from the poll do not have the same proportions as the reported votes.
 \end{itemize}
 }}
 
@@ -774,10 +807,10 @@ Total			& 504	& 100\%		& 504
 \pq{Based on these calculations what is the conclusion of the hypothesis test?}
 
 \begin{enumerate}[(a)]
-\solnMult{p-value is low, $H_0$ is rejected. The observed counts from the poll do \underline{not} follow the same distribution as the reported votes.}
-\item p-value is high, $H_0$ is not rejected. The observed counts from the poll follow the same distribution as the reported votes.
-\item p-value is low, $H_0$ is rejected. The observed counts from the poll follow the same distribution as the reported votes
-\item p-value is low, $H_0$ is not rejected. The observed counts from the poll do \underline{not} follow the same distribution as the reported votes.
+\solnMult{p-value is low, $H_0$ is rejected. The observed counts from the poll do \underline{not} have the same proportions as the reported votes.}
+\item p-value is high, $H_0$ is not rejected. The observed counts from the poll have the same proportions as the reported votes.
+\item p-value is low, $H_0$ is rejected. The observed counts from the poll have the same proportions as the reported votes
+\item p-value is low, $H_0$ is not rejected. The observed counts from the poll do \underline{not} have the same proportions as the reported votes.
 \end{enumerate}
 
 \end{frame}
