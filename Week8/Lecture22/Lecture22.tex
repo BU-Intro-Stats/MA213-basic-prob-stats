@@ -282,7 +282,7 @@ Total		& 315,672		& 315,672
 
 \pause
 
-\item This is called a \hl{goodness of fit} test since we're evaluating how well the observed data fit the expected distribution.
+\item This is called a \hl{goodness of fit} test since we're evaluating how well the observed data fit the expected proportions.
 
 \end{itemize}
 
@@ -420,7 +420,7 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Simulating Libby's experiment}
+\section{R Demonstration: Simulating Labby's experiment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -596,7 +596,7 @@ As the df increases,
 
 \begin{itemize}
 
-\item When conducting a goodness of fit test to evaluate how well the observed data follow an expected distribution, the degrees of freedom are calculated as the number of cells ($k$) minus 1.
+\item When conducting a goodness of fit test to evaluate how well the observed data follow the expected proportions, the degrees of freedom are calculated as the number of cells ($k$) minus 1.
 \[ \mathhl{df = k - 1} \]
 
 \pause
@@ -715,10 +715,6 @@ Failing to check conditions may unintentionally affect the test's error rates.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Putting into practice}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{2009 Iran Election}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -741,7 +737,7 @@ Total			& 504	& 100\% \\
 \pause
 			& \hl{$\downarrow$}	& \hl{$\downarrow$}	\\
 			& \hl{observed}	& \hl{expected} \\
-			& 			& \hl{distribution} 	
+			& 			& \hl{proportions} 	
 \end{tabular}
 \end{center}
 
@@ -752,7 +748,7 @@ Total			& 504	& 100\% \\
 \begin{frame}
 \frametitle{Hypotheses}
 
-\dq{What are the hypotheses for testing if the distributions of reported and polled votes are different?}
+\dq{What are the hypotheses for testing if the proportions of reported and polled votes are different?}
 
 \soln{
 \only<2>{
@@ -798,6 +794,10 @@ Total			& 504	& 100\%		& 504
 
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Computing the p-value}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

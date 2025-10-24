@@ -3,7 +3,7 @@
 library(ggplot2)
 
 
-# ---- 1. Simulate Libby's experiment many times ----
+# ---- 1. Simulate Labby's experiment many times ----
 
 set.seed(42)  # for reproducibility
 
@@ -45,7 +45,7 @@ ggplot(chisq_df, aes(x = chisq)) +
   )
 
 
-# ---- 2. Plotting the chi-squared distribution, and computing probs ----
+# ---- 2. Plotting the chi-squared distribution ----
 
 # Set an x-axis over which to evaluate the chi-squared distribution
 npoints <- 1000
@@ -70,3 +70,7 @@ ggplot(data=data, aes(x=x, y=density, color=factor(df))) +
   geom_line() +
   labs(color="df") +
   ggtitle("Chi-squared distribution with different degrees of freedom (df)")
+
+# ---- 3. Computing probabilities ----
+
+pchisq(q = 30, df = 6, lower.tail = FALSE)
