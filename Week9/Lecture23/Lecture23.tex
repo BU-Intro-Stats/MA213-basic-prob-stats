@@ -443,9 +443,72 @@ $\:$ \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \section{Edfinity Quiz: Putting it all together}
+\section{(Preview) Chapter 7: Inference for numerical data}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Recall: CLT for the sample mean}
+
+\formula{Central limit theorem (sample mean)}
+{Sample means will be nearly normally distributed with mean equal to the population mean, $\mu$, and standard error equal to $\frac{\sigma}{\sqrt{n}}$.
+\[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
+}
+
+\begin{itemize}
+    \item This is exactly true if the population distribution is Normal, regardless of sample size $n$ (we derived this in Lecture 16)
+    % \pause
+    \item But it is also true \emph{regardless of the shape of the population distribution}, as long as the sample size $n$ is sufficiently large.
+    % \pause
+    \item Different distributions will require different sample sizes for the CLT to ``kick in''.
+    % \pause
+    \item Rule of thumb is that $n \geq 30$ is sufficient for most distributions.
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+
+\dq{Which of the following scenarios would you be able to use the Normal distribution to approximate a 95\% confidence interval for the population mean $\mu$? In each case, you take a random sample of size $n$ from the population and calculate the sample mean $\bar{X}=49$.}
+\begin{enumerate}[(a)]
+\solnMult{Population: Normal ($\sigma = 20$). $n = 100$. }
+\solnMult{Population: Normal ($\sigma = 20$). $n = 10$. }
+  \item Population: Normal ($\sigma = $ unknown). $n = 10$.
+\solnMult{Population: right skewed ($\sigma = 20$). $n = 100$. }
+  \item Population: right skewed ($\sigma = 20$). $n = 10$. 
+  \item Population: right skewed ($\sigma = $ unknown). $n = 10$.
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+\dq{Assume that the conditions are met. If you know the population standard deviation $\sigma$, the sample size $n$, and the sample mean $\bar{X}$, how would you calculate a 95\% confidence interval for the population mean $\mu$?}
+
+\soln{\only<2>{
+\[point estimate \pm critical~value \times standard~error \]\\
+\[\bar{X} \pm z^{\star} \times \frac{\sigma}{\sqrt{n}} \]
+where $z^{\star}$ is the critical value from the standard Normal distribution for a 95\% confidence level (approximately 1.96).
+}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Next Time}
+What if the population is normal, but we don't know the population standard deviation, $\sigma$?
+
+\begin{itemize}
+    \item We can estimate $\sigma$ using the sample standard deviation $s$.
+    \item However, this introduces additional uncertainty in our estimate of the standard error.
+    \item If the sample size is large enough (Rule of thumb: $n \geq 30$), this additional uncertainty is negligible, because $s$ will be a good estimate of $\sigma$.
+    \item But if the sample size is small, $s$ may not be a good estimate of $\sigma$.
+    \item To account for this, we use a different distribution: the \hl{t-distribution}.
+\end{itemize}
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

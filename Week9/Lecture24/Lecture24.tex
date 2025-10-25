@@ -67,6 +67,109 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+\frametitle{Recall: CLT for the sample mean}
+
+\formula{Central limit theorem (sample mean)}
+{Sample means will be nearly normally distributed with mean equal to the population mean, $\mu$, and standard error equal to $\frac{\sigma}{\sqrt{n}}$.
+\[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
+}
+
+\begin{itemize}
+    \item This is exactly true if the population distribution is Normal, regardless of sample size $n$ (we derived this in Lecture 16)
+    % \pause
+    \item But it is also true \emph{regardless of the shape of the population distribution}, as long as the sample size $n$ is sufficiently large.
+    % \pause
+    \item Different distributions will require different sample sizes for the CLT to ``kick in''.
+    % \pause
+    \item Rule of thumb is that $n \geq 30$ is sufficient for most distributions.
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+
+\dq{Which of the following scenarios would you be able to use the Normal distribution to approximate a 95\% confidence interval for the population mean $\mu$? In each case, you take a random sample of size $n$ from the population and calculate the sample mean $\bar{X}=49$.}
+\begin{enumerate}[(a)]
+\solnMult{Population: Normal ($\sigma = 20$). $n = 100$. }
+\solnMult{Population: Normal ($\sigma = 20$). $n = 10$. }
+  \item Population: Normal ($\sigma = $ unknown). $n = 10$.
+\solnMult{Population: right skewed ($\sigma = 20$). $n = 100$. }
+  \item Population: right skewed ($\sigma = 20$). $n = 10$. 
+  \item Population: right skewed ($\sigma = $ unknown). $n = 10$.
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Think/Pair/Share: Applying the CLT for the sample mean}
+
+You take a random sample of size $n = 10$ and calculate the sample mean $\bar{X}=49$. Assume that the population is Normal with $\sigma = 20$. 
+
+Calculate a 95\% confidence interval for the population mean $\mu$. Is the data consistent with a population mean of 60?
+
+Hint: use \[ \bar{X} \sim N \pr{ mean = \mu, SE = \frac{\sigma}{\sqrt{n}} } \]
+
+\begin{itemize}
+    \item 2 minutes to think individually
+    \item 2 minutes to discuss with a partner
+    \item 2 minutes to share with the class
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+\dq{Assume that the conditions are met. If you know the population standard deviation $\sigma$, the sample size $n$, and the sample mean $\bar{X}$, how would you calculate a 95\% confidence interval for the population mean $\mu$?}
+
+\soln{\only<2-3>{
+\[point estimate \pm critical~value \times standard~error \]\\
+\[\bar{X} \pm z^{\star} \times \frac{\sigma}{\sqrt{n}} \]
+where $z^{\star}$ is the critical value from the standard Normal distribution for a 95\% confidence level (approximately 1.96).
+}
+}
+\soln{\only<3>{
+\[49 \pm 1.96 \times \frac{20}{\sqrt{10}} = 49 \pm 12.4= [36.6, 61.4]\]
+}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+\dq{Assume that the conditions are met. If you know the population standard deviation $\sigma$, the sample size $n$, and the sample mean $\bar{X}$, how would you design a hypothesis test at a significance level $\alpha$ to check whether the population mean is less than $\mu_0$?}
+
+\soln{\only<2>{
+$H_0: \mu = \mu_0$ \\
+$H_A: \mu < \mu_0$ \\
+Test statistic: \[ z_{obs} = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \] \\
+p-value: \[P(Z < z_{obs})\]\\
+\texttt{pnorm(z\_obs)} \\
+Check if p-value $< \alpha$ to make a conclusion.
+}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{This Time}
+What if the population is normal, but we don't know the population standard deviation, $\sigma$?
+
+\begin{itemize}
+    \item We can estimate $\sigma$ using the sample standard deviation $s$.
+    \item However, this introduces additional uncertainty in our estimate of the standard error.
+    \item If the sample size is large enough (Rule of thumb: $n \geq 30$), this additional uncertainty is negligible, because $s$ will be a good estimate of $\sigma$.
+    \item But if the sample size is small, $s$ may not be a good estimate of $\sigma$.
+    \item To account for this, we use a different distribution: the \hl{t-distribution}.
+\end{itemize}
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -104,6 +207,8 @@ Batch & Alcohol Content (\% ABV) \\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz: Setting up the Guinness test}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{frame}
@@ -117,70 +222,20 @@ Batch & Alcohol Content (\% ABV) \\
 \item $H_0:$ The average alcohol content is equal to 4.5\% ABV. \\
 $H_A:$ The average alcohol content is different from 4.5\% ABV.
 \pause
+\item test statistic: \[ \frac{\bar{X} - 4.5}{s / \sqrt{n}} \]
 \end{itemize}
 
-$\:$ \\
+\orange{This test statistic looks similar to the $z$ test statistic, but uses $s$ instead of $\sigma$. How does this change things?}
+% $\:$ \\
 
-\dq{Each row in the data set represents the alcohol content measured from a batch of Guiness stout. Are the batch measurements independent?}
+% \dq{Each row in the data set represents the alcohol content measured from a batch of Guiness stout. Are the batch measurements independent?}
 
-\soln{\pause Yes, we will assume that batches are produced independently.}
+% \soln{\pause Yes, we will assume that batches are produced independently.}
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Hypotheses}
-
-\pq{What are the hypotheses for testing whether the mean alcohol content differs from the target value?}
-
-\begin{enumerate}[(a)]
-\item  \mathhl{H_0:} $\mu = 0$ \\
-\mathhl{H_A:} $\mu \ne 0$
-\solnMult{  \mathhl{H_0:} $\mu = 4.5$ \\
-\mathhl{H_A:} $\mu \ne 4.5$}
-\item  \mathhl{H_0:} $p = 4.5$ \\
-\mathhl{H_A:} $p \ne 4.5$
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}
-\frametitle{Conditions}
-
-\begin{itemize}
-\item \hl{Independence:} We assume each batch is produced independently.
-\pause
-\item \hl{Sample size / skew:} $\:$ \\
-\pause\twocol{0.6}{0.4}
-{
-{\tiny
-\begin{itemize}
-\item The sample distribution does not appear to be extremely skewed, but it's difficult to assess with such a small sample size. For alcohol levels, we might expect scores to be fairly symmetric around the target.
-\item We do not know $\sigma$ and $n$ is too small to assume $s$ is a reliable estimate for $\sigma$.
-\end{itemize}
-}
-}
-{
-\includegraphics[width=\textwidth]{\chp7@path/7-1_one_t/figures/guiness/guinessHist}
-}
-\end{itemize}
-$\:$ \\
-\pause
-\dq{So what do we do when the sample size is small?}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Intuition check, and what tools do we have for this problem?}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Board work: Similar tests we've done before}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{R demo: What if we used a Normal model for \texorpdfstring{$\bar{X}$}{X-bar}?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -196,7 +251,69 @@ As long as observations are independent, and the population distribution is not 
 
 \end{itemize}
 
+\pause
+For small samples, we need to be more careful about both of these points.
+
+\begin{itemize}
+\item We need to verify that the \hl{population distribution is approximately normal.}
+\begin{itemize}
+\item Look at the data, check for skewness/outliers
+\item Think about the context
+\end{itemize}
+\item If we don't know $\sigma$, we need to address the uncertainty in $s$.
+\begin{itemize}
+\item \hl{$t$ distribution}
+\end{itemize}
+\end{itemize}
+
 \end{frame}
+
+% \begin{frame}
+% \frametitle{Hypotheses}
+
+% \pq{What are the hypotheses for testing whether the mean alcohol content differs from the target value?}
+
+% \begin{enumerate}[(a)]
+% \item  \mathhl{H_0:} $\mu = 0$ \\
+% \mathhl{H_A:} $\mu \ne 0$
+% \solnMult{  \mathhl{H_0:} $\mu = 4.5$ \\
+% \mathhl{H_A:} $\mu \ne 4.5$}
+% \item  \mathhl{H_0:} $p = 4.5$ \\
+% \mathhl{H_A:} $p \ne 4.5$
+% \end{enumerate}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions}
+\twocol{0.6}{0.4}
+{
+\begin{itemize}
+\item \hl{Independence:} We assume each batch is produced independently.
+\pause
+\item \hl{Normality ($n<30$):} $\:$ \\
+\end{itemize}
+}
+{
+    \vspace{0.5cm}
+\includegraphics[width=\textwidth]{\chp7@path/7-1_one_t/figures/guiness/guinessHist}
+}
+\pause
+{\small
+\vspace{-0.25cm}
+\begin{itemize}
+\item The data doesn't appear skewed, but it's difficult to assess. 
+\item For alcohol levels, we might expect scores to be fairly symmetric around the target.
+\end{itemize}
+}
+\pause
+\hl{We will assume that the data come from a Normal population}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -207,21 +324,9 @@ As long as observations are independent, and the population distribution is not 
 \begin{frame}
 \frametitle{The normality condition}
 
-\begin{itemize}
-
-\item The CLT, which states that sampling distributions will be nearly normal, holds true for \orange{any} sample size as long as the population distribution is nearly normal.
-
-\pause
-
-\item While this is a helpful special case, it's inherently difficult to verify normality in small data sets.
-
-\pause
-
-\item We should exercise caution when verifying the normality condition for small samples. It is important to not only examine the data but also think about where the data come from. 
+We should exercise caution when verifying the normality condition for small samples. It is important to not only examine the data but also think about where the data come from. 
 \begin{itemize}
 \item For example, ask: would I expect this distribution to be symmetric, and am I confident that outliers are rare?
-\end{itemize}
-
 \end{itemize}
 
 \end{frame}
@@ -237,7 +342,7 @@ As long as observations are independent, and the population distribution is not 
 
 \begin{itemize}
 
-\item When the population standard deviation is unknown (almost always), the uncertainty of the standard error estimate is addressed by using a new distribution: the \hl{$t$ distribution}.
+\item When the population standard deviation is unknown (almost always) and the population is Normal, the uncertainty of the standard error estimate is addressed by using a new distribution: the \hl{$t$ distribution}.
 
 \pause
 
@@ -319,8 +424,8 @@ As long as observations are independent, and the population distribution is not 
 \frametitle{Finding the test statistic}
 
 \formula{Test statistic for inference on a small sample mean}
-{The test statistic for inference on a small sample ($n < 50$) mean is the $T$ statistic with $df = n - 1$.
-\[ T_{df} = \frac{\text{point estimate} - \text{null value}}{SE} \]}
+{The test statistic for inference on a small sample ($n < 30$) mean is the $t$ statistic with $df = n - 1$.
+\[ t_{obs} = \frac{\text{point estimate} - \text{null value}}{SE} \]}
 
 \pause
 
@@ -332,7 +437,7 @@ point~estimate &=& \bar{x} = 4.66 \\
 \pause
 SE &=& \frac{s}{\sqrt{n}} = \frac{0.17}{\sqrt{8}} = 0.060 \\
 \pause
-T &=& \frac{4.66 - 4.5}{0.060} = 2.73 \\
+t_{obs} &=& \frac{4.66 - 4.5}{0.060} = 2.73 \\
 \pause
 df &=& 8 - 1 = 7
 \end{eqnarray*}
@@ -368,7 +473,9 @@ df &=& 8 - 1 = 7
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R Demonstration: Try with \texorpdfstring{$t$}{t} distribution}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \frametitle{Conclusion of the test}
@@ -382,158 +489,6 @@ Since the p-value is low, we have evidence that the mean alcohol content differs
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Constructing confidence intervals using the \texorpdfstring{$t$}{t} distribution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}
-\frametitle{What is the mean alcohol content?}
-
-\begin{itemize}
-\item We found evidence that the mean alcohol content differs from the target.
-\pause
-\item But it would be more interesting to estimate the mean alcohol content itself.
-\pause
-\item We can use a confidence interval to estimate the mean.
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: What is the mean alcohol content? Try for yourself!}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}
-\frametitle{Confidence interval for a small sample mean}
-
-\begin{itemize}
-\item Confidence intervals are always of the form
-\[ \text{point estimate} \pm {ME} \]
-\pause
-\item ME is always calculated as the product of a critical value and SE.
-\pause
-\item Since small sample means follow a $t$ distribution (and not a $z$ distribution), the critical value is a $t^\star$ (as opposed to a $z^\star$).
-\[ \text{point estimate} \pm t^{\star} \times SE \]
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}[fragile]
-\frametitle{Finding the critical $t$ ($t^\star$)}
-
-Using R:
-\begin{verbatim}
-> qt(p = 0.975, df = 7)
-
-[1] 2.364624
-\end{verbatim}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}
-\frametitle{Constructing a CI for a small sample mean}
-
-\pq{Which of the following is the correct calculation of a 95\% confidence interval for the mean alcohol content?}
-\[ \bar{x} = 4.66 \qquad s = 0.17 \qquad n = 8 \qquad SE = 0.060 \]
-
-\twocol{0.35}{0.65}
-{
-\begin{enumerate}[(a)]
-\item $4.66 \pm 1.96 \times 0.060$
-\solnMult{ $4.66 \pm 2.36 \times 0.060$}
-\item $4.66 \pm -2.36 \times 0.060$
-\item $4.66 \pm 2.36 \times 0.17$
-\end{enumerate}
-}
-{
-\soln{\only<2>{\orange{$\rightarrow$ (4.52, 4.80)}}}
-\vspace{0.25cm}
-}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}
-\frametitle{Interpreting the CI}
-
-\pq{Which of the following is the \orange{best} interpretation for the confidence interval we just calculated?
-\[ \mu = (4.52, 4.80) \]
-}
-
-We are 95\% confident that ...
-
-\begin{enumerate}[(a)]
-\solnMult{the mean alcohol content of Guinness stout is between 4.52\% and 4.80\% ABV.}
-\item the mean alcohol content is at least 4.5\% ABV.
-\item the mean alcohol content is less than 4.7\% ABV.
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Synthesis}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Synthesis}
-
-\dq{Does the conclusion from the hypothesis test agree with the findings of the confidence interval?}
-
-$\:$ \\
-
-\soln{\only<2->{Yes, the hypothesis test found a significant difference, and the CI does not contain the null value of 0.}}
-
-$\:$ \\
-
-\dq{What does this mean for the Guinness quality control process?}
-
-$\:$ \\
-
-\soln{\only<3>{The mean alcohol content of this batch of beer is likely different from their target, so they shouldn't sell this batch, and maybe they should check their manufacturing process for issues.}}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Recap: Inference using the $t$-distribution}
-
-\begin{itemize}
-
-\item If $\sigma$ is unknown, use the $t$-distribution with $SE = \frac{s}{\sqrt{n}}$.
-
-\pause
-
-\item Conditions: 
-\begin{itemize}
-\item independence of observations (often verified by random sample, and if sampling w/o replacement, $n < $ 10\% of population)
-\item no extreme skew
-\end{itemize}
-
-\pause
-
-\item Hypothesis testing: 
-\[ T_{df} = \frac{\text{point estimate} - \text{null value}}{SE}\text{, where }df = n - 1 \]
-
-\pause
-
-\item Confidence interval: $\text{point estimate} \pm t_{df}^\star \times SE$
-
-\end{itemize}
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
