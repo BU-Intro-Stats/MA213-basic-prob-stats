@@ -719,101 +719,101 @@ Failing to check conditions may unintentionally affect the test's error rates.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{2009 Iran Election}
+% \begin{frame}
+% \frametitle{2009 Iran Election}
 
-\dq{There was lots of talk of election fraud in the 2009 Iran election. We'll compare the data from a poll conducted before the election (observed data) to the reported votes in the election to see if the two have the same proportions.}
+% \dq{There was lots of talk of election fraud in the 2009 Iran election. We'll compare the data from a poll conducted before the election (observed data) to the reported votes in the election to see if the two have the same proportions.}
 
-\begin{center}
-\begin{tabular}{l | r r}
-					& \footnotesize{Observed \# of} & \footnotesize{Reported \% of} \\
-\footnotesize{Candidate}	& \footnotesize{voters in poll} & \footnotesize{votes in election} \\
-\hline
-(1) Ahmedinajad	& 338	& 63.29\% \\
-(2) Mousavi		& 136	& 34.10\% \\
-(3) Minor candidates	& 30	& 2.61\% \\
-\hline
-Total			& 504	& 100\% \\
-\pause
-			& \hl{$\downarrow$}	& \hl{$\downarrow$}	\\
-			& \hl{observed}	& \hl{expected} \\
-			& 			& \hl{proportions} 	
-\end{tabular}
-\end{center}
+% \begin{center}
+% \begin{tabular}{l | r r}
+% 					& \footnotesize{Observed \# of} & \footnotesize{Reported \% of} \\
+% \footnotesize{Candidate}	& \footnotesize{voters in poll} & \footnotesize{votes in election} \\
+% \hline
+% (1) Ahmedinajad	& 338	& 63.29\% \\
+% (2) Mousavi		& 136	& 34.10\% \\
+% (3) Minor candidates	& 30	& 2.61\% \\
+% \hline
+% Total			& 504	& 100\% \\
+% \pause
+% 			& \hl{$\downarrow$}	& \hl{$\downarrow$}	\\
+% 			& \hl{observed}	& \hl{expected} \\
+% 			& 			& \hl{proportions} 	
+% \end{tabular}
+% \end{center}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Hypotheses}
+% \begin{frame}
+% \frametitle{Hypotheses}
 
-\dq{What are the hypotheses for testing if the proportions of reported and polled votes are different?}
+% \dq{What are the hypotheses for testing if the proportions of reported and polled votes are different?}
 
-\soln{
-\only<2>{
-\begin{itemize}
-\item[$H_0$:] The observed counts from the poll have the same proportions as the reported votes.
-\item[$H_A$:] The observed counts from the poll do not have the same proportions as the reported votes.
-\end{itemize}
-}}
+% \soln{
+% \only<2>{
+% \begin{itemize}
+% \item[$H_0$:] The observed counts from the poll have the same proportions as the reported votes.
+% \item[$H_A$:] The observed counts from the poll do not have the same proportions as the reported votes.
+% \end{itemize}
+% }}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Calculation of the test statistic}
+% \begin{frame}
+% \frametitle{Calculation of the test statistic}
 
-{\small
-\begin{center}
-\begin{tabular}{l | r r r}
-					& \footnotesize{Observed \# of} & \footnotesize{Reported \% of}	& \footnotesize{Expected \# of} \\
-\footnotesize{Candidate}	& \footnotesize{voters in poll} & \footnotesize{votes in election}		&  \footnotesize{votes in poll} \\
-\hline
-\footnotesize{(1) Ahmedinajad}	& 338	& 63.29\% 	& 504 $\times$ 0.6329 = 319 \\
-\footnotesize{(2) Mousavi}		& 136	& 34.10\%		& 504 $\times$ 0.3410 = 172 \\
-\footnotesize{(3) Minor candidates}	& 30	& 2.61\% 		& 504 $\times$ 0.0261 = 13\\
-\hline
-Total			& 504	& 100\%		& 504
-\end{tabular}
-\end{center}
-}
+% {\small
+% \begin{center}
+% \begin{tabular}{l | r r r}
+% 					& \footnotesize{Observed \# of} & \footnotesize{Reported \% of}	& \footnotesize{Expected \# of} \\
+% \footnotesize{Candidate}	& \footnotesize{voters in poll} & \footnotesize{votes in election}		&  \footnotesize{votes in poll} \\
+% \hline
+% \footnotesize{(1) Ahmedinajad}	& 338	& 63.29\% 	& 504 $\times$ 0.6329 = 319 \\
+% \footnotesize{(2) Mousavi}		& 136	& 34.10\%		& 504 $\times$ 0.3410 = 172 \\
+% \footnotesize{(3) Minor candidates}	& 30	& 2.61\% 		& 504 $\times$ 0.0261 = 13\\
+% \hline
+% Total			& 504	& 100\%		& 504
+% \end{tabular}
+% \end{center}
+% }
 
-\pause
+% \pause
 
-\begin{eqnarray*}
-\frac{(O_1 - E_1)^2}{E_1} = \frac{(338 - 319)^2}{319} &=& 1.13 \\
-\pause
-\frac{(O_2 - E_2)^2}{E_2} = \frac{(136 - 172)^2}{172} &=& 7.53 \\
-\pause
-\frac{(O_3 - E_3)^2}{E_3} = \frac{(30 - 13)^2}{13} &=& 22.23 \\
-\pause
- \chi^2_{\mathhl{df = 3 - 1 = 2}} &=& 30.89
-\end{eqnarray*}
+% \begin{eqnarray*}
+% \frac{(O_1 - E_1)^2}{E_1} = \frac{(338 - 319)^2}{319} &=& 1.13 \\
+% \pause
+% \frac{(O_2 - E_2)^2}{E_2} = \frac{(136 - 172)^2}{172} &=& 7.53 \\
+% \pause
+% \frac{(O_3 - E_3)^2}{E_3} = \frac{(30 - 13)^2}{13} &=& 22.23 \\
+% \pause
+%  \chi^2_{\mathhl{df = 3 - 1 = 2}} &=& 30.89
+% \end{eqnarray*}
 
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Computing the p-value}
+% \section{Edfinity Quiz: Computing the p-value}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Conclusion}
+% \begin{frame}
+% \frametitle{Conclusion}
 
-\pq{Based on these calculations what is the conclusion of the hypothesis test?}
+% \pq{Based on these calculations what is the conclusion of the hypothesis test?}
 
-\begin{enumerate}[(a)]
-\solnMult{p-value is low, $H_0$ is rejected. The observed counts from the poll do \underline{not} have the same proportions as the reported votes.}
-\item p-value is high, $H_0$ is not rejected. The observed counts from the poll have the same proportions as the reported votes.
-\item p-value is low, $H_0$ is rejected. The observed counts from the poll have the same proportions as the reported votes
-\item p-value is low, $H_0$ is not rejected. The observed counts from the poll do \underline{not} have the same proportions as the reported votes.
-\end{enumerate}
+% \begin{enumerate}[(a)]
+% \solnMult{p-value is low, $H_0$ is rejected. The observed counts from the poll do \underline{not} have the same proportions as the reported votes.}
+% \item p-value is high, $H_0$ is not rejected. The observed counts from the poll have the same proportions as the reported votes.
+% \item p-value is low, $H_0$ is rejected. The observed counts from the poll have the same proportions as the reported votes
+% \item p-value is low, $H_0$ is not rejected. The observed counts from the poll do \underline{not} have the same proportions as the reported votes.
+% \end{enumerate}
 
-\end{frame}
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
