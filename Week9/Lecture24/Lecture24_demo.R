@@ -14,21 +14,21 @@ library(ggplot2)
 # If the normal model is correct, then z_obs~N(0,1) under the null hypothesis
 # so let's simulate z_obs under the null hypothesis:
 
-experiment <- function(N, mu, sigma) {
+experiment <- function(n, mu, sigma) {
   # Simulate generating samples:
-  samples <- rnorm(N, mean=mu, sd=sigma) 
+  samples <- rnorm(n, mean=mu, sd=sigma) 
   
   # Compute z_obs
   Xbar <- mean(samples)          # take the sample mean
   s <- sd(samples)               # estimate the standard deviation
-  z_obs <- (Xbar - 4.5) / (s/sqrt(N))  # compute the Z score
+  z_obs <- (Xbar - 4.5) / (s/sqrt(n))  # compute the Z score
   
   return(z_obs)
 }
 
-# 1b. ---- Run the experiment 50000 times for N=100 ----
+# 1b. ---- Run the experiment 50000 times for n=100 ----
 
-data1 = as.data.frame(replicate(n=50000, experiment(100, 4.5, 0.17)))
+data1 = as.data.frame(replicate(50000, experiment(100, 4.5, 0.17)))
 colnames(data1) <- c("z_obs")
 
 # Does this histogram look familiar?
@@ -37,9 +37,9 @@ ggplot(data1, aes(x=z_obs)) +
   stat_function(fun=dnorm, args=list(mean=0.0, sd=1.0), col="blue") +
   xlim(-5, 5)
 
-# 1c. ---- Now run the experiment 50000 times for N=8 ----
+# 1c. ---- Now run the experiment 50000 times for n=8 ----
 
-data2 = as.data.frame(replicate(n=50000, experiment(8, 4.5, 0.17)))
+data2 = as.data.frame(replicate(50000, experiment(8, 4.5, 0.17)))
 colnames(data2) <- c("z_obs")
 
 # Now what's wrong with this histogram?
@@ -53,7 +53,7 @@ ggplot(data2, aes(x=z_obs)) +
 # -----------------------------------------------------------
 # ---- 2. Try graphing the results with the t distribution too
 
-data = as.data.frame(replicate(n=50000, experiment(8, 4.5, 0.17)))
+data = as.data.frame(replicate(50000, experiment(8, 4.5, 0.17)))
 colnames(data) <- c("t")
 
 ggplot(data, aes(x = t)) +
