@@ -83,6 +83,27 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz: CLT for sample mean}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+
+\dq{In which of the following scenarios would you be able to use the Normal distribution to compute a 95\% confidence interval for the population mean $\mu$? In each case, you take a random sample of size $n$ from the population and calculate the sample mean $\bar{X}=49$.}
+\begin{enumerate}[(a)]
+\solnMult{Population: Normal ($\sigma = 20$). $n = 100$. }
+\solnMult{Population: Normal ($\sigma = 20$). $n = 10$. }
+\solnMult{Population: Normal ($\sigma =$ unknown). $n = 100$. }
+  \item Population: Normal ($\sigma = $ unknown). $n = 10$. \only<2>{\orange{$\rightarrow$ Can use $t$-distribution here.}}
+\solnMult{Population: right skewed ($\sigma = 20$). $n = 100$. }
+  \item Population: right skewed ($\sigma = 20$). $n = 10$. 
+\solnMult{Population: right skewed ($\sigma =$ unknown). $n = 100$. }
+  \item Population: right skewed ($\sigma = $ unknown). $n = 10$.
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Back to Guinness: Quality Control}
 \dq{William Sealy Gosset, working at the Guinness Brewery in the early 1900s, wanted to ensure the quality of stout. He would take a small sample of batches and measure a quality metric, (e.g. alcohol content). Suppose the target mean for alcohol content is 4.5\% ABV (percent alcohol by volume).}
@@ -177,7 +198,7 @@ Using R:
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \section{Edfinity Quiz: Interpreting the Confidence Interval}
 
@@ -188,7 +209,7 @@ Using R:
 \frametitle{Interpreting the CI}
 
 \pq{Which of the following is the \orange{best} interpretation for the confidence interval we just calculated?
-\[ \mu = (4.52, 4.80) \]
+\[\text{95\% CI for }\mu:  (4.52, 4.80) \]
 }
 
 We are 95\% confident that ...
@@ -270,7 +291,7 @@ $\:$ \\
 
   Last time we learned how to do inference for one-sample data. 
   
-  Now we're returning to the setting with multiple samples, but we have observations that don't appear independent - like in the next example. 
+  Now we're returning to the setting with multiple samples, but we have observations that aren't independent - like in the next example. 
 
 \end{frame}
 
@@ -337,9 +358,9 @@ $\:$ \\
 \item To analyze paired data, it is often useful to look at the difference in outcomes of each pair of observations. 
 \[ \text{diff} = \text{read} - \text{write} \]
 
-\pause
+% \pause
 
-\item It is important that we always subtract using a consistent order.
+% \item It is important that we always subtract using a consistent order.
 
 \end{itemize}
 
@@ -373,7 +394,19 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Think/pair/share: How would you set up the hypotheses?}  % Like slides 5-7
+\begin{frame}
+\frametitle{Think/pair/share: HT for paired differences} 
+\dq{200 observations were randomly sampled from the High School and Beyond survey. The same students took a reading and writing test. We have computed the differences (reading - writing) for each student, and we would like to test if there is a difference between the average reading and writing scores.
+\small{
+\begin{itemize}
+    \item What is the parameter of interest?
+    \item What is the point estimate?
+    \item What are the null and alternative hypotheses for testing if there is a difference between the average reading and writing scores?
+    \item How does this setting compare to what we have done before? (e.g. compare to the one/two-sample tests for proportions, one-sample test for means)
+\end{itemize}
+}
+}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -445,23 +478,20 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Checking assumptions \& conditions}
+% \begin{frame}
+% \frametitle{Checking assumptions \& conditions}
 
-\pq{Which of the following is true?}
+% \pq{Which of the following is true?}
 
-\begin{enumerate}[(a)]
-\solnMult{Since students are sampled randomly and are less than 10\% of all high school students, we can assume that the difference between the reading and writing scores of one student in the sample is independent of another.}
-\item The distribution of differences is bimodal, therefore we cannot continue with the hypothesis test.
-\item In order for differences to be random we should have sampled with replacement.
-\item Since students are sampled randomly and are less than 10\% all students, we can assume that the sampling distribution of the average difference will be nearly normal.
-\end{enumerate}
+% \begin{enumerate}[(a)]
+% \solnMult{Since students are sampled randomly and are less than 10\% of all high school students, we can assume that the difference between the reading and writing scores of one student in the sample is independent of another.}
+% \item The distribution of differences is bimodal, therefore we cannot continue with the hypothesis test.
+% \item In order for differences to be random we should have sampled with replacement.
+% \item Since students are sampled randomly and are less than 10\% all students, we can assume that the sampling distribution of the average difference will be nearly normal.
+% \end{enumerate}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Computations}  % Like slide 8
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -495,6 +525,10 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R Demonstration: Computations}  % Like slide 8
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
 \section{Edfinity Quiz: Interpret the results}  % Like slides 9-10 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -512,10 +546,6 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 \end{enumerate}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Computing the Confidence Interval} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -539,6 +569,10 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 }
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Computing the Confidence Interval} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
