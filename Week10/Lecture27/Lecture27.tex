@@ -182,15 +182,35 @@ For what values of the difference between the observed averages of blood pressur
 
 \pause
 
-\includegraphics[width=\textwidth]{\chp7@path/7-4_power/figures/power/power_null_B_0_1-7_with_rejection_region}
-
+\begin{center}{
+\includegraphics[width=0.8\textwidth]{\chp7@path/7-4_power/figures/power/power_null_B_0_1-7_with_rejection_region}
+}\end{center}
 \pause
 
-The difference should be at least 
-\[ 1.96 * 1.70 = 3.326 \] 
-or at most 
-\[ -1.96 * 1.70 = -3.326. \]
-
+% two columns
+\footnotesize{
+\begin{columns}[T]
+\begin{column}{0.4\textwidth}
+We reject $H_0$ if 
+\begin{align*}
+\frac{Point\; Estimate - Null\; Value}{SE} &< -z^\star \\
+\text{or} \\
+\frac{Point\; Estimate - Null\; Value}{SE} &> z^\star
+\end{align*}
+\end{column}
+\begin{column}{0.4\textwidth}
+So we will reject $H_0$ if
+\begin{align*}
+Point\; Estimate &< Null \;Value - z^\star \times SE \\
+\text{or} \\
+Point\; Estimate &> Null\; Value + z^\star \times SE
+\end{align*}
+\end{column}
+\end{columns}
+}
+\pause
+The difference should be greater than $1.96 * 1.70 = 3.326$\\
+or less than $ -1.96 * 1.70 = -3.326$.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -219,20 +239,14 @@ Suppose that the company researchers care about finding any effect on blood pres
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Steps for computing power}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
 \frametitle{Steps for computing power}
   \begin{columns}[T]
     \begin{column}{0.5\textwidth}
       \begin{enumerate}
-        \item Plot distribution of $\bar{x}_1 - \bar{x}_2$ under $H_0$.
-        \item Find rejection region for $\bar{x}_1 - \bar{x}_2$.
-        \item Plot distribution of $\bar{x}_1 - \bar{x}_2$ under $H_A$.
+        \item Plot the sampling distribution of $\bar{x}_1 - \bar{x}_2$ under $H_0$ and $H_A$.
+        \item Find rejection region for $\bar{x}_1 - \bar{x}_2$ under $H_0$.
         \item Power $= $ area under $f_A$ in rejection region.
-        \item $\beta = 1 - $ Power
       \end{enumerate}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -243,14 +257,11 @@ Suppose that the company researchers care about finding any effect on blood pres
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Think/Pair/Share}
-% TODO
-\end{frame}
+\section{R demo: Power calculation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R demo: Power calculation and intuition}
+\section{Edfinity Quiz: Intuition for power changes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
