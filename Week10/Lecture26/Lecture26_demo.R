@@ -28,7 +28,7 @@ s99 <- sd(data[data$carat == 'pt99', 'ptprice'])
 s100 <- sd(data[data$carat == 'pt100', 'ptprice'])
 
 diff_est <- mean99 - mean100
-
+print(diff_est)
 
 # ---- 2. Computing the test statistic and p-value ----
 
@@ -36,4 +36,10 @@ SE <- sqrt((s99**2)/n99 + (s100**2)/n100)
 df <- min(n99-1, n100-1)
 Tstat <- (diff_est - 0) / SE
 
-pt(Tstat, df=22)
+pt(Tstat, df=df)
+
+#-------------------------------------------------
+# ---- 3. Computing a 90% confidence interval ----
+
+tstar <- qt(p=0.90, df=22)
+diff_est + c(-1,1)*tstar*SE
