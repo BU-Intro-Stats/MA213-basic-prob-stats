@@ -27,8 +27,8 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   output$powerPlot <- renderPlot({
-  null_mean <- input$null_mean
-  alt_mean <- input$alt_mean
+    null_mean <- input$null_mean
+    alt_mean <- input$alt_mean
     se <- sqrt((input$sd1^2 / input$n1) + (input$sd2^2 / input$n2))
     effect_size <- abs(alt_mean - null_mean)
     critical_value <- qnorm(1 - input$alpha / 2) * se
@@ -39,19 +39,22 @@ server <- function(input, output) {
       data.frame(x = x, y = null_dist, dist = "Null"),
       data.frame(x = x, y = alt_dist, dist = "Alternative")
     )
-    z_upper <- (critical_value - effect_size) / se
-    z_lower <- (-critical_value - effect_size) / se
-    power <- pnorm(z_lower) + (1 - pnorm(z_upper))
+    # Compute critical boundaries using null mean
+    zstar <- qnorm(1 - input$alpha / 2)
+    upper_boundary <- null_mean + zstar * se
+    lower_boundary <- null_mean - zstar * se
+    # Compute power using alternative mean
+    power <- pnorm(lower_boundary, mean = alt_mean, sd = se) + (1 - pnorm(upper_boundary, mean = alt_mean, sd = se))
     ggplot(plot_df, aes(x = x, y = y, color = dist)) +
-      geom_line(size = 1) +
+      geom_line(linewidth = 1) +
       scale_color_manual(values = c("Null" = "steelblue", "Alternative" = "darkgreen")) +
-      geom_vline(xintercept = c(-critical_value, critical_value), linetype = "dashed", color = "steelblue") +
+      geom_vline(xintercept = c(lower_boundary, upper_boundary), linetype = "dashed", color = "steelblue") +
       geom_area(
-        data = subset(plot_df, dist=="Alternative" & x >= critical_value),
+        data = subset(plot_df, dist=="Alternative" & x >= upper_boundary),
         aes(y = y),
         fill = 'darkgreen', alpha = 0.5) +
       geom_area(
-        data = subset(plot_df, dist=="Alternative" & x <= -critical_value),
+        data = subset(plot_df, dist=="Alternative" & x <= lower_boundary),
         aes(y = y),
         fill = 'darkgreen', alpha = 0.5) +
       labs(title = "Null and Alternative Hypothesis Distributions",
@@ -60,13 +63,14 @@ server <- function(input, output) {
            color = "Distribution")
   })
   output$powerText <- renderText({
-  se <- sqrt((input$sd1^2 / input$n1) + (input$sd2^2 / input$n2))
-  effect_size <- abs(input$alt_mean - input$null_mean)
-  critical_value <- qnorm(1 - input$alpha / 2) * se
-  z_upper <- (critical_value - effect_size) / se
-  z_lower <- (-critical_value - effect_size) / se
-  power <- pnorm(z_lower) + (1 - pnorm(z_upper))
-  sprintf("Power of the test: %.3f", power)
+    null_mean <- input$null_mean
+    alt_mean <- input$alt_mean
+    se <- sqrt((input$sd1^2 / input$n1) + (input$sd2^2 / input$n2))
+    zstar <- qnorm(1 - input$alpha / 2)
+    upper_boundary <- null_mean + zstar * se
+    lower_boundary <- null_mean - zstar * se
+    power <- pnorm(lower_boundary, mean = alt_mean, sd = se) + (1 - pnorm(upper_boundary, mean = alt_mean, sd = se))
+    sprintf("Power of the test: %.3f", power)
   })
 }
 
