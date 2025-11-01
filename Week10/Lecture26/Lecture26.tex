@@ -69,7 +69,214 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Motivation: Last time vs. this time}  
+\begin{frame}
+\frametitle{Recap: Inference using the $t$-distribution}
+
+\begin{itemize}
+
+\item If $\sigma$ is unknown, use the $t$-distribution with $SE = \frac{s}{\sqrt{n}}$.
+
+% \pause
+
+\item Conditions: 
+\begin{itemize}
+\item independence of observations (often verified by random sample, and if sampling w/o replacement, $n < $ 10\% of population)
+\item no extreme skew
+\end{itemize}
+
+% \pause
+
+\item Hypothesis testing: 
+\[ t_{obs} = \frac{\bar{X} - \mu_0}{SE}\text{, where }df = n - 1 \]
+
+% \pause
+
+\item Confidence interval: $\bar{X} \pm t_{df}^\star \times SE$
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\dq{200 observations were randomly sampled from the High School and Beyond survey. The same students took a reading and writing test and their scores are shown below. At a first glance, does there appear to be a difference between the average reading and writing test score?}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_read_write_box}
+\end{center}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Analyzing paired data}
+
+\begin{itemize}
+
+\item When two sets of observations have this special correspondence (not independent), they are said to be \hl{paired}.
+
+% \pause
+
+\item To analyze paired data, it is often useful to look at the difference in outcomes of each pair of observations. 
+\[ \text{diff} = \text{read} - \text{write} \]
+
+% \pause
+
+% \item It is important that we always subtract using a consistent order.
+
+\end{itemize}
+
+\twocol{0.5}{0.5}{
+{\small
+\begin{center}
+\begin{tabular}{rrrr >{\columncolor[gray]{.9}}r}
+  \hline
+ & id & read & write & diff \\ 
+  \hline
+1 & 70 & 57 & 52 & 5 \\ 
+  2 & 86 & 44 & 33 & 11 \\ 
+  3 & 141 & 63 & 44 & 19 \\ 
+  4 & 172 & 47 & 52 & -5 \\ 
+  $\vdots$ &   $\vdots$  &   $\vdots$ &   $\vdots$ &   $\vdots$ \\
+  200 & 137 & 63 & 65 & -2 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+}
+{
+\includegraphics[width=\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_diff_hist}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Parameter and point estimate}
+
+\begin{itemize}
+
+\item \hl{Parameter of interest:} Average difference between the reading and writing scores of \orange{all} high school students.
+\[ \mu_{diff} \]
+
+$\:$ \\
+
+% \pause
+
+\item \hl{Point estimate:} Average difference between the reading and writing scores of \orange{sampled} high school students.
+\[ \bar{x}_{diff} \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inference for paired data}
+
+\begin{frame}
+\frametitle{Setting the hypotheses}
+
+\dq{If in fact there was no difference between the scores on the reading and writing exams, what would you expect the average difference to be?}
+
+% \pause
+
+\soln{0}
+
+$\:$ \\
+
+% \pause
+
+\dq{What are the hypotheses for testing if there is a difference between the average reading and writing scores?}
+
+% \pause
+
+\begin{itemize}
+\item[$H_0$:] There is no difference between the average reading and writing score. 
+\[ \mu_{diff} = 0 \]
+\item[$H_A$:] There is a difference between the average reading and writing score. 
+\[ \mu_{diff} \ne 0 \]
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Nothing new here}
+
+\begin{itemize}
+
+\item The analysis is no different than what we have done before.
+
+\item We have data from \orange{one} sample: differences. 
+
+\item We are testing to see if the average difference is different than 0.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[shrink]
+\frametitle{Calculating the test-statistic and the p-value}
+
+\dq{The observed average difference between the two scores is -0.545 points and the standard deviation of the difference is 8.887 points. Do these data provide convincing evidence of a difference between the average scores on the two exams? Use $\alpha = 0.05$.}
+
+\twocol{0.5}{0.5}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_read_write_pval}
+\end{center}
+}
+{
+\pause
+\begin{eqnarray*}
+T &=& \frac{-0.545 - 0}{\frac{8.887}{\sqrt{200}}} \\
+&=& \frac{-0.545}{0.628} = -0.87 \\
+df &=& 200 - 1 = 199 \\
+\pause
+p-value &=& 0.1927 \times 2 = 0.3854
+\end{eqnarray*}
+}
+\pause 
+$\:$ \\
+Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide convincing evidence of a difference between the average reading and writing scores.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{HT $\leftrightarrow$ CI}
+
+\pq{Suppose we were to construct a 95\% confidence interval for the average difference between the reading and writing scores. Would you expect this interval to include 0?}
+
+\begin{enumerate}[(a)]
+\solnMult{yes}
+\item no
+\item cannot tell from the information given
+\end{enumerate}
+
+\soln{\pause
+\begin{eqnarray*} 
+-0.545 \pm 1.97 \frac{8.887}{\sqrt{200}} &=& -0.545 \pm 1.97 \times 0.628 \\
+&=& -0.545 \pm 1.24 \\
+&=& (-1.785, 0.695)
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration (from Lecture 25): Computing the Confidence Interval} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -120,13 +327,9 @@ $n$		& 23			& 30
 \end{center}
 }
 
-\Note{These data are a random sample from the \texttt{diamonds} data set in \texttt{ggplot2} R package.}
+\Note{These data are a random sample from the \texttt{diamonds} data set in the \texttt{ggplot2} R package.}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Parameter of interest, point estimate, and hypotheses}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -148,6 +351,10 @@ $\:$ \\
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Setting up the problem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -187,17 +394,13 @@ $\:$ \\
 
 \item Point prices of 0.99 carat and 1 carat diamonds in the sample should be independent.
 
-\item Distributions of point prices of 0.99 and 1 carat diamonds should not be extremely skewed.
+\item Distributions of point prices of 0.99 and 1 carat diamonds should not be extremely skewed and shouldn't have clear outliers.
 
 \solnMult{Both sample sizes should be at least 30.}
 
 \end{enumerate}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Computing the test statistic and p-values}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -261,49 +464,23 @@ T &=& \frac{\text{point estimate} - \text{null value} }{SE} \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Test statistic (cont.)}
 
-\pq{Which of the following is the correct $df$ for this hypothesis test?}
+\pq{What is the correct $df$ for this hypothesis test?}
 
-\twocol{0.3}{0.7}
-{
-\begin{enumerate}[(a)]
-\solnMult{ 22 }
-\item 23
-\item 30
-\item 29
-\item 52
-\end{enumerate}
-}
-{
-\soln{\only<2>{
-\orange{$\rightarrow df = min(n_{pt99} - 1, n_{pt100} - 1)$ \\
-$= min(23 - 1, 30 - 1)$ \\
-$= min(22,29) = 22$} \\
-\vspace{1cm}
-}}}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{p-value}
-
-\pq{Which of the following is the correct p-value for this hypothesis test?}
-
-\[ T = -2.508 \qquad \only<1-2 | handout:0>{df = 22} \] 
-
-\begin{enumerate}[(a)]
-\item between 0.005 and 0.01
-\solnMult{between 0.01 and 0.025}
-\item between 0.02 and 0.05
-\item between 0.01 and 0.02
-\end{enumerate}
-
+$df = min(n_{pt99} - 1, n_{pt100} - 1)$ \\
 \pause
+$= min(23 - 1, 30 - 1)$ \\
+\pause
+$= min(22,29) = 22$ 
+\pause
+\vspace{1em}
 
+What is the p-value for this hypothesis test?
+\[ T = -2.508 \qquad df = 22 \] 
+\pause
+\vspace{-2.5em}
 \begin{verbatim}
 > pt(q = -2.508, df = 22)
 [1] 0.0100071
@@ -313,7 +490,7 @@ $= min(22,29) = 22$} \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: What can you conclude from this hypothesis test? And, set up CI}
+\section{R Demonstration: Computing the test statistic and p-values}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -331,6 +508,10 @@ $= min(22,29) = 22$} \\
 }}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: What can you conclude from this hypothesis test? And, set up CI}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -370,11 +551,11 @@ $= min(22,29) = 22$} \\
 \begin{frame}[fragile]
 \frametitle{Critical value}
 
-\pq{What is the appropriate $t^\star$ for a confidence interval for the average difference between the point prices of 0.99 and 1 carat diamonds?}
+\pq{What is the appropriate $t^\star$ for a 90\% confidence interval for the average difference between the point prices of 0.99 and 1 carat diamonds?}
 
 \begin{enumerate}[(a)]
-\item 1.32
-\solnMult{1.72}
+\solnMult{1.32}
+\item 1.72
 \item 2.07
 \item 2.82
 \end{enumerate}
@@ -383,9 +564,9 @@ $= min(22,29) = 22$} \\
 \pause 
 
 \begin{verbatim}
-> qt(p = 0.95, df = 22)
+> qt(p = 0.90, df = 22)
 
-[1] 1.717144
+[1] 1.321237
 \end{verbatim}
 
 
@@ -404,21 +585,21 @@ $= min(22,29) = 22$} \\
 \[ \text{point estimate} \pm ME \]
 \pause
 \begin{eqnarray*}
-(\bar{x}_{pt99} - \bar{x}_{pt1}) \pm t^\star_{df} \times SE &=& (44.50 - 53.43) \pm 1.72 \times 3.56 \\
+(\bar{x}_{pt99} - \bar{x}_{pt1}) \pm t^\star_{df} \times SE &=& (44.50 - 53.43) \pm 1.32 \times 3.56 \\
 \pause
-&=& -8.93 \pm  6.12 \\
+&=& -8.93 \pm  4.71 \\
 \pause
-&=& (-15.05, -2.81)
+&=& (-13.63, -4.22)
 \end{eqnarray*}
 \pause
-We are 90\% confident that the average point price of a 0.99 carat diamond is \$15.05 to \$2.81 lower than the average point price of a 1 carat diamond.
+We are 90\% confident that the average point price of a 0.99 carat diamond is \$13.63 to \$4.22 lower than the average point price of a 1 carat diamond.
 }
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Think/pair/share: Similarities and differences between methods for inference on means}
+\section{R Demonstration: Computing the confidence interval}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -438,7 +619,7 @@ We are 90\% confident that the average point price of a 0.99 carat diamond is \$
 \item Conditions: 
 \begin{itemize}
 \item independence within groups (often verified by a random sample, and if sampling without replacement, $n < $ 10\% of population) and between groups
-\item no extreme skew in either group
+\item no extreme skew or clear outliers in either group
 \end{itemize}
 
 \pause
@@ -456,6 +637,68 @@ We are 90\% confident that the average point price of a 0.99 carat diamond is \$
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Preview: The power of a 2-sample test}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\begin{center}
+\begin{tabular}{l l | c c}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Decision}} \\
+& & fail to reject $H_0$ &  reject $H_0$ \\
+  \cline{2-4}
+& $H_0$ true & \onslide<4->{\green{$1 - \alpha$}} & \onslide<2->{\orange{Type 1 Error, $\alpha$}} \\
+\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true &  \onslide<3->{\orange{Type 2 Error, $\beta$}} & \onslide<5->{\green{Power, $1 - \beta$}} \\
+  \cline{2-4}
+\end{tabular}
+\end{center}
+
+\pause
+
+\begin{itemize}
+\item Type 1 error is rejecting $H_0$ when you shouldn't have, and the probability of doing so is $\alpha$ (significance level)
+
+\pause 
+
+\item Type 2 error is failing to reject $H_0$ when you should have, and the probability of doing so is $\beta$ (a little more complicated to calculate)
+
+\pause 
+
+\item \hl{Power} of a test is the probability of correctly rejecting $H_0$, and the probability of doing so is $1 - \beta$
+
+\pause 
+
+\item In hypothesis testing, we want to keep $\alpha$ and $\beta$ low, but there are inherent trade-offs.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Type 2 error rate}
+
+If the alternative hypothesis is actually true, what is the chance that we make a Type 2 Error, i.e. we fail to reject the null hypothesis even when we should reject it?
+
+\begin{itemize}
+
+\item The answer is not obvious.
+
+\item If the true population average is very close to the null hypothesis value, it will be difficult to detect a difference (and reject $H_0$).
+
+\item If the true population average is very different from the null hypothesis value, it will be easier to detect a difference.
+
+\item Clearly, $\beta$ depends on the \hl{effect size} ($\delta$)
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
