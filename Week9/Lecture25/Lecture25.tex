@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -130,7 +130,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \frametitle{What is the mean alcohol content?}
 
 \begin{itemize}
-\item We found evidence that the mean alcohol content differs from the target.
+\item We found evidence that the mean alcohol content differs from the target, 4.5\%.
 \pause
 \item But it would be more interesting to estimate the mean alcohol content itself.
 \pause
@@ -217,7 +217,8 @@ We are 95\% confident that ...
 \begin{enumerate}[(a)]
 \solnMult{the mean alcohol content of Guinness stout is between 4.52\% and 4.80\% ABV.}
 \item the mean alcohol content is at least 4.5\% ABV.
-\item the mean alcohol content is less than 4.7\% ABV.
+\item the mean alcohol content is not between 4.52\% and 4.80\% ABV.
+\item the mean alcohol content of the sample batch is between 4.52\% and 4.80\% ABV.
 \end{enumerate}
 
 \end{frame}
@@ -231,11 +232,11 @@ We are 95\% confident that ...
 \begin{frame}
 \frametitle{Synthesis}
 
-\dq{Does the conclusion from the hypothesis test agree with the findings of the confidence interval?}
+\dq{Does the conclusion from the hypothesis test (Reject $H_0:\mu=4.5\%$ with $\alpha=0.05$) agree with the findings of the confidence interval ($\text{95\% CI for }\mu:  (4.52, 4.80) $)?}
 
 $\:$ \\
 
-\soln{\only<2->{Yes, the hypothesis test found a significant difference, and the CI does not contain the null value of 0.}}
+\soln{\only<2->{Yes, the hypothesis test found a significant difference, and the CI does not contain the null value of 4.5\%.}}
 
 $\:$ \\
 
@@ -267,11 +268,11 @@ $\:$ \\
 \pause
 
 \item Hypothesis testing: 
-\[ t_{obs} = \frac{\text{point estimate} - \text{null value}}{SE}\text{, where }df = n - 1 \]
+\[ t_{obs} = \frac{\bar{X} - \mu_0}{SE}\text{, where }df = n - 1 \]
 
 \pause
 
-\item Confidence interval: $\text{point estimate} \pm t_{df}^\star \times SE$
+\item Confidence interval: $\bar{X} \pm t_{df}^\star \times SE$
 
 \end{itemize}
 
