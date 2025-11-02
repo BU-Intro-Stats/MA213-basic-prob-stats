@@ -5,10 +5,14 @@
     \frametitle{Lesson Plan}
     \begin{itemize}
         \item xx min Lecture: ANOVA review. Which means differ? Motivate multiple comparisons
-        \item xx min R demo: multiple testing type I error, introduce concept of familywise error rate
-        \item xx min Board work: derive familywise error rate for independent tests
-        \item xx min Edfinity quiz: how to choose alpha to control FWER?
-        \item xx min R demo: multiple testing with Bonferroni
+        \item xx min Edfinity quiz:
+        \begin{itemize}
+            \item If alpha = 0.05, what is the chance that I get a type I error when doing 1 test?
+            \item If alpha = 0.05, how many Type I errors would I expect if I did 20 independent tests with no true effects?
+            \item If alpha = 0.05, what is the probability of at least one Type I error if I do 20 independent tests with no true effects?
+            \item What should I do to alpha if I want to control the probability of at least one Type I error (the familywise error rate)? (make it smaller/larger/same)
+        \end{itemize}
+        \item xx min Lecture: Go over solution, introduce Multiple Comparisons and the Bonferroni correction
         \item xx min Lecture: Go through t tests for ANOVA example
         \item xx min Case study: Garden of forking paths, statistical vs practical significance
         \item xx min Lecture: Best practices (avoid HT when inappropriate, preregistration, report effect size and CIs, data splitting for exploratory work)
@@ -17,8 +21,3 @@
 
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO: R demo simulating multiple testing with no effect
-% TODO: Prep board work deriving FWER
-% TODO: Edfinity quiz: adjusting alpha brainstorm
-% TODO: Find a good case study for garden of forking paths, statistical vs practical significance (e.g. look at Gelman blog), prep it
-% TODO: Prep lecture slides on garden of forking paths, best practices
