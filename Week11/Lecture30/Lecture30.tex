@@ -276,6 +276,25 @@ p-value is the probability of at least as large a ratio between the ``between gr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Multiple Comparisons}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Multiple comparisons and Type I Error Rate}
+If $\alpha=0.05$:
+\begin{itemize}
+\item \dq{What is the chance that I get a type I error when doing 1 test?} \soln{\only<2-5>{ 0.05 (5\%) } }
+\item \dq{How many Type I errors would I expect if I did 20 independent tests with no true effects?} \soln{\only<3-5>{ 1 (20 x 0.05) } }
+\item \dq{What is the probability of at least one Type I error if I do 20 independent tests with no true effects?} \soln{\only<4-5>{ $1 - (1 - 0.05)^{20} \approx 0.64$ (64\%) } }
+\item \dq{What should I do to alpha if I want to control the probability of at least one Type I error?} \soln{\only<5>{ make it smaller } }
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Multiple comparisons}
 
@@ -295,11 +314,13 @@ where $K$ is the number of comparisons being considered.
 
 \item If there are $k$ groups, then usually all possible pairs are compared and $K = \frac{k (k - 1)}{2}$.
 
+\pause
+
+\item This correction controls the \hl{familywise error rate} (FWER), which is the probability of making at least one Type I error among all the tests.
+
 \end{itemize}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -439,6 +460,76 @@ p-value = 0.0018 \qquad \text{{\footnotesize (two-sided)}} \\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{The Garden of Forking Paths}
+
+Multiple comparisons can be \hl{unintentional}. Consider all of the decisions that can be made during data collection, analysis, and reporting, e.g.:
+\begin{itemize}
+\item Outlier removal: after plotting data, there are some extreme values. Should we remove outliers or not?
+\item Choice of statistics of interest: compare means vs medians?
+\item Transformations: maybe transform the response (log / square root) if skewed.
+\item Subgroup analysis: split by gender or by study hours (above vs below median) and test separately.
+\end{itemize}
+
+\hl{Over time, these choices can lead to an increased Type I error rate, even if each individual test is done at the nominal significance level.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{The Garden of Forking Paths}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{Rubin_forkingPaths.png}
+\end{center}
+\footnotesize Mark Rubin https://doi.org/10.1037/gpr0000135
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recall: Beauty and Sex Ratios Case Study}
+
+\begin{itemize}
+    \item \textbf{Claim:} Attractive people are more likely to have female children.
+    \item Survey respondents rated for attractiveness; sex of first child recorded.
+    \item Reported difference: Most attractive (rating 5) had 56\% girls, others (ratings 1-4) had 48\% girls.
+    \item Statistical test found a significant difference ($p$-value $=0.015$).
+    \item Realistic effect sizes for sex ratios are much smaller (about 1\%).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Design Choices and Inflated Type I Error Rate}
+
+\begin{itemize}
+    \item Many decisions in study design and analysis can unintentionally increase the chance of false positives:
+    \begin{itemize}
+        \item How to group attractiveness ratings (e.g., 5 vs 1-4, or other splits)?
+        \item Whether to include/exclude certain respondents or outliers.
+        \item Choice of outcome variable (first child, all children, etc.).
+        \item Selection of statistical tests and transformations.
+        \item Subgroup analyses (e.g., by age, gender, etc.).
+    \end{itemize}
+    \item Each choice can be seen as a ``fork'' in the analysis path, increasing the Type I error rate.
+    \item Without preregistration or correction for multiple comparisons, reported $p$-values may be misleading.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Best Practices for Statistical Analysis}
+\begin{itemize}
+    \item Avoid hypothesis testing when inappropriate
+    \item Preregister analysis plans to prevent data dredging
+    \item Report effect sizes and confidence intervals alongside p-values
+    \item Use data splitting for exploratory work to validate findings
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}
 \begin{center}
