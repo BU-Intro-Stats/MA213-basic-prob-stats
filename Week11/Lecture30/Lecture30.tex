@@ -70,6 +70,156 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \section{Review} % TODO: ANOVA recap slides
 
+\begin{frame}
+\frametitle{}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{\chp7@path/7-5_anova/figures/aldrin/wolf}
+\end{center}
+
+{\small
+\begin{itemize}
+
+\item  The Wolf River in Tennessee flows past an abandoned site once used by the pesticide industry for dumping wastes, including chlordane (pesticide), aldrin, and dieldrin (both insecticides).
+
+% \pause
+
+\item These highly toxic organic compounds can cause various cancers and birth defects.
+
+% \pause
+
+\item The standard methods to test whether these substances are present in a river is to take samples at six-tenths depth. 
+
+% \pause
+
+\item But since these compounds are denser than water and their molecules tend to stick to particles of sediment, they are more likely to be found in higher concentrations near the bottom than near mid-depth.
+
+\end{itemize}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{ANOVA}
+
+ANOVA is used to assess whether the mean of the outcome variable is different for different levels of a categorical variable.
+
+% \pause
+
+\begin{itemize}
+\item[] \mathhl{H_0:} The mean outcome is the same across all categories, 
+\[\mu_1 = \mu_2 = \cdots = \mu_k, \]
+where $\mu_i$ represents the mean of the outcome for observations in category $i$.
+\item[]
+\item[] \mathhl{H_A:} At least one mean is different than others.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions}
+
+\begin{enumerate}
+
+\item The observations should be independent within and between groups
+
+\begin{itemize}
+\item If the data are a simple random sample from less than 10\% of the population, this condition is satisfied.
+\item Carefully consider whether the data may be independent (e.g. no pairing). 
+\item Always important, but sometimes difficult to check.
+\end{itemize}
+
+% \pause
+
+\item The observations within each group should be nearly normal.
+
+\begin{itemize}
+\item Especially important when the sample sizes are small.
+\end{itemize}
+
+\dq{How do we check for normality?}
+
+% \pause
+
+\item The variability across the groups should be about equal.
+
+\begin{itemize}
+\item Especially important when the sample sizes differ between groups.
+\end{itemize}
+
+\dq{How can we check this condition?}
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\vspace{-0.25cm}
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{ll rrr>{\columncolor[gray]{.6}[.5\tabcolsep]}rr}
+\hline
+ 			& 			& Df 	& Sum Sq	& Mean Sq 	& F value 	& Pr($>$F) \\ 
+\hline
+(\hl{G}roup) 	& depth 		& 2 	& 16.96	& 8.48 		& \orange{6.14} 	& 0.0063 \\ 
+(\hl{E}rror) 	& Residuals 	& 27 	& 37.33 	& 1.38 		&  		&  \\ 
+\hline
+	 		& \hl{T}otal	& 29	& 54.29 \\
+\end{tabular}
+\end{center}
+}
+
+\formula{Test statistic, F value}
+{
+As we discussed before, the F statistic is the ratio of the between group and within group variability.
+\[ F = \frac{MSG}{MSE} \]
+}
+
+% \pause
+
+\[ F = \frac{8.48}{1.38} = 6.14 \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+% \frametitle{p-value in ANOVA}
+
+\vspace{-0.25cm}
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{ll rrr>{\columncolor[gray]{.6}[.5\tabcolsep]}rr}
+\hline
+                & 			& Df 	& Sum Sq	& Mean Sq 	& F value 	& Pr($>$F) \\ 
+\hline
+(\hl{G}roup) 	& depth 		& 2 	& 16.96	& 8.48 		& \orange{6.14} 	& 0.0063 \\ 
+(\hl{E}rror) 	& Residuals 	& 27 	& 37.33 	& 1.38 		&  		&  \\ 
+\hline
+                & \hl{T}otal	& 29	& 54.29 \\
+\end{tabular}
+\end{center}
+}
+
+\formula{p-value}
+{
+p-value is the probability of at least as large a ratio between the ``between group" and ``within group" variability, if in fact the means of all groups are equal. It's calculated as the area under the F curve, with degrees of freedom $df_G$ and $df_E$, above the observed F statistic.
+}
+
+% \pause
+
+\includegraphics[width=0.9\textwidth]{\chp7@path/7-5_anova/figures/aldrin/f}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -148,6 +298,8 @@ where $K$ is the number of comparisons being considered.
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
