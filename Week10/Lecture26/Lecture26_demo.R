@@ -41,5 +41,10 @@ pt(Tstat, df=df)
 #-------------------------------------------------
 # ---- 3. Computing a 90% confidence interval ----
 
-tstar <- qt(p=0.90, df=22)
+tstar <- qt(p=0.95, df=22)
 diff_est + c(-1,1)*tstar*SE
+
+# (this approach uses the lower tail probability, which gives a negative tstar)
+tstar2 <- -qt(p=0.05, df=22)
+diff_est + c(-1,1)*tstar2*SE
+
