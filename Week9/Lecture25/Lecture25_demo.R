@@ -43,4 +43,4 @@ pval = 2*pt(Tstat, df=200-1, lower.tail=TRUE)
 # ----------------------------------------------
 # ---- 4. 95% Confidence interval ----
 
-CI = xbar+c(-1,1)*qt(p = 0.975, df = 200-1)
+CI = xbar+c(-1,1)*qt(p = 0.975, df = 200-1)*SE
