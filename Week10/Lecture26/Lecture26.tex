@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -554,8 +554,8 @@ What is the p-value for this hypothesis test?
 \pq{What is the appropriate $t^\star$ for a 90\% confidence interval for the average difference between the point prices of 0.99 and 1 carat diamonds?}
 
 \begin{enumerate}[(a)]
-\solnMult{1.32}
-\item 1.72
+\item 1.32
+\solnMult{1.72}
 \item 2.07
 \item 2.82
 \end{enumerate}
@@ -564,10 +564,12 @@ What is the p-value for this hypothesis test?
 \pause 
 
 \begin{verbatim}
-> qt(p = 0.90, df = 22)
+> qt(p = 0.95, df = 22)
 
-[1] 1.321237
+[1] 1.717144
 \end{verbatim}
+
+\Note{In order to get a 90\% CI, we need to find the critical value that leaves 5\% in each tail. So we use 0.95 in the \texttt{qt()} function.}
 
 
 \end{frame}
@@ -585,14 +587,14 @@ What is the p-value for this hypothesis test?
 \[ \text{point estimate} \pm ME \]
 \pause
 \begin{eqnarray*}
-(\bar{x}_{pt99} - \bar{x}_{pt1}) \pm t^\star_{df} \times SE &=& (44.50 - 53.43) \pm 1.32 \times 3.56 \\
+(\bar{x}_{pt99} - \bar{x}_{pt1}) \pm t^\star_{df} \times SE &=& (44.50 - 53.43) \pm 1.72 \times 3.56 \\
 \pause
-&=& -8.93 \pm  4.71 \\
+&=& -8.93 \pm  6.12 \\
 \pause
-&=& (-13.63, -4.22)
+&=& (-15.05, -2.81)
 \end{eqnarray*}
 \pause
-We are 90\% confident that the average point price of a 0.99 carat diamond is \$13.63 to \$4.22 lower than the average point price of a 1 carat diamond.
+We are 90\% confident that the average point price of a 0.99 carat diamond is \$15.05 to \$2.81 lower than the average point price of a 1 carat diamond.
 }
 
 \end{frame}
@@ -696,6 +698,25 @@ If the alternative hypothesis is actually true, what is the chance that we make 
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Steps for computing power}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{enumerate}
+        \item Plot the sampling distribution of $\bar{x}_1 - \bar{x}_2$ under $H_0$ and $H_A$.
+        \item Find rejection region for $\bar{x}_1 - \bar{x}_2$ under $H_0$.
+        \item Power $= $ area under $f_A$ in rejection region.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{../Lecture27/figures/power_2sample_schematic_twosided.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
