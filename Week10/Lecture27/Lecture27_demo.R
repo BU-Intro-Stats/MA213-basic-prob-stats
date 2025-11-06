@@ -70,6 +70,7 @@ plt <- plt +
 
 print(plt)
 
-power <- pnorm(lower_boundary, mean=alt_mean, sd=se) + (1 - pnorm(upper_boundary, mean=alt_mean, sd=se))
+power <- pnorm(lower_boundary, mean=alt_mean, sd=se) + 
+        (1 - pnorm(upper_boundary, mean=alt_mean, sd=se))
 
 

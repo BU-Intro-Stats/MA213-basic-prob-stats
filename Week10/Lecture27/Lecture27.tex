@@ -109,26 +109,47 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Steps for computing power}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{enumerate}
+        \item Plot the sampling distribution of $\bar{x}_1 - \bar{x}_2$ under $H_0$ and $H_A$.
+        \item Find rejection region for $\bar{x}_1 - \bar{x}_2$ under $H_0$.
+        \item Power $= $ area under $f_A$ in rejection region.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{../Lecture27/figures/power_2sample_schematic_twosided.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \frametitle{Type 2 error rate}
 
 If the alternative hypothesis is actually true, what is the chance that we make a Type 2 Error, i.e. we fail to reject the null hypothesis even when we should reject it?
-
+\pause
 \begin{itemize}
 
-\item The answer is not obvious.
+\item The answer is not obvious, because we don't know the true population mean under the alternative hypothesis
+\pause
+\item If the true population mean $\mu_{diff}$ is very close to the null hypothesis value $\mu_0$, it will be difficult to detect a difference (and reject $H_0$).
 
-\item If the true population average is very close to the null hypothesis value, it will be difficult to detect a difference (and reject $H_0$).
-
-\item If the true population average is very different from the null hypothesis value, it will be easier to detect a difference.
-
-\item Clearly, $\beta$ depends on the \hl{effect size} ($\delta$)
+\item If the true population mean is very different from the null hypothesis value, it will be easier to detect a difference.
+\pause
+\item Clearly, $\beta$ depends on the \hl{effect size} ($\delta=|\mu_{diff} - \mu_0|$)
+\pause
+\item Typically, we will choose a value for $\mu_{diff}$ under $H_A$ based on \hl{practical significance}, and compute $\beta$ based on that.
 \end{itemize}
 
 \end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -172,6 +193,10 @@ Suppose researchers would like to run the clinical trial on patients with systol
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Calculate the rejection region}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Example - BP, minimum effect size required to reject $H_0$}
 
@@ -198,7 +223,7 @@ We reject $H_0$ if
 \frac{Point\; Estimate - Null\; Value}{SE} &> z^\star
 \end{align*}
 \end{column}
-\begin{column}{0.4\textwidth}
+\begin{column}{0.4\textwidth}\pause
 So we will reject $H_0$ if
 \begin{align*}
 Point\; Estimate &< Null \;Value - z^\star \times SE \\
@@ -209,13 +234,19 @@ Point\; Estimate &> Null\; Value + z^\star \times SE
 \end{columns}
 }
 \pause
+\soln{
 The difference should be greater than $1.96 * 1.70 = 3.326$\\
 or less than $ -1.96 * 1.70 = -3.326$.
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\section{Edfinity Quiz: Calculate the Power}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
 \frametitle{Example - BP, power}
 
 {\dq
@@ -229,12 +260,22 @@ Suppose that the company researchers care about finding any effect on blood pres
 
 \pause
 
-\[ Z = \frac{-3.326 - (-3)}{1.70} = -0.19 \]
+\vspace{-2.5em}
+\[ Pr(Point Estimate > 3.326 \mid H_A) + Pr(Point Estimate < -3.326 \mid H_A) \]
 
 \pause
 
-\[ P(Z < -0.19) = 0.4239 \]
+\begin{verbatim}
+> power <- pnorm(-3.326, mean=mu_A, sd=SE) + 
++         (1 - pnorm(3.326, mean=mu_A, sd=SE))
+[1] 0.4238905
+\end{verbatim}
 
+\pause
+\vspace{-1em}
+{\footnotesize
+There is a 42.4\% chance of detecting an effect of 3 mmHg or larger with this study design.
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -299,7 +340,7 @@ Suppose that the company researchers care about finding any effect on blood pres
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Example - BP, required sample size for 80\% power}
 
 {\dq
@@ -308,11 +349,51 @@ What sample size will lead to a power of 80\% for this test?
 }}
 
 \pause
-
-\includegraphics[width=\textwidth]{\chp7@path/7-4_power/figures/power/power_null_0_0-76_with_alt_at_3_and_shaded}
+\footnotesize{
+Solve the problem backwards. Start by using the normal approximation (can go back and use the t distribution if we come up with a small n).
+}
 
 \pause
 
+\includegraphics[width=\textwidth]{\chp7@path/7-4_power/figures/power/power_null_0_0-76_with_alt_at_3_and_shaded}
+\pause
+
+% Overlay arrows and labels using TikZ, aligned to figure axis (-10 to +10)
+\begin{tikzpicture}[overlay, remember picture]
+  % The image is centered and spans 22 units (-11 to +11)
+  % We'll use 1 unit = 0.045\textwidth, so 22 units = full width
+  \def\unit{0.045\textwidth}
+  % Place origin at center of image (x=0)
+  \coordinate (imgcenter) at ([yshift=-0.5cm]current page.center); % adjust yshift to align with axis
+
+  % 0.84 SE arrow (yellow), from x=0 to x=0.84
+  \draw[<->, thick, yellow!80!black]
+    ([xshift={-3*\unit}, yshift=0.5cm]imgcenter) -- ([xshift={-1.83*\unit}, yshift=0.5cm]imgcenter);
+  \node[fill=white, text=yellow!80!black, font=\bfseries, anchor=west]
+    at ([xshift={-3.5*\unit}, yshift=-0.1cm]imgcenter) {0.84 SE};
+
+  % 1.96 SE arrow (red), from x=0 to x=1.96
+  \draw[<->, thick, red!80!black]
+    ([xshift={-1.83*\unit}, yshift=0.5cm]imgcenter) -- ([xshift={0*\unit}, yshift=0.5cm]imgcenter);
+  \node[fill=white, text=red!80!black, font=\bfseries, anchor=west]
+    at ([xshift={-1.5*\unit}, yshift=-0.1cm]imgcenter) {1.96 SE};
+\end{tikzpicture}
+
+\pause
+
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+  \begin{verbatim}
+> qnorm(p = 0.80)
+[1] 0.8416212
+> qnorm(p = 0.975)
+[1] 1.959964
+> qnorm(p = 0.80) + qnorm(p = 0.975)
+[1] 2.801585
+\end{verbatim}
+
+\end{column}
+\begin{column}{0.5\textwidth}
 \[ SE = \frac{3}{2.8} = 1.07142 \]
 
 \pause
@@ -322,6 +403,8 @@ What sample size will lead to a power of 80\% for this test?
 \pause
 
 \[ n = 250.88 \rightarrow n \ge 251 \]
+\end{column}
+\end{columns}
 
 \end{frame}
 
@@ -339,10 +422,6 @@ What sample size will lead to a power of 80\% for this test?
 \end{center}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: How would you increase power in your experiments or study design?}  % Ask what students think before revealing the answers below; can be an open-answer question to get all their ideas
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
