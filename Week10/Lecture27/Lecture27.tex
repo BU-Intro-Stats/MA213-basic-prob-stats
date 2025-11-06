@@ -150,6 +150,29 @@ If the alternative hypothesis is actually true, what is the chance that we make 
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Example - Blood Pressure (BP)}
+
+{\dq
+{\footnotesize
+A pharmaceutical company has developed a new drug for lowering blood pressure, and they are preparing a clinical trial to test the drug's effectiveness. They recruit people who are taking a particular standard blood pressure medication, and half of the subjects are given the new drug (treatment) and the other half continue to take their current medication through generic-looking pills to ensure blinding (control). They plan to run a hypothesis test to determine if there is a difference in mean systolic blood pressure between the treatment and control groups after 3 months of treatment. 
+
+They would like to know if their current study design (100 subjects per group) has enough power to detect a \hl{practically significant} effect of 3 mmHg or larger.
+}
+}
+
+{\footnotesize
+Steps:
+\begin{itemize}
+  \item Design the hypothesis test that they will run, including $H_0$ and $H_A$ and compute the standard error for the difference in sample means
+  \item Use the sampling distribution under $H_0$ to find the rejection region for the test
+  \item Use the sampling distribution under $H_A$ to compute the power to detect an effect of 3 mmHg
+\end{itemize}
+}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -366,13 +389,13 @@ Solve the problem backwards. Start by using the normal approximation (can go bac
   % Place origin at center of image (x=0)
   \coordinate (imgcenter) at ([yshift=-0.5cm]current page.center); % adjust yshift to align with axis
 
-  % 0.84 SE arrow (yellow), from x=0 to x=0.84
+  % 0.84 SE arrow (yellow)
   \draw[<->, thick, yellow!80!black]
     ([xshift={-3*\unit}, yshift=0.5cm]imgcenter) -- ([xshift={-1.83*\unit}, yshift=0.5cm]imgcenter);
   \node[fill=white, text=yellow!80!black, font=\bfseries, anchor=west]
-    at ([xshift={-3.5*\unit}, yshift=-0.1cm]imgcenter) {0.84 SE};
+    at ([xshift={-4*\unit}, yshift=-0.1cm]imgcenter) {0.84 SE};
 
-  % 1.96 SE arrow (red), from x=0 to x=1.96
+  % 1.96 SE arrow (red)
   \draw[<->, thick, red!80!black]
     ([xshift={-1.83*\unit}, yshift=0.5cm]imgcenter) -- ([xshift={0*\unit}, yshift=0.5cm]imgcenter);
   \node[fill=white, text=red!80!black, font=\bfseries, anchor=west]
