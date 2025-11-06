@@ -12,7 +12,7 @@
 
 %\documentclass[11pt,containsverbatim,handout]{beamer}
 %\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+%\pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
 %\newcommand{\soln}[1]{ }
 %\newcommand{\solnGr}{ }
 
@@ -89,12 +89,15 @@ Some images may be included under fair use guidelines (educational purposes).}}
   \begin{center}
       \includegraphics[width=\textwidth]{../Lecture27/figures/whatif_lowpower.png}
   \end{center}
+  \soln{
+	\vspace{-2em}
   \small{
   \begin{enumerate}
 	\item The probability of correctly rejecting $H_0$ is very low (\hl{Power})
 	\item You can only detect large effects (leading to \hl{Magnitude Errors})
 	\item It becomes possible to reject $H_0$ in the wrong direction (\hl{Sign Errors})
   \end{enumerate}
+  }
   }
 \end{frame}
 
@@ -142,6 +145,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	\begin{columns}
 		\column{0.55\textwidth}
 			\textbf{Claim:} beautiful people are \textcolor{red}{8\%} more likely to have female offspring
+			\pause
 			\begin{itemize}
 				\item \textbf{N=2972} survey respondents
 				\item Rated 1-5 on ``attractiveness''
@@ -151,17 +155,19 @@ Some images may be included under fair use guidelines (educational purposes).}}
 					\item Others (1-4) had 48\% girls
 				\end{itemize}
 			\end{itemize}
+			\pause
 		\vspace{0.2em}
 		\begin{block}{}
 			\footnotesize
 				\textcolor{green!60!black}{Realistic effect sizes for sex ratios are about \textcolor{red}{\textbf{1\%}} (This is a generous estimate based on the literature for changes in sex ratios due to parental age, birth order, etc.)}
 		\end{block}
+		\pause
 		\vspace{0.5em}
 		\column{0.44\textwidth}
 			\textbf{Hypothesis Test}
 			\begin{itemize}
 				\item Level $\alpha = 0.05$
-				\item Normal approx. $np > 15$
+				\item Normal approx. $np > 15$ and $n(1-p) > 15$ 
 				\item Target parameter: $d = p_5 - p_{1-4}$
 				\item Test statistic: $\hat{d} = \hat{p}_5 - \hat{p}_{1-4}$
 				\item $H_0: d = 0$
@@ -184,9 +190,9 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	&\frac{\hat{d} - 0}{\hat{\sigma}_{\hat{d}}} = Z \sim N(0,1) \\
 	&\Pr\left(Z > \frac{\hat{d}}{\hat{\sigma}_{\hat{d}}} \mid H_0\right) = 0.0075
 	\end{align*}
-
-	Using R, $\Pr(Z > 2.4) = 0.0075$
-
+\pause
+	Using \texttt{qnorm} in R, $\Pr(Z > 2.4) = 0.0075$
+\pause
 	\begin{align*}
 	\frac{\hat{d}}{\hat{\sigma}_{\hat{d}}} = 2.4 \implies \hat{\sigma}_{\hat{d}} = \frac{8}{2.4} = \textcolor{red}{3.3\%}
 	\end{align*}
@@ -254,6 +260,11 @@ Some images may be included under fair use guidelines (educational purposes).}}
 			\item There is a high probability that your estimated effect is in the wrong direction (Sign Error)
 			\item There is a high probability that your estimated effect is larger than any actual effect (Magnitude Error)
 		\end{itemize}
+		\item If you suspect that a study is underpowered, be very cautious when interpreting statistically significant results
+		\begin{itemize}
+			\item Don't trust large effect sizes
+			\item Don't trust the direction of the effect
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -262,7 +273,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	\begin{itemize}
 		\item To avoid sign and magnitude errors, be sure to calculate power using a realistic effect size and only report results when power $>0.8$
 		\begin{itemize}
-			\item Never calculate power based on the effect size from the current experiment
+			\item Never calculate power post-hoc based on the effect size from the current experiment
 			\item Avoid basing the effect size on prior studies with low power (due to small sample size or high standard deviation)
 			\item Ideally, base it on prior studies with high power (even if the question of interest was different)
 		\end{itemize}
