@@ -68,7 +68,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Review} % TODO: ANOVA recap slides
+\section{Review}
 
 \begin{frame}
 \frametitle{}
@@ -457,6 +457,26 @@ p-value = 0.0018 \qquad \text{{\footnotesize (two-sided)}} \\
 {\small Reject $H_0$, the data provide convincing evidence of a difference between the average aldrin concentrations at bottom and surface.}
 }
 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{P-Hacking}
+
+What if we looked at the data and decided to run only the bottom vs. surface test because we saw that those box plots looked the most different?
+
+Since we only ran one test, we could use $\alpha = 0.05$ instead of the Bonferroni corrected $\alpha^\star = 0.0167$, right???
+
+\pause
+
+This is called \hl{p-hacking} or \hl{data dredging/snooping/fishing}, and it inflates the Type I error rate!
+
+It is unethical, because it misleads others into thinking there is stronger evidence against the null hypothesis than there really is.
+
+\pause
+
+To avoid p-hacking, we should decide on the analyses to be done before looking at the data (\hl{preregistration}).
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
