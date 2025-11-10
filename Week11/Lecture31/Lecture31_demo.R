@@ -28,7 +28,13 @@ print(p2)
 poverty$predicted <- 64.78 - 0.62 * poverty$Graduates
 poverty$residuals <- poverty$Poverty - poverty$predicted
 
-# Plot Graduates vs. residuals
+
+# ---- 4. Compute correlation
+correlation <- cor(poverty$Graduates, poverty$Poverty)
+cat("Correlation between % HS Graduates and % in Poverty:", correlation, "\n")
+
+#---------------------------------------------------------------------------
+# ---- 5. Residuals plot
 p3 = ggplot(poverty, aes(x = Graduates, y = residuals)) +
   geom_point(color = "darkgreen") +
   geom_hline(yintercept = 0, linetype = "dashed") +
@@ -36,7 +42,3 @@ p3 = ggplot(poverty, aes(x = Graduates, y = residuals)) +
        x = "% HS Graduates",
        y = "Residuals")
 print(p3)
-
-# ---- 4. Compute correlation
-correlation <- cor(poverty$Graduates, poverty$Poverty)
-cat("Correlation between % HS Graduates and % in Poverty:", correlation, "\n")
