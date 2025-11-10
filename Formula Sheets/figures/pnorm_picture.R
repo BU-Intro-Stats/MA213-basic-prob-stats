@@ -43,3 +43,37 @@ p <- ggplot() +
 
 # Save the plot to PNG at width = 2 in and height = 1.5 in
 ggsave(filename = "pnorm_picture.png", plot = p, width = 4, height = 3, units = "in", dpi = 300)
+
+
+
+# t distribution figure
+ndf <- 7
+q_t <- 1.5
+
+# x range based on t quantiles for stability
+xr <- qt(c(0.001, 0.999), df = ndf)
+xs <- seq(xr[1], xr[2], length.out = 1200)
+ys <- dt(xs, df = ndf)
+
+df_plot <- data.frame(x = xs, y = ys)
+shade_df <- subset(df_plot, x <= q_t)
+
+ticks <- seq(-3, 3, by = 1)
+
+p_t <- ggplot(df_plot, aes(x = x, y = y)) +
+    geom_line(size = 1, colour = "steelblue4") +
+    geom_ribbon(data = shade_df, aes(ymin = 0, ymax = y), fill = "palegreen3", alpha = 0.6) +
+    geom_vline(xintercept = q_t, colour = "black") +
+    geom_text(data = data.frame(x = q_t + 0.15, y = dt(q_t, df = ndf) + 0.03, label = "q"),
+                        aes(x = x, y = y, label = label), size = 4, hjust = 0) +
+    geom_text(aes(x = 0, y = max(y) * 0.6, label = paste0("area=p")),
+                        size = 4) +
+    labs(title = "p = pt(q, df)",
+             x = "x",
+             y = "Density") +
+    scale_x_continuous(breaks = ticks, labels = as.character(ticks), limits = c(xr[1], xr[2])) +
+    theme_minimal(base_size = 13) +
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+                axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave(filename = "tdist_picture.png", plot = p_t, width = 4, height = 3, units = "in", dpi = 300)
