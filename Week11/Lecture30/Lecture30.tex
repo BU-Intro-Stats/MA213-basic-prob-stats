@@ -284,9 +284,9 @@ p-value is the probability of at least as large a ratio between the ``between gr
 \frametitle{Multiple comparisons and Type I Error Rate}
 If $\alpha=0.05$:
 \begin{itemize}
-\item \dq{What is the chance that I get a type I error when doing 1 test?} \soln{\only<2-5>{ 0.05 (5\%) } }
-\item \dq{How many Type I errors would I expect if I did 20 independent tests with no true effects?} \soln{\only<3-5>{ 1 (20 x 0.05) } }
-\item \dq{What is the probability of at least one Type I error if I do 20 independent tests with no true effects?} \soln{\only<4-5>{ $1 - (1 - 0.05)^{20} \approx 0.64$ (64\%) } }
+\item \dq{What is the chance that I get a type I error when doing 1 test?} \soln{\only<2-5>{ 0.05 (5\%)  -- definition of $\alpha$} }
+\item \dq{How many Type I errors would I expect if I did 100 independent tests with no true effects?} \soln{\only<3-5>{$X\sim Binomial(100, 0.05)$ so $E[X]=np=5$} }
+\item \dq{What is the probability of at least one Type I error if I do 100 independent tests with no true effects?} \soln{\only<4-5>{ $1 - (1 - 0.05)^{100} \approx 0.994$ (99.4\%) } }
 \item \dq{What should I do to alpha if I want to control the probability of at least one Type I error?} \soln{\only<5>{ make it smaller } }
 \end{itemize}
 
@@ -324,6 +324,10 @@ where $K$ is the number of comparisons being considered.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Multiple Comparisons}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Determining the modified $\alpha$}
 
@@ -341,29 +345,29 @@ where $K$ is the number of comparisons being considered.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Which means differ?}
+\frametitle{Which means differ? Post-hoc t-tests}
 
 \pq{Based on the box plots below, which means would you expect to be significantly different?}
 
-\twocol{0.6}{0.4}{
+% \twocol{0.6}{0.4}{
 \includegraphics[width=\textwidth]{\chp7@path/7-5_anova/figures/aldrin/homo}
-}
-{
-\begin{enumerate}[(a)]
-\item bottom \& surface
-\item bottom \& mid-depth
-\item mid-depth \& surface
-\item bottom \& mid-depth; mid-depth \& surface
-\item bottom \& mid-depth; bottom \& surface; mid-depth \& surface
-\end{enumerate}
-}
+% }
+% {
+% \begin{enumerate}[(a)]
+% \item bottom \& surface
+% \item bottom \& mid-depth
+% \item mid-depth \& surface
+% \item bottom \& mid-depth; mid-depth \& surface
+% \item bottom \& mid-depth; bottom \& surface; mid-depth \& surface
+% \end{enumerate}
+% }
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Which means differ? (cont.)}
+\frametitle{Which means differ? Post-hoc t-tests (cont.)}
 
 If the ANOVA assumption of equal variability across groups is satisfied, we can use the data from all groups to estimate variability:
     
@@ -424,7 +428,7 @@ T_{df_E} &=& \frac{(\bar{x}_{bottom} - \bar{x}_{middepth})}{\sqrt{ \frac{MSE}{n_
 \pause
 T_{27} &=& \frac{( 6.04 - 5.05 )}{\sqrt{ \frac{1.38}{10} + \frac{1.38}{10} }} = \frac{0.99}{0.53}  =1.87 \\
 \pause
-0.05 &<& p-value < 0.10 \qquad \text{{\footnotesize (two-sided)}} \\
+p-value &=& \texttt{2*pt(1.87,27,lower.tail=FALSE)} = 0.072 \quad \text{{\footnotesize (two-sided)}} \\
 \pause
 \alpha^\star &=& 0.05 / 3 = 0.0167
 \end{eqnarray*}
@@ -485,13 +489,14 @@ To avoid p-hacking, we should decide on the analyses to be done before looking a
 \frametitle{The Garden of Forking Paths}
 
 Multiple comparisons can be \hl{unintentional}. Consider all of the decisions that can be made during data collection, analysis, and reporting, e.g.:
+\pause
 \begin{itemize}
 \item Outlier removal: after plotting data, there are some extreme values. Should we remove outliers or not?
 \item Choice of statistics of interest: compare means vs medians?
 \item Transformations: maybe transform the response (log / square root) if skewed.
 \item Subgroup analysis: split by gender or by study hours (above vs below median) and test separately.
 \end{itemize}
-
+\pause
 \hl{Over time, these choices can lead to an increased Type I error rate, even if each individual test is done at the nominal significance level.}
 
 \end{frame}
@@ -525,10 +530,10 @@ Multiple comparisons can be \hl{unintentional}. Consider all of the decisions th
 \begin{itemize}
     \item Many decisions in study design and analysis can unintentionally increase the chance of false positives:
     \begin{itemize}
-        \item How to group attractiveness ratings (e.g., 5 vs 1-4, or other splits)?
-        \item Whether to include/exclude certain respondents or outliers.
-        \item Choice of outcome variable (first child, all children, etc.).
-        \item Selection of statistical tests and transformations.
+        \item How to group attractiveness ratings (e.g., 5 vs 1-4, or other splits)? Why didn't they use an ANOVA?\pause
+        \item Whether to include/exclude certain respondents or outliers.\pause
+        \item Choice of outcome variable (first child, all children, etc.).\pause
+        \item Selection of statistical tests and transformations.\pause
         \item Subgroup analyses (e.g., by age, gender, etc.).
     \end{itemize}
     \item Each choice can be seen as a ``fork'' in the analysis path, increasing the Type I error rate.
@@ -543,6 +548,7 @@ Multiple comparisons can be \hl{unintentional}. Consider all of the decisions th
 \begin{itemize}
     \item Avoid hypothesis testing when inappropriate
     \item Preregister analysis plans to prevent data dredging
+    \item Use Bonferroni or other corrections for multiple comparisons
     \item Report effect sizes and confidence intervals alongside p-values
     \item Use data splitting for exploratory work to validate findings
 \end{itemize}
