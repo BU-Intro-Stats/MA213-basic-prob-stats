@@ -61,20 +61,39 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 }
 
-\include{Lecture31_agenda}
+\include{Lecture32_agenda}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Review}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
-    \frametitle{Last time: residuals and correlation}
+\frametitle{Poverty vs. HS graduate rate}
+
+The \hl{scatterplot} below shows the relationship between HS graduate rate in all 50 US states and DC and the \% of residents who live below the poverty line {\small (income below \$23,050 for a family of 4 in 2012)}.
+
+\twocol{0.55}{0.45}{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-1_linefit_res_corr/figures/poverty/poverty_hsgrad}
+\end{center}
+}
+{
+\dq{Response variable?}
+% \pause
+\soln{\% in poverty}
+% \pause
+\dq{Explanatory variable?}
+% \pause
+\soln{\% HS grad}
+% \pause
+\dq{Relationship?}
+% \pause
+\soln{linear, negative, moderately strong}
+}
+
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -111,6 +130,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \item Easier to compute by hand and using software
 \pause
 \item In many applications, a residual twice as large as another is usually more than twice as bad
+\pause
+\item Has nice statistical properties under certain conditions (if residuals are normally distributed with constant variability)
 \end{enumerate}
 
 \end{itemize}
@@ -175,7 +196,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \pause
 
-\item Methods for fitting a model to non-linear relationships exist, but are beyond the scope of this class. If this topic is of interest, an \href{http://www.openintro.org/download.php?file=os2_extra_nonlinear_relationships&referrer=/stat/textbook.php}{Online Extra is available on openintro.org} covering new techniques.
+\item Methods for fitting a model to non-linear relationships exist, but are beyond the scope of this class. 
 
 \pause
 
@@ -188,26 +209,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{center}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Checking the conditions}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Slope and intercept}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Practice with slope and intercept}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Regression, extrapolation}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Putting it all together}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -240,6 +241,10 @@ e &= \%~in~poverty - \widehat{\%~in~poverty} \\
 }
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{R Demonstration: Residuals plot}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -302,6 +307,10 @@ e &= \%~in~poverty - \widehat{\%~in~poverty} \\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Checking the conditions}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \frametitle{Checking conditions}
@@ -433,6 +442,15 @@ b_0 &= 11.35 - (-0.62) \times 86.01 \\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Slope and intercept}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Practice with slope and intercept}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}
 \frametitle{}
@@ -616,6 +634,10 @@ $\:$ \\
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Interpretation of $R^2$}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
