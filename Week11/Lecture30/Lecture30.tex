@@ -10,16 +10,17 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\chp7@path{../../Chp 7}
+\def\chpvii@path{../../Chp 7}
+\def\chpviii@path{../../Chp 8}
 \input{../../lec_style.tex}
 
 
@@ -74,7 +75,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \frametitle{}
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{\chp7@path/7-5_anova/figures/aldrin/wolf}
+\includegraphics[width=0.5\textwidth]{\chpvii@path/7-5_anova/figures/aldrin/wolf}
 \end{center}
 
 {\small
@@ -217,7 +218,7 @@ p-value is the probability of at least as large a ratio between the ``between gr
 
 % \pause
 
-\includegraphics[width=0.9\textwidth]{\chp7@path/7-5_anova/figures/aldrin/f}
+\includegraphics[width=0.9\textwidth]{\chpvii@path/7-5_anova/figures/aldrin/f}
 
 \end{frame}
 
@@ -350,7 +351,7 @@ where $K$ is the number of comparisons being considered.
 \pq{Based on the box plots below, which means would you expect to be significantly different?}
 
 % \twocol{0.6}{0.4}{
-\includegraphics[width=\textwidth]{\chp7@path/7-5_anova/figures/aldrin/homo}
+\includegraphics[width=\textwidth]{\chpvii@path/7-5_anova/figures/aldrin/homo}
 % }
 % {
 % \begin{enumerate}[(a)]
@@ -466,6 +467,23 @@ p-value = 0.0018 \qquad \text{{\footnotesize (two-sided)}} \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
+\frametitle{Which means differ? Post-hoc t-tests}
+
+We found that the average aldrin concentration at bottom and surface are significantly different, but bottom and mid-depth are not.
+\vspace{-1em}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chpvii@path/7-5_anova/figures/aldrin/homo}
+\end{center}
+\vspace{-1em}
+\Note{Don't be tempted to compare the p-values or hypothesis test results! If you want to compare effects, design a hypothesis test for that.}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
 \frametitle{P-Hacking}
 
 What if we looked at the data and decided to run only the bottom vs. surface test because we saw that those box plots looked the most different?
@@ -567,7 +585,160 @@ Multiple comparisons can be \hl{unintentional}. Consider all of the decisions th
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+\section{Preview: Linear Regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Line fitting, residuals, and correlation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fitting a line to data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Modeling numerical variables}
+
+In this unit we will learn to quantify the relationship between two numerical variables, as well as modeling numerical response variables using a numerical or categorical explanatory variable.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Poverty vs. HS graduate rate}
+
+The \hl{scatterplot} below shows the relationship between HS graduate rate in all 50 US states and DC and the \% of residents who live below the poverty line {\small (income below \$23,050 for a family of 4 in 2012)}.
+
+\twocol{0.55}{0.45}{
+\begin{center}
+\includegraphics[width=\textwidth]{\chpviii@path/8-1_linefit_res_corr/figures/poverty/poverty_hsgrad}
+\end{center}
+}
+{
+\dq{Response variable?}
+\pause
+\soln{\% in poverty}
+\pause
+\dq{Explanatory variable?}
+\pause
+\soln{\% HS grad}
+\pause
+\dq{Relationship?}
+\pause
+\soln{linear, negative, moderately strong}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Using a linear regression to predict poverty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+The linear model for predicting poverty from high school graduation rate in the US is
+
+\[ \hat{poverty} = 64.78 - 0.62 * HS_{grad} \]
+
+The ``hat" is used to signify that this is an estimate.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\dq{The high school graduate rate in Georgia is 85.1\%. What poverty level does the model predict for this state?}
+
+\pause
+
+\[ 64.78 - 0.62 * 85.1 = 12.018 \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Eyeballing the line}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Residuals}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Residuals}
+
+\hl{Residuals} are the leftovers from the model fit: Data = Fit + Residual
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chpviii@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_res}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Residuals (cont.)}
+
+\formula{Residual}{
+Residual is the difference between the observed ($y_i$) and predicted $\hat{y}_i$. 
+\[ e_i = y_i - \hat{y}_i \]
+}
+\vspace{-0.5cm}
+\twocol{0.6}{0.4}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chpviii@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_res_text}
+\end{center}
+}
+{
+\pause
+\begin{itemize}
+\item \% living in poverty in DC is 5.44\% more than predicted.
+\pause
+\item \% living in poverty in RI is 4.16\% less than predicted.
+\end{itemize}
+}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Describing linear relationships with correlation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Quantifying the relationship}
+
+\begin{itemize}
+
+\item \hl{Correlation} describes the strength of the \orange{linear} association between two variables.
+
+\pause
+
+\[ R = \frac{1}{n} \sum_{i=1}^n \left(\frac{x_i - \bar{x}}{s_x}\right) \left(\frac{y_i - \bar{y}}{s_y}\right) \]
+
+\pause
+
+\item It takes values between -1 (perfect negative) and +1 (perfect positive).
+
+\pause
+
+\item A value of 0 indicates no linear association.
+
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
