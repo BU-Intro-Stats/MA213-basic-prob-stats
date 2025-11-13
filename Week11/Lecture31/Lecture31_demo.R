@@ -19,7 +19,7 @@ p1 = ggplot(poverty, aes(x = Graduates, y = Poverty)) +
 print(p1)
 
 # ---- 2. Plot line 64.78 - 0.62*Graduates
-p2 = p1 + geom_abline(slope = -0.62, intercept = 64.78, color = "red", size = 1) +
+p2 = p1 + geom_abline(slope = -0.62, intercept = 64.78, color = "red", linewidth = 1) +
   labs(title = "Scatterplot with Fitted Line")
 print(p2)
 
@@ -42,3 +42,36 @@ p3 = ggplot(poverty, aes(x = Graduates, y = residuals)) +
        x = "% HS Graduates",
        y = "Residuals")
 print(p3)
+
+#---------------------------------------------------------------------------
+# ---- 6. Histogram of residuals
+p4 = ggplot(poverty, aes(x = residuals)) +
+  geom_histogram(binwidth = 1, boundary=0, fill = "lightblue", color = "black") +
+  labs(title = "Histogram of Residuals",
+       x = "Residuals",
+       y = "Count")
+print(p4)
+
+# -------------------------------------------------------
+# ---- 7. Slope and intercept of the least squares line
+
+# b1=sy/sx * R
+sx <- sd(poverty$Graduates)
+sy <- sd(poverty$Poverty)
+R <- cor(poverty$Graduates, poverty$Poverty)
+b1 <- R * (sy / sx)
+
+# b0= ybar - b1*xbar
+xbar <- mean(poverty$Graduates)
+ybar <- mean(poverty$Poverty)
+b0 <- ybar - b1 * xbar
+
+# plot line on scatterplot
+p4 = ggplot(poverty, aes(x = Graduates, y = Poverty)) +
+  geom_point(color = "blue") +
+  geom_abline(slope = b1, intercept = b0, color = "red", linewidth = 1) +
+  labs(title = "Least Squares Regression Line",
+       x = "% HS Graduates",
+       y = "% in Poverty")
+print(p4) 
+
