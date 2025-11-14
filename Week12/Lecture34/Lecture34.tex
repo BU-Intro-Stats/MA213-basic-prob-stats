@@ -91,21 +91,109 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Indicator and categorical variables as predictors}
+\section{Indicator and categorical variables as predictors}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Poverty vs. region (east, west)}
+\frametitle{The loans dataset}
+
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{r ccc ccc cc}
+  \hline
+   & interest\_rate & \alt<3->{\hl{income\_ver}}{income\_ver}
+       & debt\_to\_income & credit\_util
+       & \alt<2->{\hl{bankruptcy}}{bankruptcy} & term
+       & issued & credit\_checks \\ 
+  \hline
+  1 & 14.07 & \alt<3->{\hl{verified}}{verified} & 18.01 & 0.55 & \alt<2->{\hl{0}}{0} & 60 & Mar2018 & 6 \\ 
+  2 & 12.61 & \alt<3->{\hl{not}}{not} & 5.04 & 0.15 & \alt<2->{\hl{1}}{1} & 36 & Feb2018 & 1 \\ 
+  3 & 17.09 & \alt<3->{\hl{source\_only}}{source\_only} & 21.15 & 0.66 & \alt<2->{\hl{0}}{0} & 36 & Feb2018 & 4 \\ 
+  4 & 6.72 & \alt<3->{\hl{not}}{not} & 10.16 & 0.20 & \alt<2->{\hl{0}}{0} & 36 & Jan2018 & 0 \\ 
+  5 & 14.07 & \alt<3->{\hl{verified}}{verified} & 57.96 & 0.75 & \alt<2->{\hl{0}}{0} & 36 & Mar2018 & 7 \\ 
+  6 & 6.72 & \alt<3->{\hl{not}}{not} & 6.46 & 0.09 & \alt<2->{\hl{0}}{0} & 36 & Jan2018 & 6 \\
+  $\vdots$ & $\vdots$ & $\vdots$ &
+      $\vdots$ & $\vdots$ & $\vdots$ &
+      $\vdots$ & $\vdots$ & $\vdots$ \\
+   \hline
+\end{tabular}%
+}
+
+\centering
+\resizebox{0.9\textheight}{!}{%
+\begin{tabular}{lp{14cm}}
+\hline
+{\bf variable} & {\bf description} \\
+\hline
+\var{interest\_rate} &
+  Interest rate for the loan. \\
+\alt<3->{\hl{\var{income\_ver}}}{\var{income\_ver}} &
+  \alt<3->{\hl{Categorical variable describing whether the borrower's
+  income source and amount have been verified,
+  with levels \resp{verified}, \resp{source\_only},
+  and \resp{not}.}}{Categorical variable describing whether the borrower's
+  income source and amount have been verified,
+  with levels \resp{verified}, \resp{source\_only},
+  and \resp{not}.} \\
+\var{debt\_to\_income} &
+  Debt-to-income ratio, which is the percentage of total debt
+  of the borrower divided by their total income. \\
+\var{credit\_util} &
+  Of all the credit available to the borrower,
+  what fraction are they utilizing.
+  For example, the credit utilization on a credit card would
+  be the card's balance divided by the card's credit limit. \\
+\alt<2->{\hl{\var{bankruptcy}}}{\var{bankruptcy}} &
+\alt<2->{\hl{An indicator variable for whether the borrower has a past
+  bankruptcy in her record. This variable takes a value of
+  \resp{1} if the answer is ``yes''
+  and \resp{0} if the answer is ``no''.}}{An indicator variable for whether the borrower has a past
+  bankruptcy in her record. This variable takes a value of
+  \resp{1} if the answer is ``yes''
+  and \resp{0} if the answer is ``no''.} \\
+\var{term} &
+  The length of the loan, in months. \\
+\var{issued} &
+  The month and year the loan was issued,
+  which for these loans is always during the first
+  quarter of 2018. \\
+\var{credit\_checks} &
+  Number of credit checks in the last 12 months.
+  For example, when filing an application for a credit card,
+  it is common for the company receiving the application
+  to run a credit check. \\
+\hline
+\end{tabular}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{How to include categorical variables in regression models}
+
+\begin{itemize}
+\item Categorical variables can be included in regression models using \hl{indicator} (dummy) variables, that each take on values 0 or 1.
+\item For a categorical variable with $k$ levels, we include $k-1$ indicator variables.
+\item One level is chosen as the \hl{reference level}, and the coefficients of the indicator variables represent the difference from this reference.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interest rate vs. bankruptcy}
 
 
-\[ \widehat{poverty} = 11.17 + 0.38 \times west \]
+\[ \widehat{rate} = 12.33 + 0.74 \times bankruptcy \]
 
 \begin{itemize}
 
-\item Explanatory variable: region, \hl{reference level:} east
+\item Explanatory variable: bankruptcy, \hl{reference level:} no bankruptcy (0)
 
-\item \hl{Intercept:} The estimated average poverty percentage in eastern states is 11.17\%
+\item \hl{Intercept:} The estimated average interest rate for borrowers with no bankruptcy is 12.33\%
 \pause
 \begin{itemize}
 \item This is the value we get if we plug in \orange{0} for the explanatory variable
@@ -113,10 +201,10 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \pause
 
-\item \hl{Slope:} The estimated average poverty percentage in western states is 0.38\% higher than eastern states.
+\item \hl{Slope:} The estimated average interest rate for borrowers with a past bankruptcy is 0.74\% higher than those with no bankruptcy.
 \pause
 \begin{itemize}
-\item Then, the estimated average poverty percentage in western states is 11.17 + 0.38 =  11.55\%.
+\item Then, the estimated average interest rate for borrowers with a past bankruptcy is 12.33 + 0.74 =  13.07\%.
 \pause
 \item This is the value we get if we plug in \orange{1} for the explanatory variable
 \end{itemize}
@@ -128,31 +216,32 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Poverty vs. region (northeast, midwest, west, south)}
+\frametitle{Interest rate vs. income verification (verified, source\_only, not)}
 
-\pq{Which region (northeast, midwest, west, or south) is the reference level?}
+\pq{Which income verification level (verified, source\_only, or not) is the reference level?}
 
 {\small
 \begin{center}
-\begin{tabular}{rrrrr}
+\begin{tabular}{l rrr r}
   \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \vspace{-3.7mm} & & & & \\
+  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
-(Intercept) & 9.50 & 0.87 & 10.94 & 0.00 \\ 
-region4midwest & 0.03 & 1.15 & 0.02 & 0.98 \\ 
-region4west & 1.79 & 1.13 & 1.59 & 0.12 \\ 
-region4south & 4.16 & 1.07 & 3.87 & 0.00 \\ 
-   \hline
+  (Intercept) &
+      11.0995 & 0.0809 & 137.18 & $<$0.0001 \\
+  income\_ver : \it{source\_only} &
+      1.4160 & 0.1107 & 12.79 & $<$0.0001 \\ 
+  income\_ver : \it{verified} &
+      3.2543 & 0.1297 & 25.09 & $<$0.0001 \\ 
+  \hline
 \end{tabular}
 \end{center}
 }
 
 \begin{enumerate}[(a)]
-\solnMult{northeast}
-\item midwest
-\item west
-\item south
-\item cannot tell
+\item verified
+\item source\_only
+\solnMult{not}
 \end{enumerate}
 
 \end{frame}
@@ -160,30 +249,32 @@ region4south & 4.16 & 1.07 & 3.87 & 0.00 \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Poverty vs. region (northeast, midwest, west, south)}
+\frametitle{Interest rate vs. income verification (verified, source\_only, not)}
 
-\pq{Which region (northeast, midwest, west, or south) has the lowest poverty percentage?}
+\pq{Which income verification level (verified, source\_only, or not) has the lowest interest rate?}
 
 {\small
 \begin{center}
-\begin{tabular}{rrrrr}
+\begin{tabular}{l rrr r}
   \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \vspace{-3.7mm} & & & & \\
+  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
-(Intercept) & 9.50 & 0.87 & 10.94 & 0.00 \\ 
-region4midwest & 0.03 & 1.15 & 0.02 & 0.98 \\ 
-region4west & 1.79 & 1.13 & 1.59 & 0.12 \\ 
-region4south & 4.16 & 1.07 & 3.87 & 0.00 \\ 
-   \hline
+  (Intercept) &
+      11.0995 & 0.0809 & 137.18 & $<$0.0001 \\
+  income\_ver : \it{source\_only} &
+      1.4160 & 0.1107 & 12.79 & $<$0.0001 \\ 
+  income\_ver : \it{verified} &
+      3.2543 & 0.1297 & 25.09 & $<$0.0001 \\ 
+  \hline
 \end{tabular}
 \end{center}
 }
 
 \begin{enumerate}[(a)]
-\solnMult{northeast}
-\item midwest
-\item west
-\item south
+\item verified
+\item source\_only
+\solnMult{not}
 \item cannot tell
 \end{enumerate}
 
@@ -968,7 +1059,11 @@ R^2_{adj} &=& 1 - \pr{ \frac{ SS_{Error} }{ SS_{Total} } \times \frac{n - 1}{n -
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 9.2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2945,8 +3040,3 @@ Not useful by itself, but allows us to compare with other thresholds.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% End document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\end{document}
