@@ -315,16 +315,7 @@ b_0 &= 11.35 - (-0.62) \times 86.01 \\
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R Demonstration: Slope and intercept}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Edfinity Quiz: Practice with slope and intercept}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \begin{frame}
 \frametitle{}
@@ -478,6 +469,10 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R Demonstration: Prediction and extrapolation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Using $R^2$ to describe the strength of a fit}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -510,6 +505,10 @@ $\:$ \\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: $R^2$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Edfinity Quiz: Interpretation of $R^2$}
 
@@ -591,7 +590,7 @@ To answer this question think of where the regression line would be with and wit
 
 \pause
 
-\item Outliers that lie horizontally away from the center of the cloud are called \hl{high leverage} points.
+\item Outliers that lie horizontally away from the center of the cloud (i.e. outliers with respect to the explanatory variable) are called \hl{high leverage} points.
 
 \pause
 
@@ -599,7 +598,7 @@ To answer this question think of where the regression line would be with and wit
 
 \pause
 
-\item In order to determine if a point is influential, visualize the regression line with and without the point. Does the slope of the line change considerably? If so, then the point is influential. If not, then it?s not an influential point.
+\item In order to determine if a point is influential, visualize the regression line with and without the point. Does the slope of the line change considerably? If so, then the point is influential. If not, then it's not an influential point.
 
 \end{itemize}
 
@@ -625,6 +624,10 @@ Data are available on the log of the surface temperature and the log of the ligh
 }
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Types of outliers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -670,10 +673,6 @@ Data are available on the log of the surface temperature and the log of the ligh
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Influential points and the best-fit line}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
 \frametitle{Recap}
 
@@ -712,6 +711,59 @@ Data are available on the log of the surface temperature and the log of the ligh
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{What to do with outliers? It's a judgment call! (Lecture 4)}
+\begin{itemize}
+  \item Considerations:
+  \begin{itemize}
+    \item Are they consistent with the rest of the data, e.g. a ``long tail"?
+    \item Are they errors in data collection or entry, or data points from a different population?
+    \item How will your analysis be affected by their presence/absence?
+  \end{itemize}
+  \item Remove?
+  \begin{itemize}
+    \item If they are errors in data collection or entry
+    \item If they are from a different population
+  \end{itemize}
+  \item Keep?
+  \begin{itemize}
+    \item Consider using robust statistics
+    \item Consider using transformations e.g. to account for skewness
+    \item (Advanced) Consider using a different model for your population
+  \end{itemize}
+  \item Look into them!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What to do with influential points?}
+\begin{itemize}
+  \item Considerations:
+  \begin{itemize}
+    \item Are they consistent with the rest of the data, e.g. a ``long tail"? 
+	\begin{itemize}
+	  \item Consider transforming the explanatory variable e.g. log transformation
+	\end{itemize}
+    \item Are they errors in data collection or entry, or data points from a different population?
+    \begin{itemize}
+	  \item If errors, correct them if possible or remove them
+	  \item If from a different population, consider analyzing separately
+	\end{itemize}
+    \item How will your analysis be affected by their presence/absence?
+    \begin{itemize}
+		\item Plot the regression lines with and without the influential points
+	    \item If they change your conclusions, you need to address them carefully
+	\end{itemize}
+  \end{itemize}\pause
+  \item Overall:
+  \begin{itemize}
+    \item Document any decisions made regarding outliers or influential points
+    \item Communicate clearly with stakeholders about the presence and impact of influential points
+  \end{itemize}
+\end{itemize}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

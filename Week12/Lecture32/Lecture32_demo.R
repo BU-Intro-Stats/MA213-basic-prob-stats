@@ -7,44 +7,9 @@ setwd(dirname(getSourceEditorContext()$path))
 # Load libraries
 library(ggplot2)
 
-# ---- 1. Scatterplot for the poverty dataset
+# ---- 1. Reminder: least squares line for the poverty dataset
 # Load data
 poverty <- read.table("poverty.txt", header = T, sep = "\t")
-
-p1 = ggplot(poverty, aes(x = Graduates, y = Poverty)) +
-  geom_point(color = "blue") +
-  labs(title = "Scatterplot of % in Poverty vs. % HS Graduates",
-       x = "% HS Graduates",
-       y = "% in Poverty")
-print(p1)
-
-
-# ---- 2. Histogram of residuals
-poverty$predicted <- 64.78 - 0.62 * poverty$Graduates
-poverty$residuals <- poverty$Poverty - poverty$predicted
-
-p2 = ggplot(poverty, aes(x = residuals)) +
-  geom_histogram(binwidth = 1, boundary=0, fill = "lightblue", color = "black") +
-  labs(title = "Histogram of Residuals",
-       x = "Residuals",
-       y = "Count")
-print(p2)
-
-# Are they nearly normal?
-
-# ---- 3. Scatterplot of residuals vs. Graduates
-p3 = ggplot(poverty, aes(x = Graduates, y = residuals)) +
-  geom_point(color = "darkgreen") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(title = "Residuals vs. % HS Graduates",
-       x = "% HS Graduates",
-       y = "Residuals")
-print(p3)
-
-# Is the variability constant relative to the % HS graduates?
-
-# -------------------------------------------------------
-# ---- 4. Slope and intercept of the least squares line
 
 # b1=sy/sx * R
 sx <- sd(poverty$Graduates)
@@ -65,4 +30,28 @@ p4 = ggplot(poverty, aes(x = Graduates, y = Poverty)) +
        x = "% HS Graduates",
        y = "% in Poverty")
 print(p4) 
+
+# ---- 2. Extrapolate the line to the range 60%-100% HS Graduates
+p4 <- p4 +
+  coord_cartesian(xlim = c(60, 100), ylim=c(0, 30))
+
+print(p4)
+
+# ---- 3. What does the model predict at 60%, 85%, or 100% HS Graduates?
+
+pred60 = b0+b1*60
+pred85 = b0+b1*85
+pred100 = b0+b1*100
+
+# Do you believe these predictions? why/why not?
+
+pred200 = b0+b1*200
+# Note that the model doesn't respect the limits of the problem
+# % HS Graduates should be between 0 and 100
+# % in Poverty should be between 0 and 100
+
+# -----------------------------------------------------------------
+# ---- 4. How strong is the relationship between % HS Graduates and % in Poverty?
+
+Rsquared <- cor(poverty$Graduates,poverty$Poverty)^2
 
