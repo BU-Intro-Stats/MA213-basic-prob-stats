@@ -33,6 +33,9 @@ poverty$residuals <- poverty$Poverty - poverty$predicted
 correlation <- cor(poverty$Graduates, poverty$Poverty)
 cat("Correlation between % HS Graduates and % in Poverty:", correlation, "\n")
 
+correlation <- cor(poverty$PercentFemaleHouseholderNoHusbandPresent, poverty$Poverty)
+cat("Correlation between % no husband and % in Poverty:", correlation, "\n")
+
 #---------------------------------------------------------------------------
 # ---- 5. Residuals plot
 p3 = ggplot(poverty, aes(x = Graduates, y = residuals)) +
