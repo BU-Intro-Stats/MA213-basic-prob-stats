@@ -70,15 +70,168 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: Linear regression so far}
+\section{Recap: Linear Regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{The least squares line}
+
+\[ \mathhl{ \hat{y} = \beta_0 + \beta_1 x } \]
+
+\begin{itemize}
+\item $\hat{y}$: Predicted value of the response variable, $y$
+\item $\beta_0$: Intercept, parameter
+\begin{itemize}
+\item $b_0$: Intercept, point estimate (sometimes called $\hat{\beta}_0$)
+\end{itemize}
+\item $\beta_1$: Slope, parameter
+\begin{itemize}
+\item $b_1$: Slope, point estimate (sometimes called $\hat{\beta}_1$)
+\end{itemize}
+\item $x$: Explanatory variable
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Conditions for the least squares line}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions for the least squares line}
+
+\begin{enumerate}
+
+\item Linearity
+
+% \pause
+
+\item Nearly normal residuals
+
+% \pause
+
+\item Constant variability
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Slope}
+
+\formula{Slope}
+{The slope of the regression can be calculated as 
+\[ b_1 = \frac{s_y}{s_x} R \]
+}
+
+% \pause
+
+\hl{In context...}
+\[ b_1 = \frac{3.1}{3.73} \times -0.75 = -0.62 \]
+
+% \pause
+$\:$ \\
+\hl{Interpretation} \\
+For each additional \% point in HS graduate rate, we would expect the \% living in poverty to be lower on average by 0.62\% points.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Intercept}
+
+\formula{Intercept}
+{The intercept is where the regression line intersects the $y$-axis. The calculation of the intercept uses the fact the a regression line always passes through $(\bar{x},\bar{y})$.
+\[ b_0 = \bar{y} - b_1 \bar{x} \]
+}
+
+% \pause
+
+\twocol{0.68}{0.32}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_line_wide}
+\end{center}
+}
+{
+% \pause
+\begin{align*}
+b_0 &= 11.35 - (-0.62) \times 86.01 \\
+&= 64.68
+\end{align*}
+}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Recap: Our tools for inference so far}
+\section{Edfinity Quiz: Which parts are random?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-    \frametitle{Tools we already have...}
+\frametitle{Reminder: Using probability models for inference}
+
+Remember: The difference between descriptive statistics and inference is that in inference, we make statements about a \textbf{population} based on a \textbf{sample}.
+\pause
+
+We use a probability model for the sample to understand the randomness in our sample statistic (the \textbf{sampling distribution} of the statistic).
+
+\pause
+For example, when working with continuous data, we have often assumed that the data are independent, identically distributed (iid) normal:
+\[X_i\overset{\mathrm{iid}}{\sim} N(\mu, \sigma) \qquad i=1,2,\ldots,n \]
+
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Reminder: using a sampling distribution for inference}
+    Using the iid normal model, we know that the sampling distribution of the sample mean is (unknown $\sigma$):
+
+    \[ \frac{\bar{X}-\mu}{SE_{\bar{X}}} \sim t_{df} \qquad \text{where} \quad df = n-1 \quad \text{and} \quad SE_{\bar{X}} = \frac{s}{\sqrt{n}} \]
+  \pause
+
+    Then we can do a hypothesis test:
+    \begin{itemize}
+      \item $H_0: \mu = \mu_0$ and $H_A: \mu \ne \mu_0$
+      \item $T=\frac{\bar{X} - \mu_0}{SE_{\bar{X}}}$
+      \item $p$-value: \texttt{2*(1-pt(abs(T), df))}
+      \item Inference: Reject or fail to reject $H_0$
+    \end{itemize}
+    \pause
+
+    And we can construct a confidence interval:
+    \[ \bar{X} \pm t^\star_{df} \times SE_{\bar{X}} \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{We want to perform inference for the regression slope}
+
+Now, for regression, we will assume that the \textbf{residuals} are iid normal:
+\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i \quad \text{ where } \epsilon_i \overset{\mathrm{iid}}{\sim} N(0, \sigma) \qquad i=1,2,\ldots,n \]
+
+(This is why we checked the conditions on the residuals earlier!)
+
+\pause
+
+  If this model is correct, then we have a sampling distribution for the estimated slope, $b_1$:
+  \[ \frac{b_1-\beta_1}{SE_{b_1}} \sim t_{df} \qquad df=n-2\]
+  \pause
+
+  So now if I give you $b_1$, $SE_{b_1}$, and $n$, you already have all of the tools do a hypothesis test or to build a confidence interval for $\beta_1$!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Confidence interval for the slope}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -103,36 +256,45 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]
-\frametitle{}
+\section{R demonstration: Using the \texttt{lm} function for regression}
 
-\pq{Which of the following is \underline{false}?}
+\begin{frame}
+\frametitle{Summary output from R}
+
+\texttt{fit <- lm(formula = fosterIQ $\sim$ bioIQ, data = twins)}
+\texttt{summary(fit)}
+
+\pause
 
 {\footnotesize
-\begin{verbatim}
-Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)    
-(Intercept)       9.20760    9.29990   0.990    0.332    
-bioIQ             0.90144    0.09633   9.358  1.2e-09
-
-Residual standard error: 7.729 on 25 degrees of freedom
-Multiple R-squared: 0.7779,	Adjusted R-squared: 0.769 
-F-statistic: 87.56 on 1 and 25 DF,  p-value: 1.204e-09 
-\end{verbatim}
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+ & Estimate & Std. Error & t value & $Pr(>|t|)$ \\
+\hline
+(Intercept) & \alt<2>{\orange{9.20760}}{9.20760} & \alt<3>{\orange{9.29990}}{9.29990} & 0.990 & 0.332 \\
+bioIQ       & \alt<2>{\orange{0.90144}}{0.90144} & \alt<3>{\orange{0.09633}}{0.09633} & 9.358 & 1.2e-09 \\
+\hline
+\multicolumn{5}{l}{Residual standard error: 7.729 on 25 degrees of freedom} \\
+\multicolumn{5}{l}{Multiple R-squared: 0.7779,\quad Adjusted R-squared: 0.769} \\
+\multicolumn{5}{l}{F-statistic: 87.56 on 1 and 25 DF,\quad p-value: 1.204e-09} \\
+\hline
+\end{tabular}
+\end{center}
 }
 
-\begin{enumerate}[(a)]
-\item Additional 10 points in the biological twin's IQ is associated with additional 9 points in the foster twin's IQ, on average.
-\solnMult{Roughly 78\% of the foster twins' IQs can be accurately predicted by the model.}
-\item The linear model is $\widehat{fosterIQ} = 9.2 + 0.9 \times bioIQ$.
-\item Foster twins with IQs higher than average IQs tend to have biological twins with higher than average IQs as well.
-\end{enumerate}
+The first column gives the point estimates for the intercept and slope. 
+
+\pause
+
+The second column gives the standard errors for these estimates (we will leave the details of how these are calculated for MA214)
+
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Hypotheses for testing for the slope}  % To replace slide below, then do t-test together
+\section{Edfinity Quiz: IQ example} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -190,7 +352,7 @@ F-statistic: 87.56 on 1 and 25 DF,  p-value: 1.204e-09
 
 \item Degrees of freedom associated with the slope is $df = n - 2$, where $n$ is the sample size. $\:$ \\
 \pause
-\Remember{We lose 1 degree of freedom for each parameter we estimate, and in simple linear regression we estimate 2 parameters, $\beta_0$ and $\beta_1$.}
+\Remember{Just like in the ANOVA, we lose 1 degree of freedom for each parameter we estimate, and in simple linear regression we estimate 2 parameters, $\beta_0$ and $\beta_1$.}
 
 \end{itemize}
 
@@ -232,15 +394,6 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Inferece for linear regression, continued}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Last time: $t$-test for the slope}
-\end{frame}
-
-
 \begin{frame}
 \frametitle{\% College graduate vs. \% Hispanic in LA}
 
@@ -265,6 +418,10 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 \end{center}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: LA zip codes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -298,10 +455,10 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}[shrink]
 \frametitle{\% College educated vs. \% Hispanic in LA - linear model}
 
-\dq{Do these data provide convincing evidence that there is a statistically significant relationship between \% Hispanic and \% college graduates in zip code areas in LA?}
+\dq{Is there a statistically significant relationship between \% Hispanic and \% college graduates in zip code areas in LA?}
 
 {\small
 \begin{center}
@@ -316,28 +473,31 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 \end{tabular}
 \end{center}
 }
+\vspace{-0.5em}
 \soln{\only<2->{Yes, the p-value for \% Hispanic is low, indicating that the data provide convincing evidence that the slope parameter is different than 0.
 }}
 
-$\:$ \\
+% $\:$ \\
 
 \dq{How reliable is this p-value if these zip code areas are not randomly selected?}
+\vspace{-0.5em}
 \soln{\only<3->{Not very...
+}}
+
+\dq{Are the zip code areas independent?}
+\vspace{-0.5em}
+\soln{\only<4->{Probably not, since zip code areas that are close to each other may have similar characteristics beyond race (so the residuals are likely not independent).
 }}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R Demonstration: CI for the slope}
+\section{CI for the slope}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Edfinity Quiz: CI for the slope}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{CI for the slope}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
