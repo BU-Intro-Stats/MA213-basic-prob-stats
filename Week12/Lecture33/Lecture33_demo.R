@@ -62,3 +62,6 @@ p2 <- ggplot(df_t, aes(x = x, y = y)) +
        x = "t", y = "Density") +
   theme_minimal()
 print(p2)
+
+
+
