@@ -395,13 +395,13 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{\% College graduate vs. \% Hispanic in LA}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
 
-\dq{What can you say about the relationship between \% college graduate and \% Hispanic in a sample of 100 zip code areas in LA?}
+\dq{What can you say about the relationship between the \% with no leisure-time physical activity and the \% reporting frequent mental distress all zip codes in Massachusetts?}
 
 \begin{center}
-\includegraphics[width=0.49\textwidth]{\chp8@path/8-4_inf_lin_reg/figures/la/Prop_EduHigherThan16th}~~~~
-\includegraphics[width=0.49\textwidth]{\chp8@path/8-4_inf_lin_reg/figures/la/Prop_RaceEthHispanic}
+\includegraphics[width=0.49\textwidth]{./figures/physical_activity.png}~~~~
+\includegraphics[width=0.49\textwidth]{./figures/mental_distress.png}
 \end{center}
 
 \end{frame}
@@ -409,24 +409,24 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{\% College educated vs. \% Hispanic in LA - another look}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
 
-\dq{What can you say about the relationship between of \% college graduate and \% Hispanic in a sample of 100 zip code areas in LA?}
+\dq{What can you say about the relationship between the \% with no leisure-time physical activity and the \% reporting frequent mental distress all zip codes in Massachusetts?}
 
 \begin{center}
-\includegraphics[width=0.7\textwidth]{\chp8@path/8-4_inf_lin_reg/figures/la/la}
+\includegraphics[width=0.7\textwidth]{./figures/distress_activity_regression.png}
 \end{center}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: LA zip codes}
+\section{Edfinity Quiz: MA zip codes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{\% College educated vs. \% Hispanic in LA - linear model}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
 
 \pq{Which of the below is the best interpretation of the slope?}
 
@@ -436,29 +436,30 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
   \hline
  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
-(Intercept) & 0.7290 & 0.0308 & 23.68 & 0.0000 \\ 
- \%Hispanic & -0.7527 & 0.0501 & -15.01 & 0.0000 \\ 
+(Intercept) & 8.11159 & 0.36829 & 22.02 & $<$2e-16 \\ 
+ \%NoLeisure & 0.36943 & 0.01755 & 21.05 & $<$2e-16 \\ 
    \hline
 %   &&&&$df$ = 98 \\
 \end{tabular}
 \end{center}
 }
 
+\footnotesize{
 \begin{enumerate}[(a)]
-\item A 1\% increase in Hispanic residents in a zip code area in LA is associated with a 75\% decrease in \% of college grads.
-\solnMult{A 1\% increase in Hispanic residents in a zip code area in LA is associated with a 0.75\% decrease in \% of college grads.}
-\item An additional 1\% of Hispanic residents decreases the \% of college graduates in a zip code area in LA by 0.75\%.
-\item In zip code areas with no Hispanic residents, \% of college graduates is expected to be 75\%.
+\item A 1\% increase in residents with no leisure-time physical activity in a MA zip code is associated with a 37\% increase in the percentage reporting frequent mental distress.
+\item A 1\% increase increase in residents with no leisure-time physical activity would cause a a 0.37\% increase in the percent reporting frequent mental distress.
+\solnMult{A 1\% increase increase in residents with no leisure-time physical activity is associated with a 0.37\% increase in the percent reporting frequent mental distress.}
+\item In zip codes with no residents lacking leisure-time physical activity, the expected percent reporting frequent mental distress is about 8.11\%.
 \end{enumerate}
-
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[shrink]
-\frametitle{\% College educated vs. \% Hispanic in LA - linear model}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
 
-\dq{Is there a statistically significant relationship between \% Hispanic and \% college graduates in zip code areas in LA?}
+\dq{Is there a statistically significant relationship between \% No physical activity and \% Frequent mental distress in zip codes in Massachusetts?}
 
 {\small
 \begin{center}
@@ -466,28 +467,42 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
   \hline
  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
-(Intercept) & 0.7290 & 0.0308 & 23.68 & 0.0000 \\ 
-  hispanic & -0.7527 & 0.0501 & -15.01 & 0.0000 \\ 
+(Intercept) & 8.11159 & 0.36829 & 22.02 & $<$2e-16 \\ 
+ \%NoLeisure & 0.36943 & 0.01755 & 21.05 & $<$2e-16 \\ 
    \hline
 %   &&&&$df$ = 98 \\
 \end{tabular}
 \end{center}
 }
 \vspace{-0.5em}
-\soln{\only<2->{Yes, the p-value for \% Hispanic is low, indicating that the data provide convincing evidence that the slope parameter is different than 0.
+\soln{\only<2->{Yes, the p-value for \% No Leisure is low, indicating that the data provide convincing evidence that the slope parameter is different than 0.
 }}
 
 % $\:$ \\
 
-\dq{How reliable is this p-value if these zip code areas are not randomly selected?}
-\vspace{-0.5em}
-\soln{\only<3->{Not very...
-}}
+\only<3->{But there's something fishy about this analysis...
+}
 
-\dq{Are the zip code areas independent?}
-\vspace{-0.5em}
-\soln{\only<4->{Probably not, since zip code areas that are close to each other may have similar characteristics beyond race (so the residuals are likely not independent).
-}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Why are we even computing a p-value here?}
+
+Are the data randomly sampled, or random in any way?
+\pause
+
+... No, it's census data from all zip codes in Massachusetts.
+\pause
+
+What is the population of interest?
+\pause
+
+... All zip codes in Massachusetts? (we have data on all of them already)
+
+... All zip codes in the US? (then the sample is not representative or random)
+\pause
+
+\hl{Statistical inference is not appropriate when you have population data, and it's not reliable when the data isn't randomly sampled.}
 
 \end{frame}
 
