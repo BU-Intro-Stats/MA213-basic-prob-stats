@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -192,7 +192,7 @@ For example, when working with continuous data, we have often assumed that the d
 
 \begin{frame}
     \frametitle{Reminder: using a sampling distribution for inference}
-    Using the iid normal model, we know that the sampling distribution of the sample mean is (unknown $\sigma$):
+    Using the iid normal population model, we know that the sampling distribution of the sample mean is (unknown $\sigma$):
 
     \[ \frac{\bar{X}-\mu}{SE_{\bar{X}}} \sim t_{df} \qquad \text{where} \quad df = n-1 \quad \text{and} \quad SE_{\bar{X}} = \frac{s}{\sqrt{n}} \]
   \pause
@@ -470,7 +470,6 @@ p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
 (Intercept) & 8.11159 & 0.36829 & 22.02 & $<$2e-16 \\ 
  \%NoLeisure & 0.36943 & 0.01755 & 21.05 & $<$2e-16 \\ 
    \hline
-%   &&&&$df$ = 98 \\
 \end{tabular}
 \end{center}
 }
@@ -502,123 +501,123 @@ What is the population of interest?
 ... All zip codes in the US? (then the sample is not representative or random)
 \pause
 
-\hl{Statistical inference is not appropriate when you have population data, and it's not reliable when the data isn't randomly sampled.}
+\hl{Statistical inference is poorly defined when you have population data, and it's not reliable when the data isn't randomly sampled.}
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{CI for the slope}
+% \section{CI for the slope}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: CI for the slope}
+% \section{Edfinity Quiz: CI for the slope}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Confidence interval for the slope}
+% \begin{frame}
+% \frametitle{Confidence interval for the slope}
 
-\pq{{\small Remember that a confidence interval is calculated as $point~estimate \pm ME$ and the degrees of freedom associated with the slope in a simple linear regression is $n - 2$. Which of the below is the correct 95\% confidence interval for the slope parameter? Note that the model is based on observations from 27 twins.}}
+% \pq{{\small Remember that a confidence interval is calculated as $point~estimate \pm ME$ and the degrees of freedom associated with the slope in a simple linear regression is $n - 2$. Which of the below is the correct 95\% confidence interval for the slope parameter? Note that the model is based on observations from 27 twins.}}
 
-{\footnotesize
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
-  bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\end{center}
-}
+% {\footnotesize
+% \begin{center}
+% \begin{tabular}{rrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
+%   bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
 
-\vspace{-0.5cm}
+% \vspace{-0.5cm}
 
-\twocol{0.4}{0.6}
-{
-\begin{enumerate}[(a)]
-\item $9.2076 \pm 1.65 \times 9.2999$
-\solnMult{ $0.9014 \pm 2.06 \times 0.0963$}
-\item $0.9014 \pm 1.96 \times 0.0963$
-\item $9.2076 \pm 1.96 \times 0.0963$
-\end{enumerate}
-}
-{
-\soln{\onslide<2->{\orange{
-\begin{eqnarray*}
-\pause
-n &=& 27 \qquad df = 27 - 2 = 25 \\
-\pause
-95\%:~t^\star_{25} &=& 2.06 \\
-\pause
-0.9014 &\pm& 2.06 \times 0.0963 \\
-\pause
-(0.7 &,& 1.1)
-\end{eqnarray*}
-}}}}
+% \twocol{0.4}{0.6}
+% {
+% \begin{enumerate}[(a)]
+% \item $9.2076 \pm 1.65 \times 9.2999$
+% \solnMult{ $0.9014 \pm 2.06 \times 0.0963$}
+% \item $0.9014 \pm 1.96 \times 0.0963$
+% \item $9.2076 \pm 1.96 \times 0.0963$
+% \end{enumerate}
+% }
+% {
+% \soln{\onslide<2->{\orange{
+% \begin{eqnarray*}
+% \pause
+% n &=& 27 \qquad df = 27 - 2 = 25 \\
+% \pause
+% 95\%:~t^\star_{25} &=& 2.06 \\
+% \pause
+% 0.9014 &\pm& 2.06 \times 0.0963 \\
+% \pause
+% (0.7 &,& 1.1)
+% \end{eqnarray*}
+% }}}}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Recap}
+% \begin{frame}
+% \frametitle{Recap}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item Inference for the slope for a single-predictor linear regression model:
-\pause
-\begin{itemize}
-\item Hypothesis test:
-\[ T = \frac{b_1 - null~value}{SE_{b_1}} \qquad df = n - 2 \]
-\pause
-\item Confidence interval:
-\[ b_1 \pm t^\star_{df = n - 2} SE_{b_1} \]
-\end{itemize}
+% \item Inference for the slope for a single-predictor linear regression model:
+% \pause
+% \begin{itemize}
+% \item Hypothesis test:
+% \[ T = \frac{b_1 - null~value}{SE_{b_1}} \qquad df = n - 2 \]
+% \pause
+% \item Confidence interval:
+% \[ b_1 \pm t^\star_{df = n - 2} SE_{b_1} \]
+% \end{itemize}
 
-\pause
+% \pause
 
-\item The null value is often 0 since we are usually checking for \hl{any} relationship between the explanatory and the response variable.
+% \item The null value is often 0 since we are usually checking for \hl{any} relationship between the explanatory and the response variable.
 
-\pause
+% \pause
 
-\item The regression output gives $b_1$, $SE_{b_1}$, and \hl{two-tailed} p-value for the $t$-test for the slope where the null value is 0.
+% \item The regression output gives $b_1$, $SE_{b_1}$, and \hl{two-tailed} p-value for the $t$-test for the slope where the null value is 0.
 
-\pause
+% \pause
 
-\item We rarely do inference on the intercept, so we'll be focusing on the estimates and inference for the slope.
+% \item We rarely do inference on the intercept, so we'll be focusing on the estimates and inference for the slope.
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}
-\frametitle{Caution}
+% \begin{frame}
+% \frametitle{Caution}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item Always be aware of the type of data you're working with: random sample, non-random sample, or population.
+% \item Always be aware of the type of data you're working with: random sample, non-random sample, or population.
 
-\pause
+% \pause
 
-\item Statistical inference, and the resulting p-values, are meaningless when you already have population data.
+% \item Statistical inference, and the resulting p-values, are meaningless when you already have population data.
 
-\pause
+% \pause
 
-\item If you have a sample that is non-random (biased), inference on the results will be unreliable.
+% \item If you have a sample that is non-random (biased), inference on the results will be unreliable.
 
-\pause
+% \pause
 
-\item The ultimate goal is to have independent observations.
+% \item The ultimate goal is to have independent observations.
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

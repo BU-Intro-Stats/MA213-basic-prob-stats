@@ -16,12 +16,16 @@ fit <- lm(fosterIQ ~ bioIQ, data = twins)
 
 # ---- 2. Visualize the data and the fitted regression line
 
+b0 = coef(fit)["(Intercept)"]
+b1 = coef(fit)["bioIQ"]
+
+# Or, equivalently: 
 b0 = coef(fit)[1]
 b1 = coef(fit)[2]
 
 p1 = ggplot(twins, aes(x = bioIQ, y = fosterIQ)) +
   geom_point(color = "blue") +
-  geom_abline(slope = b1, intercept = b0, color = "red", size = 1) +
+  geom_abline(slope = b1, intercept = b0, color = "red", linewidth = 1) +
   labs(title = "Foster Twins' IQ vs Biological Twins' IQ",
        x = "Biological Twin IQ",
        y = "Foster Twin IQ")
@@ -40,14 +44,18 @@ dof_b1 <- summary_twins$df[2]
 T = b1/SE_b1
 print(T)
 
+# H0: beta1=0
+# HA: beta1!=0
 pval = 2*(1-pt(abs(T),dof_b1))
 print(pval)
 
 # ---- 5. Compute one-sided hypothesis tests
-# for a positive slope (b1>0, probability in the upper tail):
+# HA: beta1>0
+# for a positive slope (probability in the upper tail):
 pval_onesided_positive = 1 - pt(T,dof_b1)
 
-# for a negative slope (b1<0, probability in the lower tail):
+# HA: beta1<0
+# for a negative slope (probability in the lower tail):
 pval_onesided_negative = pt(T,dof_b1)
 
 # Plot the T distribution and the observed T
@@ -62,6 +70,16 @@ p2 <- ggplot(df_t, aes(x = x, y = y)) +
        x = "t", y = "Density") +
   theme_minimal()
 print(p2)
+
+# ---- 6. Do a hypothesis test with a nonzero null value
+# H0: beta1=0.8
+# HA: beta1>0.8
+
+# T = b1-beta0/SE_b1
+Tnew = (b1-0.8)/SE_b1
+print(Tnew)
+
+pval_nonzero_null = 1 - pt(Tnew,dof_b1)
 
 
 
