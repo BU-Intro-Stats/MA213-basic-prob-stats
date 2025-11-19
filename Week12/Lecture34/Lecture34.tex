@@ -189,8 +189,10 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \[ \widehat{rate} = 12.33 + 0.74 \times bankruptcy \]
 
+{\small
 \begin{itemize}
-
+\item Response variable: interest rate (as a percentage)
+\pause
 \item Explanatory variable: bankruptcy, \hl{reference level:} no bankruptcy (0)
 
 \item \hl{Intercept:} The estimated average interest rate for borrowers with no bankruptcy is 12.33\%
@@ -210,8 +212,16 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{itemize}
 
 \end{itemize}
-
+}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: Loans regression with categorical variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Categorical variables}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -407,6 +417,10 @@ F-statistic: 76.73 on 2 and 12 DF,  p-value: 1.455e-07
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Books regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Determining the reference level}
 
@@ -563,6 +577,10 @@ F-statistic: 76.73 on 2 and 12 DF,  p-value: 1.455e-07
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Prediction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Prediction}
 
@@ -681,6 +699,10 @@ $\:$ \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Edfinity Quiz: Kid's test scores}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Interpreting the slope}
 
@@ -710,6 +732,10 @@ All else being equal, kids whose moms worked during the first three years of the
 than those whose moms did not work.
  
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Preview: Measuring model fit in multiple regression}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -852,6 +878,16 @@ Total & 50 & 480.25 \\
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Adjusted $R^2$}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
@@ -924,7 +960,7 @@ Total & 50 &    480.25\\
 
 $\:$ \\
 
-\hl{poverty vs. \% female head of household and \% female hh}
+\hl{poverty vs. \% female head of household and \% white}
 \begin{center}
 \begin{tabular}{rrrrr}
   \hline
@@ -992,11 +1028,11 @@ Model 2 (Multiple)			& 0.29	& 0.26
 
 \begin{itemize}
 
-\item When \underline{any} variable is added to the model $R^2$ increases.
+\item When \underline{any} variable is added to the model $R^2$ increases. It is a \underline{biased} estimate of the proportion of explained variability in $y$ for a new data set.
 
 \pause
 
-\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ does not increase.
+\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ does not increase. It is an \underline{unbiased} estimate of the proportion of explained variability in $y$ for a new data set.
 
 \end{itemize}
 
@@ -1059,11 +1095,6 @@ R^2_{adj} &=& 1 - \pr{ \frac{ SS_{Error} }{ SS_{Total} } \times \frac{n - 1}{n -
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% End document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 9.2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
