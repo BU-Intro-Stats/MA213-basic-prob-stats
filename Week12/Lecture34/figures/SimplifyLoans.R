@@ -28,7 +28,7 @@ d$credit_util <- round(ifelse(d$total_credit_limit == 0, 0,
                               d$total_credit_utilized / d$total_credit_limit), 4)
 d$income_ver <- ifelse(d$verified_income == "Verified", "verified",
                        ifelse(d$verified_income == "Not Verified", "not", "source_only"))
-d$bankruptcy <- d$public_record_bankrupt
+d$bankruptcy <- ifelse(d$public_record_bankrupt>0,1,0)
 d$credit_checks <- d$inquiries_last_12m
 d$issued <- gsub("-", "", d$issue_month, fixed = TRUE)
 these <- d$annual_income %in% 0:1
