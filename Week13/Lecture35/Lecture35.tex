@@ -66,6 +66,279 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Reminder: Multiple linear regression with categorical variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Weights of books}
+
+\twocol{0.6}{0.4}{
+{\footnotesize
+\begin{center}
+\begin{tabular}{rrrc}
+  \hline
+ & weight (g) & volume (cm$^\text{3}$) & cover \\ 
+  \hline
+1 & 800 & 885 & hc \\ 
+  2 & 950 & 1016 & hc \\ 
+  3 & 1050 & 1125 & hc \\ 
+  4 & 350 & 239 & hc \\ 
+  5 & 750 & 701 & hc \\ 
+  6 & 600 & 641 & hc \\ 
+  7 & 1075 & 1228 & hc \\ 
+  8 & 250 & 412 & pb \\ 
+  9 & 700 & 953 & pb \\ 
+  10 & 650 & 929 & pb \\ 
+  11 & 975 & 1492 & pb \\ 
+  12 & 350 & 419 & pb \\ 
+  13 & 950 & 1010 & pb \\ 
+  14 & 425 & 595 & pb \\ 
+  15 & 725 & 1034 & pb \\ 
+   \hline
+\end{tabular}
+\end{center}
+}}
+{
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chp9@path/9-1_intro_mlr/figures/books/book}
+\end{center}
+}
+
+\ct{From: Maindonald, J.H. and Braun, W.J. (2nd ed., 2007) ``Data Analysis and Graphics Using R"}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Determining the reference level}
+
+\pq{Which of the below correctly describes the roles of variables in this regression model?}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.9628 & 59.1927 & 3.34 & 0.0058 \\ 
+  volume & 0.7180 & 0.0615 & 11.67 & 0.0000 \\ 
+  cover:pb & -184.0473 & 40.4942 & -4.55 & 0.0007 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\item response: weight, explanatory: volume, paperback cover
+\item response: weight, explanatory: volume, hardcover cover
+\item response: volume, explanatory: weight, cover type
+\solnMult{response: weight, explanatory: volume, cover type}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Linear model}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.96 & 59.19 & 3.34 & 0.01 \\ 
+  volume & 0.72 & 0.06 & 11.67 & 0.00 \\ 
+  cover:pb & -184.05 & 40.49 & -4.55 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\[ \widehat{weight} = 197.96 + 0.72~volume - 184.05~cover:pb  \]
+
+\pause
+
+\begin{enumerate}
+
+\item For \hl{hardcover} books: plug in \orange{0} for \var{cover}
+\begin{eqnarray*}
+\widehat{weight} &=& 197.96 + 0.72~volume - 184.05 \times \orange{0} \\
+\pause
+&=& 197.96 +  0.72~volume
+\end{eqnarray*}
+
+\pause
+
+\item For \orange{paperback} books: plug in \orange{1} for \var{cover}
+\begin{eqnarray*}
+\widehat{weight} &=& 197.96 + 0.72~volume - 184.05 \times \orange{1} \\
+\pause
+&=& 13.91 +  0.72~volume
+\end{eqnarray*}
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Visualising the linear model}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chp9@path/9-1_intro_mlr/figures/books/weight_volume_cover_lines}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpretation of the regression coefficients}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.96 & 59.19 & 3.34 & 0.01 \\ 
+  volume & 0.72 & 0.06 & 11.67 & 0.00 \\ 
+  cover:pb & -184.05 & 40.49 & -4.55 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\begin{itemize}
+
+\item \hl{Slope of volume:} \underline{All else held constant}, books that are 1 more cubic centimeter in volume tend to weigh about 0.72 grams more.
+
+\pause
+
+\item \hl{Slope of cover:} \underline{All else held constant}, the model predicts that paperback books weigh 184 grams lower than hardcover books.
+
+\pause
+
+\item \hl{Intercept:} Hardcover books with no volume are expected on average to weigh 198 grams. \pause
+\begin{itemize}
+\item Obviously, the intercept does not make sense in context. It only serves to adjust the height of the line.
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Prediction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: Lots of predictors}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpreting the slope}
+
+\pq{What is the correct interpretation of the slope for \var{debt\_to\_income}?}
+
+{\small
+\begin{center}
+\begin{tabular}{lrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+   \hline
+\end{tabular}
+\end{center}
+}
+
+$\:$ \\
+
+\soln{\only<2>{All else held constant, a 1 percentage point increase in debt-to-income is associated with a 0.034 percentage point increase in interest rate.}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpreting the slope}
+
+\dq{What is the correct interpretation of the \underline{intercept}?}
+
+{\small
+\begin{center}
+\begin{tabular}{lrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+   \hline
+\end{tabular}
+\end{center}
+}
+
+$\:$ \\
+
+\soln{\only<2>{The estimated interest rate for a borrower with an unverified income, 0 debt-to-income ratio, and no prior bankruptcy, for a loan with a 0 month term is 4.17\%.}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Loans regression with many predictors}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpreting the slope}
+
+\pq{What is the correct interpretation of the slope for \var{term}?}
+
+{\small
+\begin{center}
+\begin{tabular}{lrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+   \hline
+\end{tabular}
+\end{center}
+}
+
+All else being equal, loans with a term that is 1 month longer are estimated to have an interest rate that is:
+\begin{enumerate}[(a)]
+\item 0.15 percentage points lower
+\solnMult{0.15 percentage points higher}
+\end{enumerate}
+than a loan term that is 1 month shorter.
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Adjusted $R^2$ as a better tool for multiple regression}
@@ -192,6 +465,10 @@ Total & 50 & 480.25 \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R demonstration: Calculating $R^2$ three ways}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Why bother?}
 
@@ -206,6 +483,10 @@ Total & 50 & 480.25 \\
 \end{itemize}}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: $R^2$ with multiple predictors}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -355,7 +636,7 @@ Model 2 (Multiple)			& 0.29	& 0.26
 
 \pause
 
-\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ does not increase. It is an \underline{unbiased} estimate of the proportion of explained variability in $y$ for a new data set.
+\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ is not \underline{expected to} increase. It is an \underline{unbiased} estimate of the proportion of explained variability in $y$ for a new data set.
 
 \end{itemize}
 
@@ -418,684 +699,11 @@ R^2_{adj} &=& 1 - \pr{ \frac{ SS_{Error} }{ SS_{Total} } \times \frac{n - 1}{n -
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 9.2
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Model selection}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Identifying variables in the model that may not be helpful}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Beauty in the classroom}
-
-\begin{itemize}
-
-\item Data: Student evaluations of instructors' beauty and teaching quality for 463 courses at the University of Texas.
-
-\item Evaluations conducted at the end of semester, and the beauty judgements were made later, by six students who had not attended the classes and were not aware of the course evaluations (2 upper level females, 2 upper level males, one lower level female, one lower level male).
-
-\end{itemize}
-
-\ct{Hamermesh \& Parker. (2004)``Beauty in the classroom: instructors? pulchritude and putative pedagogical productivity? Economics Education Review.}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Professor rating vs. beauty}
-
-Professor evaluation score (higher score means better) vs. beauty score (a score of 0 means average, negative score means below average, and a positive score above average):
-
-\begin{center}
-\includegraphics[width=0.65\textwidth]{\chp9@path/9-2_model_select/figures/beauty/beauty_profeval}
-\end{center}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{}
-
-\pq{Which of the below is \underline{correct} based on the model output?}
-
-\begin{center}
-{\small
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.19 & 0.03 & 167.24 & 0.00 \\ 
-  beauty & 0.13 & 0.03 & 4.00 & 0.00 \\
-   \hline
-$R^2$ = 0.0336
-\end{tabular}
-}
-\end{center}
-
-\begin{enumerate}[(a)]
-\item Model predicts 3.36\% of professor ratings correctly.
-\item Beauty is not a significant predictor of professor evaluation.
-\solnMult{Professors who score 1 point above average in their beauty score are tend to also score 0.13 points higher in their evaluation.}
-\item 3.36\% of variability in beauty scores can be explained by professor evaluation.
-\item The correlation coefficient could be $\sqrt{0.0336} = 0.18$ or $-0.18$, we can't tell which is correct.
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Exploratory analysis}
-
-\twocol{0.4}{0.6}
-{
-\dq{Any interesting features?}
-\soln{\only<2->{Few females with very low beauty scores.}}
-$\:$ \\
-\dq{For a given beauty score, are male professors evaluated higher, lower, or about the same as female professors?}
-\soln{\only<3->{Difficult to tell from this plot only.}}
-}
-{
-\begin{center}
-\includegraphics[width=\textwidth]{\chp9@path/9-2_model_select/figures/beauty/beauty_profeval_gender}
-\end{center}
-}
-
-\end{frame}
+\section{R demonstration: Adjusted $R^2$}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{Professor rating vs. beauty + gender}
-
-\pq{For a given beauty score, are male professors evaluated higher, lower, or about the same as female professors?}
-
-{\small
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.09 & 0.04 & 107.85 & 0.00 \\ 
-  beauty & 0.14 & 0.03 & 4.44 & 0.00 \\ 
-  gender.male & 0.17 & 0.05 & 3.38 & 0.00 \\ 
-   \hline
-$R^2_{adj}$ = 0.057
-\end{tabular}
-\end{center}
-}
-
-\begin{enumerate}[(a)]
-\solnMult{higher} \soln{\only<2>{\orange{$\rightarrow$ Beauty held constant, male professors are rated 0.17 points higher on average than female professors.}}}
-\item lower
-\item about the same
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{Full model}
-
-{\small
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.6282 & 0.1720 & 26.90 & 0.00 \\ 
-  beauty & 0.1080 & 0.0329 & 3.28 & 0.00 \\ 
-  gender.male & 0.2040 & 0.0528 & 3.87 & 0.00 \\ 
-  age & -0.0089 & 0.0032 & -2.75 & 0.01 \\ 
-formal.yes \footnote{\texttt{formal}: picture wearing tie\&jacket/blouse, levels: \texttt{yes}, \texttt{no}} & 0.1511 & 0.0749 & 2.02 & 0.04 \\ 
-  lower.yes \footnote{\texttt{lower}: lower division course, levels: \texttt{yes}, \texttt{no}} & 0.0582 & 0.0553 & 1.05 & 0.29 \\ 
-  native.non english & -0.2158 & 0.1147 & -1.88 & 0.06 \\ 
-  minority.yes & -0.0707 & 0.0763 & -0.93 & 0.35 \\ 
-  students \footnote{\texttt{students}: number of students} & -0.0004 & 0.0004 & -1.03 & 0.30 \\ 
-  tenure.tenure track \footnote{\texttt{tenure}: tenure status, levels: \texttt{non-tenure track}, \texttt{tenure track}, \texttt{tenured}} & -0.1933 & 0.0847 & -2.28 & 0.02 \\ 
-  tenure.tenured & -0.1574 & 0.0656 & -2.40 & 0.02 \\ 
-   \hline
-\end{tabular}
-\end{center}
-}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Hypotheses}
-
-Just as the interpretation of the slope parameters take into account all other variables in the model,  the hypotheses for testing for significance of a predictor also takes into account all other variables.
-
-$\:$ \\
-
-\begin{itemize}
-\item[] \mathhl{H_0:} $B_i = 0$ when other explanatory variables are included in the model.
-\item[] \mathhl{H_A:} $B_i \ne 0$ when other explanatory variables are included in the model.
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Assessing significance: numerical variables}
-
-\pq{The p-value for age is 0.01. What does this indicate?}
-
-{\scriptsize
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-...\\
-  age & -0.0089 & 0.0032 & -2.75 & 0.01 \\ 
-...\\
-   \hline
-\end{tabular}
-\end{center}
-}
-
-\begin{enumerate}[(a)]
-\item Since p-value is positive, higher the professor's age, the higher we would expect them to be rated.
-\solnMult{If we keep all other variables in the model, there is strong evidence that professor's age is associated with their rating.}
-\item Probability that the true slope parameter for age is 0 is 0.01.
-\item There is about 1\% chance that the true slope parameter for age is -0.0089.
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{Assessing significance: categorical variables}
-
-\pq{{\small Tenure is a categorical variable with 3 levels: non tenure track, tenure track, tenured. Based on the model output given, which of the below is \underline{false}?}}
-
-{\footnotesize
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-... \\
-  tenure.tenure track & -0.1933 & 0.0847 & -2.28 & 0.02 \\ 
-  tenure.tenured & -0.1574 & 0.0656 & -2.40 & 0.02 \\ 
-   \hline
-\end{tabular}
-\end{center}
-}
-
-\begin{enumerate}[(a)]
-\item Reference level is non tenure track.
-\item All else being equal, tenure track professors are rated, on average, 0.19 points lower than non-tenure track professors.
-\item All else being equal, tenured professors are rated, on average, 0.16 points lower than non-tenure track professors.
-\solnMult{All else being equal, there is a significant difference between the average ratings of tenure track and tenured professors.}
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Assessing significance}
-
-\dq{Which predictors do not seem to meaningfully contribute to the model, i.e. may not be significant predictors of professor's rating score?}
-
-{\scriptsize
-\begin{center}
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.6282 & 0.1720 & 26.90 & 0.00 \\ 
-  beauty & 0.1080 & 0.0329 & 3.28 & 0.00 \\ 
-  gender.male & 0.2040 & 0.0528 & 3.87 & 0.00 \\ 
-  age & -0.0089 & 0.0032 & -2.75 & 0.01 \\ 
-  formal.yes & 0.1511 & 0.0749 & 2.02 & 0.04 \\ 
-  \rowcolor{oiB!50}
-  lower.yes & 0.0582 & 0.0553 & 1.05 & 0.29 \\ 
-    \rowcolor{oiB!50}
-  native.non english & -0.2158 & 0.1147 & -1.88 & 0.06 \\ 
-    \rowcolor{oiB!50}
-  minority.yes & -0.0707 & 0.0763 & -0.93 & 0.35 \\ 
-    \rowcolor{oiB!50}
-  students & -0.0004 & 0.0004 & -1.03 & 0.30 \\ 
-  tenure.tenure track & -0.1933 & 0.0847 & -2.28 & 0.02 \\ 
-  tenure.tenured & -0.1574 & 0.0656 & -2.40 & 0.02 \\ 
-   \hline
-\end{tabular}
-\end{center}
-}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Two model selection strategies}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Model selection strategies}
-
-\dq{Based on what we've learned so far, what are some ways you can think of that can be used to determine which variables to keep in the model and which to leave out?}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Backward-elimination}
-
-\begin{enumerate}
-
-\item Start with the full model
-\item Drop one variable at a time and record $R^2_{adj}$ of each smaller model
-\item Pick the model with the highest increase in $R^2_{adj}$
-\item Repeat until none of the models yield an increase in $R^2_{adj}$
-
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[shrink]
-\frametitle{Backward-elimination}
-
-\vspace{-0.3cm}
-
-{\tiny
-\begin{tabular}{l | l | c}
-Full		& beauty + gender + age + formal + lower + native + minority + students + tenure & \orange{0.0839} \pause \\
-\hline
-Step 1 	& gender + age + formal + lower + native + minority + students + tenure		& 0.0642 \\
-		& beauty + age + formal + lower + native + minority + students + tenure		& 0.0557 \\
-		& beauty + gender + formal + lower + native + minority + students + tenure	& 0.0706 \\
-		& beauty + gender + age + lower + native + minority + students + tenure		& 0.0777 \\
-		& beauty + gender + age + formal + native + minority + students + tenure		& 0.0837 \\
-		& beauty + gender + age + formal + lower + minority + students + tenure		& 0.0788 \\
-		& beauty + gender + age + formal + lower + native + students + tenure		& \orange{0.0842} \\
-		& beauty + gender + age + formal + lower + native + minority + tenure		& 0.0838 \\
-		& beauty + gender + age + formal + lower + native + minority + students		& 0.0733 \pause \\
-\hline		
-Step 2	& gender + age + formal + lower + native + students + tenure 				& 0.0647 \\
-		& beauty + age + formal + lower + native + students + tenure 				& 0.0543 \\
-		& beauty + gender + formal + lower + native + students + tenure 			& 0.0708 \\
-		& beauty + gender + age + lower + native + students + tenure 				&0.0776  \\
-		& beauty + gender + age + formal + native + students + tenure 			& \orange{0.0846} \\
-		& beauty + gender + age + formal + lower + native + tenure 				& 0.0844 \\
-		& beauty + gender + age + formal + lower + native + students 				& 0.0725 \pause \\
-\hline
-Step 3	& gender + age + formal + native + students + tenure 					& 0.0653 \\
-		& beauty + age + formal + native + students + tenure					& 0.0534 \\
-		& beauty + gender + formal + native + students + tenure					& 0.0707 \\
-		& beauty + gender + age + native + students + tenure					& 0.0786 \\
-		& beauty + gender + age + formal + students + tenure					& 0.0756 \\
-		& beauty + gender + age + formal + native + tenure						& \orange{0.0855} \\
-		& beauty + gender + age + formal + native + students					& 0.0713 \pause \\
-\hline
-Step 4	& gender + age + formal + native + tenure 							& 0.0667 \\
-		& beauty + age + formal + native + tenure								& 0.0553 \\
-		& beauty + gender + formal + native + tenure							& 0.0723 \\
-		& beauty + gender + age + native + tenure							& 0.0806 \\
-		& beauty + gender + age + formal + tenure							& 0.0773 \\
-		& beauty + gender + age + formal + native							& 0.0713 \\
-\end{tabular}
-}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{\texttt{step} function in R}
-
-The \texttt{step} function in R does a similar backward elimination process, 
-however it uses a different metric called AIC (Akaike Information Criterion) 
-instead of adjusted $R^2$ to do the model selection.
-
-{\tiny
-\begin{verbatim}
-Call:
-lm(formula = profevaluation ~ beauty + gender + age + formal + 
-    native + tenure, data = d)
-
-Coefficients:
-       (Intercept)              beauty          gendermale  
-          4.628435            0.105546            0.208079  
-               age           formalyes   nativenon english  
-         -0.008844            0.132422           -0.243003  
-tenuretenure track       tenuretenured  
-         -0.206784           -0.175967  
-\end{verbatim}
-}
-
-\pause
-Best model: beauty + gender + age + formal + native + tenure
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Forward selection}
-
-\begin{enumerate}
-
-\item Start with regressions of response vs. each explanatory variable
-\item Pick the model with the highest $R^2_{adj}$
-\item Add the remaining variables one at a time to the existing model, and once again pick the model  with the highest $R^2_{adj}$
-\item Repeat until the addition of any of the remanning variables does not result in a higher $R^2_{adj}$
-
-\end{enumerate}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{The p-value approach, an alternative to adjusted $R^2$}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\subsection{Backward and forward}
-
-\begin{itemize}
-
-\item Backward elimination with the p-value approach: 
-\begin{enumerate}
-\item Start with the full model
-\item Drop the variable with the highest p-value and refit a smaller model
-\item Repeat until all variables left in the model are significant
-\end{enumerate}
-
-\item Forward selection with the p-value approach: 
-\begin{enumerate}
-\item Start with regressions of response vs. each explanatory variable
-\item Pick the variable with the lowest significant p-value 
-\item Add the remaining variables one at a time to the existing model, and pick the variable with the lowest significant p-value
-\item Repeat until any of the remaining variables does not have a significant p-value
-\end{enumerate}
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Backward-elimination: $p-value$ approach}
-
-\resizebox{\textwidth}{!}{%
-{\tiny
-\begin{tabular}{l | rrrrrrrrrr }
-\textbf{Step}		& \multicolumn{10}{c}{ \textbf{Variables included \& p-value} } \\
-\hline
-Full		& beauty	& gender		& age	& formal		& lower 	& native	 	& minority		& students	& tenure		& tenure \\
-		& 		& male		& 		& yes		& yes	 & nonenglish	& yes		& 			& tenure track	& tenured \\
-		&  0.00 	&  0.00 		& 0.01	& 0.04		& 0.29	& 0.06		& \orange{0.35}	& 0.30		& 0.02		& 0.02 \pause \\
-\hline
-Step 1	& beauty	& gender		& age	& formal		& lower 		& native	 	& 			& students	& tenure		& tenure \\
-		& 		& male		& 		& yes		& yes		& nonenglish	& 			& 			& tenure track	& tenured \\
-		&  0.00 	&  0.00 		& 0.01	& 0.04		& \orange{0.38}	& 0.03		&			& 0.34		& 0.02		& 0.01 \pause\\
-\hline
-Step 2	& beauty	& gender		& age	& formal		& 	 		& native	 	& 			& students	& tenure		& tenure \\
-		& 		& male		& 		& yes		& 			& nonenglish	& 			& 			& tenure track	& tenured \\
-		&  0.00 	&  0.00 		& 0.01	& 0.05		& 			& 0.02		&			& \orange{0.44}	& 0.01		& 0.01\pause \\
-\hline
-Step 3 	& beauty	& gender		& age	& formal		& 	 		& native	 	& 			& 			& tenure		& tenure \\
-		& 		& male		& 		& yes		& 			& nonenglish	& 			& 			& tenure track	& tenured \\
-		&  0.00 	&  0.00 		& 0.01	& \orange{0.06}	& 			& 0.02		&			& 			& 0.01		& 0.01 \pause \\
-\hline
-Step 	4	& beauty	& gender		& age	& 			& 	 		& native	 	& 			& 			& tenure		& tenure \\
-		& 		& male		& 		& 			& 			& nonenglish	& 			& 			& tenure track	& tenured \\
-		&  0.00 	&  0.00 		& 0.01	&			& 			& \orange{0.06}	&			& 			& 0.01		& 0.01 \pause \\
-\hline
-Step 5 	& beauty	& gender		& age	& 			& 	 		& 		 	& 			& 			& tenure		& tenure \\
-		& 		& male		& 		& 			& 			&			& 			& 			& tenure track	& tenured \\
-		&  0.00 	&  0.00 		& 0.01	&			& 			& 			&			& 			& 0.01		& 0.01 \\
-\end{tabular}
-}}
-
-$\:$ \\
-
-\pause
-Best model: beauty + gender + age + tenure
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Adjusted $R^2$ vs. p-value approaches}
-
-\begin{itemize}
-
-\item The two approaches are similar, but they sometimes lead to different models, with the adjusted $R^2$ approach tending to include more predictors in the final model.
-
-\item When the sole goal is to improve prediction accuracy, use $R^2$ . This is commonly the case in machine learning applications.
-
-\item When we care about understanding which variables are statistically significant predictors of the response, or if there is interest in producing a simpler model at the potential cost of a little prediction accuracy, then the p-value approach is preferred.
-
-\item Regardless of the approach we use, our job is not done after variable selection -- we must still verify the model conditions are reasonable.
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 9.3
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Checking model conditions using graphs}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Diagnostic plots}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Modeling conditions}
-
-\[ \hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p \] 
-
-$\:$ \\
-
-The model depends on the following conditions
-\begin{enumerate}
-\item residuals are nearly normal (less important for larger data sets)
-\item residuals have constant variability
-\item residuals are independent
-\item each variable is linearly related to the outcome \\
-\end{enumerate}
-
-We often use graphical methods to check the validity of these conditions, which we will go through in detail in the following slides.
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{(1) nearly normal residuals}
-
-normal probability plot and/or histogram of residuals: \\
-
-\begin{center}
-\includegraphics[width=0.6\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/normal_res}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{(2) constant variability in residuals}
-
-scatterplot of residuals and/or absolute value of residuals vs. fitted (predicted): \\
-
-\begin{center}
-\includegraphics[width=\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/homo_res}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Checking constant variance - recap}
-
-\begin{itemize}
-
-\item When we did simple linear regression (one explanatory variable) we checked the constant variance condition using a plot of \hl{residuals vs. x}.
-
-\item With multiple linear regression (2+ explanatory variables) we checked the constant variance condition using a plot of \hl{residuals vs. fitted}. 
-
-\end{itemize}
-
-$\:$ \\
-
-\dq{Why are we using different plots?}
-
-\soln{\only<2>{In multiple linear regression there are many explanatory variables, so a plot of residuals vs. one of them wouldn't give us the complete picture.
-}}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{(3) independent residuals}
-
-scatterplot of residuals vs. order of data collection: \\
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/indep_res}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{More on the condition of independent residuals}
-
-\begin{itemize}
-
-\item Checking for independent residuals allows us to indirectly check for independent observations.
-
-\item If observations and residuals are independent, we would not expect to see an increasing or decreasing trend in the scatterplot of residuals vs. order of data collection.
-
-\item This condition is often violated when we have time series data. Such data require more advanced time series regression techniques for proper analysis.
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{(4) linear relationships}
-
-scatterplot of residuals vs. each (numerical) explanatory variable:
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/linear}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\Note{We use residuals instead of the predictors on the y-axis so that we can still check for linearity without worrying about other possible violations like collinearity between the predictors.}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Options for improving the model fit}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Several options for improving a model}
-
-\begin{itemize}
-
-\item Transforming variables
-\item Seeking out additional variables to fill model gaps
-\item Using more advanced methods that would account for challenges around inconsistent variability or nonlinear relationships between predictors and the outcome
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Transformations}
-
-If the concern with the model is non-linear relationships between the explanatory 
-variable(s) and the response variable, transforming the response variable can be helpful. 
-
-\begin{itemize}
-
-\item Log transformation (log $y$)
-\item Square root transformation ($\sqrt{y}$)
-\item Inverse transformation ($1/y$)
-\item Truncation (cap the max value possible)
-
-\end{itemize}
-
-It is also possible to apply transformations to the explanatory variable(s), however 
-such transformations tend to make the model coefficients even harder to interpret.
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Models can be wrong, but useful}
-
-\begin{quote}
-All models are wrong, but some are useful. - George Box
-\end{quote}
-
-\begin{itemize}
-
-\item No model is perfect, but even imperfect models can be useful, as long as we are clear and report the model's shortcomings.
-
-\item If conditions are grossly violated, we should not report the model results, but instead consider a new model, even if it means learning more statistical methods or hiring someone who can help.
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
