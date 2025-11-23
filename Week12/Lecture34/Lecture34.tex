@@ -800,104 +800,104 @@ F-statistic: 76.73 on 2 and 12 DF,  p-value: 1.455e-07
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{R demonstration: Lots of predictors}
+% \section{R demonstration: Lots of predictors}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Interpreting the slope}
+% \begin{frame}
+% \frametitle{Interpreting the slope}
 
-\pq{What is the correct interpretation of the slope for \var{debt\_to\_income}?}
+% \pq{What is the correct interpretation of the slope for \var{debt\_to\_income}?}
 
-{\small
-\begin{center}
-\begin{tabular}{lrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
-income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
-income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
-debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
-bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
-term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
-   \hline
-\end{tabular}
-\end{center}
-}
+% {\small
+% \begin{center}
+% \begin{tabular}{lrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+% income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+% income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+% debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+% bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+% term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
 
-$\:$ \\
+% $\:$ \\
 
-\soln{\only<2>{All else held constant, a 1 percentage point increase in debt-to-income is associated with a 0.034 percentage point increase in interest rate.}}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \soln{\only<2>{All else held constant, a 1 percentage point increase in debt-to-income is associated with a 0.034 percentage point increase in interest rate.}}
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Interpreting the slope}
+% \begin{frame}
+% \frametitle{Interpreting the slope}
 
-\dq{What is the correct interpretation of the \underline{intercept}?}
+% \dq{What is the correct interpretation of the \underline{intercept}?}
 
-{\small
-\begin{center}
-\begin{tabular}{lrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
-income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
-income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
-debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
-bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
-term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
-   \hline
-\end{tabular}
-\end{center}
-}
+% {\small
+% \begin{center}
+% \begin{tabular}{lrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+% income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+% income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+% debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+% bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+% term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
 
-$\:$ \\
+% $\:$ \\
 
-\soln{\only<2>{The estimated interest rate for a borrower with an unverified income, 0 debt-to-income ratio, and no prior bankruptcy, for a loan with a 0 month term is 4.17\%.}}
+% \soln{\only<2>{The estimated interest rate for a borrower with an unverified income, 0 debt-to-income ratio, and no prior bankruptcy, for a loan with a 0 month term is 4.17\%.}}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz: Loans regression with many predictors}
+% \section{Edfinity Quiz: Loans regression with many predictors}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Interpreting the slope}
+% \begin{frame}
+% \frametitle{Interpreting the slope}
 
-\pq{What is the correct interpretation of the slope for \var{term}?}
+% \pq{What is the correct interpretation of the slope for \var{term}?}
 
-{\small
-\begin{center}
-\begin{tabular}{lrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
-income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
-income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
-debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
-bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
-term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
-   \hline
-\end{tabular}
-\end{center}
-}
+% {\small
+% \begin{center}
+% \begin{tabular}{lrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+% income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+% income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+% debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+% bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+% term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
 
-All else being equal, loans with a term that is 1 month longer are estimated to have an interest rate that is:
-\begin{enumerate}[(a)]
-\item 0.15 percentage points lower
-\solnMult{0.15 percentage points higher}
-\end{enumerate}
-than a loan term that is 1 month shorter.
+% All else being equal, loans with a term that is 1 month longer are estimated to have an interest rate that is:
+% \begin{enumerate}[(a)]
+% \item 0.15 percentage points lower
+% \solnMult{0.15 percentage points higher}
+% \end{enumerate}
+% than a loan term that is 1 month shorter.
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
