@@ -27,34 +27,6 @@
 
 \input{../fsheet_pg1}
 
-% R Functions Table and pnorm_picture.R side by side
-\begin{center}
-\begin{minipage}[t]{0.6\textwidth}
-\vspace{0pt} % Align tops
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
-\hline
-\textbf{Distribution} & \textbf{R Functions} \\
-\hline
-Normal & \texttt{rnorm}, \texttt{dnorm}, \texttt{pnorm}, \texttt{qnorm} \\
-\hline
-Geometric & \texttt{rgeom}, \texttt{dgeom}, \texttt{pgeom}, \texttt{qgeom} \\
-\hline
-Binomial & \texttt{rbinom}, \texttt{dbinom}, \texttt{pbinom}, \texttt{qbinom} \\
-\hline
-Poisson & \texttt{rpois}, \texttt{dpois}, \texttt{ppois}, \texttt{qpois} \\
-\hline
-\end{tabularx}
-
-\vspace{0.5em}
-\textbf{r} -- generate random number; \textbf{d} -- PDF or PMF; \textbf{p} -- CDF; \textbf{q} -- inverse CDF
-\end{minipage}%
-\hfill
-\begin{minipage}[t]{0.4\textwidth}
-\vspace{0pt} % Align tops
-\centering
-\includegraphics[height=2in]{../figures/pnorm_picture}
-\end{minipage}
-\end{center}
+\input{../rfunctions_no_t.tex}
 
 \end{document}

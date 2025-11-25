@@ -1,0 +1,30 @@
+\textbf{Confidence Intervals}
+
+\textit{General Form:}
+\begin{align*}
+    &\text{point estimate} &\pm& \text{margin of error} \\
+    &\text{point estimate} &\pm& (\text{critical value}) \times (\text{standard error})
+\end{align*}
+
+\textit{Special case}: For single/two proportion CIs,  when computing SE, can substitute $\hat{p}$ for $p$
+
+\textit{Computing sample size for desired ME}: Write down the ME formula in terms of $n$, $z^*$ and/or $t^*$, and other known quantities, and solve for $n$
+
+% Common critical values for CI table (save for Quiz 4)
+% \vspace{1em}
+\begin{center}
+
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Confidence Level} & \textbf{Critical value }($z^*$) \\
+\hline
+90\% & 1.645 \\
+95\% & 1.960 \\
+99\% & 2.576 \\
+\hline
+\end{tabular}%
+
+\smallskip
+
+\small\textit{Note:} For t-based CIs use \texttt{qt($1-\alpha/2$, df)} in R
+\end{center}
