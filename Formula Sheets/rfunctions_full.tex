@@ -1,0 +1,35 @@
+% R Functions Table, tdist_picture.png and pnorm_picture.png side by side
+\begin{center}
+\begin{minipage}[t]{0.40\textwidth}
+\vspace{0pt} % Align tops
+\begingroup
+\setlength{\tabcolsep}{4pt} % reduce horizontal padding
+\renewcommand{\arraystretch}{1.3}
+\scriptsize % smaller font to "squish" the table
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.28\linewidth}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Distribution} & \textbf{R Functions} \\
+\hline
+Normal & \texttt{rnorm}, \texttt{dnorm}, \texttt{pnorm}, \texttt{qnorm} \\
+\hline
+Geometric & \texttt{rgeom}, \texttt{dgeom}, \texttt{pgeom}, \texttt{qgeom} \\
+\hline
+Binomial & \texttt{rbinom}, \texttt{dbinom}, \texttt{pbinom}, \texttt{qbinom} \\
+\hline
+Poisson & \texttt{rpois}, \texttt{dpois}, \texttt{ppois}, \texttt{qpois} \\
+\hline
+\end{tabularx}
+
+\vspace{0.4em}
+\textbf{r} -- generate random number; \textbf{d} -- PDF or PMF; \textbf{p} -- CDF;\\ \textbf{q} -- inverse CDF
+\endgroup
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.55\textwidth}
+\vspace{0pt} % Align tops
+\centering
+% two small pictures side-by-side (pnorm and tdist) scaled to fit the narrow column
+\includegraphics[width=0.48\linewidth]{../figures/pnorm_picture}\hfill
+\includegraphics[width=0.48\linewidth]{../figures/tdist_picture}
+\end{minipage}
+\end{center}
