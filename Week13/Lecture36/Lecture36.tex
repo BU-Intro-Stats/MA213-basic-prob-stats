@@ -68,6 +68,108 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Reminder: $R^2$ for Multiple Linear Regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Another look at $R^2$}
+
+$R^2$ can be calculated in three ways:
+
+% \pause
+
+\begin{enumerate}
+
+\item square the correlation coefficient of $x$ and $y$ {\small (how we have been calculating it)}
+
+% \pause
+
+\item square the correlation coefficient of $y$ and $\hat{y}$
+
+% \pause
+
+\item based on definition: 
+
+\[ R^2 = \frac{\text{explained variability in }y}{\text{total variability in }y} \]
+
+\end{enumerate}
+
+% \pause
+
+Using \hl{ANOVA} we can calculate the explained variability and total variability in $y$.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Why bother?}
+
+\dq{Why bother with another approach for calculating $R^2$ when we had a perfectly good way to calculate it as the correlation coefficient squared?}
+
+% \pause
+
+\soln{\begin{itemize}
+\item For single-predictor linear regression, having three ways to calculate the same value may seem like overkill. 
+\item However, in multiple linear regression, we can't calculate $R^2$ as the square of the correlation between $x$ and $y$ because we have multiple $x$s. 
+\item And next we'll learn another measure of explained variability, \hl{adjusted $R^2$}, that requires the use of the third approach, ratio of explained and unexplained variability. 
+\end{itemize}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{$R^2$ vs. adjusted $R^2$}
+
+\renewcommand\arraystretch{1.25}
+\begin{center}
+\begin{tabular}{l | c  c}
+			& $R^2$	& Adjusted $R^2$ \\
+\hline
+Model 1 (Single-predictor)	& 0.28	& 0.26 \\
+Model 2 (Multiple)			& 0.29	& 0.26 	
+\end{tabular}
+\end{center}
+
+\pause
+
+\begin{itemize}
+
+\item When \underline{any} variable is added to the model $R^2$ increases. It is a \underline{biased} estimate of the proportion of explained variability in $y$ for a new data set.
+
+\pause
+
+\item But if the added variable doesn't really provide any new information, or is completely unrelated, adjusted $R^2$ is not \underline{expected to} increase. It is an \underline{unbiased} estimate of the proportion of explained variability in $y$ for a new data set.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Collinearity between explanatory variables (cont.)}
+
+\begin{itemize}
+
+\item Two predictor variables are said to be collinear when they are correlated, and this \hl{collinearity} complicates model estimation. \\
+\Remember{Predictors are also called explanatory or \underline{independent} variables. Ideally, they would be independent of each other.}
+
+% \pause
+
+\item We don't like adding predictors that are associated with each other to the model, because often times the addition of such variable brings nothing to the table. Instead, we prefer the simplest best model, i.e. \hl{parsimonious} model.
+
+% \pause
+
+\item While it's impossible to avoid collinearity from arising in observational data, experiments are usually designed to prevent correlation among predictors.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 9.2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,6 +211,10 @@ Professor evaluation score (higher score means better) vs. beauty score (a score
 \end{center}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Interpreting model output for beauty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -161,6 +267,10 @@ $\:$ \\
 }
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Interpreting model output for beauty 2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -236,6 +346,10 @@ $\:$ \\
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Interpreting model output for beauty 3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -339,7 +453,7 @@ $\:$ \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Model selection strategies}
+\frametitle{Think/Pair/Share: Model selection strategies}
 
 \dq{Based on what we've learned so far, what are some ways you can think of that can be used to determine which variables to keep in the model and which to leave out?}
 
@@ -442,6 +556,10 @@ Best model: beauty + gender + age + formal + native + tenure
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{R demonstration: Model selection for beauty data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Forward selection}
 
@@ -450,7 +568,7 @@ Best model: beauty + gender + age + formal + native + tenure
 \item Start with regressions of response vs. each explanatory variable
 \item Pick the model with the highest $R^2_{adj}$
 \item Add the remaining variables one at a time to the existing model, and once again pick the model  with the highest $R^2_{adj}$
-\item Repeat until the addition of any of the remanning variables does not result in a higher $R^2_{adj}$
+\item Repeat until the addition of any of the remaining variables does not result in a higher $R^2_{adj}$
 
 \end{enumerate}
 
@@ -547,206 +665,6 @@ Best model: beauty + gender + age + tenure
 \end{itemize}
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 9.3
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Checking model conditions using graphs}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Diagnostic plots}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Modeling conditions}
-
-\[ \hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p \] 
-
-$\:$ \\
-
-The model depends on the following conditions
-\begin{enumerate}
-\item residuals are nearly normal (less important for larger data sets)
-\item residuals have constant variability
-\item residuals are independent
-\item each variable is linearly related to the outcome \\
-\end{enumerate}
-
-We often use graphical methods to check the validity of these conditions, which we will go through in detail in the following slides.
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{(1) nearly normal residuals}
-
-normal probability plot and/or histogram of residuals: \\
-
-\begin{center}
-\includegraphics[width=0.6\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/normal_res}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{(2) constant variability in residuals}
-
-scatterplot of residuals and/or absolute value of residuals vs. fitted (predicted): \\
-
-\begin{center}
-\includegraphics[width=\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/homo_res}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Checking constant variance - recap}
-
-\begin{itemize}
-
-\item When we did simple linear regression (one explanatory variable) we checked the constant variance condition using a plot of \hl{residuals vs. x}.
-
-\item With multiple linear regression (2+ explanatory variables) we checked the constant variance condition using a plot of \hl{residuals vs. fitted}. 
-
-\end{itemize}
-
-$\:$ \\
-
-\dq{Why are we using different plots?}
-
-\soln{\only<2>{In multiple linear regression there are many explanatory variables, so a plot of residuals vs. one of them wouldn't give us the complete picture.
-}}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{(3) independent residuals}
-
-scatterplot of residuals vs. order of data collection: \\
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/indep_res}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{More on the condition of independent residuals}
-
-\begin{itemize}
-
-\item Checking for independent residuals allows us to indirectly check for independent observations.
-
-\item If observations and residuals are independent, we would not expect to see an increasing or decreasing trend in the scatterplot of residuals vs. order of data collection.
-
-\item This condition is often violated when we have time series data. Such data require more advanced time series regression techniques for proper analysis.
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{(4) linear relationships}
-
-scatterplot of residuals vs. each (numerical) explanatory variable:
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/linear}
-\end{center}
-
-\dq{Does this condition appear to be satisfied?}
-
-\Note{We use residuals instead of the predictors on the y-axis so that we can still check for linearity without worrying about other possible violations like collinearity between the predictors.}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Options for improving the model fit}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Several options for improving a model}
-
-\begin{itemize}
-
-\item Transforming variables
-\item Seeking out additional variables to fill model gaps
-\item Using more advanced methods that would account for challenges around inconsistent variability or nonlinear relationships between predictors and the outcome
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Transformations}
-
-If the concern with the model is non-linear relationships between the explanatory 
-variable(s) and the response variable, transforming the response variable can be helpful. 
-
-\begin{itemize}
-
-\item Log transformation (log $y$)
-\item Square root transformation ($\sqrt{y}$)
-\item Inverse transformation ($1/y$)
-\item Truncation (cap the max value possible)
-
-\end{itemize}
-
-It is also possible to apply transformations to the explanatory variable(s), however 
-such transformations tend to make the model coefficients even harder to interpret.
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Models can be wrong, but useful}
-
-\begin{quote}
-All models are wrong, but some are useful. - George Box
-\end{quote}
-
-\begin{itemize}
-
-\item No model is perfect, but even imperfect models can be useful, as long as we are clear and report the model's shortcomings.
-
-\item If conditions are grossly violated, we should not report the model results, but instead consider a new model, even if it means learning more statistical methods or hiring someone who can help.
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
