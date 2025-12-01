@@ -20,7 +20,8 @@
 % Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\chp9@path{../../Chp 9}
+\def\chpviii@path{../../Chp 8}
+\def\chpix@path{../../Chp 9}
 \input{../../lec_style.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,13 +67,212 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+  \frametitle{Reminder: Simple Regression Model and Conditions}
+
+We assume that the \textbf{residuals} are iid normally distributed:
+\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i \quad \text{ where } \epsilon_i \overset{\mathrm{iid}}{\sim} N(0, \sigma) \qquad i=1,2,\ldots,n \]
+
+This is why we checked the conditions:
+\begin{enumerate}
+
+\item Linearity
+
+\item Nearly normal residuals
+
+\item Constant variability
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Residuals}
+
+\hl{Residuals} are the leftovers from the model fit: [Data = Fit + Residual]
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chpviii@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_res}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Residuals (cont.)}
+
+\formula{Residual}{
+Residual is the difference between the observed ($y_i$) and predicted $\hat{y}_i$. 
+\[ e_i = y_i - \hat{y}_i \]
+}
+\vspace{-0.5cm}
+\twocol{0.6}{0.4}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chpviii@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_res_text}
+\end{center}
+}
+{
+% \pause
+\begin{itemize}
+\item \% living in poverty in DC is 5.44\% more than predicted.
+% \pause
+\item \% living in poverty in RI is 4.16\% less than predicted.
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{An objective measure for finding the best line}
+
+\begin{itemize}
+
+\item We want a line that has small residuals:
+% \pause
+\begin{enumerate}
+\item Option 1: Minimize the sum of magnitudes (absolute values) of residuals
+\[ |e_1| + |e_2| + \cdots + |e_n| \]
+% \pause
+\item Option 2: Minimize the sum of squared residuals -- \hl{least squares}
+\[ e_1^2 + e_2^2 + \cdots + e_n^2 \]
+\end{enumerate}
+
+\pause
+
+\item Why least squares?
+\pause
+\begin{enumerate}
+\item Most commonly used
+% \pause
+\item Easier to compute by hand and using software
+% \pause
+\item In many applications, a residual twice as large as another is usually more than twice as bad
+% \pause
+\item Has nice statistical properties under certain conditions...
+\end{enumerate}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Slope and Intercept}
+
+Estimate the slope and intercept by minimizing the sum of squared residuals -- \hl{least squares}
+\[ \hat{\beta}_0, \hat{\beta}_1 = \underset{\beta_0,\beta_1}{argmin} \sum_{i=1}^{n} e_i^2 = \underset{\beta_0,\beta_1}{argmin} \sum_{i=1}^{n} |y_i-\hat{y}_i|^2 \]
+
+
+\hl{Slope}
+\[ b_1 = \frac{s_y}{s_x} R \]
+
+
+\hl{Intercept}
+\[ b_0 = \bar{y} - b_1 \bar{x} \]
+
+\pause
+\small{
+\hl{The Least Squares solutions for $\beta_0$ and $\beta_1$ are the ``maximum likelihood estimators" for the intercept and slope if our three conditions are met.}
+}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions: (1) Linearity}
+
+\begin{itemize}
+
+\item The relationship between the explanatory and the response variable should be linear. 
+
+% \pause
+
+\item Methods for fitting a model to non-linear relationships exist, but are beyond the scope of this class. 
+
+% \pause
+
+\item Check using a scatterplot of the data, or a \hl{residuals plot}.
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chpviii@path/8-2_least_square_reg/figures/sampleLinesAndResPlots/sampleLinesAndResPlots}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions: (2) Nearly normal residuals}
+
+\begin{itemize}
+
+\item The residuals should be nearly normal.
+
+% \pause
+
+\item This condition may not be satisfied when there are unusual observations that don't follow the trend of the rest of the data.
+
+% \pause
+
+\item Check using a histogram.
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{\chpviii@path/8-2_least_square_reg/figures/poverty/normal_res}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions: (3) Constant variability}
+
+\twocol{0.5}{0.5}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chpviii@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_tube}
+\end{center}
+}
+{
+\begin{itemize}
+
+\item The variability of points around the least squares line should be roughly constant.
+
+% \pause
+
+\item This implies that the variability of residuals around the 0 line should be roughly constant as well.
+
+% \pause
+
+\item Also called \hl{homoscedasticity}.
+
+% \pause
+
+\item Check using a residuals plot.
+
+\end{itemize}
+}
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 9.3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Checking model conditions using graphs}
+\section{Multiple Regression: Checking model conditions using graphs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -81,21 +281,26 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Modeling conditions}
+\frametitle{Multiple Linear Regression Model and Conditions}
 
 \[ \hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p \] 
-
-$\:$ \\
+\pause
+Or:
+\small{
+\[y_i = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \epsilon_i \quad \]
+\[\text{ where } \epsilon_i \overset{\mathrm{iid}}{\sim} N(0, \sigma) \qquad i=1,2,\ldots,n \]
+}
+\pause
 
 The model depends on the following conditions
 \begin{enumerate}
-\item residuals are nearly normal (less important for larger data sets)
-\item residuals have constant variability
-\item residuals are independent
-\item each variable is linearly related to the outcome \\
+\item residuals are nearly normal (less important for larger data sets)\pause
+\item residuals have constant variability\pause
+\item residuals are independent\pause
+\item each variable is linearly related to the outcome \pause \\
 \end{enumerate}
 
-We often use graphical methods to check the validity of these conditions, which we will go through in detail in the following slides.
+We often use graphical methods to check the validity of these conditions
 
 \end{frame}
 
@@ -107,7 +312,7 @@ We often use graphical methods to check the validity of these conditions, which 
 normal probability plot and/or histogram of residuals: \\
 
 \begin{center}
-\includegraphics[width=0.6\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/normal_res}
+\includegraphics[width=0.6\textwidth]{\chpix@path/9-3_model_cond/figures/beauty/normal_res}
 \end{center}
 
 \dq{Does this condition appear to be satisfied?}
@@ -122,7 +327,7 @@ normal probability plot and/or histogram of residuals: \\
 scatterplot of residuals and/or absolute value of residuals vs. fitted (predicted): \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/homo_res}
+\includegraphics[width=\textwidth]{\chpix@path/9-3_model_cond/figures/beauty/homo_res}
 \end{center}
 
 \dq{Does this condition appear to be satisfied?}
@@ -146,7 +351,7 @@ $\:$ \\
 
 \dq{Why are we using different plots?}
 
-\soln{\only<2>{In multiple linear regression there are many explanatory variables, so a plot of residuals vs. one of them wouldn't give us the complete picture.
+\soln{\only<2>{In multiple linear regression there are many explanatory variables, so a plot of residuals vs. one of them wouldn't give us the complete picture. (It's also smart to check the residuals vs. each explanatory variable individually to look for any patterns!)
 }}
 
 \end{frame}
@@ -159,7 +364,7 @@ $\:$ \\
 scatterplot of residuals vs. order of data collection: \\
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/indep_res}
+\includegraphics[width=0.8\textwidth]{\chpix@path/9-3_model_cond/figures/beauty/indep_res}
 \end{center}
 
 \dq{Does this condition appear to be satisfied?}
@@ -191,7 +396,7 @@ scatterplot of residuals vs. order of data collection: \\
 scatterplot of residuals vs. each (numerical) explanatory variable:
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{\chp9@path/9-3_model_cond/figures/beauty/linear}
+\includegraphics[width=0.8\textwidth]{\chpix@path/9-3_model_cond/figures/beauty/linear}
 \end{center}
 
 \dq{Does this condition appear to be satisfied?}
@@ -199,6 +404,10 @@ scatterplot of residuals vs. each (numerical) explanatory variable:
 \Note{We use residuals instead of the predictors on the y-axis so that we can still check for linearity without worrying about other possible violations like collinearity between the predictors.}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Checking model conditions using graphs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -238,6 +447,23 @@ variable(s) and the response variable, transforming the response variable can be
 
 It is also possible to apply transformations to the explanatory variable(s), however 
 such transformations tend to make the model coefficients even harder to interpret.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Transformations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Which transformation to use?}
+
+\includegraphics[height=0.4\textheight]{figures/transformations.png}
+
+\soln{\only<2>{
+\includegraphics[height=0.4\textheight]{figures/transformations_applied.png}
+}}
 
 \end{frame}
 
