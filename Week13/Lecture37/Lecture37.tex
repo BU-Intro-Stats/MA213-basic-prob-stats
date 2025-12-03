@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -178,7 +178,7 @@ Estimate the slope and intercept by minimizing the sum of squared residuals -- \
 
 \pause
 \small{
-\hl{The Least Squares solutions for $\beta_0$ and $\beta_1$ are the ``maximum likelihood estimators" for the intercept and slope if our three conditions are met.}
+\Note{The Least Squares solutions for $\beta_0$ and $\beta_1$ are the \hl{maximum likelihood estimators} for the intercept and slope if our Normal model is true. That means that they are the values of the parameters that assign the highest probability to the data that we observed. (More on this in later courses!)}
 }
 
 \end{frame}
@@ -317,6 +317,18 @@ normal probability plot and/or histogram of residuals: \\
 
 \dq{Does this condition appear to be satisfied?}
 
+\end{frame}
+
+\begin{frame}
+\frametitle{How normal is normal enough?}
+It depends on our goals:
+\begin{itemize}
+    \item If we are mainly interested in predicting the expected response for given predictor values, then minor deviations from normality are not a big concern
+    \item If we are interested in precise inference for the regression coefficients (hypothesis tests, confidence intervals), then we want the residuals to be fairly normal
+    \item If we are interested in predicting responses with \emph{prediction intervals}, then we want the residuals to be fairly normal
+\end{itemize}
+\pause
+At least, we want to make sure there are no extreme deviations from normality (e.g., strong skewness, outliers).
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
