@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -315,7 +315,7 @@ In each case, brain function is intact, but signals cannot reach muscles.
 \item Contains simultaneous measurements of:
 \begin{itemize}
 \item \textbf{Neural signals}: Firing rates from 100+ neurons in motor cortex
-\item \textbf{Behavior}: Cursor position and velocity over time
+\item \textbf{Behavior}: Cursor position and hand kinematics (position/velocity) over time
 \end{itemize}
 
 \end{itemize}
@@ -327,53 +327,6 @@ In each case, brain function is intact, but signals cannot reach muscles.
 \end{column}
 \end{columns}
 
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{The data structure: What does each observation represent?}
-
-\textbf{Temporal data at millisecond resolution}
-
-\vspace{0.3cm}
-
-Each row = one \textit{time bin} (e.g., 50 milliseconds)
-
-\vspace{0.3cm}
-
-\begin{columns}
-\begin{column}{0.48\textwidth}
-\textbf{Predictors (Neural activity):}
-\small
-\begin{itemize}
-\item Neuron 1 firing rate
-\item Neuron 2 firing rate
-\item ...
-\item Neuron 100+ firing rate
-\end{itemize}
-
-\textit{Firing rate} = spikes per unit time
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\textbf{Response (Behavior):}
-\small
-\begin{itemize}
-\item Cursor X position
-\item Cursor Y position
-\item Cursor X velocity
-\item Cursor Y velocity
-\end{itemize}
-
-\textit{Velocity} = change in position over time
-\end{column}
-\end{columns}
-
-\vspace{0.3cm}
-
-\textbf{Goal}: Predict cursor position/velocity from neural firing rates
 
 \end{frame}
 
@@ -414,20 +367,44 @@ Each row = one \textit{time bin} (e.g., 50 milliseconds)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Challenges specific to this dataset}
+\frametitle{The data structure: What does each observation represent?}
 
-\textbf{Why MC\_maze is realistic for BCIs:}
+\textbf{Temporal data at millisecond resolution}
 
+\vspace{0.3cm}
+
+Each row = one \textit{time bin} (e.g., 50 milliseconds)
+
+\vspace{0.3cm}
+
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Predictors (Neural activity):}
+\small
 \begin{itemize}
-\setlength\itemsep{0.4em}
-
-\item \textbf{High dimensionality}: 100+ neural predictors vs. a few response variables
-
-\item \textbf{Temporal correlation}: Consecutive time bins are not independent
-
-\item \textbf{Neural noise}: Firing rates are variable and noisy
-
+\item Neuron 1 firing rate
+\item Neuron 2 firing rate
+\item ...
+\item Neuron 100+ firing rate
 \end{itemize}
+
+\textit{Firing rate} = spikes per unit time
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Response (Behavior):}
+\small
+\begin{itemize}
+\item Cursor X position
+\item Cursor Y position
+\end{itemize}
+
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+
+\textbf{Goal}: Predict cursor position from neural firing rates
 
 \end{frame}
 
@@ -435,7 +412,51 @@ Each row = one \textit{time bin} (e.g., 50 milliseconds)
 
 \section{R demonstration: Visualizing BCI data}
 
+\begin{frame}
+\frametitle{Takeaways}
+
+\begin{itemize}
+\item We used linear regression to decode cursor position from neural activity. \pause
+\item Even when the model is massively simplified (and incorrect), it can still provide useful predictions. \pause
+\item We often start with simple models to build intuition before moving to more complex approaches.\pause
+\item This math is the foundation for modern machine learning methods used in brain-computer interfaces.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Ways that this model could be improved}
+
+\begin{itemize}
+    \item Model the \hl{hand kinematics} (position, velocity) instead of cursor position alone.\pause
+    \item Use the spikes themselves as predictors instead of smoothed firing rates. To get the noise model right, we could use a \hl{Poisson distribution}. Regression with Poisson responses is an example of a \hl{generalized linear model (GLM)}.\pause
+    \item Capture the \hl{temporal dependencies} in the data using \hl{state space modeling}.\pause
+    \item Use \hl{regularization} (e.g., ridge regression, LASSO) to prevent overfitting given the large number of predictors.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{If you're interested in this topic...}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{If you're interested in this topic...}
+
+\begin{itemize}
+    \item \textbf{Neural Latents Benchmark}: \webLink{https://neurallatents.github.io/}{https://neurallatents.github.io/} - Public datasets and benchmarks for neural decoding.
+    \item \textbf{BrainGate}: \webLink{https://braingate.org/}{https://braingate.org/} - Research consortium developing clinical BCIs.
+    \item \textbf{Chang Lab}: \webLink{https://changlab.ucsf.edu}{https://changlab.ucsf.edu} - Leading research group on speech BCIs.
+    \item \textbf{Articles}:
+    \begin{itemize}
+        \item Pei et al. (2021) \textit{Neural Latents Benchmark '21: Evaluating latent variable models of neural population activity. } Biorxiv. \webLink{https://doi.org/10.48550/arXiv.2109.04463}{https://doi.org/10.48550/arXiv.2109.04463}
+        \item Chen et al. (2025) \textit{Brain-computer interfaces in 2023-2024.} Brain-X. \webLink{https://doi.org/10.1002/brx2.70024}{https://doi.org/10.1002/brx2.70024}
+        \item Karpowicz et al. (2025) \textit{Stabilizing brain-computer interfaces through alignment of latent dynamics.} Nature Communications. \webLink{https://doi.org/10.1038/s41467-025-59652-y}{https://doi.org/10.1038/s41467-025-59652-y}
+    \end{itemize}
+\end{itemize}
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
