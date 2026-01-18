@@ -1,9 +1,9 @@
 ---
 title: "MA213 Basic Statistics and Probability - Lab1 Guide"
 output:
-  html_document:
-    code_download: false 
   pdf_document: default
+  html_document:
+    code_download: true 
 ---
 
 ```{r setup, include=FALSE}
@@ -64,7 +64,7 @@ window `4` : environment window
 
 ```{r, eval=FALSE, include=FALSE}
 
-setwd('path of your working directory')
+setwd('path of your working directory') # replace with your own path
 
 ```
 
@@ -72,7 +72,7 @@ setwd('path of your working directory')
 
 # for example
 setwd('/Users/ylim2/Documents/Work/MA213') # this will set up your working directory
-getwd() # to check where you are at in term of your working directory
+getwd() # prints the path of current working directory
 
 ```
 
@@ -111,9 +111,8 @@ Run shortcut : `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).
 $(\frac{12}{24})^2$
 
 ```{r, echo=TRUE}
-(12/24)^(2)
-#or
-(12/24)**(2)
+(12/24)^(2) # divide 12 by 24, then square the result
+(12/24)**(2) # alternative exponentiation operator
 
 ```
 
@@ -122,11 +121,11 @@ $(\frac{12}{24})^2$
 Let's say if you want to save 10 to variable `A`. You can do the following command.
 
 ```{r, echo=TRUE}
-A <- 10
-A <<- 10
-10 -> A
-10 ->> A
-A = 10
+A <- 10 # assign 10 to variable A
+A <<- 10 # assign 10 to A in global environment
+10 -> A # alternative assignment
+10 ->> A # alternative global assignment
+A = 10 # assign 10 to A using = (less common)
 
 # A <- 10
 # A = 10 
@@ -136,15 +135,15 @@ A = 10
 ## And you can check what value the variable `A` has by calling it or using `print()` function
 
 ```{r, echo=TRUE}
-A
-print(A)
+A # calling the variable will display its value
+print(A) # explicitly print the value of the variable
 ```
 
 Assigning character type information to a variable
 
 ```{r, echo=TRUE}
-SchoolName <- "Boston University"
-SchoolName
+SchoolName <- "Boston University" # assign text string
+SchoolName # print the value
 ```
 
 ## Assign values to a vector
@@ -152,10 +151,10 @@ SchoolName
 You can assign multiple values to a vector.
 
 ```{r, echo=TRUE}
-GPA <- c(3.2, 3.7, 3.9, 2.3, 2.7)
-FirstName <- c("Tom", "Sarah", "Nick", "Amy", "John")
-GPA
-FirstName
+GPA <- c(3.2, 3.7, 3.9, 2.3, 2.7) # numeric vector
+FirstName <- c("Tom", "Sarah", "Nick", "Amy", "John") # character vector
+GPA # print the GPA vector
+FirstName # print the FirstName vector
 
 ```
 
@@ -170,20 +169,21 @@ There are some useful functions for a vector
 ## Examples
 
 ```{r, echo=TRUE}
-my_vector = seq(1, 10, 2)
-my_vector
+my_vector = seq(1, 10, 2) # numbers from 1 to 10 with step size 2
+my_vector # print the vector
 
 ```
 
 ```{r, echo=TRUE}
+#Shortcut to create vector from 1 to 10
 another_vector = 1:10
 another_vector
 
 ```
 
 ```{r, echo=TRUE}
-
-vector3 = rep("BU", 25)
+#Replicate an element multiple times
+vector3 = rep("BU", 25) # repeat "BU" 25 times
 vector3
 
 ```
@@ -211,9 +211,8 @@ You can also access, for example, the second and the third elements by `SomeName
 
 ```{r, echo=TRUE}
 #
-SomeNames[3]
-
-SomeNames[2:3]
+SomeNames[3] # third element
+SomeNames[2:3] # second and third elements
 
 
 ```
@@ -239,7 +238,7 @@ x != 100   # x not equal to 100
 
 ```{r, echo=TRUE}
 Numbers <- c(20, 30, 50, 70, 120, 200)
-Numbers[Numbers<100]
+Numbers[Numbers < 100] # returns all numbers less than 100
 
 
 ```
@@ -289,7 +288,7 @@ You can combine multiple logical conditions using & (AND), \| (OR), and ! (NOT) 
 
 ```{r, echo=TRUE}
 
-my_data[(my_data$hp < 100) & (my_data$cyl == 4), ]
+my_data[(my_data$hp < 100) & (my_data$cyl == 4), ] # hp < 100 AND cyl = 4
 
 ```
 
@@ -297,7 +296,7 @@ my_data[(my_data$hp < 100) & (my_data$cyl == 4), ]
 
 ```{r, echo=TRUE}
 
-my_data[my_data$hp < 100 | my_data$cyl == 4, ]
+my_data[my_data$hp < 100 | my_data$cyl == 4, ] # hp < 100 OR cyl = 4
 
 ```
 
@@ -305,7 +304,7 @@ Rows where `hp` is NOT less than 100:
 
 ```{r, echo=TRUE}
 
-my_data[! (my_data$hp < 100), ]
+my_data[!(my_data$hp < 100), ] # NOT (hp < 100)
 
 ```
 
@@ -319,6 +318,6 @@ my_data[! (my_data$hp < 100), ]
 ```
 
 ```{r, echo=TRUE}
-my_data$hp < 100 # if the horse power of the car is less than 100 it gives 1, 0 otherwise. 
-my_data[my_data$hp < 100,] # this is how we are only printing the cars data with horse power < 100. 
+my_data$hp < 100 # returns TRUE/FALSE for each row
+my_data[my_data$hp < 100, ] # shows only rows where hp < 100
 ```
