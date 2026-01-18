@@ -18,73 +18,70 @@ library(dplyr)
 
 ## Lab Activities
 
-#### Q1. Let's set up your working directory.
+#### Q1. Set up your working directory and import `baby_names.csv` data file into R. You can find the data from
+
+#### <https://www.openintro.org/data/index.php?data=baby_names>
+
+#### What does the dataset contain? Discuss with your partner. Consider the following:
+
+-   How many rows and columns are in the dataset?
+
+-   What kind of information does each column hold?
+
+-   What kinds of questions or analyses could you perform with this data?
 
 ```{r, echo=TRUE}
-
 #
+#
+#
+
 
 ```
 
-#### Q2. Use R commands to calculate the following and print `C` .
-
-$A = \exp(3),$ $B = \frac{(-3)^{4}}{10},$
-
-$C = A \times B$
+#### Q2. You want to see how many unique names are in both male and female column. What are they? Show them and assign them to variables `male_names` and `female_names`. Show also how many unique names are there in both columns.
 
 ```{r, echo=TRUE}
 #
-
+#
+#
 ```
 
-#### Q3. You are going to explore the data extracted from the 1974 *Motor Trend* US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+#### Q3. Make a data frame from the following table.
 
-You can look at the description of the data by `help(mtcars)` .
-
-Please remember to use `help()` function or `?function_name` method. You are going to use it a lot when you use R.
-
-Here are some useful functions for vectors.
-
-`length(x)` : get the length of vector `x`
-
-`unique(x)` : get the unique values of vector `x`
-
-`min(x)` : get the minimum value of vector `x`
-
-`max(x)` : get the maximum value of vector `x`
-
-`mean(x)` : get the mean (average) of vector `x`
-
-Import `mtcars.csv` and assign it to variable `cars_data` .
+| number | fruit  | size |
+|--------|--------|------|
+| 1      | apple  | 2    |
+| 2      | apple  | 2    |
+| 3      | apple  | 2    |
+| 4      | orange | 4    |
+| 5      | orange | 3    |
+| 6      | orange | 3    |
+| 7      | orange | 3    |
+| 8      | orange | 3    |
+| 9      | orange | 3    |
+| 10     | orange | 3    |
 
 ```{r}
 #
-
+# df <- 
 
 ```
 
-#### Q4. You are interested in first five data (first five rows). Assign first five rows to variable `cars_data_5` and print it.
+#### Q4. You want to take out `size` column from the `df` . Assign the new dataframe wihout `size` to object `df_2` and print it.
 
 ```{r}
 #
 
 ```
 
-#### Q5. From the `cars_data`, you are interested in cars with horsepower greater than 100. Show the cars that have horsepower greater than 100.
+#### Q5. You want to delete rows 9 and 10. Assign the new dataframe wihout rows 9 and 10 to object `df_3` and print it.
 
 ```{r}
 #
 
 ```
 
-#### Q6. **Print only the cylinders, horsepower, and weight columns for cars that have 4 cylinders and more than 100 horsepower.**
-
-```{r}
-#
-
-```
-
-#### Q7. You are interested in the total sum of horse power and the average of mils per gallon of all the cars in the data. Assign them to variables `hp_sum` and `mpg_mean`. You can use `sum()` function and `mean()` function.
+#### Q6. Write all above R code to `lab1_lab.R` and submit it to GradeScope.
 
 ```{r}
 #
@@ -95,24 +92,12 @@ Import `mtcars.csv` and assign it to variable `cars_data` .
 
 ## Post-lab activities
 
-Please name your submission as `lab1.R` on GradeScope.
+Please name your submission `lab1.R` on GradeScope.
 
-1.  Calculate these questions and assign the answers to the corresponding variables.
+1.  Import `baby_names.csv` and assign it to the object `df_baby`.
 
-a). $$a=\frac{45}{9}$$
+2.  For the year 1999, what is the rank 1 boy’s name? Assign it to `1999_boy`.
 
-b). $$ b=25^{4}$$
+3.  Add a registration number column to the dataset. The registration numbers should start from 1 and go up to 2820. Name this new column Registration (case-sensitive). Save the updated data frame as `new_df`.
 
-c). $$ c=\exp(-10) $$
-
-For example, you would write a line of code as the following
-
-``` r
-a <- 45/9
-```
-
-2.  In `mtcars.csv` data,
-
-    Import `mtcars.csv` to the variable `cars_data`. Create a new variable `cars_data_sub` containing only the data for automatic transmission cars with weight over 3000 lbs (Make sure you end up with two variables: `cars_data` and `cars_data_sub`).
-
-3.  You are interested in how many different number of cylinders of the cars in the datasets. You can count them and distinguish them in this dataset. However, if it is a large data, it is not possible to do it manually. Assign distinct cylinders of the cars in the data by using `unique()` function and assign it to variable `unique_cyl` .
+Note: On GradeScope, the autograder will run your `lab1.R` to check that you have correctly created `df_baby`, `1999_boy`, and `new_df`.
