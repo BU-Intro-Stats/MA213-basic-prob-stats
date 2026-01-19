@@ -18,7 +18,7 @@ library(dplyr)
 
 ## Lab Activities
 
-#### Q1. Set up your working directory and import `baby_names.csv` data file into R. You can find the data from
+#### Q1. Set up your working directory and import the file `baby_names.csv` into R. The data is on the blackboard and also it is available at:
 
 #### <https://www.openintro.org/data/index.php?data=baby_names>
 
@@ -34,11 +34,9 @@ library(dplyr)
 #
 #
 #
-
-
 ```
 
-#### Q2. You want to see how many unique names are in both male and female column. What are they? Show them and assign them to variables `male_names` and `female_names`. Show also how many unique names are there in both columns.
+#### Q2. Find the unique names in the `male` and `female` name columns. Assign them to variables `male_names` and `female_names`, and show how many unique names are in each column.
 
 ```{r, echo=TRUE}
 #
@@ -46,7 +44,7 @@ library(dplyr)
 #
 ```
 
-#### Q3. Make a data frame from the following table.
+#### Q3. Create a data frame from the table below. There are several ways to do this. There are several ways to do this; for example, you can build it column-wise or row-wise (using `append()` or `rbind()`).
 
 | number | fruit  | size |
 |--------|--------|------|
@@ -54,39 +52,68 @@ library(dplyr)
 | 2      | apple  | 2    |
 | 3      | apple  | 2    |
 | 4      | orange | 4    |
-| 5      | orange | 3    |
-| 6      | orange | 3    |
-| 7      | orange | 3    |
+| 5      | orange | 2    |
+| 6      | orange | 2    |
+| 7      | orange | 2    |
 | 8      | orange | 3    |
 | 9      | orange | 3    |
 | 10     | orange | 3    |
 
-```{r}
+```{r, echo=TRUE}
 #
-# df <- 
-
+# 
+#
 ```
 
-#### Q4. You want to take out `size` column from the `df` . Assign the new dataframe wihout `size` to object `df_2` and print it.
+#### Q4. Remove the `size` column from the data frame (assume the data frame is named `df`). Assign the new data frame without size to `df_2` and print it.
 
-```{r}
+```{r, echo=TRUE}
 #
-
+#
+#
 ```
 
-#### Q5. You want to delete rows 9 and 10. Assign the new dataframe wihout rows 9 and 10 to object `df_3` and print it.
+#### Q5. Delete rows 9 and 10 from df. Assign the resulting data frame to `df_3` and print it.
 
-```{r}
+```{r, echo=TRUE}
 #
-
+#
+#
 ```
 
-#### Q6. Write all above R code to `lab1_lab.R` and submit it to GradeScope.
+### Q6. Select all rows where fruit is "apple"
 
-```{r}
+```{r, echo=TRUE}
 #
-
+#
+#
 ```
+
+### Q7. Select rows where fruit is "orange" and size equals 2
+
+```{r, echo=TRUE}
+#
+#
+#
+```
+
+### Q8. Select all rows where fruit is "apple"
+
+```{r, echo=TRUE}
+#
+#
+#
+```
+
+### Q9. Select rows where fruit is not "apple"
+
+```{r, echo=TRUE}
+#
+#
+#
+```
+
+#### Q10. Write all above R code to `lab1_lab.R` and submit it to GradeScope.
 
 ------------------------------------------------------------------------
 
