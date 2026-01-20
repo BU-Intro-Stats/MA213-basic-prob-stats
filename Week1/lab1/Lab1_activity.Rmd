@@ -119,12 +119,12 @@ library(dplyr)
 
 ## Post-lab activities
 
-Please name your submission `lab1.R` on GradeScope.
+Please name your submission `Lab1.R` on GradeScope.
 
 1.  Import `baby_names.csv` and assign it to the object `df_baby`.
 
-2.  For the year 1999, what is the rank 1 boy’s name? Assign it to `1999_boy`.
+2.  For the year 1999, what is the rank 1 boy’s name? Assign it to `boy_1999`.
 
 3.  Add a registration number column to the dataset. The registration numbers should start from 1 and go up to 2820. Name this new column Registration (case-sensitive). Save the updated data frame as `new_df`.
 
-Note: On GradeScope, the autograder will run your `lab1.R` to check that you have correctly created `df_baby`, `1999_boy`, and `new_df`.
+Note: On GradeScope, the autograder will run your `lab1.R` to check that you have correctly created `df_baby`, `boy_1999`, and `new_df`.
