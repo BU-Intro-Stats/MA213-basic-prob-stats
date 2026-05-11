@@ -18,7 +18,7 @@ In this lab session, we will learn basic syntax of R.
 
 ## Learning Objectives
 
--   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
+- Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
 
 #### Install R and RStudio.
 
@@ -30,11 +30,11 @@ Download RStudio from: <https://posit.co/download/rstudio-desktop/>
 
 ## Introduction of R
 
--   R is a programming language and environment for statistical computing, data manipulation, and graphics.
+- R is a programming language and environment for statistical computing, data manipulation, and graphics.
 
--   R is free and open source.
+- R is free and open source.
 
--   RStudio is a free, open source integrated development environment (IDE) for R.
+- RStudio is a free, open source integrated development environment (IDE) for R.
 
 ## RStudio interface (brief)
 
@@ -52,11 +52,11 @@ window `4` : environment window
 
 Set your working directory
 
--   Menu: Session → Set Working Directory → Choose Directory
+- Menu: Session → Set Working Directory → Choose Directory
 
--   Or: Files tab → ☸︎ → Copy Folder Path to Clipboard, then paste into setwd()
+- Or: Files tab → ☸︎ → Copy Folder Path to Clipboard, then paste into setwd()
 
--   Or: Files tab → ☸︎ → Set As Working Directory
+- Or: Files tab → ☸︎ → Set As Working Directory
 
 ```{r, eval=FALSE, include=FALSE}
 
@@ -68,17 +68,17 @@ getwd() # prints the current working directory
 
 ## How to run code?
 
--   Type commands in the console.
+- Type commands in the console.
 
--   In an R Markdown chunk, click the run button ▶.
+- In an R Markdown chunk, click the run button ▶.
 
--   In a script, highlight code and press Run.
+- In a script, highlight code and press Run.
 
--   Shortcuts: Ctrl+Enter (Windows) or Cmd+Enter (Mac).
+- Shortcuts: Ctrl+Enter (Windows) or Cmd+Enter (Mac).
 
 ## R is a calculator: basic operations
 
-> -   Basic math operations
+> - Basic math operations
 >
 > `+`: add
 >
@@ -137,9 +137,9 @@ print(FirstName)
 
 Useful vector functions
 
--   `seq(from=a, to=b, by=c)` — generate a sequence
--   `rep(x, times=n)` — replicate x n times
--   `length(x)` — length of a vector
+- `seq(from=a, to=b, by=c)` — generate a sequence
+- `rep(x, times=n)` — replicate x n times
+- `length(x)` — length of a vector
 
 Examples
 
@@ -278,41 +278,41 @@ You can import Data by using `read.csv()` function. There are many different fun
 
 ```{r, echo=TRUE}
 
-my_data <- read.csv("data/mtcars.csv")
-read.csv("data/mtcars.csv", stringsAsFactors = FALSE) #— base R CSV reader (common).
-read.table("data/mtcars.csv", header = TRUE, sep = "\t") #— base R for general delimited files.
-readr::read_csv("data/mtcars.csv") #— fast tidyverse CSV reader (recommended for speed and consistent parsing).
+my_data <- read.csv("mtcars.csv")
+read.csv("mtcars.csv", stringsAsFactors = FALSE) #— base R CSV reader (common).
+read.table("mtcars.csv", header = TRUE, sep = "\t") #— base R for general delimited files.
+readr::read_csv("mtcars.csv") #— fast tidyverse CSV reader (recommended for speed and consistent parsing).
 ```
 
 ## You can access subset data
 
--   Specific element by `my_data[row, column]`
+- Specific element by `my_data[row, column]`
 
-    -   \| for example, the element in the third row and the fourth column `my_data[3,4]`
+  - \| for example, the element in the third row and the fourth column `my_data[3,4]`
 
--   Specific row by `my_data[row,]`
+- Specific row by `my_data[row,]`
 
-    -   \| for example, all the element of the third row `my_data[3,]`
+  - \| for example, all the element of the third row `my_data[3,]`
 
 ## Also,
 
--   Specific column by `my_data[,column]`
+- Specific column by `my_data[,column]`
 
-    -   \| for example, all the element of the fifth column `my_data[,5]`
+  - \| for example, all the element of the fifth column `my_data[,5]`
 
--   Access the column by using `$` sign such as `my_data$column_name`
+- Access the column by using `$` sign such as `my_data$column_name`
 
-    -   \| for example, `hp` column from `my_data` is `my_data$hp`
+  - \| for example, `hp` column from `my_data` is `my_data$hp`
 
--   Conditional statement works similar as vectors (row wise and column wise)
+- Conditional statement works similar as vectors (row wise and column wise)
 
-    -   \| for example, `my_data[my_data$hp<100,]`
+  - \| for example, `my_data[my_data$hp<100,]`
 
 ## Multiple conditions can be combined
 
 You can combine multiple logical conditions using & (AND), \| (OR), and ! (NOT) operators inside the row index to filter rows. For example
 
--   Rows where `hp` is less than 100 AND `cyl` equals 4:
+- Rows where `hp` is less than 100 AND `cyl` equals 4:
 
 ```{r, echo=TRUE}
 
@@ -320,7 +320,7 @@ my_data[(my_data$hp < 100) & (my_data$cyl == 4), ] # hp < 100 AND cyl = 4
 
 ```
 
--   Rows where `hp` is less than 100 OR `cyl` equals 4:
+- Rows where `hp` is less than 100 OR `cyl` equals 4:
 
 ```{r, echo=TRUE}
 
