@@ -144,7 +144,8 @@ greeting2
 ```{r, echo=TRUE}
 #
 #
-
+number <- 655
+number
 ```
 
 Assign strings and vectors
@@ -164,8 +165,12 @@ print(FirstName)
 ### Exercise 2: Assign your name to variable `name` and print it.
 
 ```{r, echo=TRUE}
-#
-#
+# Assign a character string to the object `name`
+name <- "yongho"
+
+# Print the value of `name`
+# Note: character (string) values must be enclosed in quotation marks
+name
 
 ```
 
@@ -198,7 +203,8 @@ Boston, New York, LA, San Francisco
 ```{r, echo=TRUE}
 #
 #
-
+cities <- c("Boston", "New York", "LA", "San Francisco")
+cities
 ```
 
 ### Exercise 4: Assign the following value to a vector `some_numbers` and print it.
@@ -207,7 +213,19 @@ Boston, New York, LA, San Francisco
 
 ```{r, echo=TRUE}
 #
-#
+# Create a numeric vector called `some_numbers`
+some_numbers <- c(1, 3, 5, 7, 9, 11)
+
+# Print the vector
+some_numbers
+
+# or you can also use seq()
+some_numbers <- seq(1,11,2)
+
+# Print the vector
+some_numbers
+
+
 
 ```
 
@@ -275,6 +293,8 @@ Numbers[Numbers < 100] # returns all numbers less than 100
 ```{r, echo=TRUE}
 #
 #
+numbers<-seq(10,60,10)
+numbers
 
 ```
 
@@ -285,7 +305,7 @@ Numbers[Numbers < 100] # returns all numbers less than 100
 ```{r, echo=TRUE}
 #
 #
-
+numbers[numbers<40]
 ```
 
 ### Exercise 7: From above vector `numbers`, print the first and second values inside.
@@ -293,7 +313,7 @@ Numbers[Numbers < 100] # returns all numbers less than 100
 ```{r, echo=TRUE}
 #
 #
-
+numbers[1:2]
 ```
 
 ## Creating data frames
@@ -370,8 +390,18 @@ df4
 | 109    | Amazon | 3        |
 
 ```{r, echo=TRUE}
-#
-#
+# Create a data frame called `my_df`
+my_df <- data.frame(
+  number   = 100:109,
+  brand    = c(rep("google", 2),
+               rep("OpenAI", 2),
+               rep("Apple", 2),
+               rep("Amazon", 4)),
+  quantity = c(3, 4, 2, 3, 1, 2, rep(3, 4))
+)
+
+# Print the data frame
+my_df
 
 ```
 
@@ -393,6 +423,8 @@ readr::read_csv("mtcars.csv") #— fast tidyverse CSV reader (recommended for sp
 ```{r, echo=true}
 #
 #
+my_df2 <- read.csv("mtcars.csv")
+my_df2 # or print(my_df2) 
 ```
 
 ## You can access subset data
@@ -452,6 +484,7 @@ my_data[!(my_data$hp < 100), ] # NOT (hp < 100)
 ```{r, echo=true}
 #
 #
+my_df2[my_df2$hp<100 & my_df2$gear==4,]
 ```
 
 ## Boolean values (logical expressions)
