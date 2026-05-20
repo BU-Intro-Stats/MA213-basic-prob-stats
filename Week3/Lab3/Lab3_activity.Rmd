@@ -18,117 +18,113 @@ library(dplyr)
 
 ------------------------------------------------------------------------
 
-### **New York Air Quality Dataset**
+#### Q1. Import the `airquality.csv` file and assign it do `df1`. Discuss with your partner the following questions.
 
-#### Q0. Import the `airquality.csv` file.
+1.  What kind of exploratory data analysis (EDA) can be done on this dataset?
+2.  What could be a research question or interest based on this data?
 
 ```{r}
 #
 #
 # 
-df <- read.csv("airquality.csv")
-head(df)
-names(df)
 ```
 
-#### Q1. How is Ozone distributed? You want to look at the histogram of `Ozone`. Make a histogram of `Ozone` and assign it to `Hist_Ozone`. Then print it.
+#### Q2. Import the Titanic dataset and assign it to `df2`. Discuss with your partner the following questions.
 
-```{r}
-
-```
-
-#### Q2. How is Wind distributed? You are interested in looking at shape of `Wind`. This time create Box plot of `Wind` and Histogram of `Wind`.
+1.  What kind of exploratory data analysis (EDA) can be done on this dataset?
+2.  What could be a research question or interest based on this data?
 
 ```{r}
 
 
 ```
 
-#### Q3. Let's compare those plots you obtained from Q2. What do you see and what are the differences? Think also about what you need to do more.
+#### Q3. Show the bar plot of average Solar radiation per each month in the Airquality data. What do you see from the plot?
 
 ```{r}
+#
+#
+#
 
+```
+
+#### Q4. Create a contingency table to examine the relationship between Class and Survived in the Titanic data. Assign it to `my_table1` and print it (Use `dplyr` package functions).
+
+```{r}
+#
+#
+#
 
 
 ```
 
-#### Q4. Show the scatter plot of Solar radiation and Temperature. What are the patterns? Let's talk about it.
+#### Q5. Make a plot to visualize the relationship between Class and Survived using `ggplot()`.
 
 ```{r}
-
+#
+#
+#
 
 ```
 
-#### Q5. Show the bar plot of average Solar radiation per each month. What do you see from the plot?
+and answer these questions with the partner.
 
-```{r}
-
-```
-
-### **Survival of Passengers on the Titanic**
-
-#### Q6. Import the `titanic.csv` file.
-
-```{r}
-
-df2 <- read.csv("titanic.csv")
-head(df2)
-names(df2)
-```
-
-#### Q7. You are interested in how the data is categorized by sex visually. You are interested in seeing how many people in each category of `Sex`. Obtain the table showing `Sex` by `N` (how many people are counted in each category). Assign it to `table_data` and print it.
-
-```{r}
-
-```
-
-#### Q8. Using this `table_data` variable, obtain pie chart.
-
-```{r}
-
-```
-
-#### Q9. You are also interested in exploring whether age is associated with survival. How would you go about visualizing or summarizing this relationship?
-
-```{r}
-
-```
+1.  Which class had the highest survival count?
+2.  What general pattern can you observe between passenger class and survival?
 
 ### Post-lab activities
 
-Please name your submission as `lab3.R`
+Name your submission as `lab3.R`
 
-We are going to also analyze a synthetic data `somedata.csv`.
+We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
 
-``` r
-> head(my_df)
-  X N        A    B     C        D E
-1 1 1  1.42830 -5.0 25.00 4.945988 D
-2 2 2  0.12983 -4.9 24.01 5.267488 E
-3 3 3 -0.02932 -4.8 23.04 5.295265 E
-4 4 4 -0.05000 -4.7 22.09 4.519594 C
-5 5 5  0.71453 -4.6 21.16 3.943522 E
-6 6 6 -0.35986 -4.5 20.25 4.860658 D
+1.  Import the `airquality.csv` file and assign it to `my_df` object.
+
+2.  Create the scatter plot of Solar radiation and Temperature and assign it to `my_plot1` .
+
+3.  Show average Solar radiation for each month using a bar plot.
+
+    3.1) Create a new data frame `new_df` containing the average Solar radiation per month (hint: use summarize()) and name the average column `solar_r_avg`.
+
+    3.2) From `new_df`, create a bar plot of the average Solar radiation for each month and assign it to `my_barplot`.
+
+4.  Import the `titanic.csv` file and assign it to `my_df2` object.
+
+5.  From this `my_df2`, create a contingency table for categorized `Sex` vs `Age` and assign it to `titanic_table` .
+
+6.  How many boy (male and child) are there? assign numeric number to `child_male` .
+
+```{r}
+
+# You may write your code here. Copy the code into `lab3.R` and submit it to Gradescope.
+
+# Do not use setwd() here.
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+#1
+
+
+#2
+
+
+#3.1
+
+
+#3.2
+
+
+#4
+
+
+#5
+
+
+#6
+
+
+
 ```
-
-1.  load the `somedata.csv` file and assign it to `my_df` object.
-
-2.  Get box plot of `A` in `my_df`. Looking at the box plot, how many suspected outliers can you see? assign it to `n_suspected` . (For example, you can do `n_suspected <- 1`).
-
-3.  Obtain the scatter plot of `B` and `C` (x-axis for B, y-axis for C). What kind of relationship can you see? You can choose from those two
-
-    `linear` , `nonlinear`
-
-    You can answer this by assigning a variable `relationship` . (For example, you can do `relationship <- "linear"` or `relationship <- "nonlinear"` ).
-
-4.  You are interested in looking at this mysterious variable `D` in the data. Look at the distribution of the data by producing a plot, answer if the shape of `D` is one of
-
-    `right skewed` , `left skewed` , `uniform` , `symmetric`
-
-    You can answer this by assigning a variable `shape` . (For example, you can do `shape <- "right skewed"` or `shape <- "uniform"` ... )
-
-5.  Obtain a barplot of `E` in the data. If you create a barplot showing counts on Y axis and categories (from A to E) on X axis, what is the pattern of this barplot? You can answer if it is one of
-
-    `increasing` , `decreasing` , `flat`
-
-    You can answer this by assigning a variable `pattern` . (For example, you can do `pattern <- "increasing"` or `pattern <- "decreasing"` ... )
