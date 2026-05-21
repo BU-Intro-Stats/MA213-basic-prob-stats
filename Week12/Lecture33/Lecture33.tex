@@ -1,0 +1,627 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Option 1: Slides with solutions
+
+\documentclass[slidestop,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
+
+% Option 2: Handouts without solutions
+
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\chp8@path{../../Chp 8}
+\input{../../lec_style.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Lecture 33]{MA213: Lecture 33}
+\subtitle{Module 5: Linear regression}
+\author{OpenIntro Statistics, 4th Edition}
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
+Some images may be included under fair use guidelines (educational purposes).}}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\addtocounter{framenumber}{-1} 
+{\removepagenumbers 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
+
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
+
+\titlepage
+
+\end{frame}
+}
+}
+
+\include{Lecture33_agenda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Recap: Linear Regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{The least squares line}
+
+\[ \mathhl{ \hat{y} = \beta_0 + \beta_1 x } \]
+
+\begin{itemize}
+\item $\hat{y}$: Predicted value of the response variable, $y$
+\item $\beta_0$: Intercept, parameter
+\begin{itemize}
+\item $b_0$: Intercept, point estimate (sometimes called $\hat{\beta}_0$)
+\end{itemize}
+\item $\beta_1$: Slope, parameter
+\begin{itemize}
+\item $b_1$: Slope, point estimate (sometimes called $\hat{\beta}_1$)
+\end{itemize}
+\item $x$: Explanatory variable
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Conditions for the least squares line}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions for the least squares line}
+
+\begin{enumerate}
+
+\item Linearity
+
+% \pause
+
+\item Nearly normal residuals
+
+% \pause
+
+\item Constant variability
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Slope}
+
+\formula{Slope}
+{The slope of the regression can be calculated as 
+\[ b_1 = \frac{s_y}{s_x} R \]
+}
+
+% \pause
+
+\hl{In context...}
+\[ b_1 = \frac{3.1}{3.73} \times -0.75 = -0.62 \]
+
+% \pause
+$\:$ \\
+\hl{Interpretation} \\
+For each additional \% point in HS graduate rate, we would expect the \% living in poverty to be lower on average by 0.62\% points.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Intercept}
+
+\formula{Intercept}
+{The intercept is where the regression line intersects the $y$-axis. The calculation of the intercept uses the fact the a regression line always passes through $(\bar{x},\bar{y})$.
+\[ b_0 = \bar{y} - b_1 \bar{x} \]
+}
+
+% \pause
+
+\twocol{0.68}{0.32}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp8@path/8-2_least_square_reg/figures/poverty/poverty_hsgrad_line_wide}
+\end{center}
+}
+{
+% \pause
+\begin{align*}
+b_0 &= 11.35 - (-0.62) \times 86.01 \\
+&= 64.68
+\end{align*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Which parts are random?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Reminder: Using probability models for inference}
+
+Remember: The difference between descriptive statistics and inference is that in inference, we make statements about a \textbf{population} based on a \textbf{sample}.
+\pause
+
+We use a probability model for the sample to understand the randomness in our sample statistic (the \textbf{sampling distribution} of the statistic).
+
+\pause
+For example, when working with continuous data, we have often assumed that the data are independent, identically distributed (iid) normal:
+\[X_i\overset{\mathrm{iid}}{\sim} N(\mu, \sigma) \qquad i=1,2,\ldots,n \]
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Reminder: using a sampling distribution for inference}
+    Using the iid normal population model, we know that the sampling distribution of the sample mean is (unknown $\sigma$):
+
+    \[ \frac{\bar{X}-\mu}{SE_{\bar{X}}} \sim t_{df} \qquad \text{where} \quad df = n-1 \quad \text{and} \quad SE_{\bar{X}} = \frac{s}{\sqrt{n}} \]
+  \pause
+
+    Then we can do a hypothesis test:
+    \begin{itemize}
+      \item $H_0: \mu = \mu_0$ and $H_A: \mu \ne \mu_0$
+      \item $T=\frac{\bar{X} - \mu_0}{SE_{\bar{X}}}$
+      \item $p$-value: \texttt{2*(1-pt(abs(T), df))}
+      \item Inference: Reject or fail to reject $H_0$
+    \end{itemize}
+    \pause
+
+    And we can construct a confidence interval:
+    \[ \bar{X} \pm t^\star_{df} \times SE_{\bar{X}} \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{We want to perform inference for the regression slope}
+
+Now, for regression, we will assume that the \textbf{residuals} are iid normal:
+\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i \quad \text{ where } \epsilon_i \overset{\mathrm{iid}}{\sim} N(0, \sigma) \qquad i=1,2,\ldots,n \]
+
+(This is why we checked the conditions on the residuals earlier!)
+
+\pause
+
+  If this model is correct, then we have a sampling distribution for the estimated slope, $b_1$:
+  \[ \frac{b_1-\beta_1}{SE_{b_1}} \sim t_{df} \qquad df=n-2\]
+  \pause
+
+  So now if I give you $b_1$, $SE_{b_1}$, and $n$, you already have all of the tools do a hypothesis test or to build a confidence interval for $\beta_1$!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Confidence interval for the slope}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Inference for linear regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Understanding regression output from software}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Nature or nurture?}
+
+{\small In 1966 Cyril Burt published a paper called ``The genetic determination of differences in intelligence: A study of monozygotic twins reared together and apart". The data consist of IQ scores for [an assumed random sample of] 27 identical twins, one raised by foster parents, the other by the biological parents.}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chp8@path/8-4_inf_lin_reg/figures/twins/twins_IQ}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: Using the \texttt{lm} function for regression}
+
+\begin{frame}
+\frametitle{Summary output from R}
+
+\texttt{fit <- lm(formula = fosterIQ $\sim$ bioIQ, data = twins)}
+\texttt{summary(fit)}
+
+\pause
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{lrrrr}
+\hline
+ & Estimate & Std. Error & t value & $Pr(>|t|)$ \\
+\hline
+(Intercept) & \alt<2>{\orange{9.20760}}{9.20760} & \alt<3>{\orange{9.29990}}{9.29990} & 0.990 & 0.332 \\
+bioIQ       & \alt<2>{\orange{0.90144}}{0.90144} & \alt<3>{\orange{0.09633}}{0.09633} & 9.358 & 1.2e-09 \\
+\hline
+\multicolumn{5}{l}{Residual standard error: 7.729 on 25 degrees of freedom} \\
+\multicolumn{5}{l}{Multiple R-squared: 0.7779,\quad Adjusted R-squared: 0.769} \\
+\multicolumn{5}{l}{F-statistic: 87.56 on 1 and 25 DF,\quad p-value: 1.204e-09} \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+The first column gives the point estimates for the intercept and slope. 
+
+\pause
+
+The second column gives the standard errors for these estimates (we will leave the details of how these are calculated for MA214)
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: IQ example} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Testing for the slope}
+
+\pq{Assuming that these 27 twins comprise a representative sample of all twins separated at birth, we would like to test if these data provide convincing evidence that the IQ of the biological twin is a significant predictor of IQ of the foster twin. What are the appropriate hypotheses?}
+
+\begin{enumerate}[(a)]
+\item \mathhl{H_0:} $b_0 = 0$; \mathhl{H_A:} $b_0 \ne 0$ 
+\item \mathhl{H_0:} $\beta_0 = 0$; \mathhl{H_A:} $\beta_0 \ne 0$ 
+\item \mathhl{H_0:} $b_1 = 0$; \mathhl{H_A:} $b_1 \ne 0$ 
+\solnMult{ \mathhl{H_0:} $\beta_1 = 0$; \mathhl{H_A:} $\beta_1 \ne 0$ }
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Testing for the slope (cont.)}
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
+  bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\begin{itemize}
+
+\item We always use a $t$-test in inference for regression. $\:$ \\
+
+\pause
+
+\Remember{Test statistic, $T = \frac{point~estimate - null~value}{SE}$}
+
+\pause
+
+\item Point estimate = $b_1$ is the observed slope.
+
+\pause
+
+\item $SE_{b_1}$ is the standard error associated with the slope.
+
+\pause
+
+\item Degrees of freedom associated with the slope is $df = n - 2$, where $n$ is the sample size. $\:$ \\
+\pause
+\Remember{Just like in the ANOVA, we lose 1 degree of freedom for each parameter we estimate, and in simple linear regression we estimate 2 parameters, $\beta_0$ and $\beta_1$.}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Testing for the slope (cont.)}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) &  9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
+  bioIQ & \orange{0.9014}  &   \green{0.0963} & \orange{9.36} & \textcolor{blue}{0.0000} \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\begin{eqnarray*}
+T &=& \frac{\orange{0.9014} - 0}{\green{0.0963}} = \orange{9.36} \\
+\pause
+df &=& 27 - 2 = 25 \\
+\pause
+p-value &=& P(|T| > \orange{9.36}) < \textcolor{blue}{0.01}
+\end{eqnarray*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: $t$-test for the slope}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
+
+\dq{What can you say about the relationship between the \% with no leisure-time physical activity and the \% reporting frequent mental distress all zip codes in Massachusetts?}
+
+\begin{center}
+\includegraphics[width=0.49\textwidth]{./figures/physical_activity.png}~~~~
+\includegraphics[width=0.49\textwidth]{./figures/mental_distress.png}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
+
+\dq{What can you say about the relationship between the \% with no leisure-time physical activity and the \% reporting frequent mental distress all zip codes in Massachusetts?}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{./figures/distress_activity_regression.png}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: MA zip codes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
+
+\pq{Which of the below is the best interpretation of the slope?}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 8.11159 & 0.36829 & 22.02 & $<$2e-16 \\ 
+ \%NoLeisure & 0.36943 & 0.01755 & 21.05 & $<$2e-16 \\ 
+   \hline
+%   &&&&$df$ = 98 \\
+\end{tabular}
+\end{center}
+}
+
+\footnotesize{
+\begin{enumerate}[(a)]
+\item A 1\% increase in residents with no leisure-time physical activity in a MA zip code is associated with a 37\% increase in the percentage reporting frequent mental distress.
+\item A 1\% increase increase in residents with no leisure-time physical activity would cause a a 0.37\% increase in the percent reporting frequent mental distress.
+\solnMult{A 1\% increase increase in residents with no leisure-time physical activity is associated with a 0.37\% increase in the percent reporting frequent mental distress.}
+\item In zip codes with no residents lacking leisure-time physical activity, the expected percent reporting frequent mental distress is about 8.11\%.
+\end{enumerate}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[shrink]
+\frametitle{\% No physical activity vs. \% Frequent mental distress}
+
+\dq{Is there a statistically significant relationship between \% No physical activity and \% Frequent mental distress in zip codes in Massachusetts?}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 8.11159 & 0.36829 & 22.02 & $<$2e-16 \\ 
+ \%NoLeisure & 0.36943 & 0.01755 & 21.05 & $<$2e-16 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+\vspace{-0.5em}
+\soln{\only<2->{Yes, the p-value for \% No Leisure is low, indicating that the data provide convincing evidence that the slope parameter is different than 0.
+}}
+
+% $\:$ \\
+
+\only<3->{But there's something fishy about this analysis...
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Why are we even computing a p-value here?}
+
+Are the data randomly sampled, or random in any way?
+\pause
+
+... No, it's census data from all zip codes in Massachusetts.
+\pause
+
+What is the population of interest?
+\pause
+
+... All zip codes in Massachusetts? (we have data on all of them already)
+
+... All zip codes in the US? (then the sample is not representative or random)
+\pause
+
+\hl{Statistical inference is poorly defined when you have population data, and it's not reliable when the data isn't randomly sampled.}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{CI for the slope}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{Edfinity Quiz: CI for the slope}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Confidence interval for the slope}
+
+% \pq{{\small Remember that a confidence interval is calculated as $point~estimate \pm ME$ and the degrees of freedom associated with the slope in a simple linear regression is $n - 2$. Which of the below is the correct 95\% confidence interval for the slope parameter? Note that the model is based on observations from 27 twins.}}
+
+% {\footnotesize
+% \begin{center}
+% \begin{tabular}{rrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
+%   bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
+
+% \vspace{-0.5cm}
+
+% \twocol{0.4}{0.6}
+% {
+% \begin{enumerate}[(a)]
+% \item $9.2076 \pm 1.65 \times 9.2999$
+% \solnMult{ $0.9014 \pm 2.06 \times 0.0963$}
+% \item $0.9014 \pm 1.96 \times 0.0963$
+% \item $9.2076 \pm 1.96 \times 0.0963$
+% \end{enumerate}
+% }
+% {
+% \soln{\onslide<2->{\orange{
+% \begin{eqnarray*}
+% \pause
+% n &=& 27 \qquad df = 27 - 2 = 25 \\
+% \pause
+% 95\%:~t^\star_{25} &=& 2.06 \\
+% \pause
+% 0.9014 &\pm& 2.06 \times 0.0963 \\
+% \pause
+% (0.7 &,& 1.1)
+% \end{eqnarray*}
+% }}}}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Recap}
+
+% \begin{itemize}
+
+% \item Inference for the slope for a single-predictor linear regression model:
+% \pause
+% \begin{itemize}
+% \item Hypothesis test:
+% \[ T = \frac{b_1 - null~value}{SE_{b_1}} \qquad df = n - 2 \]
+% \pause
+% \item Confidence interval:
+% \[ b_1 \pm t^\star_{df = n - 2} SE_{b_1} \]
+% \end{itemize}
+
+% \pause
+
+% \item The null value is often 0 since we are usually checking for \hl{any} relationship between the explanatory and the response variable.
+
+% \pause
+
+% \item The regression output gives $b_1$, $SE_{b_1}$, and \hl{two-tailed} p-value for the $t$-test for the slope where the null value is 0.
+
+% \pause
+
+% \item We rarely do inference on the intercept, so we'll be focusing on the estimates and inference for the slope.
+
+% \end{itemize}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \begin{frame}
+% \frametitle{Caution}
+
+% \begin{itemize}
+
+% \item Always be aware of the type of data you're working with: random sample, non-random sample, or population.
+
+% \pause
+
+% \item Statistical inference, and the resulting p-values, are meaningless when you already have population data.
+
+% \pause
+
+% \item If you have a sample that is non-random (biased), inference on the results will be unreliable.
+
+% \pause
+
+% \item The ultimate goal is to have independent observations.
+
+% \end{itemize}
+
+% \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

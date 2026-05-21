@@ -1,0 +1,43 @@
+\documentclass[8pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[
+    left=0.5in,
+    right=0.5in,
+    top=0.5in,
+    bottom=0.5in
+]{geometry}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multicol} % Added for two columns
+\usepackage{tabularx} % For better tables
+\usepackage{array}    % For column formatting
+
+\setlength{\parindent}{0pt}
+% \setlength{\parskip}{0pt}
+\def\chpiv@path{../../Chp 4}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{MA213 Quiz 4 Formula Sheet}}
+\end{center}
+
+\vspace{1em}
+
+\input{../fsheet_pg1}
+
+\input{../rfunctions_full.tex}
+
+\clearpage
+
+\begin{multicols}{2} % Begin two columns
+
+\input{../full_point_estimates.tex}
+
+\input{../full_confidence_intervals.tex}
+
+\input{../full_hyp_tests.tex}
+\end{multicols} % End two columns
+
+\end{document}

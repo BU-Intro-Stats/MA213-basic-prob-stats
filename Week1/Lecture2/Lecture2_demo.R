@@ -21,7 +21,7 @@ print(is.data.frame(survey_data))
 head(survey_data) 
 
 
-# ---- 32 Plotting ----
+# ---- 2. Plotting ----
 
 # Now we get to ask interesting questions about the data, and try to answer them
 # using plots. For example, how many people in the class go to bed within each 
@@ -38,15 +38,27 @@ ggplot(data=survey_data, aes(x=zodiac)) +
   geom_bar() +
   xlab("Zodiac sign")
 
+# ...rotate the x labels so they are readable
+ggplot(data=survey_data, aes(x=zodiac)) +
+  geom_bar() +
+  xlab("Zodiac sign") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 # Scatter plot of hours of sleep vs caffeinated drinks:
 ggplot(data=survey_data, aes(x=caffeine, y=sleep)) +
   geom_point() +
   xlab("Number of caffeinated drinks") +
   ylab("Hours of sleep")
 
+# ...What if more than one person had the same combination of answers?
+ggplot(data=survey_data, aes(x=caffeine, y=sleep)) +
+  geom_jitter() +
+  xlab("Number of caffeinated drinks") +
+  ylab("Hours of sleep")
+
 # Scatter plot of hours of sleep vs caffeinated drinks, colored by bedtimes
 ggplot(data=survey_data, aes(x=caffeine, y=sleep, color=bedtime)) +
-  geom_point() +
+  geom_jitter() +
   xlab("Number of caffeinated drinks") +
   ylab("Hours of sleep") +
   labs(color="Bedtime")

@@ -25,19 +25,25 @@ for(i in 1:3){
 for(i in 4:6){
 	x <- runif(n[i])
 	y <- m[i]*x + rnorm(n[i])
+	if(i==5){
+	  # Save for later
+	  x5 <- x
+	  y5 <- y
+	}
 	x <- c(x,xr[[i]])
 	y <- c(y,yr[[i]])
 	pdf(paste("out",i,".pdf",sep=""), height = 6, width = 5.5)
 	par(mar=c(4,4,1,1), las=1, mgp=c(2.5,0.5,0), cex.lab = 1.25, cex.axis = 1.25, mfrow = c(2,1))
 	lmPlot(x, y, col = COL[1,2], lCol = COL[4], lwd = 3)
 	dev.off()
+	
 }
 
-i = 5
-x <- runif(n[i])
-y <- m[i]*x + rnorm(n[i])
-x <- c(x,xr[[i]])
-y <- c(y,yr[[i]])
+#i = 5
+#x <- runif(n[i])
+#y <- m[i]*x + rnorm(n[i])
+x <- c(x5,xr[[5]])
+y <- c(y5,yr[[5]])
 pdf(paste("out5-1.pdf",sep=""), height = 6, width = 5.5)
 par(mar=c(4,4,1,1), las=1, mgp=c(2.5,0.5,0), cex.lab = 1.25, cex.axis = 1.25, mfrow = c(2,1))
 lmPlot(x[1:70], y[1:70], col = COL[1,2], lCol = COL[4], lwd = 3, xlim = range(x), ylim = range(y))

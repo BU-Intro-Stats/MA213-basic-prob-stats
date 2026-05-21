@@ -1,0 +1,45 @@
+\textbf{Hypothesis Tests}
+
+\begin{itemize}
+    \item Null hypothesis ($H_0$): Default
+    \item Alternative hypothesis ($H_A$): Research question
+    \item Test statistic: \[\frac{\text{point estimate} - \text{null value}}{\text{standard error}}\]
+    \item P-value: Prob of observing test stat at least as extreme as observed test stat under $H_0$
+    \item Significance level ($\alpha$): $\alpha=Pr(Type\; 1\; error | H_0\; true)$
+    \item Inference: reject or fail to reject $H_0$
+\end{itemize}
+
+\textit{Special cases}:
+\begin{itemize}
+    \item For single proportion tests, when computing SE under $H_0$, use $p_0$ instead of $\hat{p}$
+    \item For two proportion tests, when computing SE under $H_0$ of no difference, use pooled proportion \[\hat{p}_{\text{pooled}} = \frac{X_1 + X_2}{n_1 + n_2}\]
+\end{itemize}
+
+\textit{Chi Square Goodness of Fit Test:}
+\[
+    X^2 = \sum_i^k \frac{(O_i - E_i)^2}{E_i} \sim \chi^2_{df} \qquad
+    df = k - 1 
+\]
+\textit{Chi Square Independence Test:}
+Same formula as above, but
+\begin{align*}
+    & E_{i,j} = \frac{(\text{row i total})(\text{column j total})}{\text{grand total}} \\
+    & df = (r - 1)(c - 1) 
+\end{align*}
+\textit{Conditions for Chi Square tests:}
+\begin{itemize} 
+    \item Independence: Each case must be independent of the others
+    \item Expected cell counts: All expected counts at least 5
+\end{itemize}  
+
+
+\begin{center}
+\begin{tabular}{l l | c c}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Decision}} \\
+& & fail to reject $H_0$ &  reject $H_0$ \\
+  \cline{2-4}
+& $H_0$ true & $\checkmark$ &  Type 1 Error \\
+\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true & Type 2 Error & $\checkmark$ \\
+  \cline{2-4}
+\end{tabular}
+\end{center}
