@@ -12,7 +12,13 @@ library(tidyr)
 library(gridExtra)
 ```
 
+
+
 # Introduction
+
+![](images/clipboard-4108551022.jpeg){width="300"}
+
+![](images/clipboard-2732389219.jpeg){width="400"}
 
 You've been offered two different dice games. Before you decide whether to play, you need to understand:
 
@@ -60,9 +66,11 @@ cat("Expected Value:", E_X, "\n")
 cat("Interpretation: On average, you gain $", round(E_X, 2), " per game.\n", sep="")
 ```
 
+
+
 **Your calculation (show your work):**
 
-E(X) =
+$$E(X)  = \underline{\hspace{2cm}}$$
 
 **Decision based on Expected Value:**
 
@@ -103,9 +111,11 @@ cat("\nInterpretation: Your winnings will typically vary by about $",
     round(sd_X, 2), " from the expected value.\n", sep="")
 ```
 
+
+
 **Your calculation (show your work):**
 
-Var(X) =
+$$Var(X) = \underline{\hspace{2cm}}$$
 
 **What does variance tell you?**
 
@@ -129,6 +139,8 @@ play_simple_game()
 play_simple_game()
 play_simple_game()
 ```
+
+
 
 ### Simulate 100 games
 
@@ -161,6 +173,8 @@ cat("Standard Deviation:\n")
 cat("  Theoretical: $", round(sd_X, 4), "\n", sep="")
 cat("  Simulated:   $", round(empirical_sd, 4), "\n", sep="")
 ```
+
+
 
 **Question:** Are the simulated values close to the theoretical values?
 
@@ -200,6 +214,8 @@ ggplot(cumulative_data, aes(x = game, y = profit)) +
   theme_minimal()
 ```
 
+
+
 **Observation:**
 
 ------------------------------------------------------------------------
@@ -237,6 +253,8 @@ ggplot(variance_data, aes(x = n, y = sd_of_means)) +
   theme_minimal()
 ```
 
+
+
 **Key Insight:** What do you observe?
 
 ------------------------------------------------------------------------
@@ -273,7 +291,7 @@ Let $X_1$ = winnings from first die, $X_2$ = winnings from second die.
 
 Your total winnings: $Y = X_1 + 2X_2$
 
-**Property of Expected Value:** E(X_1 + 2X_2)=
+**Property of Expected Value:** $$E(X_1 + 2X_2) = ?$$
 
 ```{r theory-ev-two-dice}
 # First die (same as before)
@@ -291,19 +309,15 @@ E_Y <- c() # Your turn
 cat("\nE(Y) = E(X1) + E(X2) = $", E_Y, "\n", sep="")
 ```
 
+
+
 **Your calculation:**
 
-$$E(X_1) $$
+$$E(X_1) = \underline{\hspace{2cm}}$$
 
-=
+$$E(X_2) = \underline{\hspace{2cm}}$$
 
-$$E(X_2) $$
-
-=
-
-$$E(Y) = E(X_1+2X_2) $$
-
-=
+$$E(Y) = E(X_1+2X_2) = \underline{\hspace{2cm}}$$
 
 **Should you play this game?** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
@@ -331,17 +345,15 @@ cat("\nVar(Y) = Var(X1) + 4 * Var(X2) =", Var_Y, "\n")
 cat("SD(Y) =", SD_Y, "\n")
 ```
 
+
+
 **Your calculation:**
 
-$$Var(X_1) $$ =
+$$Var(X_1) = \underline{\hspace{2cm}}$$
 
-$$Var(X_2)$$
+$$Var(X_2) = \underline{\hspace{2cm}}$$
 
-=
-
-$$Var(Y) = Var(X_1 + 2X_2) $$
-
-=
+$$Var(Y) = Var(X_1 + 2X_2) = \underline{\hspace{2cm}}$$
 
 **Question:** Is the variance of the two-dice game larger or smaller than the one-die game?
 
@@ -374,6 +386,8 @@ play_two_dice_game()
 play_two_dice_game()
 ```
 
+
+
 ### Run simulations
 
 ```{r simulate-two-dice-many}
@@ -402,6 +416,8 @@ cat("Standard Deviation:\n")
 cat("  Theoretical: $", round(SD_Y, 4), "\n", sep="")
 cat("  Simulated:   $", round(empirical_sd_2d, 4), "\n", sep="")
 ```
+
+
 
 **Question:** Do the simulated values match the theoretical values?
 
@@ -434,6 +450,8 @@ ggplot(cumulative_data_2d, aes(x = game, y = profit)) +
        y = "Cumulative Profit ($)") +
   theme_minimal()
 ```
+
+
 
 What do you observe?
 
@@ -517,9 +535,9 @@ Then: - Calculate the theoretical expected value - Calculate the theoretical var
 
 
 # 5. Create visualizations
-
-
 ```
+
+
 
 **Describe your game:**
 
