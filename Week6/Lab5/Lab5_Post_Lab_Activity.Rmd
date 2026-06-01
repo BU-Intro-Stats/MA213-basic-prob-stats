@@ -1,0 +1,74 @@
+---
+title: "MA213 Basic Statistics and Probability — Lab 5 Post-lab Activity"
+output:
+  html_document:
+    code_download: true
+    toc: true
+    toc_float: true
+    theme: flatly
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Post-Lab Activities
+
+> **Submission instructions:** Save your completed script as `lab5.R` and submit it before Next Tuesday 10pm.
+
+In a hypothetical world, **10% of Americans** rely on Social Network Sites (SNSs) as their primary news source (true). We will conduct a simulation study to verify that the CLT holds in this setting. For computational purposes, assume the U.S. population is $N = 300{,}000$.
+
+**0.** Set the random seed for reproducibility:
+
+``` r
+set.seed(213)
+```
+
+**1.** Generate the population data and store it in an object called `population`.
+
+**2.** Compute the mean and standard deviation of the population. Assign them to `mean_pop` and `sd_pop`, respectively.
+
+**3.** Simulate the sampling distribution with $n = 10$ and $K = 1{,}000$ iterations. Compute and assign the mean and standard deviation of the resulting sample means to `mean_sample` and `sd_sample`.
+
+**4.** Repeat the above with $n = 50$ and $K = 100$ iterations. Assign the mean and standard deviation of the resulting sample means to `mean_sample2` and `sd_sample2`.
+
+**5.** With $n = 1{,}000$ and $K = 1{,}000$, extract the subsets of sample proportions that fall within 1, 2, and 3 standard deviations of the mean. Assign these subsets to `first_sd_data`, `second_sd_data`, and `third_sd_data`, respectively. Do you think the sample proportions are normally distributed? Answer `normal <- 1` for yes and `normal <- 0` for no.
+
+```{r}
+
+# You may write your code here. Copy the code into `lab5.R` and submit it to Gradescope.
+
+# Do not use setwd() here.
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+set.seed(213)
+
+#1
+
+
+#2
+
+
+#3
+
+
+
+#4
+
+
+
+#5
+
+
+
+
+```
+
+## 

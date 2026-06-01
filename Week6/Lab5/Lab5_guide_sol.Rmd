@@ -230,8 +230,9 @@ In the worked example we used a population of Apple and Android users. Now suppo
 
 ```{r your-turn-1a}
 # Your code here
-# pop2 <- c(rep("Subscriber", 20000), rep("Non-subscriber", 5000))
-# true_p2 <- ???
+pop2 <- c(rep("Subscriber", 20000), rep("Non-subscriber", 5000))
+true_p2 <- sum(pop2=="Non-subscriber")/length(pop2)
+true_p2
 
 ```
 
@@ -239,14 +240,80 @@ In the worked example we used a population of Apple and Android users. Now suppo
 
 ```{r your-turn-1b}
 # Your code here
-
+# Step 1: Draw one sample and compute the sample proportion
+n <- 200
+my_sample <- sample(pop2, size = n)
+p_hat <- sum(my_sample == "Non-subscriber") / n
+cat("Sample proportion (one draw):", round(p_hat, 4), "\n")
 ```
 
 **1c.** Repeat the sampling $K = 1{,}000$ times and store each $\hat{p}$ in a vector called `p_hat_vector2`. Plot a histogram of the result and add a vertical dashed line at the true $p$.
 
 ```{r your-turn-1c}
 # Your code here
+K <- 1000
+p_hat_vector  <- rep(0, K)   # pre-allocate for efficiency
 
+n <- 200
+
+for (i in 1:K) {
+
+my_sample <- sample(pop2, size = n)
+p_hat <- sum(my_sample == "Non-subscriber") / n
+p_hat_vector[i] = p_hat
+}
+
+head(p_hat_vector)
+
+
+sample_data <- data.frame(p_hat = p_hat_vector)
+
+ggplot(sample_data, aes(x = p_hat)) +
+  geom_histogram(bins = 25, fill = "steelblue", color = "white", alpha = 0.85) +
+  geom_vline(xintercept = true_p2, color = "red", linetype = "dashed", linewidth = 1) +
+  lims(x=c(0.1,0.3))+
+  labs(
+    title    = "Sampling Distribution of the Sample Proportion",
+    subtitle = paste0("n = ", n, ", K = ", length(p_hat_vector),
+                      "  |  Red dashed line = true p = ", round(true_p2, 4)),
+    x = expression(hat(p)),
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 13)
+
+
+
+# 
+# # Your code here
+# K <- 1000
+# p_hat_vector  <- rep(0, K)   # pre-allocate for efficiency
+# 
+# n <- 2000
+# 
+# for (i in 1:K) {
+# 
+# my_sample <- sample(pop2, size = n)
+# p_hat <- sum(my_sample == "Non-subscriber") / n
+# p_hat_vector[i] = p_hat
+# }
+# 
+# head(p_hat_vector)
+# 
+# 
+# sample_data <- data.frame(p_hat = p_hat_vector)
+# 
+# ggplot(sample_data, aes(x = p_hat)) +
+#   geom_histogram(bins = 25, fill = "steelblue", color = "white", alpha = 0.85) +
+#   geom_vline(xintercept = true_p2, color = "red", linetype = "dashed", linewidth = 1) +
+#    lims(x=c(0.1,0.3))+
+#   labs(
+#     title    = "Sampling Distribution of the Sample Proportion",
+#     subtitle = paste0("n = ", n, ", K = ", length(p_hat_vector),
+#                       "  |  Red dashed line = true p = ", round(true_p2, 4)),
+#     x = expression(hat(p)),
+#     y = "Count"
+#   ) +
+#   theme_minimal(base_size = 13)
 ```
 
 **1d. Conceptual question:** Without running any code, predict what would happen to the histogram if you changed $n$ from 200 to 2,000. Would it be wider or narrower? Would the center change? Explain your reasoning.
