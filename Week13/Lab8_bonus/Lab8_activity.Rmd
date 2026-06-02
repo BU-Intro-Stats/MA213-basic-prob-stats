@@ -1,0 +1,104 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab8 (Bonus) Post Lab Activity"
+output:
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 8: Bonus-Post Lab Activity
+
+Create `lab8.R` and submit it to GradeScope. Pass means you get all questions correct. If you get pass, you can recover one of your failed post-lab activities.
+
+Questions 1 and 2
+
+**`student_gpa.csv`** includes simulated data for 120 students. For each student, the following variables are recorded:
+
+-   **Name**: A unique identifier for each student.
+
+-   **Major**: Student's academic major (Math, Biology, History, or Engineering).
+
+-   **GPA**: Student's grade point average on a 4.0 scale. Some GPA values are outliers (unusually low or high), and a few are missing (NA).
+
+#### **Question 1:**
+
+Create a contingency table showing the count of students in each GPA category (A, B, C, D) by major, excluding students with missing GPA values (NA). First, add a new column, `GPA_Letter`, to the dataframe to indicate each student's GPA category.
+
+Based on your contingency table, how many students in the Math major have an 'A'? Assign this count to `Number_of_A_Math`.
+
+**GPA Categories:**
+
+-   **A:** GPA ≥ 3.7
+
+-   **B:** 3.0 ≤ GPA \< 3.7
+
+-   **C:** 2.0 ≤ GPA \< 3.0
+
+-   **D:** GPA \< 2.0
+
+(You need to have variable `Number_of_A_Math` in your R file)
+
+#### **Question 2:**
+
+Obtain a histogram of GPA. How many outliers do you observe by looking at the histogram? Assign the number to `number_of_outliers`.
+
+(You need to have variable `number_of_outliers` in your R file)
+
+#### Question 3:
+
+You have a biased coin where $P(head)=0.70$ and $P(tail)=0.30$.
+
+You flip the coin twice. If the first outcome is head (that means 1) you earn 1 dollars and tail (that means 0) for nothing. If the second outcome is head, you need to pay a dollar and tail for nothing.
+
+We are working on this simulation procedure. We are creating a function called one_trial() which takes no input values (it is fine for the function to have no inputs) and outputs the amount of money earned from one trial of the game (the money obtained from flipping twice).
+
+``` r
+
+one_trial <- function(){
+
+  first <- sample(c(1,0), 1, ### place for prob? ) # output from the first flip
+  second <- sample(c(1,0), 1, ### place for prob? )  # output from the second flip  
+  out <- first + second # This line needs to be modified ... 
+  return(out)
+}
+one_trial()
+```
+
+(You need to a function `one_trial()` )
+
+#### Question 4:
+
+Recent statistics suggest that 20% of Boston University students ride a bicycle. Let's assume that the total student population is 25,000 for calculation purposes.
+
+Generate the population data and assign it to a variable called `population`. This `population` should consist of 25,000 values, each being either `1` or `0`, where `1` indicates a student rides a bicycle and `0` indicates a student does not ride a bicycle.
+
+Generate `population`
+
+#### Question 5:
+
+The file **`promotion.csv`** contains company data with variables for **department** and **promotion status**, where promotion status can be **`"Promoted"`**, **`"Not Promoted"`**, or **`"In Review"`**.
+
+At a significance level of $\alpha=0.05$, test whether there is an association between **department** and **promotion status**.
+
+Obtain `degrees_of_freedom`, `chi_stat` and `p_value` where `df` is the degrees of freedom, `chi_stat` the Chi-square test-statistic, and `p_value` is the p value obtained from the test.
+
+Based on the test, do you reject $H_0$? If you reject $H_0$, then have a variable `reject_null=T` otherwise, `reject_null=F`
+
+(You need to have variables `degrees_of_freedom`, `chi_stat`, `p_value` and `reject_null` in your R file)
+
+#### Question 6:
+
+Using the `exam_performance.csv` data set, which contains information on each student's number of study hours (StudyHours) and exam score (ExamScore):
+
+Fit a linear regression model with exam score as the dependent variable and study hours as the independent variable:
+
+Obtain b0 and b1 from the `exam_performance.csv` data using the model $$
+    y = \beta_0 + \beta_1 x + \epsilon
+    $$ where b0 and b1 are the estimates of the intercept ($\beta_0$) and slope ($\beta_1$) parameters in the linear regression relating $x$ (study hours) to $y$ (ExamScore).
+
+(You need to have variables `b0`, `b1` in your R file)
