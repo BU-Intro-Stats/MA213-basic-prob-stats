@@ -1,0 +1,377 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab6 Activity"
+bibliography: references.bib
+output:
+  pdf_document: default
+  html_document:
+    code_download: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Lab 6: **Confidence Interval and Hypothesis Test**
+
+### Pre-lab activity
+
+### Testing Hypotheses using confidence intervals
+
+Suppose that a market research company is tasked with determining the percentage of adults in Boston who own cell phones. Two hundred randomly selected residents in Boston are surveyed to answer whether they have cell phones. 127 responded yes to the question "do you have a cell phone?"
+
+#### Exercise 0
+
+Construct 95% confidence interval for the proportion of Boston residents who have cell phones and interpret the confidence interval you found.
+
+```{r}
+# Given information
+n <- 200
+x <- 127
+p_hat <- x / n
+p_hat
+
+# Standard Error
+SE <- sqrt(p_hat * (1 - p_hat) / n)
+SE
+
+# 95% Confidence Interval
+alpha <- 0.05
+z_star <- qnorm(1 - alpha / 2)
+
+lower_bound <- p_hat - z_star * SE
+upper_bound <- p_hat + z_star * SE
+CI <- c(lower_bound, upper_bound)
+CI
+```
+
+**Interpretation:** We are 95% confident that the true proportion of Boston residents who own a cell phone is between 56.8% to 70.2%.
+
+We want to test with $\alpha=0.05$ whether the proportion of Boston residents who have cell phones is different from 50%. Let's obtain the test statistic and p-value.
+
+```{r}
+# Two-sided hypothesis test: H0: p = 0.5 vs Ha: p != 0.5
+p0 <- 0.5
+
+# Test statistic (z-score under H0)
+SE_null <- sqrt(p0 * (1 - p0) / n)
+z_stat <- (p_hat - p0) / SE_null
+z_stat
+
+# Two-sided p-value
+p_value <- 2 * (1 - pnorm(abs(z_stat)))
+p_value
+
+# Conclusion
+if (p_value < alpha) {
+  print("Reject H0: There is significant evidence that the proportion differs from 50%.")
+} else {
+  print("Fail to reject H0.")
+}
+```
+
+**Note:** Since the 95% CI (`r round(CI, 4)`) does not contain 0.5, this is consistent with rejecting $H_0: p = 0.5$ at $\alpha = 0.05$.
+
+## Lab activities
+
+Let's do a simulation using confidence interval.
+
+### Population
+
+```{r}
+N <- 675000
+pop <- c(rep("Cellphone", N*0.9), rep("No Cellphone", N*0.1))
+true_prop <- sum(pop=="Cellphone")/length(pop)
+true_prop
+
+
+```
+
+Here are steps to see how many confidence intervals contain the true proportion among `K` confidence intervals.
+
+(using alpha level 0.05)
+
+1.  Sample `n` from `pop` assign it to `sampled_data`
+2.  Obtain sample proportion and assign it to `phat`
+3.  Using $SE = \sqrt{ \frac{\hat{p} (1-\hat{p})}{n} }$ , obtain `SE` and obtain a confidence interval
+4.  Repeat these steps `K` times and count how many intervals contain the true proportion `true_prop` .
+
+#### Exercise 1. Complete the following R code
+
+---
+alpha = 0.05
+n <- 200
+K <- 1000
+num_of_simulation <- rep(0,K)
+prop_est <- rep(0,K)
+lower <- rep(0,K)
+upper <- rep(0,K)
+included  <- rep(0,K)
+
+for (k in 1:K) {
+  #Step 1
+  sampled_data <-   #
+    
+  #Step 2  
+  p_hat <-  #
+  
+  # Step 3
+  SE <-   #
+  
+  CI = p_hat + c(-1,1)   #
+  
+  num_of_simulation[k] = k
+  prop_est[k] <- p_hat
+  lower[k] <- CI[1]
+  upper[k] <- CI[2]
+  included[k] <- CI[1] <= true_prop & true_prop <=CI[2] 
+  
+}
+
+# bind together
+df_table <- data.frame(num_of_simulation = num_of_simulation, prop_est = prop_est, lower = lower, upper = upper, included = included)
+
+head(df_table)
+---
+
+```{r}
+# you can copy and paste the completed code above here
+alpha = 0.05
+n <- 200
+K <- 1000
+num_of_simulation <- rep(0, K)
+prop_est <- rep(0, K)
+lower <- rep(0, K)
+upper <- rep(0, K)
+included  <- rep(0, K)
+
+for (k in 1:K) {
+  # Step 1: sample n observations from pop
+  sampled_data <- sample(pop, n)
+
+  # Step 2: compute sample proportion
+  p_hat <- sum(sampled_data == "Cellphone") / n
+
+  # Step 3: compute SE and confidence interval
+  SE <- sqrt(p_hat * (1 - p_hat) / n)
+
+  CI = p_hat + c(-1, 1) * qnorm(1 - alpha / 2) * SE
+
+  num_of_simulation[k] = k
+  prop_est[k] <- p_hat
+  lower[k] <- CI[1]
+  upper[k] <- CI[2]
+  included[k] <- CI[1] <= true_prop & true_prop <= CI[2]
+}
+
+# bind together
+df_table <- data.frame(num_of_simulation = num_of_simulation, prop_est = prop_est,
+                       lower = lower, upper = upper, included = included)
+
+head(df_table)
+```
+
+```{r}
+sum(df_table$included) # number of CIs contains the true population propotion
+
+K # total number of CIs
+```
+
+#### Exercise 2. Using the code above and modify it here, change your alpha=0.01 . How many intervals contain the true population parameter?
+
+```{r}
+# Modified simulation with alpha = 0.01 (99% confidence level)
+alpha = 0.01
+n <- 200
+K <- 1000
+num_of_simulation <- rep(0, K)
+prop_est <- rep(0, K)
+lower <- rep(0, K)
+upper <- rep(0, K)
+included  <- rep(0, K)
+
+for (k in 1:K) {
+  # Step 1
+  sampled_data <- sample(pop, n)
+
+  # Step 2
+  p_hat <- sum(sampled_data == "Cellphone") / n
+
+  # Step 3
+  SE <- sqrt(p_hat * (1 - p_hat) / n)
+
+  CI = p_hat + c(-1, 1) * qnorm(1 - alpha / 2) * SE
+
+  num_of_simulation[k] = k
+  prop_est[k] <- p_hat
+  lower[k] <- CI[1]
+  upper[k] <- CI[2]
+  included[k] <- CI[1] <= true_prop & true_prop <= CI[2]
+}
+
+df_table <- data.frame(num_of_simulation = num_of_simulation, prop_est = prop_est,
+                       lower = lower, upper = upper, included = included)
+
+head(df_table)
+```
+
+```{r}
+sum(df_table$included) # number of CIs contains the true population propotion
+
+K # total number of CIs
+```
+
+### Testing for independence in two-way tables
+
+We are going to consider hair and eye color of statistics students data. It is the data contains 592 statistics students hair and eye color data.
+
+```{r}
+# load the data 
+df <- read.csv("haircolor.csv")
+head(df)
+
+```
+
+Here are the steps of testing for independence in two-way tables.
+
+1.  Check how many categories each variables have.
+2.  Make a contingency table using `table()` function.
+3.  Calculate expected counts for each cell.
+4.  Make an another contingency table whose cells are expected counts.
+5.  Compute the chi-square statistic
+6.  Compute p-value and make a decision by comparing the p-value and alpha level.
+
+```{r}
+#Step 1 
+unique(df$Hair)
+unique(df$Eye)
+# Hair has 4 categories: Black, Brown, Red, Blond
+# Eye has 4 categories: Brown, Blue, Hazel, Green
+```
+
+```{r}
+#Step 2
+#Make a contingency table using table() function. 
+tbl <- table(df$Hair, df$Eye)
+tbl
+tbl2 <- addmargins(tbl)
+tbl2
+```
+
+```{r}
+# Step 3
+# Get the expected counts: E = (row total * col total) / grand total
+total <- tbl2[5, 5]
+
+# Row totals (Hair: Black, Blond, Brown, Red)
+r1 <- tbl2[1, 5]; r2 <- tbl2[2, 5]; r3 <- tbl2[3, 5]; r4 <- tbl2[4, 5]
+
+# Column totals (Eye: Blue, Brown, Green, Hazel)
+c1 <- tbl2[5, 1]; c2 <- tbl2[5, 2]; c3 <- tbl2[5, 3]; c4 <- tbl2[5, 4]
+
+# Expected counts e[row, col]
+e11 <- r1*c1/total; e12 <- r1*c2/total; e13 <- r1*c3/total; e14 <- r1*c4/total
+e21 <- r2*c1/total; e22 <- r2*c2/total; e23 <- r2*c3/total; e24 <- r2*c4/total
+e31 <- r3*c1/total; e32 <- r3*c2/total; e33 <- r3*c3/total; e34 <- r3*c4/total
+e41 <- r4*c1/total; e42 <- r4*c2/total; e43 <- r4*c3/total; e44 <- r4*c4/total
+
+print("All expected counts >= 5:")
+all(c(e11,e12,e13,e14,e21,e22,e23,e24,e31,e32,e33,e34,e41,e42,e43,e44) >= 5)
+```
+
+```{r}
+#Step 4
+# Build expected counts matrix (filled column by column to match tbl layout)
+expected_tbl <- matrix(
+  c(e11, e21, e31, e41,
+    e12, e22, e32, e42,
+    e13, e23, e33, e43,
+    e14, e24, e34, e44),
+  nrow = 4, ncol = 4)
+rownames(expected_tbl) <- rownames(tbl)
+colnames(expected_tbl) <- colnames(tbl)
+expected_tbl
+```
+
+```{r}
+#Step 5
+# Chi-square statistic: sum of (O - E)^2 / E over all cells
+chi_statistic <- 0
+for (i in 1:16) {
+  chi_statistic <- chi_statistic + (tbl[i] - expected_tbl[i])^2 / expected_tbl[i]
+}
+chi_statistic
+```
+
+```{r}
+#Step 6
+# Degrees of freedom: df = (r - 1)(c - 1) = (4-1)(4-1) = 9
+df_chisq <- (nrow(tbl) - 1) * (ncol(tbl) - 1)
+df_chisq
+
+p_value <- 1 - pchisq(chi_statistic, df = df_chisq)
+p_value
+```
+
+**Conclusion:** The p-value is far below $\alpha = 0.05$, so we **reject** $H_0$. There is statistically significant evidence that hair color and eye color are **not independent** — the two variables are associated among statistics students.
+
+## Post-lab activities
+
+Please name your submission as `lab6.R`
+
+1.  The file `a.csv` contains poll results in which random students were asked the question: "Do you own a car?" Assume that these students represent all American college students. Calculate a 95% confidence interval (CI) for the proportion of students who own a car. The sample proportion $\hat{p}$​ can be calculated as the fraction of students who answered "Yes." Obtain `CI` vector.
+
+2.  The file `b.csv` contains Netflix data with variables for plans and gender. At a significance level of $\alpha=0.05$, test whether there is an association between plan type and gender.
+
+    Obtain `df`, `chi_stat` and `p_value` where `df` is the degrees of freedom, `chi_stat` the Chi-square test-statistic, and `p_value` is the p value obtained from the test.
+
+    Based on the test, do you reject $H_0$? If you reject $H_0$, then have a variable `reject_null=T` otherwise, `reject_null=F`
+
+(You need to have variables `df`, `chi_stat`, `p_value` and `reject_null` in your R file)
+
+```{r}
+data_a <- read.csv("a.csv")
+data_b <- read.csv("b.csv")
+
+# Post-lab 1: 95% CI for proportion of students who own a car
+p_hat_a <- sum(data_a[[1]] == "Yes") / nrow(data_a)
+n_a     <- nrow(data_a)
+SE_a    <- sqrt(p_hat_a * (1 - p_hat_a) / n_a)
+z_star  <- qnorm(0.975)   # z* for 95% CI
+
+CI <- c(p_hat_a - z_star * SE_a,
+        p_hat_a + z_star * SE_a)
+CI   # 95% confidence interval for proportion who own a car
+
+
+# Post-lab 2: Chi-square test for plan type vs gender (b.csv)
+tbl_b  <- table(data_b[[1]], data_b[[2]])
+tbl_b2 <- addmargins(tbl_b)
+
+# Degrees of freedom: df = (rows-1)(cols-1)
+df <- (nrow(tbl_b) - 1) * (ncol(tbl_b) - 1)
+
+# Expected counts: E_ij = (row_i total x col_j total) / grand total
+grand_total <- tbl_b2[nrow(tbl_b2), ncol(tbl_b2)]
+expected_b  <- matrix(0, nrow = nrow(tbl_b), ncol = ncol(tbl_b))
+for (i in 1:nrow(tbl_b)) {
+  for (j in 1:ncol(tbl_b)) {
+    expected_b[i, j] <- tbl_b2[i, ncol(tbl_b2)] * tbl_b2[nrow(tbl_b2), j] / grand_total
+  }
+}
+
+# Chi-square test statistic
+chi_stat <- sum((tbl_b - expected_b)^2 / expected_b)
+
+# p-value
+p_value <- 1 - pchisq(chi_stat, df = df)
+
+df
+chi_stat
+p_value
+
+# Decision at alpha = 0.05
+reject_null <- p_value < 0.05
+reject_null
+```
