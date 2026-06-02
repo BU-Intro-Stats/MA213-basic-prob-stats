@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage{resource/shortex}
+\input{resource/teaching}
+
+%--------------------
+\begin{document}
+
+\begin{center}
+\textbf{\Large Project 2 \\  Statistical Data Analysis } 
+\end{center}
+
+
+\section*{Overview}
+Your group will select dataset(s) of your interest and conduct data analyses.
+This should include :
+\begin{itemize}
+    \item One numerical data anlysis
+    \item One categorical data analysis 
+\end{itemize} 
+You will write a report of your analyses and submit it together with your R code.
+The report should be approximately 5-10 pages in length (12-point font, single-spaced), including references, R code and data file, but the page count is flexible.
+
+
+\section*{Suggested outline for your writeup}
+\begin{itemize}
+    \item Introduction
+    \begin{enumerate}
+        \item Introduce the dataset and its source
+        \item Describe the context and background of the data
+        \item  Define your variables of interest
+        \item Tell the story of your reasoning and possible hypothesis
+    \end{enumerate}
+    \item Categorical Data Analysis Part
+    \begin{enumerate}
+        \item Preliminary Data Exploration (EDA) 
+            \begin{enumerate}
+            \item Summarize categorical variables
+            \item Contingency Table 
+            \item Visualizations: bar plots, pie charts, etc.
+            \end{enumerate} 
+        \item Inference for Categorical Data
+        \begin{enumerate}
+            \item Conditions of inference
+            \item Hypoetheses
+            \item Test statistic and p-value
+            \item Conclusion : Discuss results in context of the data
+        \end{enumerate}
+    \end{enumerate}
+    \item Numerical Data Analysis Part
+        \begin{enumerate}
+             \item Preliminary Data Exploration (EDA) 
+            \begin{enumerate}
+                \item Summarize numerical variables (mean, median, sd, IQR, etc)
+                \item Visualizations: histograms, boxplots, etc.
+            \end{enumerate}
+            \item Inference for Numerical Data
+        \begin{enumerate}
+            \item Conditions of inference
+            \item Hypoetheses
+            \item Test statistic and p-value
+            \item Conclusion : Discuss results in context of the data
+        \end{enumerate}
+    \end{enumerate}
+    \item Conclusion
+    \begin{enumerate}
+            \item Summarize key insights
+            \item Suggest future analysis or potential applications
+        \end{enumerate} 
+\end{itemize}
+
+\section*{Project requirements}
+\begin{itemize}
+    \item Source of data must be cited
+    \item R code should be included (Rscript (.R) or Rmd files)
+    \item References should be provided at the end
+    \item Using certain functions in R are not allowed
+    \begin{itemize}
+        \item Using functions that directly perform hypothesis tests (e.g., t.test(), chisq.test(), prop.test(), etc.)
+        \item If you want to use ANOVA, you can use aov(), anova() or lm() functions.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section*{Possible Data Sources to Consider (not limited to these)}
+You can click the links below to explore possible data sources.
+\begin{itemize}
+    \item \href{https://www.openintro.org/data/}{OpenIntro Datasets}
+    \item \href{https://cran.r-project.org/web/packages/fivethirtyeight/vignettes/fivethirtyeight.html}{fivethirtyeight 
+    R Package}
+    \item \href{https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html}{datsets R package}
+    \item \href{https://www.kaggle.com/datasets}{Kaggle datasets}
+    \item \href{https://data.gov/}{US government's open data}
+\end{itemize}
+
+
+\section*{Some example of analyses you can do}
+\begin{itemize}
+     \item Categorical Data Analysis Examples (choose at least one)
+    \begin{itemize}
+        \item One categorical data with binary outcome (Inference for a single proportion : Chapter 6.1)
+        \item Two Categorical variables with binary outcomes (Inference for two proportions : Chapter 6.2)
+        \item One categorical variable with more than two outcomes (Chi-square goodness-of-fit test : Chapter 6.3)
+        \item Two categorical variables with more than two outcomes (Testing for independece in two-way tables : Chapter 6.4)
+    \end{itemize}
+
+    \item Numerical Data Analysis Examples (choose at least one)
+    \begin{itemize}
+        \item One numerical variable (One-sample means with t-test : Chapter 7.1)
+        \item Two numerical variables (Paired data or Two-sample means with t-test : Chapters 7.2, 7.3)
+        \item More than two numerical variables (Comparing many means with ANOVA : Chapter 7.5)
+    \end{itemize}
+   
+\end{itemize}
+
+\section*{Project Timeline}
+\begin{enumerate}
+    \item Project 2 logistic week : Week 8 (on March 18th)
+    \item Deliverable 1 : Project Outline (by March 24th) 
+    \item Project 2 work 2 (on April 1st)
+    \item Deliverable 2 : Project Plan (Results slides to explain + R code + Datafile) (by April 7th)
+    \item Project 2 work 3 (on April 9th)
+    \item Deliverable 3 : Writeup + R code(final version) + Datafile (by April 15th)
+\end{enumerate}
+
+\section*{Example Roles by Tasks}
+\begin{enumerate}
+    \item For a group of 4 \\
+    Role 1 : Introduction + Categorical Data Analysis   \\
+    Role 2 : Categorical Data Analysis \\
+    Role 3 : Numerical Data Analysis \\
+    Role 4 : Conclusion + Numerical Data Analysis  \\
+    \vspace{1em}
+
+    \item For a group of 3 \\
+    Role 1 : Introduction, EDA part for numerical and categorical analysis \\
+    Role 2 : Numerical Data Analysis \\
+    Role 3 : Categorical Data Analysis + Conclusion \\
+\end{enumerate}
+
+\section*{Deliverables}
+\begin{itemize}
+    \item Deliverable 1 : Project Outline (by March 24th) 
+    \item Deliverable 2 : Project Plan (Results slides + R code + Datafile) (by April 7th) 
+    \item Deliverable 3 : Writeup + R code(final version + Datafile) (by April 15th)
+\end{itemize}
+
+
+
+\end{document}
+
+
+
+% shall i add abstract part too? 
