@@ -1,5 +1,5 @@
 ---
-title: "MA213 Basic Statistics and Probability - Lab4 Guide"
+title: "MA213 Basic Statistics and Probability - Lab4 Guide (Enhanced)"
 output:
   html_document:
     toc: true
@@ -13,19 +13,20 @@ library(ggplot2)
 library(dplyr)
 ```
 
+
 ## Lab 4: Simulation and Probability R Guide
 
 ------------------------------------------------------------------------
 
 ## Learning Objectives
 
-- Validate and Explain Probability Distributions: Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1).
+-   Validate and Explain Probability Distributions: Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1).
 
-- Compute Probabilities Using Various Tools: Use logic, Venn diagrams, and probability rules to compute probabilities for events.
+-   Compute Probabilities Using Various Tools: Use logic, Venn diagrams, and probability rules to compute probabilities for events.
 
-- Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
+-   Understand and Compute Expectations and Variances: Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables.
 
-- Conduct Hypothesis Testing Using Simulation: Set up null and alternative hypotheses to test for independence between variables, and use simulation techniques to evaluate data support for these hypotheses.
+-   Conduct Hypothesis Testing Using Simulation: Set up null and alternative hypotheses to test for independence between variables, and use simulation techniques to evaluate data support for these hypotheses.
 
 ------------------------------------------------------------------------
 
@@ -43,14 +44,27 @@ sample(x, 3) # picks 3 unique fruits from the vector (without replacement)
 sample(x, 10, replace=TRUE) # picks 10 fruits, allowing repeats (sampling with replacement)
 ```
 
+
 ### Exercise 1: Make and roll a die once
 
 **Task:** Create a vector for a fair six-sided die and roll it once.
 
 ```{r ex1-student, eval=FALSE}
 # Your code here
-
+die <- c(1, 2, 3, 4, 5, 6)
+sample(die, 1)
 ```
+
+```{r ex1-solution}
+# Solution
+die <- c(1, 2, 3, 4, 5, 6)
+# Or simply:
+die <- 1:6
+
+# Roll once
+sample(die, 1)
+```
+
 
 ### Exercise 1b: Roll a weighted die
 
@@ -61,6 +75,20 @@ sample(x, 10, replace=TRUE) # picks 10 fruits, allowing repeats (sampling with r
 #
 #
 ```
+
+```{r ex1b-solution}
+# Solution
+die <- 1:6
+# Probabilities: 6 has twice the probability of others
+probs <- c(1/7, 1/7, 1/7, 1/7, 1/7, 2/7)
+
+# Roll 20 times
+sample(die, 20, replace = TRUE, prob = probs)
+
+# Verify the probabilities work
+sum(probs)  # Should equal 1
+```
+
 
 ------------------------------------------------------------------------
 
@@ -78,6 +106,7 @@ for (i in 1:5) {
 }
 ```
 
+
 ### Example 2: Print numbers from 1 to 5
 
 ```{r loop-example2, echo=TRUE}
@@ -86,6 +115,7 @@ for (i in c(1, 2, 3, 4, 5)) {
   print(i)
 }
 ```
+
 
 ### Example 3: Simulate rolling a die 5 times and record it
 
@@ -97,6 +127,7 @@ for (i in 1:5) {
 }
 rolls
 ```
+
 
 ### For loop syntax
 
@@ -119,6 +150,23 @@ x <- c(0, 1) # here is a coin. 0 for tail and 1 for head
 #
 ```
 
+```{r ex2-solution}
+# Solution
+x <- c(0, 1) # 0 for tail, 1 for head
+coin_exp <- rep(0, 10) # Initialize vector
+
+for (i in 1:10) {
+  coin_exp[i] <- sample(x, 1)
+}
+
+coin_exp
+
+# Alternative solution using sample directly
+coin_exp_alt <- sample(c(0, 1), 10, replace = TRUE)
+coin_exp_alt
+```
+
+
 ### Exercise 2b: Flip a biased coin
 
 **Task:** Flip a coin 100 times where heads (1) appears 70% of the time. Calculate the proportion of heads.
@@ -128,6 +176,27 @@ x <- c(0, 1) # here is a coin. 0 for tail and 1 for head
 #
 #
 ```
+
+```{r ex2b-solution}
+# Solution
+coin <- c(0, 1)
+probs <- c(0.3, 0.7) # 30% tails, 70% heads
+
+flips <- sample(coin, 100, replace = TRUE, prob = probs)
+
+# Calculate proportion of heads
+prop_heads <- mean(flips)
+prop_heads
+
+# Visualize
+table(flips)
+barplot(table(flips), 
+        main = "Biased Coin Flips (100 flips)",
+        xlab = "Outcome (0=Tail, 1=Head)",
+        ylab = "Frequency",
+        col = c("coral", "steelblue"))
+```
+
 
 ------------------------------------------------------------------------
 
@@ -174,6 +243,7 @@ square_sum(3, 4)
 square_sum(10, 5)
 ```
 
+
 ### Exercise 3: Multiplication of three numbers
 
 **Task:** Make a function to calculate the multiplication of three numbers.
@@ -187,6 +257,18 @@ square_sum(10, 5)
 #
 ```
 
+```{r ex3-solution}
+# Solution
+multiply_three <- function(x, y, z) {
+  x * y * z
+}
+
+# Test
+multiply_three(2, 3, 4)
+multiply_three(5, 10, 2)
+```
+
+
 ### Exercise 3b: Mean and standard deviation function
 
 **Task:** Create a function that takes a vector of numbers and returns both the mean and standard deviation.
@@ -197,6 +279,32 @@ square_sum(10, 5)
 #
 ```
 
+```{r ex3b-solution}
+# Solution
+stats_summary <- function(x) {
+  mean_val <- mean(x)
+  sd_val <- sd(x)
+  
+  list(mean = mean_val, sd = sd_val)
+}
+
+# Test
+test_data <- c(2, 4, 6, 8, 10, 12)
+stats_summary(test_data)
+
+# Alternative: using return explicitly
+stats_summary2 <- function(x) {
+  return(list(
+    mean = mean(x),
+    sd = sd(x),
+    n = length(x)
+  ))
+}
+
+stats_summary2(test_data)
+```
+
+
 ### Exercise 3c: Temperature converter
 
 **Task:** Create a function that converts Fahrenheit to Celsius. Formula: C = (F - 32) × 5/9
@@ -206,6 +314,25 @@ square_sum(10, 5)
 #
 #
 ```
+
+```{r ex3c-solution}
+# Solution
+fahrenheit_to_celsius <- function(fahrenheit) {
+  celsius <- (fahrenheit - 32) * 5/9
+  return(celsius)
+}
+
+# Test
+fahrenheit_to_celsius(32)   # Should be 0
+fahrenheit_to_celsius(212)  # Should be 100
+fahrenheit_to_celsius(98.6) # Should be 37
+
+# Bonus: Create vector conversion
+temps_f <- c(32, 50, 68, 86, 104)
+temps_c <- fahrenheit_to_celsius(temps_f)
+data.frame(Fahrenheit = temps_f, Celsius = temps_c)
+```
+
 
 ------------------------------------------------------------------------
 
@@ -242,6 +369,7 @@ if (score >= 90) {
 print(grade)
 ```
 
+
 ### Comparison Operators
 
 ```{r operators, echo=TRUE}
@@ -259,6 +387,7 @@ print(grade)
 3 %in% c(1,2,3)  # TRUE
 ```
 
+
 ### Logical Operators
 
 ```{r logical, echo=TRUE}
@@ -271,6 +400,7 @@ print(grade)
 # ! (NOT) - reverses the condition
 !(5 < 3)              # TRUE
 ```
+
 
 ### Example: Dice Game with If Statements
 
@@ -299,6 +429,7 @@ ev <- (1/6)*10 + (3/6)*1 + (2/6)*(-2)
 cat("Expected value:", ev)
 ```
 
+
 ### Exercise: Two-Coin Game
 
 **Task:** Flip two coins. Both heads: win \$5, both tails: lose \$3, one each: \$0
@@ -313,6 +444,32 @@ coin_game <- function() {
   
 }
 ```
+
+```{r coin-solution}
+# Solution
+coin_game <- function() {
+  coin1 <- sample(c(0, 1), 1)
+  coin2 <- sample(c(0, 1), 1)
+  
+  if (coin1 == 1 && coin2 == 1) {
+    winnings <- 5
+  } else if (coin1 == 0 && coin2 == 0) {
+    winnings <- -3
+  } else {
+    winnings <- 0
+  }
+  
+  return(winnings)
+}
+
+# Test
+coin_game()
+
+# Expected value: P(HH)=1/4→$5, P(TT)=1/4→-$3, P(HT or TH)=1/2→$0
+ev <- (1/4)*5 + (1/4)*(-3) + (1/2)*0
+cat("Expected value:", ev)
+```
+
 
 **Key Points:** - Use `==` for comparison (not `=`) - Use `&&` for AND, `||` for OR in if statements - Always use curly braces `{}`
 
@@ -339,6 +496,7 @@ roll_multiple <- function(runs) {
 roll_multiple(5)
 ```
 
+
 ### Exercise 4: Coin flip function
 
 **Task:** Create a function that flips a coin n times and returns the proportion of heads.
@@ -349,6 +507,27 @@ roll_multiple(5)
 #
 ```
 
+```{r ex4-solution}
+# Solution
+flip_coin_prop <- function(n) {
+  coin <- c(0, 1) # 0 = tails, 1 = heads
+  flips <- rep(0, n)
+  
+  for (i in 1:n) {
+    flips[i] <- sample(coin, 1)
+  }
+  
+  proportion_heads <- mean(flips)
+  return(proportion_heads)
+}
+
+# Test
+flip_coin_prop(10)
+flip_coin_prop(100)
+flip_coin_prop(1000)
+```
+
+
 ### Exercise 4b: Compare different sample sizes
 
 **Task:** Use the function from Exercise 4 to compare proportions from 10, 100, 1000, and 10000 flips.
@@ -358,6 +537,34 @@ roll_multiple(5)
 #
 #
 ```
+
+```{r ex4b-solution}
+# Solution
+sample_sizes <- c(10, 100, 1000, 10000)
+proportions <- numeric(length(sample_sizes))
+
+for (i in seq_along(sample_sizes)) {
+  proportions[i] <- flip_coin_prop(sample_sizes[i])
+}
+
+results <- data.frame(
+  Sample_Size = sample_sizes,
+  Proportion_Heads = proportions
+)
+results
+
+# Visualize convergence to 0.5
+ggplot(results, aes(x = Sample_Size, y = Proportion_Heads)) +
+  geom_point(size = 3, color = "steelblue") +
+  geom_line(color = "steelblue") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "red") +
+  scale_x_log10() +
+  labs(title = "Law of Large Numbers: Coin Flips",
+       x = "Number of Flips (log scale)",
+       y = "Proportion of Heads") +
+  theme_minimal()
+```
+
 
 ------------------------------------------------------------------------
 
@@ -374,6 +581,7 @@ sum_of_two <- dice1 + dice2
 sum_of_two
 ```
 
+
 Simulate two-dice sum for 100 iterations using a for loop:
 
 ```{r two-dice-loop}
@@ -385,6 +593,7 @@ for (i in 1:100) {
 }
 head(myoutcome)
 ```
+
 
 ### Using replicate()
 
@@ -399,12 +608,14 @@ twodice_outcome <- function() {
 twodice_outcome()
 ```
 
+
 Run many simulations:
 
 ```{r replicate-run}
 myoutcome <- replicate(n = 30, twodice_outcome())
 myoutcome
 ```
+
 
 ### Exercise 5: Three-dice simulation
 
@@ -414,4 +625,26 @@ myoutcome
 # Your code here
 #
 #
+```
+
+```{r ex5-solution}
+# Solution
+threedice_outcome <- function() {
+  sum(sample(1:6, 3, replace = TRUE))
+}
+
+# Simulate 1000 rolls
+outcomes_3dice <- replicate(1000, threedice_outcome())
+
+# Summary statistics
+mean(outcomes_3dice)
+sd(outcomes_3dice)
+
+# Visualize
+hist(outcomes_3dice, 
+     breaks = 15,
+     main = "Distribution of Three Dice Sum",
+     xlab = "Sum of Three Dice",
+     col = "lightblue",
+     border = "white")
 ```
