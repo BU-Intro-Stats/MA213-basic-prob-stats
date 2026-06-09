@@ -1,94 +1,233 @@
 ---
-title: "MA213 Basic Statistics and Probability - Lab7 Activity"
-bibliography: references.bib
+title: "MA213 Basic Statistics and Probability — Lab 7 Activity"
+subtitle: "Simple Linear Regression"
 output:
-  pdf_document: default
   html_document:
-    code_download: true 
+    code_download: true
+    toc: true
+    toc_float: true
+    theme: flatly
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(ggplot2)
 library(dplyr)
 ```
 
-## Lab 7: Linear Regression
+------------------------------------------------------------------------
 
-### Lab activities
+## Lab Activities
 
-#### Exercise Q6
+| Name | BUID |
+|------|------|
+|      |      |
+|      |      |
 
-Choose one dataset and perform data analysis using simple linear regression. Your group can choose a data from
+### Choose Your Dataset
 
-[Survey of Duke students on GPA, studying, and more](https://www.openintro.org/data/index.php?data=gpa)
+Your group will choose **one** dataset and carry out a complete simple linear regression analysis. Browse the descriptions at the links below and pick the one that interests your group most.
 
-[US Crime Rates](https://www.openintro.org/data/index.php?data=us_crime_rates)
+| Dataset | Link |
+|----|----|
+| Duke Student Survey (GPA, studying, etc.) | [gpa](https://www.openintro.org/data/index.php?data=gpa) |
+| US Crime Rates | [us_crime_rates](https://www.openintro.org/data/index.php?data=us_crime_rates) |
+| Normal Body Temperature | [thermometry](https://www.openintro.org/data/index.php?data=thermometry) |
+| State-Level Data | [state_stats](https://www.openintro.org/data/index.php?data=state_stats) |
+| SAT and GPA | [satgpa](https://www.openintro.org/data/index.php?data=satgpa) |
+| Pierce County House Sales (2020) | [pierce_county_house_sales](https://www.openintro.org/data/index.php?data=pierce_county_house_sales) |
 
-[Normal Body Temperature](https://www.openintro.org/data/index.php?data=thermometry)
+------------------------------------------------------------------------
 
-[State-level data](https://www.openintro.org/data/index.php?data=state_stats)
+### Question 0 — Import the Data
 
-[SAT and GPA data](https://www.openintro.org/data/index.php?data=satgpa)
+Download your chosen dataset as a `.csv` file and load it with `read.csv()`. Then discuss with your partner:
 
-[Pierce County House Sales Data for 2020](https://www.openintro.org/data/index.php?data=pierce_county_house_sales)
+- Which variable will be your **response** (outcome) variable $Y$?\
+- Which variable will be your **explanatory** (predictor) variable $X$?\
+- Why does this direction of prediction make sense?
 
-0.  Import the data
+Write your variable choices as comments before the code.
 
 ```{r}
+# Response variable (Y):  
+# Explanatory variable (X):  
 
-#
-#
-#
+# -> Import your dataset below
+
+# Duke Student Survey (GPA, studying, etc.)
+# df <- read.csv("https://www.openintro.org/data/csv/gpa.csv")
+# head(df)
+
+## Us Crime Rates
+ # df <- read.csv("https://www.openintro.org/data/csv/us_crime_rates.csv")
+ # head(df)
+
+
+## Normal Body Temperature
+df <- read.csv("https://www.openintro.org/data/csv/thermometry.csv")
+head(df)
+
+
+## State-Level Data
+# df <- read.csv("https://www.openintro.org/data/csv/state_stats.csv")
+# head(df)
+
+
+## SAT and GPA
+# df <- read.csv("https://www.openintro.org/data/csv/satgpa.csv")
+# head(df)
+
+
+## SAT and GPA
+# df <- read.csv("https://www.openintro.org/data/csv/pierce_county_house_sales.csv")
+# head(df)
+
+# TODO : let X and Y
+# X <- df$...
+# Y <- df$...
+```
+
+------------------------------------------------------------------------
+
+### Question 1 — Explore the Relationship
+
+Before fitting any model, we examine the data visually and numerically.
+
+**Tasks:**
+
+a.  Create a **scatterplot** of $Y$ vs. $X$ using `ggplot2`. Label your axes clearly and add an informative title.\
+b.  Calculate the **correlation coefficient** $r$ using `cor()`. What does its sign and magnitude tell you?\
+c.  In 1–2 sentences, describe the direction, form, and strength of the relationship you observe.
+
+```{r}
+# a) Scatterplot
+
+
+
+# b) Correlation coefficient
+
+
+
+# c) Description (write as a comment):
+# 
+```
+
+------------------------------------------------------------------------
+
+### Question 2 — Fit the Least Squares Line Manually
+
+We will compute the regression coefficients **by hand** using the formulas:
+
+$$\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}, \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}$$
+
+**Tasks:**
+
+a.  Compute $\bar{x}$ and $\bar{y}$.\
+b.  Compute $\hat{\beta}_1$ (store as `b1`) and $\hat{\beta}_0$ (store as `b0`).\
+c.  Compute the **fitted values** $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i$ and store them as `y_hat`.\
+d.  Compute the **residuals** $e_i = y_i - \hat{y}_i$ and store them as `resids`.
+
+```{r}
+# a) Sample means of X and Y
+
+
+
+# b) Slope and intercept
+
+
+
+# c) Fitted values
+
+
+
+# d) Residuals
+
 
 
 ```
 
-1.  Check the relationship between response variable and explanatory variable.
+------------------------------------------------------------------------
+
+### Question 3 — Verify with `lm()`
+
+Now use R's built-in `lm()` function to fit the same model.
+
+**Tasks:**
+
+a.  Fit the model with `lm()` and display the `summary()` output.\
+b.  Extract the intercept and slope from the `lm` object and confirm they match your manual values from Question 2.\
 
 ```{r}
-#
-#
-#
+# a) Fit model with lm() and print summary
 
-```
 
-2.  Obtain the least square line and get the residuals.
 
-```{r}
-#
-#
-#
+# b) Extract and compare coefficients
 
-```
 
-3.  Show some plots to check model assumption.
-
-```{r}
-#
-#
-#
 
 ```
 
 ### Post-lab activities
 
-The Toluca Company manufactures refrigeration equipments as well as many replacement parts. In the past, one of the replacement parts has been produced periodically in lots of varying sizes. When a cost improvement program was undertaken, company officials wished to determine the optimum lot size for producing this part. The production of this part involves setting up the production process (which must be done no matter what is the lot size) and machining and assembly operations. One key input for the model to ascertain the optimum lot size was the relationship between lot size and labour hours required to produce the lot. To determine this relationship, data on lot size and work hours for 25 recent production runs were utilized. The production conditions were stable during the six-month period in which the 25 runs were made and were expected to continue to be the same during the next three years, the planning period for which the cost improvement program was being conducted.
+The Toluca Company manufactures refrigeration equipment and various replacement parts. One replacement part is produced periodically in lots of varying sizes. As part of a cost improvement program, company officials sought to determine the optimal lot size. Producing this part requires setup time (which is fixed regardless of lot size) and machining/assembly time.
 
-Please name your submission as `lab7.R`
+A key component of determining the optimal lot size was understanding the relationship between lot size and labor hours required to produce the lot. To study this, data from 25 recent production runs were collected. Production conditions were stable during the six-month period when the data were collected and were expected to remain stable for the next three years—the period relevant to the cost improvement planning.
 
-Data here is given in `toluca.csv` .
+You will use the data provided in `toluca.csv`.
 
-1.  Calculate the correlation coefficient and save it to object `r2.`
+Please name your submission: `lab7.R`
 
-2.  Obtain standard deviations of `X` and `Y`, `sx` and `sy`, respectively.
+Complete the following tasks:
 
-3.  Obtain the sum of `X` and `Y`, `sumx` and `sumy`, respectively.
+1.  If the correlation coefficient is closer to 1, it is a strong positive correlation. If the correlation coefficient is close to -1, it is a strong negative correlation.
 
-4.  Obtain `b0` estimate for $\beta_0$.
+    Calculate the correlation coefficient and assign the variable `correlation` to
 
-5.  Obtain the slope estimate `b1` .
+    "strong positive correlation", "neutral" or
 
-6.  Obtain `R2` .
+    "strong negative correlation" .
 
-7.  What is the 5th residual value? Assign it to object `resid5` .
+2.  Obtain `b0` estimate for $\beta_0$. You need to calculate this manually.
+
+3.  Obtain the slope estimate `b1` . You need to calculate this manually.
+
+4.  What is the 5th residual value? Assign it to object `resid5` (You can use `lm()` function for this question).
+
+5.  Obtain $R^2$. $R^2$ measures how well the model fits the data. For example, an $R^2=1$ indicates that the regression predictions perfectly fit the data.
+
+    Using the following rules, classify the model fit:
+
+| $R^2$                   | Classification |
+|-------------------------|----------------|
+| $R^2 > 0.8$             | `"good"`       |
+| $0.3 \leq R^2 \leq 0.8$ | `"moderate"`   |
+| $R^2 < 0.3$             | `"poor"`       |
+
+Assign this classification to a variable called **`how_fit`** (for example, `how_fit <- "moderate"` )
+
+Assign the classification string to `how_fit`.
+
+------------------------------------------------------------------------
+
+```{r}
+# README : 
+# You must make seperate lab7.R file and submit that file to GradeScope.
+# Do not setup your working directory in the code.
+# 'toluca.csv' should be in the same folder as this R script. (and case-sensitive)
+# Due April 21, 2024 at 11:59 PM
+# No Late Submissions
+# Do not use any packages other than ggplot2, dplyr and readr.
+
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+
+df <- read.csv("toluca.csv")
+head(df)
+
+
+
+```
