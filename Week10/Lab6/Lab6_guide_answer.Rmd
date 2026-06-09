@@ -102,7 +102,7 @@ Let’s think about how to do this. For each row (each simulation for an interva
 The confidence interval for $p$ is given by
 
 $$
-\hat{p} \pm (z^{*} \times SE)
+\hat{p} \pm z^{*} \times SE
 $$
 
 where $z^{*} = 1.96$ for a 95% CI and
@@ -314,7 +314,7 @@ Yes, with more simulations the coverage percentage converges closer to 95%. By t
 
 A classmate says: *"This means 95% of Americans prefer chocolate ice cream with probability between 60% and 64%."* Is this interpretation correct? If not, write a correct interpretation.
 
-=\> Answer here
+=\> Answer
 
 ------------------------------------------------------------------------
 
@@ -470,37 +470,85 @@ a.  State the degrees of freedom for this test and explain how they were calcula
 setting
 
 ```{r}
-# TODO: a
+df_titanic <- read.csv("titanic.csv")
+df2 <- df_titanic[, 2:3]
+tbl <- table(df2)
+tbl2 <- addmargins(tbl)
+tbl2
 ```
 
 **a. Degrees of freedom**
 
 ```{r}
-# TODO: b
+r <- nrow(tbl)
+c <- ncol(tbl)
+dof <- (r - 1) * (c - 1)
+print(paste0("Degrees of freedom = (", r, "-1) x (", c, "-1) = ", dof))
 ```
 
 b.  At a significance level of $\alpha = 0.05$, what is your conclusion? Write it out in a full sentence in the context of the problem (i.e., mention passenger class and survival).
 
 ```{r}
-# TODO: c
+# Recompute statistic for reference
+row1sum <- tbl2[1, 4]; row2sum <- tbl2[2, 4]
+col1sum <- tbl2[3, 1]; col2sum <- tbl2[3, 2]; col3sum <- tbl2[3, 3]
+total   <- tbl2[3, 4]
+
+expected_tbl <- matrix(
+  c(row1sum * col1sum / total, row2sum * col1sum / total,
+    row1sum * col2sum / total, row2sum * col2sum / total,
+    row1sum * col3sum / total, row2sum * col3sum / total),
+  nrow = 2, ncol = 3)
+
+statistic <- sum((tbl - expected_tbl)^2 / expected_tbl)
+pvalue <- 1 - pchisq(statistic, df = 2)
+
+print(paste0("Chi-square statistic = ", round(statistic, 4)))
+print(paste0("p-value = ", round(pvalue, 6)))
 ```
+
+**Answer:** Since the p-value is much less than $\alpha = 0.05$, we **reject** $H_0$. There is statistically significant evidence that survival rate differs across the three passenger classes on the Titanic.
 
 **Exercise 5.** Now explore the relationship between **survival and sex** (`Survived` and `Sex` columns) in the Titanic dataset.
 
 a.  Create a two-way contingency table for `Survived` vs. `Sex`.
 
 ```{r}
-# TODO: a
+df3 <- data.frame(Survived = df_titanic$Survived, Sex = df_titanic$Sex)
+tbl_sex <- table(df3)
+tbl_sex
+tbl_sex2 <- addmargins(tbl_sex)
+tbl_sex2
 ```
 
 b.  Manually calculate all expected cell counts. Do all cells meet the condition $E \geq 5$? (This is required for the chi-square test to be valid.)
 
 ```{r}
-# TODO: b
+row1s <- tbl_sex2[1, 3]   # Survived = 0 total
+row2s <- tbl_sex2[2, 3]   # Survived = 1 total
+col1s <- tbl_sex2[3, 1]   # female total
+col2s <- tbl_sex2[3, 2]   # male total
+tots  <- tbl_sex2[3, 3]   # grand total
+
+e11s <- row1s * col1s / tots   # Survived=0, female
+e12s <- row1s * col2s / tots   # Survived=0, male
+e21s <- row2s * col1s / tots   # Survived=1, female
+e22s <- row2s * col2s / tots   # Survived=1, male
+
+expected_sex <- matrix(c(e11s, e21s, e12s, e22s), nrow = 2, ncol = 2)
+print("Expected counts:")
+print(expected_sex)
+print(paste0("All expected counts >= 5: ", all(expected_sex >= 5)))
 ```
 
 c.  Compute the chi-square test statistic and p-value. What do you conclude at $\alpha = 0.05$?
 
 ```{r}
-# TODO: c
+statistic <- sum((tbl_sex - expected_sex)^2 / expected_sex)
+dof <- (nrow(tbl_sex) - 1) * (ncol(tbl_sex) - 1)
+pvalue <- 1 - pchisq(statistic_sex, df = dof_sex)
+
+statistic
+dof
+pvalue
 ```

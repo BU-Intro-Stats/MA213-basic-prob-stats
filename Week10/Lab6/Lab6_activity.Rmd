@@ -15,72 +15,37 @@ library(dplyr)
 
 ## Lab 6: **Confidence Interval and Hypothesis Test**
 
-## Lab activities
+### Pre-lab activity
 
-## A study asks people in Boston with this question.
+### Testing Hypotheses using confidence intervals
 
-```         
-Are you satisfied with your current work-from-home setup? 
-(Yes/No)
-```
+Suppose that a market research company is tasked with determining the percentage of adults in Boston who own cell phones. Two hundred randomly selected residents in Boston are surveyed to answer whether they have cell phones. 127 responded yes to the question "do you have a cell phone?"
 
-We will do simulation study from this hypothetical population. The goal is to see how many intervals cover the true population proportion. How do you do it?
+Recall that
 
-Let's conduct simulation study using the following steps.
-
-1.  Sample $n=150$
-2.  Get the estimate
-3.  Calculate the lower bound, upper bound
-4.  Record them in the dataset
-5.  Do these steps (step 1 to 4) $K=1000$ times (1000 rows)
-
-The confidence interval for $p$ is given by
+The confidence interval for $p$ is given by $$
+\hat{p} \pm (\text{margin of error})
+$$
 
 $$
-\hat{p} \pm z^{*} \times SE
+= \hat{p} \pm (z^{*} \times SE)
 $$
 
 where $z^{*} = 1.96$ for a 95% CI and
 
 $$
 SE = \sqrt{\frac{p(1-p)}{n}   }
-$$ We will use the substitution approximation of $p \approx \hat{p}$.
+$$
 
-#### Exercise 1
+We will use the substitution approximation of $p \approx \hat{p}$.
 
-Population -\> Let's assume that all the people in the population have an answer for the question, Are you satisfied with your current work-from-home setup? (Yes/No).
+So we use
 
-```{r}
-pop <- c(rep("Yes", 1500000), rep("No", 300000))
-N <- length(pop)
-true_prop = sum(pop == "Yes") / N
-N # population size
-true_prop # true proportion
+$$
+SE = \sqrt{\frac{\hat{p}(1-\hat{p})}{n} }
+$$
 
-```
-
-Our goal is to make a table as the following
-
-| \# of Simulation | Proportion Estimate | Lower Bound | Upper Bound | included |
-|------------------|---------------------|-------------|-------------|----------|
-| 1                | 0.75                | 0.6988      | 0.8611      | No       |
-| 2                | 0.63                | 0.6119      | 0.8080      | No       |
-| 3                | 0.77                | 0.6762      | 0.8437      | Yes      |
-| 4                | 0.72                | 0.6651      | 0.8348      | Yes      |
-| ...              | ...                 | ...         | ...         | No       |
-| K                | 0.77                | 0.7021      | 0.8012      | No       |
-
-: Sample Simulated CI Table
-
-How do we obtain it? and how many intervals cover the true proportion?
-
-Let's work on R file `Lab6_activity1.R` .
-
-### Testing Hypotheses using confidence intervals
-
-Suppose that a market research company is tasked with determining the percentage of adults in Boston who own cell phones. Two hundred randomly selected residents in Boston are surveyed to answer whether they have cell phones. 127 responded yes to the question "do you have a cell phone?"
-
-#### Exercise 2
+#### Exercise 0
 
 Construct 95% confidence interval for the proportion of Boston residents who have cell phones and interpret the confidence interval you found.
 
@@ -88,128 +53,226 @@ Construct 95% confidence interval for the proportion of Boston residents who hav
 #
 #
 #
+response <-127
+n <- 200
+phat <- response/n
+alpha <- 0.05
+
+zstar <- qnorm(1-alpha/2, mean = 0, sd = 1)
+SE <- sqrt( phat*(1-phat)/n )
+
+CI_lower <- phat - zstar*SE
+CI_upper <- phat + zstar*SE
+
+CI <- c(CI_lower, CI_upper)
+cat(CI)
+```
+
+## Lab activities
+
+Let’s do a simulation using confidence intervals. What we are going to do is repeatedly take random samples from a large “population” in which we know the true proportion who own a cell phone (here, 90%), construct a confidence interval for each sample, and then check whether each interval contains the true population proportion. By doing this many times (e.g., 1000 samples), we can empirically see how often a 95% confidence interval actually includes the true parameter. This lets us see the long‑run meaning of “95% confidence”: in repeated sampling, about 95% of the intervals we construct should capture the true proportion.
+
+### Population
+
+```{r}
+N <- 675000
+pop <- c(rep("Cellphone", N*0.9), rep("No Cellphone", N*0.1))
+true_prop <- sum(pop=="Cellphone")/length(pop)
+true_prop
+
 
 ```
 
-We want to evaluate whether the proportion of Boston residents who have cell phones is different from 50%. Could you explain from the results above using Statistical language?
+Here are steps to see how many confidence intervals contain the true proportion among `K` confidence intervals.
+
+(using alpha level 0.05, that means (1-alpha) % confidence)
+
+1.  Sample `n` from `pop` assign it to `sampled_data`
+2.  Obtain sample proportion and assign it to `phat`
+3.  Using $SE = \sqrt{ \frac{\hat{p} (1-\hat{p})}{n} }$ , obtain `SE` and obtain a confidence interval
+4.  Repeat these steps `K` times and count how many intervals contain the true proportion `true_prop` .
+
+#### Exercise 1. Complete the following R code
 
 ---
-#
----
+alpha = 0.05
+n <- 200
+K <- 1000
+num_of_simulation <- rep(0,K)
+prop_est <- rep(0,K)
+lower <- rep(0,K)
+upper <- rep(0,K)
+included  <- rep(0,K)
 
-### Chi-Square test for independence
-
-Let's explore more on `Titanic` dataset.
-
-```{r}
-# loading from csv file
-df <- read.csv("titanic.csv")
-
-df2 <- df[,2:3]
-head(df2)
-
-```
-
-We want to see whether there is a statistically significant difference in death from passenger class. How do we do it?
-
-Expected Cell Count is
-
-$$
-E = \frac{(\text{row total}) \times (\text{column total})}{\text{total sample size}}
-$$
-
-Chi-Square Test Statistic $X^2$ is given by
-
-$$
-X^{2} = \frac{(O_{11} - E_{11})^2}{E_{11}} + \frac{(O_{12} - E_{12})^2}{E_{12}} + \dots +  \frac{(O_{rc} - E_{rc})^2}{E_{rc}} 
-$$
-
-Obtain the p-value using this Chi-Square Test Statistic $X^2$ where degrees of freedom is $df=(r-1) \times (c-1)$ in a two way table.
-
-p-value is $P(\chi^2 \geq X^{2})$
-
-```{r}
-
-draw_chisq_p_value <- function(test_stat, df){
-x <- seq(0,25, 0.01)
-y <- dchisq(x, df=df)
-df_temp <- data.frame(x=x, y=y)
-ggplot(data = df_temp, aes(x = x, y = y)) +
-  geom_line() +
-  geom_area(data = subset(df_temp, x >= test_stat), aes(x = x, y = y), fill = "red", alpha = 0.5)
+for (k in 1:K) {
+  #Step 1
+  sampled_data <-   #
+    
+  #Step 2  
+  p_hat <-  #
+  
+  # Step 3
+  SE <-   #
+  
+  CI = p_hat + c(-1,1)   #
+  
+  num_of_simulation[k] = k
+  prop_est[k] <- p_hat
+  lower[k] <- CI[1]
+  upper[k] <- CI[2]
+  included[k] <- CI[1] <= true_prop & true_prop <=CI[2] 
+  
 }
 
-# if the calculated chi-square test statistic is 6 and degrees of freedom is 4
-draw_chisq_p_value(6,4)
+# bind together
+df_table <- data.frame(num_of_simulation = num_of_simulation, prop_est = prop_est, lower = lower, upper = upper, included = included)
 
-
-
-
-```
-
-And the actual p-value can be calculated by
-
-```{r}
-
-1-pchisq(5,4)
-
-# or
-
-pchisq(5,4, lower.tail = FALSE)
-
-
-```
-
-#### Exercise 3
-
-We are interested in whether survival depends on the class of passengers. Conduct a chi-square test for the data to check whether there is a statistically significant difference in survival based on the class of passengers. (Use a significance level of $\alpha = 0.05$.)
-
-1.  Let's obtain a two way table of `Survived` vs `Pclass` from the dataset.
-
-```{r}
-# loading from csv file
-df <- read.csv("titanic.csv")
-
-
-
-```
-
-2.  Calculate the expected counts for each cell.
-
-```{r}
-#
-#
-#
-
-
-
-```
-
-3.  Obtain the p-value using the Chi-Square test statistic.
-
-```{r}
-#
-#
-#
-
-
-
-```
-
-4.  What do you conclude?
-
+head(df_table)
 ---
-##
----
+
+```{r}
+# you can copy and paste the completed code above here
+#
+#
+
+
+
+```
+
+```{r}
+sum(df_table$included) # number of CIs contains the true population propotion
+
+K # total number of CIs
+```
+
+#### Exercise 2. Using the code above and modify it here, change your alpha=0.01 . How many intervals contain the true population parameter?
+
+```{r}
+
+
+
+
+```
+
+```{r}
+sum(df_table$included) # number of CIs contains the true population propotion
+
+K # total number of CIs
+```
+
+### Testing for independence in two-way tables
+
+We are going to consider hair and eye color of statistics students data. It is the data contains 592 statistics students hair and eye color data.
+
+```{r}
+# load the data 
+df <- read.csv("haircolor.csv")
+head(df)
+
+```
+
+Here are the steps of testing for independence in two-way tables.
+
+1.  Check how many categories each variables have.
+2.  Make a contingency table using `table()` function.
+3.  Calculate expected counts for each cell.
+4.  Make an another contingency table whose cells are expected counts.
+5.  Compute the chi-square statistic
+6.  Compute p-value and make a decision by comparing the p-value and alpha level.
+
+```{r}
+
+#Step 1 
+unique(df$Hair)
+unique(df$Eye)
+
+
+
+```
+
+```{r}
+#Step 2
+#Make a contingency table using table() function. 
+
+
+
+```
+
+```{r}
+# Step 3
+# Get the expected counts
+# e11, e12, e13, e14, e21,...
+
+
+```
+
+```{r}
+#Step 4
+#expected_tbl 
+
+```
+
+```{r}
+#Step 5 : Chisquare statistic
+#chi_statistic
+
+```
+
+```{r}
+#Step 6
+#p-value, what is df?
+```
+
+What is your conclusion?
 
 ## Post-lab activities
 
 Please name your submission as `lab6.R`
 
-1.  Suppose that a market research company is tasked with determining the percentage of adults in Boston who own a bike. Three hundred randomly selected residents in Boston are surveyed to answer whether they have a bike. 180 responded yes to the question "Do you have a bike?"
+1.  The file `a.csv` contains poll results in which random students were asked the question: "Do you own a car?" Assume that these students represent all American college students. Calculate a 95% confidence interval (CI) for the proportion of students who own a car. The sample proportion $\hat{p}$​ can be calculated as the fraction of students who answered "Yes." Obtain `CI` vector.
 
-    Obtain 95% CI for $p$. Assign the lower bound and upper bound of the CI to objects `lower` and `upper`, respectively.
+2.  The file `b.csv` contains Netflix data with variables for plans and gender. At a significance level of $\alpha=0.05$, test whether there is an association between plan type and gender.
 
-2.  (`Titanic` dataset) We are interested in whether survival depends on the gender of passengers. Conduct a chi-square test for the data to check whether there is a statistically significant difference in survival based on their gender. (Use a significance level of $\alpha = 0.05$.)
+    Obtain `df`, `chi_stat` and `p_value` where `df` is the degrees of freedom, `chi_stat` the Chi-square test-statistic, and `p_value` is the p value obtained from the test.
 
-    Obtain the Chi-Square test statistic and assign it to object `chisquare`.
+    Based on the test, do you reject $H_0$? If you reject $H_0$, then have a variable `reject_null=T` otherwise, `reject_null=F`
+
+(You need to have variables `df`, `chi_stat`, `p_value` and `reject_null` in your R file)
+
+```{r}
+### Warning : do not copy {r} above in the R file ###
+
+##### Lab 6 Post Lab Activity #####
+
+##### Do not install packages in this file #####
+##### Do not use the setwd() function in this file #####
+##### Do not use the library() function in this file #####
+
+#  The file a.csv contains poll results in which random students were asked the question:
+#   "Do you own a car?" Assume that these students represent all American college students. 
+#   Calculate a 95% confidence interval (CI) for the proportion of students who own a car. 
+#   The sample proportion p_hat can be calculated as the fraction of students who answered "Yes."
+#   Obtain CI vector.
+
+data_a <- read.csv("a.csv")
+
+
+
+
+
+# The file b.csv contains Netflix data with variables for plans and gender. 
+# At a significance level of alpha=0.05, 
+# test whether there is an association between plan type and gender.
+# Obtain df, chi_stat and p_value where df is the degrees of freedom, 
+# chi_stat the Chi-square test-statistic, and p_value is the p value obtained from the test.
+
+# Based on the test, do you reject H_0? If you reject H_0, 
+# then have a variable reject_null=T otherwise, reject_null=F
+
+data_b <- read.csv("b.csv")
+
+
+# (You need to have variables df, chi_stat, p_value and reject_null in your R file)
+# 
+# 
+```
