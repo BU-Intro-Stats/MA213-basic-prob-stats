@@ -1,0 +1,136 @@
+---
+title: "MA213 Basic Statistics and Probability - Lab4 Post-Lab Activity"
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Post-lab activities
+
+Please name your submission as `lab4.R` to "Lab 4 Post Lab Activity".
+
+You have a slightly biased coin where
+
+$P(head)=0.40$ and $P(tail)=0.60$.
+
+You flip the coin twice. If the first outcome is head (that means 1) you earn 2 dollars and if it is tail (that means 0) you need to pay 1 dollar. If the second outcome is head, you earn one dollar and if it is tail, you need to pay one dollar. Another rule says that you need to triple the outcome from the second flip.
+
+You play this game an infinite number of times. How much money do you have at the end? Do you think you can earn money from this game?
+
+1.  Calculate theoretical value of $\mu$. Assign them into `mu` .
+
+``` r
+# for example,
+mu <- 7
+```
+
+2.  We are working on this simulation procedure. We are making a function `one_trial()` function which takes input of no value (it is okay that function takes no input values) and output as the money from the one trial of this game (the money you are getting from the flipping twice).
+
+``` r
+
+one_trial <- function(){
+
+  first_coin <- sample(c(1,0), 1, prob=c(0.4, 0.6)) # output from the first flip
+  second_coin <- sample(c(1,0), 1, prob=c(0.4, 0.6))  # output from the second flip  
+  
+  
+  # hint ; final_outcome should be the total money from this game
+  # first_outcome
+  # second_outcome
+  # final_outcome
+  
+  final_outcome <- c() 
+  return(final_outcome)
+}
+one_trial()
+```
+
+And we need to modify this `one_trial()`, please modify this function and write it to your `lab4.R` file.
+
+3.  This is the different approach from one of GenAI models (slightly advanced).
+
+``` r
+ 
+one_trial_gpt <- function() {
+  # Sample flips together
+  flips <- sample(c(1, 0), 2, replace = TRUE, prob = c(0.4, 0.6))
+  
+  # Define earnings/payout vectors
+  earnings_first <- c(-1, 2)   # index: flips[1] + 1; tail -> -$1, head -> +$2
+  payments_second <- c(-1, 1)  # index: flips[2] + 1; tail -> -$1, head -> +$1 (before tripling)
+  
+  # Calculate output by indexing 
+  out <- earnings_first[flips[1] + 1] + 3 * payments_second[flips[2] + 1]
+  
+  return(out)
+}
+
+
+one_trial_gpt()
+```
+
+We want to create a **`simulate(n)`** function that simulates the game **`n`** times and outputs the expected result (money). It's perfectly fine to use **`one_trial()`** within this function.
+
+``` r
+
+ 
+simulate <- function(n) {
+  # 
+  # 
+  all_the_out <- rep(0,n)
+  
+  #{ place for for loop 
+  
+  all_the_out[i] <- one_trial_gpt()   # Each time you need to store your output to ith element of all_the_out
+                                       # i from 1 to n times                                  
+                                       # or you can use one_trial() from the above
+  #}
+  
+  #
+  # 
+  # to get the expected value... you need to average them
+  # 
+  
+  return(out) # out variable is the expected value
+}
+
+
+simulate(100) # this needs to work without error
+```
+
+Complete this `simulate(n)` function.
+
+Please test out your `simulate(n)` by increasing your `n` (e.g. `simulate(10)`, `simulate(100)` ...). Is it close to the value you calculated in Q1?
+
+```{r}
+
+# You may write your code here. Copy the code into `lab4.R` and submit it to Gradescope.
+
+# Do not use setwd() here.
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+#1
+
+
+#2
+
+
+#3
+
+
+```
+
+## Reminder
+
+You are required to submit the Project 1 deliverable 2 : **project presentation plan- Slide**, **R code and Data file** by next Monday at 10:00 PM. Please discuss this with your team and make a plan to complete and submit it on time. (Submit them on Blackboard)
+
+Please start your post-lab activity 4 as soon as possible. It is also due next Tuesday at 10pm. (Submit it on GradeScope)

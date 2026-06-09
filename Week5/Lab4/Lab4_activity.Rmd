@@ -1,148 +1,588 @@
 ---
-title: "MA213 Basic Statistics and Probability - Lab4 Activity"
-bibliography: references.bib
+title: "MA213 Lab Activity: Lab4 Activity"
+subtitle: "Simulating Dice Games to Make Decisions"
 output:
-  pdf_document: default
-  html_document:
-    code_download: true 
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(gridExtra)
 ```
 
-## Lab 4: Simulation and Probability Lab Activity
+
+
+# Introduction
+
+![](images/clipboard-4108551022.jpeg){width="300"}
+
+![](images/clipboard-2732389219.jpeg){width="400"}
+
+You've been offered two different dice games. Before you decide whether to play, you need to understand:
+
+1.  **Expected Value (E[X])**: What will happen *on average* in the long run?
+2.  **Variance (Var[X])**: How much *variability* should you expect?
+
+Today, you'll use both **theoretical calculations** and **simulations** to make informed decisions about these games!
 
 ------------------------------------------------------------------------
 
-## Pre-lab activities
+# Part 1: The Simple Game (One Die)
 
-#### Let’s roll a die! You are playing a die-rolling game and are curious about how the game will play out in the end. The rule is that you roll the die once, and the other player rolls it once as well; then you add the outcomes together. What can you expect from this game in the end? Specifically, what are the long-term average and the variability of the game results? In other words, what are the expected value and variance?
+## Game Rules
 
-We let $X_1$ be the number on the top face of the first die rolled, and $X_2$ be the number on the top face of the second die rolled.
-
-Then, what is $E(X_1 + X_2)$ and $Var(X_1 + X_2)$?
-
-Calculate them by filling out the table given.
-
-------------------------------------------------------------------------
-
-Now, let’s consider implementing a simulation for the game. We will run 10 simulation trials. How would you like to proceed?
-
-We need these parts
-
-> 1.  Rolling the dice
-> 2.  Record the result of each run.
-> 3.  Perform the calculations at the end.
-
-We need three people: two to roll the dice each time, and one to record the results of each turn.
-
-| i        | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
-|----------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-| person 1 |     |     |     |     |     |     |     |     |     |     |
-| person 2 |     |     |     |     |     |     |     |     |     |     |
-| outcome  |     |     |     |     |     |     |     |     |     |     |
-
-Calculate observed expected value and the variance and compare with the answers above.
+> **You roll one die.**
+>
+> \- If you roll a **1** → You **WIN \$6**
+>
+> \- If you roll **2, 3, 4, 5, or 6** → You **LOSE \$1**
+>
+> **Question: Should you play this game?**
 
 ------------------------------------------------------------------------
 
-## Lab activities
+## Step 1: Theoretical Expected Value
 
-## This time, you have a new challenging game. The first player rolls a die, and their outcome is multiplied by 3. The second player then rolls a die, and their outcome is multiplied by 4. The final result is the sum of these two values. What are the expected value and variance of the resulting random variable?
+**Expected value** is the average outcome if you play the game many, many times.
 
-Q. What are the theoretical expected value and variance of the total outcome?
+**Formula:** $$E(X) = \sum_{i} x_i \cdot P(x_i)$$
 
-```         
+Where $x_i$ are the possible outcomes and $P(x_i)$ are their probabilities.
+
+### Calculate by hand first:
+
+```{r theory-ev-simple}
+# Possible outcomes and probabilities
+outcomes <- c() # your turn; what are the outcomes?
+probs <- c() # your turn; what are the corresponding probabilities?
+
+# Expected Value
+E_X <- sum(outcomes * probs)
+E_X
+
+cat("Expected Value:", E_X, "\n")
+cat("Interpretation: On average, you gain $", round(E_X, 2), " per game.\n", sep="")
 ```
 
-Q. Let's simulate it. Make a function to obtain one trial from this setting.
 
-```{r}
-#
-#
-#
-```
 
-Q. Using the function above, Make an another function to obtain the expected value and variance from $n$ iteration.
+**Your calculation (show your work):**
 
-```{r}
-#
-#
-#
-```
+$$E(X)  = \underline{\hspace{2cm}}$$
 
-Q. Using the function above, could you make a plot with the x-axis is `n` and the y-axis representing the expected value of the outcome?
+**Decision based on Expected Value:**
 
-```{r}
-#
-#
-#
-```
+\- If E(X) \> 0: **Play the game** (you gain money on average)
 
-Q. Let $X$ be the number on the top face of a rolled die. What are the theoretical values of $E(X)$ and $Var(X)$? Using $E(X)$ and $Var(X)$, calculate $E(3X_1 + 4X_2)$ and $Var(3X_1 + 4X_2)$. Then, compare these to the simulation results above.
+\- If E(X) \< 0: **Don't play** (you lose money on average)
 
-```         
-```
+\- If E(X) = 0: **Doesn't matter** (it's a fair game)
+
+**Should you play?** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 ------------------------------------------------------------------------
 
-## Post-lab activities
+## Step 2: Theoretical Variance
 
-Please name your submission as `lab4.R`
+**Variance** measures how much your winnings will *vary* from game to game.
 
-Now, You flip a slightly biased coin where $P(head)=0.40$ and $P(tail)=0.60$. If the result is head, you earn \$20, otherwise you pay \$15. How much money you have at the end?
+**Formula:** $$Var(X) = E[(X - \mu)^2] = \sum_{i} (x_i - \mu)^2 \cdot P(x_i)$$
 
-1.  Calculate theoretical value of $\mu$ and $\sigma^2$. Assign them into `mu` and `sigma_2`, respectively.
+Or equivalently: $$Var(X) = E(X^2) - [E(X)]^2$$
 
-``` r
-# for example,
-mu <- 7
-sigma_2 <- 14
+```{r theory-var-simple}
+# Method 1: Direct calculation
+variance <- sum((outcomes - E_X)^2 * probs)
+variance
+
+# Method 2: E(X²) - [E(X)]²
+E_X_squared <- NULL # your turn
+variance_alt <- NULL  # your turn
+variance_alt
+
+# Standard deviation
+sd_X <- sqrt(variance)
+
+cat("Variance:", variance, "\n")
+cat("Standard Deviation:", sd_X, "\n")
+cat("\nInterpretation: Your winnings will typically vary by about $", 
+    round(sd_X, 2), " from the expected value.\n", sep="")
 ```
 
-2.  You are going to make an function named `my_sim(n)` which takes input of `n` and gives an output list of `mu_simulated` and `sigma_2_simulated` (hint: sample with custom probabilities can be added by `sample(x, size, prob=c(0.40, 0.60))` ).
 
-``` r
-# for example
-my_sim(10)
-$mu
-[1] 7.44
 
-$sigma2
-[1] 111.1296
+**Your calculation (show your work):**
 
-# and it is expected that
->out <- my_sim(100)
->out$mu
-[1] 7.44
->out$sigma2
-[1] 111.1296
+$$Var(X) = \underline{\hspace{2cm}}$$
 
-# assign them to object
-mu_simulated <- out$mu
-sigma_2_simulated <- out$sigma2
+**What does variance tell you?**
+
+------------------------------------------------------------------------
+
+## Step 3: Simulate the Game
+
+Let's verify our theoretical calculations by **simulating** the game 100 times!
+
+### Write a function for one game
+
+```{r simulate-one-game}
+# Function to simulate one game
+play_simple_game <- function() {
+  # your turn
+  # output should be the dollar amount 
+}
+
+# Test it a few times
+play_simple_game()
+play_simple_game()
+play_simple_game()
 ```
 
-3.  (Optional with extra credit)
 
-To do this, you include `Optional=TRUE` in your file.
 
-The table below summarizes the survival outcomes from the Titanic disaster based on gender.
+### Simulate 100 games
 
-``` r
-          Survived
-          Yes   No    Total
-female    307   156   463
-male      142   708   850
+```{r simulate-many-games}
+# Number of simulations
+n_games <- 100
+
+# Play the game n_games times
+set.seed(123)  # For reproducibility
+results <- replicate(n_games, play_simple_game())
+
+# Calculate empirical statistics
+empirical_mean <- mean(results)
+empirical_var <- var(results)
+empirical_sd <- sd(results)
+
+# Compare with theoretical values
+cat("=== COMPARISON: THEORETICAL vs SIMULATED ===\n\n")
+cat("Expected Value:\n")
+cat("  Theoretical: $", round(E_X, 4), "\n", sep="")
+cat("  Simulated:   $", round(empirical_mean, 4), "\n", sep="")
+cat("  Difference:  $", round(abs(E_X - empirical_mean), 4), "\n\n", sep="")
+
+cat("Variance:\n")
+cat("  Theoretical: ", round(variance, 4), "\n", sep="")
+cat("  Simulated:   ", round(empirical_var, 4), "\n", sep="")
+cat("  Difference:  ", round(abs(variance - empirical_var), 4), "\n\n", sep="")
+
+cat("Standard Deviation:\n")
+cat("  Theoretical: $", round(sd_X, 4), "\n", sep="")
+cat("  Simulated:   $", round(empirical_sd, 4), "\n", sep="")
 ```
 
-We want to simulate the null hypothesis where we pretend that the gender of the passenger and survival are independent.
 
-Create the **`sim_function()`** for one simulation run to calculate the difference in the proportion of survival between females and males.
 
-Obtain 100 simulation runs to calculate the difference rates and assign them to **`rates`**.
+**Question:** Are the simulated values close to the theoretical values?
 
-Would you reject the null hypothesis or not? Include `Reject_H_not = TRUE` or `Reject_H_not = FALSE`
+**Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Question:** What size n is needed for the simulated values to be close to the theoretical values? (increase `n_games`)
+
+**Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+------------------------------------------------------------------------
+
+## Step 4: Visualize the Results
+
+### Cumulative Profit Over Time
+
+```{r viz-cumulative}
+# Calculate cumulative profit
+n_games <- 100000
+
+cumulative_data <- data.frame(
+  game = 1:n_games,
+  profit = cumsum(results),
+  expected_line = (1:n_games) * E_X
+)
+
+# Plot cumulative profit
+ggplot(cumulative_data, aes(x = game, y = profit)) +
+  geom_line(color = "steelblue", alpha = 0.8) +
+  geom_line(aes(y = expected_line), color = "red", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = 0, color = "black", linetype = "dotted") +
+  annotate("text", x = 7500, y = max(cumulative_data$profit) * 0.8,
+           label = "Expected trajectory", color = "red") +
+  labs(title = "Cumulative Profit Over Time",
+       subtitle = "Law of Large Numbers in Action!",
+       x = "Number of Games Played",
+       y = "Cumulative Profit ($)") +
+  theme_minimal()
+```
+
+
+
+**Observation:**
+
+------------------------------------------------------------------------
+
+## Step 5: Understanding Variance Through Simulation
+
+Let's see what variance really means by comparing results from different numbers of games.
+
+```{r variance-understanding}
+# Simulate different sample sizes
+sample_sizes <- c(10, 50, 100, 500, 1000, 5000, 10000)
+variance_data <- data.frame()
+
+for (n in sample_sizes) {
+  # Run 100 experiments of size n each
+  experiments <- replicate(100, mean(replicate(n, play_simple_game())))
+  
+  variance_data <- rbind(variance_data, data.frame(
+    n = n,
+    mean_of_means = mean(experiments),
+    sd_of_means = sd(experiments)
+  ))
+}
+
+# Plot how variance of the mean decreases
+ggplot(variance_data, aes(x = n, y = sd_of_means)) +
+  geom_point(size = 3, color = "steelblue") +
+  geom_line(color = "steelblue") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_x_log10() +
+  labs(title = "How Uncertainty Decreases with More Games",
+       subtitle = "Standard deviation of average winnings",
+       x = "Number of Games Played (log scale)",
+       y = "Standard Deviation of Mean Winnings") +
+  theme_minimal()
+```
+
+
+
+**Key Insight:** What do you observe?
+
+------------------------------------------------------------------------
+
+# Part 2: The Two-Dice Game (Linear Combination)
+
+## New Game Rules
+
+> **You roll TWO dice.**
+>
+> **First die:**
+>
+> \- Roll a **1** → WIN \$6
+>
+> \- Roll **2-6** → LOSE \$1
+>
+> **Second die :**
+>
+> \- Roll a **1** → WIN \$3
+>
+> \- Roll **2-6** → LOSE \$3
+>
+> **(additional rule for the second die -\> double the outcome)**
+>
+> **Your total winnings = (First die result) + 2** $\times$ **(Second die result)**
+>
+> **Question: Should you play this new game?**
+
+------------------------------------------------------------------------
+
+## Step 1: Theoretical Expected Value (Two Dice)
+
+Let $X_1$ = winnings from first die, $X_2$ = winnings from second die.
+
+Your total winnings: $Y = X_1 + 2X_2$
+
+**Property of Expected Value:** $$E(X_1 + 2X_2) = ?$$
+
+```{r theory-ev-two-dice}
+# First die (same as before)
+E_X1 <- 6 * (1/6) + (-1) * (5/6)
+cat("E(X1) = $", E_X1, "\n", sep="")
+
+# Second die
+outcomes_die2 <- c() # Your turn
+probs_die2 <- c() # Your turn
+E_X2 <- sum(outcomes_die2 * probs_die2)
+cat("E(X2) = $", E_X2, "\n", sep="")
+
+# Total expected value
+E_Y <- c() # Your turn
+cat("\nE(Y) = E(X1) + E(X2) = $", E_Y, "\n", sep="")
+```
+
+
+
+**Your calculation:**
+
+$$E(X_1) = \underline{\hspace{2cm}}$$
+
+$$E(X_2) = \underline{\hspace{2cm}}$$
+
+$$E(Y) = E(X_1+2X_2) = \underline{\hspace{2cm}}$$
+
+**Should you play this game?** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+------------------------------------------------------------------------
+
+## Step 2: Theoretical Variance (Two Dice)
+
+**Property of Variance (for independent variables):** $$Var(X_1 + 2 X_2) $$
+
+```{r theory-var-two-dice}
+# Variance of first die (we already calculated this)
+Var_X1 <- variance  # From Part 1
+cat("Var(X1) =", Var_X1, "\n")
+
+# Variance of second die
+E_X2_squared <- sum(outcomes_die2^2 * probs_die2)
+Var_X2 <- E_X2_squared - E_X2^2
+cat("Var(X2) =", Var_X2, "\n")
+
+# Total variance
+Var_Y <- c() # Your turn
+SD_Y <- c() # Your turn
+
+cat("\nVar(Y) = Var(X1) + 4 * Var(X2) =", Var_Y, "\n")
+cat("SD(Y) =", SD_Y, "\n")
+```
+
+
+
+**Your calculation:**
+
+$$Var(X_1) = \underline{\hspace{2cm}}$$
+
+$$Var(X_2) = \underline{\hspace{2cm}}$$
+
+$$Var(Y) = Var(X_1 + 2X_2) = \underline{\hspace{2cm}}$$
+
+**Question:** Is the variance of the two-dice game larger or smaller than the one-die game?
+
+**Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Why does this make sense?**
+
+------------------------------------------------------------------------
+
+## Step 3: Simulate the Two-Dice Game
+
+```{r simulate-two-dice-game}
+# Function to play the two-dice game
+play_two_dice_game <- function() {
+  # First die
+  
+  
+  
+  # Second die
+
+  
+  # Total winnings
+  total <- c() # Your Turn : it should be the winning from the one play of two dice game 
+  return(total)
+}
+
+# Test the function
+play_two_dice_game()
+play_two_dice_game()
+play_two_dice_game()
+```
+
+
+
+### Run simulations
+
+```{r simulate-two-dice-many}
+# Simulate the game
+n_games <- 10000 # change the number 
+results_two_dice <- replicate(n_games, play_two_dice_game())
+
+# Calculate empirical statistics
+empirical_mean_2d <- mean(results_two_dice)
+empirical_var_2d <- var(results_two_dice)
+empirical_sd_2d <- sd(results_two_dice)
+
+# Compare with theoretical values
+cat("=== TWO-DICE GAME: THEORETICAL vs SIMULATED ===\n\n")
+cat("Expected Value:\n")
+cat("  Theoretical: $", round(E_Y, 4), "\n", sep="")
+cat("  Simulated:   $", round(empirical_mean_2d, 4), "\n", sep="")
+cat("  Difference:  $", round(abs(E_Y - empirical_mean_2d), 4), "\n\n", sep="")
+
+cat("Variance:\n")
+cat("  Theoretical: ", round(Var_Y, 4), "\n", sep="")
+cat("  Simulated:   ", round(empirical_var_2d, 4), "\n", sep="")
+cat("  Difference:  ", round(abs(Var_Y - empirical_var_2d), 4), "\n\n", sep="")
+
+cat("Standard Deviation:\n")
+cat("  Theoretical: $", round(SD_Y, 4), "\n", sep="")
+cat("  Simulated:   $", round(empirical_sd_2d, 4), "\n", sep="")
+```
+
+
+
+**Question:** Do the simulated values match the theoretical values?
+
+**Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+------------------------------------------------------------------------
+
+## Step 4: Visualize Two-Dice Results
+
+### Cumulative Profit Over Time
+
+```{r viz-cumulative-two-dice}
+# Calculate cumulative profit
+cumulative_data_2d <- data.frame(
+  game = 1:n_games,
+  profit = cumsum(results_two_dice),
+  expected_line = (1:n_games) * E_Y
+)
+
+# Plot
+ggplot(cumulative_data_2d, aes(x = game, y = profit)) +
+  geom_line(color = "coral", alpha = 0.8) +
+  geom_line(aes(y = expected_line), color = "red", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = 0, color = "black", linetype = "dotted") +
+  annotate("text", x = 7500, y = max(cumulative_data_2d$expected_line) * 0.8,
+           label = "Expected trajectory", color = "red") +
+  labs(title = "Cumulative Profit Over Time (Two-Dice Game)",
+       subtitle = "Still converges to expected value!",
+       x = "Number of Games Played",
+       y = "Cumulative Profit ($)") +
+  theme_minimal()
+```
+
+
+
+What do you observe?
+
+**Your answer:**
+
+------------------------------------------------------------------------
+
+# Part 3: Reflection Questions
+
+## Question 1: Expected Value
+
+If both games have a **negative** expected value. What does this mean for you as a player?
+
+**Your answer:**
+
+------------------------------------------------------------------------
+
+## Question 2: Variance and Risk
+
+If the two-dice game has higher variance. What does this mean in practical terms?
+
+**Your answer:**
+
+------------------------------------------------------------------------
+
+## Question 3:
+
+In both simulations, we saw that as we played more games, the cumulative average got closer to the theoretical expected value.
+
+a)  What does this tell you about short-term vs long-term gambling?
+
+**Your answer:**
+
+b)  If you only played 10 games, would you be guaranteed to end up at the expected value?
+
+**Your answer:**
+
+------------------------------------------------------------------------
+
+## Question 4: Decision Making
+
+Given what you learned:
+
+a)  Would you play the one-die game? Why or why not?
+
+**Your answer:**
+
+b)  Would you play the two-dice game? Why or why not?
+
+**Your answer:**
+
+c)  If you had to choose between the two games, which would you choose?
+
+**Your answer:**
+
+------------------------------------------------------------------------
+
+# Part 4: Your Own Game Design
+
+**Challenge:** Design your own dice game!
+
+Create a game where: 1. You have at least 2 different outcomes 2. Each outcome has a different payoff
+
+Then: - Calculate the theoretical expected value - Calculate the theoretical variance - Simulate it 10,000 times - Compare theoretical vs simulated results - Visualize the distribution
+
+```{r your-game-design}
+# Your game design here
+
+# 1. Define your game rules
+# my_game <- function() {
+#   # Your code here
+# }
+
+# 2. Calculate theoretical E(X) and Var(X)
+
+
+# 3. Simulate 10,000 games
+
+
+# 4. Compare theoretical vs simulated
+
+
+# 5. Create visualizations
+```
+
+
+
+**Describe your game:**
+
+**Theoretical expected value:**
+
+**Theoretical variance:**
+
+**Would you play your own game?**
+
+------------------------------------------------------------------------
+
+# Summary: Key Formulas
+
+## Expected Value
+
+**For a single random variable:** $$E(X) = \sum_{i} x_i \cdot P(x_i)$$
+
+**For a linear combination:** $$E(aX + bY) = aE(X) + bE(Y)$$
+
+## Variance
+
+**For a single random variable:** $$Var(X) = E[(X - \mu)^2] = E(X^2) - [E(X)]^2$$
+
+**For a linear combination (independent variables):** $$Var(aX + bY) = a^2Var(X) + b^2Var(Y)$$
+
+## Standard Deviation
+
+$$SD(X) = \sqrt{Var(X)}$$
+
+------------------------------------------------------------------------
+
+# Submission
+
+Save your completed R Markdown file and submit The .Rmd file
+
+Make sure all your answers are filled in and all code chunks run without errors!
+
+**Student Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ **BUID** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Student Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ **BUID** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Student Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ **BUID** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Date:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+**Did the simulations help you understand expected value and variance better?**
+
+**Your reflection:**

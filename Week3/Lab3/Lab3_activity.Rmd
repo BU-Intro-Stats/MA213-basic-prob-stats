@@ -18,42 +18,28 @@ library(dplyr)
 
 ------------------------------------------------------------------------
 
-### **New York Air Quality Dataset**
+#### Q1. Import the `airquality.csv` file and assign it do `df1`. Discuss with your partner the following questions.
 
-#### Q0. Import the `airquality.csv` file.
+1.  What kind of exploratory data analysis (EDA) can be done on this dataset?
+2.  What could be a research question or interest based on this data?
 
 ```{r}
 #
 #
 # 
-df <- read.csv("airquality.csv")
-head(df)
-names(df)
 ```
 
-#### Q1. You are interested in Ozone level excluding May. You want to see how Ozone level is distributed in June, July, August and September by looking at a plot.
+#### Q2. Import the Titanic dataset and assign it to `df2`. Discuss with your partner the following questions.
+
+1.  What kind of exploratory data analysis (EDA) can be done on this dataset?
+2.  What could be a research question or interest based on this data?
 
 ```{r}
 
 
 ```
 
-#### Q3. You want to see how average speed of wind changes over time (Month). Can you visualize it?
-
-```{r}
-
-
-```
-
-#### Q4. Do you see any patterns of level of Ozone over time?
-
-```{r}
-
-
-
-```
-
-#### Q5. Show the scatter plot of Solar radiation and Temperature.
+#### Q3. Show the bar plot of average Solar radiation per each month in the Airquality data. What do you see from the plot?
 
 ```{r}
 #
@@ -62,7 +48,17 @@ names(df)
 
 ```
 
-#### Show the bar plot of average Solar radiation per each month.
+#### Q4. Create a contingency table to examine the relationship between Class and Survived in the Titanic data. Assign it to `my_table1` and print it (Use `dplyr` package functions).
+
+```{r}
+#
+#
+#
+
+
+```
+
+#### Q5. Make a plot to visualize the relationship between Class and Survived using `ggplot()`.
 
 ```{r}
 #
@@ -71,63 +67,64 @@ names(df)
 
 ```
 
-### **Survival of Passengers on the Titanic**
+and answer these questions with the partner.
 
-#### Import the `titanic.csv` file.
-
-```{r}
-#
-#
-#
-
-```
-
-#### You are interested in how the data is categorized by sex visually. Show the pie chart of `sex`
-
-```{r}
-#
-#
-#
-```
-
-#### You are interested in whether sex is related to survival in the Titanic disaster. How would you visualize or summarize this relationship?
-
-```{r}
-#
-#
-#
-```
-
-#### You are also interested in exploring whether age is associated with survival. How would you go about visualizing or summarizing this relationship?
-
-```{r}
-#
-#
-#
-```
+1.  Which class had the highest survival count?
+2.  What general pattern can you observe between passenger class and survival?
 
 ### Post-lab activities
 
-Please name your submission as `lab3.R`
+Name your submission as `lab3.R`
 
 We are going to also analyze this New York Air Quality Measurements data again. This time, we are going to see how Solar radiation is behaving with Temperature.
 
-1.  load the `airquality.csv` file and assign it to `my_df` object.
+1.  Import the `airquality.csv` file and assign it to `my_df` object.
 
-2.  Show the scatter plot of Solar radiation and Temperature.
+2.  Create the scatter plot of Solar radiation and Temperature and assign it to `my_plot1` .
 
-3.  Show average Solar radiation in each month. Use bar plot.
+3.  Show average Solar radiation for each month using a bar plot.
 
-    2.1) Assign average Solar radiation into object `solar_radiation_avg` .
+    3.1) Create a new data frame `new_df` containing the average Solar radiation per month (hint: use summarize()) and name the average column `solar_r_avg`.
 
-    2.2) Show the bar plot of average Solar radiation per each month.
+    3.2) From `new_df`, create a bar plot of the average Solar radiation for each month and assign it to `my_barplot`.
 
-Back to Titanic data.
+4.  Import the `titanic.csv` file and assign it to `my_df2` object.
 
-1.  Show the pie chart of `sex` in `titanic` data.
+5.  From this `my_df2`, create a contingency table for categorized `Sex` vs `Age` and assign it to `titanic_table` .
 
-    3.1) Load `titanic.csv` file and assign it to `my_df2` object.
+6.  How many boy (male and child) are there? assign numeric number to `child_male` .
 
-    3.2) Show the pie chart of `sex` .
+```{r}
 
-### References
+# You may write your code here. Copy the code into `lab3.R` and submit it to Gradescope.
+
+# Do not use setwd() here.
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+
+#1
+
+
+#2
+
+
+#3.1
+
+
+#3.2
+
+
+#4
+
+
+#5
+
+
+#6
+
+
+
+```
