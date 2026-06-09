@@ -3,8 +3,6 @@ title: "MA213 Basic Statistics and Probability - Lab3 Guide"
 link-citations: true
 output:
   html_document:
-    code_download: true 
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -21,14 +19,14 @@ library(readr)
 
 ## Learning Objectives
 
-- Classify and Analyze Variables: Categorize variables based on their types (e.g., numerical/categorical, continuous/discrete, ordinal), assess their association (positive, negative, or independent), and determine which make sense as explanatory vs. response variables.
-- Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
+-   Classify and Analyze Variables: Categorize variables based on their types (e.g., numerical/categorical, continuous/discrete, ordinal), assess their association (positive, negative, or independent), and determine which make sense as explanatory vs. response variables.
+-   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
 
 ------------------------------------------------------------------------
 
 ## Load packages for Data
 
-If you didn't install `tidyverse` package
+If you didn't install packages
 
 ```{r eval=FALSE}
 install.packages("dplyr")
@@ -110,31 +108,31 @@ df |>
 # 
 ```
 
-## `Dplyr` data manipulation functions
+## \*\* `Dplyr` data manipulation functions
 
-- Rows:
+-   Rows:
 
-  - [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) chooses rows based on column values.
+    -   [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) chooses rows based on column values.
 
-  - [`slice()`](https://dplyr.tidyverse.org/reference/slice.html) chooses rows based on location.
+    -   [`slice()`](https://dplyr.tidyverse.org/reference/slice.html) chooses rows based on location.
 
-  - [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) changes the order of the rows.
+    -   [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) changes the order of the rows.
 
-- Columns:
+-   Columns:
 
-  - [`select()`](https://dplyr.tidyverse.org/reference/select.html) changes whether or not a column is included.
+    -   [`select()`](https://dplyr.tidyverse.org/reference/select.html) changes whether or not a column is included.
 
-  - [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) changes the name of columns.
+    -   [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) changes the name of columns.
 
-  - [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) changes the values of columns and creates new columns.
+    -   [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) changes the values of columns and creates new columns.
 
-  - [`relocate()`](https://dplyr.tidyverse.org/reference/relocate.html) changes the order of the columns.
+    -   [`relocate()`](https://dplyr.tidyverse.org/reference/relocate.html) changes the order of the columns.
 
-- Groups of rows:
+-   Groups of rows:
 
-  - [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) collapses a group into a single row.
+    -   [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) collapses a group into a single row.
 
-## Creating new column using `Dplyr`
+## \*\* Creating new column using `Dplyr`
 
 You can create new columns or modify existing ones using the `mutate()` function.
 
@@ -147,7 +145,7 @@ df2 <- df %>%
 head(df2)
 ```
 
-## Contingency Table using `dplyr`
+## \*\* Contingency Table using `dplyr`
 
 A contingency table displays the frequency distribution of variables. You can create contingency tables using `dplyr` in combination with `tidyr`.
 
@@ -165,7 +163,7 @@ contingency_table <- df %>%
 print(contingency_table)
 ```
 
-## Contingency Table with new categorized variable
+## \*\* Contingency Table with new categorized variable
 
 You can categorize `solar.R` by
 
@@ -195,20 +193,25 @@ Create a contingency table for categorized `solar.R` vs `Ozone_level`
  print(contingency_table2)
 ```
 
-### Exercise 1:
+### \*\* Exercise 1:
 
 In the airquality data, Create a new column named `Temp_C` from `Temp`. Below is the formula for Celsius.
 
-$$C = (F-32) \times \frac{5}{9}$$
+$$
+C = (F-32) \times \frac{5}{9}
+$$
 
 ```{r}
 #
 # airquality data object is df
 # df = read.csv("airquality.csv") # if you didn't import it
+df_new1 <- df %>%
+  mutate(Temp_C = (Temp-32)*5/9 )
 
+df_new1
 ```
 
-## Filtering out missing values
+## \*\* Filtering out missing values
 
 We have `NA` values in `Ozone`, `Solar.R` and so on.
 
@@ -260,7 +263,7 @@ df_clean <- df %>%
   drop_na()
 ```
 
-### Exercise 2:
+### \*\* Exercise 2:
 
 Here is Beaufort wind scale, wind speed(mph) can be categorized into
 
@@ -287,6 +290,8 @@ High : if greater than median of Ozone
 #
 #
 #
+df_clean <- df %>% drop_na()
+df_clean
 ```
 
 2.  Get the new categorized Ozone level by using mutate()
@@ -295,6 +300,23 @@ High : if greater than median of Ozone
 #
 #
 #
+ df_categorized <- df %>%
+  mutate(Ozone_cat = case_when(
+    Ozone <= median(Ozone) ~ "Low",
+    Ozone > median(Ozone) ~ "High"
+  )) 
+ head(df_categorized[,6:10]) # it has NA's because we used original data that has some NA (missing values)
+ 
+ #Now we use the cleaned data
+  df_categorized2 <- df_clean %>%
+  mutate(Ozone_cat = case_when(
+    Ozone <= median(Ozone) ~ "Low",
+    Ozone > median(Ozone) ~ "High"
+  )) 
+  head(df_categorized2[,6:10]) 
+ 
+ 
+ 
 ```
 
 3.  Get the new categorized wind speed by using mutate()
@@ -303,6 +325,18 @@ High : if greater than median of Ozone
 #
 #
 #
+ df_categorized3 <- df_categorized2 %>%
+  mutate(Wind_cat = case_when(
+    Wind <= 1 ~ "Calm",
+    Wind > 1 & Wind <= 4 ~ "Light Air",
+    Wind > 4 & Wind <= 7 ~ "Light Breeze",
+    Wind > 7 & Wind <= 12 ~ "Gentle Breeze",
+    Wind > 12 & Wind <= 18 ~ "Moderate Breeze",
+    Wind > 18 & Wind <= 24 ~ "Fresh Breeze",
+    Wind > 24 ~ "Strong Breeze"
+  ))
+ 
+ head(df_categorized3[,6:11])
 ```
 
 4.  Obtain the contingency table
@@ -311,10 +345,15 @@ High : if greater than median of Ozone
 #
 #
 #
+my_contingency_tbl <- df_categorized3 %>%
+  group_by(Ozone_cat, Wind_cat) %>%
+  summarise(Count = n()) %>%
+  pivot_wider(names_from = Wind_cat, values_from = Count)
 
+my_contingency_tbl
 ```
 
-### Graphics with `ggplot2` package
+### \*\* Graphics with `ggplot2` package
 
 Plotting with `ggplot2` package begins with
 
@@ -328,11 +367,11 @@ where
 
 and then you add `geoms` functions – geometrical objects as a graphical representation of the data in the plot (points, lines, bars). **`ggplot2`** offers many different geoms; We will use a few common ones today, including:
 
-- `geom_point()` : scatter plots, dot plots, etc.
+-   `geom_point()` : scatter plots, dot plots, etc.
 
-- `geom_line()` : trend lines, time-series, etc.
+-   `geom_line()` : trend lines, time-series, etc.
 
-- `geom_histogram()` : histograms
+-   `geom_histogram()` : histograms
 
 In short,
 
@@ -514,7 +553,7 @@ ggplot(data = table_data, aes(x="", y=n, fill=Class)) +
   theme_void()
 ```
 
-### Exercise 3:
+### \*\* Exercise 3:
 
 In the air quality data, Filter the data to include only the months June through September and print it.
 
@@ -523,6 +562,9 @@ In the air quality data, Filter the data to include only the months June through
 # df_air # the airquality data frame 
 # df_air = read.csv("airquality.csv") # if you don't have one
 
+df_air_not_May <- df_air %>% filter(Month != 5)
+
+df_air_not_May
 ```
 
 2.  Create a boxplot to show the distribution of Ozone levels for these months. (Air quality data)
@@ -531,6 +573,15 @@ In the air quality data, Filter the data to include only the months June through
 #
 #
 #
+# filter NA values first from the dataframe
+df_air_not_May_clean <- df_air_not_May %>% drop_na()
+
+df_air_not_May_clean %>% group_by(Month) %>%
+  summarise(Median = median(Ozone)) 
+
+df_air_not_May_clean %>% group_by(Month) %>%
+  summarise(Median = median(Ozone)) %>%
+  ggplot(aes(x=Month, y=Median)) + geom_col()
 ```
 
 3.  Create a histogram to show the distribution of Ozone levels for these months. (Air quality data)
@@ -539,4 +590,22 @@ In the air quality data, Filter the data to include only the months June through
 #
 #
 #
+df_air_not_May_clean %>% group_by(Month) %>%
+  summarise(Median = median(Ozone)) %>%
+  ggplot(aes(x=Median)) + geom_histogram()
+
+
+## how about without Month? June - Sept
+df_air_not_May_clean %>% 
+  ggplot(aes(x=Ozone)) + geom_histogram()
+
+
+## how about without Month ? May - Sept
+df_clean %>% 
+  ggplot(aes(x=Ozone)) + geom_histogram()
+
+
+## How about only within certain Month?
+df_clean %>% filter(Month==5) %>%
+  ggplot(aes(x=Ozone)) + geom_histogram()
 ```
