@@ -175,7 +175,7 @@
   - No discussion sections next week
 - **Learning Objectives:**
   - M3, LO2: Visualize and Interpret Sampling Distributions
-  - M3, LO3: Calculate and Interpret Standard Error
+  - M3, LO3: Inference for a Single Proportion
 
 ### Lecture 17
 - **Topic:** Confidence intervals (Chapter 5.2)
@@ -187,7 +187,7 @@
   - No discussion sections next week
 - **Learning Objectives:**
   - M3, LO2: Visualize and Interpret Sampling Distributions
-  - M3, LO3: Calculate and Interpret Standard Error
+  - M3, LO3: Inference for a Single Proportion
 
 ### Lecture 18
 - **Topic:** Hypothesis testing for a proportion (Chapter 5.3)
@@ -197,17 +197,15 @@
   - Quiz 2 tomorrow in class (not discussion)
   - Prof Stephen office hours today 12:15–1:30pm; no OH on Thursday
 - **Learning Objectives:**
-  - M3, LO3: Calculate and Interpret Standard Error
-  - M3, LO4: Explain Hypothesis Testing and Its Limitations
-  - M3, LO5: Understand Errors and Significance Levels
+  - M3, LO3: Inference for a Single Proportion
+  - M3, LO4: Understand Errors and Significance Levels
 
 ### Lecture 19
 - **Topic:** Hypothesis testing for a proportion, continued (Chapter 5.3)
 - **Reading:** Chapter 6.1
 - **Deadlines/Announcements:** HW 7 due Monday
 - **Learning Objectives:**
-  - M3, LO4: Explain Hypothesis Testing and Its Limitations
-  - M3, LO5: Understand Errors and Significance Levels
+  - M3, LO4: Understand Errors and Significance Levels
 
 ### Lecture 20
 - **Topic:** Inference for a single proportion (Chapter 6.1)
@@ -217,17 +215,19 @@
   - LA mid-semester feedback form (for Jack and Yao)
   - Quiz 2 retake qualifications due Friday
 - **Learning Objectives:**
-  - M4, LO1: Calculate Sample Size for Confidence Intervals
-  - M4, LO2: Design and Interpret Confidence Intervals
-  - M4, LO3: Conduct and Interpret Hypothesis Tests for Proportions
+  - M3, LO3: Inference for a Single Proportion
+  - M3, LO6: Calculate Sample Size for Confidence Intervals
+
+---
+
+## Module 4: Inference
 
 ### Lecture 21
 - **Topic:** Difference of two proportions (Chapter 6.2)
 - **Reading:** Chapter 6.3
 - **Deadlines/Announcements:** (none)
 - **Learning Objectives:**
-  - M4, LO2: Design and Interpret Confidence Intervals
-  - M4, LO3: Conduct and Interpret Hypothesis Tests for Proportions
+  - M4, LO1: Inference for a Difference in Proportions
 
 ### Lecture 22
 - **Topic:** Testing for goodness of fit using chi-square (Chapter 6.3)
@@ -237,26 +237,22 @@
   - Dr. Lim lecturing on Monday and Wednesday next week
   - Prof Stephen's Monday office hours cancelled (Thursday hours still on)
 - **Learning Objectives:**
-  - M4, LO4: Conduct and Interpret Chi-Square Tests
+  - M4, LO2: Conduct and Interpret Chi-Square Tests
 
 ### Lecture 23
 - **Topic:** Testing for independence in two-way tables (Chapter 6.4)
 - **Reading:** Chapter 7.1
 - **Deadlines/Announcements:** HW 8 due today
 - **Learning Objectives:**
-  - M4, LO4: Conduct and Interpret Chi-Square Tests
-
----
-
-## Module 4: Inference
+  - M4, LO2: Conduct and Interpret Chi-Square Tests
 
 ### Lecture 24
 - **Topic:** One-sample means with the t-distribution (Chapter 7.1)
 - **Reading:** Chapter 7.2
 - **Deadlines/Announcements:** (none)
 - **Learning Objectives:**
-  - M4, LO5: Explain and Use the t-Distribution
-  - M4, LO6: Conduct and Interpret t-Tests
+  - M4, LO3: Explain and Use the t-Distribution
+  - M4, LO4: Conduct and Interpret t-Tests
 
 ### Lecture 25
 - **Topic:** CIs for one-sample means, Paired data (Chapter 7.2)
@@ -265,8 +261,8 @@
   - HW 9 due Monday
   - Quiz 3 next week (in discussion sections)
 - **Learning Objectives:**
-  - M4, LO5: Explain and Use the t-Distribution
-  - M4, LO6: Conduct and Interpret t-Tests
+  - M4, LO3: Explain and Use the t-Distribution
+  - M4, LO4: Conduct and Interpret t-Tests
 
 ### Lecture 26
 - **Topic:** Difference of two means (Chapter 7.3)
@@ -275,24 +271,24 @@
   - Quiz 3 in discussions this week
   - Lab attendance tracked starting this week
 - **Learning Objectives:**
-  - M4, LO5: Explain and Use the t-Distribution
-  - M4, LO6: Conduct and Interpret t-Tests
+  - M4, LO3: Explain and Use the t-Distribution
+  - M4, LO4: Conduct and Interpret t-Tests
 
 ### Lecture 27
 - **Topic:** Power calculations for a difference of means (Chapter 7.4)
 - **Reading:** Gelman et al. power paper
 - **Deadlines/Announcements:** (none)
 - **Learning Objectives:**
-  - M4, LO6: Conduct and Interpret t-Tests
-  - M4, LO7: Calculate Test Power and Evaluate Factors
+  - M4, LO4: Conduct and Interpret t-Tests
+  - M4, LO6: Calculate Test Power and Evaluate Factors
 
 ### Lecture 28
 - **Topic:** Issues with Hypothesis Testing 1: The traps of insufficient power
 - **Reading:** Chapter 7.5
 - **Deadlines/Announcements:** HW 10 due Monday
 - **Learning Objectives:**
-  - M3, LO4: Explain Hypothesis Testing and Its Limitations
-  - M3, LO6: Distinguish Statistical vs. Practical Significance
+  - M4, LO5: Explain Hypothesis Testing and Its Limitations
+  - M3, LO5: Distinguish Statistical vs. Practical Significance
 
 ### Lecture 29
 - **Topic:** Comparing many means with ANOVA (Chapter 7.5)
@@ -302,16 +298,16 @@
   - Quiz 3 retake qualifications and Almost Pass due Friday
   - Quiz 4 Practice this week; Quiz 4 next week
 - **Learning Objectives:**
-  - M4, LO8: Conduct and Interpret ANOVA
+  - M4, LO7: Conduct and Interpret ANOVA
 
 ### Lecture 30
 - **Topic:** Issues with Hypothesis Testing 2: Multiple comparisons
 - **Reading:** Chapters 8.1–8.2
 - **Deadlines/Announcements:** (none)
 - **Learning Objectives:**
-  - M3, LO4: Explain Hypothesis Testing and Its Limitations
-  - M3, LO6: Distinguish Statistical vs. Practical Significance
-  - M4, LO8: Conduct and Interpret ANOVA
+  - M3, LO5: Distinguish Statistical vs. Practical Significance
+  - M4, LO5: Explain Hypothesis Testing and Its Limitations
+  - M4, LO7: Conduct and Interpret ANOVA
 
 ---
 
