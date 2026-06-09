@@ -1,308 +1,517 @@
 ---
-title: "MA213 Basic Statistics and Probability - Lab5 activity"
+title: "MA213 Basic Statistics and Probability — Lab 5 Activity"
 output:
   html_document:
-    code_download: true 
+    code_download: true
+    toc: true
+    toc_float: true
+    theme: flatly
   pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(ggplot2)
 library(dplyr)
 ```
 
-# **Lab 5: Simulation and probability**
+# **Lab 5: Sampling Distributions and the Central Limit Theorem**
 
 ------------------------------------------------------------------------
 
-## Lab activities
+## Overview
+
+In this lab, you will investigate how the **sample mean** behaves when repeated samples are drawn from a population. Each group will work with a different hypothetical population. Your goal is to explore the **sampling distribution** of the sample mean, defined as:
+
+$$\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+
+By the end of this lab, you should be able to explain what happens to this distribution as the sample size $n$ increases — this is the Central Limit Theorem (CLT) in action.
+
+------------------------------------------------------------------------
+
+## Hypothetical Populations
+
+The diagram below illustrates the general simulation workflow for this lab.
 
 ![](Sampling_diag.jpeg){width="100%"}
 
-You are given a hypothetical population. Each group will work with a different population. Your goal is to examine how the sample mean, given by
+Choose **one** of the five populations below. Each population has a large size of $N = 100{,}000$ observations, and you will draw samples of size $n = 500$ from it. Note that all populations are designed to share the same standard deviation ($\sigma \approx 0.447$), allowing for fair comparisons across groups.
 
-$$
-\hat{\mu} = \frac{1}{n} \sum_{i=1}^{n}x_i
-$$ is distributed when samples are drawn independently from your chosen population.
+------------------------------------------------------------------------
 
-Sample $n= 500$ from your chosen population. The population parameters are given here.
+### Population 1: Normal Distribution
 
-## Population 1 : Normal distribution
+Parameters: $\mu = 2$, $\sigma = 0.447$
 
-```{r, eval=FALSE}
+```{r pop1-show, eval=FALSE}
 sigma <- 0.447
-N <- 100000
-n = 500
-pop <- rnorm(N, mean=2, sd=sigma)
-
+N     <- 100000
+n     <- 500
+pop   <- rnorm(N, mean = 2, sd = sigma)
 ```
 
-```{r echo=FALSE}
+```{r pop1-plot, echo=FALSE}
 sigma <- 0.447
-N <- 100000
-n = 500
-pop <- rnorm(N, mean=2, sd=sigma)
-df = data.frame(X=pop)
+N     <- 100000
+n     <- 500
+pop   <- rnorm(N, mean = 2, sd = sigma)
 
-ggplot(df, aes(x = X)) + 
-  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
-  labs(title = "Histogram of Population Distribution",
-       x = "X",
-       y = "Frequency") +
-  theme_minimal()
-```
-
-## Population 2 : Bernoulli distribution
-
-```{r, eval=FALSE}
-
-N <- 100000
-n = 500
-prob = 0.3
-pop <- rbinom(N, 1, prob)
-#sqrt(prob * (1-prob))
-sigma <- sd(pop) # since pop is finite here
-
-```
-
-```{r echo=FALSE}
-N <- 100000
-n = 500
-prob = 0.3
-pop <- rbinom(N, 1, prob)
-df = data.frame(X=pop)
-
-ggplot(df, aes(x = X)) + 
-  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
-  labs(title = "Histogram of Population Distribution",
-       x = "X",
-       y = "Frequency") +
-  theme_minimal()
-```
-
-## Population 3 : Poisson distribution
-
-```{r, eval=FALSE}
-sigma <- 0.447
-N <- 100000
-n = 500
-lambda_pois <- sigma^2
-pop <- rpois(N, lambda = lambda_pois)
-```
-
-```{r echo=FALSE}
-sigma <- 0.447
-N <- 100000
-n = 500
-lambda_pois <- sigma^2
-pop <- rpois(N, lambda = lambda_pois)
-
-df = data.frame(X=pop)
-
-ggplot(df, aes(x = X)) + 
-  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
-  labs(title = "Histogram of Population Distribution",
-       x = "X",
-       y = "Frequency") +
-  theme_minimal()
-```
-
-## Population 4 : Exponential distribution
-
-```{r, eval=FALSE}
-N <- 100000
-sigma <- 0.447
-lambda_exp <- 1 / sigma
-pop <- rexp(N, rate = lambda_exp)
-```
-
-```{r echo=FALSE}
-N <- 100000
-sigma <- 0.447
-lambda_exp <- 1 / sigma
-pop <- rexp(N, rate = lambda_exp)
-
-df = data.frame(X=pop)
-
-ggplot(df, aes(x = X)) + 
-  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
-  labs(title = "Histogram of Population Distribution",
-       x = "X",
-       y = "Frequency") +
-  theme_minimal()
-```
-
-## Population 5 : Gamma Distribution
-
-```{r, eval=FALSE}
-sigma <- 0.447
-n = 500
-N <- 100000
-alpha_gamma <- 4  
-beta_gamma <- sqrt(alpha_gamma) / sigma
-pop <- rgamma(N, shape = alpha_gamma, rate = beta_gamma)
-```
-
-```{r echo=FALSE}
-sigma <- 0.447
-n = 500
-N <- 100000
-alpha_gamma <- 4  
-beta_gamma <- sqrt(alpha_gamma) / sigma
-pop <- rgamma(N, shape = alpha_gamma, rate = beta_gamma)
-
-df = data.frame(X=pop)
-
-ggplot(df, aes(x = X)) + 
-  geom_histogram(bins = 30, fill = "skyblue", color = "black") +
-  labs(title = "Histogram of Population Distribution",
-       x = "X",
-       y = "Frequency") +
-  theme_minimal()
+data.frame(X = pop) |>
+  ggplot(aes(x = X)) +
+  geom_histogram(bins = 40, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Population 1: Normal Distribution",
+       subtitle = paste0("mu = 2, sigma = ", sigma),
+       x = "X", y = "Count") +
+  theme_minimal(base_size = 13)
 ```
 
 ------------------------------------------------------------------------
 
-The goal of today is to see the sampling distribution of sample statistic (sample mean).
+### Population 2: Bernoulli Distribution
 
-### 0. Make your population from one of the populations above.
+Parameters: $p = 0.3$, so $\sigma = \sqrt{p(1-p)} \approx 0.458$
 
-```{r}
-#
-#
-#
+```{r pop2-show, eval=FALSE}
+N     <- 100000
+n     <- 500
+prob  <- 0.3
+pop   <- rbinom(N, size = 1, prob = prob)
+sigma <- sd(pop)   # empirical SD of the finite population
+```
+
+```{r pop2-plot, echo=FALSE}
+N    <- 100000
+n    <- 500
+prob <- 0.3
+pop  <- rbinom(N, size = 1, prob = prob)
+
+data.frame(X = pop) |>
+  ggplot(aes(x = X)) +
+  geom_histogram(bins = 5, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Population 2: Bernoulli Distribution",
+       subtitle = paste0("p = ", prob),
+       x = "X", y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+------------------------------------------------------------------------
+
+### Population 3: Poisson Distribution
+
+Parameters: $\lambda = \sigma^2 = 0.447^2 \approx 0.2$
+
+```{r pop3-show, eval=FALSE}
+sigma       <- 0.447
+N           <- 100000
+n           <- 500
+lambda_pois <- sigma^2
+pop         <- rpois(N, lambda = lambda_pois)
+```
+
+```{r pop3-plot, echo=FALSE}
+sigma       <- 0.447
+N           <- 100000
+n           <- 500
+lambda_pois <- sigma^2
+pop         <- rpois(N, lambda = lambda_pois)
+
+data.frame(X = pop) |>
+  ggplot(aes(x = X)) +
+  geom_histogram(bins = 15, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Population 3: Poisson Distribution",
+       subtitle = paste0("lambda = ", round(lambda_pois, 3)),
+       x = "X", y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+------------------------------------------------------------------------
+
+### Population 4: Exponential Distribution
+
+Parameters: rate $= 1/\sigma \approx 2.237$, so the mean $= \sigma \approx 0.447$
+
+```{r pop4-show, eval=FALSE}
+sigma      <- 0.447
+N          <- 100000
+n          <- 500
+lambda_exp <- 1 / sigma
+pop        <- rexp(N, rate = lambda_exp)
+```
+
+```{r pop4-plot, echo=FALSE}
+sigma      <- 0.447
+N          <- 100000
+n          <- 500
+lambda_exp <- 1 / sigma
+pop        <- rexp(N, rate = lambda_exp)
+
+data.frame(X = pop) |>
+  ggplot(aes(x = X)) +
+  geom_histogram(bins = 40, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Population 4: Exponential Distribution",
+       subtitle = paste0("rate = ", round(lambda_exp, 3)),
+       x = "X", y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+------------------------------------------------------------------------
+
+### Population 5: Gamma Distribution
+
+Parameters: shape $\alpha = 4$, rate $\beta = \sqrt{\alpha}/\sigma$
+
+```{r pop5-show, eval=FALSE}
+sigma       <- 0.447
+N           <- 100000
+n           <- 500
+alpha_gamma <- 4
+beta_gamma  <- sqrt(alpha_gamma) / sigma
+pop         <- rgamma(N, shape = alpha_gamma, rate = beta_gamma)
+```
+
+```{r pop5-plot, echo=FALSE}
+sigma       <- 0.447
+N           <- 100000
+n           <- 500
+alpha_gamma <- 4
+beta_gamma  <- sqrt(alpha_gamma) / sigma
+pop         <- rgamma(N, shape = alpha_gamma, rate = beta_gamma)
+
+data.frame(X = pop) |>
+  ggplot(aes(x = X)) +
+  geom_histogram(bins = 40, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Population 5: Gamma Distribution",
+       subtitle = paste0("shape = ", alpha_gamma, ", rate = ", round(beta_gamma, 3)),
+       x = "X", y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+------------------------------------------------------------------------
+
+## Key Concepts to Keep in Mind
+
+Before you start coding, make sure you understand the following ideas. Read through them carefully — they will guide your answers in the reflection section.
+
+### What is a Sampling Distribution?
+
+When you draw a sample of size $n$ from a population and compute the sample mean $\hat{\mu}$, you get **one number**. But if you repeated that process many times (say, $K = 1{,}000$ times), you would get $K$ different values of $\hat{\mu}$. The distribution of those $K$ values is called the **sampling distribution of the sample mean**.
+
+> **Key idea:** A sampling distribution is not the distribution of the data — it is the distribution of a *statistic* (here, the mean) computed from repeated samples.
+
+### What does the Central Limit Theorem say?
+
+The **Central Limit Theorem (CLT)** states that, regardless of the shape of the original population, the sampling distribution of $\hat{\mu}$ approaches a **Normal distribution** as $n$ increases. More precisely:
+
+$$\hat{\mu} \xrightarrow{d} \mathcal{N}\!\left(\mu,\; \frac{\sigma^2}{n}\right) \quad \text{as } n \to \infty$$
+
+This means:
+
+- The **center** of the sampling distribution equals the population mean $\mu$.
+- The **spread** (standard deviation) of the sampling distribution equals $\sigma / \sqrt{n}$, called the **Standard Error (SE)**.
+- The **shape** becomes bell-shaped (Normal) as $n$ grows, even if the population is skewed or discrete.
+
+### Distinguishing $n$ from $K$
+
+It is easy to confuse these two quantities:
+
+| Symbol | Meaning | Effect when increased |
+|----|----|----|
+| $n$ | Sample size (observations per sample) | Reduces the spread of $\hat{\mu}$; makes the sampling distribution narrower and more Normal |
+| $K$ | Number of repeated samples | Gives a more accurate *picture* of the sampling distribution; does not change its true shape or spread |
+
+> **Analogy:** $n$ controls how precise each estimate is. $K$ controls how well you can see the distribution of those estimates.
+
+### The 68–95–99.7 Rule (Empirical Rule)
+
+For a Normal distribution $\mathcal{N}(\mu, \sigma^2)$:
+
+- About **68%** of values fall within $\pm 1$ standard deviation of the mean.
+- About **95%** fall within $\pm 2$ standard deviations.
+- About **99.7%** fall within $\pm 3$ standard deviations.
+
+You will use this rule in Question 6 to check whether your sampling distribution is "close enough" to Normal.
+
+------------------------------------------------------------------------
+
+## Lab Activities
+
+You and your partners need to choose **different** distributions (one each).
+
+At the end of the lab today, you need to submit this completed Rmd file.
+
+### 0. Build Your Population
+
+Copy the code block for your assigned population and run it here.
+
+```{r q0}
+# Replace the code below with your assigned population
+sigma       <- 0.447
+N           <- 100000
+n           <- 500
+lambda_pois <- sigma^2
+pop         <- rpois(N, lambda = lambda_pois)
+
+data.frame(X = pop) |>
+  ggplot(aes(x = X)) +
+  geom_histogram(bins = 15, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Population 3: Poisson Distribution",
+       subtitle = paste0("lambda = ", round(lambda_pois, 3)),
+       x = "X", y = "Count") +
+  theme_minimal(base_size = 13)
 
 ```
 
-### 1. Obtain one sample of size $n$ from the population. Then, obtain the sample mean $\hat{\mu}$ from the sample.
+------------------------------------------------------------------------
 
-(Set `n=100` this time)
+### 1. Draw One Sample and Compute the Sample Mean
 
-```{r}
-#
-#
-#
+Draw a single sample of size $n = 100$ from your population and compute $\hat{\mu}$.
 
-```
+> **Hint:** Use `sample(pop, n)` to draw the sample, then `mean()` for the sample mean.
 
-### 2. Now we are going to obtain `K` many sample means $\hat{\mu}$'s from `K` different sample from the population. Obtain a sample of size $n=100$ from the population and obtain the sample mean. Repeat the sampling process $K=100$ times.
+```{r q1}
+n <- 100
 
-```{r}
-#
-#
-#
+# Draw one sample and compute the sample mean
 
-```
-
-### 3. Make the above process as a function of $n$ and $K$ (input : n and `K`, output : $\hat{\mu}$ vector output) and obtain the output with `n=100`, `K=100`. Compare your result with question 2. Think about how you can compare them?
-
-```{r}
-#
-#
-#
+# my_sample  <- sample(pop, n)
+# mu_hat     <- mean(my_sample)
+# mu_hat
 
 ```
 
-### 4. Now using the function, obtain the histogram of $\hat{\mu}$. First, start with `n=20, K=1000`, `n=200, K=1000` and `n=1000, K=1000`. What do you see?
+------------------------------------------------------------------------
 
-```{r}
-#
-# n=20, K=1000
-#
+### 2. Repeat Sampling $K = 100$ Times
+
+Draw $K = 100$ samples of size $n = 100$ from the population and record the sample mean from each. This gives you a vector of $K$ sample means.
+
+> **Hint:** Use a `for` loop. Pre-allocate a vector with `rep(0, K)` before the loop for efficiency.
+
+```{r q2}
+K  <- 100
+n  <- 100
+# mu_hat_vector <- rep(0, K)
+# 
+# for (i in 1:K) {
+#   my_sample         <- sample(pop, n)
+#   mu_hat_vector[i]  <- mean(my_sample)
+# }
+# mu_hat_vector
+```
+
+------------------------------------------------------------------------
+
+### 3. Write a Reusable Function
+
+Wrap the sampling process from Question 2 into a function that takes `n` (sample size) and `K` (number of repetitions) as inputs and returns a vector of $K$ sample means.
+
+Run the function with `n = 100, K = 100` and compare the result to your answer in Question 2. How are the two vectors similar or different? How could you formally compare them?
+
+```{r q3}
+get_mu_hats <- function(pop, n, K) {
+
+# mu_hat_vector <- rep(0, K)
+
+
+# output should be a vector of statistic sampled
+# return(mu_hat_vector) ## output vector here
+  
+}
+result_q3 <- get_mu_hats(pop, n = 100, K = 100)
+result_q3
+```
+
+------------------------------------------------------------------------
+
+### 4. Effect of Sample Size $n$ on the Sampling Distribution
+
+Use your function with $K = 1{,}000$ and three different values of $n$. Plot a histogram of the resulting sample means for each setting.
+
+**What do you observe as** $n$ increases?
+
+```{r q4-n20}
+#n = 20, K = 1000
+mu_hats_20 <- get_mu_hats(pop, n = 20, K = 1000)
+# Plot histogram
+data.frame(mu_hat = mu_hats_20) |>
+  ggplot(aes(x = mu_hat)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Sampling Distribution of Sample Mean (n = 20, K = 1000)",
+       x = expression(hat(mu)), y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+```{r q4-n200}
+# n = 200, K = 1000
+mu_hats_200 <- get_mu_hats(pop, n = 200, K = 1000)
+# Plot histogram
+data.frame(mu_hat = mu_hats_200) |>
+  ggplot(aes(x = mu_hat)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Sampling Distribution of Sample Mean (n = 200, K = 1000)",
+       x = expression(hat(mu)), y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+```{r q4-n1000}
+# n = 1000, K = 1000
+mu_hats_1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+# Plot histogram
+data.frame(mu_hat = mu_hats_1000) |>
+  ggplot(aes(x = mu_hat)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.85) +
+  labs(title = "Sampling Distribution of Sample Mean (n = 1000, K = 1000)",
+       x = expression(hat(mu)), y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+> **Discussion:** As $n$ increases, what happens to the shape, center, and spread of the histogram?
+
+------------------------------------------------------------------------
+
+### 5. Effect of Number of Repetitions $K$ on the Sampling Distribution
+
+Now fix $n = 1{,}000$ and vary $K$. Plot a histogram for each setting.
+
+**What do you observe as** $K$ increases?
+
+```{r q5-k20}
+# n = 1000, K = 20
+mu_hats_k20 <- get_mu_hats(pop, n = 1000, K = 20)
+# Plot histogram
+data.frame(mu_hat = mu_hats_k20) |>
+  ggplot(aes(x = mu_hat)) +
+  geom_histogram(bins = 10, fill = "coral", color = "white", alpha = 0.85) +
+  labs(title = "Sampling Distribution of Sample Mean (n = 1000, K = 20)",
+       x = expression(hat(mu)), y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+```{r q5-k200}
+# n = 1000, K = 200
+mu_hats_k200 <- get_mu_hats(pop, n = 1000, K = 200)
+# Plot histogram
+data.frame(mu_hat = mu_hats_k200) |>
+  ggplot(aes(x = mu_hat)) +
+  geom_histogram(bins = 20, fill = "coral", color = "white", alpha = 0.85) +
+  labs(title = "Sampling Distribution of Sample Mean (n = 1000, K = 200)",
+       x = expression(hat(mu)), y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+```{r q5-k1000}
+# n = 1000, K = 1000
+mu_hats_k1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+# Plot histogram
+data.frame(mu_hat = mu_hats_k1000) |>
+  ggplot(aes(x = mu_hat)) +
+  geom_histogram(bins = 30, fill = "coral", color = "white", alpha = 0.85) +
+  labs(title = "Sampling Distribution of Sample Mean (n = 1000, K = 1000)",
+       x = expression(hat(mu)), y = "Count") +
+  theme_minimal(base_size = 13)
+```
+
+> **Discussion:** How does increasing $K$ affect the histogram? Is this the same type of change as increasing $n$?
+
+------------------------------------------------------------------------
+
+### 6. Finding the Minimum $n$ for Approximate Normality
+
+Set $K = 5{,}000$. Using the **68–95–99.7 Empirical Rule**, find the smallest value of $n$ for which the sampling distribution of $\hat{\mu}$ is approximately normal. Specifically, find $n$ such that the observed proportions within 1, 2, and 3 standard deviations each differ from the theoretical values (68%, 95%, 99.7%) by less than 0.005.
+
+Let `rate1`, `rate2`, and `rate3` be the proportions of $\hat{\mu}$ values falling within 1, 2, and 3 standard deviations of the mean of the $\hat{\mu}$ vector, respectively. The test passes when:
+
+``` r
+all(abs(c(rate1 - 0.68, rate2 - 0.95, rate3 - 0.997)) < 0.005)
+```
+
+```{r q6}
+K <- 5000
+# Try different values of n and check the empirical rule
+
+mu_hats <- get_mu_hats(pop, n = ???, K = K)  # Change n values
+m  <- mean(mu_hats)
+s  <- sd(mu_hats)
+rate1 <- mean(abs(mu_hats - m) < 1 * s)
+rate2 <- mean(abs(mu_hats - m) < 2 * s)
+rate3 <- mean(abs(mu_hats - m) < 3 * s)
+all(abs(c(rate1 - 0.68, rate2 - 0.95, rate3 - 0.997)) < 0.005)
 
 ```
 
-```{r}
-#
-# n=200, K=1000
-#
+What is minimum n value ?
 
+Your answer: n =
 
+------------------------------------------------------------------------
+
+### 7. Standard Error vs. Empirical Standard Deviation
+
+The **Standard Error (SE)** of the sample mean is the theoretical standard deviation of the sampling distribution:
+
+$$SE = \frac{\sigma}{\sqrt{n}}$$
+
+Using $n = 1{,}000$ and $K = 1{,}000$, compute the SE using the formula above and compare it to the standard deviation of your `mu_hats` vector. Are they close? How large does the sample size need to be for them to be close?
+
+Then, compare your SE with other groups. Since all populations were designed to have the same $\sigma$, what would you expect? What do you actually find?
+
+```{r q7}
+n <- 10 # change n=100, n=500, n=1000 ...
+K <- 1000
+
+# sigma is defined when you set up your population above
+SE           <- sigma / sqrt(n)
+mu_hats      <- get_mu_hats(pop, n = n, K = K)
+empirical_sd <- sd(mu_hats)
+
+SE
+empirical_sd
+abs(SE - empirical_sd)   # How close are they?
 ```
 
-```{r}
-#
-# n=1000, K=1000
-#
+## 🔁 Final Reflection
 
-```
+Before submitting, answer the questions below in complete sentences. Each question includes a prompt to help you structure your answer.
 
-### 5. Now using the function, obtain the histogram of $\hat{\mu}$. First, start with `n=1000, K=20`, `n=1000, K=200` and `n=1000, K=1000`. What do you see?
+**1.** In your own words, what is a **sampling distribution**?
 
-```{r}
-#
-# n=1000, K=20
-#
+*Your answer:*
 
-```
+**2.** Look at your histograms from Question 4. As $n$ increased from 20 to 200 to 1,000, describe what changed about the histogram — specifically its **shape**, **center**, and **spread**. Did the center shift? Did the histogram get wider or narrower? Did it look more bell-shaped?
 
-```{r}
-#
-# n=1000, K=200
-#
+*Your answer:*
 
-```
+**3.** Now compare Question 4 and Question 5. Increasing $n$ and increasing $K$ both changed the histograms, but in different ways. What was the key difference?
 
-```{r}
-#
-# n=1000, K=1000
-#
+*Your answer:*
 
-```
+**4.** The Central Limit Theorem says the sampling distribution of $\hat{\mu}$ becomes approximately Normal as $n$ increases, **regardless of the population's shape**. Does your population's shape (from Question 0) make it easy or hard for the CLT to kick in? Did you need a large $n$ in Question 6, or a small one? Compare your answer with your partner's.
 
-### 5. Using the function, set $K=5000$. Using the empirical rule (68-95-99.7 rule), how big should $n$ be to pass the rule within 0.005?
+*Your answer:*
 
-Let `rate1`, `rate2` and `rate3` be the rate within 1, 2 and 3 standard deviations from the $\hat{\mu}$ samples, respectively. To pass the test, use the code `all(abs(c(rate1-0.68, rate2-0.95, rate3-0.997))< 0.005)`
+**5.** Suppose a researcher collects a single sample of size $n = 30$ and computes $\hat{\mu} = 4.7$. The population standard deviation is $\sigma = 2$.\
+(a) Calculate the Standard Error:
 
-```{r}
-#
-#
-# all(abs(c(rate1-0.68, rate2-0.95, rate3-0.997))< 0.005)
-# True to be expected
+Your answer:
 
+$SE = \sigma  \sqrt{n} =$ \_\_\_
 
-```
+\
+(b) In plain language, what does this SE tell you about $\hat{\mu} = 4.7$?
 
-### 6. Obtain standard error where
+*Your answer:*
 
-$$
-SE = \frac{\sigma}{\sqrt{n}}
-$$
+------------------------------------------------------------------------
 
-### Compare this with the standard deviation of `mu_hat_vector` (Set `n=1000` and `k=1000`). Are they close?
+**Student Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ **BUID** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ Considered Distribution: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-### Also, compare obtained standard error to other groups. What do you conclude?
+**Student Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ **BUID** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ Considered Distribution: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-```{r}
+**Student Name:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ **BUID** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ Considered Distribution: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-#
-#
-#
+**Date:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
+------------------------------------------------------------------------
 
-```
-
-## Post-lab activities
-
-Recent statistics suggest that 10% of Americans rely on Social Network Sites (SNSs). We are going to have a simulation study if we can verify that CLT really works in this case too. Let's assume that US population is 300,000 for calculation purposes.
-
-Please name your submission as `lab5.R`
-
-0.  execute this `set.seed(213)`
-
-1.  Produce population data and assign it `population` object.
-
-2.  Obtain mean and standard deviation of the population and assign them to `mean_pop` and `sd_pop` accordingly.
-
-3.  Get the sample mean data for $n=10$ with $k=1000$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample` and `sd_sample`.
-
-4.  Do one more time with the sample mean data for $n=50$ with $k=100$ iterations. Assign the mean and standard deviation of the sample mean data to `mean_sample2` and `sd_sample2`.
-
-5.  (Extra)
-
-    5.1) Show the shape of the distribution of the sample proportion with n=10, k=1000.
-
-    5.2) Show the shape of the distribution of the sample proportion with n=1000, k=1000.
-
-6.  With $n=1000, K =1000$, assign within 1, 2 and 3 standard deviations of the sample proportions to `first_sd_data`, `second_sd_data` and `third_sd_data`, respectively.
+Submit it to Blackboard by the end of the lab
