@@ -14,7 +14,7 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## **Lab 3: Plotting and Summaries**
+## **Lab 3:** Data transformation
 
 ------------------------------------------------------------------------
 
@@ -25,11 +25,293 @@ library(dplyr)
 
 ------------------------------------------------------------------------
 
+## Load packages for Data
+
+If you didn't install `tidyverse` package
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+```
+
+Load package
+
+```{r, echo=TRUE}
+library(tidyverse)
+```
+
+## **New York Air Quality Data**
+
+Daily air quality measurements in New York, May to September 1973 stored within a data frame with 153 observations on 6 variables. It is obtained from the New York State Department of Conservation (ozone data) and the National Weather Service (meteorological data). It is cited by @chambers2018graphical.
+
+You can find the details fo the data description [here](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html).
+
+## Import the Data
+
+You can use `airquality` object from base R data. You can also `airquality.csv` file where the data is stored as a comma separated value (CSV) file. Each row holds information for a single observation.
+
+Import the data from `airquality.csv` and show first 6 rows to see how this data is organized.
+
+```{r, echo=TRUE}
+df = read.csv("airquality.csv")
+```
+
+## `glimpse()` to take a quick peek at your data
+
+```{r, echo=TRUE}
+
+glimpse(df)
+
+```
+
+## To view the names of the variables (what are the columns in the data?)
+
+```{r, echo=TRUE}
+
+names(df)
+
+```
+
+## To view the first 6 rows
+
+```{r, echo=TRUE}
+
+head(df)
+
+```
+
+## The pipe operator
+
+`dplyr` (one of data packages in `tidyverse`) provides the `%>%` operator from magrittr. `x %>% f(y)` turns into `f(x, y)` so the result from one step is then “piped” into the next step.
+
+`df %>% filter(Month==5)` means "Select all rows with May"
+
+```{r, echo=TRUE, eval=TRUE}
+df %>% filter(Month==5)
+
+```
+
+## The pipe operator can be added
+
+You can use the pipe to rewrite multiple operations that you can read left-to-right, top-to-bottom (reading the pipe operator as “then”) (`%>%` and `|>` are equivalent)
+
+```{r, echo=TRUE, eval=TRUE}
+df |> 
+  select(Ozone, Wind, Month) |>
+  filter(Month==5)
+
+# 
+```
+
+## `Dplyr` data manipulation functions
+
+-   Rows:
+
+    -   [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) chooses rows based on column values.
+
+    -   [`slice()`](https://dplyr.tidyverse.org/reference/slice.html) chooses rows based on location.
+
+    -   [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) changes the order of the rows.
+
+-   Columns:
+
+    -   [`select()`](https://dplyr.tidyverse.org/reference/select.html) changes whether or not a column is included.
+
+    -   [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) changes the name of columns.
+
+    -   [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) changes the values of columns and creates new columns.
+
+    -   [`relocate()`](https://dplyr.tidyverse.org/reference/relocate.html) changes the order of the columns.
+
+-   Groups of rows:
+
+    -   [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) collapses a group into a single row.
+
+## Creating new column using `Dplyr`
+
+You can create new columns or modify existing ones using the `mutate()` function.
+
+For example, to create a new column that categorizes temperature:
+
+```{r, echo=TRUE}
+df <- df %>%
+  mutate(Temp_Category = ifelse(Temp > 80, "High", "Moderate")) # if Temp>80 -> "High" otherwise "Moderate"
+
+head(df)
+```
+
+## Contingency Table using `dplyr`
+
+A contingency table displays the frequency distribution of variables. You can create contingency tables using `dplyr` in combination with `tidyr`.
+
+For example, to create a contingency table of Month vs. Ozone_Level:
+
+```{r, echo=TRUE}
+df <- df %>%
+  mutate(Ozone_Level = ifelse(Ozone > median(Ozone, na.rm=TRUE), "High", "Low"))
+
+contingency_table <- df %>%
+  group_by(Month, Ozone_Level) %>%
+  summarise(Count = n()) %>%
+  pivot_wider(names_from = Ozone_Level, values_from = Count)
+
+print(contingency_table)
+```
+
+## Contingency Table with new categorized variable
+
+You can categorize `solar.R` by
+
+```         
+Solar.R <= 115       : Low
+115< Solar.R <= 185  : Medium
+258< Solar.R         : High
+```
+
+Create a contingency table for categorized `solar.R` vs `Ozone_level`
+
+```{r, echo=TRUE}
+ contingency_table2 <- df %>%
+  mutate(solar_cat = case_when(
+    Solar.R <= 115 ~ "Low",
+    Solar.R > 115 & Solar.R <= 185 ~ "Medium",
+    Solar.R > 258 ~ "High"
+  )) %>%
+  group_by(solar_cat, Ozone_Level) %>%
+  summarise(Count = n()) %>%
+  pivot_wider(
+    names_from = Ozone_Level,
+    values_from = Count
+  )
+ 
+ 
+ print(contingency_table2)
+```
+
+### Exercise 1:
+
+From `Temp` Create a new column named `Temp_C`. Below is the formula for Celsius.
+
+$$
+C = (F-32) \times \frac{5}{9}
+$$
+
+```{r}
+#
+#
+#
+```
+
+## Filtering out missing values
+
+We have `NA` values in `Ozone`, `Solar.R` and so on.
+
+```{r, echo=TRUE}
+ print(head(df))
+```
+
+Let's filter out those `NA` values from `df` and make it to `filtered_df` .
+
+1.  Filter out based on specific column. For example, we are going to remove `NA` values based on `Ozone` column.
+
+```{r, echo=TRUE}
+# -------------------------------
+# 1. Using filter() with !is.na()
+# -------------------------------
+df_filtered <- df %>%
+  filter(!is.na(x))  # Keep only rows where x is NOT NA
+# You can also filter multiple columns:
+# filter(!is.na(x), !is.na(y)) # Keep rows where both x and y are NOT NA
+
+# -------------------------------
+# 2. Using drop_na() from tidyr
+# -------------------------------
+df_dropped <- df %>%
+  drop_na(x)  # Remove rows where x is NA
+# Multiple columns:
+# drop_na(x, y) # Remove rows where either x or y is NA
+# Without arguments, removes any row with NA in any column:
+# drop_na() 
+```
+
+2.  Filter out based on multiple columns. For example, we are going to remove `NA` values based on `Ozone` and `Solar.R`columns.
+
+```{r, echo=TRUE}
+filtered_df <- df %>%
+  filter(!is.na(Ozone), !is.na(Solar.R))
+
+print(filtered_df[1:10,])
+
+
+# filtered_df <- df %>%
+#   filter(!is.na(Ozone) & !is.na(Solar.R)). ## this is equivalent code
+```
+
+3.  Filter out based on all the columns using `tidyr`.
+
+```{r, echo=TRUE}
+df_clean <- df %>%
+  drop_na()
+```
+
+### Exercise 2:
+
+Here is Beaufort wind scale, wind speed(mph) can be categorized into
+
+```         
+Calm: Wind speed less than 1 mph. 
+Light Air: 1-4 mph. 
+Light Breeze: 4-7 mph. 
+Gentle Breeze: 7-12 mph. 
+Moderate Breeze: 12-18 mph. 
+Fresh Breeze: 18-24 mph. 
+Strong Breeze: Wind speed greater than 24 mph.
+```
+
+Also, we can categorize Ozone level into two levels as the following.
+
+```         
+Low : if less than median of Ozone
+High : if greater than median of Ozone
+```
+
+1.  Exclude NA values
+
+```{r}
+#
+#
+#
+```
+
+2.  Get the new categorized Ozone level by using mutate()
+
+```{r}
+#
+#
+#
+```
+
+3.  Get the new categorized wind speed by using mutate()
+
+```{r}
+#
+#
+#
+```
+
+4.  Obtain the contingency table
+
+```{r}
+#
+#
+#
+
+```
+
 ### Graphics with `ggplot2` package
 
 Plotting with `ggplot2` package begins with
 
-`ggplot(data = df, aes(x=x_xvariable, y=y_variable))`
+`ggplot(data = df, aes(x=x_variable, y=y_variable))`
 
 where
 
@@ -223,4 +505,31 @@ ggplot(data = table_data, aes(x="", y=n, fill=Class)) +
   geom_col() + 
   coord_polar(theta="y") +
   theme_void()
+```
+
+### Exercise 3:
+
+You want to study Ozone levels after May. 1. Filter the data to include only the months June through September.
+
+```{r}
+#
+#
+#
+
+```
+
+2.  Create a boxplot to show the distribution of Ozone levels for these months.
+
+```{r}
+#
+#
+#
+```
+
+3.  Create a histogram to show the distribution of Ozone levels for these months.
+
+```{r}
+#
+#
+#
 ```
