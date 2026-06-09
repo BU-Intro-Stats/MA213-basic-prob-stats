@@ -1,0 +1,728 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Option 1: Slides with solutions
+
+\documentclass[slidestop,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
+
+% Option 2: Handouts without solutions
+
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\chp7@path{../../Chp 7}
+\input{../../lec_style.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Lecture 26]{MA213: Lecture 26}
+\subtitle{Module 4: Inference}
+\author{OpenIntro Statistics, 4th Edition}
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
+Some images may be included under fair use guidelines (educational purposes).}}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\addtocounter{framenumber}{-1} 
+{\removepagenumbers 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
+
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
+
+\titlepage
+
+\end{frame}
+}
+}
+
+\include{Lecture26_agenda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap: Inference using the $t$-distribution}
+
+\begin{itemize}
+
+\item If $\sigma$ is unknown, use the $t$-distribution with $SE = \frac{s}{\sqrt{n}}$.
+
+% \pause
+
+\item Conditions: 
+\begin{itemize}
+\item independence of observations (often verified by random sample, and if sampling w/o replacement, $n < $ 10\% of population)
+\item no extreme skew
+\end{itemize}
+
+% \pause
+
+\item Hypothesis testing: 
+\[ t_{obs} = \frac{\bar{X} - \mu_0}{SE}\text{, where }df = n - 1 \]
+
+% \pause
+
+\item Confidence interval: $\bar{X} \pm t_{df}^\star \times SE$
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\dq{200 observations were randomly sampled from the High School and Beyond survey. The same students took a reading and writing test and their scores are shown below. At a first glance, does there appear to be a difference between the average reading and writing test score?}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_read_write_box}
+\end{center}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Analyzing paired data}
+
+\begin{itemize}
+
+\item When two sets of observations have this special correspondence (not independent), they are said to be \hl{paired}.
+
+% \pause
+
+\item To analyze paired data, it is often useful to look at the difference in outcomes of each pair of observations. 
+\[ \text{diff} = \text{read} - \text{write} \]
+
+% \pause
+
+% \item It is important that we always subtract using a consistent order.
+
+\end{itemize}
+
+\twocol{0.5}{0.5}{
+{\small
+\begin{center}
+\begin{tabular}{rrrr >{\columncolor[gray]{.9}}r}
+  \hline
+ & id & read & write & diff \\ 
+  \hline
+1 & 70 & 57 & 52 & 5 \\ 
+  2 & 86 & 44 & 33 & 11 \\ 
+  3 & 141 & 63 & 44 & 19 \\ 
+  4 & 172 & 47 & 52 & -5 \\ 
+  $\vdots$ &   $\vdots$  &   $\vdots$ &   $\vdots$ &   $\vdots$ \\
+  200 & 137 & 63 & 65 & -2 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+}
+{
+\includegraphics[width=\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_diff_hist}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Parameter and point estimate}
+
+\begin{itemize}
+
+\item \hl{Parameter of interest:} Average difference between the reading and writing scores of \orange{all} high school students.
+\[ \mu_{diff} \]
+
+$\:$ \\
+
+% \pause
+
+\item \hl{Point estimate:} Average difference between the reading and writing scores of \orange{sampled} high school students.
+\[ \bar{x}_{diff} \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inference for paired data}
+
+\begin{frame}
+\frametitle{Setting the hypotheses}
+
+\dq{If in fact there was no difference between the scores on the reading and writing exams, what would you expect the average difference to be?}
+
+% \pause
+
+\soln{0}
+
+$\:$ \\
+
+% \pause
+
+\dq{What are the hypotheses for testing if there is a difference between the average reading and writing scores?}
+
+% \pause
+
+\begin{itemize}
+\item[$H_0$:] There is no difference between the average reading and writing score. 
+\[ \mu_{diff} = 0 \]
+\item[$H_A$:] There is a difference between the average reading and writing score. 
+\[ \mu_{diff} \ne 0 \]
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Nothing new here}
+
+\begin{itemize}
+
+\item The analysis is no different than what we have done before.
+
+\item We have data from \orange{one} sample: differences. 
+
+\item We are testing to see if the average difference is different than 0.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[shrink]
+\frametitle{Calculating the test-statistic and the p-value}
+
+\dq{The observed average difference between the two scores is -0.545 points and the standard deviation of the difference is 8.887 points. Do these data provide convincing evidence of a difference between the average scores on the two exams? Use $\alpha = 0.05$.}
+
+\twocol{0.5}{0.5}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_read_write_pval}
+\end{center}
+}
+{
+\pause
+\begin{eqnarray*}
+T &=& \frac{-0.545 - 0}{\frac{8.887}{\sqrt{200}}} \\
+&=& \frac{-0.545}{0.628} = -0.87 \\
+df &=& 200 - 1 = 199 \\
+\pause
+p-value &=& 0.1927 \times 2 = 0.3854
+\end{eqnarray*}
+}
+\pause 
+$\:$ \\
+Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide convincing evidence of a difference between the average reading and writing scores.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{HT $\leftrightarrow$ CI}
+
+\pq{Suppose we were to construct a 95\% confidence interval for the average difference between the reading and writing scores. Would you expect this interval to include 0?}
+
+\begin{enumerate}[(a)]
+\solnMult{yes}
+\item no
+\item cannot tell from the information given
+\end{enumerate}
+
+\soln{\pause
+\begin{eqnarray*} 
+-0.545 \pm 1.97 \frac{8.887}{\sqrt{200}} &=& -0.545 \pm 1.97 \times 0.628 \\
+&=& -0.545 \pm 1.24 \\
+&=& (-1.785, 0.695)
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration (from Lecture 25): Computing the Confidence Interval} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Difference of two means} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Diamonds}
+	
+	\begin{itemize}
+	
+	\item Weights of diamonds are measured in carats. 
+	
+	\item 1 carat = 100 points, 0.99 carats = 99 points, etc.
+	
+	\item The difference between the size of a 0.99 carat diamond and a 1 carat diamond is undetectable to the naked human eye, but does the price of a 1 carat diamond tend to be higher than the price of a 0.99 diamond?
+	
+	\item We are going to test to see if there is a difference between the average prices of 0.99 and 1 carat diamonds.
+	
+	\item In order to be able to compare equivalent units, we divide the prices of 0.99 carat diamonds by 99 and 1 carat diamonds by 100, and compare the average point prices.
+	
+	\end{itemize}
+	
+	\hfill \includegraphics[width=0.2\textwidth]{\chp7@path/7-3_diff_two_mean/figures/diamonds/diamond}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Data}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{\chp7@path/7-3_diff_two_mean/figures/diamonds/diamondBox.pdf}
+\end{center}
+
+{\small
+\begin{center}
+\begin{tabular}{l | c | c}
+		& {\footnotesize \hl{0.99 carat}} &  {\footnotesize \hl{1 carat}}  \\
+		& pt99	& pt100 \\
+\hline
+$\bar{x}$	& 44.50		& 53.43 \\
+$s$		& 13.32		& 12.22 \\
+$n$		& 23			& 30
+\end{tabular}
+\end{center}
+}
+
+\Note{These data are a random sample from the \texttt{diamonds} data set in the \texttt{ggplot2} R package.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Parameter and point estimate}
+
+\begin{itemize}
+
+\item \hl{Parameter of interest:} Average difference between the point prices of \orange{all} 0.99 carat and 1 carat diamonds.
+\[ \mu_{pt99} - \mu_{pt100} \]
+
+$\:$ \\
+
+\pause
+
+\item \hl{Point estimate:} Average difference between the point prices of \orange{sampled}  0.99 carat and 1 carat diamonds.
+\[ \bar{x}_{pt99} - \bar{x}_{pt100} \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Setting up the problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Hypotheses}
+
+\pq{Which of the following is the correct set of hypotheses for testing if the average point price of 1 carat diamonds ($_{pt100}$) is higher than the average point price of 0.99 carat diamonds ($_{pt99}$)?}
+
+\begin{enumerate}[(a)]
+
+\item  \mathhl{H_0:} $\mu_{pt99} = \mu_{pt100}$ \\
+\mathhl{H_A:} $\mu_{pt99} \ne \mu_{pt100}$
+
+\item  \mathhl{H_0:} $\mu_{pt99} = \mu_{pt100}$ \\
+\mathhl{H_A:} $\mu_{pt99} > \mu_{pt100}$
+
+\solnMult{  \mathhl{H_0:} $\mu_{pt99} = \mu_{pt100}$ \\
+\mathhl{H_A:} $\mu_{pt99} < \mu_{pt100}$ }
+
+\item  \mathhl{H_0:} $\bar{x}_{pt99} = \bar{x}_{pt100}$ \\
+\mathhl{H_A:} $\bar{x}_{pt99} < \bar{x}_{pt100}$
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditions}
+
+\pq{Which of the following does \underline{not} need to be satisfied in order to conduct this hypothesis test using theoretical methods?}
+
+\begin{enumerate}[(a)]
+
+\item Point price of one 0.99 carat diamond in the sample should be independent of another, and the point price of one 1 carat diamond should independent of another as well.
+
+\item Point prices of 0.99 carat and 1 carat diamonds in the sample should be independent.
+
+\item Distributions of point prices of 0.99 and 1 carat diamonds should not be extremely skewed and shouldn't have clear outliers.
+
+\solnMult{Both sample sizes should be at least 30.}
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sampling distribution for the difference of two means}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Test statistic}
+
+\formula{Test statistic for inference on the difference of two small sample means}
+{The test statistic for inference on the difference of two means where $\sigma_1$ and $\sigma_2$ are unknown is the $T$ statistic.
+\[ T_{df} = \frac{\text{point estimate} - \text{null value}}{SE} \]
+where 
+\[ SE = \sqrt{ \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} } \qquad \text{ and } \qquad df = min(n_1 - 1, n_2 - 1) \]
+}
+
+\Note{The calculation of the $df$ is actually much more complicated. For simplicity we'll use the above formula to \underline{estimate} the true $df$ when conducting the analysis by hand.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Hypothesis testing for the difference of two means}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Test statistic (cont.)}
+
+{\small
+\begin{center}
+\begin{tabular}{l | c | c}
+		& {\footnotesize \hl{0.99 carat}} &  {\footnotesize \hl{1 carat}}  \\
+		& pt99	& pt100 \\
+\hline
+$\bar{x}$	& 44.50		& 53.43 \\
+$s$		& 13.32		& 12.22 \\
+$n$		& 23			& 30
+\end{tabular}
+\end{center}
+}
+
+\hl{in context...}
+
+\pause
+
+{\small
+\begin{eqnarray*}
+T &=& \frac{\text{point estimate} - \text{null value} }{SE} \\
+\pause
+&=& \frac{(44.50 - 53.43) - 0}{ \sqrt{\frac{13.32^2}{23} + \frac{12.22^2}{30} }} \\
+\pause
+&=& \frac{-8.93}{3.56} \\
+\pause
+&=& -2.508
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Test statistic (cont.)}
+
+\pq{What is the correct $df$ for this hypothesis test?}
+
+$df = min(n_{pt99} - 1, n_{pt100} - 1)$ \\
+\pause
+$= min(23 - 1, 30 - 1)$ \\
+\pause
+$= min(22,29) = 22$ 
+\pause
+\vspace{1em}
+
+What is the p-value for this hypothesis test?
+\[ T = -2.508 \qquad df = 22 \] 
+\pause
+\vspace{-2.5em}
+\begin{verbatim}
+> pt(q = -2.508, df = 22)
+[1] 0.0100071
+\end{verbatim}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Computing the test statistic and p-values}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Synthesis}
+
+\dq{What is the conclusion of the hypothesis test? How (if at all) would this conclusion change your behavior if you went diamond shopping?}
+
+
+\soln{\only<2>{
+\begin{itemize}
+\item p-value is small so reject $H_0$. The data provide convincing evidence to suggest that the point price of 0.99 carat diamonds is lower than the point price of 1 carat diamonds.
+\item Maybe buy a 0.99 carat diamond? It looks like a 1 carat, but is significantly cheaper.
+\end{itemize}
+}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Set up CI}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Confidence intervals for the difference of two means} % Answers to Edfinity Quiz
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Equivalent confidence level}
+
+\pq{What is the equivalent confidence level for a one-sided hypothesis test at $\alpha = 0.05$?}
+
+
+\twocol{0.3}{0.7}{
+\begin{enumerate}[(a)]
+
+\solnMult{90\%}
+
+\item 92.5\%
+
+\item 95\%
+
+\item 97.5\%
+
+\end{enumerate}
+}
+{
+\soln{\only<2>{
+\includegraphics[width=\textwidth]{\chp7@path/7-3_diff_two_mean/figures/middle90/middle90}
+}}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Critical value}
+
+\pq{What is the appropriate $t^\star$ for a 90\% confidence interval for the average difference between the point prices of 0.99 and 1 carat diamonds?}
+
+\begin{enumerate}[(a)]
+\item 1.32
+\solnMult{1.72}
+\item 2.07
+\item 2.82
+\end{enumerate}
+
+
+\pause 
+
+\begin{verbatim}
+> qt(p = 0.95, df = 22)
+
+[1] 1.717144
+\end{verbatim}
+
+\Note{In order to get a 90\% CI, we need to find the critical value that leaves 5\% in each tail. So we use 0.95 in the \texttt{qt()} function.}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Confidence interval}
+
+\dq{Calculate the interval, and interpret it in context.}
+
+\pause
+
+\soln{
+\[ \text{point estimate} \pm ME \]
+\pause
+\begin{eqnarray*}
+(\bar{x}_{pt99} - \bar{x}_{pt1}) \pm t^\star_{df} \times SE &=& (44.50 - 53.43) \pm 1.72 \times 3.56 \\
+\pause
+&=& -8.93 \pm  6.12 \\
+\pause
+&=& (-15.05, -2.81)
+\end{eqnarray*}
+\pause
+We are 90\% confident that the average point price of a 0.99 carat diamond is \$15.05 to \$2.81 lower than the average point price of a 1 carat diamond.
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Computing the confidence interval}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Recap}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap: Inference using difference of two small sample means}
+
+\begin{itemize}
+
+\item If $\sigma_1$ or $\sigma_2$ is unknown, difference between the sample means follow a $t$-distribution with $SE = \sqrt{ \frac{s_1^2}{n_1} + \frac{s_2^2}{n_1} }$.
+
+\pause
+
+\item Conditions: 
+\begin{itemize}
+\item independence within groups (often verified by a random sample, and if sampling without replacement, $n < $ 10\% of population) and between groups
+\item no extreme skew or clear outliers in either group
+\end{itemize}
+
+\pause
+
+\item Hypothesis testing: 
+\[ T_{df} = \frac{\text{point estimate} - \text{null value}}{SE}\text{, where }df = min(n_1 - 1, n_2 - 1) \]
+
+\pause
+
+\item Confidence interval:
+\[ \text{point estimate} \pm t_{df}^\star \times SE \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Preview: The power of a 2-sample test}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\begin{center}
+\begin{tabular}{l l | c c}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Decision}} \\
+& & fail to reject $H_0$ &  reject $H_0$ \\
+  \cline{2-4}
+& $H_0$ true & \onslide<4->{\green{$1 - \alpha$}} & \onslide<2->{\orange{Type 1 Error, $\alpha$}} \\
+\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true &  \onslide<3->{\orange{Type 2 Error, $\beta$}} & \onslide<5->{\green{Power, $1 - \beta$}} \\
+  \cline{2-4}
+\end{tabular}
+\end{center}
+
+\pause
+
+\begin{itemize}
+\item Type 1 error is rejecting $H_0$ when you shouldn't have, and the probability of doing so is $\alpha$ (significance level)
+
+\pause 
+
+\item Type 2 error is failing to reject $H_0$ when you should have, and the probability of doing so is $\beta$ (a little more complicated to calculate)
+
+\pause 
+
+\item \hl{Power} of a test is the probability of correctly rejecting $H_0$, and the probability of doing so is $1 - \beta$
+
+\pause 
+
+\item In hypothesis testing, we want to keep $\alpha$ and $\beta$ low, but there are inherent trade-offs.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Type 2 error rate}
+
+If the alternative hypothesis is actually true, what is the chance that we make a Type 2 Error, i.e. we fail to reject the null hypothesis even when we should reject it?
+
+\begin{itemize}
+
+\item The answer is not obvious.
+
+\item If the true population average is very close to the null hypothesis value, it will be difficult to detect a difference (and reject $H_0$).
+
+\item If the true population average is very different from the null hypothesis value, it will be easier to detect a difference.
+
+\item Clearly, $\beta$ depends on the \hl{effect size} ($\delta$)
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Steps for computing power}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{enumerate}
+        \item Plot the sampling distribution of $\bar{x}_1 - \bar{x}_2$ under $H_0$ and $H_A$.
+        \item Find rejection region for $\bar{x}_1 - \bar{x}_2$ under $H_0$.
+        \item Power $= $ area under $f_A$ in rejection region.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{../Lecture27/figures/power_2sample_schematic_twosided.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

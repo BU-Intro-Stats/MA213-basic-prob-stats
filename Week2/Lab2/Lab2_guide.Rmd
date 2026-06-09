@@ -1,7 +1,5 @@
 ---
-title: "MA213 Basic Statistics and Probability - Lab2 Guide"
-bibliography: references.bib
-link-citations: true
+title: "MA213 Basic Statistics and Probability - Lab1 Guide"
 output:
   pdf_document: default
   html_document:
@@ -10,189 +8,469 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
 ```
 
-## **Lab 2:** Data transformation
+## **Lab 1: Introduction to R**
 
-Data transformation is a crucial part in exploratory data analysis (EDA). EDA includes the processes of importing, cleaning, and visualizing data to uncover the patterns, relationships and hidden insights within the data.
-
-In this lab, we will learn data processing and subsetting to see more insights from the data.
-
-------------------------------------------------------------------------
+In this lab session, we will learn basic syntax of R.
 
 ## Learning Objectives
 
 -   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
--   Classify and Analyze Variables: Categorize variables based on their types (e.g., numerical/categorical, continuous/discrete, ordinal), assess their association (positive, negative, or independent), and determine which make sense as explanatory vs. response variables.
 
-------------------------------------------------------------------------
+#### Install R and RStudio.
 
-## Load packages for Data
+Download R from: <https://www.r-project.org/>
 
-If you didn't install `tidyverse` package
+Download RStudio from: <https://posit.co/download/rstudio-desktop/>
 
-```{r eval=FALSE}
-install.packages("tidyverse")
+(Install R first, then RStudio — RStudio is an IDE for R.)
+
+## Introduction of R
+
+-   R is a programming language and environment for statistical computing, data manipulation, and graphics.
+
+-   R is free and open source.
+
+-   RStudio is a free, open source integrated development environment (IDE) for R.
+
+## RStudio interface (brief)
+
+![RStudio overview](images/Screen_Shot_Rstudio.png){width="767"}
+
+window `1` : script window (text editor)
+
+window `2` : console (type and run R commands)
+
+window `3` : plots, files, packages, help, etc.
+
+window `4` : environment window
+
+## Set up your `working directory`
+
+Set your working directory
+
+-   Menu: Session → Set Working Directory → Choose Directory
+
+-   Or: Files tab → ☸︎ → Copy Folder Path to Clipboard, then paste into setwd()
+
+-   Or: Files tab → ☸︎ → Set As Working Directory
+
+```{r, eval=FALSE, include=FALSE}
+
+# replace with your own path
+setwd('/path/to/your/working/directory')
+getwd() # prints the current working directory
+
 ```
 
-Load package
+## How to run code?
+
+-   Type commands in the console.
+
+-   In an R Markdown chunk, click the run button ▶.
+
+-   In a script, highlight code and press Run.
+
+-   Shortcuts: Ctrl+Enter (Windows) or Cmd+Enter (Mac).
+
+## R is a calculator: basic operations
+
+> -   Basic math operations
+>
+> `+`: add
+>
+> `-` : substract
+>
+> `*` : multiply
+>
+> `/` : divide
+>
+> `^` or `**`: exponentiation
+
+For example,
+
+$(\frac{12}{24})^2$
 
 ```{r, echo=TRUE}
-library(tidyverse)
+(12/24)^(2) # divide 12 by 24, then square the result
+(12/24)**(2) # alternative exponentiation operator
+
 ```
 
-## **New York Air Quality Data**
-
-Daily air quality measurements in New York, May to September 1973 stored within a data frame with 153 observations on 6 variables. It is obtained from the New York State Department of Conservation (ozone data) and the National Weather Service (meteorological data). It is cited by @chambers2018graphical.
-
-You can find the details fo the data description [here](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html).
-
-## Import the Data
-
-You can use `airquality` object from base R data. You can also `airquality.csv` file where the data is stored as a comma separated value (CSV) file. Each row holds information for a single observation.
-
-Import the data from `airquality.csv` and show first 6 rows to see how this data is organized.
+## Assign values to a variable
 
 ```{r, echo=TRUE}
-df = read.csv("airquality.csv")
+A <- 10 # assign 10 to variable A
+A <<- 10 # assign 10 to A in global environment
+10 -> A # alternative assignment
+10 ->> A # alternative global assignment
+A = 10 # assign 10 to A using = (less common)
+
+# A <- 10
+# A = 10 
+# commonly used ones 
 ```
 
-## `glimpse()` to take a quick peek at your data
+And you can check what value the variable `A` has by calling it or using `print()` function
+
+```{r, echo=TRUE}
+A # calling the variable will display its value
+print(A) # explicitly print the value of the variable
+```
+
+Strings (character type)
+
+```{r, echo=TRUE}
+s1 <- "Hello, world!"   # double quotes
+s2 <- 'R is great'      # single quotes also work
+s1
+s2
+```
+
+Concatenate strings
+
+```{r, echo=TRUE}
+greeting <- paste("Hello", "world", sep = ", ")
+greeting
+greeting2 <- paste0("Hello", " ", "world")  # paste0 has no separator argument needed
+greeting2
+```
+
+### Exercise 1: Assign 655 to variable `number` and print it.
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+Assign strings and vectors
+
+```{r, echo=TRUE}
+SchoolName <- "Boston University"
+GPA <- c(3.2, 3.7, 3.9, 2.3, 2.7)
+FirstName <- c("Tom", "Sarah", "Nick", "Amy", "John")
+```
+
+```{r, echo=TRUE}
+print(SchoolName)
+print(GPA) 
+print(FirstName) 
+```
+
+### Exercise 2: Assign your name to variable `name` and print it.
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+Useful vector functions
+
+-   `seq(from=a, to=b, by=c)` — generate a sequence
+-   `rep(x, times=n)` — replicate x n times
+-   `length(x)` — length of a vector
+
+Examples
+
+```{r, echo=TRUE}
+my_vector <- seq(1, 10, 2)
+another_vector <- 1:10
+vector3 <- rep("BU", 25)
+
+```
+
+```{r, echo=TRUE}
+print(my_vector)
+print(another_vector)
+print(vector3)
+
+```
+
+### Exercise 3: Assign the following value to a vector `cities` and print it.
+
+Boston, New York, LA, San Francisco
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+### Exercise 4: Assign the following value to a vector `some_numbers` and print it.
+
+1, 3, 5, 7, 9, 11
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+## Accessing vector elements
+
+Each element in a vector is associated with index number. The index in R starts from 1 as the first item.
+
+For example,
+
+```{r, echo=TRUE}
+#
+SomeNames <- c("Alpha", "Bravo", "Charlie")
+
+
+```
+
+![Index of Vector Elements](images/index.jpg)
+
+For example,
+
+You can access the third element of `SomeNames` by `SomeNames[3]` .
+
+You can also access, for example, the second and the third elements by `SomeNames[2:3]` .
+
+```{r, echo=TRUE}
+#
+SomeNames[3] # third element
+SomeNames[2:3] # second and third elements
+
+
+```
+
+## Numeric vector can be subsetted using condition
+
+``` {.R style="gray"}
+                         x[condition]
+```
+
+the conditional statements (condition) you can use could be
+
+``` {.R style="yellow"}
+x == 20    # x equals to 20
+x < 100
+x <= 100
+x > 100
+x >= 100
+x != 100   # x not equal to 100
+```
+
+For example
+
+```{r, echo=TRUE}
+Numbers <- c(20, 30, 50, 70, 120, 200)
+Numbers[Numbers < 100] # returns all numbers less than 100
+
+
+```
+
+![Subsetting vector using condition](images/Slicing.jpg)
+
+### Exercise 5: Assign the following value to a vector `numbers` and print it.
+
+10, 20, 30, 40, 50, 60
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+### Exercise 6: From above vector `numbers`, print the numbers that are less than 40.
+
+10, 20, 30, 40, 50, 60
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+### Exercise 7: From above vector `numbers`, print the first and second values inside.
+
+```{r, echo=TRUE}
+#
+#
+
+```
+
+## Creating data frames
+
+1.  Column-wise (vectors)
 
 ```{r, echo=TRUE}
 
-glimpse(df)
+# simple column-wise construction
+id <- 1:6
+name <- c("Alice", "Bob", "Carol", "Dave", "Eve", "Frank")
+score <- c(85, 92, 78, 90, 88, 74)
+df1 <- data.frame(id = id, name = name, score = score, stringsAsFactors = FALSE)
+df1
 
 ```
 
-## To view the names of the variables
+2.  Column-wise listing columns directly (vectors)
 
 ```{r, echo=TRUE}
 
-names(df)
+# list the columns directly
+df2 <- data.frame(
+  region = c("North", "South", "East", "West"),
+  sales  = c(1200, 950, 1100, 980),
+  month  = c("Jan", "Jan", "Jan", "Jan"),
+  stringsAsFactors = FALSE
+)
+df2
 
 ```
 
-## To view the first 6 rows
+3.  Row-wise using `rbind()` (building up rows)
 
 ```{r, echo=TRUE}
 
-head(df)
+# start empty and rbind rows (not efficient for many rows, but instructive)
+df3 <- NULL
+df3 <- rbind(df3, data.frame(country = "USA", pop_millions = 331, year = 2020, stringsAsFactors = FALSE))
+df3 <- rbind(df3, data.frame(country = "Canada", pop_millions = 38, year = 2020, stringsAsFactors = FALSE))
+df3 <- rbind(df3, data.frame(country = "Mexico", pop_millions = 128, year = 2020, stringsAsFactors = FALSE))
+rownames(df3) <- NULL
+df3
 
 ```
 
-## The pipe operator
-
-`dplyr` (one of data packages in `tidyverse`) provides the `%>%` operator from magrittr. `x %>% f(y)` turns into `f(x, y)` so the result from one step is then “piped” into the next step.
-
-`df %>% filter(Month==5)` means "Select all rows with May"
-
-```{r, echo=TRUE, eval=TRUE}
-df %>% filter(Month==5)
-
-```
-
-## The pipe operator can be added
-
-You can use the pipe to rewrite multiple operations that you can read left-to-right, top-to-bottom (reading the pipe operator as “then”) (`%>%` and `|>` are equivalent)
-
-```{r, echo=TRUE, eval=TRUE}
-df |> 
-  select(Ozone, Wind, Month) |>
-  filter(Month==5)
-
-# 
-```
-
-## `Dplyr` data manipulation functions
-
--   Rows:
-
-    -   [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) chooses rows based on column values.
-
-    -   [`slice()`](https://dplyr.tidyverse.org/reference/slice.html) chooses rows based on location.
-
-    -   [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) changes the order of the rows.
-
--   Columns:
-
-    -   [`select()`](https://dplyr.tidyverse.org/reference/select.html) changes whether or not a column is included.
-
-    -   [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) changes the name of columns.
-
-    -   [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) changes the values of columns and creates new columns.
-
-    -   [`relocate()`](https://dplyr.tidyverse.org/reference/relocate.html) changes the order of the columns.
-
--   Groups of rows:
-
-    -   [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) collapses a group into a single row.
-
-## Some useful resources
-
-<https://openintrostat.github.io/oilabs-tidy/02_intro_to_data/intro_to_data.html>
-
-<https://dplyr.tidyverse.org/articles/dplyr.html>
-
-<https://rstudio.github.io/cheatsheets/html/data-transformation.html>
-
-## Creating new column using `Dplyr`
-
-You can create new columns or modify existing ones using the `mutate()` function.
-
-For example, to create a new column that categorizes temperature:
+4.  Using `tibble::tibble()`
 
 ```{r, echo=TRUE}
-df <- df %>%
-  mutate(Temp_Category = ifelse(Temp > 80, "High", "Moderate")) # if Temp>80 -> "High" otherwise "Moderate"
 
-head(df)
+library(tibble)
+df4 <- tibble(
+  student = c("Spider Man", "Iron Man", "Hulk"),
+  grade   = c("A", "B", "A-"),
+  points  = c(95, 82, 89)
+)
+df4
+
 ```
 
-## Contingency Table using `dplyr`
+### Exercise 8: Create the following table as a data.frame object named `my_df`
 
-A contingency table displays the frequency distribution of variables. You can create contingency tables using `dplyr` in combination with `tidyr`.
-
-For example, to create a contingency table of Month vs. Ozone_Level:
+| number | brand  | quantity |
+|--------|--------|----------|
+| 100    | google | 3        |
+| 101    | google | 4        |
+| 102    | OpenAI | 2        |
+| 103    | OpenAI | 3        |
+| 104    | Apple  | 1        |
+| 105    | Apple  | 2        |
+| 106    | Amazon | 3        |
+| 107    | Amazon | 3        |
+| 108    | Amazon | 3        |
+| 109    | Amazon | 3        |
 
 ```{r, echo=TRUE}
-df <- df %>%
-  mutate(Ozone_Level = ifelse(Ozone > median(Ozone, na.rm=TRUE), "High", "Low"))
+#
+#
 
-contingency_table <- df %>%
-  group_by(Month, Ozone_Level) %>%
-  summarise(Count = n()) %>%
-  pivot_wider(names_from = Ozone_Level, values_from = Count)
-
-print(contingency_table)
 ```
 
-## Contingency Table with new categorized variable
+## Importing and inspecting data frames
 
-You can categorize `solar.R` by
-
-```         
-Solar.R <= 115       : Low
-115< Solar.R <= 185  : Medium
-258< Solar.R         : High
-```
-
-Create a contingency table for categorized `solar.R` vs `Ozone_level`
+You can import Data by using `read.csv()` function. There are many different functions to import the data, for example
 
 ```{r, echo=TRUE}
- contingency_table2 <- df %>%
-  mutate(solar_cat = case_when(
-    Solar.R <= 115 ~ "Low",
-    Solar.R > 115 & Solar.R <= 185 ~ "Medium",
-    Solar.R > 258 ~ "High"
-  )) %>%
-  group_by(solar_cat, Ozone_Level) %>%
-  summarise(Count = n()) %>%
-  pivot_wider(
-    names_from = Ozone_Level,
-    values_from = Count
-  )
- 
- 
- print(contingency_table2)
+
+my_data <- read.csv("mtcars.csv")
+
+read.csv("mtcars.csv", stringsAsFactors = FALSE) #— base R CSV reader (common).
+read.table("mtcars.csv", header = TRUE, sep = "\t") #— base R for general delimited files.
+readr::read_csv("mtcars.csv") #— fast tidyverse CSV reader (recommended for speed and consistent parsing).
+```
+
+### Exercise 9: Import `mtcars.csv` and assign it to `my_df2` and print it.
+
+```{r, echo=true}
+#
+#
+```
+
+## You can access subset data
+
+-   Specific element by `my_data[row, column]`
+
+    -   \| for example, the element in the third row and the fourth column `my_data[3,4]`
+
+-   Specific row by `my_data[row,]`
+
+    -   \| for example, all the element of the third row `my_data[3,]`
+
+## Also,
+
+-   Specific column by `my_data[,column]`
+
+    -   \| for example, all the element of the fifth column `my_data[,5]`
+
+-   Access the column by using `$` sign such as `my_data$column_name`
+
+    -   \| for example, `hp` column from `my_data` is `my_data$hp`
+
+-   Conditional statement works similar as vectors (row wise and column wise)
+
+    -   \| for example, `my_data[my_data$hp<100,]`
+
+## Multiple conditions can be combined
+
+You can combine multiple logical conditions using & (AND), \| (OR), and ! (NOT) operators inside the row index to filter rows. For example
+
+-   Rows where `hp` is less than 100 AND `cyl` equals 4:
+
+```{r, echo=TRUE}
+
+my_data[(my_data$hp < 100) & (my_data$cyl == 4), ] # hp < 100 AND cyl = 4
+
+```
+
+-   Rows where `hp` is less than 100 OR `cyl` equals 4:
+
+```{r, echo=TRUE}
+
+my_data[my_data$hp < 100 | my_data$cyl == 4, ] # hp < 100 OR cyl = 4
+
+```
+
+Rows where `hp` is NOT less than 100:
+
+```{r, echo=TRUE}
+
+my_data[!(my_data$hp < 100), ] # NOT (hp < 100)
+
+```
+
+### Exercise 10: From `my_df2` above, print rows where `hp` is less than 100 and `gear` equals 4:
+
+```{r, echo=true}
+#
+#
+```
+
+## Boolean values (logical expressions)
+
+If an expression or condition is true or false, the result in R is a logical value: TRUE or FALSE. Logical values can be used directly in expressions, indexing, and arithmetic (TRUE is treated as 1 and FALSE as 0 in numeric contexts).
+
+Basic comparisons produce logical values:
+
+```{r, echo=TRUE}
+3 == 3    # TRUE: equality test
+10 == 3   # FALSE
+5 > 2     # TRUE
+4 <= 4    # TRUE
+7 != 9    # TRUE (not equal)
+```
+
+Using logical vectors to subset data frames:
+
+```{r, echo=TRUE}
+my_data$hp < 100           # returns a logical vector of length nrow(my_data)
+my_data[my_data$hp < 100, ]# returns only rows where hp < 100
 ```

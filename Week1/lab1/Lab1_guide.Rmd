@@ -18,83 +18,67 @@ In this lab session, we will learn basic syntax of R.
 
 ## Learning Objectives
 
--   Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
+- Use R for Data Management and Exploration: Utilize R to load, pre-process, and explore data through visualization and summarization techniques.
 
 #### Install R and RStudio.
 
-You can download and install R from
+Download R from: <https://www.r-project.org/>
 
-<https://www.r-project.org/>
+Download RStudio from: <https://posit.co/download/rstudio-desktop/>
 
-And you can download and install RStudio from
-
-<https://posit.co/download/rstudio-desktop/>
-
-We assume that you have already installed R and Rstudio (You need to install first R and then install Rstudio because Rstudio is an IDE for R).
+(Install R first, then RStudio — RStudio is an IDE for R.)
 
 ## Introduction of R
 
--   R is Programming language and environment statistical computing, data manipulation and graphical display.
+- R is a programming language and environment for statistical computing, data manipulation, and graphics.
 
--   R is free and open source.
+- R is free and open source.
 
--   Rstudio is also free and open source IDE (Integrated Development Environment) for R.
+- RStudio is a free, open source integrated development environment (IDE) for R.
 
-## Brief walk through about RStudio interface
+## RStudio interface (brief)
 
-![RStudio overview](Screen_Shot_Rstudio.png){width="767"}
+![RStudio overview](images/Screen_Shot_Rstudio.png){width="767"}
 
 window `1` : script window (text editor)
 
-window `2` : console window (this is where you type your R code and run)
+window `2` : console (type and run R commands)
 
-window `3` : plots, files, packages, help... window
+window `3` : plots, files, packages, help, etc.
 
 window `4` : environment window
 
-## Set up `working directory`
+## Set up your `working directory`
 
--   You can go to `Session` → `set working directory` → `choose directory` and then choose your working directory.
+Set your working directory
 
-    or
+- Menu: Session → Set Working Directory → Choose Directory
 
--   You can go to `Files` tap → ☸︎ →'copy folder path to Clipboard'
+- Or: Files tab → ☸︎ → Copy Folder Path to Clipboard, then paste into setwd()
 
-    then paste into `setwd()` function
+- Or: Files tab → ☸︎ → Set As Working Directory
 
 ```{r, eval=FALSE, include=FALSE}
 
-setwd('path of your working directory')
+# replace with your own path
+setwd('/path/to/your/working/directory')
+getwd() # prints the current working directory
 
 ```
-
-```{r, echo=TRUE, eval=FALSE, include=FALSE}
-
-# for example
-setwd('/Users/ylim2/Documents/Work/MA213') # this will set up your working directory
-getwd() # to check where you are at in term of your working directory
-
-```
-
-or
-
--   You can go to `Files` tap → ☸︎ →'Set As Working Directory'
 
 ## How to run code?
 
-1.  Directly type your command in the console window.
+- Type commands in the console.
 
-2.  You can run your R chunk by pressing run button `▶` in the R chunk in your R markdown file.
+- In an R Markdown chunk, click the run button ▶.
 
-3.  You can write your commands on your R script file and highlight the commands and press `run`
+- In a script, highlight code and press Run.
 
-```         
-Run shortcut : `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).
-```
+- Shortcuts: Ctrl+Enter (Windows) or Cmd+Enter (Mac).
 
-## R is basically a big calculator (some mathematics) : basic math operations to matrix operations
+## R is a calculator: basic operations
 
-> -   Basic math operations
+> - Basic math operations
 >
 > `+`: add
 >
@@ -104,87 +88,72 @@ Run shortcut : `ctrl` + `enter` (windows) or `cmd` + `enter` (mac).
 >
 > `/` : divide
 >
-> `^` or `**`: exponent
+> `^` or `**`: exponentiation
 
-## For example
+For example,
 
 $(\frac{12}{24})^2$
 
 ```{r, echo=TRUE}
-(12/24)^(2)
-#or
-(12/24)**(2)
+(12/24)^(2) # divide 12 by 24, then square the result
+(12/24)**(2) # alternative exponentiation operator
 
 ```
 
 ## Assign values to a variable
 
-Let's say if you want to save 10 to variable `A`. You can do the following command.
-
 ```{r, echo=TRUE}
-A <- 10
-A <<- 10
-10 -> A
-10 ->> A
-A = 10
+A <- 10 # assign 10 to variable A
+A <<- 10 # assign 10 to A in global environment
+10 -> A # alternative assignment
+10 ->> A # alternative global assignment
+A = 10 # assign 10 to A using = (less common)
 
 # A <- 10
 # A = 10 
 # commonly used ones 
 ```
 
-## And you can check what value the variable `A` has by calling it or using `print()` function
+And you can check what value the variable `A` has by calling it or using `print()` function
 
 ```{r, echo=TRUE}
-A
-print(A)
+A # calling the variable will display its value
+print(A) # explicitly print the value of the variable
 ```
 
-Assigning character type information to a variable
+Assign strings and vectors
 
 ```{r, echo=TRUE}
 SchoolName <- "Boston University"
-SchoolName
-```
-
-## Assign values to a vector
-
-You can assign multiple values to a vector.
-
-```{r, echo=TRUE}
 GPA <- c(3.2, 3.7, 3.9, 2.3, 2.7)
 FirstName <- c("Tom", "Sarah", "Nick", "Amy", "John")
-GPA
-FirstName
-
-```
-
-There are some useful functions for a vector
-
--   `seq(from=a, to=b, by=c)` : this generates a sequence vector from value a to b by c increment.
-
--   `rep(x, times = n)` : this replicate element `x` for n times.
-
--   `length(x)` : this will give you the length of vector `x`
-
-## Examples
-
-```{r, echo=TRUE}
-my_vector = seq(1, 10, 2)
-my_vector
-
 ```
 
 ```{r, echo=TRUE}
-another_vector = 1:10
-another_vector
+print(SchoolName)
+print(GPA) 
+print(FirstName) 
+```
+
+Useful vector functions
+
+- `seq(from=a, to=b, by=c)` — generate a sequence
+- `rep(x, times=n)` — replicate x n times
+- `length(x)` — length of a vector
+
+Examples
+
+```{r, echo=TRUE}
+my_vector <- seq(1, 10, 2)
+another_vector <- 1:10
+vector3 <- rep("BU", 25)
 
 ```
 
 ```{r, echo=TRUE}
-
-vector3 = rep("BU", 25)
-vector3
+print(my_vector)
+print(another_vector)
+print(vector3)
 
 ```
 
@@ -201,9 +170,9 @@ SomeNames <- c("Alpha", "Bravo", "Charlie")
 
 ```
 
-![Index of Vector Elements](index.jpg)
+![Index of Vector Elements](images/index.jpg)
 
-## For example
+For example,
 
 You can access the third element of `SomeNames` by `SomeNames[3]` .
 
@@ -211,9 +180,8 @@ You can also access, for example, the second and the third elements by `SomeName
 
 ```{r, echo=TRUE}
 #
-SomeNames[3]
-
-SomeNames[2:3]
+SomeNames[3] # third element
+SomeNames[2:3] # second and third elements
 
 
 ```
@@ -235,69 +203,128 @@ x >= 100
 x != 100   # x not equal to 100
 ```
 
-## For example
+For example
 
 ```{r, echo=TRUE}
 Numbers <- c(20, 30, 50, 70, 120, 200)
-Numbers[Numbers<100]
+Numbers[Numbers < 100] # returns all numbers less than 100
 
 
 ```
 
-![Subsetting vector using condition](Slicing.jpg)
+![Subsetting vector using condition](images/Slicing.jpg)
 
-## Importing and Subsetting Data
+## Creating data frames
 
-You can import Data by using `read.table()` function.
+1.  Column-wise (vectors)
+
+```{r, echo=TRUE}
+
+# simple column-wise construction
+id <- 1:6
+name <- c("Alice", "Bob", "Carol", "Dave", "Eve", "Frank")
+score <- c(85, 92, 78, 90, 88, 74)
+df1 <- data.frame(id = id, name = name, score = score, stringsAsFactors = FALSE)
+df1
+
+```
+
+2.  Column-wise listing columns directly (vectors)
+
+```{r, echo=TRUE}
+
+# list the columns directly
+df2 <- data.frame(
+  region = c("North", "South", "East", "West"),
+  sales  = c(1200, 950, 1100, 980),
+  month  = c("Jan", "Jan", "Jan", "Jan"),
+  stringsAsFactors = FALSE
+)
+df2
+
+```
+
+3.  Row-wise using `rbind()` (building up rows)
+
+```{r, echo=TRUE}
+
+# start empty and rbind rows (not efficient for many rows, but instructive)
+df3 <- NULL
+df3 <- rbind(df3, data.frame(country = "USA", pop_millions = 331, year = 2020, stringsAsFactors = FALSE))
+df3 <- rbind(df3, data.frame(country = "Canada", pop_millions = 38, year = 2020, stringsAsFactors = FALSE))
+df3 <- rbind(df3, data.frame(country = "Mexico", pop_millions = 128, year = 2020, stringsAsFactors = FALSE))
+rownames(df3) <- NULL
+df3
+
+```
+
+4.  Using `tibble::tibble()`
+
+```{r, echo=TRUE}
+
+library(tibble)
+df4 <- tibble(
+  student = c("Spider Man", "Iron Man", "Hulk"),
+  grade   = c("A", "B", "A-"),
+  points  = c(95, 82, 89)
+)
+df4
+
+```
+
+## Importing and inspecting data frames
+
+You can import Data by using `read.csv()` function. There are many different functions to import the data, for example
 
 ```{r, echo=TRUE}
 
 my_data <- read.csv("mtcars.csv")
-# to be able to import this file, this file needs to be in your working directory
-
+read.csv("mtcars.csv", stringsAsFactors = FALSE) #— base R CSV reader (common).
+read.table("mtcars.csv", header = TRUE, sep = "\t") #— base R for general delimited files.
+readr::read_csv("mtcars.csv") #— fast tidyverse CSV reader (recommended for speed and consistent parsing).
 ```
 
 ## You can access subset data
 
--   Specific element by `my_data[row, column]`
+- Specific element by `my_data[row, column]`
 
-    -   \| for example, the element in the third row and the fourth column `my_data[3,4]`
+  - \| for example, the element in the third row and the fourth column `my_data[3,4]`
 
--   Specific row by `my_data[row,]`
+- Specific row by `my_data[row,]`
 
-    -   \| for example, all the element of the third row `my_data[3,]`
+  - \| for example, all the element of the third row `my_data[3,]`
 
 ## Also,
 
--   Specific column by `my_data[,column]`
+- Specific column by `my_data[,column]`
 
-    -   \| for example, all the element of the fifth column `my_data[,5]`
+  - \| for example, all the element of the fifth column `my_data[,5]`
 
--   Access the column by using `$` sign such as `my_data$column_name`
+- Access the column by using `$` sign such as `my_data$column_name`
 
-    -   \| for example, `hp` column from `my_data` is `my_data$hp`
+  - \| for example, `hp` column from `my_data` is `my_data$hp`
 
--   Conditional statement works similar as vectors (row wise and column wise)
+- Conditional statement works similar as vectors (row wise and column wise)
 
-    -   \| for example, `my_data[my_data$hp<100,]`
+  - \| for example, `my_data[my_data$hp<100,]`
 
 ## Multiple conditions can be combined
 
 You can combine multiple logical conditions using & (AND), \| (OR), and ! (NOT) operators inside the row index to filter rows. For example
 
--   Rows where `hp` is less than 100 AND `cyl` equals 4:
+- Rows where `hp` is less than 100 AND `cyl` equals 4:
 
 ```{r, echo=TRUE}
 
-my_data[(my_data$hp < 100) & (my_data$cyl == 4), ]
+my_data[(my_data$hp < 100) & (my_data$cyl == 4), ] # hp < 100 AND cyl = 4
 
 ```
 
--   Rows where `hp` is less than 100 OR `cyl` equals 4:
+- Rows where `hp` is less than 100 OR `cyl` equals 4:
 
 ```{r, echo=TRUE}
 
-my_data[my_data$hp < 100 | my_data$cyl == 4, ]
+my_data[my_data$hp < 100 | my_data$cyl == 4, ] # hp < 100 OR cyl = 4
 
 ```
 
@@ -305,20 +332,27 @@ Rows where `hp` is NOT less than 100:
 
 ```{r, echo=TRUE}
 
-my_data[! (my_data$hp < 100), ]
+my_data[!(my_data$hp < 100), ] # NOT (hp < 100)
 
 ```
 
-### If an expression or condition is True or False, programming language gives two answers `TRUE` or `FALSE` . It is sometimes can be shown to `1` or `0`. 
+## Boolean values (logical expressions)
+
+If an expression or condition is true or false, the result in R is a logical value: TRUE or FALSE. Logical values can be used directly in expressions, indexing, and arithmetic (TRUE is treated as 1 and FALSE as 0 in numeric contexts).
+
+Basic comparisons produce logical values:
 
 ```{r, echo=TRUE}
-3==3 # True
-10 == 3 # False
-
-
+3 == 3    # TRUE: equality test
+10 == 3   # FALSE
+5 > 2     # TRUE
+4 <= 4    # TRUE
+7 != 9    # TRUE (not equal)
 ```
 
+Using logical vectors to subset data frames:
+
 ```{r, echo=TRUE}
-my_data$hp < 100 # if the horse power of the car is less than 100 it gives 1, 0 otherwise. 
-my_data[my_data$hp < 100,] # this is how we are only printing the cars data with horse power < 100. 
+my_data$hp < 100           # returns a logical vector of length nrow(my_data)
+my_data[my_data$hp < 100, ]# returns only rows where hp < 100
 ```

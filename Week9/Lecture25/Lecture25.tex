@@ -1,0 +1,584 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Option 1: Slides with solutions
+
+\documentclass[slidestop,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
+
+% Option 2: Handouts without solutions
+
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\chp7@path{../../Chp 7}
+\input{../../lec_style.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Lecture 25]{MA213: Lecture 25}
+\subtitle{Module 4: Inference}
+\author{OpenIntro Statistics, 4th Edition}
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
+Some images may be included under fair use guidelines (educational purposes).}}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\addtocounter{framenumber}{-1} 
+{\removepagenumbers 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
+
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
+
+\titlepage
+
+\end{frame}
+}
+}
+
+\include{Lecture25_agenda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Reminder: Hypothesis test for a small sample mean}
+\begin{itemize}
+\item Conditions
+\begin{itemize}
+\item \hl{Independence} of observations
+\item \hl{Normal population distribution} (no extreme skew, reasoning about the population)
+\end{itemize}
+\item Test statistic
+\[ t_{obs} = \frac{\bar{X} - \mu_0}{(s / \sqrt{n})} \]
+\item Under the null hypothesis, $t_{obs}$ follows a $t$-distribution with $df = n - 1$ degrees of freedom
+\item p-value: calculated using the $t$-distribution
+\end{itemize} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz: CLT for sample mean}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Applying the CLT for the sample mean}
+
+\dq{In which of the following scenarios would you be able to use the Normal distribution to compute a 95\% confidence interval for the population mean $\mu$? In each case, you take a random sample of size $n$ from the population and calculate the sample mean $\bar{X}=49$.}
+\begin{enumerate}[(a)]
+\solnMult{Population: Normal ($\sigma = 20$). $n = 100$. }
+\solnMult{Population: Normal ($\sigma = 20$). $n = 10$. }
+\solnMult{Population: Normal ($\sigma =$ unknown). $n = 100$. }
+  \item Population: Normal ($\sigma = $ unknown). $n = 10$. \only<2>{\orange{$\rightarrow$ Can use $t$-distribution here.}}
+\solnMult{Population: right skewed ($\sigma = 20$). $n = 100$. }
+  \item Population: right skewed ($\sigma = 20$). $n = 10$. 
+\solnMult{Population: right skewed ($\sigma =$ unknown). $n = 100$. }
+  \item Population: right skewed ($\sigma = $ unknown). $n = 10$.
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Back to Guinness: Quality Control}
+\dq{William Sealy Gosset, working at the Guinness Brewery in the early 1900s, wanted to ensure the quality of stout. He would take a small sample of batches and measure a quality metric, (e.g. alcohol content). Suppose the target mean for alcohol content is 4.5\% ABV (percent alcohol by volume).}
+\begin{itemize}
+\item Sample mean ($\bar{x}$): 4.66
+\item Sample standard deviation ($s$): 0.17
+\item Sample size ($n$): 8
+\end{itemize}
+
+\begin{align*}
+\orange{$\bar{x} = 4.66$} \\
+\orange{s = 0.17} \\
+\orange{n = 8}
+\end{align*}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constructing confidence intervals using the \texorpdfstring{$t$}{t} distribution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{What is the mean alcohol content?}
+
+\begin{itemize}
+\item We found evidence that the mean alcohol content differs from the target, 4.5\%.
+\pause
+\item But it would be more interesting to estimate the mean alcohol content itself.
+\pause
+\item We can use a confidence interval to estimate the mean.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Confidence interval for a small sample mean}
+
+\begin{itemize}
+\item Confidence intervals are always of the form
+\[ \text{point estimate} \pm {ME} \]
+\pause
+\item ME is always calculated as the product of a critical value and SE.
+\pause
+\item Since small sample means follow a $t$ distribution (and not a $z$ distribution), the critical value is a $t^\star$ (as opposed to a $z^\star$).
+\[ \text{point estimate} \pm t^{\star} \times SE \]
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{Finding the critical $t$ ($t^\star$)}
+
+Using R:
+\begin{verbatim}
+> qt(p = 0.975, df = 7)
+
+[1] 2.364624
+\end{verbatim}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Confidence Interval for a small sample mean}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Constructing a CI for a small sample mean}
+
+\pq{Which of the following is the correct calculation of a 95\% confidence interval for the mean alcohol content?}
+\[ \bar{x} = 4.66 \qquad s = 0.17 \qquad n = 8 \qquad SE = 0.060 \]
+
+\twocol{0.35}{0.65}
+{
+\begin{enumerate}[(a)]
+\item $4.66 \pm 1.96 \times 0.060$
+\solnMult{ $4.66 \pm 2.36 \times 0.060$}
+\item $4.66 \pm -2.36 \times 0.060$
+\item $4.66 \pm 2.36 \times 0.17$
+\end{enumerate}
+}
+{
+\soln{\only<2>{\orange{$\rightarrow$ (4.52, 4.80)}}}
+\vspace{0.25cm}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\section{Edfinity Quiz: Interpreting the Confidence Interval}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Interpreting the CI}
+
+\pq{Which of the following is the \orange{best} interpretation for the confidence interval we just calculated?
+\[\text{95\% CI for }\mu:  (4.52, 4.80) \]
+}
+
+We are 95\% confident that ...
+
+\begin{enumerate}[(a)]
+\solnMult{the mean alcohol content of Guinness stout is between 4.52\% and 4.80\% ABV.}
+\item the mean alcohol content is at least 4.5\% ABV.
+\item the mean alcohol content is not between 4.52\% and 4.80\% ABV.
+\item the mean alcohol content of the sample batch is between 4.52\% and 4.80\% ABV.
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Synthesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Synthesis}
+
+\dq{Does the conclusion from the hypothesis test (Reject $H_0:\mu=4.5\%$ with $\alpha=0.05$) agree with the findings of the confidence interval ($\text{95\% CI for }\mu:  (4.52, 4.80) $)?}
+
+$\:$ \\
+
+\soln{\only<2->{Yes, the hypothesis test found a significant difference, and the CI does not contain the null value of 4.5\%.}}
+
+$\:$ \\
+
+\dq{What does this mean for the Guinness quality control process?}
+
+$\:$ \\
+
+\soln{\only<3>{The mean alcohol content of this batch of beer is likely different from their target, so they shouldn't sell this batch, and maybe they should check their manufacturing process for issues.}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap: Inference using the $t$-distribution}
+
+\begin{itemize}
+
+\item If $\sigma$ is unknown, use the $t$-distribution with $SE = \frac{s}{\sqrt{n}}$.
+
+\pause
+
+\item Conditions: 
+\begin{itemize}
+\item independence of observations (often verified by random sample, and if sampling w/o replacement, $n < $ 10\% of population)
+\item no extreme skew
+\end{itemize}
+
+\pause
+
+\item Hypothesis testing: 
+\[ t_{obs} = \frac{\bar{X} - \mu_0}{SE}\text{, where }df = n - 1 \]
+
+\pause
+
+\item Confidence interval: $\bar{X} \pm t_{df}^\star \times SE$
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Paired data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Motivation}
+
+\begin{frame}
+  \frametitle{Motivating paired data}
+
+  Last time we learned how to do inference for one-sample data. 
+  
+  Now we're returning to the setting with multiple samples, but we have observations that aren't independent - like in the next example. 
+
+\end{frame}
+
+
+\subsection{Paired observations}
+
+\begin{frame}
+
+\dq{200 observations were randomly sampled from the High School and Beyond survey. The same students took a reading and writing test and their scores are shown below. At a first glance, does there appear to be a difference between the average reading and writing test score?}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_read_write_box}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Are the data independent?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\pq{The same students took a reading and writing test and their scores are shown below. Are the reading and writing scores of each student independent of each other?}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrr}
+  \hline
+ & id & read & write \\ 
+  \hline
+1 & 70 & 57 & 52 \\ 
+  2 & 86 & 44 & 33 \\ 
+  3 & 141 & 63 & 44 \\ 
+  4 & 172 & 47 & 52 \\ 
+  $\vdots$ &   $\vdots$  &   $\vdots$ &   $\vdots$  \\
+  200 & 137 & 63 & 65 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item Yes
+\solnMult{No}
+\end{enumerate}
+\end{multicols}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Analyzing paired data}
+
+\begin{itemize}
+
+\item When two sets of observations have this special correspondence (not independent), they are said to be \hl{paired}.
+
+\pause
+
+\item To analyze paired data, it is often useful to look at the difference in outcomes of each pair of observations. 
+\[ \text{diff} = \text{read} - \text{write} \]
+
+% \pause
+
+% \item It is important that we always subtract using a consistent order.
+
+\end{itemize}
+
+\twocol{0.5}{0.5}{
+{\small
+\begin{center}
+\begin{tabular}{rrrr >{\columncolor[gray]{.9}}r}
+  \hline
+ & id & read & write & diff \\ 
+  \hline
+1 & 70 & 57 & 52 & 5 \\ 
+  2 & 86 & 44 & 33 & 11 \\ 
+  3 & 141 & 63 & 44 & 19 \\ 
+  4 & 172 & 47 & 52 & -5 \\ 
+  $\vdots$ &   $\vdots$  &   $\vdots$ &   $\vdots$ &   $\vdots$ \\
+  200 & 137 & 63 & 65 & -2 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+}
+{
+\includegraphics[width=\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_diff_hist}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Examining the difference}  % Test statistic & point estimates, like slide 4
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Think/pair/share: HT for paired differences} 
+\dq{200 observations were randomly sampled from the High School and Beyond survey. The same students took a reading and writing test. We have computed the differences (reading - writing) for each student, and we would like to test if there is a difference between the average reading and writing scores.
+\small{
+\begin{itemize}
+    \item What is the parameter of interest?
+    \item What is the point estimate?
+    \item What are the null and alternative hypotheses for testing if there is a difference between the average reading and writing scores?
+    \item How does this setting compare to what we have done before? (e.g. compare to the one/two-sample tests for proportions, one-sample test for means)
+\end{itemize}
+}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Parameter and point estimate}
+
+\begin{itemize}
+
+\item \hl{Parameter of interest:} Average difference between the reading and writing scores of \orange{all} high school students.
+\[ \mu_{diff} \]
+
+$\:$ \\
+
+\pause
+
+\item \hl{Point estimate:} Average difference between the reading and writing scores of \orange{sampled} high school students.
+\[ \bar{x}_{diff} \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Inference for paired data}
+
+\begin{frame}
+\frametitle{Setting the hypotheses}
+
+\dq{If in fact there was no difference between the scores on the reading and writing exams, what would you expect the average difference to be?}
+
+\pause
+
+\soln{0}
+
+$\:$ \\
+
+\pause
+
+\dq{What are the hypotheses for testing if there is a difference between the average reading and writing scores?}
+
+\pause
+
+\begin{itemize}
+\item[$H_0$:] There is no difference between the average reading and writing score. 
+\[ \mu_{diff} = 0 \]
+\item[$H_A$:] There is a difference between the average reading and writing score. 
+\[ \mu_{diff} \ne 0 \]
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Nothing new here}
+
+\begin{itemize}
+
+\item The analysis is no different than what we have done before.
+
+\item We have data from \orange{one} sample: differences. 
+
+\item We are testing to see if the average difference is different than 0.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Checking assumptions \& conditions}
+
+% \pq{Which of the following is true?}
+
+% \begin{enumerate}[(a)]
+% \solnMult{Since students are sampled randomly and are less than 10\% of all high school students, we can assume that the difference between the reading and writing scores of one student in the sample is independent of another.}
+% \item The distribution of differences is bimodal, therefore we cannot continue with the hypothesis test.
+% \item In order for differences to be random we should have sampled with replacement.
+% \item Since students are sampled randomly and are less than 10\% all students, we can assume that the sampling distribution of the average difference will be nearly normal.
+% \end{enumerate}
+
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[shrink]
+\frametitle{Calculating the test-statistic and the p-value}
+
+\dq{The observed average difference between the two scores is -0.545 points and the standard deviation of the difference is 8.887 points. Do these data provide convincing evidence of a difference between the average scores on the two exams? Use $\alpha = 0.05$.}
+
+\twocol{0.5}{0.5}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp7@path/7-2_paired/figures/hsb2/hsb2_read_write_pval}
+\end{center}
+}
+{
+\pause
+\begin{eqnarray*}
+T &=& \frac{-0.545 - 0}{\frac{8.887}{\sqrt{200}}} \\
+&=& \frac{-0.545}{0.628} = -0.87 \\
+df &=& 200 - 1 = 199 \\
+\pause
+p-value &=& 0.1927 \times 2 = 0.3854
+\end{eqnarray*}
+}
+\pause 
+$\:$ \\
+Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide convincing evidence of a difference between the average reading and writing scores.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Computations}  % Like slide 8
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\section{Edfinity Quiz: Interpret the results}  % Like slides 9-10 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpretation of p-value}
+
+\pq{Which of the following is the correct interpretation of the p-value?}
+
+\begin{enumerate}[(a)]
+\item Probability that the average scores on the reading and writing exams are equal.
+\item Probability that the average scores on the reading and writing exams are different.
+\solnMult{Probability of obtaining a random sample of 200 students where the average difference between the reading and writing scores is at least 0.545 (in either direction), if in fact the true average difference between the scores is 0.}
+\item Probability of incorrectly rejecting the null hypothesis if in fact the null hypothesis is true.
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{HT $\leftrightarrow$ CI}
+
+\pq{Suppose we were to construct a 95\% confidence interval for the average difference between the reading and writing scores. Would you expect this interval to include 0?}
+
+\begin{enumerate}[(a)]
+\solnMult{yes}
+\item no
+\item cannot tell from the information given
+\end{enumerate}
+
+\soln{\pause
+\begin{eqnarray*} 
+-0.545 \pm 1.97 \frac{8.887}{\sqrt{200}} &=& -0.545 \pm 1.97 \times 0.628 \\
+&=& -0.545 \pm 1.24 \\
+&=& (-1.785, 0.695)
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R Demonstration: Computing the Confidence Interval} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,48 @@
+\textbf{Common Point Estimates and their Sampling Distributions}
+
+\textit{Single Proportion:}
+\begin{align*}
+    &\hat{p} = \frac{X}{n} \quad \text{(Sample proportion)} \\
+    &Pr\left(\hat{p}=\frac{k}{n}\right) = \binom{n}{k} p^k (1-p)^{n-k} \\
+    &\hat{p} \stackrel{\text{approx}}{\sim} \text{Normal}\left(p, \sqrt{\frac{p(1-p)}{n}}\right) \\
+\end{align*}
+\textit{Difference of Two Proportions (independent samples):}
+\begin{align*}
+    &\hat{p}_1 - \hat{p}_2 \quad \text{(Independent)} \\
+    &(\hat{p}_1 - \hat{p}_2) \stackrel{\text{approx}}{\sim} \text{Normal}\left(p_1 - p_2, \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}\right)
+\end{align*}
+\textit{Conditions for normality (Proportions):}
+\begin{itemize} 
+    \item Independence: Random sample/independent observations; 10\% condition: $n \leq 0.1N$
+    \item Normality: Success-failure condition: $np \ge 10$ and $n(1-p) \ge 10$
+\end{itemize}
+
+
+
+\textit{Single Mean: (known $\sigma$)}
+\[\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i \qquad \bar{X} \stackrel{\text{approx}}{\sim} \text{Normal}\left(\mu, \frac{\sigma}{\sqrt{n}}\right)\]
+\textit{Conditions for normality (Means):}
+\begin{itemize} 
+    \item Independence: Random sample/independent observations; 10\% condition: $n \leq 0.1N$
+    \item Normality: Exact when the population distribution is Normal; Approximate when $n>30$
+\end{itemize}
+\textit{Single Mean: (unknown $\sigma$)}
+\[
+    \frac{\bar{X}-\mu}{s/\sqrt{n}} \sim t_{df} \qquad
+    df = n - 1
+\]
+\textit{Difference of Two Means (paired samples):}
+\begin{itemize}
+    \item Same as single mean, but on the differences \[D_i = X_{1i} - X_{2i}\]
+\end{itemize}
+% \columnbreak
+\textit{Difference of Two Means (independent samples):}
+\[
+    \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \sim t_{df} \qquad df \approx \min(n_1 - 1, n_2 - 1)
+\]
+\textit{Conditions for t distribution (Means):}
+\begin{itemize} 
+    \item Independence: Random sample/independent observations; 10\% condition: $n \leq 0.1N$
+    \item Normality: Population distribution is approximately Normal (no strong skewness or outliers)
+\end{itemize}
+

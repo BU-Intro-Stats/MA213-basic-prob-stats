@@ -13,3 +13,15 @@ polygon(c(X[these[1]], X[these],X[rev(these)[1]]), c(0,Y[these],0), col='#CCCCCC
 
 lines(X, Y)
 abline(h=0)
+
+# make a similar figure for the CDF, but add a y axis
+# Adjust margins to make space for y-axis labels
+par(las=1, mar=c(1.5,3,0.5,0), mgp=c(3,0.6,0))
+Y <- pnorm(X)
+plot(X, Y, type='l', axes=F, xlim=c(-3.4,3.4))
+axis(1, at=-3:3, label=(1500+300*(-3:3)), cex.axis=0.7)
+axis(2, at=seq(0,1,0.2), labels=seq(0,1,0.2), cex.axis=0.7)
+these <- which(X <= 1)
+polygon(c(X[these[1]], X[these],X[rev(these)[1]]), c(0,Y[these],0), col='#CCCCCC')
+
+lines(X, Y)

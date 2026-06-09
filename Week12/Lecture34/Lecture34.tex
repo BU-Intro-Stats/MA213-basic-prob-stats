@@ -1,0 +1,907 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Option 1: Slides with solutions
+
+\documentclass[slidestop,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
+
+% Option 2: Handouts without solutions
+
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\chp9@path{../../Chp 9}
+\input{../../lec_style.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Lecture 34]{MA213: Lecture 34}
+\subtitle{Module 5: Linear regression}
+\author{OpenIntro Statistics, 4th Edition}
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
+Some images may be included under fair use guidelines (educational purposes).}}
+\date{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\addtocounter{framenumber}{-1} 
+{\removepagenumbers 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
+
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
+
+\titlepage
+
+\end{frame}
+}
+}
+
+\include{Lecture34_agenda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Recap: Inference for the slope in simple linear regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{We want to perform inference for the regression slope}
+
+Now, for regression, we will assume that the \textbf{residuals} are iid normal:
+\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i \quad \text{ where } \epsilon_i \overset{\mathrm{iid}}{\sim} N(0, \sigma) \qquad i=1,2,\ldots,n \]
+
+(This is why we checked the conditions on the residuals earlier!)
+
+\pause
+
+  If this model is correct, then we have a sampling distribution for the estimated slope, $b_1$:
+  \[ \frac{b_1-\beta_1}{SE_{b_1}} \sim t_{df} \qquad df=n-2\]
+  \pause
+
+  So now if I give you $b_1$, $SE_{b_1}$, and $n$, you already have all of the tools do a hypothesis test or to build a confidence interval for $\beta_1$!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Testing for the slope}
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
+  bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+% \pause
+
+\begin{itemize}
+
+\item We always use a $t$-test in inference for regression. $\:$ \\
+
+% \pause
+
+\Remember{Test statistic, $T = \frac{point~estimate - null~value}{SE}$}
+
+% \pause
+
+\item Point estimate = $b_1$ is the observed slope.
+
+% \pause
+
+\item $SE_{b_1}$ is the standard error associated with the slope.
+
+% \pause
+
+\item Degrees of freedom associated with the slope is $df = n - 2$, where $n$ is the sample size. $\:$ \\
+% \pause
+\Remember{Just like in the ANOVA, we lose 1 degree of freedom for each parameter we estimate, and in simple linear regression we estimate 2 parameters, $\beta_0$ and $\beta_1$.}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{CI for the slope}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: CI for the slope}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Confidence interval for the slope}
+
+\pq{{\small Remember that a confidence interval is calculated as $point~estimate \pm ME$ and the degrees of freedom associated with the slope in a simple linear regression is $n - 2$. Which of the below is the correct 95\% confidence interval for the slope parameter? Note that the model is based on observations from 27 twins.}}
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 9.2076 & 9.2999 & 0.99 & 0.3316 \\ 
+  bioIQ & 0.9014 & 0.0963 & 9.36 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\vspace{-0.5cm}
+
+\twocol{0.4}{0.6}
+{
+\begin{enumerate}[(a)]
+\item $9.2076 \pm 1.65 \times 9.2999$
+\solnMult{ $0.9014 \pm 2.06 \times 0.0963$}
+\item $0.9014 \pm 1.96 \times 0.0963$
+\item $9.2076 \pm 1.96 \times 0.0963$
+\end{enumerate}
+}
+{
+\soln{\onslide<2->{\orange{
+\begin{eqnarray*}
+\pause
+n &=& 27 \qquad df = 27 - 2 = 25 \\
+\pause
+95\%:~t^\star_{25} &=& 2.06 \\
+\pause
+0.9014 &\pm& 2.06 \times 0.0963 \\
+\pause
+(0.7 &,& 1.1)
+\end{eqnarray*}
+}}}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap}
+
+\begin{itemize}
+
+\item Inference for the slope for a single-predictor linear regression model:
+\pause
+\begin{itemize}
+\item Hypothesis test:
+\[ T = \frac{b_1 - null~value}{SE_{b_1}} \qquad df = n - 2 \]
+\pause
+\item Confidence interval:
+\[ b_1 \pm t^\star_{df = n - 2} SE_{b_1} \]
+\end{itemize}
+
+\pause
+
+\item The null value is often 0 since we are usually checking for \hl{any} relationship between the explanatory and the response variable.
+
+\pause
+
+\item The regression output gives $b_1$, $SE_{b_1}$, and \hl{two-tailed} p-value for the $t$-test for the slope where the null value is 0.
+
+\pause
+
+\item We rarely do inference on the intercept, so we'll be focusing on the estimates and inference for the slope.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Caution}
+
+\begin{itemize}
+
+\item Always be aware of the type of data you're working with: random sample, non-random sample, or population.
+
+\pause
+
+\item Statistical inference, and the resulting p-values, are poorly defined when you already have population data.
+
+\pause
+
+\item If you have a sample that is non-random (biased), inference on the results will be unreliable.
+
+\pause
+
+\item The ultimate goal is to have independent observations.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 9.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction to multiple regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Multiple regression}
+
+\begin{itemize}
+
+\item Simple linear regression: Bivariate - two variables: $y$ and $x$
+
+\item Multiple linear regression: Multiple variables: $y$ and $x_1, x_2, \cdots$
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Indicator and categorical variables as predictors}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{The loans dataset}
+
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{r ccc ccc cc}
+  \hline
+   & interest\_rate & \alt<3->{\hl{income\_ver}}{income\_ver}
+       & debt\_to\_income & credit\_util
+       & \alt<2->{\hl{bankruptcy}}{bankruptcy} & term
+       & issued & credit\_checks \\ 
+  \hline
+  1 & 14.07 & \alt<3->{\hl{verified}}{verified} & 18.01 & 0.55 & \alt<2->{\hl{0}}{0} & 60 & Mar2018 & 6 \\ 
+  2 & 12.61 & \alt<3->{\hl{not}}{not} & 5.04 & 0.15 & \alt<2->{\hl{1}}{1} & 36 & Feb2018 & 1 \\ 
+  3 & 17.09 & \alt<3->{\hl{source\_only}}{source\_only} & 21.15 & 0.66 & \alt<2->{\hl{0}}{0} & 36 & Feb2018 & 4 \\ 
+  4 & 6.72 & \alt<3->{\hl{not}}{not} & 10.16 & 0.20 & \alt<2->{\hl{0}}{0} & 36 & Jan2018 & 0 \\ 
+  5 & 14.07 & \alt<3->{\hl{verified}}{verified} & 57.96 & 0.75 & \alt<2->{\hl{0}}{0} & 36 & Mar2018 & 7 \\ 
+  6 & 6.72 & \alt<3->{\hl{not}}{not} & 6.46 & 0.09 & \alt<2->{\hl{0}}{0} & 36 & Jan2018 & 6 \\
+  $\vdots$ & $\vdots$ & $\vdots$ &
+      $\vdots$ & $\vdots$ & $\vdots$ &
+      $\vdots$ & $\vdots$ & $\vdots$ \\
+   \hline
+\end{tabular}%
+}
+
+\centering
+\resizebox{0.9\textheight}{!}{%
+\begin{tabular}{lp{14cm}}
+\hline
+{\bf variable} & {\bf description} \\
+\hline
+\var{interest\_rate} &
+  Interest rate for the loan. \\
+\alt<3->{\hl{\var{income\_ver}}}{\var{income\_ver}} &
+  \alt<3->{\hl{Categorical variable describing whether the borrower's
+  income source and amount have been verified,
+  with levels \resp{verified}, \resp{source\_only},
+  and \resp{not}.}}{Categorical variable describing whether the borrower's
+  income source and amount have been verified,
+  with levels \resp{verified}, \resp{source\_only},
+  and \resp{not}.} \\
+\var{debt\_to\_income} &
+  Debt-to-income ratio, which is the percentage of total debt
+  of the borrower divided by their total income. \\
+\var{credit\_util} &
+  Of all the credit available to the borrower,
+  what fraction are they utilizing.
+  For example, the credit utilization on a credit card would
+  be the card's balance divided by the card's credit limit. \\
+\alt<2->{\hl{\var{bankruptcy}}}{\var{bankruptcy}} &
+\alt<2->{\hl{An indicator variable for whether the borrower has a past
+  bankruptcy in her record. This variable takes a value of
+  \resp{1} if the answer is ``yes''
+  and \resp{0} if the answer is ``no''.}}{An indicator variable for whether the borrower has a past
+  bankruptcy in her record. This variable takes a value of
+  \resp{1} if the answer is ``yes''
+  and \resp{0} if the answer is ``no''.} \\
+\var{term} &
+  The length of the loan, in months. \\
+\var{issued} &
+  The month and year the loan was issued,
+  which for these loans is always during the first
+  quarter of 2018. \\
+\var{credit\_checks} &
+  Number of credit checks in the last 12 months.
+  For example, when filing an application for a credit card,
+  it is common for the company receiving the application
+  to run a credit check. \\
+\hline
+\end{tabular}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{How to include categorical variables in regression models}
+
+\begin{itemize}
+\item Categorical variables can be included in regression models using \hl{indicator} (dummy) variables, that each take on values 0 or 1.
+\item For a categorical variable with $k$ levels, we include $k-1$ indicator variables.
+\item One level is chosen as the \hl{reference level}, and the coefficients of the indicator variables represent the difference from this reference.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interest rate vs. bankruptcy}
+
+
+\[ \widehat{rate} = 12.33 + 0.74 \times bankruptcy \]
+
+{\small
+\begin{itemize}
+\item Response variable: interest rate (as a percentage)
+\pause
+\item Explanatory variable: bankruptcy, \hl{reference level:} no bankruptcy (0)
+
+\item \hl{Intercept:} The estimated average interest rate for borrowers with no bankruptcy is 12.33\%
+\pause
+\begin{itemize}
+\item This is the value we get if we plug in \orange{0} for the explanatory variable
+\end{itemize}
+
+\pause
+
+\item \hl{Slope:} The estimated average interest rate for borrowers with a past bankruptcy is 0.74\% higher than those with no bankruptcy.
+\pause
+\begin{itemize}
+\item Then, the estimated average interest rate for borrowers with a past bankruptcy is 12.33 + 0.74 =  13.07\%.
+\pause
+\item This is the value we get if we plug in \orange{1} for the explanatory variable
+\end{itemize}
+
+\end{itemize}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: Loans regression with categorical variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Categorical variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interest rate vs. income verification (verified, source\_only, not)}
+
+\pq{Which income verification level (verified, source\_only, or not) is the reference level?}
+
+{\small
+\begin{center}
+\begin{tabular}{l rrr r}
+  \hline
+  \vspace{-3.7mm} & & & & \\
+  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+  (Intercept) &
+      11.0995 & 0.0809 & 137.18 & $<$0.0001 \\
+  income\_ver : \it{source\_only} &
+      1.4160 & 0.1107 & 12.79 & $<$0.0001 \\ 
+  income\_ver : \it{verified} &
+      3.2543 & 0.1297 & 25.09 & $<$0.0001 \\ 
+  \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\item verified
+\item source\_only
+\solnMult{not}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interest rate vs. income verification (verified, source\_only, not)}
+
+\pq{Which income verification level (verified, source\_only, or not) has the lowest interest rate?}
+
+{\small
+\begin{center}
+\begin{tabular}{l rrr r}
+  \hline
+  \vspace{-3.7mm} & & & & \\
+  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+  (Intercept) &
+      11.0995 & 0.0809 & 137.18 & $<$0.0001 \\
+  income\_ver : \it{source\_only} &
+      1.4160 & 0.1107 & 12.79 & $<$0.0001 \\ 
+  income\_ver : \it{verified} &
+      3.2543 & 0.1297 & 25.09 & $<$0.0001 \\ 
+  \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\item verified
+\item source\_only
+\solnMult{not}
+\item cannot tell
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{R demonstration: Predictions with categorical variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Including and assessing many variables in a model}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Weights of books}
+
+\twocol{0.6}{0.4}{
+{\footnotesize
+\begin{center}
+\begin{tabular}{rrrc}
+  \hline
+ & weight (g) & volume (cm$^\text{3}$) & cover \\ 
+  \hline
+1 & 800 & 885 & hc \\ 
+  2 & 950 & 1016 & hc \\ 
+  3 & 1050 & 1125 & hc \\ 
+  4 & 350 & 239 & hc \\ 
+  5 & 750 & 701 & hc \\ 
+  6 & 600 & 641 & hc \\ 
+  7 & 1075 & 1228 & hc \\ 
+  8 & 250 & 412 & pb \\ 
+  9 & 700 & 953 & pb \\ 
+  10 & 650 & 929 & pb \\ 
+  11 & 975 & 1492 & pb \\ 
+  12 & 350 & 419 & pb \\ 
+  13 & 950 & 1010 & pb \\ 
+  14 & 425 & 595 & pb \\ 
+  15 & 725 & 1034 & pb \\ 
+   \hline
+\end{tabular}
+\end{center}
+}}
+{
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chp9@path/9-1_intro_mlr/figures/books/book}
+\end{center}
+}
+
+\ct{From: Maindonald, J.H. and Braun, W.J. (2nd ed., 2007) ``Data Analysis and Graphics Using R"}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Weights of books}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Weights of books (cont.)}
+
+\twocol{0.45}{0.4}
+{
+\pq{{\small The scatterplot shows the relationship between weights and volumes of books as well as the regression output. Which of the below is correct?}}
+}
+{
+\begin{center}
+\includegraphics[width=\textwidth]{\chp9@path/9-1_intro_mlr/figures/books/weight_volume}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\item Weights of 80\% of the books can be predicted accurately using this model.
+\solnMult{Books that are 10 cm$^\text{3}$ over average are expected to weigh 7 g over average.}
+\item The correlation between weight and volume is $R = 0.80^2 = 0.64$.
+\item The model underestimates the weight of the book with the highest volume.
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Modeling weights of books using volume}
+
+{\small \textit{somewhat abbreviated output...}}
+
+\begin{verbatim}
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 107.67931   88.37758   1.218    0.245    
+volume        0.70864    0.09746   7.271 6.26e-06
+
+
+Residual standard error: 123.9 on 13 degrees of freedom
+Multiple R-squared: 0.8026,	Adjusted R-squared: 0.7875 
+F-statistic: 52.87 on 1 and 13 DF,  p-value: 6.262e-06 
+\end{verbatim}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Weights of hardcover and paperback books}
+
+\dq{Can you identify a trend in the relationship between volume and weight of hardcover and paperback books?}
+
+\soln{\only<2>{{\small Paperbacks generally weigh less than hardcover books after controlling for the book?s volume.}}}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{\chp9@path/9-1_intro_mlr/figures/books/weight_volume_cover}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Modeling weights of books using volume \underline{and} cover type}
+
+\begin{verbatim}
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  197.96284   59.19274   3.344 0.005841 ** 
+volume         0.71795    0.06153  11.669  6.6e-08 ***
+cover:pb    -184.04727   40.49420  -4.545 0.000672 ***
+
+
+Residual standard error: 78.2 on 12 degrees of freedom
+Multiple R-squared: 0.9275,	Adjusted R-squared: 0.9154 
+F-statistic: 76.73 on 2 and 12 DF,  p-value: 1.455e-07 
+\end{verbatim}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Books regression}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Determining the reference level}
+
+\pq{Based on the regression output below, which level of \var{cover} is the reference level? Note that \var{pb}: paperback.}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.9628 & 59.1927 & 3.34 & 0.0058 \\ 
+  volume & 0.7180 & 0.0615 & 11.67 & 0.0000 \\ 
+  cover:pb & -184.0473 & 40.4942 & -4.55 & 0.0007 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\item paperback
+\solnMult{hardcover}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Determining the reference level}
+
+\pq{Which of the below correctly describes the roles of variables in this regression model?}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.9628 & 59.1927 & 3.34 & 0.0058 \\ 
+  volume & 0.7180 & 0.0615 & 11.67 & 0.0000 \\ 
+  cover:pb & -184.0473 & 40.4942 & -4.55 & 0.0007 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\item response: weight, explanatory: volume, paperback cover
+\item response: weight, explanatory: volume, hardcover cover
+\item response: volume, explanatory: weight, cover type
+\solnMult{response: weight, explanatory: volume, cover type}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Linear model}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.96 & 59.19 & 3.34 & 0.01 \\ 
+  volume & 0.72 & 0.06 & 11.67 & 0.00 \\ 
+  cover:pb & -184.05 & 40.49 & -4.55 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\[ \widehat{weight} = 197.96 + 0.72~volume - 184.05~cover:pb  \]
+
+\pause
+
+\begin{enumerate}
+
+\item For \hl{hardcover} books: plug in \orange{0} for \var{cover}
+\begin{eqnarray*}
+\widehat{weight} &=& 197.96 + 0.72~volume - 184.05 \times \orange{0} \\
+\pause
+&=& 197.96 +  0.72~volume
+\end{eqnarray*}
+
+\pause
+
+\item For \orange{paperback} books: plug in \orange{1} for \var{cover}
+\begin{eqnarray*}
+\widehat{weight} &=& 197.96 + 0.72~volume - 184.05 \times \orange{1} \\
+\pause
+&=& 13.91 +  0.72~volume
+\end{eqnarray*}
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Visualising the linear model}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chp9@path/9-1_intro_mlr/figures/books/weight_volume_cover_lines}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Interpretation of the regression coefficients}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.96 & 59.19 & 3.34 & 0.01 \\ 
+  volume & 0.72 & 0.06 & 11.67 & 0.00 \\ 
+  cover:pb & -184.05 & 40.49 & -4.55 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\begin{itemize}
+
+\item \hl{Slope of volume:} \underline{All else held constant}, books that are 1 more cubic centimeter in volume tend to weigh about 0.72 grams more.
+
+\pause
+
+\item \hl{Slope of cover:} \underline{All else held constant}, the model predicts that paperback books weigh 184 grams lower than hardcover books.
+
+\pause
+
+\item \hl{Intercept:} Hardcover books with no volume are expected on average to weigh 198 grams. \pause
+\begin{itemize}
+\item Obviously, the intercept does not make sense in context. It only serves to adjust the height of the line.
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Prediction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Prediction}
+
+\pq{Which of the following is the correct calculation for the predicted weight of a paperback book that is 600 cm$^3$?}
+
+{\small
+\begin{center}
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 197.96 & 59.19 & 3.34 & 0.01 \\ 
+  volume & 0.72 & 0.06 & 11.67 & 0.00 \\ 
+  cover:pb & -184.05 & 40.49 & -4.55 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{center}
+}
+
+\begin{enumerate}[(a)]
+\solnMult{197.96 + 0.72 * 600 - 184.05 * 1} \soln{\only<2>{\orange{~$= 445.91$ grams}}}
+\item 184.05 + 0.72 * 600 - 197.96 * 1
+\item 197.96 + 0.72 * 600 - 184.05 * 0
+\item 197.96 + 0.72 * 1 - 184.05 * 600
+\end{enumerate}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{R demonstration: Lots of predictors}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Interpreting the slope}
+
+% \pq{What is the correct interpretation of the slope for \var{debt\_to\_income}?}
+
+% {\small
+% \begin{center}
+% \begin{tabular}{lrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+% income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+% income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+% debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+% bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+% term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
+
+% $\:$ \\
+
+% \soln{\only<2>{All else held constant, a 1 percentage point increase in debt-to-income is associated with a 0.034 percentage point increase in interest rate.}}
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Interpreting the slope}
+
+% \dq{What is the correct interpretation of the \underline{intercept}?}
+
+% {\small
+% \begin{center}
+% \begin{tabular}{lrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+% income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+% income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+% debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+% bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+% term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
+
+% $\:$ \\
+
+% \soln{\only<2>{The estimated interest rate for a borrower with an unverified income, 0 debt-to-income ratio, and no prior bankruptcy, for a loan with a 0 month term is 4.17\%.}}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{Edfinity Quiz: Loans regression with many predictors}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Interpreting the slope}
+
+% \pq{What is the correct interpretation of the slope for \var{term}?}
+
+% {\small
+% \begin{center}
+% \begin{tabular}{lrrrr}
+%   \hline
+%  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+%   \hline
+% (Intercept) & 4.1707 & 0.1952 & 21.37 & $< 2\text{e-}16$ \\
+% income\_ver: source\_only & 1.1286 & 0.1038 & 10.87 & $< 2\text{e-}16$ \\
+% income\_ver: verified     & 2.5356 & 0.1228 & 20.65 & $< 2\text{e-}16$ \\
+% debt\_to\_income          & 0.0343 & 0.0031 & 11.23 & $< 2\text{e-}16$ \\
+% bankruptcy                & 0.6784 & 0.1386 & 4.90  & 9.95e-07 \\
+% term                      & 0.1495 & 0.0041 & 36.10 & $< 2\text{e-}16$ \\
+%    \hline
+% \end{tabular}
+% \end{center}
+% }
+
+% All else being equal, loans with a term that is 1 month longer are estimated to have an interest rate that is:
+% \begin{enumerate}[(a)]
+% \item 0.15 percentage points lower
+% \solnMult{0.15 percentage points higher}
+% \end{enumerate}
+% than a loan term that is 1 month shorter.
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
