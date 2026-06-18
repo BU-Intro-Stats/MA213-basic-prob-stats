@@ -243,7 +243,7 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a brief interpretation of the chosen modeling approach
 
 **Deliverables**
-- Lab6 in-lab activity submission 
+- Lab7 in-lab activity submission 
 
 ---
 
