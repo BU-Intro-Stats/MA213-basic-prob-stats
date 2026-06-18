@@ -67,8 +67,9 @@ def sequence_week_for_title(title: str):
         "P1-2": 7,
         "P2-1": 8,
         "Lab 6": 9,
-        "P2-2/P2-3": 10,
-        "Lab 7": 11,
+        "P2-2": 10,
+        "P2-3": 11,
+        "Lab 7": 12,
     }
     return order.get(title)
 
@@ -191,17 +192,25 @@ def parse_lab_summary(path: Path):
             week = 4
             lecture_anchor = "Lecture 8"
 
-        lab_rows.append(
-            {
-                "heading": heading,
-                "title": title,
-                "purpose": purpose,
-                "lecture_anchor": lecture_anchor,
-                "week": week,
-                "objectives": " | ".join(objectives),
-                "deliverables": " | ".join(deliverables),
-            }
-        )
+        row = {
+            "heading": heading,
+            "title": title,
+            "purpose": purpose,
+            "lecture_anchor": lecture_anchor,
+            "week": week,
+            "objectives": " | ".join(objectives),
+            "deliverables": " | ".join(deliverables),
+        }
+
+        if title == "P2-2/P2-3":
+            lab_rows.extend(
+                [
+                    {**row, "title": "P2-2", "week": sequence_week_for_title("P2-2")},
+                    {**row, "title": "P2-3", "week": sequence_week_for_title("P2-3")},
+                ]
+            )
+        else:
+            lab_rows.append(row)
 
     return lab_rows
 
