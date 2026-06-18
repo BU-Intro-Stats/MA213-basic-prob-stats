@@ -61,7 +61,7 @@
 ---
 
 ## Module 5: Beyond Recipes: Frequentist and Bayesian Approaches to Statistical Modeling
-*(*Bayes' Rules*, Chapters 1–2; 5 objectives: 5 auxiliary)*
+*(*Bayes' Rules*, Chapters 1–3; 5 objectives: 5 auxiliary)*
 
 1. **The Frequentist Perspective:** Explain how Frequentist modeling uses sampling distributions to evaluate estimators. Describe the difference between a sampling distribution and a likelihood. Use maximum likelihood to estimate a parameter and identify which of the estimators in the course are maximum likelihood estimators. [Q5] Auxiliary
 2. **The Bayesian Perspective:** Explain how Bayesian modeling uses likelihoods, priors, and posteriors to perform inference. Explain how Bayesian analyses can be updated sequentially as new data arrives and how the results remain invariant to the order in which the data is observed. [Q5] Auxiliary
