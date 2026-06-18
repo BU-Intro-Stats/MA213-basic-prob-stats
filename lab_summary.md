@@ -78,6 +78,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 **Post-lab activity**
 - Submit a short R-based reflection or guided worksheet
 
+**Deliverables**
+- Lab1 in-lab activity submission 
+- Tutorial 1 (pre-lab for lab2)
+
 ---
 
 ### Lab 2: Data transformation, visualization, and interpretation
@@ -103,6 +107,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 **Post-lab activity**
 - Submit a short analysis summary with plots and written conclusions
 
+**Deliverables**
+- Lab2 in-lab activity submission 
+- Tutorial 2 (pre-lab for lab3)
+
 ---
 
 ### Lab 3: Probability rules and simulation
@@ -127,6 +135,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 **Post-lab activity**
 - Submit a worksheet with probabilities and interpretation
 
+**Deliverables**
+- Lab3 in-lab activity submission 
+- Tutorial 3 (pre-lab for lab4)
+
 ---
 
 ### Lab 4: Random variables, expectation, variance, and normality
@@ -150,6 +162,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 **Post-lab activity**
 - Submit a short interpretation of the model choices and results
 
+**Deliverables**
+- Lab4 in-lab activity submission 
+- Tutorial 4 (pre-lab for lab5)
+
 ---
 
 ### Lab 5: Sampling distributions and CLT
@@ -172,6 +188,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 **Post-lab activity**
 - Submit a short summary of what the simulations show
+
+**Deliverables**
+- Lab5 in-lab activity submission 
+- Tutorial 5 (pre-lab for lab6)
 
 ---
 
@@ -198,17 +218,19 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 **Post-lab activity**
 - Submit a graded inference worksheet
 
+**Deliverables**
+- Lab6 in-lab activity submission 
+- Tutorial 6 (pre-lab for lab7)
+
 ---
 
-### Lab 7: Regression or Bayesian extension
+### Lab 7: Bayesian 
 
 **Lecture anchor:** Lecture 26 or later  
 **Purpose:** End the course with a flexible application that connects modeling ideas to the methods already studied.
 
 **Primary objectives supported**
-- Conduct and Interpret t-Tests
-- Conduct and Interpret ANOVA
-- Compare Bayesian and Frequentist Approaches (if used)
+- Compare Bayesian and Frequentist Approaches
 
 **Pre-lab activity**
 - Review the final lecture material on modeling and inference
@@ -219,6 +241,9 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 **Post-lab activity**
 - Submit a brief interpretation of the chosen modeling approach
+
+**Deliverables**
+- Lab6 in-lab activity submission 
 
 ---
 
