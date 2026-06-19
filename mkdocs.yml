@@ -1,0 +1,18 @@
+site_name: MA 213 Basic Probability and Statistics
+site_description: Course schedule, lectures, labs, and learning objectives for MA 213.
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: mkdocs
+  navigation_depth: 3
+
+nav:
+  - Home: index.md
+  - Weekly Schedule: weekly_schedule.md
+  - Lectures: lecture_summary.md
+  - Labs: lab_summary.md
+  - Learning Objectives: learning_objectives.md
+
+extra_css:
+  - stylesheets/extra.css
