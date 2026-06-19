@@ -10,17 +10,18 @@ This version preserves the original course sequence so that the lab flow stays f
 
 | Sequence item | Lecture anchor | Main purpose | Main objective focus |
 | --- | --- | --- | --- |
-| Lab 1 | Lecture 1 | R workflow and first data exploration | Module 1 and Module 6 |
-| Lab 2 | Lecture 3 | Data transformation and visualization | Module 1 |
-| Lab 3 | Lecture 5 | Probability foundations and simulation basics | Module 2 |
-| P1-1 | Lecture 7 or soon after | Project 1 launch and planning | Modules 1 and 6 |
-| Lab 4 | Lecture 9 or 10 | Random variables, expectation, variance, and normality | Module 2 |
-| Lab 5 | Lecture 15 or 16 | Sampling variability and CLT | Module 3 |
+| Lab 1 | Lecture 1 | R Intro and first data exploration | Module 1 and Module 6 |
+| Lab 2 | Lecture 3 | Data transformation and interpretation  | Module 1 |
+| Lab 3 | Lecture 6 | Data visualization, and interpretation | Module 2 |
+| P1-1 | Lecture 8 | Project 1 launch and planning | Modules 1 and 6 |
+| Lab 4 | Lecture 11 | Probability rules and Expectation/Variance Rules | Module 2 |
+| Lab 5 | Lecture 14 | Simulating LLN/CLT with Different Distributions | Module 3 |
 | P1-2 | After Lab 5 | Project 1 workday and feedback | Modules 1 and 6 |
 | P2-1 | Before Lab 6 | Project 2 launch and planning | Modules 3–6 |
-| Lab 6 | Lecture 18 or 20 | Confidence intervals and hypothesis tests | Modules 3 and 4 |
-| P2-2/P2-3 | Around Lab 6 and after | Project 2 workdays and report revisions | Modules 5 and 6 |
-| Lab 7 | Lecture 26 or later | Regression or Bayesian extension | Module 4 and optional Module 5 |
+| Lab 6 | Lecture 22 | Confidence intervals and hypothesis tests | Modules 3 and 4 |
+| P2-2 | After Lab 6  | Project 2 workdays and report revisions | Modules 5 and 6 |
+| P2-3 | After P2-2 | Project 2 workdays and report revisions | Modules 5 and 6 |
+| Lab 7 | Lecture 30 | Regression or Bayesian extension | Module 4 and optional Module 5 |
 
 ## How this sequence connects to lectures and objectives
 
@@ -45,10 +46,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 | Tutorial | Suggested purpose |
 | --- | --- |
-| Tutorial 1 | R basics, loading data, R Markdown/Quarto |
-| Tutorial 2 | Data wrangling, variable types, summaries |
-| Tutorial 3 | Plotting and interpretation |
-| Tutorial 4 | Probability rules, simulation, and random variables |
+| Tutorial 1 | Data wrangling |
+| Tutorial 2 | Data visualization |
+| Tutorial 3 | Functions, Loops |
+| Tutorial 4 | Simulation using Functions and Loops |
 | Tutorial 5 | Sampling distributions and inference in R |
 | Tutorial 6 | Regression or Bayesian modeling extension |
 
@@ -84,10 +85,38 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 ---
 
-### Lab 2: Data transformation, visualization, and interpretation
+### Lab 2: Data transformation and interpretation
 
 **Lecture anchor:** Lecture 3  
-**Purpose:** Reinforce the ideas from the data and visualization lectures by asking students to move from raw data to meaningful descriptions.
+**Purpose:** Reinforce the ideas from the data  lectures by asking students to move from raw data to meaningful descriptions.
+
+**Primary objectives supported**
+- Classify and Analyze Variables
+- Describe Data Distributions
+- Use R for Data Management and Exploration
+
+**Pre-lab activity**
+- Review the lecture notes on categorical and numerical variables
+- Complete a short tutorial on `dplyr` and plotting
+
+**In-lab activity**
+- Decide whether variables are categorical or numerical
+- Use `filter()`, `mutate()`, and `summarize()`
+- Write interpretations in context
+
+**Post-lab activity**
+- Submit a short analysis summary with tables and written conclusions
+
+**Deliverables**
+- Lab2 in-lab activity submission 
+- Tutorial 2 (pre-lab for lab3)
+
+---
+
+### Lab 3: Data visualization, and interpretation
+
+**Lecture anchor:** Lecture 6
+**Purpose:** Reinforce the ideas from the data to visualization by asking students to move from raw data to meaningful descriptions using visualization. 
 
 **Primary objectives supported**
 - Classify and Analyze Variables
@@ -108,14 +137,14 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a short analysis summary with plots and written conclusions
 
 **Deliverables**
-- Lab2 in-lab activity submission 
-- Tutorial 2 (pre-lab for lab3)
+- Lab3 in-lab activity submission 
+- Tutorial 3 (pre-lab for lab4)
 
 ---
 
-### Lab 3: Probability rules and simulation
+### Lab 4: Probability rules and Expectation/Variance Rules
 
-**Lecture anchor:** Lecture 5  
+**Lecture anchor:** Lecture 11  
 **Purpose:** Connect the lecture discussion of probability to concrete practice with events, tables, and simulation.
 
 **Primary objectives supported**
@@ -136,14 +165,14 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a worksheet with probabilities and interpretation
 
 **Deliverables**
-- Lab3 in-lab activity submission 
-- Tutorial 3 (pre-lab for lab4)
+- Lab4 in-lab activity submission 
+- Tutorial 4 (pre-lab for lab5)
 
 ---
 
-### Lab 4: Random variables, expectation, variance, and normality
+### Lab 5: Simulating LLN/CLT with Different Distributions
 
-**Lecture anchor:** Lecture 9 or 10  
+**Lecture anchor:** Lecture 14
 **Purpose:** Help students see how probability ideas become useful for understanding distributions and unusual data values.
 
 **Primary objectives supported**
@@ -163,33 +192,6 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a short interpretation of the model choices and results
 
 **Deliverables**
-- Lab4 in-lab activity submission 
-- Tutorial 4 (pre-lab for lab5)
-
----
-
-### Lab 5: Sampling distributions and CLT
-
-**Lecture anchor:** Lecture 15 or 16  
-**Purpose:** Make sampling variability visible so students can understand why inference is possible.
-
-**Primary objectives supported**
-- Understand Point Estimates and Sampling Variability
-- Visualize and Interpret Sampling Distributions
-- Inference for a Single Proportion
-
-**Pre-lab activity**
-- Review sampling distributions and the CLT
-
-**In-lab activity**
-- Simulate repeated samples from different distributions
-- Compare sample means and sampling distributions
-- Discuss how sample size affects variability
-
-**Post-lab activity**
-- Submit a short summary of what the simulations show
-
-**Deliverables**
 - Lab5 in-lab activity submission 
 - Tutorial 5 (pre-lab for lab6)
 
@@ -197,7 +199,7 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 ### Lab 6: Confidence intervals and hypothesis tests
 
-**Lecture anchor:** Lecture 18 or 20  
+**Lecture anchor:** Lecture 22
 **Purpose:** Give students practice choosing and interpreting inference procedures, not just computing formulas.
 
 **Primary objectives supported**
@@ -226,7 +228,7 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 ### Lab 7: Bayesian 
 
-**Lecture anchor:** Lecture 26 or later  
+**Lecture anchor:** Lecture 30
 **Purpose:** End the course with a flexible application that connects modeling ideas to the methods already studied.
 
 **Primary objectives supported**
