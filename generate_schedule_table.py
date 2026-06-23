@@ -70,6 +70,7 @@ def sequence_week_for_title(title: str):
         "P2-2": 10,
         "P2-3": 11,
         "Lab 7": 12,
+        "Lab 8": 13,
     }
     return order.get(title)
 

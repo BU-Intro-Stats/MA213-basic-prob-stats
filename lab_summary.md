@@ -77,11 +77,10 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Save and knit a reproducible document
 
 **Post-lab activity**
-- Submit a short R-based reflection or guided worksheet
+- Lab1 in-lab activity submission 
 
 **Deliverables**
-- Lab1 in-lab activity submission 
-- Tutorial 1 (pre-lab for lab2)
+
 
 ---
 
@@ -106,10 +105,15 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 **Post-lab activity**
 - Submit a short analysis summary with tables and written conclusions
+- Lab2 in-lab activity submission 
+- Lab2 GradeScope
 
 **Deliverables**
-- Lab2 in-lab activity submission 
-- Tutorial 2 (pre-lab for lab3)
+- Lab1 in-lab activity submission 
+- Tutorial 1
+- Tutorial 2 (pre-lab for lab2)
+
+
 
 ---
 
@@ -134,11 +138,21 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Write interpretations in context
 
 **Post-lab activity**
-- Submit a short analysis summary with plots and written conclusions
+- Lab3 in-lab activity submission 
+
+
+**Deliverables**
+- Lab2 in-lab activity submission 
+- Tutorial 3 (pre-lab for lab3)
+
+---
+
+### P1-1: Project 1 launch
+- Use this session after Lab 3 to introduce the project prompt, rubric, data access, and timeline.
+- Students should leave with a clear project question and a first analysis plan.
 
 **Deliverables**
 - Lab3 in-lab activity submission 
-- Tutorial 3 (pre-lab for lab4)
 
 ---
 
@@ -165,8 +179,8 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a worksheet with probabilities and interpretation
 
 **Deliverables**
-- Lab4 in-lab activity submission 
-- Tutorial 4 (pre-lab for lab5)
+- Project 1 Outline
+- Tutorial 4 (pre-lab for lab4)
 
 ---
 
@@ -192,8 +206,26 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a short interpretation of the model choices and results
 
 **Deliverables**
+- Lab4 in-lab activity submission 
+- Tutorial 5 (pre-lab for lab5)
+
+---
+
+### P1-2: Project 1 workday
+- Use this session after Lab 5 to help students refine plots, summaries, and presentation structure.
+- The emphasis should remain on data interpretation and clear communication.
+
+**Deliverables**
 - Lab5 in-lab activity submission 
-- Tutorial 5 (pre-lab for lab6)
+
+---
+
+### P2-1: Project 2 launch
+- Use this session before or near Lab 6 so students can begin connecting inference methods to their report.
+- Students should identify candidate response and explanatory variables and think about possible methods.
+
+**Deliverables**
+- P1 Video
 
 ---
 
@@ -222,7 +254,26 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 
 **Deliverables**
 - Lab6 in-lab activity submission 
-- Tutorial 6 (pre-lab for lab7)
+- Tutorial 6 (pre-lab for lab6)
+- P2 Outline
+
+---
+
+### P2-2: Project 2 workdays
+- Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing.
+- Students should be encouraged to justify both the method choice and the interpretation.
+
+**Deliverables**
+- Lab6 in-lab activity submission 
+
+---
+
+### P2-3: Project 2 workdays
+- Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing.
+- Students should be encouraged to justify both the method choice and the interpretation.
+
+**Deliverables**
+- P2 Progress Report
 
 ---
 
@@ -245,25 +296,28 @@ Tutorials should be used as preparation for the corresponding lab so students ar
 - Submit a brief interpretation of the chosen modeling approach
 
 **Deliverables**
-- Lab7 in-lab activity submission 
+- P2 writeup
+- Tutorial 7 (pre-lab for lab7)
 
 ---
 
-## Project support sessions in the original order
+### Lab 8: extra 
 
-### P1-1: Project 1 launch
-- Use this session after Lab 3 to introduce the project prompt, rubric, data access, and timeline.
-- Students should leave with a clear project question and a first analysis plan.
+**Lecture anchor:** 
+**Purpose:** 
 
-### P1-2: Project 1 workday
-- Use this session after Lab 5 to help students refine plots, summaries, and presentation structure.
-- The emphasis should remain on data interpretation and clear communication.
+**Primary objectives supported**
 
-### P2-1: Project 2 launch
-- Use this session before or near Lab 6 so students can begin connecting inference methods to their report.
-- Students should identify candidate response and explanatory variables and think about possible methods.
 
-### P2-2/P2-3: Project 2 workdays
-- Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing.
-- Students should be encouraged to justify both the method choice and the interpretation.
+**Pre-lab activity**
 
+
+**In-lab activity**
+
+
+**Post-lab activity**
+
+**Deliverables**
+- P2 Resubmission
+
+---
