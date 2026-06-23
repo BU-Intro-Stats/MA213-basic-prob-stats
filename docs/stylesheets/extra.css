@@ -1,0 +1,40 @@
+:root {
+  --ma213-border: #d9e2ec;
+  --ma213-accent: #245f73;
+  --ma213-soft: #f6f9fb;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.wy-nav-content {
+  max-width: 1180px;
+}
+
+.wy-side-nav-search {
+  background-color: var(--ma213-accent);
+}
+
+table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th {
+  background: var(--ma213-soft);
+}
+
+th,
+td {
+  border: 1px solid var(--ma213-border);
+  padding: 0.55rem 0.7rem;
+  vertical-align: top;
+}
+
+code {
+  font-size: 0.9em;
+}
