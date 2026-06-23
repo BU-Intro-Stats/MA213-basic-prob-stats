@@ -9,3 +9,24 @@ This file describes guidelines for when the slides' source files are modified an
 2. Derivative title. No derivative may include "OpenIntro" in the title, unless it is included in text of the form "Derivative of OpenIntro", e.g. one might add a subtitle such as "Derivative of OpenIntro Slides".
 
 3. For derivative works, we suggest but do not require that contributing authors' names be listed in chronological order of their contribution.
+
+## Course website
+
+The MA 213 course website is built with MkDocs and hosted on GitHub Pages:
+
+https://bu-intro-stats.github.io/MA213-basic-prob-stats/
+
+GitHub Pages should be configured in the repository settings with:
+
+- Source: GitHub Actions
+
+The workflow in
+`.github/workflows/deploy-site.yml` installs the Python dependencies, regenerates
+the documentation pages, runs `mkdocs build --strict`, uploads the `site/`
+artifact, and deploys it with `actions/deploy-pages`.
+
+Deployment runs automatically when changes are pushed to `master`. It can also
+be run manually from the Actions tab using the `Deploy course site` workflow.
+If deployment fails with `Creating Pages deployment failed` or `HttpError: Not
+Found`, check that GitHub Pages is enabled and that the source is set to
+`GitHub Actions` under Settings -> Pages.
