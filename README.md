@@ -1,3 +1,52 @@
+## Course website
+
+The MA 213 course website is built with MkDocs and hosted on GitHub Pages:
+
+https://bu-intro-stats.github.io/MA213-basic-prob-stats/
+
+The website is generated from the course planning files in this repository:
+
+- `lecture_summary.md` contains the lecture schedule and lecture-level notes.
+- `lab_summary.md` contains the lab schedule, lab topics, and deliverables.
+- `generate_schedule_table.py` reads the course schedule information and creates
+  `weekly_schedule.md`.
+- `build_docs.py` copies/regenerates the source pages into the `docs/` directory
+  used by MkDocs.
+- `mkdocs.yml` defines the site navigation, theme, and build settings.
+
+To regenerate the schedule and sync the MkDocs source pages locally, run:
+
+```bash
+python generate_schedule_table.py
+python build_docs.py
+```
+
+The generated MkDocs pages live in `docs/`:
+
+- `docs/weekly_schedule.md`
+- `docs/lecture_summary.md`
+- `docs/lab_summary.md`
+- `docs/learning_objectives.md`
+- `docs/index.md`
+
+The GitHub Actions workflow in `.github/workflows/deploy-site.yml` installs the
+Python dependencies, regenerates the documentation pages, runs
+`mkdocs build --strict`, uploads the built `site/` artifact, and deploys it with
+`actions/deploy-pages`.
+
+This site is deployed with GitHub Actions, not GitHub Pages Jekyll. In the
+repository settings, GitHub Pages should be configured with:
+
+- Source: GitHub Actions
+
+Deployment runs automatically when changes are pushed to `master`. It can also
+be run manually from the Actions tab using the `Deploy course site` workflow.
+If deployment fails with `Creating Pages deployment failed` or `HttpError: Not
+Found`, check that GitHub Pages is enabled and that the source is set to
+`GitHub Actions` under Settings -> Pages.
+
+## Slide license notes
+
 These slides are available at http://www.openintro.org under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported license (CC BY-NC-SA):
 
 http://creativecommons.org/licenses/by-nc-sa/3.0/
@@ -9,24 +58,3 @@ This file describes guidelines for when the slides' source files are modified an
 2. Derivative title. No derivative may include "OpenIntro" in the title, unless it is included in text of the form "Derivative of OpenIntro", e.g. one might add a subtitle such as "Derivative of OpenIntro Slides".
 
 3. For derivative works, we suggest but do not require that contributing authors' names be listed in chronological order of their contribution.
-
-## Course website
-
-The MA 213 course website is built with MkDocs and hosted on GitHub Pages:
-
-https://bu-intro-stats.github.io/MA213-basic-prob-stats/
-
-GitHub Pages should be configured in the repository settings with:
-
-- Source: GitHub Actions
-
-The workflow in
-`.github/workflows/deploy-site.yml` installs the Python dependencies, regenerates
-the documentation pages, runs `mkdocs build --strict`, uploads the `site/`
-artifact, and deploys it with `actions/deploy-pages`.
-
-Deployment runs automatically when changes are pushed to `master`. It can also
-be run manually from the Actions tab using the `Deploy course site` workflow.
-If deployment fails with `Creating Pages deployment failed` or `HttpError: Not
-Found`, check that GitHub Pages is enabled and that the source is set to
-`GitHub Actions` under Settings -> Pages.
