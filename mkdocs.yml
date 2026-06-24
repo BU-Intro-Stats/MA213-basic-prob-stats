@@ -10,6 +10,7 @@ theme:
 nav:
   - Home: index.md
   - Weekly Schedule: weekly_schedule.md
+  - Calendar View: calendar_schedule.md
   - Lectures: lecture_summary.md
   - Labs: lab_summary.md
   - Learning Objectives: learning_objectives.md

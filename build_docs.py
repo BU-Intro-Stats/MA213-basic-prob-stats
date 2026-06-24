@@ -7,6 +7,7 @@ DOCS = ROOT / "docs"
 
 SOURCE_PAGES = {
     "weekly_schedule.md": "weekly_schedule.md",
+    "calendar_schedule.md": "calendar_schedule.md",
     "lecture_summary.md": "lecture_summary.md",
     "lab_summary.md": "lab_summary.md",
     "learningObjectives.md": "learning_objectives.md",

@@ -1,5 +1,16 @@
 # MA 213 Lecture Summary
 
+## Course Meeting Pattern
+
+Edit this table when the recurring course meeting days change.
+
+| Event Type | Weekdays |
+| --- | --- |
+| Lecture | Monday, Wednesday, Friday |
+| Discussion | Thursday |
+| Office Hours | Friday |
+| Homework | Sunday |
+
 ---
 
 ## Module 1: Exploratory Data Analysis and Study Design
@@ -285,4 +296,3 @@
 - **Topic:** Wrap-up and evaluations
 - **Reading:** 
 - **Learning Objectives:**
-

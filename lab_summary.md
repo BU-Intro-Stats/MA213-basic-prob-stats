@@ -2,6 +2,15 @@
 
 This version preserves the original course sequence so that the lab flow stays familiar to students while still being aligned with the lecture schedule and learning objectives.
 
+## Lab Meeting Pattern
+
+Edit this table when the recurring lab or project meeting day changes.
+
+| Event Type | Weekday |
+| --- | --- |
+| Lab / Project | Wednesday |
+| Lab Deliverable | Tuesday |
+
 ## Sequence that follows the original course order
 
 - Each week includes 3 lectures and 1 lab.

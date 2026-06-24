@@ -6,13 +6,58 @@ https://bu-intro-stats.github.io/MA213-basic-prob-stats/
 
 The website is generated from the course planning files in this repository:
 
-- `lecture_summary.md` contains the lecture schedule and lecture-level notes.
-- `lab_summary.md` contains the lab schedule, lab topics, and deliverables.
+- `lecture_summary.md` contains the lecture schedule, lecture-level notes, and
+  the editable lecture/discussion/office-hour meeting pattern table.
+- `lab_summary.md` contains the lab schedule, lab topics, deliverables, and the
+  editable lab/project meeting pattern table.
+- `important_dates.md` contains the editable semester date table used for
+  holidays, recesses, final exams, and other academic calendar dates.
 - `generate_schedule_table.py` reads the course schedule information and creates
-  `weekly_schedule.md`.
+  `weekly_schedule.md`, `calendar_schedule.md`, and the generated Excel schedule.
 - `build_docs.py` copies/regenerates the source pages into the `docs/` directory
   used by MkDocs.
 - `mkdocs.yml` defines the site navigation, theme, and build settings.
+
+Edit the root source files first, not the generated copies in `docs/`. The
+generated MkDocs pages are refreshed by `build_docs.py`.
+
+### Editable schedule inputs
+
+Lecture, discussion, and office-hour meeting days are controlled by this table
+near the top of `lecture_summary.md`:
+
+```md
+| Event Type | Weekdays |
+| --- | --- |
+| Lecture | Monday, Wednesday, Friday |
+| Discussion | Thursday |
+| Office Hours | Friday |
+| Homework | Sunday |
+```
+
+Lab and project meeting days are controlled by this table near the top of
+`lab_summary.md`:
+
+```md
+| Event Type | Weekday |
+| --- | --- |
+| Lab / Project | Wednesday |
+| Lab Deliverable | Tuesday |
+```
+
+Academic dates are controlled by the table in `important_dates.md`:
+
+```md
+| Start Date | End Date | Event |
+| --- | --- | --- |
+| September 2 |  | Classes Begin; First Seven-Week Session Begins |
+| November 25 | November 29 | Thanksgiving Recess |
+```
+
+Blank `End Date` values are treated as one-day events. Dates in January are
+treated as belonging to the following calendar year for a fall semester.
+
+### Local workflow
 
 To regenerate the schedule and sync the MkDocs source pages locally, run:
 
@@ -21,9 +66,36 @@ python generate_schedule_table.py
 python build_docs.py
 ```
 
+To preview the website locally, run:
+
+```bash
+python -m mkdocs serve
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/
+```
+
+The monthly calendar page is available at:
+
+```text
+http://127.0.0.1:8000/calendar_schedule/
+```
+
+If port `8000` is already in use, run the server on another port:
+
+```bash
+python -m mkdocs serve -a 127.0.0.1:8001
+```
+
+Stop the local server with `Ctrl+C` in the terminal where it is running.
+
 The generated MkDocs pages live in `docs/`:
 
 - `docs/weekly_schedule.md`
+- `docs/calendar_schedule.md`
 - `docs/lecture_summary.md`
 - `docs/lab_summary.md`
 - `docs/learning_objectives.md`
