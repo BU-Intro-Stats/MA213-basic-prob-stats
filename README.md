@@ -6,12 +6,16 @@ https://bu-intro-stats.github.io/MA213-basic-prob-stats/
 
 The website is generated from the course planning files in this repository:
 
-- `lecture_summary.md` contains the lecture schedule, lecture-level notes, and
-  the editable lecture/discussion/office-hour meeting pattern table.
+- `Schedules.md` contains the editable lecture/discussion/office-hour/homework
+  meeting pattern table that is copied to the top of `lecture_summary.md`.
+- `lecture_summary.md` contains the generated lecture schedule and lecture-level
+  notes from the lecture agenda files.
 - `lab_summary.md` contains the lab schedule, lab topics, deliverables, and the
   editable lab/project meeting pattern table.
 - `important_dates.md` contains the editable semester date table used for
   holidays, recesses, final exams, and other academic calendar dates.
+- `generate_lecture_summary.py` reads `Week*/Lecture*/Lecture*_agenda.tex`,
+  cross-references `learningObjectives.md`, and rewrites `lecture_summary.md`.
 - `generate_schedule_table.py` reads the course schedule information and creates
   `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, and the
   generated Excel schedule.
@@ -24,8 +28,9 @@ generated MkDocs pages are refreshed by `build_docs.py`.
 
 ### Editable schedule inputs
 
-Lecture, discussion, and office-hour meeting days are controlled by this table
-near the top of `lecture_summary.md`:
+Lecture, discussion, office-hour, and homework meeting days are controlled by
+the table in `Schedules.md`. `generate_lecture_summary.py` copies this block to
+the top of `lecture_summary.md`:
 
 ```md
 | Event Type | Weekdays | Start Time | End Time |
@@ -33,9 +38,14 @@ near the top of `lecture_summary.md`:
 | Lecture | Monday, Wednesday, Friday | 11:15 AM | 12:05 PM |
 | Discussion | Thursday | 12:20 PM | 1:10 PM |
 | Office Hour 1 | Friday | 3:00 PM | 4:00 PM |
-| Office Hour 2 | Friday | 4:00 PM | 5:00 PM |
+| Office Hour 2 | Monday | 4:00 PM | 5:00 PM |
 | Homework | Sunday | 2:55 PM | 3:00 PM |
 ```
+
+Lecture topics, readings, and lecture learning objectives are generated from
+the corresponding `Lecture*_agenda.tex` files. Learning objective labels are
+matched against `learningObjectives.md`, so entries such as `M1, LO1` are
+expanded with their objective title, assessment tag, and core/auxiliary status.
 
 Lab and project meeting days are controlled by this table near the top of
 `lab_summary.md`:
@@ -64,6 +74,7 @@ treated as belonging to the following calendar year for a fall semester.
 To regenerate the schedule and sync the MkDocs source pages locally, run:
 
 ```bash
+python generate_lecture_summary.py
 python generate_schedule_table.py
 python build_docs.py
 ```
@@ -86,8 +97,8 @@ The monthly calendar page is available at:
 http://127.0.0.1:8000/calendar_schedule/
 ```
 
-The calendar page includes download buttons for Google Calendar, Apple Calendar,
-and Outlook. These buttons all use the generated `course_calendar.ics` file.
+The calendar page includes a download menu for Google Calendar, Apple Calendar,
+and Outlook. These choices all use the generated `course_calendar.ics` file.
 
 If port `8000` is already in use, run the server on another port:
 
