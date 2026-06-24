@@ -76,6 +76,11 @@ code {
   text-transform: uppercase;
 }
 
+.calendar-event__time {
+  color: #3f5364;
+  font-weight: 700;
+}
+
 .calendar-event__meta {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   margin-top: 0.45rem !important;
@@ -138,6 +143,73 @@ code {
   border-left: 4px solid #b84a4a;
   margin: 1rem 0 1.5rem;
   padding: 0.75rem 1rem;
+}
+
+.calendar-download-menu {
+  display: block;
+  margin: 0 0 1.25rem;
+  position: relative;
+  text-align: right;
+}
+
+.calendar-download-trigger {
+  background: var(--ma213-accent);
+  border: 0;
+  border-radius: 6px;
+  color: #ffffff !important;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+  list-style: none;
+  padding: 0.42rem 0.58rem;
+}
+
+.calendar-download-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.calendar-download-trigger::after {
+  content: "v";
+  font-size: 0.65rem;
+  margin-left: 0.4rem;
+}
+
+.calendar-download-menu[open] .calendar-download-trigger::after {
+  content: "^";
+}
+
+.calendar-download-trigger:hover {
+  background: #1d4f60;
+  color: #ffffff !important;
+}
+
+.calendar-download-options {
+  background: #ffffff;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+  right: 0;
+  margin-top: 0.35rem;
+  min-width: 10rem;
+  overflow: hidden;
+  position: absolute;
+  z-index: 5;
+}
+
+.calendar-download-option {
+  color: var(--ma213-text) !important;
+  display: block;
+  font-size: 0.76rem;
+  padding: 0.5rem 0.65rem;
+  text-decoration: none;
+}
+
+.calendar-download-option:hover {
+  background: #f0f5f7;
+  color: var(--ma213-text) !important;
+  text-decoration: none;
 }
 
 .calendar-month {

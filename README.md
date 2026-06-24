@@ -13,7 +13,8 @@ The website is generated from the course planning files in this repository:
 - `important_dates.md` contains the editable semester date table used for
   holidays, recesses, final exams, and other academic calendar dates.
 - `generate_schedule_table.py` reads the course schedule information and creates
-  `weekly_schedule.md`, `calendar_schedule.md`, and the generated Excel schedule.
+  `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, and the
+  generated Excel schedule.
 - `build_docs.py` copies/regenerates the source pages into the `docs/` directory
   used by MkDocs.
 - `mkdocs.yml` defines the site navigation, theme, and build settings.
@@ -27,22 +28,23 @@ Lecture, discussion, and office-hour meeting days are controlled by this table
 near the top of `lecture_summary.md`:
 
 ```md
-| Event Type | Weekdays |
-| --- | --- |
-| Lecture | Monday, Wednesday, Friday |
-| Discussion | Thursday |
-| Office Hours | Friday |
-| Homework | Sunday |
+| Event Type | Weekdays | Start Time | End Time |
+| --- | --- | --- | --- |
+| Lecture | Monday, Wednesday, Friday | 11:15 AM | 12:05 PM |
+| Discussion | Thursday | 12:20 PM | 1:10 PM |
+| Office Hour 1 | Friday | 3:00 PM | 4:00 PM |
+| Office Hour 2 | Friday | 4:00 PM | 5:00 PM |
+| Homework | Sunday | 2:55 PM | 3:00 PM |
 ```
 
 Lab and project meeting days are controlled by this table near the top of
 `lab_summary.md`:
 
 ```md
-| Event Type | Weekday |
-| --- | --- |
-| Lab / Project | Wednesday |
-| Lab Deliverable | Tuesday |
+| Event Type | Weekday | Start Time | End Time |
+| --- | --- | --- | --- |
+| Lab / Project | Wednesday | 9:05 AM | 1:10 PM |
+| Lab Deliverable | Tuesday |  | 10:00 PM |
 ```
 
 Academic dates are controlled by the table in `important_dates.md`:
@@ -84,6 +86,9 @@ The monthly calendar page is available at:
 http://127.0.0.1:8000/calendar_schedule/
 ```
 
+The calendar page includes download buttons for Google Calendar, Apple Calendar,
+and Outlook. These buttons all use the generated `course_calendar.ics` file.
+
 If port `8000` is already in use, run the server on another port:
 
 ```bash
@@ -96,6 +101,7 @@ The generated MkDocs pages live in `docs/`:
 
 - `docs/weekly_schedule.md`
 - `docs/calendar_schedule.md`
+- `docs/course_calendar.ics`
 - `docs/lecture_summary.md`
 - `docs/lab_summary.md`
 - `docs/learning_objectives.md`

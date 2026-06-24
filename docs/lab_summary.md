@@ -6,10 +6,10 @@ This version preserves the original course sequence so that the lab flow stays f
 
 Edit this table when the recurring lab or project meeting day changes.
 
-| Event Type | Weekday |
-| --- | --- |
-| Lab / Project | Wednesday |
-| Lab Deliverable | Tuesday |
+| Event Type | Weekday | Start Time | End Time |
+| --- | --- | --- | --- |
+| Lab / Project | Wednesday |        |        |
+| Lab Deliverable | Tuesday |         | 10:00 PM |
 
 ## Sequence that follows the original course order
 
