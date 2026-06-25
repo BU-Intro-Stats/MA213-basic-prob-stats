@@ -5,7 +5,7 @@ import re
 ROOT = Path(__file__).resolve().parent
 LECTURE_SUMMARY = ROOT / "lecture_summary.md"
 LEARNING_OBJECTIVES = ROOT / "learningObjectives.md"
-SCHEDULES = ROOT / "Schedules.md"
+LECTURE_SCHEDULES = ROOT / "Lecture_schedules.md"
 
 
 QUIZ_AFTER_LECTURE = {
@@ -214,7 +214,7 @@ def build_summary(lectures, intro: str) -> str:
 def main():
     objectives = parse_learning_objectives(LEARNING_OBJECTIVES)
     lectures = [parse_agenda(path, objectives) for path in agenda_paths()]
-    summary = build_summary(lectures, build_intro(SCHEDULES))
+    summary = build_summary(lectures, build_intro(LECTURE_SCHEDULES))
     LECTURE_SUMMARY.write_text(summary, encoding="utf-8")
     print(f"Wrote {LECTURE_SUMMARY.name} from {len(lectures)} lecture agenda files.")
 

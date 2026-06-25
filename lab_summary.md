@@ -11,57 +11,6 @@ Edit this table when the recurring lab or project meeting day changes.
 | Lab / Project | Wednesday |        |        |
 | Lab Deliverable | Tuesday |         | 10:00 PM |
 
-## Sequence that follows the original course order
-
-- Each week includes 3 lectures and 1 lab.
-- The lab/project flow below follows the original sequence: Lab 1, Lab 2, Lab 3, P1-1, Lab 4, Lab 5, P1-2, P2-1, Lab 6, P2-2/P2-3, Lab 7.
-- The lecture anchors are used to show where each item best fits in the course timeline.
-
-| Sequence item | Lecture anchor | Main purpose | Main objective focus |
-| --- | --- | --- | --- |
-| Lab 1 | Lecture 1 | R Intro and first data exploration | Module 1 and Module 6 |
-| Lab 2 | Lecture 3 | Data transformation and interpretation  | Module 1 |
-| Lab 3 | Lecture 6 | Data visualization, and interpretation | Module 2 |
-| P1-1 | Lecture 8 | Project 1 launch and planning | Modules 1 and 6 |
-| Lab 4 | Lecture 11 | Probability rules and Expectation/Variance Rules | Module 2 |
-| Lab 5 | Lecture 14 | Simulating LLN/CLT with Different Distributions | Module 3 |
-| P1-2 | After Lab 5 | Project 1 workday and feedback | Modules 1 and 6 |
-| P2-1 | Before Lab 6 | Project 2 launch and planning | Modules 3–6 |
-| Lab 6 | Lecture 22 | Confidence intervals and hypothesis tests | Modules 3 and 4 |
-| P2-2 | After Lab 6  | Project 2 workdays and report revisions | Modules 5 and 6 |
-| P2-3 | After P2-2 | Project 2 workdays and report revisions | Modules 5 and 6 |
-| Lab 7 | Lecture 30 | Regression or Bayesian extension | Module 4 and optional Module 5 |
-
-## How this sequence connects to lectures and objectives
-
-- The original order is preserved so students see the planned progression clearly.
-- Labs 1–3 build foundational R and data/probability skills before Project 1 begins.
-- Lab 4 and Lab 5 connect probability and sampling ideas to the later inference units.
-- Project workdays are placed exactly where they support the course flow rather than replacing the lab sequence.
-
-## Skills labs and projects
-
-### Skills lab
-- Labs 1–7 are designed to build the computational and statistical workflow used throughout the course.
-- Every lab should include a short pre-lab preparation, a guided in-lab activity, and a post-lab submission.
-
-### Projects
-- Project 1: presentation-based exploratory analysis
-- Project 2: written report using inference and modeling tools
-
-## Tutorial plan
-
-Tutorials should be used as preparation for the corresponding lab so students arrive ready to use the tools.
-
-| Tutorial | Suggested purpose |
-| --- | --- |
-| Tutorial 1 | Data wrangling |
-| Tutorial 2 | Data visualization |
-| Tutorial 3 | Functions, Loops |
-| Tutorial 4 | Simulation using Functions and Loops |
-| Tutorial 5 | Sampling distributions and inference in R |
-| Tutorial 6 | Regression or Bayesian modeling extension |
-
 ## Lab details
 
 ### Lab 1: R Intro and first data exploration

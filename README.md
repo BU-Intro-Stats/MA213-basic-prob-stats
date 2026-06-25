@@ -4,18 +4,27 @@ The MA 213 course website is built with MkDocs and hosted on GitHub Pages:
 
 https://bu-intro-stats.github.io/MA213-basic-prob-stats/
 
-The website is generated from the course planning files in this repository:
+The website is generated from source planning files in this repository. Edit the
+source files first, then regenerate the derived summaries and site pages.
 
-- `Schedules.md` contains the editable lecture/discussion/office-hour/homework
-  meeting pattern table that is copied to the top of `lecture_summary.md`.
-- `lecture_summary.md` contains the generated lecture schedule and lecture-level
-  notes from the lecture agenda files.
-- `lab_summary.md` contains the lab schedule, lab topics, deliverables, and the
-  editable lab/project meeting pattern table.
+- `Lecture_schedules.md` contains the editable
+  lecture/discussion/office-hour/homework meeting pattern table that is copied
+  to the top of `lecture_summary.md`.
+- `Week*/Lecture*/Lecture*_agenda.tex` files contain the source lecture topics,
+  readings, and lecture learning-objective codes.
+- `Lab_schedules.md` contains the editable lab/project meeting pattern table
+  that is copied to the top of `lab_summary.md`.
+- Non-lecture `Week*` directories contain lab/project `*_plan.md` files. These
+  files are the source for lab/project topics, objectives, activities, and
+  deliverables.
 - `important_dates.md` contains the editable semester date table used for
   holidays, recesses, final exams, and other academic calendar dates.
+- `lecture_summary.md` and `lab_summary.md` are generated summaries. Do not edit
+  them directly unless you intentionally want to overwrite generator output.
 - `generate_lecture_summary.py` reads `Week*/Lecture*/Lecture*_agenda.tex`,
   cross-references `learningObjectives.md`, and rewrites `lecture_summary.md`.
+- `generate_lab_summary.py` reads `*_plan.md` files from non-lecture
+  directories inside each `Week*` folder and rewrites `lab_summary.md`.
 - `generate_schedule_table.py` reads the course schedule information and creates
   `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, and the
   generated Excel schedule.
@@ -24,13 +33,15 @@ The website is generated from the course planning files in this repository:
 - `mkdocs.yml` defines the site navigation, theme, and build settings.
 
 Edit the root source files first, not the generated copies in `docs/`. The
-generated MkDocs pages are refreshed by `build_docs.py`.
+generated summaries are refreshed by `generate_lecture_summary.py` and
+`generate_lab_summary.py`; generated MkDocs pages are refreshed by
+`build_docs.py`.
 
 ### Editable schedule inputs
 
 Lecture, discussion, office-hour, and homework meeting days are controlled by
-the table in `Schedules.md`. `generate_lecture_summary.py` copies this block to
-the top of `lecture_summary.md`:
+the table in `Lecture_schedules.md`. `generate_lecture_summary.py` copies this
+block to the top of `lecture_summary.md`:
 
 ```md
 | Event Type | Weekdays | Start Time | End Time |
@@ -47,15 +58,21 @@ the corresponding `Lecture*_agenda.tex` files. Learning objective labels are
 matched against `learningObjectives.md`, so entries such as `M1, LO1` are
 expanded with their objective title, assessment tag, and core/auxiliary status.
 
-Lab and project meeting days are controlled by this table near the top of
-`lab_summary.md`:
+Lab and project meeting days are controlled by the table in `Lab_schedules.md`.
+`generate_lab_summary.py` copies this block to the top of `lab_summary.md`:
 
 ```md
 | Event Type | Weekday | Start Time | End Time |
 | --- | --- | --- | --- |
-| Lab / Project | Wednesday | 9:05 AM | 1:10 PM |
+| Lab / Project | Wednesday |  |  |
 | Lab Deliverable | Tuesday |  | 10:00 PM |
 ```
+
+Lab and project details are generated from `*_plan.md` files in each non-lecture
+directory under `Week*`. A directory is treated as a lab/project directory when
+its name does not start with `Lecture`. For example, `Week6/Lab5/Lab5_plan.md`
+supplies the Lab 5 section, while `Week8/P2W1/P2_1_plan.md` supplies the P2-1
+section.
 
 Academic dates are controlled by the table in `important_dates.md`:
 
@@ -75,6 +92,7 @@ To regenerate the schedule and sync the MkDocs source pages locally, run:
 
 ```bash
 python generate_lecture_summary.py
+python generate_lab_summary.py
 python generate_schedule_table.py
 python build_docs.py
 ```
@@ -119,9 +137,11 @@ The generated MkDocs pages live in `docs/`:
 - `docs/index.md`
 
 The GitHub Actions workflow in `.github/workflows/deploy-site.yml` installs the
-Python dependencies, regenerates the documentation pages, runs
-`mkdocs build --strict`, uploads the built `site/` artifact, and deploys it with
-`actions/deploy-pages`.
+Python dependencies, regenerates schedule/site output, runs `mkdocs build
+--strict`, uploads the built `site/` artifact, and deploys it with
+`actions/deploy-pages`. Run the full local workflow above before committing when
+you have changed lecture agenda files, lab/project plan files, or schedule
+source files.
 
 This site is deployed with GitHub Actions, not GitHub Pages Jekyll. In the
 repository settings, GitHub Pages should be configured with:
