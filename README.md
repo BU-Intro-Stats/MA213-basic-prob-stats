@@ -1,11 +1,41 @@
-## Course website
+## MA 213 course content source
 
 The MA 213 course website is built with MkDocs and hosted on GitHub Pages:
 
 https://bu-intro-stats.github.io/MA213-basic-prob-stats/
 
-The website is generated from source planning files in this repository. Edit the
-source files first, then regenerate the derived summaries and site pages.
+This repository is the source for the MA 213 Basic Probability and Statistics
+course materials. It contains lecture slides and agendas, lab and project
+materials, learning objectives, schedule metadata, and the generated website
+pages used by students.
+
+The main content workflow is source-first: edit the lecture agenda files,
+lab/project plan files, schedule files, learning objectives, and important
+dates; then regenerate the summary, schedule, calendar, and MkDocs pages.
+
+### MA 213 content sources
+
+Course content is organized by week:
+
+- `Week*/Lecture*/` directories contain lecture source files. The
+  `Lecture*_agenda.tex` files are the source for lecture topics, readings, and
+  lecture learning-objective codes.
+- Non-lecture directories inside `Week*` contain lab or project materials. Their
+  `*_plan.md` files are the source for lab/project topics, objectives,
+  activities, and deliverables.
+- Chapter folders such as `Chp 1`, `Chp 2`, and so on contain textbook-aligned
+  slide/content sources used across lectures.
+- `learningObjectives.md` is the master list of course learning objectives.
+- `Lecture_schedules.md`, `Lab_schedules.md`, and `important_dates.md` provide
+  the schedule metadata used to build weekly and calendar views.
+
+Generated summary files, including `lecture_summary.md` and `lab_summary.md`,
+are derived from those sources. Edit the source files first, not generated
+summaries or generated copies in `docs/`.
+
+### Website generation files
+
+The website is generated from these planning and build files:
 
 - `Lecture_schedules.md` contains the editable
   lecture/discussion/office-hour/homework meeting pattern table that is copied
@@ -44,13 +74,13 @@ the table in `Lecture_schedules.md`. `generate_lecture_summary.py` copies this
 block to the top of `lecture_summary.md`:
 
 ```md
-| Event Type | Weekdays | Start Time | End Time |
-| --- | --- | --- | --- |
-| Lecture | Monday, Wednesday, Friday | 11:15 AM | 12:05 PM |
-| Discussion | Thursday | 12:20 PM | 1:10 PM |
-| Office Hour 1 | Friday | 3:00 PM | 4:00 PM |
-| Office Hour 2 | Monday | 4:00 PM | 5:00 PM |
-| Homework | Sunday | 2:55 PM | 3:00 PM |
+| Event Type    | Weekdays                 | Start Time | End Time |
+| ---           | ---                      | ---        | ---      |
+| Lecture       | Monday, Wednesday, Friday | 11:15 AM  | 12:05 PM |
+| Discussion    | Thursday                 | 12:20 PM   | 1:10 PM  |
+| Office Hour 1 | Friday                   | 3:00 PM    | 4:00 PM  |
+| Office Hour 2 | Monday                   | 4:00 PM    | 5:00 PM  |
+| Homework      | Sunday                   | 2:55 PM    | 3:00 PM  |
 ```
 
 Lecture topics, readings, and lecture learning objectives are generated from
@@ -62,10 +92,10 @@ Lab and project meeting days are controlled by the table in `Lab_schedules.md`.
 `generate_lab_summary.py` copies this block to the top of `lab_summary.md`:
 
 ```md
-| Event Type | Weekday | Start Time | End Time |
-| --- | --- | --- | --- |
-| Lab / Project | Wednesday |  |  |
-| Lab Deliverable | Tuesday |  | 10:00 PM |
+| Event Type      | Weekday   | Start Time | End Time |
+| ---             | ---       | ---        | ---      |
+| Lab / Project   | Wednesday |            |          |
+| Lab Deliverable | Tuesday   |            | 10:00 PM |
 ```
 
 Lab and project details are generated from `*_plan.md` files in each non-lecture
@@ -77,10 +107,10 @@ section.
 Academic dates are controlled by the table in `important_dates.md`:
 
 ```md
-| Start Date | End Date | Event |
-| --- | --- | --- |
-| September 2 |  | Classes Begin; First Seven-Week Session Begins |
-| November 25 | November 29 | Thanksgiving Recess |
+| Start Date   | End Date    | Event                                             |
+| ---          | ---         | ---                                               |
+| September 2  |             | Classes Begin; First Seven-Week Session Begins    |
+| November 25  | November 29 | Thanksgiving Recess                               |
 ```
 
 Blank `End Date` values are treated as one-day events. Dates in January are
