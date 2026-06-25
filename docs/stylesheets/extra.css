@@ -38,3 +38,238 @@ td {
 code {
   font-size: 0.9em;
 }
+
+.calendar-note {
+  background: #f7f4ed;
+  border-left: 4px solid #a6643c;
+  margin: 1rem 0 1.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.calendar-event {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  margin: 0 0 0.55rem;
+  padding: 0.42rem 0.48rem;
+}
+
+.calendar-event:last-child {
+  margin-bottom: 0;
+}
+
+.calendar-event h3 {
+  font-size: 0.78rem;
+  line-height: 1.25;
+  margin: 0.1rem 0 0.22rem;
+}
+
+.calendar-event p {
+  font-size: 0.72rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.calendar-event__kind {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.calendar-event__time {
+  color: #3f5364;
+  font-weight: 700;
+}
+
+.calendar-event__meta {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-top: 0.45rem !important;
+  padding-top: 0.4rem;
+}
+
+.calendar-event--lecture {
+  background: #eef6f8;
+  border-color: #a8ccd4;
+}
+
+.calendar-event--lab {
+  background: #eef7ef;
+  border-color: #aad2b2;
+}
+
+.calendar-event--lab-deliverable {
+  background: #f2f8e8;
+  border-color: #bfd486;
+}
+
+.calendar-event--project {
+  background: #f8f0fb;
+  border-color: #cfaddc;
+}
+
+.calendar-event--discussion {
+  background: #fff7e8;
+  border-color: #e4c176;
+}
+
+.calendar-event--office-hours {
+  background: #f0f3f8;
+  border-color: #b8c3d6;
+}
+
+.calendar-event--quiz {
+  background: #fff0f0;
+  border-color: #dcaaaa;
+}
+
+.calendar-event--homework {
+  background: #eef2ff;
+  border-color: #aebbea;
+}
+
+.calendar-event--important-date {
+  background: #f7f4ed;
+  border-color: #cda67f;
+}
+
+.calendar-empty {
+  color: #697386;
+  font-size: 0.74rem;
+  margin: 0;
+}
+
+.calendar-warning {
+  background: #fff0f0;
+  border-left: 4px solid #b84a4a;
+  margin: 1rem 0 1.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.calendar-download-menu {
+  display: block;
+  margin: 0 0 1.25rem;
+  position: relative;
+  text-align: right;
+}
+
+.calendar-download-trigger {
+  background: var(--ma213-accent);
+  border: 0;
+  border-radius: 6px;
+  color: #ffffff !important;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+  list-style: none;
+  padding: 0.42rem 0.58rem;
+}
+
+.calendar-download-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.calendar-download-trigger::after {
+  content: "v";
+  font-size: 0.65rem;
+  margin-left: 0.4rem;
+}
+
+.calendar-download-menu[open] .calendar-download-trigger::after {
+  content: "^";
+}
+
+.calendar-download-trigger:hover {
+  background: #1d4f60;
+  color: #ffffff !important;
+}
+
+.calendar-download-options {
+  background: #ffffff;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+  right: 0;
+  margin-top: 0.35rem;
+  min-width: 10rem;
+  overflow: hidden;
+  position: absolute;
+  z-index: 5;
+}
+
+.calendar-download-option {
+  color: var(--ma213-text) !important;
+  display: block;
+  font-size: 0.76rem;
+  padding: 0.5rem 0.65rem;
+  text-decoration: none;
+}
+
+.calendar-download-option:hover {
+  background: #f0f5f7;
+  color: var(--ma213-text) !important;
+  text-decoration: none;
+}
+
+.calendar-month {
+  border-top: 2px solid var(--ma213-border);
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+}
+
+.calendar-month > h2 {
+  margin: 0.6rem 0 0.9rem;
+}
+
+.calendar-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.calendar-weekday {
+  background: var(--ma213-soft);
+  border: 1px solid var(--ma213-border);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.45rem 0.5rem;
+  text-align: center;
+}
+
+.calendar-date {
+  background: #ffffff;
+  border: 1px solid var(--ma213-border);
+  min-height: 9.5rem;
+  min-width: 0;
+  padding: 0.45rem;
+}
+
+.calendar-date--outside {
+  background: #f8fafc;
+}
+
+.calendar-date--term-edge {
+  color: #697386;
+}
+
+.calendar-date__number {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 700px) {
+  .calendar-month-grid {
+    display: block;
+  }
+
+  .calendar-weekday {
+    display: none;
+  }
+
+  .calendar-date {
+    border-radius: 8px;
+    margin-bottom: 0.65rem;
+    min-height: 0;
+  }
+}

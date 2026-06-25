@@ -7,6 +7,8 @@ DOCS = ROOT / "docs"
 
 SOURCE_PAGES = {
     "weekly_schedule.md": "weekly_schedule.md",
+    "calendar_schedule.md": "calendar_schedule.md",
+    "course_calendar.ics": "course_calendar.ics",
     "lecture_summary.md": "lecture_summary.md",
     "lab_summary.md": "lab_summary.md",
     "learningObjectives.md": "learning_objectives.md",
@@ -21,7 +23,7 @@ def main():
         destination = DOCS / output_name
         shutil.copyfile(source, destination)
 
-    print(f"Synced {len(SOURCE_PAGES)} markdown files to {DOCS.name}/")
+    print(f"Synced {len(SOURCE_PAGES)} site source files to {DOCS.name}/")
 
 
 if __name__ == "__main__":
