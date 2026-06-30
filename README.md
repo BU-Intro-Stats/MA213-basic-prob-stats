@@ -13,6 +13,32 @@ The main content workflow is source-first: edit the lecture agenda files,
 lab/project plan files, schedule files, learning objectives, and important
 dates; then regenerate the summary, schedule, calendar, and MkDocs pages.
 
+### Quick schedule update checklist
+
+For routine semester setup, instructors should manually update these three root
+files first:
+
+1. `important_dates.md` - semester year, first/last class day, holidays,
+   recesses, final exam dates, and other academic calendar dates.
+2. `Lecture_schedules.md` - lecture, discussion, office-hour, and homework
+   meeting days/times.
+3. `Lab_schedules.md` - lab/project meeting day and lab deliverable due day/time.
+
+After those files are updated, run the generators from the repository root:
+
+```bash
+python generate_lecture_summary.py
+python generate_lab_summary.py
+python generate_schedule_table.py
+python build_docs.py
+```
+
+These commands regenerate the student-facing summaries, weekly schedule,
+calendar view, `.ics` calendar file, and the MkDocs copies in `docs/`. Do not
+edit `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, or
+the generated copies in `docs/` by hand; they will be overwritten the next time
+the generators run.
+
 ### MA 213 content sources
 
 Course content is organized by week:
@@ -118,7 +144,8 @@ treated as belonging to the following calendar year for a fall semester.
 
 ### Local workflow
 
-To regenerate the schedule and sync the MkDocs source pages locally, run:
+After editing source files, regenerate the summaries, schedule, calendar, and
+MkDocs source pages locally with:
 
 ```bash
 python generate_lecture_summary.py
@@ -171,7 +198,8 @@ Python dependencies, regenerates schedule/site output, runs `mkdocs build
 --strict`, uploads the built `site/` artifact, and deploys it with
 `actions/deploy-pages`. Run the full local workflow above before committing when
 you have changed lecture agenda files, lab/project plan files, or schedule
-source files.
+source files, especially `important_dates.md`, `Lecture_schedules.md`, or
+`Lab_schedules.md`.
 
 This site is deployed with GitHub Actions, not GitHub Pages Jekyll. In the
 repository settings, GitHub Pages should be configured with:
