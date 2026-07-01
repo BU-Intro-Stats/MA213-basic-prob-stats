@@ -85,6 +85,26 @@ flowchart TD
     ics --> docsSync
     docsSync --> docs --> site
 
+    subgraph Legend["Legend"]
+        direction LR
+        legendInput["User inputs / source files"]
+        legendScript["Python scripts"]
+        legendOutput["Generated files"]
+        legendSite("Published course site")
+    end
+
+    site ~~~ legendInput
+
+    subgraph Legend["Legend"]
+      direction LR
+      legendInput["User inputs / source files"]
+      legendScript["Python scripts"]
+      legendOutput["Generated files"]
+      legendSite("Published course site")
+    end
+
+    site ~~~ legendInput
+
     classDef input fill:#fff2cc,stroke:#d6b656,stroke-width:2px,color:#000;
     classDef source fill:#f8cecc,stroke:#b85450,stroke-width:2px,color:#000;
     classDef script fill:#dae8fc,stroke:#6c8ebf,stroke-width:2px,color:#000;
@@ -95,6 +115,16 @@ flowchart TD
     class scheduleGen,docsSync script;
     class weekly,calendar,ics,excel,docs output;
     class site website;
+
+    class legendInput input;
+    class legendScript script;
+    class legendOutput output;
+    class legendSite website;
+
+    class legendInput input;
+    class legendScript script;
+    class legendOutput output;
+    class legendSite website;
 ```
 
 ### Instructor Workflow
