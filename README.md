@@ -101,6 +101,7 @@ flowchart TD
 
 For routine schedule and website updates, instructors should edit only files in
 `materials/instructor_inputs/`.
+### MA 213 content sources
 
 Common semester setup files:
 
