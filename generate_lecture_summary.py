@@ -172,7 +172,7 @@ def parse_agenda(path: Path, objectives):
 
 def agenda_paths():
     return sorted(
-        ROOT.glob("Week*/Lecture*/Lecture*_agenda.tex"),
+        ROOT.glob("Moduel*/lecture*/Lecture*_agenda.tex"),
         key=lecture_number_from_path,
     )
 
