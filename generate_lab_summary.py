@@ -5,23 +5,34 @@ ROOT = Path(__file__).resolve().parent
 LAB_SUMMARY = ROOT / "lab_summary.md"
 LAB_SCHEDULES = ROOT / "Lab_schedules.md"
 
-
-def week_number(path: Path) -> int:
-    name = path.name
-    if not name.startswith("Week"):
-        raise ValueError(f"Expected a Week* directory, got {path}")
-    return int(name.removeprefix("Week"))
+PLAN_DIRECTORY_ORDER = (
+    "lab1",
+    "lab2",
+    "lab3",
+    "project1-part1",
+    "lab4",
+    "lab5",
+    "project1-part2",
+    "project2-part1",
+    "lab6",
+    "project2-part2",
+    "project2-part3",
+    "lab7",
+    "lab8-bonus",
+)
 
 
 def discover_lab_plan_files() -> list[Path]:
-    plan_files = []
-    week_dirs = [path for path in ROOT.glob("Week*") if path.is_dir()]
-    for week_dir in sorted(week_dirs, key=week_number):
-        for item_dir in sorted(path for path in week_dir.iterdir() if path.is_dir()):
-            if item_dir.name.lower().startswith("lecture"):
-                continue
-            plan_files.extend(sorted(item_dir.glob("*_plan.md")))
-    return plan_files
+    plan_files_by_directory = {
+        path.parent.name: path
+        for path in ROOT.glob("Moduel*/*/*_plan.md")
+        if path.parent.name.startswith(("lab", "project"))
+    }
+    return [
+        plan_files_by_directory[directory]
+        for directory in PLAN_DIRECTORY_ORDER
+        if directory in plan_files_by_directory
+    ]
 
 
 def default_lab_schedule() -> str:

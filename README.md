@@ -41,12 +41,13 @@ the generators run.
 
 ### MA 213 content sources
 
-Course content is organized by week:
+Course content is organized by module:
 
-- `Week*/Lecture*/` directories contain lecture source files. The
+- `Moduel*/lecture*/` directories contain lecture source files. The
   `Lecture*_agenda.tex` files are the source for lecture topics, readings, and
   lecture learning-objective codes.
-- Non-lecture directories inside `Week*` contain lab or project materials. Their
+- `Moduel*/lab*/` and `Moduel*/project*/` directories contain lab or project
+  materials. Their
   `*_plan.md` files are the source for lab/project topics, objectives,
   activities, and deliverables.
 - Chapter folders such as `Chp 1`, `Chp 2`, and so on contain textbook-aligned
@@ -66,21 +67,23 @@ The website is generated from these planning and build files:
 - `Lecture_schedules.md` contains the editable
   lecture/discussion/office-hour/homework meeting pattern table that is copied
   to the top of `lecture_summary.md`.
-- `Week*/Lecture*/Lecture*_agenda.tex` files contain the source lecture topics,
+- `Moduel*/lecture*/Lecture*_agenda.tex` files contain the source lecture topics,
   readings, and lecture learning-objective codes.
 - `Lab_schedules.md` contains the editable lab/project meeting pattern table
   that is copied to the top of `lab_summary.md`.
-- Non-lecture `Week*` directories contain lab/project `*_plan.md` files. These
+- `Moduel*/lab*/` and `Moduel*/project*/` directories contain lab/project
+  `*_plan.md` files. These
   files are the source for lab/project topics, objectives, activities, and
   deliverables.
 - `important_dates.md` contains the editable semester date table used for
   holidays, recesses, final exams, and other academic calendar dates.
 - `lecture_summary.md` and `lab_summary.md` are generated summaries. Do not edit
   them directly unless you intentionally want to overwrite generator output.
-- `generate_lecture_summary.py` reads `Week*/Lecture*/Lecture*_agenda.tex`,
+- `generate_lecture_summary.py` reads
+  `Moduel*/lecture*/Lecture*_agenda.tex`,
   cross-references `learningObjectives.md`, and rewrites `lecture_summary.md`.
-- `generate_lab_summary.py` reads `*_plan.md` files from non-lecture
-  directories inside each `Week*` folder and rewrites `lab_summary.md`.
+- `generate_lab_summary.py` reads `*_plan.md` files from `lab*` and `project*`
+  directories inside each `Moduel*` folder and rewrites `lab_summary.md`.
 - `generate_schedule_table.py` reads the course schedule information and creates
   `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, and the
   generated Excel schedule.
@@ -124,11 +127,10 @@ Lab and project meeting days are controlled by the table in `Lab_schedules.md`.
 | Lab Deliverable | Tuesday   |            | 10:00 PM |
 ```
 
-Lab and project details are generated from `*_plan.md` files in each non-lecture
-directory under `Week*`. A directory is treated as a lab/project directory when
-its name does not start with `Lecture`. For example, `Week6/Lab5/Lab5_plan.md`
-supplies the Lab 5 section, while `Week8/P2W1/P2_1_plan.md` supplies the P2-1
-section.
+Lab and project details are generated from `*_plan.md` files in the `lab*` and
+`project*` directories under `Moduel*`. For example,
+`Moduel2/lab5/Lab5_plan.md` supplies the Lab 5 section, while
+`Moduel4/project2-part1/P2_1_plan.md` supplies the P2-1 section.
 
 Academic dates are controlled by the table in `important_dates.md`:
 
