@@ -10,8 +10,6 @@
 
 **Bold** = Core &nbsp;&nbsp; plain = Auxiliary
 
-Tags: `[Q#]` = quiz, `[L#]` = lab, `[P#]` = project.
-
 ---
 
 ## Module 1: Exploratory Data Analysis and Study Design

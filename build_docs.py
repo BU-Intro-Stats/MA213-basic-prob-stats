@@ -4,22 +4,23 @@ import shutil
 
 ROOT = Path(__file__).resolve().parent
 DOCS = ROOT / "docs"
+INSTRUCTOR_INPUTS = ROOT / "instructor_inputs"
+GENERATED_OUTPUTS = ROOT / "generated_outputs"
 
 SOURCE_PAGES = {
-    "weekly_schedule.md": "weekly_schedule.md",
-    "calendar_schedule.md": "calendar_schedule.md",
-    "course_calendar.ics": "course_calendar.ics",
-    "lecture_summary.md": "lecture_summary.md",
-    "lab_summary.md": "lab_summary.md",
-    "learningObjectives.md": "learning_objectives.md",
+    GENERATED_OUTPUTS / "weekly_schedule.md": "weekly_schedule.md",
+    GENERATED_OUTPUTS / "calendar_schedule.md": "calendar_schedule.md",
+    GENERATED_OUTPUTS / "course_calendar.ics": "course_calendar.ics",
+    INSTRUCTOR_INPUTS / "lecture_summary.md": "lecture_summary.md",
+    INSTRUCTOR_INPUTS / "lab_summary.md": "lab_summary.md",
+    INSTRUCTOR_INPUTS / "learningObjectives.md": "learning_objectives.md",
 }
 
 
 def main():
     DOCS.mkdir(exist_ok=True)
 
-    for source_name, output_name in SOURCE_PAGES.items():
-        source = ROOT / source_name
+    for source, output_name in SOURCE_PAGES.items():
         destination = DOCS / output_name
         shutil.copyfile(source, destination)
 

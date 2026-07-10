@@ -2,8 +2,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-LAB_SUMMARY = ROOT / "lab_summary.md"
-LAB_SCHEDULES = ROOT / "Lab_schedules.md"
+INSTRUCTOR_INPUTS = ROOT / "instructor_inputs"
+LAB_SUMMARY = INSTRUCTOR_INPUTS / "lab_summary.md"
+LAB_SCHEDULES = INSTRUCTOR_INPUTS / "Lab_schedules.md"
 
 PLAN_DIRECTORY_ORDER = (
     "lab1",

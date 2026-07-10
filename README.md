@@ -9,35 +9,51 @@ course materials. It contains lecture slides and agendas, lab and project
 materials, learning objectives, schedule metadata, and the generated website
 pages used by students.
 
-The main content workflow is source-first: edit the lecture agenda files,
-lab/project plan files, schedule files, learning objectives, and important
-dates; then regenerate the summary, schedule, calendar, and MkDocs pages.
+The main content workflow is module-first: edit the root ground-truth planning
+files, then regenerate the schedule, calendar, and MkDocs pages from those
+files. The current ground-truth files live in `instructor_inputs/`:
+`lecture_summary.md`, `learningObjectives.md`, `lab_summary.md`, and
+`quiz_schedule.md`.
+
+### Document organization
+
+Course planning documents are separated by role:
+
+- `instructor_inputs/` contains instructor-edited markdown files and schedule
+  source tables.
+- `generated_outputs/` contains files produced by the generators, including the
+  weekly schedule, calendar view, calendar download, and generated Excel
+  schedule.
+- `docs/` contains the MkDocs website source copied from the instructor inputs
+  and generated outputs. Do not edit generated copies in `docs/` by hand.
 
 ### Quick schedule update checklist
 
 For routine semester setup, instructors should manually update these three root
 files first:
 
-1. `important_dates.md` - semester year, first/last class day, holidays,
+1. `instructor_inputs/important_dates.md` - semester year, first/last class day, holidays,
    recesses, final exam dates, and other academic calendar dates.
-2. `Lecture_schedules.md` - lecture, discussion, office-hour, and homework
+2. `instructor_inputs/Lecture_schedules.md` - lecture, discussion, office-hour, and homework
    meeting days/times.
-3. `Lab_schedules.md` - lab/project meeting day and lab deliverable due day/time.
+3. `instructor_inputs/Lab_schedules.md` - lab/project meeting day and lab
+   deliverable due day/time.
+4. `instructor_inputs/quiz_schedule.md` - quiz placement after a lecture, once
+   the instructor decides where each quiz belongs.
 
 After those files are updated, run the generators from the repository root:
 
 ```bash
-python generate_lecture_summary.py
-python generate_lab_summary.py
 python generate_schedule_table.py
 python build_docs.py
 ```
 
-These commands regenerate the student-facing summaries, weekly schedule,
-calendar view, `.ics` calendar file, and the MkDocs copies in `docs/`. Do not
-edit `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, or
-the generated copies in `docs/` by hand; they will be overwritten the next time
-the generators run.
+These commands regenerate the weekly schedule, calendar view, `.ics` calendar
+file, and the MkDocs copies in `docs/`. Do not edit
+`generated_outputs/weekly_schedule.md`,
+`generated_outputs/calendar_schedule.md`,
+`generated_outputs/course_calendar.ics`, or the generated copies in `docs/` by
+hand; they will be overwritten the next time the generators run.
 
 ### MA 213 content sources
 
@@ -52,55 +68,78 @@ Course content is organized by module:
   activities, and deliverables.
 - Chapter folders such as `Chp 1`, `Chp 2`, and so on contain textbook-aligned
   slide/content sources used across lectures.
-- `learningObjectives.md` is the master list of course learning objectives.
-- `Lecture_schedules.md`, `Lab_schedules.md`, and `important_dates.md` provide
-  the schedule metadata used to build weekly and calendar views.
+- `instructor_inputs/lecture_summary.md` is the master lecture sequence by
+  module.
+- `instructor_inputs/learningObjectives.md` is the master list of course
+  learning objectives.
+- `instructor_inputs/lab_summary.md` is the master lab/project sequence by
+  module.
+- `instructor_inputs/quiz_schedule.md` is the instructor-editable quiz placement
+  table. Set
+  `After Lecture` to the lecture that should immediately precede each quiz.
+- `instructor_inputs/Lecture_schedules.md`,
+  `instructor_inputs/Lab_schedules.md`, and
+  `instructor_inputs/important_dates.md` provide the schedule metadata used to
+  build weekly and calendar views.
 
-Generated summary files, including `lecture_summary.md` and `lab_summary.md`,
-are derived from those sources. Edit the source files first, not generated
-summaries or generated copies in `docs/`.
+The website copies in `docs/` are derived from these root files. Edit the root
+files first, not the generated copies in `docs/`.
 
 ### Website generation files
 
 The website is generated from these planning and build files:
 
-- `Lecture_schedules.md` contains the editable
+- `instructor_inputs/Lecture_schedules.md` contains the editable
   lecture/discussion/office-hour/homework meeting pattern table that is copied
-  to the top of `lecture_summary.md`.
+  to the top of `instructor_inputs/lecture_summary.md`.
 - `Moduel*/lecture*/Lecture*_agenda.tex` files contain the source lecture topics,
   readings, and lecture learning-objective codes.
-- `Lab_schedules.md` contains the editable lab/project meeting pattern table
-  that is copied to the top of `lab_summary.md`.
+- `instructor_inputs/Lab_schedules.md` contains the editable lab/project meeting
+  pattern table that is copied to the top of
+  `instructor_inputs/lab_summary.md`.
 - `Moduel*/lab*/` and `Moduel*/project*/` directories contain lab/project
   `*_plan.md` files. These
   files are the source for lab/project topics, objectives, activities, and
   deliverables.
-- `important_dates.md` contains the editable semester date table used for
-  holidays, recesses, final exams, and other academic calendar dates.
-- `lecture_summary.md` and `lab_summary.md` are generated summaries. Do not edit
-  them directly unless you intentionally want to overwrite generator output.
+- `instructor_inputs/important_dates.md` contains the editable semester date
+  table used for holidays, recesses, final exams, and other academic calendar
+  dates.
+- `instructor_inputs/lecture_summary.md`,
+  `instructor_inputs/learningObjectives.md`, and
+  `instructor_inputs/lab_summary.md` are the ground-truth planning files used by
+  the website.
+- `instructor_inputs/quiz_schedule.md` controls where quiz events are inserted
+  into the lecture sequence. The schedule generator assigns each quiz to the
+  next regular class meeting after its `After Lecture` value.
 - `generate_lecture_summary.py` reads
   `Moduel*/lecture*/Lecture*_agenda.tex`,
-  cross-references `learningObjectives.md`, and rewrites `lecture_summary.md`.
+  cross-references `instructor_inputs/learningObjectives.md`, and can rewrite
+  `instructor_inputs/lecture_summary.md` when you intentionally want to rebuild
+  it from agenda files.
 - `generate_lab_summary.py` reads `*_plan.md` files from `lab*` and `project*`
-  directories inside each `Moduel*` folder and rewrites `lab_summary.md`.
+  directories inside each `Moduel*` folder and can rewrite
+  `instructor_inputs/lab_summary.md` when you intentionally want to rebuild it
+  from plan files.
 - `generate_schedule_table.py` reads the course schedule information and creates
-  `weekly_schedule.md`, `calendar_schedule.md`, `course_calendar.ics`, and the
-  generated Excel schedule.
+  `generated_outputs/weekly_schedule.md`,
+  `generated_outputs/calendar_schedule.md`,
+  `generated_outputs/course_calendar.ics`, and
+  `generated_outputs/Weekly Schedules.xlsx`. It also adds instructor flags when
+  scheduled lectures, quizzes, labs, or projects fall on or near holidays,
+  recesses, or other important dates.
 - `build_docs.py` copies/regenerates the source pages into the `docs/` directory
   used by MkDocs.
 - `mkdocs.yml` defines the site navigation, theme, and build settings.
 
-Edit the root source files first, not the generated copies in `docs/`. The
-generated summaries are refreshed by `generate_lecture_summary.py` and
-`generate_lab_summary.py`; generated MkDocs pages are refreshed by
-`build_docs.py`.
+Edit the root source files first, not the generated copies in `docs/`.
+`build_docs.py` refreshes the MkDocs pages from the root ground-truth files.
 
 ### Editable schedule inputs
 
 Lecture, discussion, office-hour, and homework meeting days are controlled by
-the table in `Lecture_schedules.md`. `generate_lecture_summary.py` copies this
-block to the top of `lecture_summary.md`:
+the table in `instructor_inputs/Lecture_schedules.md`.
+`generate_lecture_summary.py` copies this block to the top of
+`instructor_inputs/lecture_summary.md`:
 
 ```md
 | Event Type    | Weekdays                 | Start Time | End Time |
@@ -114,11 +153,13 @@ block to the top of `lecture_summary.md`:
 
 Lecture topics, readings, and lecture learning objectives are generated from
 the corresponding `Lecture*_agenda.tex` files. Learning objective labels are
-matched against `learningObjectives.md`, so entries such as `M1, LO1` are
-expanded with their objective title, assessment tag, and core/auxiliary status.
+matched against `instructor_inputs/learningObjectives.md`, so entries such as
+`M1, LO1` are expanded with their objective title, assessment tag, and
+core/auxiliary status.
 
-Lab and project meeting days are controlled by the table in `Lab_schedules.md`.
-`generate_lab_summary.py` copies this block to the top of `lab_summary.md`:
+Lab and project meeting days are controlled by the table in
+`instructor_inputs/Lab_schedules.md`. `generate_lab_summary.py` copies this
+block to the top of `instructor_inputs/lab_summary.md`:
 
 ```md
 | Event Type      | Weekday   | Start Time | End Time |
@@ -132,7 +173,20 @@ Lab and project details are generated from `*_plan.md` files in the `lab*` and
 `Moduel2/lab5/Lab5_plan.md` supplies the Lab 5 section, while
 `Moduel4/project2-part1/P2_1_plan.md` supplies the P2-1 section.
 
-Academic dates are controlled by the table in `important_dates.md`:
+Quiz placement is controlled by `instructor_inputs/quiz_schedule.md`:
+
+```md
+| Quiz | After Lecture | Status | Notes |
+| --- | --- | --- | --- |
+| Quiz 1 | Lecture 8 | tentative |  |
+```
+
+This means Quiz 1 is scheduled at the next regular class meeting after Lecture
+8. Update only the `After Lecture`, `Status`, and `Notes` cells when quiz timing
+changes.
+
+Academic dates are controlled by the table in
+`instructor_inputs/important_dates.md`:
 
 ```md
 | Start Date   | End Date    | Event                                             |
@@ -146,12 +200,10 @@ treated as belonging to the following calendar year for a fall semester.
 
 ### Local workflow
 
-After editing source files, regenerate the summaries, schedule, calendar, and
-MkDocs source pages locally with:
+After editing root source files, regenerate the schedule, calendar, and MkDocs
+source pages locally with:
 
 ```bash
-python generate_lecture_summary.py
-python generate_lab_summary.py
 python generate_schedule_table.py
 python build_docs.py
 ```
@@ -175,7 +227,8 @@ http://127.0.0.1:8000/calendar_schedule/
 ```
 
 The calendar page includes a download menu for Google Calendar, Apple Calendar,
-and Outlook. These choices all use the generated `course_calendar.ics` file.
+and Outlook. These choices all use the generated
+`generated_outputs/course_calendar.ics` file.
 
 If port `8000` is already in use, run the server on another port:
 
@@ -199,9 +252,11 @@ The GitHub Actions workflow in `.github/workflows/deploy-site.yml` installs the
 Python dependencies, regenerates schedule/site output, runs `mkdocs build
 --strict`, uploads the built `site/` artifact, and deploys it with
 `actions/deploy-pages`. Run the full local workflow above before committing when
-you have changed lecture agenda files, lab/project plan files, or schedule
-source files, especially `important_dates.md`, `Lecture_schedules.md`, or
-`Lab_schedules.md`.
+you have changed `instructor_inputs/lecture_summary.md`,
+`instructor_inputs/learningObjectives.md`,
+`instructor_inputs/lab_summary.md`, `instructor_inputs/quiz_schedule.md`, or
+schedule source files in `instructor_inputs/`, especially `important_dates.md`,
+`Lecture_schedules.md`, or `Lab_schedules.md`.
 
 This site is deployed with GitHub Actions, not GitHub Pages Jekyll. In the
 repository settings, GitHub Pages should be configured with:

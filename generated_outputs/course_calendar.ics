@@ -47,11 +47,11 @@ SUMMARY:Lecture 2
 DESCRIPTION:Introduction to data (Chapter 1)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-04-2-Office-Hour-1@ma213-course-calendar
+UID:2026-09-04-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260904T150000
-DTEND;TZID=America/New_York:20260904T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20260904T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-06-1-Homework-Week-1@ma213-course-calendar
@@ -83,7 +83,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260909T111500
 DTEND;TZID=America/New_York:20260909T120500
 SUMMARY:Lecture 3
-DESCRIPTION:Examining numerical data (Chapter 2.1)
+DESCRIPTION:Examining numerical data (Chapter 2.1)\nNear Labor Day Holiday\
+ , Classes Suspended
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-09-2-Lab-2@ma213-course-calendar
@@ -94,7 +95,7 @@ SUMMARY:Lab 2
 DESCRIPTION:Reinforce the ideas from the data  lectures by asking students 
  to move from raw data to meaningful descriptions.\nAnchor: Lecture 4 | Del
  iverables: Lab1 in-lab activity submission | Tutorial 1 | Tutorial 2 (pre-
- lab for lab2)
+ lab for lab2) | Near Labor Day Holiday\, Classes Suspended
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-10-1-Discussion-Section@ma213-course-calendar
@@ -112,11 +113,11 @@ SUMMARY:Lecture 4
 DESCRIPTION:Considering categorical data (Chapter 2.2)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-11-2-Office-Hour-1@ma213-course-calendar
+UID:2026-09-11-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260911T150000
-DTEND;TZID=America/New_York:20260911T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20260911T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-13-1-Homework-Week-2@ma213-course-calendar
@@ -133,13 +134,6 @@ DTSTART;TZID=America/New_York:20260914T111500
 DTEND;TZID=America/New_York:20260914T120500
 SUMMARY:Lecture 5
 DESCRIPTION:Two case studies
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-09-14-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20260914T160000
-DTEND;TZID=America/New_York:20260914T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-15-1-Lab-3-Deliverables-Due@ma213-course-calendar
@@ -183,11 +177,11 @@ SUMMARY:Lecture 7
 DESCRIPTION:Conditional Probability\, Sampling (Chapters 3.2–3.3)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-18-2-Office-Hour-1@ma213-course-calendar
+UID:2026-09-18-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260918T150000
-DTEND;TZID=America/New_York:20260918T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20260918T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-20-1-Homework-Week-3@ma213-course-calendar
@@ -207,13 +201,6 @@ DESCRIPTION:Sampling from a small population\, Random Variables (Chapters 3
  .3–3.4)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-21-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20260921T160000
-DTEND;TZID=America/New_York:20260921T170000
-SUMMARY:Office Hour 2
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-09-22-1-P1-1-Deliverables-Due@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260922T220000
@@ -226,7 +213,7 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260923T111500
 DTEND;TZID=America/New_York:20260923T120500
 SUMMARY:Quiz 1
-DESCRIPTION:Quiz in the scheduled course window.
+DESCRIPTION:tentative
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-23-2-P1-1@ma213-course-calendar
@@ -253,11 +240,11 @@ SUMMARY:Lecture 9
 DESCRIPTION:Continuous Distributions (Chapter 3.5)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-25-2-Office-Hour-1@ma213-course-calendar
+UID:2026-09-25-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260925T150000
-DTEND;TZID=America/New_York:20260925T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20260925T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-27-1-Homework-Week-4@ma213-course-calendar
@@ -275,13 +262,6 @@ DTEND;TZID=America/New_York:20260928T120500
 SUMMARY:Lecture 10
 DESCRIPTION:Continuous Distributions (Chapter 3.5)\, Normal distribution (C
  hapter 4.1)
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-09-28-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20260928T160000
-DTEND;TZID=America/New_York:20260928T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-29-1-Lab-4-Deliverables-Due@ma213-course-calendar
@@ -324,11 +304,11 @@ SUMMARY:Lecture 12
 DESCRIPTION:Geometric distribution (Chapter 4.2)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-02-2-Office-Hour-1@ma213-course-calendar
+UID:2026-10-02-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261002T150000
-DTEND;TZID=America/New_York:20261002T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261002T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-04-1-Homework-Week-5@ma213-course-calendar
@@ -345,13 +325,6 @@ DTSTART;TZID=America/New_York:20261005T111500
 DTEND;TZID=America/New_York:20261005T120500
 SUMMARY:Lecture 13
 DESCRIPTION:Binomial distribution (Chapter 4.3)
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-10-05-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261005T160000
-DTEND;TZID=America/New_York:20261005T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-06-1-Lab-5-Deliverables-Due@ma213-course-calendar
@@ -394,11 +367,11 @@ SUMMARY:Lecture 15
 DESCRIPTION:Point estimates and sampling variability (Chapter 5.1)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-09-2-Office-Hour-1@ma213-course-calendar
+UID:2026-10-09-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261009T150000
-DTEND;TZID=America/New_York:20261009T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261009T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-11-1-Homework-Week-6@ma213-course-calendar
@@ -431,7 +404,8 @@ DTSTART;TZID=America/New_York:20261013T111500
 DTEND;TZID=America/New_York:20261013T120500
 SUMMARY:Lecture 16
 DESCRIPTION:Point estimates and sampling variability\, continued (Chapter 5
- .1)
+ .1)\nNear Indigenous People's Day Holiday\, Classes Suspended | Substitute
+  a Monday schedule of classes
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-13-3-P1-2-Deliverables-Due@ma213-course-calendar
@@ -446,7 +420,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261014T111500
 DTEND;TZID=America/New_York:20261014T120500
 SUMMARY:Quiz 2
-DESCRIPTION:Quiz in the scheduled course window.
+DESCRIPTION:tentative\nNear Indigenous People's Day Holiday\, Classes Suspe
+ nded | Near Substitute a Monday schedule of classes
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-14-2-P1-2@ma213-course-calendar
@@ -454,7 +429,9 @@ DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20261014
 DTEND;VALUE=DATE:20261015
 SUMMARY:P1-2
-DESCRIPTION:Deliverables: Lab5 in-lab activity submission
+DESCRIPTION:Deliverables: Lab5 in-lab activity submission | Near Indigenous
+  People's Day Holiday\, Classes Suspended | Near Substitute a Monday sched
+ ule of classes
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-15-1-Discussion-Section@ma213-course-calendar
@@ -480,11 +457,11 @@ SUMMARY:Lecture 17
 DESCRIPTION:Confidence intervals (Chapter 5.2)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-16-3-Office-Hour-1@ma213-course-calendar
+UID:2026-10-16-3-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261016T150000
-DTEND;TZID=America/New_York:20261016T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261016T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-18-1-Homework-Week-7@ma213-course-calendar
@@ -509,13 +486,6 @@ DTSTART;TZID=America/New_York:20261019T111500
 DTEND;TZID=America/New_York:20261019T120500
 SUMMARY:Lecture 18
 DESCRIPTION:Hypothesis testing for a proportion (Chapter 5.3)
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-10-19-3-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261019T160000
-DTEND;TZID=America/New_York:20261019T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-20-1-P2-1-Deliverables-Due@ma213-course-calendar
@@ -556,11 +526,11 @@ SUMMARY:Lecture 20
 DESCRIPTION:Inference for a single proportion (Chapter 6.1)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-23-2-Office-Hour-1@ma213-course-calendar
+UID:2026-10-23-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261023T150000
-DTEND;TZID=America/New_York:20261023T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261023T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-25-1-Homework-Week-8@ma213-course-calendar
@@ -577,13 +547,6 @@ DTSTART;TZID=America/New_York:20261026T111500
 DTEND;TZID=America/New_York:20261026T120500
 SUMMARY:Lecture 21
 DESCRIPTION:Difference of two proportions (Chapter 6.2)
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-10-26-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261026T160000
-DTEND;TZID=America/New_York:20261026T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-27-1-Lab-6-Deliverables-Due@ma213-course-calendar
@@ -628,11 +591,11 @@ SUMMARY:Lecture 23
 DESCRIPTION:Testing for independence in two-way tables (Chapter 6.4)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-30-2-Office-Hour-1@ma213-course-calendar
+UID:2026-10-30-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261030T150000
-DTEND;TZID=America/New_York:20261030T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261030T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-01-1-Homework-Week-9@ma213-course-calendar
@@ -651,13 +614,6 @@ SUMMARY:Lecture 24
 DESCRIPTION:One-sample means with the t-distribution (Chapter 7.1)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-02-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261102T160000
-DTEND;TZID=America/New_York:20261102T170000
-SUMMARY:Office Hour 2
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-11-03-1-P2-2-Deliverables-Due@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261103T220000
@@ -670,7 +626,7 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261104T111500
 DTEND;TZID=America/New_York:20261104T120500
 SUMMARY:Quiz 3
-DESCRIPTION:Quiz in the scheduled course window.
+DESCRIPTION:tentative
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-04-2-P2-2@ma213-course-calendar
@@ -696,11 +652,11 @@ SUMMARY:Lecture 25
 DESCRIPTION:CIs for one-sample means\, Paired data (Chapter 7.2)
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-06-2-Office-Hour-1@ma213-course-calendar
+UID:2026-11-06-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261106T150000
-DTEND;TZID=America/New_York:20261106T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261106T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-08-1-Homework-Week-10@ma213-course-calendar
@@ -717,13 +673,6 @@ DTSTART;TZID=America/New_York:20261109T111500
 DTEND;TZID=America/New_York:20261109T120500
 SUMMARY:Lecture 26
 DESCRIPTION:Difference of two means (Chapter 7.3)
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-11-09-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261109T160000
-DTEND;TZID=America/New_York:20261109T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-10-1-P2-3-Deliverables-Due@ma213-course-calendar
@@ -765,11 +714,11 @@ DESCRIPTION:Issues with Hypothesis Testing 1: The traps of insufficient pow
  er
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-13-2-Office-Hour-1@ma213-course-calendar
+UID:2026-11-13-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261113T150000
-DTEND;TZID=America/New_York:20261113T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261113T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-15-1-Homework-Week-11@ma213-course-calendar
@@ -786,13 +735,6 @@ DTSTART;TZID=America/New_York:20261116T111500
 DTEND;TZID=America/New_York:20261116T120500
 SUMMARY:Lecture 29
 DESCRIPTION:Comparing many means with ANOVA (Chapter 7.5)
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-11-16-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261116T160000
-DTEND;TZID=America/New_York:20261116T170000
-SUMMARY:Office Hour 2
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-17-1-Lab-7-Deliverables-Due@ma213-course-calendar
@@ -836,11 +778,11 @@ DESCRIPTION:Beyond Recipes: Frequentist and Bayesian Approaches to Statisti
  cal Modeling
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-20-2-Office-Hour-1@ma213-course-calendar
+UID:2026-11-20-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261120T150000
-DTEND;TZID=America/New_York:20261120T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261120T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-22-1-Homework-Week-12@ma213-course-calendar
@@ -856,14 +798,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261123T111500
 DTEND;TZID=America/New_York:20261123T120500
 SUMMARY:Lecture 32
-DESCRIPTION:Frequentist modeling using the likelihood function
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-11-23-2-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261123T160000
-DTEND;TZID=America/New_York:20261123T170000
-SUMMARY:Office Hour 2
+DESCRIPTION:Frequentist modeling using the likelihood function\nNear Thanks
+ giving Recess
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-24-1-Lab-8-Deliverables-Due@ma213-course-calendar
@@ -926,7 +862,7 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261130T111500
 DTEND;TZID=America/New_York:20261130T120500
 SUMMARY:Quiz 4
-DESCRIPTION:Quiz in the scheduled course window.
+DESCRIPTION:tentative\nNear Thanksgiving Recess | Classes Resume
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-30-3-Lab-8@ma213-course-calendar
@@ -934,7 +870,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:Lab 8
-DESCRIPTION:Deliverables: P2 Resubmission
+DESCRIPTION:Deliverables: P2 Resubmission | Near Thanksgiving Recess | Clas
+ ses Resume
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-30-4-Discussion-Section@ma213-course-calendar
@@ -952,19 +889,13 @@ SUMMARY:Homework Week 13
 DESCRIPTION:Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-30-6-Office-Hour-2@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261130T160000
-DTEND;TZID=America/New_York:20261130T170000
-SUMMARY:Office Hour 2
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-12-02-1-Lecture-33@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261202T111500
 DTEND;TZID=America/New_York:20261202T120500
 SUMMARY:Lecture 33
-DESCRIPTION:Bayesian modeling with discrete distributions
+DESCRIPTION:Bayesian modeling with discrete distributions\nNear Classes Res
+ ume
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-03-1-Discussion-Section@ma213-course-calendar
@@ -982,11 +913,11 @@ SUMMARY:Lecture 34
 DESCRIPTION:Bayesian modeling with the beta-binomial model
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-12-04-2-Office-Hour-1@ma213-course-calendar
+UID:2026-12-04-2-Office-Hours@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261204T150000
-DTEND;TZID=America/New_York:20261204T160000
-SUMMARY:Office Hour 1
+DTEND;TZID=America/New_York:20261204T170000
+SUMMARY:Office Hours
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-06-1-Homework-Week-14@ma213-course-calendar
@@ -1010,7 +941,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261209T111500
 DTEND;TZID=America/New_York:20261209T120500
 SUMMARY:Quiz 5
-DESCRIPTION:Quiz in the scheduled course window.
+DESCRIPTION:tentative\nNear Last Day of Classes\; Second Seven-Week Session
+  Ends | Near Study Period
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-10-1-Academic-Calendar@ma213-course-calendar
@@ -1026,7 +958,15 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261210T111500
 DTEND;TZID=America/New_York:20261210T120500
 SUMMARY:Lecture 36
-DESCRIPTION:Wrap-up and evaluations
+DESCRIPTION:Wrap-up and evaluations\nLast Day of Classes\; Second Seven-Wee
+ k Session Ends | Near Study Period
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-10-3-Discussion-Section@ma213-course-calendar
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=America/New_York:20261210T122000
+DTEND;TZID=America/New_York:20261210T131000
+SUMMARY:Discussion Section
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-11-1-Academic-Calendar@ma213-course-calendar

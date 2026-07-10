@@ -1,7 +1,7 @@
 # Calendar View
 
 <div class="calendar-note">
-This month view is generated from course summaries and `important_dates.md`. It assigns lectures and quizzes to class-meeting dates from September 2, 2026 through December 10, 2026; exact rooms, section times, and office-hour locations should follow the current syllabus.
+This month view is generated from course summaries and `instructor_inputs/important_dates.md`. It assigns lectures and quizzes to class-meeting dates from September 2, 2026 through December 10, 2026; exact rooms, section times, and office-hour locations should follow the current syllabus.
 </div>
 
 <details class="calendar-download-menu">
@@ -71,8 +71,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -112,12 +112,13 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 3</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Examining numerical data (Chapter 2.1)</p>
+<p class="calendar-event__meta">Near Labor Day Holiday, Classes Suspended</p>
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 2</h3>
 <p>Reinforce the ideas from the data  lectures by asking students to move from raw data to meaningful descriptions.</p>
-<p class="calendar-event__meta">Anchor: Lecture 4 | Deliverables: Lab1 in-lab activity submission | Tutorial 1 | Tutorial 2 (pre-lab for lab2)</p>
+<p class="calendar-event__meta">Anchor: Lecture 4 | Deliverables: Lab1 in-lab activity submission | Tutorial 1 | Tutorial 2 (pre-lab for lab2) | Near Labor Day Holiday, Classes Suspended</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -138,8 +139,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -162,11 +163,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 5</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Two case studies</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -211,8 +207,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -236,11 +232,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Sampling from a small population, Random Variables (Chapters 3.3–3.4)</p>
 </article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
-</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">22</div>
@@ -257,7 +248,7 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 1</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Quiz in the scheduled course window.</p>
+<p>tentative</p>
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
@@ -283,8 +274,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -307,11 +298,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 10</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Continuous Distributions (Chapter 3.5), Normal distribution (Chapter 4.1)</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -411,8 +397,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -435,11 +421,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 13</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Binomial distribution (Chapter 4.3)</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -484,8 +465,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -521,6 +502,7 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 16</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Point estimates and sampling variability, continued (Chapter 5.1)</p>
+<p class="calendar-event__meta">Near Indigenous People&#x27;s Day Holiday, Classes Suspended | Substitute a Monday schedule of classes</p>
 </article>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
@@ -535,12 +517,13 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 2</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Quiz in the scheduled course window.</p>
+<p>tentative</p>
+<p class="calendar-event__meta">Near Indigenous People&#x27;s Day Holiday, Classes Suspended | Near Substitute a Monday schedule of classes</p>
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>P1-2</h3>
-<p class="calendar-event__meta">Deliverables: Lab5 in-lab activity submission</p>
+<p class="calendar-event__meta">Deliverables: Lab5 in-lab activity submission | Near Indigenous People&#x27;s Day Holiday, Classes Suspended | Near Substitute a Monday schedule of classes</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -566,8 +549,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -595,11 +578,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 18</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Hypothesis testing for a proportion (Chapter 5.3)</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -643,8 +621,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -667,11 +645,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 21</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Difference of two proportions (Chapter 6.2)</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -716,8 +689,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -775,11 +748,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>One-sample means with the t-distribution (Chapter 7.1)</p>
 </article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
-</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">3</div>
@@ -796,7 +764,7 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 3</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Quiz in the scheduled course window.</p>
+<p>tentative</p>
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
@@ -822,8 +790,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -846,11 +814,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 26</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Difference of two means (Chapter 7.3)</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -894,8 +857,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -918,11 +881,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 29</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Comparing many means with ANOVA (Chapter 7.5)</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -967,8 +925,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -991,11 +949,7 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 32</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Frequentist modeling using the likelihood function</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
+<p class="calendar-event__meta">Near Thanksgiving Recess</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1058,12 +1012,13 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 4</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Quiz in the scheduled course window.</p>
+<p>tentative</p>
+<p class="calendar-event__meta">Near Thanksgiving Recess | Classes Resume</p>
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 8</h3>
-<p class="calendar-event__meta">Deliverables: P2 Resubmission</p>
+<p class="calendar-event__meta">Deliverables: P2 Resubmission | Near Thanksgiving Recess | Classes Resume</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
@@ -1075,11 +1030,6 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Homework Week 13</h3>
 <p class="calendar-event__time">2:55 PM-3:00 PM</p>
 <p>Weekly homework component.</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 2</h3>
-<p class="calendar-event__time">4:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date calendar-date--outside">
@@ -1148,6 +1098,7 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 33</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Bayesian modeling with discrete distributions</p>
+<p class="calendar-event__meta">Near Classes Resume</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1168,8 +1119,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour 1</h3>
-<p class="calendar-event__time">3:00 PM-4:00 PM</p>
+<h3>Office Hours</h3>
+<p class="calendar-event__time">3:00 PM-5:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1204,7 +1155,8 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 5</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Quiz in the scheduled course window.</p>
+<p>tentative</p>
+<p class="calendar-event__meta">Near Last Day of Classes; Second Seven-Week Session Ends | Near Study Period</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1219,6 +1171,12 @@ This month view is generated from course summaries and `important_dates.md`. It 
 <h3>Lecture 36</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Wrap-up and evaluations</p>
+<p class="calendar-event__meta">Last Day of Classes; Second Seven-Week Session Ends | Near Study Period</p>
+</article>
+<article class="calendar-event calendar-event--discussion">
+<div class="calendar-event__kind">Discussion</div>
+<h3>Discussion Section</h3>
+<p class="calendar-event__time">12:20 PM-1:10 PM</p>
 </article>
 </section>
 <section class="calendar-date calendar-date--term-edge">
