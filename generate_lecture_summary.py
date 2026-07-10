@@ -3,18 +3,10 @@ import re
 
 
 ROOT = Path(__file__).resolve().parent
-LECTURE_SUMMARY = ROOT / "lecture_summary.md"
-LEARNING_OBJECTIVES = ROOT / "learningObjectives.md"
-LECTURE_SCHEDULES = ROOT / "Lecture_schedules.md"
-
-
-QUIZ_AFTER_LECTURE = {
-    8: "Quiz 1",
-    16: "Quiz 2",
-    24: "Quiz 3",
-    32: "Quiz 4",
-    35: "Quiz 5",
-}
+INSTRUCTOR_INPUTS = ROOT / "instructor_inputs"
+LECTURE_SUMMARY = INSTRUCTOR_INPUTS / "lecture_summary.md"
+LEARNING_OBJECTIVES = INSTRUCTOR_INPUTS / "learningObjectives.md"
+LECTURE_SCHEDULES = INSTRUCTOR_INPUTS / "Lecture_schedules.md"
 
 
 def clean_text(text: str) -> str:
@@ -202,11 +194,6 @@ def build_summary(lectures, intro: str) -> str:
         else:
             lines.append("- **Learning Objectives:** (none listed)")
         lines.append("")
-
-        quiz = QUIZ_AFTER_LECTURE.get(lecture["lecture_num"])
-        if quiz:
-            lines.append(f"### {quiz}")
-            lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
 

@@ -67,8 +67,6 @@
   - M2, LO3: Compute Probabilities Using Various Tools
   - M2, LO4: Understand and Compute Expectations and Variances
 
-### Quiz 1
-
 ### Lecture 9
 - **Topic:** Continuous Distributions (Chapter 3.5)
 - **Reading:** Chapter 4.1
@@ -135,8 +133,6 @@
   - M3, LO2: Visualize and Interpret Sampling Distributions
   - M3, LO3: Inference for a Single Proportion
 
-### Quiz 2
-
 ### Lecture 17
 - **Topic:** Confidence intervals (Chapter 5.2)
 - **Reading:** Chapter 5.3
@@ -192,8 +188,6 @@
 - **Learning Objectives:**
   - M4, LO3: Explain and Use the t-Distribution
   - M4, LO4: Conduct and Interpret t-Tests
-
-### Quiz 3
 
 ### Lecture 25
 - **Topic:** CIs for one-sample means, Paired data (Chapter 7.2)
@@ -255,8 +249,6 @@
 - **Learning Objectives:**
   - M5, LO1: The Frequentist Perspective
 
-### Quiz 4
-
 ### Lecture 33
 - **Topic:** Bayesian modeling with discrete distributions
 - **Reading:** Bayes' Rules Chapter 3
@@ -278,8 +270,6 @@
   - M5, LO1: The Frequentist Perspective
   - M5, LO2: The Bayesian Perspective
   - M5, LO3: Comparing Bayesian and Frequentist Approaches
-
-### Quiz 5
 
 ### Lecture 36
 - **Topic:** Wrap-up and evaluations
