@@ -325,7 +325,7 @@ This means Quiz 1 is scheduled at the next regular class meeting after Lecture
 changes.
 
 Prerequisite flags are inferred from `instructor_inputs/learningObjectives.md`.
-Quiz flags use the `Q#` tags, lab flags use the `L#` tags, and project flags use
+Quiz flags use the `Q#` tags, lab flags use the `Lab#` tags, and project flags use
 the `P1` or `P2` tags. If an event has no matching learning-objective tag, the
 weekly schedule and calendar show a missing-prerequisite-metadata flag so the
 instructor knows where an explicit prerequisite entry is needed.
@@ -348,7 +348,7 @@ The script creates flags from three sources:
    - Lecture objective codes come from `instructor_inputs/lecture_summary.md`,
      using codes such as `M2, LO4`.
    - Quiz/lab/project prerequisite tags come from
-     `instructor_inputs/learningObjectives.md`, using tags such as `Q2`, `L5`,
+     `instructor_inputs/learningObjectives.md`, using tags such as `Q2`, `Lab5`,
      `P1`, or `P2`.
    - The script checks whether each prerequisite objective has already appeared
      in a prior lecture.
@@ -365,7 +365,7 @@ Common prerequisite flag meanings:
 - `Prerequisite may be same-day`: the objective first appears on the same date
   as the quiz, lab, or project event.
 - `Missing prerequisite metadata`: the quiz, lab, or project does not have a
-  matching `Q#`, `L#`, `P1`, or `P2` tag in `learningObjectives.md`.
+  matching `Q#`, `Lab#`, `P1`, or `P2` tag in `learningObjectives.md`.
 
 The local instructor build shows these flags:
 
