@@ -1,5 +1,22 @@
 # MA 213 Lecture Summary
 
+## Course Meeting Pattern
+
+Edit this table when the recurring course meeting days change.
+
+| Event Type | Weekdays | Start Time | End Time |
+| --- | --- | --- | --- |
+| Lecture | Monday, Wednesday, Friday | 11:15AM | 12:05PM |
+| Discussion B1 | Monday | 3:35PM | 4:25PM |
+| Discussion B2 | Tuesday | 11:15AM | 12:05PM |
+| Discussion B3 | Tuesday | 3:35PM | 4:25PM |
+| Discussion B4 | Wednesday | 8:00AM | 8:50AM |
+| Discussion B5 | Wednesday | 9:05AM | 9:55AM |
+| Discussion B6 | Wednesday | 10:10AM | 11:00AM |
+| Office Hour 1 | Friday | 3:00PM | 4:00PM |
+| Office Hour 2 | Monday | 4:00PM | 5:00PM |
+| Homework | Sunday | 2:55PM | 3:00PM |
+
 ---
 
 ## Module 1: Exploratory Data Analysis and Study Design

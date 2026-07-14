@@ -32,9 +32,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Regenerate schedule and docs
-        run: |
-          python generate_schedule_table.py
-          python build_docs.py
+        env:
+          MA213_PUBLIC_SITE: "1"
+        run: python generate_schedule_table.py
 
       - name: Build site
         run: mkdocs build --strict
