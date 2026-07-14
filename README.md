@@ -275,6 +275,59 @@ Edit the root source files first, not the generated copies in `docs/`.
 `generate_schedule_table.py` refreshes the MkDocs pages from the root
 ground-truth files.
 
+### Reusable Course Package
+
+The schedule generator now lives in the local Python package
+`course_site_builder`. The root `generate_schedule_table.py` file is a thin
+MA 213 wrapper:
+
+```py
+from pathlib import Path
+
+from course_site_builder.schedule import CourseSiteConfig, main
+
+
+if __name__ == "__main__":
+    main(CourseSiteConfig.for_repo(Path(__file__).resolve().parent, "MA213", course_title="MA 213"))
+```
+
+This keeps the instructor workflow unchanged:
+
+```bash
+python generate_schedule_table.py
+```
+
+For another course repository, such as MA 214, copy the package directory or
+install this package, keep the same `instructor_inputs/`, `generated_outputs/`,
+and `docs/` folder pattern, and create a course-specific wrapper. An example is
+provided in `examples/MA214_generate_schedule_table.py`:
+
+```py
+from pathlib import Path
+
+from course_site_builder.schedule import CourseSiteConfig, main
+
+
+if __name__ == "__main__":
+    main(CourseSiteConfig.for_repo(Path(__file__).resolve().parent, "MA214", course_title="MA 214"))
+```
+
+The public-site environment variable is based on the course code. For MA 214,
+the public build command would be:
+
+```bash
+MA214_PUBLIC_SITE=1 python generate_schedule_table.py
+```
+
+The reusable package currently assumes the same markdown filenames and syntax
+used by MA 213: `lecture_summary.md`, `lab_summary.md`,
+`learningObjectives.md`, `quiz_schedule.md`, `Lecture_schedules.md`,
+`Lab_schedules.md`, and `important_dates.md`.
+
+When setting up another course, put the wrapper at the root of that course
+repository as `generate_schedule_table.py`. The example file lives in
+`examples/` only as a template; it is not part of the routine MA 213 build.
+
 ### Editable schedule inputs
 
 Lecture, discussion, office-hour, and homework meeting days are controlled by
