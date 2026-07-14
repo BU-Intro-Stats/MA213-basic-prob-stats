@@ -528,7 +528,7 @@ def parse_learning_objectives(path: Path):
         for tag_group in re.findall(r"\[([^\]]+)\]", rest):
             for tag in re.split(r",|;", tag_group):
                 tag = clean_text(tag).upper()
-                if re.fullmatch(r"Q\d+|L\d+|P\d+", tag):
+                if re.fullmatch(r"Q\d+|LAB\d+|P\d+", tag):
                     objectives_by_tag[tag].append(code)
 
     return objectives_by_code, dict(objectives_by_tag)
@@ -562,7 +562,7 @@ def match_objective_text(text: str, lookup):
 def lab_prerequisite_tag(title: str):
     lab_match = re.match(r"Lab\s+(\d+)", title)
     if lab_match:
-        return f"L{int(lab_match.group(1))}"
+        return f"LAB{int(lab_match.group(1))}"
     project_match = re.match(r"P(\d+)", title)
     if project_match:
         return f"P{int(project_match.group(1))}"
