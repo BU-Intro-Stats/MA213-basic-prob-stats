@@ -319,10 +319,39 @@ the public build command would be:
 MA214_PUBLIC_SITE=1 python generate_schedule_table.py
 ```
 
-The reusable package currently assumes the same markdown filenames and syntax
-used by MA 213: `lecture_summary.md`, `lab_summary.md`,
-`learningObjectives.md`, `quiz_schedule.md`, `Lecture_schedules.md`,
-`Lab_schedules.md`, and `important_dates.md`.
+By default, the reusable package uses the same folder and markdown filenames as
+MA 213: `instructor_inputs/`, `generated_outputs/`, `docs/`,
+`lecture_summary.md`, `lab_summary.md`, `learningObjectives.md`,
+`quiz_schedule.md`, `Lecture_schedules.md`, `Lab_schedules.md`, and
+`important_dates.md`. Another course can override those names in its wrapper:
+
+```py
+main(
+    CourseSiteConfig.for_repo(
+        Path(__file__).resolve().parent,
+        "MA214",
+        course_title="MA 214",
+        term_year=2026,
+        learning_objectives_filename="learning_objectives.md",
+        xlsx_filename="Weekly Schedule.xlsx",
+    )
+)
+```
+
+Common `CourseSiteConfig` overrides:
+
+- `term_year`: fallback calendar year when `important_dates.md` does not state
+  the semester year.
+- `local_timezone`: timezone used in the generated `.ics` calendar.
+- `instructor_inputs_dir`, `generated_outputs_dir`, `docs_dir`: root folder
+  names or paths.
+- `lecture_summary_filename`, `lab_summary_filename`,
+  `learning_objectives_filename`, `quiz_schedule_filename`,
+  `lecture_schedule_filename`, `lab_schedule_filename`,
+  `important_dates_filename`: instructor input filenames.
+- `weekly_schedule_filename`, `calendar_schedule_filename`,
+  `calendar_ics_filename`, `xlsx_filename`: generated output filenames.
+- `docs_*_filename`: destination names for files copied into `docs/`.
 
 When setting up another course, put the wrapper at the root of that course
 repository as `generate_schedule_table.py`. The example file lives in
