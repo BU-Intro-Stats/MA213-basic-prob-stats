@@ -1,15 +1,14 @@
 # MA 213 Lab Summary
 
+<!--
+Instructor notes:
+- Calendar: each Lab/Project heading becomes a compact calendar event. Lecture Anchor appears as metadata; Purpose, Primary Objectives, activities, Deliverables, and prerequisite flags are not shown on the lab meeting event.
+- Calendar due events: Deliverables create separate "Deliverables Due" calendar events on the day set in Lab_schedules.md.
+- Weekly schedule: Lab/Project headings fill the "Labs" column. Deliverables fill the "Lab Deliverables" column.
+- Primary Objectives: used for fallback prerequisite matching when learningObjectives.md tags are missing; they are not displayed directly in the weekly schedule or calendar.
+-->
+
 This version preserves the original course sequence so that the lab flow stays familiar to students while still being aligned with the lecture schedule and learning objectives.
-
-## Lab Meeting Pattern
-
-Edit this table when the recurring lab or project meeting day changes.
-
-| Event Type | Weekday | Start Time | End Time |
-| --- | --- | --- | --- |
-| Lab / Project | Friday |        |        |
-| Lab Deliverable | Thursday |         | 10:00PM |
 
 ## Lab details
 
@@ -86,7 +85,7 @@ Edit this table when the recurring lab or project meeting day changes.
 
 ---
 
-### P1-1: Project 1 launch
+### Project1-1: Project 1 launch
 
 - **Lecture Anchor:**
 - **Purpose:** Use this session after Lab 3 to introduce the project prompt, rubric, data access, and timeline. Students should leave with a clear project question and a first analysis plan.
@@ -144,7 +143,7 @@ Edit this table when the recurring lab or project meeting day changes.
 
 ---
 
-### P1-2: Project 1 workday
+### Project1-2: Project 1 workday
 
 - **Lecture Anchor:**
 - **Purpose:** Use this session after Lab 5 to help students refine plots, summaries, and presentation structure. The emphasis should remain on data interpretation and clear communication.
@@ -157,7 +156,7 @@ Edit this table when the recurring lab or project meeting day changes.
 
 ---
 
-### P2-1: Project 2 launch
+### Project2-1: Project 2 launch
 
 - **Lecture Anchor:**
 - **Purpose:** Use this session before or near Lab 6 so students can begin connecting inference methods to their report. Students should identify candidate response and explanatory variables and think about possible methods.
@@ -166,7 +165,7 @@ Edit this table when the recurring lab or project meeting day changes.
 - **In-Lab Activity:**
 - **Post-Lab Activity:**
 - **Deliverables:**
-  - P1 Video
+  - Project1 Video
 
 ---
 
@@ -191,11 +190,11 @@ Edit this table when the recurring lab or project meeting day changes.
 - **Deliverables:**
   - Lab6 in-lab activity submission
   - Tutorial 6 (pre-lab for lab6)
-  - P2 Outline
+  - Project2 Outline
 
 ---
 
-### P2-2: Project 2 workdays
+### Project2-2: Project 2 workdays
 
 - **Lecture Anchor:**
 - **Purpose:** Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing. Students should be encouraged to justify both the method choice and the interpretation.
@@ -208,7 +207,7 @@ Edit this table when the recurring lab or project meeting day changes.
 
 ---
 
-### P2-3: Project 2 workdays
+### Project2-3: Project 2 workdays
 
 - **Lecture Anchor:**
 - **Purpose:** Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing. Students should be encouraged to justify both the method choice and the interpretation.
@@ -217,7 +216,7 @@ Edit this table when the recurring lab or project meeting day changes.
 - **In-Lab Activity:**
 - **Post-Lab Activity:**
 - **Deliverables:**
-  - P2 Progress Report
+  - Project2 Progress Report
 
 ---
 
@@ -235,7 +234,7 @@ Edit this table when the recurring lab or project meeting day changes.
 - **Post-Lab Activity:**
   - Submit a brief interpretation of the chosen modeling approach
 - **Deliverables:**
-  - P2 writeup
+  - Project2 writeup
   - Tutorial 7 (pre-lab for lab7)
 
 ---
@@ -249,6 +248,6 @@ Edit this table when the recurring lab or project meeting day changes.
 - **In-Lab Activity:**
 - **Post-Lab Activity:**
 - **Deliverables:**
-  - P2 Resubmission
+  - Project2 Resubmission
 
 ---

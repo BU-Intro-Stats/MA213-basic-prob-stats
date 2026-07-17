@@ -24,6 +24,6 @@
 **Deliverables**
 - Lab6 in-lab activity submission 
 - Tutorial 6 (pre-lab for lab6)
-- P2 Outline
+- Project2 Outline
 
 ---
