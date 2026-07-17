@@ -38,6 +38,7 @@ flowchart TD
         quizSchedule["instructor_inputs/quiz_schedule.md<br/>Quiz placement after lectures"]
         lecturePattern["instructor_inputs/Lecture_schedules.md<br/>Lecture and meeting pattern"]
         labPattern["instructor_inputs/Lab_schedules.md<br/>Lab and deliverable pattern"]
+        homeworkPattern["instructor_inputs/Homework_schedule.md<br/>Homework due events"]
         dates["instructor_inputs/important_dates.md<br/>Holidays, breaks, term dates"]
     end
 
@@ -60,6 +61,7 @@ flowchart TD
     quizSchedule --> scheduleGen
     lecturePattern --> scheduleGen
     labPattern --> scheduleGen
+    homeworkPattern --> scheduleGen
     dates --> scheduleGen
 
     scheduleGen --> weekly
@@ -96,11 +98,12 @@ Common semester setup files:
 
 1. `instructor_inputs/important_dates.md` - semester year, first/last class day, holidays,
    recesses, final exam dates, and other academic calendar dates.
-2. `instructor_inputs/Lecture_schedules.md` - lecture, discussion, office-hour, and homework
+2. `instructor_inputs/Lecture_schedules.md` - lecture, discussion, and office-hour
    meeting days/times.
 3. `instructor_inputs/Lab_schedules.md` - lab/project meeting day and lab
    deliverable due day/time.
-4. `instructor_inputs/quiz_schedule.md` - quiz placement after a lecture, once
+4. `instructor_inputs/Homework_schedule.md` - individual homework due events.
+5. `instructor_inputs/quiz_schedule.md` - quiz placement after a lecture, once
    the instructor decides where each quiz belongs.
 
 Content files:
@@ -119,9 +122,9 @@ python generate_schedule_table.py
 ```
 
 This regenerates the weekly schedule, calendar view, `.ics` calendar file, Excel
-schedule, and the MkDocs copies in `docs/`. It also keeps copied meeting-pattern
-blocks in `lecture_summary.md` and `lab_summary.md` synchronized with
-`Lecture_schedules.md` and `Lab_schedules.md`.
+schedule, and the MkDocs copies in `docs/`. Meeting patterns are read directly
+from `Lecture_schedules.md`, `Lab_schedules.md`, and `Homework_schedule.md`;
+they are not duplicated in the lecture or lab summary files.
 
 By default this is an instructor build: the local weekly schedule includes the
 `Instructor Flags` column, and calendar metadata may include instructor-facing
@@ -192,8 +195,8 @@ Lecture sections in `instructor_inputs/lecture_summary.md` use this pattern:
 - **Topic:** Geometric distribution (Chapter 4.2)
 - **Reading:** Chapter 4.3
 - **Learning Objectives:**
-  - M2, LO1: Validate and Explain Probability Distributions
-  - M2, LO4: Understand and Compute Expectations and Variances
+  - M2.L01: Validate and Explain Probability Distributions
+  - M2.L04: Understand and Compute Expectations and Variances
 ```
 
 Lab/project sections in `instructor_inputs/lab_summary.md` use this pattern:
@@ -216,8 +219,9 @@ Lab/project sections in `instructor_inputs/lab_summary.md` use this pattern:
 ```
 
 Schedule tables in `Lecture_schedules.md`, `Lab_schedules.md`,
-`quiz_schedule.md`, and `important_dates.md` should keep their column names and
-table structure. Edit cell values, but avoid renaming columns.
+`Homework_schedule.md`, `quiz_schedule.md`, and `important_dates.md` should keep
+their column names and table structure. Edit cell values, but avoid renaming
+columns.
 
 ### Instructor Input Files
 
@@ -231,7 +235,8 @@ table structure. Edit cell values, but avoid renaming columns.
   table. Set
   `After Lecture` to the lecture that should immediately precede each quiz.
 - `instructor_inputs/Lecture_schedules.md`,
-  `instructor_inputs/Lab_schedules.md`, and
+  `instructor_inputs/Lab_schedules.md`,
+  `instructor_inputs/Homework_schedule.md`, and
   `instructor_inputs/important_dates.md` provide the schedule metadata used to
   build weekly and calendar views.
 
@@ -243,9 +248,11 @@ The website copies in `docs/` are derived from these files. Edit
 The website is generated from these planning and build files:
 
 - `instructor_inputs/Lecture_schedules.md` contains the editable
-  lecture/discussion/office-hour/homework meeting pattern table.
+  lecture/discussion/office-hour meeting pattern table.
 - `instructor_inputs/Lab_schedules.md` contains the editable lab/project meeting
   pattern table.
+- `instructor_inputs/Homework_schedule.md` contains the editable homework due
+  event table. Each row creates one homework due event.
 - `instructor_inputs/important_dates.md` contains the editable semester date
   table used for holidays, recesses, final exams, and other academic calendar
   dates.
@@ -261,9 +268,8 @@ The website is generated from these planning and build files:
   `generated_outputs/calendar_schedule.md`,
   `generated_outputs/course_calendar.ics`, and
   `generated_outputs/Weekly Schedules.xlsx`. It also syncs the MkDocs source
-  pages in `docs/`, updates copied meeting-pattern blocks in
-  `lecture_summary.md` and `lab_summary.md`, and adds instructor flags when
-  scheduled lectures, quizzes, labs, or projects fall on or near holidays,
+  pages in `docs/` and adds instructor flags when scheduled lectures, quizzes,
+  labs, or projects fall on or near holidays,
   recesses, or other important dates, or when prerequisites have not yet been
   covered.
 - `build_docs.py` is a small compatibility helper that only copies source pages
@@ -322,8 +328,9 @@ MA214_PUBLIC_SITE=1 python generate_schedule_table.py
 By default, the reusable package uses the same folder and markdown filenames as
 MA 213: `instructor_inputs/`, `generated_outputs/`, `docs/`,
 `lecture_summary.md`, `lab_summary.md`, `learningObjectives.md`,
-`quiz_schedule.md`, `Lecture_schedules.md`, `Lab_schedules.md`, and
-`important_dates.md`. Another course can override those names in its wrapper:
+`quiz_schedule.md`, `Lecture_schedules.md`, `Lab_schedules.md`,
+`Homework_schedule.md`, and `important_dates.md`. Another course can override
+those names in its wrapper:
 
 ```py
 main(
@@ -348,6 +355,7 @@ Common `CourseSiteConfig` overrides:
 - `lecture_summary_filename`, `lab_summary_filename`,
   `learning_objectives_filename`, `quiz_schedule_filename`,
   `lecture_schedule_filename`, `lab_schedule_filename`,
+  `homework_schedule_filename`,
   `important_dates_filename`: instructor input filenames.
 - `weekly_schedule_filename`, `calendar_schedule_filename`,
   `calendar_ics_filename`, `xlsx_filename`: generated output filenames.
@@ -359,10 +367,8 @@ repository as `generate_schedule_table.py`. The example file lives in
 
 ### Editable schedule inputs
 
-Lecture, discussion, office-hour, and homework meeting days are controlled by
-the table in `instructor_inputs/Lecture_schedules.md`.
-`generate_schedule_table.py` syncs this block to the top of
-`instructor_inputs/lecture_summary.md`:
+Lecture, discussion, and office-hour meeting days are controlled by
+the table in `instructor_inputs/Lecture_schedules.md`:
 
 ```md
 | Event Type    | Weekdays                 | Start Time | End Time |
@@ -371,17 +377,26 @@ the table in `instructor_inputs/Lecture_schedules.md`.
 | Discussion    | Thursday                 | 12:20PM   | 1:10PM  |
 | Office Hour 1 | Friday                   | 3:00PM    | 4:00PM  |
 | Office Hour 2 | Monday                   | 4:00PM    | 5:00PM  |
-| Homework      | Sunday                   | 2:55PM    | 3:00PM  |
+```
+
+Homework due dates are controlled by `instructor_inputs/Homework_schedule.md`.
+Each row creates one homework due event; delete rows for weeks with no homework.
+Homework uses only `End Time`, which is treated as the due time:
+
+```md
+| Homework | Week | Weekday | End Time | Details |
+| --- | --- | --- | --- | --- |
+| Homework 1 | 1 | Sunday | 3:00PM | Weekly homework component. |
+| Homework 3 | 3 | Sunday | 3:00PM | Weekly homework component. |
 ```
 
 Lecture topics, readings, and lecture learning objectives are maintained in
 `instructor_inputs/lecture_summary.md`. Keep objective codes in the form
-`M1, LO1` so prerequisite checks can match them against
+`M1.L01` so prerequisite checks can match them against
 `instructor_inputs/learningObjectives.md`.
 
 Lab and project meeting days are controlled by the table in
-`instructor_inputs/Lab_schedules.md`. `generate_schedule_table.py` syncs this
-block to the top of `instructor_inputs/lab_summary.md`:
+`instructor_inputs/Lab_schedules.md`:
 
 ```md
 | Event Type      | Weekday   | Start Time | End Time |
@@ -407,8 +422,8 @@ This means Quiz 1 is scheduled at the next regular class meeting after Lecture
 changes.
 
 Prerequisite flags are inferred from `instructor_inputs/learningObjectives.md`.
-Quiz flags use the `Q#` tags, lab flags use the `Lab#` tags, and project flags use
-the `P1` or `P2` tags. If an event has no matching learning-objective tag, the
+Quiz flags use the `Quiz#` tags, lab flags use the `Lab#` tags, and project flags use
+the `Project1` or `Project2` tags. If an event has no matching learning-objective tag, the
 weekly schedule and calendar show a missing-prerequisite-metadata flag so the
 instructor knows where an explicit prerequisite entry is needed.
 
@@ -428,10 +443,10 @@ The script creates flags from three sources:
      important dates, using wording such as `Near Thanksgiving Recess`.
 2. Learning-objective prerequisites:
    - Lecture objective codes come from `instructor_inputs/lecture_summary.md`,
-     using codes such as `M2, LO4`.
+     using codes such as `M2.L04`.
    - Quiz/lab/project prerequisite tags come from
-     `instructor_inputs/learningObjectives.md`, using tags such as `Q2`, `Lab5`,
-     `P1`, or `P2`.
+     `instructor_inputs/learningObjectives.md`, using tags such as `Quiz2`, `Lab5`,
+     `Project1`, or `Project2`.
    - The script checks whether each prerequisite objective has already appeared
      in a prior lecture.
 3. Missing or mismatched metadata:
@@ -447,7 +462,8 @@ Common prerequisite flag meanings:
 - `Prerequisite may be same-day`: the objective first appears on the same date
   as the quiz, lab, or project event.
 - `Missing prerequisite metadata`: the quiz, lab, or project does not have a
-  matching `Q#`, `Lab#`, `P1`, or `P2` tag in `learningObjectives.md`.
+  matching `Quiz#`, `Lab#`, `Project1`, or `Project2` tag in
+  `learningObjectives.md`.
 
 The local instructor build shows these flags:
 
@@ -556,7 +572,7 @@ before committing when you have changed `instructor_inputs/lecture_summary.md`,
 `instructor_inputs/learningObjectives.md`,
 `instructor_inputs/lab_summary.md`, `instructor_inputs/quiz_schedule.md`, or
 schedule source files in `instructor_inputs/`, especially `important_dates.md`,
-`Lecture_schedules.md`, or `Lab_schedules.md`.
+`Lecture_schedules.md`, `Lab_schedules.md`, or `Homework_schedule.md`.
 
 This site is deployed with GitHub Actions, not GitHub Pages Jekyll. In the
 repository settings, GitHub Pages should be configured with:

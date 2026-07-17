@@ -77,8 +77,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 1</h3>
-<p>Give students a low-stress entry into the course workflow and connect the first lecture ideas about data and study design to hands-on practice.</p>
-<p class="calendar-event__meta">Anchor: Lecture 1 | Prerequisite may be same-day: M1, LO1: Classify and Analyze Variables (first covered Lecture 2) | Prerequisite may be same-day: M1, LO2: Evaluate Study Design and Its Implications (first covered Lecture 2) | Prerequisite may be same-day: M1, LO3: Use R for Data Management and Exploration (first covered Lecture 2)</p>
+<p class="calendar-event__meta">Anchor: Lecture 1</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -92,12 +91,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">6</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 1</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">7</div>
@@ -123,6 +117,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 2</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -170,8 +170,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 2</h3>
-<p>Reinforce the ideas from the data lectures by asking students to move from raw data to meaningful descriptions.</p>
-<p class="calendar-event__meta">Anchor: Lecture 3 | Deliverables: Lab1 in-lab activity submission | Tutorial 1 | Tutorial 2 (pre-lab for lab2)</p>
+<p class="calendar-event__meta">Anchor: Lecture 3</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -185,12 +184,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">13</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 2</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">14</div>
@@ -222,6 +216,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 3</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -268,8 +268,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 3</h3>
-<p>Reinforce the ideas from the data to visualization by asking students to move from raw data to meaningful descriptions using visualization.</p>
-<p class="calendar-event__meta">Anchor: Lecture 6 | Deliverables: Lab2 in-lab activity submission | Tutorial 3 (pre-lab for lab3)</p>
+<p class="calendar-event__meta">Anchor: Lecture 6</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -283,12 +282,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">20</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 3</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">21</div>
@@ -321,6 +315,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
 </article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 4</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">23</div>
@@ -328,7 +328,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 1</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>tentative</p>
+<p>confirmed</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
@@ -350,7 +350,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-date__number">24</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
-<h3>P1-1 Deliverables Due</h3>
+<h3>Project1-1 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
 <p>Lab3 in-lab activity submission</p>
 </article>
@@ -365,9 +365,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
-<h3>P1-1</h3>
-<p>Use this session after Lab 3 to introduce the project prompt, rubric, data access, and timeline. Students should leave with a clear project question and a first analysis plan.</p>
-<p class="calendar-event__meta">Deliverables: Lab3 in-lab activity submission</p>
+<h3>Project1-1</h3>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -381,12 +379,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">27</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 4</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">28</div>
@@ -418,6 +411,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 5</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -519,8 +518,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 4</h3>
-<p>Connect the lecture discussion of probability to concrete practice with events, tables, and simulation.</p>
-<p class="calendar-event__meta">Anchor: Lecture 11 | Deliverables: Project 1 Outline | Tutorial 4 (pre-lab for lab4)</p>
+<p class="calendar-event__meta">Anchor: Lecture 11</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -534,12 +532,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">4</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 5</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">5</div>
@@ -571,6 +564,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 6</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -617,8 +616,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 5</h3>
-<p>Help students see how probability ideas become useful for understanding distributions and unusual data values.</p>
-<p class="calendar-event__meta">Anchor: Lecture 14 | Deliverables: Lab4 in-lab activity submission | Tutorial 5 (pre-lab for lab5)</p>
+<p class="calendar-event__meta">Anchor: Lecture 14</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -632,12 +630,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">11</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 6</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">12</div>
@@ -676,6 +669,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
 </article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 7</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">14</div>
@@ -683,7 +682,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 2</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>tentative</p>
+<p>in the lecture time</p>
 <p class="calendar-event__meta">Near Indigenous People&#x27;s Day Holiday, Classes Suspended | Near Substitute a Monday schedule of classes</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -706,7 +705,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-date__number">15</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
-<h3>P1-2 Deliverables Due</h3>
+<h3>Project1-2 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
 <p>Lab5 in-lab activity submission</p>
 </article>
@@ -726,9 +725,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
-<h3>P1-2</h3>
-<p>Use this session after Lab 5 to help students refine plots, summaries, and presentation structure. The emphasis should remain on data interpretation and clear communication.</p>
-<p class="calendar-event__meta">Deliverables: Lab5 in-lab activity submission</p>
+<h3>Project1-2</h3>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -742,12 +739,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">18</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 7</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">19</div>
@@ -814,9 +806,9 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-date__number">22</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
-<h3>P2-1 Deliverables Due</h3>
+<h3>Project2-1 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
-<p>P1 Video</p>
+<p>Project1 Video</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -829,14 +821,18 @@ This month view is generated from course summaries and `instructor_inputs/import
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
-<h3>P2-1</h3>
-<p>Use this session before or near Lab 6 so students can begin connecting inference methods to their report. Students should identify candidate response and explanatory variables and think about possible methods.</p>
-<p class="calendar-event__meta">Deliverables: P1 Video | Prerequisite not yet covered: M3, LO5: Distinguish Statistical vs. Practical Significance (first covered Lecture 28) | Prerequisite not yet covered: M4, LO1: Inference for a Difference in Proportions (first covered Lecture 21) | Prerequisite not yet covered: M4, LO2: Conduct and Interpret Chi-Square Tests (first covered Lecture 22) | Prerequisite not yet covered: M4, LO4: Conduct and Interpret t-Tests (first covered Lecture 24) | Prerequisite not yet covered: M4, LO5: Explain Hypothesis Testing and Its Limitations (first covered Lecture 28)</p>
+<h3>Project2-1</h3>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour 1</h3>
 <p class="calendar-event__time">3:00 PM-4:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 8</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -845,12 +841,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">25</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 8</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">26</div>
@@ -883,6 +874,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
 </article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 9</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">28</div>
@@ -914,7 +911,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 6 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
-<p>Lab6 in-lab activity submission | Tutorial 6 (pre-lab for lab6) | P2 Outline</p>
+<p>Lab6 in-lab activity submission | Tutorial 6 (pre-lab for lab6) | Project2 Outline</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -928,8 +925,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 6</h3>
-<p>Give students practice choosing and interpreting inference procedures, not just computing formulas.</p>
-<p class="calendar-event__meta">Anchor: Lecture 22 | Deliverables: Lab6 in-lab activity submission | Tutorial 6 (pre-lab for lab6) | P2 Outline | Prerequisite not yet covered: M3, LO5: Distinguish Statistical vs. Practical Significance (first covered Lecture 28)</p>
+<p class="calendar-event__meta">Anchor: Lecture 22</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -977,12 +973,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-weekday">Sat</div>
 <section class="calendar-date">
 <div class="calendar-date__number">1</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 9</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">2</div>
@@ -1023,7 +1014,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <h3>Quiz 3</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>tentative</p>
-<p class="calendar-event__meta">Prerequisite not yet covered: M3, LO5: Distinguish Statistical vs. Practical Significance (first covered Lecture 28)</p>
+<p class="calendar-event__meta">Prerequisite not yet covered: M3.L05: Distinguish Statistical vs. Practical Significance (first covered Lecture 28)</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
@@ -1045,9 +1036,15 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-date__number">5</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
-<h3>P2-2 Deliverables Due</h3>
+<h3>Project2-2 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
 <p>Lab6 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 10</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1060,9 +1057,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
-<h3>P2-2</h3>
-<p>Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing. Students should be encouraged to justify both the method choice and the interpretation.</p>
-<p class="calendar-event__meta">Deliverables: Lab6 in-lab activity submission | Prerequisite not yet covered: M3, LO5: Distinguish Statistical vs. Practical Significance (first covered Lecture 28) | Prerequisite not yet covered: M4, LO5: Explain Hypothesis Testing and Its Limitations (first covered Lecture 28)</p>
+<h3>Project2-2</h3>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -1076,12 +1071,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">8</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 10</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">9</div>
@@ -1114,6 +1104,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
 </article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 11</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">11</div>
@@ -1143,9 +1139,9 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-date__number">12</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
-<h3>P2-3 Deliverables Due</h3>
+<h3>Project2-3 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
-<p>P2 Progress Report</p>
+<p>Project2 Progress Report</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1158,9 +1154,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
-<h3>P2-3</h3>
-<p>Use these sessions around the inference unit to support analysis, revision, peer review, and report polishing. Students should be encouraged to justify both the method choice and the interpretation.</p>
-<p class="calendar-event__meta">Deliverables: P2 Progress Report | Prerequisite may be same-day: M3, LO5: Distinguish Statistical vs. Practical Significance (first covered Lecture 28) | Prerequisite may be same-day: M4, LO5: Explain Hypothesis Testing and Its Limitations (first covered Lecture 28)</p>
+<h3>Project2-3</h3>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -1174,12 +1168,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">15</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 11</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">16</div>
@@ -1243,7 +1232,13 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 7 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
-<p>P2 writeup | Tutorial 7 (pre-lab for lab7)</p>
+<p>Project2 writeup | Tutorial 7 (pre-lab for lab7)</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 12</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1257,8 +1252,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 7</h3>
-<p>End the course with a flexible application that connects modeling ideas to the methods already studied.</p>
-<p class="calendar-event__meta">Anchor: Lecture 30 | Deliverables: P2 writeup | Tutorial 7 (pre-lab for lab7) | Prerequisite may be same-day: M5, LO3: Comparing Bayesian and Frequentist Approaches (first covered Lecture 31)</p>
+<p class="calendar-event__meta">Anchor: Lecture 30</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
@@ -1272,12 +1266,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">22</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 12</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">23</div>
@@ -1369,13 +1358,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 8</h3>
-<p class="calendar-event__meta">Deliverables: P2 Resubmission | Near Thanksgiving Recess | Classes Resume | Missing prerequisite metadata: add learning-objective tags for Lab 8</p>
 </article>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 8 Deliverables Due</h3>
 <p class="calendar-event__time">Due 10:00 PM</p>
-<p>P2 Resubmission</p>
+<p>Project2 Resubmission</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
@@ -1392,12 +1380,6 @@ This month view is generated from course summaries and `instructor_inputs/import
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 13</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B1</h3>
@@ -1407,6 +1389,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour 2</h3>
 <p class="calendar-event__time">4:00 PM-5:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 13</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date calendar-date--outside">
@@ -1504,7 +1492,12 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">3</div>
-<p class="calendar-empty">No events</p>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 14</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Weekly homework component.</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">4</div>
@@ -1526,12 +1519,7 @@ This month view is generated from course summaries and `instructor_inputs/import
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">6</div>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework Week 14</h3>
-<p class="calendar-event__time">2:55 PM-3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
+<p class="calendar-empty">No events</p>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">7</div>

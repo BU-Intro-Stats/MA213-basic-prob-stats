@@ -15,6 +15,6 @@
 **Post-lab activity**
 
 **Deliverables**
-- P2 Resubmission
+- Project2 Resubmission
 
 ---

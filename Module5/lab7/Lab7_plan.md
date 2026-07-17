@@ -17,7 +17,7 @@
 - Submit a brief interpretation of the chosen modeling approach
 
 **Deliverables**
-- P2 writeup
+- Project2 writeup
 - Tutorial 7 (pre-lab for lab7)
 
 ---

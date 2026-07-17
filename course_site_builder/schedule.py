@@ -25,7 +25,7 @@ DEFAULT_EVENT_TIMES = {
     "lab_deliverable": ("9:55 PM", "10:00 PM"),
     "discussion": ("12:20 PM", "1:10 PM"),
     "office_hours": ("3:00 PM", "5:00 PM"),
-    "homework": ("2:55 PM", "3:00 PM"),
+    "homework": ("", "3:00 PM"),
 }
 LOCAL_TIMEZONE = "America/New_York"
 FLAGGABLE_IMPORTANT_DATE = re.compile(
@@ -71,6 +71,7 @@ class CourseSiteConfig:
     lab_summary_filename: str = "lab_summary.md"
     lecture_schedule_filename: str = "Lecture_schedules.md"
     lab_schedule_filename: str = "Lab_schedules.md"
+    homework_schedule_filename: str = "Homework_schedule.md"
     quiz_schedule_filename: str = "quiz_schedule.md"
     learning_objectives_filename: str = "learningObjectives.md"
     important_dates_filename: str = "important_dates.md"
@@ -97,6 +98,7 @@ class CourseSiteConfig:
         self.lab_file = self.instructor_inputs / self.lab_summary_filename
         self.lecture_schedule_file = self.instructor_inputs / self.lecture_schedule_filename
         self.lab_schedule_file = self.instructor_inputs / self.lab_schedule_filename
+        self.homework_schedule_file = self.instructor_inputs / self.homework_schedule_filename
         self.quiz_schedule_file = self.instructor_inputs / self.quiz_schedule_filename
         self.learning_objectives_file = self.instructor_inputs / self.learning_objectives_filename
         self.important_dates_file = self.instructor_inputs / self.important_dates_filename
@@ -210,29 +212,6 @@ def extract_table_after_heading(lines, heading: str):
     return rows
 
 
-def sync_markdown_section(summary_path: Path, source_path: Path, heading: str):
-    if not summary_path.exists() or not source_path.exists():
-        return
-
-    summary_text = summary_path.read_text(encoding="utf-8")
-    source_text = source_path.read_text(encoding="utf-8").strip()
-    heading_pattern = re.compile(rf"^##\s+{re.escape(heading)}\s*$", re.IGNORECASE | re.MULTILINE)
-    match = heading_pattern.search(summary_text)
-
-    if match:
-        next_heading = re.search(r"^##\s+", summary_text[match.end() :], re.MULTILINE)
-        section_end = match.end() + next_heading.start() if next_heading else len(summary_text)
-        updated = f"{summary_text[:match.start()].rstrip()}\n\n{source_text}\n\n{summary_text[section_end:].lstrip()}"
-    else:
-        title_match = re.match(r"^# .*$", summary_text, re.MULTILINE)
-        if title_match:
-            updated = f"{summary_text[:title_match.end()].rstrip()}\n\n{source_text}\n\n{summary_text[title_match.end():].lstrip()}"
-        else:
-            updated = f"{source_text}\n\n{summary_text.lstrip()}"
-
-    summary_path.write_text(updated.rstrip() + "\n", encoding="utf-8")
-
-
 def parse_weekday_list(text: str):
     weekdays = []
     parts = re.split(r",|/|;|\band\b", text, flags=re.IGNORECASE)
@@ -289,7 +268,6 @@ def parse_meeting_patterns(lecture_path: Path, lab_path: Path):
         "lab_deliverable": DEFAULT_LAB_DELIVERABLE_WEEKDAYS,
         "discussion": DEFAULT_DISCUSSION_WEEKDAYS,
         "office_hours": DEFAULT_OFFICE_HOURS_WEEKDAYS,
-        "homework": DEFAULT_HOMEWORK_WEEKDAYS,
         "times": DEFAULT_EVENT_TIMES.copy(),
         "discussion_patterns": [],
         "office_hour_patterns": [],
@@ -330,10 +308,6 @@ def parse_meeting_patterns(lecture_path: Path, lab_path: Path):
                     "end_time": patterns["times"]["office_hours"][1],
                 }
             )
-        elif event_type == "homework":
-            patterns["homework"] = weekdays
-            patterns["times"]["homework"] = read_row_time(row, DEFAULT_EVENT_TIMES["homework"])
-
     lab_rows = extract_table_after_heading(
         lab_path.read_text(encoding="utf-8").splitlines(),
         "Lab Meeting Pattern",
@@ -574,7 +548,7 @@ def parse_learning_objectives(path: Path):
         lo_num = int(objective_match.group(1))
         title = clean_text(objective_match.group(2))
         rest = clean_text(objective_match.group(3))
-        code = f"M{module_num}, LO{lo_num}"
+        code = objective_code(module_num, lo_num)
         objective = {
             "code": code,
             "label": f"{code}: {title}",
@@ -585,18 +559,44 @@ def parse_learning_objectives(path: Path):
 
         for tag_group in re.findall(r"\[([^\]]+)\]", rest):
             for tag in re.split(r",|;", tag_group):
-                tag = clean_text(tag).upper()
-                if re.fullmatch(r"Q\d+|L\d+|P\d+", tag):
+                tag = canonical_prerequisite_tag(tag)
+                if tag:
                     objectives_by_tag[tag].append(code)
 
     return objectives_by_code, dict(objectives_by_tag)
 
 
+def objective_code(module_num: int, lo_num: int):
+    return f"M{module_num}.L{lo_num:02d}"
+
+
+def canonical_prerequisite_tag(tag: str):
+    compact_tag = re.sub(r"\s+", "", clean_text(tag)).upper()
+    match = re.fullmatch(r"Q(?:UIZ)?(\d+)", compact_tag)
+    if match:
+        return f"QUIZ{int(match.group(1))}"
+
+    match = re.fullmatch(r"L(?:AB)?(\d+)", compact_tag)
+    if match:
+        return f"LAB{int(match.group(1))}"
+
+    match = re.fullmatch(r"P(?:ROJECT)?(\d+)", compact_tag)
+    if match:
+        return f"PROJECT{int(match.group(1))}"
+
+    return ""
+
+
 def objective_code_from_text(text: str):
-    match = re.search(r"M\s*(\d+)\s*,\s*L(?:O|0)?\s*(\d+)", text, re.IGNORECASE)
-    if not match:
-        return None
-    return f"M{int(match.group(1))}, LO{int(match.group(2))}"
+    match = re.search(r"M\s*(\d+)\s*\.\s*L\s*0?(\d+)", text, re.IGNORECASE)
+    if match:
+        return objective_code(int(match.group(1)), int(match.group(2)))
+
+    match = re.search(r"M\s*(\d+)\s*,\s*L(?:O|0)?\s*0?(\d+)", text, re.IGNORECASE)
+    if match:
+        return objective_code(int(match.group(1)), int(match.group(2)))
+
+    return None
 
 
 def objective_lookup_by_text(objectives_by_code):
@@ -620,10 +620,10 @@ def match_objective_text(text: str, lookup):
 def lab_prerequisite_tag(title: str):
     lab_match = re.match(r"Lab\s+(\d+)", title)
     if lab_match:
-        return f"L{int(lab_match.group(1))}"
-    project_match = re.match(r"P(\d+)", title)
+        return f"LAB{int(lab_match.group(1))}"
+    project_match = re.match(r"(?:P|Project\s*)(\d+)", title, re.IGNORECASE)
     if project_match:
-        return f"P{int(project_match.group(1))}"
+        return f"PROJECT{int(project_match.group(1))}"
     return ""
 
 
@@ -679,7 +679,7 @@ def annotate_prerequisite_flags(
     for row in lecture_rows:
         if row.get("kind") != "quiz":
             continue
-        tag = f"Q{row['lecture_num']}"
+        tag = f"QUIZ{row['lecture_num']}"
         row["prerequisite_codes"] = objectives_by_tag.get(tag, [])
         row.setdefault("flags", []).extend(
             prerequisite_flags(row["label"], row.get("date"), row["prerequisite_codes"], taught_objectives, objectives_by_code)
@@ -742,6 +742,38 @@ def parse_quiz_schedule(path: Path):
             }
         )
     return sorted(quiz_rows, key=lambda row: (row["after_lecture"], row["quiz_num"]))
+
+
+def parse_homework_schedule(path: Path):
+    if not path.exists():
+        return []
+
+    rows = extract_table_after_heading(
+        path.read_text(encoding="utf-8").splitlines(),
+        "Homework Schedule",
+    )
+    homework_rows = []
+    for index, row in enumerate(rows, start=1):
+        week_match = re.search(r"\d+", row.get("week", ""))
+        weekdays = parse_weekday_list(row.get("weekday", "") or row.get("weekdays", ""))
+        if not week_match or not weekdays:
+            continue
+
+        title = clean_text(row.get("homework", "") or row.get("title", "") or row.get("event type", ""))
+        details = clean_text(row.get("details", "") or row.get("description", ""))
+        end_time = normalize_event_time(row.get("end time", "")) or DEFAULT_EVENT_TIMES["homework"][1]
+        homework_rows.append(
+            {
+                "week": int(week_match.group(0)),
+                "weekday": weekdays[0],
+                "title": title or f"Homework {index}",
+                "details": details or "Weekly homework component.",
+                "start_time": "",
+                "end_time": end_time,
+            }
+        )
+
+    return homework_rows
 
 
 def parse_lecture_summary(path: Path, quiz_schedule=None):
@@ -834,7 +866,7 @@ def assign_course_dates(lecture_rows, important_dates, meeting_patterns, default
 
 
 def split_combined_lab_titles(title: str):
-    match = re.fullmatch(r"(P\d+)-(\d+)/(?:P\d+-)?(\d+)", title)
+    match = re.fullmatch(r"(P(?:roject)?\d+)-(\d+)/(?:P(?:roject)?\d+-)?(\d+)", title, re.IGNORECASE)
     if not match:
         return [title]
 
@@ -884,7 +916,7 @@ def parse_lab_summary(path: Path):
 
     for raw in text.splitlines():
         line = raw.rstrip()
-        if re.match(r"^###\s+(Lab\s+\d+|P\d+(?:-\d+|/\d+)*|Project\s+\d+.*)", line):
+        if re.match(r"^###\s+(Lab\s+\d+|P\d+(?:-\d+|/\d+)*|Project\s*\d+(?:-\d+|/\d+)*.*)", line):
             if current is not None and current_heading is not None:
                 sections[current_heading] = current
             current_heading = line.split("###", 1)[1].strip()
@@ -897,7 +929,7 @@ def parse_lab_summary(path: Path):
 
     lab_rows = []
     for heading, block in sections.items():
-        # Match headings like: Lab 1: R Intro, P1-1: Project 1 Logistics, etc.
+        # Match headings like: Lab 1: R Intro, Project1-1: Project 1 Logistics, etc.
         title = heading.split(":", 1)[0].strip()
 
         fields = {"lecture_anchor": "", "purpose": "", "objectives": [], "deliverables": []}
@@ -1156,6 +1188,7 @@ def write_ics_calendar(events, ics_path: Path, config: CourseSiteConfig):
 def build_calendar_events(
     lecture_rows,
     lab_rows,
+    homework_rows,
     important_dates,
     meeting_patterns,
     include_instructor_flags: bool = True,
@@ -1200,15 +1233,11 @@ def build_calendar_events(
         meta_parts = []
         if lab["lecture_anchor"]:
             meta_parts.append(f"Anchor: {lab['lecture_anchor']}")
-        if lab["deliverables"]:
-            meta_parts.append(f"Deliverables: {lab['deliverables']}")
-        if include_instructor_flags:
-            meta_parts.extend(lab.get("flags", []))
         events[lab_date].append(
             {
                 "kind": kind,
                 "title": lab["title"],
-                "details": lab["purpose"],
+                "details": "",
                 "meta": " | ".join(meta_parts),
                 "start_time": start_time,
                 "end_time": end_time,
@@ -1269,19 +1298,25 @@ def build_calendar_events(
                             "end_time": office_hour["end_time"],
                         }
                     )
-        for weekday in meeting_patterns["homework"]:
-            homework_date = scheduled_weekday_date(term_start, week, weekday, suspended, clamp_to_term_start=False)
-            if term_start <= homework_date <= term_end:
-                start_time, end_time = event_time_range(meeting_patterns, "homework")
-                events[homework_date].append(
-                    {
-                        "kind": "homework",
-                        "title": f"Homework Week {week}",
-                        "details": "Weekly homework component.",
-                        "start_time": start_time,
-                        "end_time": end_time,
-                    }
-                )
+
+    for homework in homework_rows:
+        homework_date = scheduled_weekday_date(
+            term_start,
+            homework["week"],
+            homework["weekday"],
+            suspended,
+            clamp_to_term_start=False,
+        )
+        if term_start <= homework_date <= term_end:
+            events[homework_date].append(
+                {
+                    "kind": "homework",
+                    "title": homework["title"],
+                    "details": homework["details"],
+                    "start_time": homework["start_time"],
+                    "end_time": homework["end_time"],
+                }
+            )
 
     for day, descriptions in important_by_day.items():
         for description in descriptions:
@@ -1325,6 +1360,7 @@ def months_to_render(important_dates, default_year: int = DEFAULT_TERM_YEAR):
 def write_calendar_markdown(
     lecture_rows,
     lab_rows,
+    homework_rows,
     important_dates,
     meeting_patterns,
     md_path: Path,
@@ -1334,6 +1370,7 @@ def write_calendar_markdown(
     events = build_calendar_events(
         lecture_rows,
         lab_rows,
+        homework_rows,
         important_dates,
         meeting_patterns,
         include_instructor_flags,
@@ -1426,13 +1463,14 @@ def main(config: CourseSiteConfig | None = None):
     config.generated_outputs.mkdir(exist_ok=True)
     include_instructor_flags = not is_public_site_build(config.public_env_var)
 
-    sync_markdown_section(config.lecture_file, config.lecture_schedule_file, "Course Meeting Pattern")
-    sync_markdown_section(config.lab_file, config.lab_schedule_file, "Lab Meeting Pattern")
-
     important_dates = parse_important_dates(config.important_dates_file, config.term_year)
-    meeting_patterns = parse_meeting_patterns(config.lecture_schedule_file, config.lab_schedule_file)
+    meeting_patterns = parse_meeting_patterns(
+        config.lecture_schedule_file,
+        config.lab_schedule_file,
+    )
     objectives_by_code, objectives_by_tag = parse_learning_objectives(config.learning_objectives_file)
     quiz_rows = parse_quiz_schedule(config.quiz_schedule_file)
+    homework_rows = parse_homework_schedule(config.homework_schedule_file)
     lecture_rows = parse_lecture_summary(config.lecture_file, quiz_rows)
     lecture_rows = assign_course_dates(lecture_rows, important_dates, meeting_patterns, config.term_year)
     lab_rows = parse_lab_summary(config.lab_file)
@@ -1452,6 +1490,7 @@ def main(config: CourseSiteConfig | None = None):
     write_calendar_markdown(
         lecture_rows,
         lab_rows,
+        homework_rows,
         important_dates,
         meeting_patterns,
         config.output_calendar_md,
@@ -1461,6 +1500,7 @@ def main(config: CourseSiteConfig | None = None):
     calendar_events = build_calendar_events(
         lecture_rows,
         lab_rows,
+        homework_rows,
         important_dates,
         meeting_patterns,
         include_instructor_flags,
