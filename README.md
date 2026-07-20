@@ -118,7 +118,7 @@ Content files:
 After editing instructor inputs, run this from the repository root:
 
 ```bash
-python generate_schedule_table.py
+python3 generate_schedule_table.py
 ```
 
 This regenerates the weekly schedule, calendar view, `.ics` calendar file, Excel
@@ -134,7 +134,7 @@ publishing.
 To preview the website locally, run:
 
 ```bash
-python -m mkdocs serve
+python3 -m mkdocs serve
 ```
 
 Then open:
@@ -146,19 +146,19 @@ http://127.0.0.1:8000/
 
 ### In short, you can just run the following commands in the shell
 ```bash
-python generate_schedule_table.py
-python -m mkdocs serve
+python3 generate_schedule_table.py
+python3 -m mkdocs serve
 ```
 
 To preview the public/student version locally, hide instructor flags when
 generating:
 
 ```bash
-MA213_PUBLIC_SITE=1 python generate_schedule_table.py
-python -m mkdocs serve
+MA213_PUBLIC_SITE=1 python3 generate_schedule_table.py
+python3 -m mkdocs serve
 ```
 
-Run `python generate_schedule_table.py` again afterward to restore the local
+Run `python3 generate_schedule_table.py` again afterward to restore the local
 instructor-facing schedule.
 
 **Warning**
@@ -300,7 +300,26 @@ if __name__ == "__main__":
 This keeps the instructor workflow unchanged:
 
 ```bash
-python generate_schedule_table.py
+python3 generate_schedule_table.py
+```
+
+The package also exposes a command-line interface. From a source checkout, use:
+
+```bash
+python3 -m course_site_builder --course-code MA213 --course-title "MA 213"
+```
+
+After installing the package, the equivalent command is:
+
+```bash
+course-site-builder --course-code MA213 --course-title "MA 213"
+```
+
+For the public/student version, either set the course-specific environment
+variable or pass `--public`:
+
+```bash
+course-site-builder --course-code MA213 --course-title "MA 213" --public
 ```
 
 For another course repository, such as MA 214, copy the package directory or
@@ -322,7 +341,7 @@ The public-site environment variable is based on the course code. For MA 214,
 the public build command would be:
 
 ```bash
-MA214_PUBLIC_SITE=1 python generate_schedule_table.py
+MA214_PUBLIC_SITE=1 python3 generate_schedule_table.py
 ```
 
 By default, the reusable package uses the same folder and markdown filenames as

@@ -12,5 +12,8 @@ dependencies = [
     "openpyxl",
 ]
 
+[project.scripts]
+course-site-builder = "course_site_builder.cli:cli_main"
+
 [tool.setuptools.packages.find]
 include = ["course_site_builder*"]
