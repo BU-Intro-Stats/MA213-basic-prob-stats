@@ -29,20 +29,20 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r materials/requirements.txt
 
       - name: Regenerate schedule and docs
         env:
           MA213_PUBLIC_SITE: "1"
-        run: python generate_schedule_table.py
+        run: python materials/generate_schedule_table.py
 
       - name: Build site
-        run: mkdocs build --strict
+        run: mkdocs build --strict -f materials/mkdocs.yml
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: materials/site
 
   deploy:
     environment:

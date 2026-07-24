@@ -1,0 +1,1020 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Option 1: Slides with solutions
+
+\documentclass[slidestop,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
+
+% Option 2: Handouts without solutions
+
+%\documentclass[11pt,containsverbatim,handout]{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+%\newcommand{\soln}[1]{ }
+%\newcommand{\solnGr}{ }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\chp3@path{../../../Chp 3}
+\input{../../lec_style.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Lecture 7]{MA213: Lecture 7}
+\subtitle{Module 2: Probability, Random Variables, and Distributions}
+\author{OpenIntro Statistics, 4th Edition}
+\institute{$\:$ \\ {\footnotesize Based on slides developed by Mine \c{C}etinkaya-Rundel of OpenIntro. \\
+The slides may be copied, edited, and/or shared via the \webLink{http://creativecommons.org/licenses/by-sa/3.0/us/}{CC BY-SA license.} \\
+Some images may be included under fair use guidelines (educational purposes).}}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\addtocounter{framenumber}{-1} 
+{\removepagenumbers 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
+
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
+
+\titlepage
+
+\end{frame}
+}
+}
+
+\include{Lecture7_agenda}
+\include{Lecture7_announcements}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Probability distributions}
+
+A \hl{probability distribution} lists all possible events and the probabilities with which they occur.
+
+\begin{itemize}
+\item The probability distribution for the gender of one kid:
+{\footnotesize 
+\begin{center}
+\begin{tabular}{r | c | c}
+Event    & Male		& Female \\
+\hline
+Probability	& 0.5		& 0.5 \\
+\end{tabular}
+\end{center}
+}
+
+\vspace{2em}
+\item Rules for probability distributions:
+\begin{enumerate}
+\item The events listed must be disjoint
+\item Each probability must be between 0 and 1
+\item The probabilities must total 1
+\end{enumerate}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Disjoint and Complementary outcomes}
+
+\begin{columns}
+	\column{0.48\textwidth}
+	\textbf{$A$ and $B$ are Disjoint} \\ 
+	Events $A$ and $B$ cannot both happen \\
+	$P(A~and~B) = 0$
+	\vspace{1em}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Disjoint sets (left)
+			\begin{scope}
+			% Draw sample space box
+			\draw[thick] (-1.5,-1.2) rectangle (3.7,1.2);
+			\draw[thick] (0,0) circle (1);
+			\node at (0,0) {A};
+			\draw[thick] (2.2,0) circle (1);
+			\node at (2.2,0) {B};
+			\node at (1.1,-1.7) {\textbf{Disjoint}};
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+
+
+	\column{0.48\textwidth}
+	\textbf{$A$ and $A^c$ are Complementary} \\
+	$A$ and $A^c$ are disjoint and cover the entire sample space \\
+	$P(A)+P(A^c)=1$ \\
+	$A^c \equiv$ ``not A'' \\
+	\vspace{1em}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Complement (right): One event A, shade A^c
+			% Draw sample space box
+			\draw[thick] (-1.5,-1.2) rectangle (3,1.2);
+			% Shade A complement (everything outside A)
+			\begin{scope}
+			\clip (-1.5,-1.2) rectangle (3,1.2);
+			\fill[gray!40, opacity=0.7] (-1.5,-1.2) rectangle (3,1.2);
+			\fill[white] (0.75,0) circle (1);
+			\end{scope}
+			\node at (2.2,0.8) {$A^c$};
+			% Draw circle for A
+			\draw[thick] (0.75,0) circle (1);
+			\node at (0.75,0) {A};
+			\node at (.75,-1.7) {\textbf{Complementary}};
+		\end{tikzpicture}
+	\end{center}
+\end{columns}
+\end{frame}	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Union (or) and Intersection (and)}
+
+\begin{columns}
+	\column{0.48\textwidth}
+		\textbf{Union (or):} $A \cup B$\\
+	$A$ or $B$ or both\\
+	$P(A~or~B) \equiv P(A \cup B)$\\
+	\vspace{2mm}
+	\begin{center}
+		\begin{tikzpicture}
+       		\draw[thick] (-1.2,-1.2) rectangle (2.4,1.2);
+			\path[fill=orange!40, opacity=0.7] 
+				(0,0) circle(0.8)
+				-- ++(1.2,0) circle(0.8);
+			\draw[thick] (0,0) circle(0.8);
+			\draw[thick] (1.2,0) circle(0.8);
+			\node at (0,0) {$A$};
+			\node at (1.2,0) {$B$};
+		\end{tikzpicture}
+	\end{center}
+
+	\column{0.48\textwidth}
+		\textbf{Intersection (and):} $A \cap B$\\
+	$A$ and $B$\\
+	$P(A~and~B) \equiv P(A \cap B)  \equiv P(A,B)$\\
+	\vspace{2mm}
+	\begin{center}
+		\begin{tikzpicture}
+       		\draw[thick] (-1.2,-1.2) rectangle (2.4,1.2);
+			\draw[thick] (0,0) circle(0.8);
+			\draw[thick] (1.2,0) circle(0.8);
+			% Fill intersection only
+			\begin{scope}
+			  \clip (0,0) circle(0.8);
+			  \fill[blue!40,opacity=0.7] (1.2,0) circle(0.8);
+			\end{scope}
+			\node at (0,0) {$A$};
+			\node at (1.2,0) {$B$};
+		\end{tikzpicture}
+	\end{center}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\formula{Checking for independence}{If P(A occurs, given that B is true) = $P(A~|~B) = P(A)$, then A and B are independent.}
+
+Knowing that event B occurred does not change the probability that event A occurs.
+% $\:$ \\
+% \small{
+% \soln{\pause{
+% Proportion(prefers in-person work) = 0.58 \\
+% \pause
+% $\:$ \\
+% P(randomly selected employee prefers in-person work, given that the employee is in the IT department) = ? \\ 
+% Proportion(prefers in-person $|$ IT) = 0.67 \\
+% $\:$ \\
+% Proportion(prefers in-person $|$ HR) = 0.28 \\
+% $\:$ \\
+% Proportion(prefers in-person $|$ Sales) = 0.64 \\
+% $\:$ \\
+% \pause
+% P(prefers in-person work) seems to vary by department, therefore preference for in-person vs remote work and department are most likely dependent.
+% }}
+% }
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Determining dependence based on sample data}
+
+% \begin{itemize}
+
+% \item If conditional proportions calculated based on sample data suggest dependence between two variables, the next step is to conduct a hypothesis test to determine if the observed difference between the proportions is likely or unlikely to have happened by chance.
+
+% \item If the observed difference between the conditional proportions is large, then there is stronger evidence that the difference is real.
+
+% \item If a sample is large, then even a small difference can provide strong evidence of a real difference.
+
+% \end{itemize}
+
+% \pause
+
+% \dq{{\small We saw that Proportion(prefers in-person $|$ IT) = 0.67 and Proportion(prefers in-person $|$ Sales) = 0.64. Under which condition would you be more convinced of a real difference between the proportions of IT and Sales employees who prefer in-person work? $n = 500$ or $n = 50,000$}} \pause \soln{$n = 50,000$}
+
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{}
+
+\formula{Product rule for independent events}{If A and B are independent, then \\
+\[P(A~and~B) = P(A) \times P(B) \]
+\small{Or more generally, $P(A_1~and~\cdots~and~A_k) = P(A_1) \times \cdots \times P(A_k)$}}
+
+\pause
+
+\vspace{2mm}
+\dq{You toss a coin twice, what is the probability of getting two tails in a row?}
+
+\pause
+
+\[ P(\text{T on the first toss}) \times  P(\text{T on the second toss}) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4} \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Practice}
+
+\pq{A recent Gallup poll suggests that 25.5\% of Texans do not have health insurance as of June 2012. Assuming that the uninsured rate stayed constant, what is the probability that two randomly selected Texans are both uninsured?}
+
+\twocol{0.4}{0.6}
+{
+\begin{enumerate}[(a)]
+\item $25.5^2$
+\solnMult{ $0.255^2$ }
+\item $0.255 \times 2$
+\item $(1 - 0.255)^2$
+\end{enumerate}
+}
+{
+\includegraphics[width=0.9\textwidth]{\chp3@path/3-1_define_probability/figures/uninsured}
+}
+
+\ct{ \webURL{http://www.gallup.com/poll/156851/uninsured-rate-stable-across-states-far-2012.aspx}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Disjoint vs. complementary}
+
+\dq{Do the sum of probabilities of two disjoint events always add up to 1?}
+
+\pause
+
+\soln{Not necessarily, there may be more than 2 events in the sample space, e.g. party affiliation.}
+
+\pause
+$\:$ \\
+
+\dq{Do the sum of probabilities of two complementary events always add up to 1?}
+
+\pause
+
+\soln{Yes, that's the definition of complementary, e.g. heads and tails. }
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Putting everything together...}
+
+\dq{If we were to randomly select 5 Texans, what is the probability that at least one is uninsured?}
+
+\begin{itemize}
+
+\item If we were to randomly select 5 Texans, the sample space for the number of Texans who are uninsured would be:
+\[ S = \{0, 1, 2, 3, 4, 5\} \]
+
+\item We are interested in instances where at least one person is uninsured:
+\[ S = \{0, \orange{$1, 2, 3, 4, 5$} \} \]
+
+\item So we can divide up the sample space into two categories:
+\[ S = \{0, \orange{at~least~one} \} \]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Putting everything together...}
+
+Since the probability of the sample space must add up to 1:
+\begin{eqnarray*}
+Prob(at~least~1~uninsured) &=& 1 - Prob(none~uninsured) \\
+\pause
+&=& 1 - [(1-0.255)^5] \\
+\pause
+&=& 1- 0.745^5 \\
+\pause
+&=& 1 - 0.23 \\
+\pause
+&=& 0.77
+\end{eqnarray*}
+
+$\:$ \\
+$\:$ \\
+
+\formula{At least 1}{\[P(at~least~one) = 1 - P(none)\]}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conditional probability}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Exploring probabilities with a contingency table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Relapse}
+
+Researchers randomly assigned 72 chronic users of cocaine into three groups: desipramine (antidepressant), lithium (standard treatment for cocaine) and placebo. Results of the study are summarized below.
+
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+desipramine	& 10		& 14		& 24 \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20		& 4		& 24 \\
+\hline
+total			& 48		& 24		& 72
+\end{tabular}
+\end{center}
+}
+
+\ct{\webURL{http://www.oswego.edu/~srp/stats/2_way_tbl_1.htm}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Marginal and joint probabilities}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Joint probability}
+
+\dq{What is the probability that a randomly selected patient received the antidepressant (desipramine) \underline{and} relapsed?}
+
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+desipramine	& \only<1>{10} \only<2->{\red{10}}		& 14		& 24 \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20		& 4		& 24 \\
+\hline
+total			& 48	& 24		&  \only<1>{72} \only<2->{\red{72}}
+\end{tabular}
+\end{center}
+}
+
+\onslide<2->{P(relapsed and desipramine) = $\frac{10}{72} \approx 0.14$} \\
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Marginal probability}
+
+\dq{What is the probability that a randomly selected patient relapsed?}
+
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+desipramine	& 10		& 14		& 24 \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20		& 4		& 24 \\
+\hline
+total			& \only<1>{48}\only<2->{\red{48}}		& 24		&  \only<1>{72}\only<2->{\red{72}}
+\end{tabular}
+\end{center}
+}
+
+\onslide<2->{P(relapsed) = $\frac{48}{72} \approx 0.67$} \\
+
+\vspace{2mm}
+
+\onslide<2->{P(relapsed) = \\
+P(relapsed and des.)+P(relapsed and lith.)+P(relapsed and plac.)= \\
+$\frac{10}{72}+\frac{18}{72}+\frac{20}{72}$ = $\frac{48}{72} \approx 0.67$} \\
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Defining conditional probability}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditional probability}
+
+\formula{Conditional probability}{
+The conditional probability of the outcome of interest $A$ given condition $B$ is calculated as
+\[ P(A|B) = \frac{P(A~and~B)}{P(B)} \]
+}
+
+\pause
+
+\twocol{0.5}{0.5}
+{
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+desipramine	& 10		& 14		& 24 \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20		& 4		& 24  \\
+\hline
+total			& 48		& 24		&  72
+\end{tabular}
+\end{center}
+}
+}
+{
+\begin{eqnarray*}
+&&P(relapse |  desipramine) \\
+&&= \frac{P(relapse ~ and ~ desipramine)}{P(desipramine)} \\
+\pause
+&&= \frac{10 / 72}{24 / 72} \\
+\pause
+&&= \frac{10}{24} \\
+\pause
+&&= 0.42
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditional probability (cont.)}
+
+\dq{If we know that a randomly selected patient received the antidepressant (desipramine), what is the probability that they relapsed?}
+
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+\rowcolor[gray]{.7}
+desipramine	& \only<1>{10} \only<2->{\red{10}}			& 14		& \only<1>{24} \only<2->{\red{24}} \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20 		& 4		& 24  \\
+\hline
+total			& 48	& 24		&  72
+\end{tabular}
+\end{center}
+}
+
+\onslide<2->{P(relapse $|$  desipramine) = $\frac{10}{24} \approx 0.42$} \\
+
+\onslide<3->{
+$\:$ \\
+P(relapse $|$  lithium) = $\frac{18}{24} \approx 0.75$ \\
+P(relapse $|$  placebo) = $\frac{20}{24} \approx 0.83$ \\
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Conditional probability (cont.)}
+
+\dq{If we know that a randomly selected patient relapsed, what is the probability that they received the antidepressant (desipramine)?}
+
+{\small
+\begin{center}
+\begin{tabular}{l | >{\columncolor[gray]{0.7}[0pt]}c c | c}
+			& 		& no 		&  \\
+			& relapse	& relapse	& total \\
+\hline
+desipramine	& \only<1>{10} \only<2->{\red{10}}			& 14		& 24 \\
+lithium		& 18		& 6		& 24 \\
+placebo		& 20		& 4		& 24  \\
+\hline
+total			& \only<1>{48} \only<2->{\red{48}}	& 24		&  72
+\end{tabular}
+\end{center}
+}
+
+\onslide<2->{P(desipramine $|$  relapse) = $\frac{10}{48} \approx 0.21$} \\
+
+\onslide<3->{
+$\:$ \\
+P(lithium $|$  relapse) = $\frac{18}{48} \approx 0.375$ \\
+P(placebo $|$  relapse) = $\frac{20}{48} \approx 0.42$ \\
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Conditional probability redefines the sample space}
+
+\formula{Conditional probability}{
+The conditional probability of $A$ given $B$ is:
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+\]
+}
+
+\vspace{2mm}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+	% Left: Full sample space
+	\begin{scope}
+		% B region
+		\draw[fill=green!60, opacity=0.8] (0.2,0.2) rectangle (2.0,2.3);
+		% B^c region
+		\draw[fill=gray!20, opacity=0.7] (2.0,0.2) rectangle (3.0,2.3);
+		% A region
+		\draw[fill=cyan!40, opacity=0.8] (1.0,0.8) rectangle (2.7,1.7);
+		% Intersection A ∩ B
+		\draw[fill=teal!60, opacity=0.7] (1.0,0.8) rectangle (2.0,1.7);
+		% Labels
+		\node at (0.6,2.0) {\Large $B$};
+		\node at (2.5,2.0) {\large $B^{c}$};
+		\node at (1.5,1.25) {\large $A \cap B$};
+		\node at (2.5,1.25) {\large $A$};
+	\end{scope}
+
+	% Arrow
+	\draw[thick,->] (3.3,1.25) -- (3.9,1.25);
+
+	% Right: Reduced sample space (B only)
+	\begin{scope}[shift={(4.1,0)}]
+		% B region as new sample space
+		\draw[fill=green!60, opacity=0.8] (0.2,0.2) rectangle (2.0,2.3);
+		% A ∩ B region
+		\draw[fill=teal!60, opacity=0.7] (1.0,0.8) rectangle (2.0,1.7);
+		% A label (partial, only in B)
+		\node at (1.5,1.25) {\large $A \cap B$};
+		\node at (0.6,2.0) {\Large $B$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\vspace{1mm}
+\textbf{Interpretation:} Conditioning on $B$ restricts the sample space to $B$ (right). 
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{General multiplication rule}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{General multiplication rule}
+
+\begin{itemize}
+
+\item Earlier we saw that if two events are independent, their joint probability is simply the product of their probabilities. If the events are not believed to be independent, the joint probability is calculated slightly differently.
+
+\pause
+
+\item If $A$ and $B$ represent two outcomes or events, then
+\formula{\[ P(A~and~B) = P(A|B) \times P(B) \]}
+Note that this formula is simply the conditional probability formula, rearranged: $P(A|B)= P(A~and~B) / P(B)$
+\pause
+
+\item It is useful to think of $A$ as the outcome of interest and $B$ as the condition.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Independence considerations in conditional probability}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Independence and conditional probabilities}
+
+Consider the following (hypothetical) distribution of class year and major of students in an introductory statistics class:
+
+{\small
+\begin{center}
+\begin{tabular}{l | c c | c}
+			& social	& non-social 		&  \\
+			& science	& science	& total \\
+\hline
+freshman		& 30		& 20		& 50 \\
+sophomore			& 30		& 20		& 50 \\
+\hline
+total			& 60		& 40		& 100
+\end{tabular}
+\end{center}
+}
+
+\pause
+
+\begin{itemize}
+
+\item The probability that a randomly selected student is a social science major is \pause $\frac{60}{100} = 0.6$. 
+
+\pause
+
+\item The probability that a randomly selected student is a social science major given that they are a freshman is \pause $\frac{30}{50} = 0.6$. 
+
+\pause
+
+\item Since $P(SS | F)$ also equals 0.6, major of students in this class does not depend on their class year: $P(SS | S) = P(SS)$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Independence and conditional probabilities (cont.)}
+
+Generically, if $P(A|B) = P(A)$ then the events $A$ and $B$ are said to be independent.
+
+\pause
+
+\begin{itemize}
+
+\item Conceptually: Giving $B$ doesn't tell us anything about $A$.
+
+\pause
+
+\item Mathematically: We know that if events $A$ and $B$ are independent, $P(A~and~B) = P(A) \times P(B)$. Then,
+\[ P(A|B) = \frac{P(A~and~B)}{P(B)} = \frac{P(A) \times P(B)}{P(B)} = P(A) \]
+
+\end{itemize}
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0,1) rectangle (2,2);
+		\draw[fill=cyan!40] (2,0) rectangle (4,1);
+		\draw[fill=teal!60,opacity=0.7] (0,0) rectangle (2,1);
+		\node at (1,1.5) {\textbf{B}};
+		\node at (3,0.5) {\textbf{A}};
+		\node at (1,0.5) {\textbf{$A\cap B$}};
+	\end{tikzpicture}
+	\end{center}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Disjoint vs independent}
+
+	% --- Diagram for mutually exclusive and independent events ---
+	\begin{minipage}{0.48\textwidth}
+		Mutually exclusive events:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0.5,0.7) rectangle (1.7,1.7);
+		\draw[fill=cyan!40] (2.3,0.7) rectangle (3.5,1.7);
+		\node at (1.1,1.2) {\textbf{B}};
+		\node at (2.9,1.2) {\textbf{A}};
+	\end{tikzpicture}
+	\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.48\textwidth}
+		Independent events:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.8]
+		\draw[fill=gray!20] (0,0) rectangle (4,2);
+		\draw[fill=green!60] (0,1) rectangle (2,2);
+		\draw[fill=cyan!40] (2,0) rectangle (4,1);
+		\draw[fill=teal!60,opacity=0.7] (0,0) rectangle (2,1);
+		\draw[thick,red] (0,0) rectangle (2,1);
+		\node at (1,1.5) {\textbf{B}};
+		\node at (3,0.5) {\textbf{A}};
+		\node at (1,0.5) {\textbf{$A\cap B$}};
+	\end{tikzpicture}
+	\end{center}
+	\end{minipage}
+
+	\vspace{1em}
+	\begin{itemize}
+		\item For disjoint (mutually exclusive) events, $P(A~and~B) = 0$
+		\item For independent events, $P(A~and~B) = P(A) \times P(B)$
+	\end{itemize}
+
+	\dq{Can two events be disjoint and independent at the same time?}
+	\pause
+	\soln{Only if $P(A) = 0$ or $P(B) = 0$.}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edfinity Quiz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Tree diagrams}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Breast cancer screening}
+
+\begin{itemize}
+
+\item American Cancer Society estimates that about 1.7\% of women have breast cancer. \\
+{\small\webURL{http://www.cancer.org/cancer/cancerbasics/cancer-prevalence}}
+
+\item Susan G. Komen For The Cure Foundation states that mammography correctly identifies about 78\% of women who truly have breast cancer. \\
+{\small\webURL{http://ww5.komen.org/BreastCancer/AccuracyofMammograms.html}}
+
+\item An article published in 2003 suggests that up to 10\% of all mammograms result in false positives for patients who do not have cancer. \\{\small \webURL{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1360940}}
+
+\end{itemize}
+
+\vfill
+
+\Note{These percentages are approximate, and very difficult to estimate.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Inverting probabilities}
+
+\dq{When a patient goes through breast cancer screening there are two competing claims: patient had cancer and patient doesn't have cancer. If a mammogram yields a positive result, what is the probability that patient actually has cancer?}
+
+\pause
+
+\twocol{0.7}{0.3}{
+\includegraphics[width=\textwidth]{\chp3@path/3-2_conditional_probability/figures/cancer_tree/cancer_tree_first} 
+}
+{
+\pause
+{\footnotesize
+\begin{eqnarray*}
+&&P(C | +) \\
+\pause
+&&= \frac{P(C~and~+)}{P(+)} \\
+\pause
+&&= \frac{0.0133}{0.0133 + 0.0983} \\
+\pause
+&&= 0.12
+\end{eqnarray*}
+}
+}
+
+\pause
+
+\Note{Tree diagrams are useful for inverting probabilities: we are given $P(+|C)$ and asked for $P(C|+)$.}
+
+\end{frame}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \subsection{Bayes' Theorem}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Bayes' Theorem: Version 1}
+
+% The conditional probability formula we have seen so far is a special case of \hl{Bayes' Theorem}, which lets us switch the conditioning.
+
+% \vspace{2mm}
+% \[
+% P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(B|A)P(A)
+% \]
+% \pause
+% \[
+% P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}
+% \]
+
+% \pause
+% \vspace{2mm}
+
+% \formula{Bayes' Theorem (1):}{
+% \[
+% P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+% \]
+% }
+
+% \end{frame}
+
+% % --- Bayes' Theorem Step 2 ---
+% \begin{frame}
+% \frametitle{Bayes' Theorem: Version 2}
+% We often don't know the marginal probability $P(B)$ by itself, so we split the denominator:
+% \formula{Bayes' Theorem (2):}{
+% \[
+% P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)}
+% \]
+% }
+
+% \pause
+% \vspace{2mm}
+
+% \begin{center}
+% 	\begin{tikzpicture}[scale=1.0]
+% 		% Draw the main rectangle (sample space)
+% 		\draw[thick] (0,0) rectangle (4,2);
+
+% 		% (right half, bottom)
+% 		\fill[cyan!60] (2,0) rectangle (4,1);
+
+% 		% (top left)
+% 		\fill[green!60] (0,1) rectangle (2,2);
+
+% 		% (bottom left)
+% 		\fill[teal!60] (0,0) rectangle (2,1);
+
+% 		% Labels
+% 		\node[red] at (3.7,0.3) {\large B};
+% 		\node at (0.2,1.7) {\large A};
+% 		\node at (3,0.7) { $B \cap A^c$};
+% 		\node at (1,0.7) { $B \cap A$}; 
+
+% 		% Draw A and B outlines
+% 		\draw[thick, black, line width=1pt] (0,0) rectangle (2,2);
+% 		\draw[thick, red, line width=2pt] (0,0) rectangle (4,1);
+% 	\end{tikzpicture}
+% \end{center}
+% \pause
+% \small{Note: $P(B \cap A)=P(B|A)P(A)$ and $P(B \cap A^c)=P(B|A^c)P(A^c)$, by the conditional probability formula (again!)}
+
+
+% \end{frame}
+
+% % --- Bayes' Theorem Step 3 ---
+% \begin{frame}
+% \frametitle{Bayes' Theorem: Version 3}
+
+
+% This trick can be extended to more than two mutually exclusive events $A_1, A_2, \ldots, A_k$ that \hl{partition} the sample space.
+
+% \formula{Bayes' Theorem (3):}{
+% \[ P(A_1|B) = \frac{P(B|A_1)P(A_1)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + \cdots + P(B|A_k)P(A_k)} \]
+% \[ = \frac{P(B|A_1)P(A_1)}{\sum_{i=1}^k P(B|A_i)P(A_i)}\]
+% }
+% \pause
+
+% \begin{center}
+% \begin{tikzpicture}[scale=1.0]
+% 	% Draw universal set
+% 	\draw[thick] (0,0) rectangle (6,2.5);
+% 	% Draw A1, A2, A3, A4
+% 	\foreach \i/\col in {1/green!40,2/lime!60,3/cyan!40,4/blue!40} {
+% 		\fill[\col] (1.5*\i-1.5,0.0) rectangle (1.5*\i,2.5);
+% 		\node at (-0.75+1.5*\i,2.2) {$A_{\i}$};
+% 	}
+% 	% Draw B as a horizontal bar
+% 	\draw[thick,red, line width=2pt] (0,0.0) rectangle (6,1.2);
+% 	% Label intersections
+% 	\foreach \i in {1,2,3,4} {
+% 		\node at (-0.75+1.5*\i,0.85) {$A_{\i} \cap B$};
+% 	}
+% 	% Label B
+% 	\node[red] at (5.7,0.3) {B};
+% \end{tikzpicture}
+% \end{center}
+
+% \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{Application activity: Inverting probabilities}
+
+% % \app{{\footnotesize A common epidemiological model for the spread of diseases is the SIR model, where the population is partitioned into three groups: Susceptible, Infected, and Recovered. This is a reasonable model for diseases like chickenpox where a single infection usually provides immunity to subsequent infections. Sometimes these diseases can also be difficult to detect. \vspace{2mm} \\
+% % Imagine a population in the midst of an epidemic where 60\% of the population is considered susceptible, 10\% is infected, and 30\% is recovered. The only test for the disease is accurate 95\% of the time for susceptible individuals, 99\% for infected individuals, but 65\% for recovered individuals. (Note: In this case accurate means returning a negative result for susceptible and recovered individuals and a positive result for infected individuals). \vspace{2mm} \\
+% % Draw a probability tree to reflect the information given above. If the individual has tested positive, what is the probability that they are actually infected?
+% % }}
+
+% % \end{frame}
+
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % \begin{frame}
+% % \frametitle{Application activity: Inverting probabilities (cont.)}
+
+% % \vspace{-0.5cm}
+
+% % \includegraphics[width=\textwidth]{\chp3@path/3-2_conditional_probability/figures/sir_tree/sir_tree} 
+
+% % \pause
+
+% % \[ P(inf | +) = \frac{P(inf~and~+)}{P(+)} = \frac{0.099}{0.03 + 0.099 + 0.105} \approx 0.423 \]
+
+
+% % \end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Bayes' Theorem Example: Weather Prediction}
+
+% \begin{itemize}
+% 	\item Let $A_1$ = \{rain tomorrow\}, $A_2$ = \{cloudy tomorrow\}, $A_3$ = \{clear tomorrow\}, $B$ = \{weatherman predicts rain\}.
+% 	\item Assume $P(A_1) = 0.2$, $P(A_2) = 0.15$, $P(A_3) = 0.65$
+% 	\item $P(B|A_1) = 0.8$, $P(B|A_2) = 0.4$, $P(B|A_3) = 0.2$
+% 	\item What is $P(A_1|B)$?
+% \end{itemize}
+
+% \vspace{2mm}
+% \pause
+% \[
+% P(A_1|B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2) + P(A_3)P(B|A_3)}
+% \]
+
+% \begin{align*}
+% P(A_1|B) &= \frac{0.2 \times 0.8}{0.2 \times 0.8 + 0.15 \times 0.4 + 0.65 \times 0.2} \\
+% 				&= \frac{0.16}{0.16 + 0.06 + 0.13} \\
+% 				&= \frac{0.16}{0.35} \\
+% 				&= 0.46
+% \end{align*}
+% \end{frame}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Edfinity Quiz}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

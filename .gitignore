@@ -21,3 +21,6 @@ site/
 lectureDraftArchives/
 lecture_1_classroom_survey.csv
 lecture_1_survey_data_clean.csv
+
+__pycache__/
+.venv/
