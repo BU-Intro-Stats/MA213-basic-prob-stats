@@ -595,6 +595,12 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--review-session">
+<div class="calendar-event__kind">Review Session</div>
+<h3>Midterm Review</h3>
+<p class="calendar-event__time">5:00 PM-6:00 PM</p>
+<p>Optional review before Quiz 2.</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">8</div>

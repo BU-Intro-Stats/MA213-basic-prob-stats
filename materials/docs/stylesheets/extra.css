@@ -47,7 +47,8 @@ code {
 }
 
 .calendar-event {
-  border: 1px solid transparent;
+  background: #f4f1fb;
+  border: 1px solid #c7b7df;
   border-radius: 6px;
   margin: 0 0 0.55rem;
   padding: 0.42rem 0.48rem;
