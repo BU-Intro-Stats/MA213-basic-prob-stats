@@ -1,0 +1,425 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\renewcommand{\arraystretch}{1.15}
+\begin{document}
+
+\begin{center}\LARGE\textbf{MA 213: Basic Statistics and Probability}\\[0.4em]
+\large Fall 2026\end{center}
+
+\tableofcontents
+\newpage
+
+\section{Course Information}
+
+\subsection{Course Details}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{Field} & \textbf{Value} \\
+\hline
+Course Name & Basic Statistics and Probability \\
+\hline
+Institution & Boston University \\
+\hline
+Learning Management System & Blackboard \\
+\hline
+Lecture Location & PHO 206 \\
+\hline
+Discussion and Lab Locations & Check your student schedule. \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Course Description}
+
+This course serves as an introduction to basic concepts and tools in probability and statistics. We begin with techniques for describing data. Then we study the elements of probability theory, including probability densities, means, variances, correlation, independence, the binomial distribution, and the central limit theorem. Finally, we combine data description and probability theory into an approach to statistical inference. Students should emerge from this course with the ability to incorporate a variety of skills in analyzing and reasoning from data.
+
+\subsection{Course Materials}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+\hline
+\textbf{Item} & \textbf{Required} & \textbf{Details} & \textbf{URL} \\
+\hline
+OpenIntro Statistics, 4th Edition & Yes & Open-source textbook by Cetinkaya-Rundel, Diez, and Barr. A PDF is available at no cost; optional print copies are available from the publisher. & \url{https://www.openintro.org/book/os/} \\
+\hline
+Edfinity & Yes & Used for in-class activities and weekly auto-graded homework. The Fall 2025 reference price was \$40 with OfficeHours; confirm the current price. &  \\
+\hline
+Laptop, phone, or similar device & Yes & Bring a device to lectures to participate in in-class activities. &  \\
+\hline
+R and RStudio & Yes & Used during skills labs for statistical programming and data analysis. & \url{https://posit.co/download/rstudio-desktop/} \\
+\hline
+Gradescope & Yes & Used to submit lab deliverables and revisions. &  \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Edfinity Enrollment}
+
+\begin{enumerate}
+\item Use a current version of Google Chrome or Firefox on a Windows or Mac computer. Other browsers or devices may cause issues when Edfinity is accessed through Blackboard.
+\item If you already have an Edfinity account, sign out of Edfinity before beginning enrollment.
+\item Log in to Blackboard.
+\item Open the Edfinity link for this course in Blackboard.
+\item Follow the prompts to enroll and pay the course fee.
+\end{enumerate}
+
+\section{Course Staff}
+
+\subsection{Staff}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
+\hline
+\textbf{Role} & \textbf{Name} & \textbf{Email} & \textbf{Office} & \textbf{Office Hours} & \textbf{Link or Notes} \\
+\hline
+Lecture Instructor & Dr. Yongho Lim & ylim2@bu.edu & CCDS 408 & Thursday 12:00PM-2:00PM &  \\
+\hline
+Lab Instructor & Dr. Emily Stephen & estephen@bu.edu & CCDS 437 & Monday 12:15PM-1:30PM; Thursday 9:00AM-10:00AM &  \\
+\hline
+Teaching Fellow & John Doe & johndoe@bu.edu & CCDS 000 & Friday 2:30PM-4:30PM &  \\
+\hline
+Teaching Fellow & Jane Doe & janedoe@bu.edu & CCDS 000 & Tuesday 12:30PM-2:30PM &  \\
+\hline
+Teaching Fellow & James Doe & jamesdoe@bu.edu & CCDS 000 & Wednesday 3:00PM-5:00PM & Add Zoom link. \\
+\hline
+Learning Assistant & LA1 & LA1@bu.edu & CCDS 000 & Thursday 2:00PM-3:00PM & In person and Zoom; confirm meeting details. \\
+\hline
+Learning Assistant & LA2 & LA2@bu.edu & CCDS 000 & Tuesday 11:00AM-12:00PM &  \\
+\hline
+\end{tabularx}
+\end{center}
+
+\section{Grading}
+
+\subsection{Grading Approach}
+
+This course uses an alternative grading system based on the following principles:
+
+\begin{itemize}
+\item Learn the course material in a way that promotes sense-making and retention of knowledge.
+\item Spend much of your time working at your learning edge, where you are challenged but not lost or overwhelmed.
+\item Use clear expectations for what quality work looks like and how grades are determined.
+\item Receive feedback that helps you improve your work.
+\item Have multiple opportunities to learn from mistakes without those mistakes automatically lowering your grade.
+\item Use frequent, smaller assignments and assessments to support learning.
+\item Build a learning community in which students support one another rather than compete for grades.
+\item Promote authentic engagement with statistics rather than cramming, cheating, or arguing about points.
+\item Allow students some choice in their trajectory through the course.
+\end{itemize}
+
+Course work includes Edfinity homework, lecture participation, quizzes, skills labs, and lab group projects. Quiz problems assess core and auxiliary learning objectives. A course grade is determined by meeting every requirement in the corresponding row below. Students may choose the grade they aim to earn and should plan their work accordingly.
+
+\subsection{Grade Requirements}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|}
+\hline
+\textbf{Grade} & \textbf{Homeworks} & \textbf{Quiz Core Objectives} & \textbf{Quiz Auxiliary Objectives} & \textbf{Skills Labs} & \textbf{Lab Projects} & \textbf{Lectures} \\
+\hline
+A & 12/12 complete & 19/20 passed & 9/11 passed & 7/7 passed & 2 satisfactory & Fewer than 5 missed \\
+\hline
+B & 11/12 complete & 16/20 passed & 6/11 passed & Labs 1-6 passed & 2 satisfactory & Fewer than 9 missed \\
+\hline
+C & 10/12 complete & 12/20 passed & 0/11 passed & Labs 1-6 passed & 2 satisfactory & Fewer than 15 missed \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Additional Grade Rules}
+
+\begin{itemize}
+\item Grades between letter grades are determined by how close a student is to the next letter grade.
+\item One unsatisfactory project lowers the course grade by one-third of a letter grade, such as B to B-.
+\item Two unsatisfactory project grades lower the course grade by two-thirds of a letter grade, such as B to C+.
+\item Lectures missed with permission are not counted as missed. To request permission, contact the lecture instructor in advance with the reason for the absence and complete any required form.
+\end{itemize}
+
+\section{Assessments}
+
+\subsection{Homeworks}
+
+Homework problem sets are assigned in Edfinity. The interface reports when an answer is incorrect and provides another opportunity to submit a correct answer. Due dates and times are generated from \texttt{Homework\_schedule.md}.
+
+\subsection{Quizzes}
+
+Course material is divided into learning objectives described in \texttt{learningObjectives.md}. Quizzes occur during discussion sections according to \texttt{quiz\_schedule.md}. Each objective on an original quiz is evaluated using the following labels:
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+\textbf{Result} & \textbf{Meaning} & \textbf{Next Step} \\
+\hline
+Pass & The response is correct. & The objective does not need to be attempted again, even when another objective from the same quiz is retaken. \\
+\hline
+Almost Pass & The response contains only a minor error, such as a typo. & Within one week of receiving the quiz grade, attend office hours, explain the error, and correct it. A correct explanation becomes Pass; an incorrect explanation becomes Not Yet. \\
+\hline
+Not Yet & The response is incorrect, incomplete, or insufficient. & Retake the objective through the quiz-retake process. \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Quiz Retakes}
+
+Students may retake up to three quizzes near the end of the semester to pass objectives missed on the original quizzes. Retakes may be more difficult than the original quizzes and are graded Pass or Not Passed.
+
+To qualify for a retake, complete a Quiz Retake Qualification Form and have it signed by the lecture instructor or discussion teaching fellow within one week of receiving the original quiz grade. Qualification forms may be completed for more than three quizzes, but no more than three quizzes may be retaken. A missed original quiz uses one of the available retakes and still requires a qualification form.
+
+\subsection{Skills Labs}
+
+Lab sections provide opportunities to work in groups, solve problems in probability and data analysis, and use R with RStudio. A pre-lab document is generally posted before each skills lab and should be read before the session.
+
+Skills labs are evaluated through lab deliverables submitted through Gradescope. Students may revise and resubmit a lab deliverable before the next lab session. Lab topics and deliverables are generated from \texttt{lab\_summary.md} and \texttt{Lab\_schedules.md}.
+
+\subsection{Lab Projects}
+
+Students work in groups to complete two projects:
+
+\begin{itemize}
+\item Project 1: video presentation
+\item Project 2: written report
+\end{itemize}
+
+Each project is evaluated with the ESRN rubric:
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{Label} & \textbf{Meaning} \\
+\hline
+E & Excellent or Exemplary \\
+\hline
+S & Satisfactory \\
+\hline
+R & Revisions Needed \\
+\hline
+N & Not Assessable \\
+\hline
+\end{tabularx}
+\end{center}
+
+A grade of S receives full credit. A grade of E may be considered when deciding between final letter grades. A project receiving R or N must be revised and resubmitted once. A project that does not earn S or E by the end of the course may reduce the final course grade as described in \texttt{syllabus\_grading.md}.
+
+\subsubsection{Peer Evaluation}
+
+Each group member submits a peer assessment after each project deliverable. Peer evaluations use Excellent, Satisfactory, and Unsatisfactory categories. The lab instructor will contact students who consistently receive Unsatisfactory ratings. Repeated Unsatisfactory ratings may reduce the final project grade.
+
+\subsection{Lecture Participation}
+
+Lecture participation is based on completion of in-class Edfinity activities during the lecture.
+
+\section{Course Policies and Student Resources}
+
+\subsection{Generative AI}
+
+Generative artificial intelligence tools create text, images, computer code, audio, video, and other content. A complete course policy should describe acceptable uses, unauthorized uses, and documentation requirements for each assignment type.
+
+No generative AI use is allowed for quizzes. Any authorized use of generative AI must be appropriately documented. The purpose of this policy is to allow students to use AI to enhance learning while limiting uses that provide an unfair advantage or detract from student learning.
+
+Use of generative AI in ways that have not been explicitly authorized may be addressed under the Boston University Academic Conduct Code. Students who are unsure whether a use is authorized should ask an instructor in advance. Students remain responsible for avoiding plagiarism, fabricated information, and fabricated data.
+
+\subsection{Attendance}
+
+Students are expected to attend lectures, labs, and discussion sections unless they have a valid reason for being absent. When an absence is necessary, notify the lecture instructor, lab instructor, or discussion teaching fellow as soon as possible and ideally before the absence. Excused lecture absences are not penalized in the lecture participation requirement.
+
+Boston University attendance policy: \url{https://www.bu.edu/academics/policies/attendance/}
+
+\subsection{Recording}
+
+Lectures may be recorded and shared with students who miss class for a valid reason.
+
+\subsection{Academic Conduct}
+
+All Boston University students are expected to maintain high standards of academic honesty and integrity. Students are responsible for understanding the Academic Conduct Code, including the ethical standards, rights, and responsibilities that apply to members of the university learning community. Cheating, plagiarism, and other forms of academic misconduct are addressed according to this policy. Penalties may range from failing an assignment or course to suspension or expulsion from the university.
+
+Boston University Academic Conduct Code: \url{https://www.bu.edu/academics/policies/academic-conduct-code/}
+
+\subsection{Disability and Access Services}
+
+Students with documented disabilities, including learning disabilities, may be entitled to accommodations that provide integrated and equal access to university programs. Accommodations may include additional testing time, staggered homework assignments, or note-taking assistance.
+
+Students who believe they should receive accommodations should contact Disability and Access Services. The office can provide an accommodation letter to share with instructors; the letter does not state the reason for the accommodations. Students who already have a letter are encouraged to share it with the instructor as soon as possible.
+
+Boston University Disability and Access Services: \url{https://www.bu.edu/disability/}
+
+\subsection{Educational Resource Center}
+
+The Educational Resource Center provides programs and services that help students strengthen their learning and develop a plan for academic success. Free peer tutoring may be available for this course, subject to availability.
+
+Boston University Educational Resource Center: \url{https://www.bu.edu/erc/}
+
+\section{Learning Objectives}
+
+The current learning-objective file contains 23 Core-tagged entries and 11 Auxiliary-tagged entries.
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
+\hline
+\textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+\hline
+\textbf{Quiz 1} & \textbf{M1.L01} & \textbf{M1.L02} & \textbf{M1.L03} & \textbf{M1.L04} & M1.L05 &  &  \\
+\hline
+\textbf{Quiz 2} & \textbf{M2.L01} & \textbf{M2.L02} & \textbf{M2.L03} & \textbf{M2.L04} & \textbf{M2.L05} & \textbf{M2.L06} &  \\
+\hline
+\textbf{Quiz 3} & \textbf{M3.L01} & \textbf{M3.L02} & \textbf{M3.L03} & \textbf{M3.L04} & \textbf{M3.L05} & M3.L06 &  \\
+\hline
+\textbf{Quiz 4} & \textbf{M4.L01} & M4.L02 & M4.L03 & \textbf{M4.L04} & \textbf{M4.L05} & M4.L06 & M4.L07 \\
+\hline
+\textbf{Quiz 5} & M5.L01 & M5.L02 & M5.L03 & M5.L04 & M5.L05 &  &  \\
+\hline
+\end{tabularx}
+\end{center}
+
+\textbf{Bold} = Core    plain = Auxiliary
+
+\subsection{Module 1: Exploratory Data Analysis and Study Design}
+
+*(Chapters 1 and 2; 5 objectives)*
+
+\begin{enumerate}
+\item \textbf{Classify and Analyze Variables:} Categorize variables based on their types (e.g., numerical/categorical, continuous/discrete, ordinal), assess their association (positive, negative, or independent), and determine which make sense as explanatory vs. response variables. [Quiz1, Lab1, Lab2, Lab3] \textbf{Core}
+\item \textbf{Evaluate Study Design and Its Implications:} Identify and explain experimental design choices (observational vs. experimental, sampling methods, blinding, potential biases), and judge whether results can be generalized to a population or used to infer causation. [Quiz1, Lab1, Project1] \textbf{Core}
+\item \textbf{Use R for Data Management and Exploration:} Utilize R to load, pre-process, and explore data through visualization and summarization techniques. [Quiz1, Lab1, Lab2, Lab3] \textbf{Core}
+\item \textbf{Visualize and Describe Data Distributions:} Select appropriate visualizations (scatterplots, histograms, box plots, bar plots) to depict data, and describe distributions qualitatively (shape, center, spread, outliers) and quantitatively (mean, median, mode, range, IQR, standard deviation). [Quiz1, Lab2, Lab3, Project1] \textbf{Core}
+\item \textbf{Conduct Hypothesis Testing Using Simulation:} Set up null and alternative hypotheses to test for independence between variables, and use simulation techniques to evaluate data support for these hypotheses. [Quiz1] Auxiliary
+\end{enumerate}
+
+\subsection{Module 2: Probability, Random Variables, and Distributions}
+
+*(Chapters 3 and 4; 6 objectives)*
+
+\begin{enumerate}
+\item \textbf{Validate and Explain Probability Distributions:} Assess the validity of a probability distribution using the concepts of outcome, sample space, and probability properties (e.g., disjoint outcomes, probabilities between 0 and 1, and total probabilities summing to 1). [Quiz2, Lab4] \textbf{Core}
+\item \textbf{Apply the Law of Large Numbers and Its Implications:} Explain the Law of Large Numbers, why it holds, and its implications for predicting long-term averages in probability and statistics. [Quiz2, Lab4] \textbf{Core}
+\item \textbf{Compute Probabilities Using Various Tools:} Use logic, Venn diagrams, and probability rules to compute probabilities for events. [Quiz2, Lab4] \textbf{Core}
+\item \textbf{Understand and Compute Expectations and Variances:} Explain the concepts of expectations and variances of random variables, and compute the expectation and variance of a linear combination of random variables. [Quiz2, Lab5] \textbf{Core}
+\item \textbf{Model Data Using Bernoulli, Geometric, and Binomial Distributions:} Recognize when to appropriately model data using the Bernoulli, geometric, and binomial distributions, and compute quantities of interest such as mean, standard deviation, and tail probabilities. [Quiz2, Lab5] \textbf{Core}
+\item \textbf{Assess Data Using the Normal Distribution:} Use the normal distribution to assess the "unusualness" of data points, apply the 68-95-99.7\% rule, evaluate normality through histograms, and determine when a normal approximation to the binomial model is valid for calculating binomial probabilities. [Quiz2, Lab5] \textbf{Core}
+\end{enumerate}
+
+\subsection{Module 3: Foundations for Inference}
+
+*(Chapter 5–Chapter 6.1; 6 objectives)*
+
+\begin{enumerate}
+\item \textbf{Understand Point Estimates and Sampling Variability:} Define a sample statistic (point estimate) for a population parameter, and explain how it varies across different samples. [Quiz3] \textbf{Core}
+\item \textbf{Visualize and Interpret Sampling Distributions:} Draw and interpret sampling distributions for a point estimate (e.g., population proportion) across different sample sizes, explaining how the distribution changes as the sample size increases. [Quiz3] \textbf{Core}
+\item \textbf{Inference for a Single Proportion:} Design, execute, and interpret confidence intervals and hypothesis tests for a single proportion. [Quiz3, Lab6, Project2] \textbf{Core}
+\item \textbf{Understand Errors and Significance Levels:} Identify Type I and Type II errors and explain how they are influenced by changes in the significance level. [Quiz3, Lab6] \textbf{Core}
+\item \textbf{Distinguish Statistical vs. Practical Significance:} Differentiate between statistical significance and practical significance, and explain the implications of each. [Quiz3, Lab6, Project2] \textbf{Core}
+\item \textbf{Calculate Sample Size for Confidence Intervals:} Calculate the required minimum sample size for a given margin of error and confidence level. [Quiz3] Auxiliary
+\end{enumerate}
+
+\subsection{Module 4: Inference}
+
+*(Chapters 6 and 7; 7 objectives)*
+
+\begin{enumerate}
+\item \textbf{Inference for a Difference in Proportions:} Design, execute, and interpret confidence intervals and hypothesis tests for a difference in proportions. Choose when to use a paired test and when to use an independent test. [Quiz4, Lab6, Project2] \textbf{Core}
+\item \textbf{Conduct and Interpret Chi-Square Tests:} Assess whether the conditions for a chi-square test (goodness of fit or independence) are met, and if so, design, execute, and interpret the test. [Quiz4, Lab6, Project2] Auxiliary
+\item \textbf{Explain and Use the t-Distribution:} Explain how the t-distribution differs from the normal distribution and why it is used for population mean inference. [Quiz4] Auxiliary
+\item \textbf{Conduct and Interpret t-Tests:} Design, execute, and interpret t-tests for a single population mean, a difference of paired means, and a difference of independent means, calculating the standard error appropriately for each. Describe how to obtain a p-value for a t-test and a critical t-score for a confidence interval. [Quiz4, Project2] \textbf{Core}
+\item \textbf{Explain Hypothesis Testing and Its Limitations:} Discuss the use cases and potential issues with hypothesis testing, including the interpretation of results. [Quiz4, Project2] \textbf{Core}
+\item \textbf{Calculate Test Power and Evaluate Factors:} Calculate the power of a test for a given effect size and significance level, and explain how the power would change with variations in effect size, sample size, significance level, or standard error. [Quiz5] Auxiliary
+\item \textbf{Conduct and Interpret ANOVA:} Assess whether conditions for an ANOVA are met, and if so, design, execute, and interpret the test to compare sample means across several groups. [Quiz5] Auxiliary
+\end{enumerate}
+
+\subsection{Module 5: Beyond Recipes: Frequentist and Bayesian Approaches to Statistical Modeling}
+
+*(*Bayes' Rules*, Chapters 1–3; 5 objectives: 5 auxiliary)*
+
+\begin{enumerate}
+\item \textbf{The Frequentist Perspective:} Explain how Frequentist modeling uses sampling distributions to evaluate estimators. Describe the difference between a sampling distribution and a likelihood. Use maximum likelihood to estimate a parameter and identify which of the estimators in the course are maximum likelihood estimators. [Quiz5] Auxiliary
+\item \textbf{The Bayesian Perspective:} Explain how Bayesian modeling uses likelihoods, priors, and posteriors to perform inference. Explain how Bayesian analyses can be updated sequentially as new data arrives and how the results remain invariant to the order in which the data is observed. [Quiz5] Auxiliary
+\item \textbf{Comparing Bayesian and Frequentist Approaches:} Describe the key differences between Bayesian and frequentist approaches to statistical inference and reasoning, including providing examples of when each method is appropriate. [Quiz5, Lab7] Auxiliary
+\item \textbf{Bayesian Modeling 1:} Construct Bayesian models for discrete distributions and identify the likelihood, prior, and posterior, and use the probability rules from Module 2 to compute conditional and marginal probabilities for the models. [Quiz5] Auxiliary
+\item \textbf{Bayesian Modeling 2:} Apply and interpret the beta-binomial model, including understanding the prior and posterior distributions, and evaluating the influence of the prior relative to the likelihood. [Quiz5] Auxiliary
+\end{enumerate}
+
+\subsection{Module 6: Global Module}
+
+*(Shared with MA 214; 4 objectives)*
+
+\begin{enumerate}
+\item I can carry out a complete, reproducible statistical workflow in R (load data, run exploratory analyses, transform variables, run statistical analyses, display and interpret results) using the inference methods from the course. [Lab1, Project1, Project2] \textbf{Core}
+\item Given R code for a statistical analysis, I can explain what it does and why (in terms of the methods from the course), and identify both programmatic and statistical errors. [Quizzes] \textbf{Core}
+\item When solving probability and statistics problems, I can support my answers by writing out the steps using the notation and conventions of statistical exposition. [Quizzes] \textbf{Core}
+\item I can recognize whether a statistical workflow is appropriate for the given data and data analysis goals, and explain the results of a statistical analysis to stakeholders
+\item as a presentation, and [Project1] \textbf{Core}
+\item in a written report. [Project2] \textbf{Core}
+\end{enumerate}
+
+\section{Weekly Schedule}
+
+This schedule is generated from the course schedule inputs. Dates and activities may change; updates will be announced through the course learning management system.
+
+\begin{landscape}
+\footnotesize
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{@{}p{0.04\linewidth}p{0.14\linewidth}p{0.35\linewidth}p{0.22\linewidth}p{0.19\linewidth}@{}}
+\toprule
+\textbf{Week} & \textbf{Meetings} & \textbf{Lecture Topics} & \textbf{Labs and Deliverables} & \textbf{Additional Events} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Week} & \textbf{Meetings} & \textbf{Lecture Topics} & \textbf{Labs and Deliverables} & \textbf{Additional Events} \\
+\midrule
+\endhead
+1 & Lecture 1, Lecture 2 & Lecture 1: Course introduction; Lecture 2: Introduction to data (Chapter 1) & Lab 1 (Lecture 1) &  \\
+\addlinespace
+2 & Lecture 3, Lecture 4 & Lecture 3: Examining numerical data (Chapter 2.1); Lecture 4: Considering categorical data (Chapter 2.2) & Lab 2 (Lecture 3) -- Lab 2: Lab1 in-lab activity submission | Tutorial 1 | Tutorial 2 (pre-lab for lab2) &  \\
+\addlinespace
+3 & Lecture 5, Lecture 6, Lecture 7 & Lecture 5: Two case studies; Lecture 6: Probability (Chapter 3.1); Lecture 7: Conditional Probability, Sampling (Chapters 3.2–3.3) & Lab 3 (Lecture 6) -- Lab 3: Lab2 in-lab activity submission | Tutorial 3 (pre-lab for lab3) &  \\
+\addlinespace
+4 & Lecture 8, Quiz 1, Lecture 9 & Lecture 8: Sampling from a small population, Random Variables (Chapters 3.3–3.4); Quiz 1: confirmed; Lecture 9: Continuous Distributions (Chapter 3.5) & Project1-1 -- Project1-1: Lab3 in-lab activity submission &  \\
+\addlinespace
+5 & Lecture 10, Lecture 11, Lecture 12 & Lecture 10: Continuous Distributions (Chapter 3.5), Normal distribution (Chapter 4.1); Lecture 11: Normal distribution, continued; Lecture 12: Geometric distribution (Chapter 4.2) & Lab 4 (Lecture 11) -- Lab 4: Project 1 Outline | Tutorial 4 (pre-lab for lab4) &  \\
+\addlinespace
+6 & Lecture 13, Lecture 14, Lecture 15 & Lecture 13: Binomial distribution (Chapter 4.3); Lecture 14: Poisson distribution (Chapter 4.5); Lecture 15: Point estimates and sampling variability (Chapter 5.1) & Lab 5 (Lecture 14) -- Lab 5: Lab4 in-lab activity submission | Tutorial 5 (pre-lab for lab5) & Midterm Review, 5:00PM-6:00PM \\
+\addlinespace
+7 & Lecture 16, Quiz 2, Lecture 17 & Lecture 16: Point estimates and sampling variability, continued (Chapter 5.1); Quiz 2: in the lecture time; Lecture 17: Confidence intervals (Chapter 5.2) & Project1-2 -- Project1-2: Lab5 in-lab activity submission &  \\
+\addlinespace
+8 & Lecture 18, Lecture 19, Lecture 20 & Lecture 18: Hypothesis testing for a proportion (Chapter 5.3); Lecture 19: Hypothesis testing for a proportion, continued (Chapter 5.3); Lecture 20: Inference for a single proportion (Chapter 6.1) & Project2-1 -- Project2-1: Project1 Video &  \\
+\addlinespace
+9 & Lecture 21, Lecture 22, Lecture 23 & Lecture 21: Difference of two proportions (Chapter 6.2); Lecture 22: Testing for goodness of fit using chi-square (Chapter 6.3); Lecture 23: Testing for independence in two-way tables (Chapter 6.4) & Lab 6 (Lecture 22) -- Lab 6: Lab6 in-lab activity submission | Tutorial 6 (pre-lab for lab6) | Project2 Outline &  \\
+\addlinespace
+10 & Lecture 24, Quiz 3, Lecture 25 & Lecture 24: One-sample means with the t-distribution (Chapter 7.1); Quiz 3: tentative; Lecture 25: CIs for one-sample means, Paired data (Chapter 7.2) & Project2-2 -- Project2-2: Lab6 in-lab activity submission &  \\
+\addlinespace
+11 & Lecture 26, Lecture 27, Lecture 28 & Lecture 26: Difference of two means (Chapter 7.3); Lecture 27: Power calculations for a difference of means (Chapter 7.4); Lecture 28: Issues with Hypothesis Testing 1: The traps of insufficient power & Project2-3 -- Project2-3: Project2 Progress Report &  \\
+\addlinespace
+12 & Lecture 29, Lecture 30, Lecture 31 & Lecture 29: Comparing many means with ANOVA (Chapter 7.5); Lecture 30: Issues with Hypothesis Testing 2: Multiple comparisons; Lecture 31: Beyond Recipes: Frequentist and Bayesian Approaches to Statistical Modeling & Lab 7 (Lecture 30) -- Lab 7: Project2 writeup | Tutorial 7 (pre-lab for lab7) &  \\
+\addlinespace
+13 & Lecture 32 & Lecture 32: Frequentist modeling using the likelihood function & Lab 8 -- Lab 8: Project2 Resubmission &  \\
+\addlinespace
+14 & Quiz 4, Lecture 33, Lecture 34 & Quiz 4: tentative; Lecture 33: Bayesian modeling with discrete distributions; Lecture 34: Bayesian modeling with the beta-binomial model &  &  \\
+\addlinespace
+15 & Lecture 35, Quiz 5, Lecture 36 & Lecture 35: Case study in modern statistical modeling; Quiz 5: tentative; Lecture 36: Wrap-up and evaluations &  &  \\
+\addlinespace
+\bottomrule
+\end{longtable}
+\end{landscape}
+
+\end{document}

@@ -131,6 +131,16 @@ After editing instructor inputs, run this from the repository root:
 python3 materials/generate_schedule_table.py
 ```
 
+Generate the LaTeX syllabus after refreshing the schedule:
+
+```bash
+python3 materials/generate_syllabus.py
+```
+
+The syllabus generator reads the modular `syllabus_*.md` files, learning objectives,
+semester information, and `materials/generated_outputs/weekly_schedule.md`. It writes
+`materials/generated_outputs/syllabus.tex`.
+
 This regenerates the weekly schedule, calendar view, `.ics` calendar file, Excel
 schedule, and the MkDocs copies in `materials/docs/`. Meeting patterns are read directly
 from `Lecture_schedules.md`, `Lab_schedules.md`, and `Homework_schedule.md`;
