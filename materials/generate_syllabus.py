@@ -11,12 +11,12 @@ INPUTS = ROOT / "instructor_inputs"
 OUTPUT = ROOT / "generated_outputs" / "syllabus.tex"
 WEEKLY_SCHEDULE = ROOT / "generated_outputs" / "weekly_schedule.md"
 
-SYLLABUS_SECTIONS = (
-    ("Course Information", INPUTS / "syllabus_course.md"),
-    ("Course Staff", INPUTS / "syllabus_staff.md"),
-    ("Grading", INPUTS / "syllabus_grading.md"),
-    ("Assessments", INPUTS / "syllabus_assessments.md"),
-    ("Course Policies and Student Resources", INPUTS / "syllabus_policies.md"),
+SYLLABUS_FILES = (
+    INPUTS / "syllabus_course.md",
+    INPUTS / "syllabus_staff.md",
+    INPUTS / "syllabus_grading.md",
+    INPUTS / "syllabus_assessments.md",
+    INPUTS / "syllabus_policies.md",
 )
 
 LATEX_SPECIALS = {
@@ -30,6 +30,15 @@ LATEX_SPECIALS = {
     "}": r"\}",
     "~": r"\textasciitilde{}",
     "^": r"\textasciicircum{}",
+}
+
+SOURCE_LABELS = {
+    "Homework_schedule.md": "the course schedule",
+    "learningObjectives.md": "the course learning objectives",
+    "quiz_schedule.md": "the course schedule",
+    "lab_summary.md": "the lab summaries",
+    "Lab_schedules.md": "meeting schedule",
+    "syllabus_grading.md": "the grading rules above",
 }
 
 
@@ -48,7 +57,9 @@ def inline_latex(text: str) -> str:
         if token.startswith("**") and token.endswith("**"):
             parts.append(r"\textbf{" + latex_escape(token[2:-2]) + "}")
         elif token.startswith("`") and token.endswith("`"):
-            parts.append(r"\texttt{" + latex_escape(token[1:-1]) + "}")
+            source = token[1:-1]
+            label = SOURCE_LABELS.get(source)
+            parts.append(latex_escape(label) if label else r"\texttt{" + latex_escape(source) + "}")
         elif token.startswith(("http://", "https://")):
             url = token.rstrip(".,;:")
             punctuation = token[len(url) :]
@@ -76,28 +87,39 @@ def table_latex(rows: list[list[str]]) -> list[str]:
         return [inline_latex(" | ".join(row)) + r"\\" for row in rows]
 
     column_count = len(rows[0])
-    alignment = "|" + "|".join("X" for _ in range(column_count)) + "|"
+    alignment = "l" + "Y" * (column_count - 1)
+    size = r"\scriptsize" if column_count >= 5 else r"\small"
     output = [
         r"\begin{center}",
-        r"\small",
+        size,
+        r"\setlength{\tabcolsep}{4pt}",
         rf"\begin{{tabularx}}{{\textwidth}}{{{alignment}}}",
-        r"\hline",
+        r"\toprule",
         " & ".join(r"\textbf{" + inline_latex(cell) + "}" for cell in rows[0]) + r" \\",
-        r"\hline",
+        r"\midrule",
     ]
     for row in rows[2:]:
         padded = row + [""] * (column_count - len(row))
         output.append(" & ".join(inline_latex(cell) for cell in padded[:column_count]) + r" \\")
-        output.append(r"\hline")
-    output.extend((r"\end{tabularx}", r"\end{center}"))
+    output.extend((r"\bottomrule", r"\end{tabularx}", r"\end{center}"))
     return output
 
 
-def markdown_to_latex(path: Path) -> str:
+def markdown_to_latex(
+    path: Path,
+    exclude_sections: set[str] | None = None,
+    section_replacements: dict[str, str] | None = None,
+) -> str:
     lines = strip_comments(path.read_text(encoding="utf-8")).splitlines()
+    excluded = {heading.lower() for heading in (exclude_sections or set())}
+    replacements = {
+        heading.lower(): replacement
+        for heading, replacement in (section_replacements or {}).items()
+    }
     output: list[str] = []
     paragraph: list[str] = []
     list_kind: str | None = None
+    skip_level: int | None = None
 
     def flush_paragraph() -> None:
         if paragraph:
@@ -109,6 +131,7 @@ def markdown_to_latex(path: Path) -> str:
         nonlocal list_kind
         if list_kind:
             output.append(rf"\end{{{list_kind}}}")
+            output.append(r"\end{samepage}")
             output.append("")
             list_kind = None
 
@@ -116,6 +139,29 @@ def markdown_to_latex(path: Path) -> str:
     while index < len(lines):
         raw = lines[index].rstrip()
         stripped = raw.strip()
+        heading = re.match(r"^(#{1,4})\s+(.+)$", stripped)
+
+        if skip_level is not None:
+            if heading and len(heading.group(1)) <= skip_level:
+                skip_level = None
+            else:
+                index += 1
+                continue
+
+        if heading and heading.group(2).strip().lower() in excluded:
+            flush_paragraph()
+            close_list()
+            skip_level = len(heading.group(1))
+            index += 1
+            continue
+        if heading and heading.group(2).strip().lower() in replacements:
+            flush_paragraph()
+            close_list()
+            output.append(replacements[heading.group(2).strip().lower()])
+            output.append("")
+            skip_level = len(heading.group(1))
+            index += 1
+            continue
 
         if stripped.startswith("|"):
             flush_paragraph()
@@ -128,14 +174,15 @@ def markdown_to_latex(path: Path) -> str:
             output.append("")
             continue
 
-        heading = re.match(r"^(#{1,4})\s+(.+)$", stripped)
         if heading:
             flush_paragraph()
             close_list()
             level = len(heading.group(1))
             if level > 1:
-                command = {2: "subsection", 3: "subsubsection", 4: "paragraph"}[level]
-                output.append(rf"\{command}{{{inline_latex(heading.group(2))}}}")
+                if level == 2:
+                    output.append(rf"\section*{{{inline_latex(heading.group(2))}}}")
+                else:
+                    output.append(rf"\textbf{{{inline_latex(heading.group(2))}:}}")
                 output.append("")
             index += 1
             continue
@@ -147,6 +194,7 @@ def markdown_to_latex(path: Path) -> str:
             if list_kind != wanted_kind:
                 close_list()
                 list_kind = wanted_kind
+                output.append(r"\begin{samepage}")
                 output.append(rf"\begin{{{list_kind}}}")
             output.append(r"\item " + inline_latex(item.group(1)))
             index += 1
@@ -190,11 +238,15 @@ def objective_counts(path: Path) -> tuple[int, int]:
 def read_markdown_table(path: Path, heading: str) -> list[dict[str, str]]:
     lines = path.read_text(encoding="utf-8").splitlines()
     heading_index = next(
-        (index for index, line in enumerate(lines) if line.strip() == f"# {heading}"),
+        (
+            index
+            for index, line in enumerate(lines)
+            if re.fullmatch(rf"#{{1,4}}\s+{re.escape(heading)}", line.strip(), re.IGNORECASE)
+        ),
         None,
     )
     if heading_index is None:
-        raise ValueError(f"Could not find '# {heading}' in {path}.")
+        raise ValueError(f"Could not find heading '{heading}' in {path}.")
 
     table_lines = []
     for line in lines[heading_index + 1 :]:
@@ -204,7 +256,7 @@ def read_markdown_table(path: Path, heading: str) -> list[dict[str, str]]:
             break
     rows = [split_table_row(line) for line in table_lines]
     if len(rows) < 3:
-        raise ValueError(f"Could not find a Markdown table under '# {heading}' in {path}.")
+        raise ValueError(f"Could not find a Markdown table under '{heading}' in {path}.")
 
     headers = rows[0]
     return [
@@ -213,45 +265,116 @@ def read_markdown_table(path: Path, heading: str) -> list[dict[str, str]]:
     ]
 
 
+def course_details() -> dict[str, str]:
+    rows = read_markdown_table(INPUTS / "syllabus_course.md", "Course Details")
+    return {row["Field"]: row["Value"] for row in rows}
+
+
+def meeting_summary() -> str:
+    rows = read_markdown_table(INPUTS / "Lecture_schedules.md", "Course Meeting Pattern")
+    lecture = next((row for row in rows if row.get("Event Type") == "Lecture"), None)
+    if not lecture:
+        return "See the current course schedule."
+    weekdays = lecture.get("Weekdays", "")
+    start = lecture.get("Start Time", "")
+    end = lecture.get("End Time", "")
+    time = f"{start}--{end}" if start and end else start or end
+    return ", ".join(part for part in (weekdays, time) if part)
+
+
+def staff_latex(path: Path) -> str:
+    rows = read_markdown_table(path, "Staff")
+    grouped: dict[str, list[dict[str, str]]] = {}
+    for row in rows:
+        grouped.setdefault(row["Role"], []).append(row)
+
+    output = [r"\section*{Course Staff}"]
+    for role, people in grouped.items():
+        label = role.upper() + ("S" if len(people) > 1 and not role.endswith("s") else "")
+        output.append(rf"\textbf{{{inline_latex(label)}:}}")
+        output.append(r"\begin{itemize}")
+        for person in people:
+            name = inline_latex(person.get("Name", ""))
+            email = person.get("Email", "")
+            contact = rf"\href{{mailto:{email}}}{{{latex_escape(email)}}}" if email else ""
+            details = ", ".join(
+                part
+                for part in (
+                    f"Office: {person.get('Office', '')}" if person.get("Office") else "",
+                    f"Office hours: {person.get('Office Hours', '')}"
+                    if person.get("Office Hours")
+                    else "",
+                    person.get("Link or Notes", ""),
+                )
+                if part
+            )
+            line = name + (f" ({contact})" if contact else "")
+            if details:
+                line += r" --- " + inline_latex(details)
+            output.append(r"\item " + line)
+        output.append(r"\end{itemize}")
+    return "\n".join(output)
+
+
+def course_materials_latex(path: Path) -> str:
+    rows = read_markdown_table(path, "Course Materials")
+    output = [r"\section*{Course Materials}"]
+    for row in rows:
+        item = inline_latex(row.get("Item", ""))
+        required = row.get("Required", "").strip().lower() == "yes"
+        details = inline_latex(row.get("Details", ""))
+        url = row.get("URL", "").strip()
+        label = rf"\textbf{{{item}}}"
+        if required:
+            label += " (required)"
+        output.append(label + (f": {details}" if details else ""))
+        if url:
+            output.append(r"\begin{center}" + rf"\url{{{url}}}" + r"\end{center}")
+    return "\n\n".join(output)
+
+
 def schedule_latex(path: Path) -> str:
     rows = read_markdown_table(path, "Weekly Schedule")
-    output = [
-        r"\begin{landscape}",
-        r"\footnotesize",
-        r"\setlength{\LTleft}{0pt}",
-        r"\setlength{\LTright}{0pt}",
-        r"\begin{longtable}{@{}p{0.04\linewidth}p{0.14\linewidth}p{0.35\linewidth}p{0.22\linewidth}p{0.19\linewidth}@{}}",
-        r"\toprule",
-        r"\textbf{Week} & \textbf{Meetings} & \textbf{Lecture Topics} & \textbf{Labs and Deliverables} & \textbf{Additional Events} \\",
-        r"\midrule",
-        r"\endfirsthead",
-        r"\toprule",
-        r"\textbf{Week} & \textbf{Meetings} & \textbf{Lecture Topics} & \textbf{Labs and Deliverables} & \textbf{Additional Events} \\",
-        r"\midrule",
-        r"\endhead",
-    ]
-    for row in rows:
-        labs = row.get("Labs", "")
-        deliverables = row.get("Lab Deliverables", "")
-        lab_text = " -- ".join(part for part in (labs, deliverables) if part)
-        cells = (
-            row.get("Week", ""),
-            row.get("Lecture #", ""),
-            row.get("Lecture Topics", ""),
-            lab_text,
-            row.get("Additional Events", ""),
+    chunks = [rows[index : index + 8] for index in range(0, len(rows), 8)]
+    output = []
+    for chunk_index, chunk in enumerate(chunks):
+        if chunk_index:
+            output.append(r"\newpage")
+            output.append(r"\section*{Weekly Plan (continued)}")
+        output.extend(
+            (
+                r"\begin{center}",
+                r"\footnotesize",
+                r"\setlength{\tabcolsep}{3pt}",
+                r"\renewcommand{\arraystretch}{1.15}",
+                r"\begin{tabularx}{\textwidth}{|c|Y|Y|p{0.12\textwidth}|}",
+                r"\hline",
+                r"\textbf{Week} & \textbf{Lecture Topics} & \textbf{Labs and Deliverables} & \textbf{Other} \\",
+                r"\hline",
+            )
         )
-        output.append(" & ".join(inline_latex(cell) for cell in cells) + r" \\")
-        output.append(r"\addlinespace")
-    output.extend((r"\bottomrule", r"\end{longtable}", r"\end{landscape}"))
+        for row in chunk:
+            labs = row.get("Labs", "")
+            deliverables = row.get("Lab Deliverables", "")
+            lab_text = " -- ".join(part for part in (labs, deliverables) if part)
+            cells = (
+                row.get("Week", ""),
+                row.get("Lecture Topics", ""),
+                lab_text,
+                row.get("Additional Events", ""),
+            )
+            output.append(" & ".join(inline_latex(cell) for cell in cells) + r" \\")
+            output.append(r"\hline")
+        output.extend((r"\end{tabularx}", r"\end{center}"))
     return "\n".join(output)
 
 
 def build_document() -> str:
-    required = [path for _, path in SYLLABUS_SECTIONS]
+    required = list(SYLLABUS_FILES)
     required.extend(
         (
             INPUTS / "important_dates.md",
+            INPUTS / "Lecture_schedules.md",
             INPUTS / "learningObjectives.md",
             WEEKLY_SCHEDULE,
         )
@@ -268,58 +391,67 @@ def build_document() -> str:
     semester = semester_label(INPUTS / "important_dates.md")
     title = course_name(INPUTS / "syllabus_course.md")
     core_count, auxiliary_count = objective_counts(INPUTS / "learningObjectives.md")
+    details = course_details()
 
-    body = []
-    for section_title, path in SYLLABUS_SECTIONS:
-        body.append(rf"\section{{{inline_latex(section_title)}}}")
-        body.append(markdown_to_latex(path))
-
-    body.extend(
+    header = (
+        rf"\textbf{{LECTURES:}} {inline_latex(meeting_summary())}, "
+        f"{inline_latex(details.get('Lecture Location', ''))}"
+        "\n\n"
+        rf"\textbf{{DISCUSSION AND LAB SECTIONS:}} "
+        f"{inline_latex(details.get('Discussion and Lab Locations', 'Check your schedule.'))}"
+    )
+    body = (
+        markdown_to_latex(
+            INPUTS / "syllabus_course.md",
+            {"Course Details"},
+            {"Course Materials": course_materials_latex(INPUTS / "syllabus_course.md")},
+        ),
+        staff_latex(INPUTS / "syllabus_staff.md"),
+        markdown_to_latex(INPUTS / "syllabus_grading.md"),
+        markdown_to_latex(INPUTS / "syllabus_assessments.md"),
+        markdown_to_latex(INPUTS / "syllabus_policies.md"),
+        r"\section*{Learning Objectives}",
         (
-            r"\section{Learning Objectives}",
-            (
-                f"The current learning-objective file contains "
-                f"{core_count} Core-tagged entries and "
-                f"{auxiliary_count} Auxiliary-tagged entries."
-            ),
-            markdown_to_latex(INPUTS / "learningObjectives.md"),
-            r"\section{Weekly Schedule}",
-            (
-                "This schedule is generated from the course schedule inputs. "
-                "Dates and activities may change; updates will be announced through the course learning management system."
-            ),
-            schedule_latex(WEEKLY_SCHEDULE),
-        )
+            f"The current learning-objective file contains "
+            f"{core_count} Core-tagged entries and "
+            f"{auxiliary_count} Auxiliary-tagged entries. Detailed objectives are "
+            "published on the course website and assessed through the quizzes, labs, and projects."
+        ),
+        r"\section*{Weekly Plan (Subject to Change)}",
+        schedule_latex(WEEKLY_SCHEDULE),
     )
 
     return (
         r"""\documentclass[11pt]{article}
-\usepackage[margin=0.75in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{microtype}
+\usepackage{lmodern,color}
+\usepackage{parskip}
 \usepackage{enumitem}
 \usepackage{booktabs}
-\usepackage{longtable}
 \usepackage{tabularx}
-\usepackage{pdflscape}
+\usepackage{array}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
-\setlist{nosep,leftmargin=*}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlist{leftmargin=*,topsep=2pt,itemsep=1pt}
+\setlength{\parskip}{5pt}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.55em}
-\renewcommand{\arraystretch}{1.15}
+\newcommand{\syllabussectionspace}{\vspace{-3mm}}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{0pt}%
+  {-1.5ex plus -.4ex minus -.2ex}%
+  {.5ex plus .2ex}%
+  {\normalfont\large\bfseries}}
+\makeatother
 \begin{document}
 """
         + "\n"
-        + rf"\begin{{center}}\LARGE\textbf{{MA 213: {inline_latex(title)}}}\\[0.4em]"
+        + rf"\begin{{center}}{{\large\textbf{{MA213 -- {inline_latex(title.upper())} -- {inline_latex(semester.upper())}}}}}\\[2mm]"
         + "\n"
-        + rf"\large {inline_latex(semester)}\end{{center}}"
+        + r"SYLLABUS\end{center}"
         + "\n\n"
-        + r"\tableofcontents"
-        + "\n"
-        + r"\newpage"
+        + header
         + "\n\n"
         + "\n\n".join(body)
         + "\n\n"
