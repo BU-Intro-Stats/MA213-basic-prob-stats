@@ -45,6 +45,7 @@ flowchart TD
         lecturePattern["materials/instructor_inputs/Lecture_schedules.md<br/>Lecture and meeting pattern"]
         labPattern["materials/instructor_inputs/Lab_schedules.md<br/>Lab and deliverable pattern"]
         homeworkPattern["materials/instructor_inputs/Homework_schedule.md<br/>Homework due events"]
+        exceptions["materials/instructor_inputs/exceptions.md<br/>One-off calendar and schedule events"]
         dates["materials/instructor_inputs/important_dates.md<br/>Holidays, breaks, term dates"]
     end
 
@@ -68,6 +69,7 @@ flowchart TD
     lecturePattern --> scheduleGen
     labPattern --> scheduleGen
     homeworkPattern --> scheduleGen
+    exceptions --> scheduleGen
     dates --> scheduleGen
 
     scheduleGen --> weekly
@@ -109,7 +111,9 @@ Common semester setup files:
 3. `materials/instructor_inputs/Lab_schedules.md` - lab/project meeting day and lab
    deliverable due day/time.
 4. `materials/instructor_inputs/Homework_schedule.md` - individual homework due events.
-5. `materials/instructor_inputs/quiz_schedule.md` - quiz placement after a lecture, once
+5. `materials/instructor_inputs/exceptions.md` - one-off events to add to the
+   generated calendar and weekly schedule.
+6. `materials/instructor_inputs/quiz_schedule.md` - quiz placement after a lecture, once
    the instructor decides where each quiz belongs.
 
 Content files:
@@ -225,7 +229,7 @@ Lab/project sections in `materials/instructor_inputs/lab_summary.md` use this pa
 ```
 
 Schedule tables in `Lecture_schedules.md`, `Lab_schedules.md`,
-`Homework_schedule.md`, `quiz_schedule.md`, and `important_dates.md` should keep
+`Homework_schedule.md`, `exceptions.md`, `quiz_schedule.md`, and `important_dates.md` should keep
 their column names and table structure. Edit cell values, but avoid renaming
 columns.
 
@@ -242,7 +246,8 @@ columns.
   `After Lecture` to the lecture that should immediately precede each quiz.
 - `materials/instructor_inputs/Lecture_schedules.md`,
   `materials/instructor_inputs/Lab_schedules.md`,
-  `materials/instructor_inputs/Homework_schedule.md`, and
+  `materials/instructor_inputs/Homework_schedule.md`,
+  `materials/instructor_inputs/exceptions.md`, and
   `materials/instructor_inputs/important_dates.md` provide the schedule metadata used to
   build weekly and calendar views.
 
@@ -259,6 +264,9 @@ The website is generated from these planning and build files:
   pattern table.
 - `materials/instructor_inputs/Homework_schedule.md` contains the editable homework due
   event table. Each row creates one homework due event.
+- `materials/instructor_inputs/exceptions.md` contains editable one-off events
+  that appear in the calendar and, by default, in the weekly schedule's
+  `Additional Events` column.
 - `materials/instructor_inputs/important_dates.md` contains the editable semester date
   table used for holidays, recesses, final exams, and other academic calendar
   dates.
@@ -354,7 +362,7 @@ By default, the reusable package uses the same folder and markdown filenames as
 MA 213: `materials/instructor_inputs/`, `materials/generated_outputs/`, `materials/docs/`,
 `lecture_summary.md`, `lab_summary.md`, `learningObjectives.md`,
 `quiz_schedule.md`, `Lecture_schedules.md`, `Lab_schedules.md`,
-`Homework_schedule.md`, and `important_dates.md`. Another course can override
+`Homework_schedule.md`, `exceptions.md`, and `important_dates.md`. Another course can override
 those names in its wrapper:
 
 ```py
@@ -381,7 +389,7 @@ Common `CourseSiteConfig` overrides:
   `learning_objectives_filename`, `quiz_schedule_filename`,
   `lecture_schedule_filename`, `lab_schedule_filename`,
   `homework_schedule_filename`,
-  `important_dates_filename`: instructor input filenames.
+  `exceptions_filename`, `important_dates_filename`: instructor input filenames.
 - `weekly_schedule_filename`, `calendar_schedule_filename`,
   `calendar_ics_filename`, `xlsx_filename`: generated output filenames.
 - `docs_*_filename`: destination names for files copied into `materials/docs/`.
@@ -414,6 +422,21 @@ Homework uses only `End Time`, which is treated as the due time:
 | Homework 1 | 1 | Sunday | 3:00PM | Weekly homework component. |
 | Homework 3 | 3 | Sunday | 3:00PM | Weekly homework component. |
 ```
+
+One-off events are controlled by `materials/instructor_inputs/exceptions.md`.
+Use this when an event needs to be squeezed into the calendar and weekly
+schedule without changing the recurring lecture or lab pattern:
+
+```md
+| Date | Event Type | Title | Start Time | End Time | Details | Include in Schedule | Schedule Note |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| October 7 | Review Session | Midterm Review | 5:00PM | 6:00PM | Optional review before Quiz 2. | Yes | Midterm Review, 5:00PM-6:00PM |
+```
+
+`Date` may be written as `October 7`, `2026-10-07`, `10/7/2026`, or
+`10/7`. Rows are added to the calendar and `.ics` file. They also appear in
+the weekly schedule's `Additional Events` column unless `Include in Schedule`
+is set to `No`.
 
 Lecture topics, readings, and lecture learning objectives are maintained in
 `materials/instructor_inputs/lecture_summary.md`. Keep objective codes in the form

@@ -72,6 +72,7 @@ class CourseSiteConfig:
     lecture_schedule_filename: str = "Lecture_schedules.md"
     lab_schedule_filename: str = "Lab_schedules.md"
     homework_schedule_filename: str = "Homework_schedule.md"
+    exceptions_filename: str = "exceptions.md"
     quiz_schedule_filename: str = "quiz_schedule.md"
     learning_objectives_filename: str = "learningObjectives.md"
     important_dates_filename: str = "important_dates.md"
@@ -99,6 +100,7 @@ class CourseSiteConfig:
         self.lecture_schedule_file = self.instructor_inputs / self.lecture_schedule_filename
         self.lab_schedule_file = self.instructor_inputs / self.lab_schedule_filename
         self.homework_schedule_file = self.instructor_inputs / self.homework_schedule_filename
+        self.exceptions_file = self.instructor_inputs / self.exceptions_filename
         self.quiz_schedule_file = self.instructor_inputs / self.quiz_schedule_filename
         self.learning_objectives_file = self.instructor_inputs / self.learning_objectives_filename
         self.important_dates_file = self.instructor_inputs / self.important_dates_filename
@@ -164,6 +166,18 @@ def parse_month_day(month_day: str, default_year: int) -> date:
     month = list(calendar.month_name).index(month_name)
     year = default_year if month >= 8 else default_year + 1
     return date(year, month, int(day))
+
+
+def parse_schedule_date(text: str, default_year: int) -> date:
+    text = clean_text(text)
+    for fmt in ("%Y-%m-%d", "%m/%d/%Y", "%m/%d"):
+        try:
+            parsed = datetime.strptime(text, fmt)
+            year = parsed.year if "%Y" in fmt else default_year if parsed.month >= 8 else default_year + 1
+            return date(year, parsed.month, parsed.day)
+        except ValueError:
+            continue
+    return parse_month_day(text, default_year)
 
 
 def split_markdown_table_row(line: str):
@@ -776,6 +790,43 @@ def parse_homework_schedule(path: Path):
     return homework_rows
 
 
+def parse_exception_events(path: Path, default_year: int = DEFAULT_TERM_YEAR):
+    if not path.exists():
+        return []
+
+    rows = extract_table_after_heading(
+        path.read_text(encoding="utf-8").splitlines(),
+        "Exceptions",
+    )
+    exception_rows = []
+    for index, row in enumerate(rows, start=1):
+        date_text = clean_text(row.get("date", ""))
+        title = clean_text(row.get("title", "") or row.get("event", ""))
+        if not date_text or not title:
+            continue
+
+        event_type = clean_text(row.get("event type", "") or row.get("kind", "") or "Additional Event")
+        kind = re.sub(r"[^a-z0-9]+", "-", event_type.lower()).strip("-") or "additional-event"
+        details = clean_text(row.get("details", "") or row.get("description", ""))
+        schedule_text = clean_text(row.get("include in schedule", "") or row.get("schedule", "")).lower()
+        include_in_schedule = schedule_text not in {"no", "n", "false", "0"}
+        exception_rows.append(
+            {
+                "date": parse_schedule_date(date_text, default_year),
+                "kind": kind,
+                "event_type": event_type,
+                "title": title,
+                "details": details,
+                "start_time": normalize_event_time(row.get("start time", "")),
+                "end_time": normalize_event_time(row.get("end time", "")),
+                "include_in_schedule": include_in_schedule,
+                "schedule_note": clean_text(row.get("schedule note", "")),
+            }
+        )
+
+    return sorted(exception_rows, key=lambda item: (item["date"], item["title"]))
+
+
 def parse_lecture_summary(path: Path, quiz_schedule=None):
     text = path.read_text(encoding="utf-8")
     sections = {}
@@ -981,17 +1032,31 @@ def parse_lab_summary(path: Path):
     return lab_rows
 
 
-def build_week_table(lecture_rows, lab_rows):
+def build_week_table(lecture_rows, lab_rows, exception_rows=None, term_start: date | None = None):
+    exception_rows = exception_rows or []
     # group lectures by week
     week_to_lectures = defaultdict(list)
     for row in lecture_rows:
         week_to_lectures[row["week"]].append(row)
+
+    week_to_exceptions = defaultdict(list)
+    for event in exception_rows:
+        if not event.get("include_in_schedule"):
+            continue
+        week = course_week_for_date(term_start, event["date"]) if term_start else None
+        if week is None:
+            continue
+        label = event.get("schedule_note") or event["title"]
+        if event.get("details") and not event.get("schedule_note"):
+            label = f"{label}: {event['details']}"
+        week_to_exceptions[week].append(label)
 
     # build schedule rows for all relevant weeks, including project sessions
     all_weeks = set(week_to_lectures.keys())
     for lab in lab_rows:
         if lab["week"] is not None:
             all_weeks.add(lab["week"])
+    all_weeks.update(week_to_exceptions.keys())
 
     rows = []
     for week in sorted(all_weeks):
@@ -1022,6 +1087,7 @@ def build_week_table(lecture_rows, lab_rows):
                 "Lecture Topics": lecture_topics,
                 "Labs": " | ".join(labs),
                 "Lab Deliverables": " | ".join(lab_deliverables),
+                "Additional Events": " | ".join(week_to_exceptions.get(week, [])),
                 "Instructor Flags": " | ".join(dict.fromkeys(flags)),
             }
         )
@@ -1189,6 +1255,7 @@ def build_calendar_events(
     lecture_rows,
     lab_rows,
     homework_rows,
+    exception_rows,
     important_dates,
     meeting_patterns,
     include_instructor_flags: bool = True,
@@ -1318,6 +1385,17 @@ def build_calendar_events(
                 }
             )
 
+    for event in exception_rows:
+        events[event["date"]].append(
+            {
+                "kind": event["kind"],
+                "title": event["title"],
+                "details": event["details"],
+                "start_time": event["start_time"],
+                "end_time": event["end_time"],
+            }
+        )
+
     for day, descriptions in important_by_day.items():
         for description in descriptions:
             events[day].insert(
@@ -1339,11 +1417,14 @@ def month_grid_dates(year: int, month: int):
     return [start + timedelta(days=i) for i in range(42)]
 
 
-def months_to_render(important_dates, default_year: int = DEFAULT_TERM_YEAR):
+def months_to_render(important_dates, exception_rows=None, default_year: int = DEFAULT_TERM_YEAR):
+    exception_rows = exception_rows or []
     term_start, term_end = term_bounds(important_dates, default_year)
     latest = term_end
     for row in important_dates:
         latest = max(latest, row["end"])
+    for row in exception_rows:
+        latest = max(latest, row["date"])
 
     months = []
     current = date(term_start.year, term_start.month, 1)
@@ -1361,6 +1442,7 @@ def write_calendar_markdown(
     lecture_rows,
     lab_rows,
     homework_rows,
+    exception_rows,
     important_dates,
     meeting_patterns,
     md_path: Path,
@@ -1371,6 +1453,7 @@ def write_calendar_markdown(
         lecture_rows,
         lab_rows,
         homework_rows,
+        exception_rows,
         important_dates,
         meeting_patterns,
         include_instructor_flags,
@@ -1384,7 +1467,7 @@ def write_calendar_markdown(
         "# Calendar View",
         "",
         '<div class="calendar-note">',
-        f"This month view is generated from course summaries and `materials/instructor_inputs/important_dates.md`. It assigns lectures and quizzes to class-meeting dates from {term_start_label} through {term_end_label}; exact rooms, section times, and office-hour locations should follow the current syllabus.",
+        f"This month view is generated from course summaries, `materials/instructor_inputs/important_dates.md`, and one-off events in `materials/instructor_inputs/exceptions.md`. It assigns lectures and quizzes to class-meeting dates from {term_start_label} through {term_end_label}; exact rooms, section times, and office-hour locations should follow the current syllabus.",
         "</div>",
         "",
         '<details class="calendar-download-menu">',
@@ -1409,7 +1492,7 @@ def write_calendar_markdown(
             ]
         )
 
-    for month_start in months_to_render(important_dates, default_year):
+    for month_start in months_to_render(important_dates, exception_rows, default_year):
         month = month_start.month
         year = month_start.year
         month_name = calendar.month_name[month]
@@ -1471,6 +1554,7 @@ def main(config: CourseSiteConfig | None = None):
     objectives_by_code, objectives_by_tag = parse_learning_objectives(config.learning_objectives_file)
     quiz_rows = parse_quiz_schedule(config.quiz_schedule_file)
     homework_rows = parse_homework_schedule(config.homework_schedule_file)
+    exception_rows = parse_exception_events(config.exceptions_file, config.term_year)
     lecture_rows = parse_lecture_summary(config.lecture_file, quiz_rows)
     lecture_rows = assign_course_dates(lecture_rows, important_dates, meeting_patterns, config.term_year)
     lab_rows = parse_lab_summary(config.lab_file)
@@ -1484,13 +1568,15 @@ def main(config: CourseSiteConfig | None = None):
         config.term_year,
     )
 
-    df = build_week_table(lecture_rows, lab_rows)
+    term_start, _ = term_bounds(important_dates, config.term_year)
+    df = build_week_table(lecture_rows, lab_rows, exception_rows, term_start)
     write_schedule_table(df, config.xlsx_file, config.output_sheet)
     write_markdown_table(df, config.output_md, include_instructor_flags)
     write_calendar_markdown(
         lecture_rows,
         lab_rows,
         homework_rows,
+        exception_rows,
         important_dates,
         meeting_patterns,
         config.output_calendar_md,
@@ -1501,6 +1587,7 @@ def main(config: CourseSiteConfig | None = None):
         lecture_rows,
         lab_rows,
         homework_rows,
+        exception_rows,
         important_dates,
         meeting_patterns,
         include_instructor_flags,
@@ -1510,7 +1597,7 @@ def main(config: CourseSiteConfig | None = None):
     synced_docs = sync_docs(config)
 
     mode = "instructor" if include_instructor_flags else "public"
-    print(f"Processed {len(lecture_rows)} lecture entries and {len(lab_rows)} lab/project entries.")
+    print(f"Processed {len(lecture_rows)} lecture entries, {len(lab_rows)} lab/project entries, and {len(exception_rows)} exception event(s).")
     print(f"Build mode: {mode}")
     print(f"Wrote {len(df)} rows to {config.xlsx_file.name} -> {config.output_sheet}")
     print(f"Wrote markdown schedule to {config.output_md.name}")

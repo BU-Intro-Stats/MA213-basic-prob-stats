@@ -1,7 +1,7 @@
 # Calendar View
 
 <div class="calendar-note">
-This month view is generated from course summaries and `materials/instructor_inputs/important_dates.md`. It assigns lectures and quizzes to class-meeting dates from September 2, 2026 through December 10, 2026; exact rooms, section times, and office-hour locations should follow the current syllabus.
+This month view is generated from course summaries, `materials/instructor_inputs/important_dates.md`, and one-off events in `materials/instructor_inputs/exceptions.md`. It assigns lectures and quizzes to class-meeting dates from September 2, 2026 through December 10, 2026; exact rooms, section times, and office-hour locations should follow the current syllabus.
 </div>
 
 <details class="calendar-download-menu">

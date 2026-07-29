@@ -56,6 +56,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Instructor input filename for course learning objectives.",
     )
     parser.add_argument(
+        "--exceptions-filename",
+        help="Instructor input filename for one-off schedule/calendar events.",
+    )
+    parser.add_argument(
         "--xlsx-filename",
         help="Generated Excel schedule filename.",
     )
@@ -81,6 +85,7 @@ def config_from_args(args: argparse.Namespace):
         "generated_outputs_dir",
         "docs_dir",
         "learning_objectives_filename",
+        "exceptions_filename",
         "xlsx_filename",
         "output_sheet",
         "local_timezone",
