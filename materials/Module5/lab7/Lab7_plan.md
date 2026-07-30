@@ -1,23 +1,22 @@
-### Lab 7: Bayesian 
+### Lab 7: Bayesian Updating
 
 **Lecture anchor:** Lecture 30
-**Purpose:** End the course with a flexible application that connects modeling ideas to the methods already studied.
+**Purpose:** End the course with a flexible modeling activity that connects conditional probability, evidence, and Bayesian updating to the inference methods already studied.
 
 **Primary objectives supported**
-- Compare Bayesian and Frequentist Approaches
+- Apply Bayes' rule to update a prior probability after observing evidence
+- Distinguish prior, likelihood, posterior, and posterior interpretation
+- Use a grid approximation to update beliefs about an unknown probability
+- Compare Bayesian and frequentist language for statistical evidence
 
 **Pre-lab activity**
-- Review the final lecture material on modeling and inference
+- Review conditional probability, Bayes' rule, and the final lecture material on modeling and inference
 
 **In-lab activity**
-- Option A: fit a linear model and interpret slope, residuals, and fit
-- Option B: use a Bayesian update framework to compare prior and posterior thinking
-
-**Post-lab activity**
-- Submit a brief interpretation of the chosen modeling approach
+- Use a Bayesian update framework to compare prior and posterior thinking
 
 **Deliverables**
-- Project2 writeup
-- Tutorial 7 (pre-lab for lab7)
+- Lab 7 in-lab activity submission
+- Lab 7 starter R script
 
 ---
