@@ -10,7 +10,7 @@
 
 
 **In-lab activity**
-
+- Project2 questions and review
 
 **Post-lab activity**
 
