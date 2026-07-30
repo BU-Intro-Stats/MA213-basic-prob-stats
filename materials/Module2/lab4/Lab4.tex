@@ -1,0 +1,360 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{predictcolor}{RGB}{255,242,200}
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{debatecolor}{RGB}{255,221,221}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{HUDDLE UP}{#1}}
+\newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
+\newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
+\newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\newcommand{\shortwritebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week 5: Lab 4}\\[3pt]
+  {\large Dice Games, Expected Value, and Simulation}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Your name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+  \item \textbf{Partner's name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+\end{enumerate}
+
+\textbf{Big idea:} Probability helps us make decisions under uncertainty. In this lab, you will compare theoretical expected value and variance with simulated results from dice games.
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own probability reasoning, coding skills, and interpretation.
+
+\textbf{Files used:} No data file is needed. You will generate data using simulation in R.
+
+\textbf{Skills practiced:} \texttt{sample()}, \texttt{if}, \texttt{function()}, \texttt{replicate()}, \texttt{mean()}, \texttt{var()}, and \texttt{ggplot()}.
+
+\textbf{Your mission:} Decide whether each game is worth playing, explain the risk using variance, and use simulation to check whether the long-run average matches the theoretical expected value.
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner. Then answer: Would you rather play a game with a small chance of a big win, or a game with many small wins and losses?
+
+\shortwritebox{My answer and my partner's answer:}
+
+\section*{Getting Started: Randomness in R}
+
+The function \texttt{sample()} lets R randomly choose outcomes. For a fair die, each side has probability $1/6$.
+
+\begin{lstlisting}[language=R]
+library(dplyr)
+library(ggplot2)
+
+# Roll one fair die once.
+sample(1:6, size = 1)
+
+# Roll one fair die 20 times.
+sample(1:6, size = 20, replace = TRUE)
+
+# Roll a weighted die where 6 is twice as likely as the other values.
+sample(1:6, size = 20, replace = TRUE,
+       prob = c(1, 1, 1, 1, 1, 2))
+\end{lstlisting}
+
+\discussbox{If the weighted die is rolled many times, do you expect exactly twice as many 6s as each other number? Why or why not?}
+
+\section*{Question 1. Is the one-die game fair?}
+
+\textbf{Game A rules:} Roll one die. If you roll a 1, you win \$6. If you roll 2, 3, 4, 5, or 6, you lose \$1.
+
+\predictbox{Before calculating, would you play this game? Does the big \$6 win feel large enough to balance the five losing outcomes?}
+
+Let $X$ be the amount of money you win from one play of Game A.
+
+\begin{center}
+\begin{tabular}{|p{0.22\textwidth}|p{0.26\textwidth}|p{0.42\textwidth}|}
+\hline
+\textbf{Outcome} & \textbf{Probability} & \textbf{Contribution to $E(X)$}\\
+\hline
+\$6 & & \\[20pt]
+\hline
+-\$1 & & \\[20pt]
+\hline
+\end{tabular}
+\end{center}
+
+The expected value formula is
+\[
+E(X) = \sum_i x_iP(x_i).
+\]
+
+\begin{lstlisting}[language=R]
+outcomes <- c(____, ____)
+probs <- c(____, ____)
+
+E_X <- sum(outcomes * probs)
+E_X
+\end{lstlisting}
+
+\writebox{Show your expected value calculation. Should you play Game A based on expected value?}
+
+\section*{Question 2. How risky is Game A?}
+
+Two games can have similar expected values but different amounts of risk. Variance measures how much outcomes tend to vary around the expected value.
+
+\[
+Var(X) = \sum_i (x_i - \mu)^2P(x_i) = E(X^2) - [E(X)]^2.
+\]
+
+\begin{lstlisting}[language=R]
+variance_X <- sum((outcomes - E_X)^2 * probs)
+sd_X <- sqrt(variance_X)
+
+variance_X
+sd_X
+
+# Check using E(X^2) - [E(X)]^2.
+E_X_squared <- sum(outcomes^2 * probs)
+variance_X_check <- E_X_squared - E_X^2
+variance_X_check
+\end{lstlisting}
+
+\writebox{What does the standard deviation tell you about the typical size of the swings in Game A?}
+
+\section*{Question 3. Can simulation verify the theory?}
+
+Write a function that plays Game A once. Then simulate the game many times.
+
+\begin{lstlisting}[language=R]
+play_game_a <- function() {
+  roll <- sample(1:6, size = 1)
+
+  if (roll == ____) {
+    winnings <- ____
+  } else {
+    winnings <- ____
+  }
+
+  return(winnings)
+}
+
+play_game_a()
+play_game_a()
+play_game_a()
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+set.seed(123)
+n_games <- 100
+
+results_a <- replicate(n_games, play_game_a())
+
+mean(results_a)
+var(results_a)
+sd(results_a)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{Quantity} & \textbf{Theoretical value} & \textbf{Simulated value}\\
+\hline
+Expected value & & \\[18pt]
+\hline
+Variance & & \\[18pt]
+\hline
+Standard deviation & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+\discussbox{Try changing \texttt{n\_games} to 10, 100, 1000, and 10000. What happens to the simulated mean as the number of games increases?}
+
+\writebox{Are the simulated values close to the theoretical values? How large did \texttt{n\_games} need to be before the mean felt stable?}
+
+\section*{Question 4. What does the law of large numbers look like?}
+
+The law of large numbers says the average of many independent repetitions should get closer to the expected value in the long run. The code below compares cumulative average winnings to the theoretical expected value.
+
+\begin{lstlisting}[language=R]
+set.seed(213)
+n_games <- 10000
+results_a <- replicate(n_games, play_game_a())
+
+cumulative_data_a <- data.frame(
+  game = 1:n_games,
+  average_profit = cumsum(results_a) / (1:n_games),
+  expected_value = E_X
+)
+
+ggplot(cumulative_data_a, aes(x = game, y = average_profit)) +
+  geom_line(color = "steelblue") +
+  geom_hline(yintercept = E_X, color = "red", linetype = "dashed") +
+  labs(
+    x = "Number of games played",
+    y = "Cumulative average profit",
+    title = "Game A: cumulative average profit",
+    subtitle = "Red dashed line shows the theoretical expected value"
+  )
+\end{lstlisting}
+
+\writebox{Describe what happens early in the graph and what happens later in the graph.}
+
+\section*{Question 5. What changes in a two-dice game?}
+
+\textbf{Game B rules:} Roll two independent dice.
+
+\begin{itemize}
+  \item First die: if it is 1, win \$6; otherwise lose \$1.
+  \item Second die: if it is 1, win \$3; otherwise lose \$3.
+  \item Total winnings are $Y = X_1 + 2X_2$.
+\end{itemize}
+
+\predictbox{Before calculating, do you think Game B has a higher or lower expected value than Game A? Do you think it has more or less variability?}
+
+\begin{lstlisting}[language=R]
+# First die.
+outcomes_x1 <- c(6, -1)
+probs_x1 <- c(1/6, 5/6)
+E_X1 <- sum(outcomes_x1 * probs_x1)
+Var_X1 <- sum((outcomes_x1 - E_X1)^2 * probs_x1)
+
+# Second die.
+outcomes_x2 <- c(____, ____)
+probs_x2 <- c(____, ____)
+E_X2 <- sum(outcomes_x2 * probs_x2)
+Var_X2 <- sum((outcomes_x2 - E_X2)^2 * probs_x2)
+
+# Total Y = X1 + 2X2.
+E_Y <- ____
+Var_Y <- ____
+SD_Y <- sqrt(Var_Y)
+
+E_Y
+Var_Y
+SD_Y
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.24\textwidth}|p{0.21\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
+\hline
+\textbf{Random variable} & \textbf{Expected value} & \textbf{Variance} & \textbf{Standard deviation}\\
+\hline
+$X_1$ & & & \\[18pt]
+\hline
+$X_2$ & & & \\[18pt]
+\hline
+$Y = X_1 + 2X_2$ & & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+\funfact{For independent random variables, $E(X_1 + 2X_2) = E(X_1) + 2E(X_2)$ and $Var(X_1 + 2X_2) = Var(X_1) + 4Var(X_2)$. The coefficient 2 gets squared in the variance formula.}
+
+\writebox{Based on expected value and standard deviation, would you rather play Game A or Game B? Explain.}
+
+\section*{Question 6. Simulate Game B}
+
+Now simulate Game B and compare the results with the theoretical values.
+
+\begin{lstlisting}[language=R]
+play_game_b <- function() {
+  die1 <- sample(1:6, size = 1)
+  die2 <- sample(1:6, size = 1)
+
+  if (die1 == 1) {
+    x1 <- ____
+  } else {
+    x1 <- ____
+  }
+
+  if (die2 == 1) {
+    x2 <- ____
+  } else {
+    x2 <- ____
+  }
+
+  total <- ____
+  return(total)
+}
+
+set.seed(456)
+n_games <- 10000
+results_b <- replicate(n_games, play_game_b())
+
+mean(results_b)
+var(results_b)
+sd(results_b)
+\end{lstlisting}
+
+\claimbox{Game \underline{\hspace{1cm}} is the better choice because \underline{\hspace{4cm}}. My evidence is \underline{\hspace{5cm}}.}
+
+\section*{Optional Challenge}
+
+Design your own dice or coin game. Your game must have at least two possible outcomes and at least two different payoffs.
+
+\begin{lstlisting}[language=R]
+# 1. Define the game rules.
+my_game <- function() {
+  # Your code here.
+}
+
+# 2. Calculate theoretical E(X) and Var(X).
+
+# 3. Simulate 10000 games.
+
+# 4. Compare theoretical and simulated values.
+\end{lstlisting}
+
+\writebox{Describe your game. What is the expected value? What is the variance? Would you play it?}
+
+\end{document}
