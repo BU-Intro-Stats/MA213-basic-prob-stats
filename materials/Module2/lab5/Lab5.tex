@@ -1,0 +1,357 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{predictcolor}{RGB}{255,242,200}
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{debatecolor}{RGB}{255,221,221}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{HUDDLE UP}{#1}}
+\newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
+\newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
+\newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\newcommand{\shortwritebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week 6: Lab 5}\\[3pt]
+  {\large Sampling Distributions and the Central Limit Theorem}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Your name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+  \item \textbf{Partner's name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+\end{enumerate}
+
+\textbf{Big idea:} A sample statistic changes from sample to sample. In this lab, you will use simulation to see the sampling distribution of a sample mean and explain how the Central Limit Theorem makes inference possible.
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own simulation work, statistical reasoning, and interpretation.
+
+\textbf{Files used:} No data file is needed for the main activity. You will generate hypothetical populations in R.
+
+\textbf{Skills practiced:} \texttt{sample()}, \texttt{mean()}, \texttt{sd()}, \texttt{for}, \texttt{function()}, \texttt{rnorm()}, \texttt{rbinom()}, \texttt{rpois()}, \texttt{rexp()}, \texttt{rgamma()}, and \texttt{ggplot()}.
+
+\textbf{Your mission:} Build a population, repeatedly sample from it, graph the sampling distribution of $\hat{\mu}$, and explain how changing $n$ and $K$ changes what you see.
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner. Then answer: If you sampled 10 BU students and recorded their commute time, would your sample mean be exactly the same as another group's sample mean? Why?
+
+\shortwritebox{My answer and my partner's answer:}
+
+\section*{Getting Started: Population, Sample, Statistic}
+
+A \textbf{population} is the full group we care about. A \textbf{sample} is a smaller group selected from the population. A \textbf{statistic} is a number computed from a sample, such as the sample mean $\hat{\mu}$.
+
+\discussbox{A sampling distribution is not the distribution of the raw data. It is the distribution of a statistic computed from many repeated samples. Keep that distinction in mind today.}
+
+\section*{Question 1. Build your population}
+
+Choose one population below. Different groups should choose different populations when possible.
+
+\begin{center}
+\begin{tabular}{|p{0.25\textwidth}|p{0.32\textwidth}|p{0.33\textwidth}|}
+\hline
+\textbf{Population} & \textbf{R generator} & \textbf{Parameters}\\
+\hline
+Normal & \texttt{rnorm()} & $\mu = 2$, $\sigma = 0.447$\\[6pt]
+\hline
+Bernoulli & \texttt{rbinom()} & $p = 0.3$\\[6pt]
+\hline
+Poisson & \texttt{rpois()} & $\lambda \approx 0.2$\\[6pt]
+\hline
+Exponential & \texttt{rexp()} & rate $\approx 2.237$\\[6pt]
+\hline
+Gamma & \texttt{rgamma()} & shape $=4$, rate $\approx 4.474$\\[6pt]
+\hline
+\end{tabular}
+\end{center}
+
+\begin{lstlisting}[language=R]
+library(dplyr)
+library(ggplot2)
+
+set.seed(213)
+sigma <- 0.447
+N <- 100000
+
+# Choose ONE population and comment out the others.
+pop <- rnorm(N, mean = 2, sd = sigma)
+# pop <- rbinom(N, size = 1, prob = 0.3)
+# pop <- rpois(N, lambda = sigma^2)
+# pop <- rexp(N, rate = 1 / sigma)
+# pop <- rgamma(N, shape = 4, rate = sqrt(4) / sigma)
+
+population_mean <- mean(pop)
+population_sd <- sd(pop)
+
+population_mean
+population_sd
+
+ggplot(data.frame(X = pop), aes(x = X)) +
+  geom_histogram(bins = 40, fill = "steelblue", color = "white") +
+  labs(
+    x = "Population value",
+    y = "Count",
+    title = "My hypothetical population"
+  )
+\end{lstlisting}
+
+\writebox{Which population did you choose? Describe its shape, center, and spread.}
+
+\section*{Question 2. Draw one sample}
+
+Draw one sample of size $n=100$ from your population and compute the sample mean $\hat{\mu}$.
+
+\begin{lstlisting}[language=R]
+n <- 100
+
+my_sample <- sample(pop, size = n)
+mu_hat <- mean(my_sample)
+
+mu_hat
+population_mean
+mu_hat - population_mean
+\end{lstlisting}
+
+\predictbox{Before comparing with other groups, do you expect your \texttt{mu\_hat} to equal the population mean exactly? Why or why not?}
+
+\writebox{How close was your sample mean to the population mean?}
+
+\section*{Question 3. Build a sampling distribution}
+
+Now repeat the sampling process $K=100$ times. Each repetition gives one sample mean. The vector of sample means approximates the sampling distribution of $\hat{\mu}$.
+
+\begin{lstlisting}[language=R]
+K <- 100
+n <- 100
+
+mu_hat_vector <- rep(0, K)
+
+for (i in 1:K) {
+  my_sample <- sample(pop, size = n)
+  mu_hat_vector[i] <- mean(my_sample)
+}
+
+head(mu_hat_vector)
+mean(mu_hat_vector)
+sd(mu_hat_vector)
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
+  geom_histogram(bins = 20, fill = "steelblue", color = "white") +
+  geom_vline(xintercept = population_mean, color = "red", linetype = "dashed") +
+  labs(
+    x = "Sample mean",
+    y = "Count",
+    title = "Sampling distribution of the sample mean",
+    subtitle = "Red dashed line shows the population mean"
+  )
+\end{lstlisting}
+
+\discussbox{Where is the sampling distribution centered? Is it centered near one sample mean, or near the population mean?}
+
+\writebox{Describe the shape, center, and spread of your first sampling distribution.}
+
+\section*{Question 4. Write a reusable simulation function}
+
+Wrap the repeated sampling process into a function. This lets you quickly compare different sample sizes and repetition counts.
+
+\begin{lstlisting}[language=R]
+get_mu_hats <- function(pop, n, K) {
+  mu_hat_vector <- rep(0, K)
+
+  for (i in 1:K) {
+    my_sample <- sample(pop, size = n)
+    mu_hat_vector[i] <- mean(my_sample)
+  }
+
+  return(mu_hat_vector)
+}
+
+result_q4 <- get_mu_hats(pop, n = 100, K = 100)
+head(result_q4)
+\end{lstlisting}
+
+\writebox{How could you check whether \texttt{result\_q4} behaves like your vector from Question 3?}
+
+\section*{Question 5. What does sample size $n$ change?}
+
+Keep $K=1000$ fixed. Compare the sampling distributions when $n=20$, $n=200$, and $n=1000$.
+
+\begin{lstlisting}[language=R]
+mu_hats_20 <- get_mu_hats(pop, n = 20, K = 1000)
+mu_hats_200 <- get_mu_hats(pop, n = 200, K = 1000)
+mu_hats_1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+
+sampling_n <- data.frame(
+  mu_hat = c(mu_hats_20, mu_hats_200, mu_hats_1000),
+  sample_size = factor(rep(c(20, 200, 1000), each = 1000))
+)
+
+ggplot(sampling_n, aes(x = mu_hat)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  facet_wrap(~ sample_size, scales = "free_y") +
+  geom_vline(xintercept = population_mean, color = "red", linetype = "dashed") +
+  labs(
+    x = "Sample mean",
+    y = "Count",
+    title = "Effect of sample size on the sampling distribution"
+  )
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.16\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+\textbf{Sample size} & \textbf{Shape} & \textbf{Center} & \textbf{Spread}\\
+\hline
+$n=20$ & & & \\[22pt]
+\hline
+$n=200$ & & & \\[22pt]
+\hline
+$n=1000$ & & & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\claimbox{As $n$ increases, the sampling distribution of $\hat{\mu}$ becomes \underline{\hspace{4cm}} and its spread becomes \underline{\hspace{3cm}}.}
+
+\section*{Question 6. What does number of repetitions $K$ change?}
+
+Now keep $n=1000$ fixed and change $K$. This changes how clearly you can see the sampling distribution, but it does not change the theoretical spread of $\hat{\mu}$.
+
+\begin{lstlisting}[language=R]
+mu_hats_k20 <- get_mu_hats(pop, n = 1000, K = 20)
+mu_hats_k200 <- get_mu_hats(pop, n = 1000, K = 200)
+mu_hats_k1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+
+sampling_k <- data.frame(
+  mu_hat = c(mu_hats_k20, mu_hats_k200, mu_hats_k1000),
+  repetitions = factor(c(rep(20, 20), rep(200, 200), rep(1000, 1000)))
+)
+
+ggplot(sampling_k, aes(x = mu_hat)) +
+  geom_histogram(bins = 25, fill = "coral", color = "white") +
+  facet_wrap(~ repetitions, scales = "free_y") +
+  geom_vline(xintercept = population_mean, color = "red", linetype = "dashed") +
+  labs(
+    x = "Sample mean",
+    y = "Count",
+    title = "Effect of number of repetitions on the picture"
+  )
+\end{lstlisting}
+
+\debatebox{Increasing $n$ and increasing $K$ both make the graphs look different. Which one changes the actual sampling variability? Which one mostly changes how clearly we can see the distribution?}
+
+\writebox{Explain the difference between increasing $n$ and increasing $K$.}
+
+\section*{Question 7. Compare standard error and simulated spread}
+
+The standard error of the sample mean is
+\[
+SE = \frac{\sigma}{\sqrt{n}}.
+\]
+Compare the theoretical standard error with the empirical standard deviation of your simulated sample means.
+
+\begin{lstlisting}[language=R]
+n <- 1000
+K <- 1000
+
+mu_hats <- get_mu_hats(pop, n = n, K = K)
+
+SE <- population_sd / sqrt(n)
+empirical_sd <- sd(mu_hats)
+
+SE
+empirical_sd
+abs(SE - empirical_sd)
+\end{lstlisting}
+
+\writebox{Are the theoretical standard error and simulated standard deviation close? Explain in context.}
+
+\section*{Optional Challenge}
+
+Use the empirical rule to check whether your sampling distribution is approximately Normal.
+
+\begin{lstlisting}[language=R]
+m <- mean(mu_hats)
+s <- sd(mu_hats)
+
+rate1 <- mean(abs(mu_hats - m) < 1 * s)
+rate2 <- mean(abs(mu_hats - m) < 2 * s)
+rate3 <- mean(abs(mu_hats - m) < 3 * s)
+
+rate1
+rate2
+rate3
+
+abs(c(rate1 - 0.68, rate2 - 0.95, rate3 - 0.997))
+\end{lstlisting}
+
+\writebox{Does your sampling distribution approximately follow the 68--95--99.7 rule?}
+
+\section*{Final Reflection}
+
+\begin{enumerate}
+  \item What is a sampling distribution in your own words?
+  \item What happened to shape, center, and spread as $n$ increased?
+  \item What changed when $K$ increased?
+  \item Did your original population shape make it easy or hard for the CLT to appear?
+\end{enumerate}
+
+\writebox{Write one paragraph summarizing what you learned from the simulation.}
+
+\end{document}
