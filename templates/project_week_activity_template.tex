@@ -1,0 +1,223 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{checkcolor}{RGB}{238,238,238}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{GROUP DISCUSSION}{#1}}
+\newcommand{\checkpointbox}[1]{\calloutbox{checkcolor}{CHECKPOINT}{#1}}
+\newcommand{\feedbackbox}[1]{\calloutbox{funfactcolor}{FEEDBACK TO USE}{#1}}
+\newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week [WEEK]: [P1/P2] Workday}\\[3pt]
+  {\large [Project activity title]}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Group name or topic:} \underline{\hspace{0.45\textwidth}} \hfill \textbf{Section:} \underline{\hspace{0.18\textwidth}}
+  \item \textbf{Group members:} \underline{\hspace{0.72\textwidth}}
+\end{enumerate}
+
+\textbf{Purpose:} [Explain what this workday helps groups improve: research question, data, analysis, slides, report, or feedback.]
+
+\textbf{Deliverable:} [Project checkpoint, outline, slide draft, code file, peer feedback, or report section.]
+
+\textbf{Due date or next milestone:} [Date and time.]
+
+\section*{Bring to Class}
+
+\begin{itemize}
+  \item [Item 1: current research question, data file, draft plot, etc.]
+  \item [Item 2]
+  \item [Item 3]
+  \item One issue where your group wants feedback.
+\end{itemize}
+
+\section*{Part A: Group Check-in}
+
+Introduce or reconnect with your group. Confirm what each person worked on before class and what needs attention today.
+
+\begin{center}
+\begin{tabular}{|p{0.24\textwidth}|p{0.36\textwidth}|p{0.3\textwidth}|}
+\hline
+\textbf{Name} & \textbf{Completed since last class} & \textbf{Question or blocker}\\
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Part B: Research Question Check}
+
+State the current project question in one sentence. Decide whether it is descriptive, comparative, or causal. If it is causal, revise it so the available data can support the claim.
+
+\writebox{Current or revised project question}
+
+\discussbox{What variables are needed to answer this question? Which are numerical? Which are categorical?}
+
+\section*{Part C: Data and Cleaning Check}
+
+List the data source, observational unit, variables of interest, and any cleaning decisions already made.
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.62\textwidth}|}
+\hline
+\textbf{Item} & \textbf{Group notes}\\
+\hline
+Data source & \\[20pt]
+\hline
+Observational unit & \\[20pt]
+\hline
+Numerical variables & \\[20pt]
+\hline
+Categorical variables & \\[20pt]
+\hline
+Cleaning decisions & \\[28pt]
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Part D: Evidence Plan}
+
+For each planned plot or table, write the point it is supposed to make. Each piece of evidence should connect directly to the research question.
+
+\begin{center}
+\begin{tabular}{|p{0.24\textwidth}|p{0.26\textwidth}|p{0.4\textwidth}|}
+\hline
+\textbf{Plot/table} & \textbf{Variables used} & \textbf{Message}\\
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\checkpointbox{Circle the evidence item your group will improve during class today.}
+
+\section*{Part E: Analysis or Code Work}
+
+[Use this section when groups need a common R task, code check, or analysis checkpoint.]
+
+\begin{lstlisting}[language=R]
+# Optional starter code for project workday.
+library(dplyr)
+library(ggplot2)
+
+project_data <- read.csv("[project-data].csv")
+
+head(project_data)
+str(project_data)
+\end{lstlisting}
+
+\writebox{What code, plot, table, or analysis did your group improve today?}
+
+\section*{Part F: Peer or Instructor Feedback}
+
+Exchange with another group or meet with the instructor. Record one strength, one unclear point, and one concrete revision.
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.62\textwidth}|}
+\hline
+\textbf{Feedback type} & \textbf{Notes}\\
+\hline
+Strength & \\[22pt]
+\hline
+Unclear point & \\[22pt]
+\hline
+Revision to make & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\feedbackbox{The feedback we will use first is \underline{\hspace{5cm}} because \underline{\hspace{5cm}}.}
+
+\section*{Part G: Roles and Next Steps}
+
+Assign specific tasks before leaving class. Each task should have one owner and one deadline.
+
+\begin{center}
+\begin{tabular}{|p{0.22\textwidth}|p{0.42\textwidth}|p{0.26\textwidth}|}
+\hline
+\textbf{Name} & \textbf{Next task} & \textbf{Due date}\\
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+ & & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Exit Ticket}
+
+\textbf{Before leaving class, submit or confirm:}
+\begin{itemize}
+  \item \badge{Updated research question}
+  \item \badge{One improved plot, table, code chunk, outline, or report section}
+  \item \badge{Feedback notes}
+  \item \badge{Next task for each group member}
+\end{itemize}
+
+\section*{Post-project Activity}
+
+[State exactly what students should submit, where to submit it, and when it is due.]
+
+\end{document}
