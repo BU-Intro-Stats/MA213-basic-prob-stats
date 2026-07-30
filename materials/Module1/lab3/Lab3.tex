@@ -1,0 +1,277 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{predictcolor}{RGB}{255,242,200}
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{debatecolor}{RGB}{255,221,221}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{HUDDLE UP}{#1}}
+\newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
+\newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
+\newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\newcommand{\shortwritebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week 3: Lab 3}\\[3pt]
+  {\large From Data to Visual Evidence}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Your name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+  \item \textbf{Partner's name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+\end{enumerate}
+
+\textbf{Big idea:} A good plot is not just a picture. It is evidence. In this lab, you will move from raw data to clear summaries, plots, and interpretations about air quality and Titanic passenger survival.
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own analysis work, coding skills, and statistical reasoning.
+
+\textbf{Files used:} \texttt{airquality.csv} and \texttt{Titanic.csv}
+
+\textbf{Skills practiced:} \texttt{read.csv()}, \texttt{filter()}, \texttt{mutate()}, \texttt{group\_by()}, \texttt{summarize()}, \texttt{count()}, and \texttt{ggplot()}.
+
+\textbf{Your mission:} Work with your partner to decide which variables are categorical or numerical, choose appropriate visualizations, and write claims that are supported by plots or tables.
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner. Then answer: What is one environmental condition that affects how you feel during a day, such as heat, wind, rain, or air quality?
+
+\shortwritebox{My answer and my partner's answer:}
+
+\section*{Getting Started: Open the Evidence Files}
+
+Load the packages and import both data sets. The first column in each CSV is a row index, so we use \texttt{row.names = 1}.
+
+\begin{lstlisting}[language=R]
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+air <- read.csv("airquality.csv", row.names = 1)
+titanic <- read.csv("Titanic.csv", row.names = 1)
+
+head(air)
+head(titanic)
+
+str(air)
+str(titanic)
+\end{lstlisting}
+
+\discussbox{Before calculating anything, discuss with your partner: What does one row represent in each data set? Which variables are numerical? Which variables are categorical?}
+
+\section*{Question 1. What kind of data are we looking at?}
+
+Classify the variables and decide what kinds of exploratory data analysis are possible for each data set.
+
+\begin{center}
+\begin{tabular}{|p{0.18\textwidth}|p{0.24\textwidth}|p{0.21\textwidth}|p{0.21\textwidth}|}
+\hline
+\textbf{Data set} & \textbf{Observational unit} & \textbf{Numerical variables} & \textbf{Categorical variables}\\
+\hline
+\texttt{airquality} & & & \\[30pt]
+\hline
+\texttt{Titanic} & & & \\[30pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{Write one possible research question for each data set.}
+
+\funfact{The \texttt{airquality} data contains daily air quality measurements from New York, May through September 1973. The Titanic data records passenger characteristics and whether passengers survived.}
+
+\section*{Question 2. Does solar radiation vary by month?}
+
+Use the air quality data to compare average solar radiation across months.
+
+\predictbox{Before running code, which month do you think will have the highest average solar radiation? Why?}
+
+\begin{lstlisting}[language=R]
+solar_by_month <- air %>%
+  group_by(________) %>%
+  summarize(solar_r_avg = mean(________, na.rm = TRUE))
+
+solar_by_month
+
+ggplot(solar_by_month, aes(x = factor(________), y = solar_r_avg)) +
+  geom_col() +
+  labs(
+    x = "Month",
+    y = "Average solar radiation",
+    title = "Average solar radiation by month"
+  )
+\end{lstlisting}
+
+\writebox{Which month has the highest average solar radiation? Was your prediction correct?}
+
+\section*{Question 3. How are temperature and solar radiation related?}
+
+A scatter plot is useful when both variables are numerical. Create a plot comparing \texttt{Temp} and \texttt{Solar.R}.
+
+\begin{lstlisting}[language=R]
+air_clean <- air %>%
+  filter(!is.na(Solar.R), !is.na(Temp))
+
+ggplot(air_clean, aes(x = Temp, y = Solar.R)) +
+  geom_point() +
+  labs(
+    x = "Temperature (F)",
+    y = "Solar radiation",
+    title = "Solar radiation and temperature"
+  )
+\end{lstlisting}
+
+\discussbox{Does the scatter plot suggest a positive association, negative association, or no clear association? Are there any points that seem unusual?}
+
+\writebox{Describe the relationship between temperature and solar radiation in context.}
+
+\section*{Question 4. Can we categorize air quality conditions?}
+
+Use \texttt{mutate()} to create categories. First, remove rows with missing \texttt{Ozone} or \texttt{Wind}. Then classify ozone as high or low using the median, and classify wind speed using simplified Beaufort-style categories.
+
+\begin{lstlisting}[language=R]
+air_categories <- air %>%
+  filter(!is.na(Ozone), !is.na(Wind)) %>%
+  mutate(
+    ozone_level = ifelse(Ozone > median(Ozone), "High", "Low"),
+    wind_level = case_when(
+      Wind < 1 ~ "Calm",
+      Wind < 4 ~ "Light air",
+      Wind < 7 ~ "Light breeze",
+      Wind < 12 ~ "Gentle breeze",
+      Wind < 18 ~ "Moderate breeze",
+      Wind < 24 ~ "Fresh breeze",
+      TRUE ~ "Strong breeze"
+    )
+  )
+
+ozone_wind_table <- air_categories %>%
+  count(wind_level, ozone_level)
+
+ozone_wind_table
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{New variable} & \textbf{Type} & \textbf{How it was created}\\
+\hline
+\texttt{ozone\_level} & & \\[22pt]
+\hline
+\texttt{wind\_level} & & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\debatebox{The original \texttt{Wind} variable is numerical. After you create \texttt{wind\_level}, should it be treated as numerical or categorical? Make your case.}
+
+\section*{Question 5. Did Titanic survival differ by class?}
+
+Now investigate two categorical variables: passenger class and survival.
+
+\predictbox{Before making the table, which passenger class do you think had the highest survival count? Which class do you think had the highest survival rate? These may not be the same question.}
+
+\begin{lstlisting}[language=R]
+class_survival_table <- titanic %>%
+  count(________, ________)
+
+class_survival_table
+
+ggplot(class_survival_table, aes(x = Class, y = n, fill = Survived)) +
+  geom_col(position = "dodge") +
+  labs(
+    x = "Passenger class",
+    y = "Number of passengers",
+    title = "Titanic survival counts by class"
+  )
+\end{lstlisting}
+
+\writebox{Which class had the highest survival count? What general pattern do you see between passenger class and survival?}
+
+\section*{Question 6. Counts or proportions?}
+
+Counts can be helpful, but they can also hide important patterns when groups have different sizes. Use a filled bar chart to compare survival proportions by class.
+
+\begin{lstlisting}[language=R]
+ggplot(class_survival_table, aes(x = Class, y = n, fill = Survived)) +
+  geom_col(position = "fill") +
+  labs(
+    x = "Passenger class",
+    y = "Proportion within class",
+    title = "Titanic survival proportions by class"
+  )
+\end{lstlisting}
+
+\claimbox{In the Titanic data, passenger class and survival appear to be related because \underline{\hspace{5cm}}. My evidence is \underline{\hspace{5cm}}.}
+
+\section*{Optional Challenge}
+
+Investigate survival by \texttt{Sex} and \texttt{Age}. Then count the number of male children in the data.
+
+\begin{lstlisting}[language=R]
+sex_age_table <- titanic %>%
+  count(Sex, Age)
+
+sex_age_table
+
+child_male <- titanic %>%
+  filter(Sex == "Male", Age == "Child") %>%
+  summarize(total = n())
+
+child_male
+\end{lstlisting}
+
+
+\end{document}
