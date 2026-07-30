@@ -1,0 +1,234 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 Lab Activity Template
+% Student-facing worksheet template for lab development.
+% Copy this file into a lab directory, then replace bracketed
+% placeholders such as [WEEK], [Lab title], and [prompt].
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+
+\definecolor{codegray}{gray}{0.97}
+\definecolor{huddleblue}{RGB}{214,234,255}
+\definecolor{predictionyellow}{RGB}{255,242,200}
+\definecolor{debatepink}{RGB}{255,225,225}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  backgroundcolor=\color{codegray},
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  xleftmargin=0pt,
+  xrightmargin=0pt
+}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{[WEEK]}
+\newcommand{\labplaceholder}{[LAB NUMBER]}
+\newcommand{\labtitle}{[Lab title]}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\newcommand{\responsebox}[2]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{#1} #2
+      \vspace{0.55in}
+    \end{minipage}
+  }
+}
+
+\newcommand{\linedbox}[1]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      #1
+      \vspace{0.18in}
+
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+    \end{minipage}
+  }
+}
+
+\newcommand{\callout}[3]{
+  \noindent\colorbox{#1}{%
+    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
+  }
+
+  \noindent\fbox{%
+    \begin{minipage}{0.93\linewidth}
+      #3
+    \end{minipage}
+  }
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lab \labplaceholder{}}\\
+  {\large \labtitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} [One or two sentences explaining the statistical purpose of the lab.]
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own analysis work, coding skills, and statistical reasoning.
+
+\textbf{Files used:} \texttt{[data-file-1.csv]} [and \texttt{[data-file-2.csv]}]
+
+\textbf{Skills practiced:} \texttt{[function()]}, \texttt{[function()]}, \texttt{[concept]}, and \texttt{[concept]}.
+
+\textbf{Your mission:} [A student-facing description of what partners will figure out by the end of lab.]
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner and answer the warm-up question below.
+
+\responsebox{Warm-up response:}{[prompt]}
+
+\section*{Getting Started}
+
+[Briefly tell students what to open, download, import, or discuss first.]
+
+\begin{lstlisting}
+# Load packages if needed.
+library(dplyr)
+
+# Read in the data.
+data_name <- read.csv("[data-file].csv")
+
+# First look.
+head(data_name)
+str(data_name)
+\end{lstlisting}
+
+\callout{huddleblue}{HUDDLE UP}{Before calculating anything, what do you think one row represents? What variables look most important for today's question?}
+
+\newpage
+
+\section*{Question 1. [Explore the Data]}
+
+[State the task in plain language. Start with interpretation before calculations when possible.]
+
+\begin{lstlisting}
+# Starter code or hints go here.
+dim(data_name)
+names(data_name)
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{|p{0.24\linewidth}|p{0.27\linewidth}|p{0.36\linewidth}|}
+\hline
+\textbf{Variable or data set} & \textbf{Type or role} & \textbf{What it means} \\
+\hline
+\texttt{[variable 1]} & & \\
+\hline
+\texttt{[variable 2]} & & \\
+\hline
+\texttt{[variable 3]} & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\linedbox{\textbf{Write 2-3 sentences describing what you learned from the first look at the data.}}
+
+\section*{Question 2. [Make a Prediction]}
+
+[Ask students to make a prediction, choose a variable, choose a year/group, or state an expectation.]
+
+\callout{predictionyellow}{PREDICTION TIME}{Before running the code, predict what pattern you expect to see. Be specific enough that the data can support or challenge your answer.}
+
+\begin{lstlisting}
+filtered_data <- data_name %>%
+  filter(________ == ________)
+
+head(filtered_data)
+\end{lstlisting}
+
+\newpage
+
+\linedbox{\textbf{What did your team predict? What evidence did you check first?}}
+
+\section*{Question 3. [Compute a Summary or Create a Table]}
+
+[Use this section for numerical summaries, grouped summaries, or contingency tables.]
+
+\begin{lstlisting}
+summary_table <- data_name %>%
+  group_by(________) %>%
+  summarize(
+    count = n(),
+    mean_value = mean(________)
+  )
+
+summary_table
+\end{lstlisting}
+
+\callout{huddleblue}{HUDDLE UP}{Does the summary answer the question directly, or do you need another comparison, plot, or table?}
+
+\callout{huddleblue}{CLAIM, EVIDENCE, CONTEXT}{%
+The main pattern is \shortblank.\\[.6em]
+My evidence is \shortblank.\\[.6em]
+This matters because \shortblank.
+}
+
+\section*{Question 4. [Interpret in Context]}
+
+[Ask students to connect the output to the real-world context or course concept.]
+
+\begin{center}
+\renewcommand{\arraystretch}{2.25}
+\begin{tabular}{|p{0.42\linewidth}|p{0.50\linewidth}|}
+\hline
+\textbf{Question} & \textbf{Your answer} \\
+\hline
+What comparison did you make? & \\
+\hline
+What result is strongest? & \\
+\hline
+What limitation or caution should readers know? & \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\callout{debatepink}{DEBATE CORNER}{If you and your partner disagree about the interpretation, write both arguments first. Then decide what claim the evidence actually supports.}
+
+\section*{Question 5. [Close the Lab]}
+
+[End with a synthesis question, short deliverable, or decision students can submit.]
+
+\linedbox{\textbf{Final response:} state your claim, cite one piece of evidence, and explain the context.}
+
+\section*{Optional Challenge}
+
+[Add one extension for groups that finish early. Keep it useful but nonessential.]
+
+\begin{lstlisting}
+# Optional challenge starter code.
+\end{lstlisting}
+
+\end{document}
