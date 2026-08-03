@@ -21,12 +21,12 @@
 - Submit a short analysis summary with tables and written conclusions
 - Lab2 in-lab activity submission 
 - Lab2 GradeScope
+- Tutorial 3
 
 **Deliverables**
 - Lab1 in-lab activity submission 
 - Tutorial 1
 - Tutorial 2 (pre-lab for lab2)
-
 
 
 ---
