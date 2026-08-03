@@ -1,0 +1,256 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 Lab Activity Template
+% Student-facing worksheet template for lab development.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+
+\definecolor{codegray}{gray}{0.97}
+\definecolor{huddleblue}{RGB}{214,234,255}
+\definecolor{predictionyellow}{RGB}{255,242,200}
+\definecolor{debatepink}{RGB}{255,225,225}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  backgroundcolor=\color{codegray},
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  xleftmargin=0pt,
+  xrightmargin=0pt
+}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{1}
+\newcommand{\labplaceholder}{1}
+\newcommand{\labtitle}{R Intro and First Data Exploration}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\newcommand{\responsebox}[2]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{#1} #2
+      \vspace{0.55in}
+    \end{minipage}
+  }
+}
+
+\newcommand{\linedbox}[1]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      #1
+      \vspace{0.18in}
+
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+    \end{minipage}
+  }
+}
+
+\newcommand{\callout}[3]{
+  \noindent\colorbox{#1}{%
+    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
+  }
+
+  \noindent\fbox{%
+    \begin{minipage}{0.93\linewidth}
+      #3
+    \end{minipage}
+  }
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lab \labplaceholder{}}\\
+  {\large \labtitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} In this lab, you will practice using R to import and explore data sets, identify variables, and write clear first interpretations.
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own analysis work, coding skills, and statistical reasoning.
+
+\textbf{Submit this worksheet at the end of the lab.}
+
+\textbf{Files used:} \texttt{sleep.csv} and \texttt{burger.csv}
+
+\textbf{Skills practiced:} \texttt{read.csv()}, \texttt{head()}, \texttt{dim()}, \texttt{names()}, \texttt{str()}, \texttt{table()}, variables, and observational units.
+
+\textbf{Your mission:} Work with your partner to get familiar with R/RStudio, import two data sets, and explain what the structure of each data set reveals.
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner and answer the warm-up question below.
+
+\responsebox{Warm-up response:}{What is one thing you want your partner to know about you?}
+
+\section*{Getting Started}
+
+Open RStudio. Make sure \texttt{Lab1.R}, \texttt{sleep.csv}, and \texttt{burger.csv} are in the same folder. Then open \texttt{Lab1.R} and use it as your starter script.
+
+\begin{lstlisting}
+# Check where R is currently looking for files.
+getwd()
+
+# Read in the sleep data.
+sleep_data <- read.csv("sleep.csv")
+
+# First look.
+head(sleep_data)
+\end{lstlisting}
+
+\callout{huddleblue}{HUDDLE UP}{Before calculating anything, what do you think one row represents? What variables look most important for understanding the sleep data?}
+
+\newpage
+
+\section*{Question 1. Import and First Look}
+
+Import \texttt{sleep.csv} into R. Then look at the first few rows and discuss what you notice.
+
+\begin{lstlisting}
+# Read the CSV file.
+sleep_data <- read.csv("sleep.csv")
+
+# Look at the first few rows.
+head(sleep_data)
+\end{lstlisting}
+
+\linedbox{\textbf{Write 2-3 sentences describing what you see in the data. What do you think this data set is about?}}
+
+\section*{Question 2. Rows, Variables, and Patients}
+
+Use \texttt{dim()}, \texttt{names()}, and \texttt{unique()} to answer the questions below.
+
+\callout{predictionyellow}{PREDICTION TIME}{Before running the code, predict how many patients are in the data set. Is that the same as the number of rows? Why or why not?}
+
+\begin{lstlisting}
+# Dimensions: rows and columns.
+dim(sleep_data)
+
+# Variable names.
+names(sleep_data)
+
+# Number of unique patients.
+length(unique(sleep_data$ID))
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{|p{0.34\linewidth}|p{0.54\linewidth}|}
+\hline
+\textbf{Question} & \textbf{Your answer} \\
+\hline
+How many rows are in the data set? & \\
+\hline
+How many variables are in the data set? & \\
+\hline
+What are the variable names? & \\
+\hline
+How many patients are in the data set? & \\
+\hline
+\end{tabular}
+\end{center}
+
+\callout{huddleblue}{HUDDLE UP}{If R gives an error such as ``cannot open file,'' it usually means R is looking in a different folder. Use \texttt{getwd()} to see your working directory and then set your working directory to the folder containing the lab files.}
+
+\section*{Question 3. What Does One Row Represent?}
+
+Use \texttt{str()} to inspect the variables. Then decide which variables are numerical and which are categorical.
+
+\begin{lstlisting}
+str(sleep_data)
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{|p{0.24\linewidth}|p{0.27\linewidth}|p{0.36\linewidth}|}
+\hline
+\textbf{Variable} & \textbf{Type or role} & \textbf{What it means} \\
+\hline
+\texttt{extra} & & \\
+\hline
+\texttt{group} & & \\
+\hline
+\texttt{ID} & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\linedbox{\textbf{What does one row represent in this data set? Use the variables to justify your answer.}}
+
+\newpage
+
+\section*{Question 4. Burger Choices and Contingency Tables}
+
+Import \texttt{burger.csv}. Then use \texttt{table()} to make a contingency table for burger place and gender.
+
+\begin{lstlisting}
+burger_data <- read.csv("burger.csv")
+
+table(burger_data$best_burger_place, burger_data$gender)
+\end{lstlisting}
+
+\callout{huddleblue}{HUDDLE UP}{What does each cell in the table count? Does the table answer ``most visited burger place'' directly, or do you need to combine counts across gender?}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.25}
+\begin{tabular}{|p{0.42\linewidth}|p{0.50\linewidth}|}
+\hline
+\textbf{Question} & \textbf{Your answer} \\
+\hline
+What is the most visited burger place overall? & \\
+\hline
+What comparison did you make? & \\
+\hline
+What limitation or caution should readers know? & \\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Question 5. Close the Lab}
+
+Write a short conclusion that uses both data sets. Focus on what the commands helped you learn, not just the numbers you found.
+
+\callout{debatepink}{DEBATE CORNER}{If you and your partner disagree about what a row represents or which burger place is most visited, write both arguments first. Then decide what claim the evidence actually supports.}
+
+\callout{huddleblue}{CLAIM, EVIDENCE, CONTEXT}{%
+The main thing I learned is \shortblank.\\[.6em]
+My evidence is \shortblank.\\[.6em]
+This matters because \shortblank.
+}
+
+\linedbox{\textbf{Final response:} state one claim about the data, cite one command or output as evidence, and explain the context.}
+
+\section*{Optional Challenge}
+
+If your team finishes early, create a one-way table that counts only burger places, without splitting by gender.
+
+\begin{lstlisting}
+# Optional challenge starter code.
+table(burger_data$best_burger_place)
+\end{lstlisting}
+
+\end{document}
