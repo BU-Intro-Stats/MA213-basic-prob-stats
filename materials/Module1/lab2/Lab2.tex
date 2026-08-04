@@ -1,0 +1,303 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{predictcolor}{RGB}{255,242,200}
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{debatecolor}{RGB}{255,221,221}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{HUDDLE UP}{#1}}
+\newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
+\newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
+\newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week 2: Lab 2}\\[3pt]
+  {\large The Data Detective Agency: Case of the Baby Names and the Hot Rods}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Your name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+  \item \textbf{Partner's name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+\end{enumerate}
+
+\textbf{Big idea:} Data wrangling is not just pushing buttons. It is detective work. Today your team takes on two open cases. You will make predictions, argue with your partner, run code that settles the argument, and write findings like investigators closing a file. 
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own analysis work and coding skills. 
+
+\textbf{Files used:} \texttt{baby\_names.csv} and \texttt{mtcars.csv}
+
+\textbf{Skills from Tutorial 1 and 2:} \texttt{read.csv()}, \texttt{head()}, \texttt{str()}, \texttt{filter()}, \texttt{mutate()}, \texttt{group\_by()}, and \texttt{summarize()}.
+
+
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner and share one fun fact about yourself. Then ask each other: ``What is one name you think was popular the year you were born?'' Write down your guesses. You will check them later.
+
+
+\begin{itemize}
+  \item Year: \underline{\hspace{0.3\textwidth}} \hfill Popular name: \underline{\hspace{0.25\textwidth}}
+\end{itemize}
+
+\section*{Getting Started: Open the Case Files}
+
+Load both data sets. The \texttt{str()} function helps you see variable types quickly.
+
+\begin{lstlisting}[language=R]
+library(dplyr)
+
+# Hint: read in both CSV files.
+baby_names <- read.csv("____________.csv")
+cars <- read.csv("____________.csv")
+
+head(baby_names)
+head(cars)
+
+str(baby_names)
+str(cars)
+\end{lstlisting}
+
+\section*{Question 1. Classify the Variables}
+
+For each data set, decide what one row represents and whether the variables are categorical or numerical.
+
+\discussbox{Before you fill in the table: \texttt{mtcars} is famously old. Just by skimming \texttt{head(cars)}, does it look like data from this decade or from a different era? What gave it away?}
+
+\begin{center}
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.42\textwidth}|}
+\hline
+\textbf{Data set} & \textbf{Observational unit} & \textbf{Variable types}\\
+\hline
+\texttt{baby\_names} & & \\[26pt]
+\hline
+\texttt{mtcars} & & \\[26pt]
+\hline
+\end{tabular}
+\end{center}
+
+\funfact{The \texttt{mtcars} data set comes from a 1974 \textit{Motor Trend} magazine article and describes design and performance for 32 cars from the 1973--74 model years.}
+
+\section*{Question 2. Investigate a Baby Name Year}
+
+Choose one year in the data. This is your case year for the baby-name investigation.
+
+\predictbox{Before filtering, guess one name, male or female, that you think was ranked \#1 in your chosen year.}
+
+\begin{lstlisting}[language=R]
+my_year <- ____  # Choose a year your group wants to investigate.
+
+baby_year <- baby_names %>%
+  filter(________ == my_year)
+
+head(baby_year)
+\end{lstlisting}
+
+\writebox{What year did your team choose, and why? What did you predict before seeing the data?}
+
+Find the top 5 male names and top 5 female names for your chosen year.
+
+\begin{lstlisting}[language=R]
+top5_male <- baby_year %>%
+  filter(________ <= 5) %>%
+  select(rank, ________)
+
+top5_female <- baby_year %>%
+  filter(________ <= 5) %>%
+  select(rank, ________)
+
+top5_male
+top5_female
+\end{lstlisting}
+
+\claimbox{In \underline{\hspace{1.2cm}}, the most popular male name was \underline{\hspace{2cm}} and the most popular female name was \underline{\hspace{2cm}}. This is evidence that \underline{\hspace{4cm}}.}
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{Variable} & \textbf{Categorical or numerical?} & \textbf{Reason}\\
+\hline
+\texttt{male} & & \\[18pt]
+\hline
+\texttt{female} & & \\[18pt]
+\hline
+\texttt{year} & & \\[18pt]
+\hline
+\texttt{rank} & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+\debatebox{One partner argues \texttt{rank} is basically a number, so you could average it across years. The other argues that averaging ranks is misleading and rank should be treated more like an ordered category. Make your case, then write the team's verdict above.}
+
+\section*{Question 3. Track One Name Over Time}
+
+Pick one name from your top 5 list. Use \texttt{filter()} to find every year where that name appears in the data. What happened to its rank over time?
+
+\predictbox{Before running code, do you think your chosen name has been climbing, falling, or holding steady?}
+
+\begin{lstlisting}[language=R]
+chosen_name <- "________"  # Choose a name from your list.
+
+name_history <- baby_names %>%
+  filter(female == __________ | male == __________) %>%
+  select(year, rank, male, female)
+
+head(name_history)
+tail(name_history)
+
+# Optional: find the best rank this name ever had.
+best_rank <- name_history %>%
+  summarize(best_rank = min(________))
+
+best_rank
+\end{lstlisting}
+
+\writebox{Interpret the name pattern in context: was your prediction right? What story does the trend tell?}
+
+\textbf{Optional challenge: Name Rivalry.}
+
+\begin{lstlisting}[language=R]
+name1 <- "________"
+name2 <- "________"
+
+rivalry <- baby_names %>%
+  filter(female == name1 | female == name2 | male == name1 | male == name2) %>%
+  mutate(tracked_name = ifelse(female %in% c(name1, name2), female, male)) %>%
+  group_by(tracked_name) %>%
+  summarize(best_rank = min(________), years_in_data = n())
+
+rivalry
+\end{lstlisting}
+
+\section*{Question 4. Build a Contingency Table}
+
+Before comparing averages, investigate the categorical structure of the car data. Are manual and automatic cars spread evenly across cylinder groups, or are some combinations more common?
+
+\discussbox{\texttt{am} is stored as 0s and 1s. Does storing a category as numbers make it numerical, or is it still categorical underneath?}
+
+\begin{center}
+\begin{tabular}{|p{0.22\textwidth}|p{0.28\textwidth}|p{0.4\textwidth}|}
+\hline
+\textbf{Variable} & \textbf{Type for this analysis} & \textbf{Reason}\\
+\hline
+\texttt{mpg} & & \\[18pt]
+\hline
+\texttt{hp} & & \\[18pt]
+\hline
+\texttt{wt} & & \\[18pt]
+\hline
+\texttt{cyl} & & \\[18pt]
+\hline
+\texttt{am} & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+Use \texttt{mutate()} to create a readable transmission variable. Then produce a contingency table for \texttt{transmission} and \texttt{cyl}. You may use either \texttt{table()} or \texttt{count()}.
+
+\begin{lstlisting}[language=R]
+cars2 <- cars %>%
+  mutate(transmission = ifelse(____ == 0, "automatic", "manual"))
+
+head(cars2)
+
+# Option 1: table()
+transmission_cyl_table <- table(cars2$________, cars2$________)
+transmission_cyl_table
+
+# Option 2: dplyr count()
+transmission_cyl_counts <- cars2 %>%
+  count(________, ________)
+
+transmission_cyl_counts
+\end{lstlisting}
+
+\writebox{Use your contingency table to describe the relationship between transmission type and cylinder group. Which combinations are most common? Which are rare or missing?}
+
+\claimbox{In the \texttt{mtcars} data, \underline{\hspace{3cm}} cars are most often paired with \underline{\hspace{2cm}} cylinders, while \underline{\hspace{3cm}} cars are most often paired with \underline{\hspace{2cm}} cylinders.}
+
+\section*{Question 5. Compare Cylinder Groups and Close the Case}
+
+Now use numerical summaries to compare cylinder groups. Use \texttt{group\_by()} and \texttt{summarize()} to compare average \texttt{mpg}, average \texttt{hp}, and number of cars for each value of \texttt{cyl}.
+
+\predictbox{Before running code, do you expect cars with more cylinders to have higher or lower average \texttt{mpg}? Higher or lower average \texttt{hp}?}
+
+\begin{lstlisting}[language=R]
+cylinder_summary <- cars2 %>%
+  group_by(________) %>%
+  summarize(
+    avg_mpg = mean(________),
+    avg_hp = mean(________),
+    number_of_cars = n()
+  )
+
+cylinder_summary
+\end{lstlisting}
+
+\writebox{What pattern do you see across cylinder groups? Were your predictions about \texttt{mpg} and \texttt{hp} correct?}
+
+\funfact{Cylinder count is one of the clearest trade-off variables in this data set. More cylinders generally means more power and worse fuel economy.}
+
+\textbf{Optional challenge: Create a Power Category.}
+
+\begin{lstlisting}[language=R]
+cars_power <- cars2 %>%
+  mutate(power_group = ifelse(hp > median(hp), "high horsepower", "lower horsepower"))
+
+power_summary <- cars_power %>%
+  group_by(power_group) %>%
+  summarize(avg_mpg = mean(________), number_of_cars = n())
+
+power_summary
+\end{lstlisting}
+
+
+\section*{Post-lab Activity}
+
+Complete Tutorial 3 and sumbit your hash until 10pm Tuesday next week. 
+
+\end{document}
