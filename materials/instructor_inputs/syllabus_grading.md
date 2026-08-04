@@ -28,9 +28,9 @@ Course work includes Edfinity homework, lecture participation, quizzes, skills l
 
 | Grade | Homeworks | Quiz Core Objectives | Quiz Auxiliary Objectives | Skills Labs | Lab Tutorials| Lab Projects | Lectures |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | 12/12 complete | 19/20 passed | 9/11 passed | 7/7 passed| at most 1 missed | 2 satisfactory | Fewer than 5 missed |
-| B | 11/12 complete | 16/20 passed | 6/11 passed | Labs 1-6 passed | at most 2 missed |2 satisfactory | Fewer than 9 missed |
-| C | 10/12 complete | 12/20 passed | 0/11 passed | Labs 1-6 passed | at most 3 missed |2 satisfactory | Fewer than 15 missed |
+| A | 12/12 complete | 20/21 passed | 9/11 passed | 7/7 passed| at most 1 missed | 2 satisfactory | Fewer than 5 missed |
+| B | 11/12 complete | 17/21 passed | 6/11 passed | Labs 1-6 passed | at most 2 missed |2 satisfactory | Fewer than 9 missed |
+| C | 10/12 complete | 13/21 passed | 0/11 passed | Labs 1-6 passed | at most 3 missed |2 satisfactory | Fewer than 15 missed |
 
 ## Additional Grade Rules
 
