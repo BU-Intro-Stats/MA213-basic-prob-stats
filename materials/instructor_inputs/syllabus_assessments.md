@@ -27,34 +27,6 @@ Students may retake up to three quizzes near the end of the semester to pass obj
 
 To qualify for a retake, complete a Quiz Retake Qualification Form and have it signed by the lecture instructor or discussion teaching fellow within one week of receiving the original quiz grade. Qualification forms may be completed for more than three quizzes, but no more than three quizzes may be retaken. A missed original quiz uses one of the available retakes and still requires a qualification form.
 
-## Skills Labs
-
-Lab sections provide opportunities to work in groups, solve problems in probability and data analysis, and use R with RStudio. A pre-lab document is generally posted before each skills lab and should be read before the session.
-
-Skills labs are evaluated through lab deliverables submitted through Gradescope. Students may revise and resubmit a lab deliverable before the next lab session. Lab topics and deliverables are generated from `lab_summary.md` and `Lab_schedules.md`.
-
-## Lab Projects
-
-Students work in groups to complete two projects:
-
-- Project 1: video presentation
-- Project 2: written report
-
-Each project is evaluated with the ESRN rubric:
-
-| Label | Meaning |
-| --- | --- |
-| E | Excellent or Exemplary |
-| S | Satisfactory |
-| R | Revisions Needed |
-| N | Not Assessable |
-
-A grade of S receives full credit. A grade of E may be considered when deciding between final letter grades. A project receiving R or N must be revised and resubmitted once. A project that does not earn S or E by the end of the course may reduce the final course grade as described in `syllabus_grading.md`.
-
-### Peer Evaluation
-
-Each group member submits a peer assessment after each project deliverable. Peer evaluations use Excellent, Satisfactory, and Unsatisfactory categories. The lab instructor will contact students who consistently receive Unsatisfactory ratings. Repeated Unsatisfactory ratings may reduce the final project grade.
-
 ## Lecture Participation
 
 Lecture participation is based on completion of in-class Edfinity activities during the lecture.

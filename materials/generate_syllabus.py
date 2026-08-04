@@ -1,8 +1,15 @@
-"""Generate a LaTeX syllabus from the modular instructor Markdown files."""
+"""Generate the course syllabus from the instructor's Markdown files.
+
+The generator reads the syllabus sections from ``materials/instructor_inputs/``,
+converts the supported Markdown into LaTeX, and writes one complete document to
+``materials/generated_outputs/syllabus.tex``.  Edit the Markdown inputs rather
+than the generated TeX file.
+"""
 
 from __future__ import annotations
 
 import re
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 
@@ -10,12 +17,15 @@ ROOT = Path(__file__).resolve().parent
 INPUTS = ROOT / "instructor_inputs"
 OUTPUT = ROOT / "generated_outputs" / "syllabus.tex"
 WEEKLY_SCHEDULE = ROOT / "generated_outputs" / "weekly_schedule.md"
+LECTURE_SUMMARY = INPUTS / "lecture_summary.md"
+HOMEWORK_SCHEDULE = INPUTS / "Homework_schedule.md"
 
 SYLLABUS_FILES = (
     INPUTS / "syllabus_course.md",
     INPUTS / "syllabus_staff.md",
     INPUTS / "syllabus_grading.md",
     INPUTS / "syllabus_assessments.md",
+    INPUTS / "syllabus_lab.md",
     INPUTS / "syllabus_policies.md",
 )
 
@@ -110,6 +120,13 @@ def markdown_to_latex(
     exclude_sections: set[str] | None = None,
     section_replacements: dict[str, str] | None = None,
 ) -> str:
+    """Convert the small Markdown subset used by the syllabus into LaTeX.
+
+    Headings become unnumbered sections, lists become LaTeX lists, and tables
+    become ``tabularx`` environments.  ``exclude_sections`` omits a heading and
+    everything beneath it; ``section_replacements`` inserts generated LaTeX in
+    place of a Markdown section.
+    """
     lines = strip_comments(path.read_text(encoding="utf-8")).splitlines()
     excluded = {heading.lower() for heading in (exclude_sections or set())}
     replacements = {
@@ -283,6 +300,7 @@ def meeting_summary() -> str:
 
 
 def staff_latex(path: Path) -> str:
+    """Build the Course Staff section from the staff Markdown table."""
     rows = read_markdown_table(path, "Staff")
     grouped: dict[str, list[dict[str, str]]] = {}
     for row in rows:
@@ -317,6 +335,7 @@ def staff_latex(path: Path) -> str:
 
 
 def course_materials_latex(path: Path) -> str:
+    """Build the Course Materials section, including optional resource links."""
     rows = read_markdown_table(path, "Course Materials")
     output = [r"\section*{Course Materials}"]
     for row in rows:
@@ -333,8 +352,71 @@ def course_materials_latex(path: Path) -> str:
     return "\n\n".join(output)
 
 
-def schedule_latex(path: Path) -> str:
+def semester_start_date(path: Path) -> date:
+    """Return the first class date listed in the important-dates table."""
+    semester = semester_label(path)
+    year = int(re.search(r"(\d{4})$", semester).group(1))
+    rows = read_markdown_table(path, "Important Dates")
+    for row in rows:
+        if "classes begin" in row.get("Event", "").lower():
+            return datetime.strptime(f"{row['Start Date']} {year}", "%B %d %Y").date()
+    raise ValueError(f"Could not find a 'Classes Begin' date in {path}.")
+
+
+def lecture_metadata(path: Path) -> dict[int, dict[str, str]]:
+    """Collect each lecture's module and assigned reading."""
+    metadata: dict[int, dict[str, str]] = {}
+    current_module = ""
+    current_lecture: int | None = None
+    for line in strip_comments(path.read_text(encoding="utf-8")).splitlines():
+        module_match = re.match(r"^##\s+Module\s+(\d+)", line.strip())
+        if module_match:
+            current_module = f"Module {module_match.group(1)}"
+            continue
+        lecture_match = re.match(r"^###\s+Lecture\s+(\d+)", line.strip())
+        if lecture_match:
+            current_lecture = int(lecture_match.group(1))
+            metadata[current_lecture] = {"module": current_module, "reading": ""}
+            continue
+        reading_match = re.match(r"^[-*]\s+\*\*Reading:\*\*\s*(.+)$", line.strip())
+        if reading_match and current_lecture is not None:
+            reading = reading_match.group(1).strip()
+            metadata[current_lecture]["reading"] = "" if reading.lower() == "(none)" else reading
+    return metadata
+
+
+def homework_by_week(path: Path) -> dict[str, str]:
+    """Return homework numbers keyed by schedule week."""
+    return {
+        row["Week"]: re.search(r"\d+", row["Homework"]).group(0)
+        for row in read_markdown_table(path, "Homework Schedule")
+    }
+
+
+def quizzes_by_week(rows: list[dict[str, str]]) -> dict[str, str]:
+    """Map weekly schedule rows to the quizzes listed in each week."""
+    return {
+        row["Week"]: ", ".join(re.findall(r"Quiz\s+\d+", row.get("Lecture #", "")))
+        for row in rows
+    }
+
+
+def chapter_numbers(reading: str) -> list[str]:
+    """Extract compact chapter references from a reading description."""
+    matches = re.findall(
+        r"Chapters?\s+([0-9]+(?:\.[0-9]+)?(?:\s*[–-]\s*[0-9]+(?:\.[0-9]+)?)?)",
+        reading,
+        flags=re.IGNORECASE,
+    )
+    return [re.sub(r"\s+", "", match) for match in matches]
+
+
+def schedule_latex(path: Path, first_week_date: date) -> str:
+    """Convert the generated weekly schedule into dated, multi-page tables."""
     rows = read_markdown_table(path, "Weekly Schedule")
+    lectures = lecture_metadata(LECTURE_SUMMARY)
+    homework = homework_by_week(HOMEWORK_SCHEDULE)
+    quizzes = quizzes_by_week(rows)
     chunks = [rows[index : index + 8] for index in range(0, len(rows), 8)]
     output = []
     for chunk_index, chunk in enumerate(chunks):
@@ -344,23 +426,44 @@ def schedule_latex(path: Path) -> str:
         output.extend(
             (
                 r"\begin{center}",
-                r"\footnotesize",
-                r"\setlength{\tabcolsep}{3pt}",
-                r"\renewcommand{\arraystretch}{1.15}",
-                r"\begin{tabularx}{\textwidth}{|c|Y|Y|p{0.12\textwidth}|}",
+                r"\scriptsize",
+                r"\setlength{\tabcolsep}{2pt}",
+                r"\renewcommand{\arraystretch}{1.1}",
+                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|p{0.08\textwidth}|}",
                 r"\hline",
-                r"\textbf{Week} & \textbf{Lecture Topics} & \textbf{Labs and Deliverables} & \textbf{Other} \\",
+                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} & \textbf{Other} \\",
                 r"\hline",
             )
         )
         for row in chunk:
+            week_number = int(row.get("Week", "0"))
+            week_date = first_week_date + timedelta(days=7 * (week_number - 1))
+            lecture_numbers = [
+                int(number) for number in re.findall(r"Lecture\s+(\d+)", row.get("Lecture #", ""))
+            ]
+            reading_values = list(dict.fromkeys(
+                chapter
+                for number in lecture_numbers
+                for chapter in chapter_numbers(lectures.get(number, {}).get("reading", ""))
+            ))
+            module_values = list(dict.fromkeys(
+                lectures[number]["module"].replace("Module ", "", 1)
+                for number in lecture_numbers
+                if lectures.get(number, {}).get("module")
+            ))
             labs = row.get("Labs", "")
-            deliverables = row.get("Lab Deliverables", "")
-            lab_text = " -- ".join(part for part in (labs, deliverables) if part)
+            deliverables = ", ".join(dict.fromkeys(
+                re.findall(r"Tutorial\s+\d+", row.get("Lab Deliverables", ""), flags=re.IGNORECASE)
+            ))
             cells = (
-                row.get("Week", ""),
-                row.get("Lecture Topics", ""),
-                lab_text,
+                f"{week_number} ({week_date.month}/{week_date.day})",
+                "; ".join(reading_values),
+                "; ".join(module_values),
+                re.sub(r"\s*\(Chapters?\s+[^)]*\)", "", row.get("Lecture Topics", ""), flags=re.IGNORECASE),
+                labs,
+                deliverables,
+                homework.get(row["Week"], ""),
+                quizzes.get(row["Week"], ""),
                 row.get("Additional Events", ""),
             )
             output.append(" & ".join(inline_latex(cell) for cell in cells) + r" \\")
@@ -370,6 +473,11 @@ def schedule_latex(path: Path) -> str:
 
 
 def build_document() -> str:
+    """Assemble the complete syllabus in the order shown in the PDF.
+
+    The opening meeting information is followed immediately by Course Staff;
+    the remaining sections are then added from their modular input files.
+    """
     required = list(SYLLABUS_FILES)
     required.extend(
         (
@@ -400,15 +508,18 @@ def build_document() -> str:
         rf"\textbf{{DISCUSSION AND LAB SECTIONS:}} "
         f"{inline_latex(details.get('Discussion and Lab Locations', 'Check your schedule.'))}"
     )
+    # Keep staff information near the meeting information so students can
+    # quickly identify who teaches lectures, labs, and discussion sections.
     body = (
+        staff_latex(INPUTS / "syllabus_staff.md"),
         markdown_to_latex(
             INPUTS / "syllabus_course.md",
             {"Course Details"},
             {"Course Materials": course_materials_latex(INPUTS / "syllabus_course.md")},
         ),
-        staff_latex(INPUTS / "syllabus_staff.md"),
         markdown_to_latex(INPUTS / "syllabus_grading.md"),
         markdown_to_latex(INPUTS / "syllabus_assessments.md"),
+        markdown_to_latex(INPUTS / "syllabus_lab.md"),
         markdown_to_latex(INPUTS / "syllabus_policies.md"),
         r"\section*{Learning Objectives}",
         (
@@ -418,7 +529,7 @@ def build_document() -> str:
             "published on the course website and assessed through the quizzes, labs, and projects."
         ),
         r"\section*{Weekly Plan (Subject to Change)}",
-        schedule_latex(WEEKLY_SCHEDULE),
+        schedule_latex(WEEKLY_SCHEDULE, semester_start_date(INPUTS / "important_dates.md")),
     )
 
     return (
