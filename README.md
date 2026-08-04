@@ -4,6 +4,17 @@ This repository contains the source files for the MA 213 course website.
 
 Website: <https://bu-intro-stats.github.io/MA213-basic-prob-stats/>
 
+## Setup
+
+Create the course environment with Conda:
+
+```bash
+conda create -n ma213 python=3.11
+conda activate ma213
+pip install -r materials/requirements.txt
+pip install -e materials/
+```
+
 ## Content generation flow
 
 ```mermaid
