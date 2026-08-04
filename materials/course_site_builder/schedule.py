@@ -72,7 +72,7 @@ class CourseSiteConfig:
     lecture_schedule_filename: str = "Lecture_schedules.md"
     lab_schedule_filename: str = "Lab_schedules.md"
     homework_schedule_filename: str = "Homework_schedule.md"
-    exceptions_filename: str = "exceptions.md"
+    exceptions_filename: str = "exception_schedules.md"
     quiz_schedule_filename: str = "quiz_schedule.md"
     learning_objectives_filename: str = "learningObjectives.md"
     important_dates_filename: str = "important_dates.md"
@@ -1074,7 +1074,7 @@ def build_week_table(lecture_rows, lab_rows, exception_rows=None, term_start: da
         for lab in lab_rows:
             if lab["week"] == week:
                 anchor = lab["lecture_anchor"]
-                labs.append(f"{lab['title']} ({anchor})" if anchor else lab["title"])
+                labs.append(lab["title"])
                 if lab["deliverables"]:
                     lab_deliverables.append(f"{lab['title']}: {lab['deliverables']}")
                 for flag in lab.get("flags", []):
@@ -1467,7 +1467,7 @@ def write_calendar_markdown(
         "# Calendar View",
         "",
         '<div class="calendar-note">',
-        f"This month view is generated from course summaries, `materials/instructor_inputs/important_dates.md`, and one-off events in `materials/instructor_inputs/exceptions.md`. It assigns lectures and quizzes to class-meeting dates from {term_start_label} through {term_end_label}; exact rooms, section times, and office-hour locations should follow the current syllabus.",
+        f"This month view is generated from course summaries, `materials/instructor_inputs/important_dates.md`, and one-off events in `materials/instructor_inputs/exception_schedules.md`. It assigns lectures and quizzes to class-meeting dates from {term_start_label} through {term_end_label}; exact rooms, section times, and office-hour locations should follow the current syllabus.",
         "</div>",
         "",
         '<details class="calendar-download-menu">',

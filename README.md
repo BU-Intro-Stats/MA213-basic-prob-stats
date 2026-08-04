@@ -12,6 +12,9 @@ flowchart LR
     generator --> outputs["materials/generated_outputs/"]
     generator --> docs["materials/docs/"]
     docs --> site["GitHub Pages"]
+    outputs --> syllabusGenerator["materials/generate_syllabus.py"]
+    syllabusInputs["syllabus_*.md"] --> syllabusGenerator
+    syllabusGenerator --> syllabus["materials/generated_outputs/syllabus.tex"]
 ```
 
 ## Instructor workflow
@@ -23,8 +26,14 @@ flowchart LR
    python3 materials/generate_schedule_table.py
    ```
 
-3. Check the results in `materials/generated_outputs/` and `materials/docs/`.
-4. Commit and push the changes to `master` to publish the website.
+3. Generate the LaTeX syllabus:
+
+   ```bash
+   python3 materials/generate_syllabus.py
+   ```
+
+4. Check the results in `materials/generated_outputs/` and `materials/docs/`.
+5. Commit and push the changes to `master` to publish the website.
 
 Do not edit generated files in `materials/generated_outputs/` or `materials/docs/`.
 
@@ -37,10 +46,24 @@ Do not edit generated files in `materials/generated_outputs/` or `materials/docs
 - `Lab_schedules.md` — lab and project schedule
 - `Homework_schedule.md` — homework due dates
 - `quiz_schedule.md` — quiz placement
-- `exceptions.md` — one-time events
+- `exception_schedules.md` — one-time events
 - `important_dates.md` — holidays, recesses, and term dates
 
 All files are in `materials/instructor_inputs/`.
+
+## Syllabus input files
+
+- `syllabus_course.md` — course details, description, and materials
+- `syllabus_staff.md` — instructor and teaching staff information
+- `syllabus_grading.md` — grading system and requirements
+- `syllabus_assessments.md` — homework and quiz information
+- `syllabus_lab.md` — skills labs, lab projects, and peer evaluation
+- `syllabus_policies.md` — course policies
+
+The syllabus generator also uses the learning objectives, semester dates, and
+`materials/generated_outputs/weekly_schedule.md`. It writes
+`materials/generated_outputs/syllabus.tex`, with Course Staff immediately after
+the lecture, discussion, and lab meeting information.
 
 ## Preview the website locally
 

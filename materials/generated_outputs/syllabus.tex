@@ -1,0 +1,305 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,color}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlist{leftmargin=*,topsep=2pt,itemsep=1pt}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\newcommand{\syllabussectionspace}{\vspace{-3mm}}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{0pt}%
+  {-1.5ex plus -.4ex minus -.2ex}%
+  {.5ex plus .2ex}%
+  {\normalfont\large\bfseries}}
+\makeatother
+\begin{document}
+
+\begin{center}{\large\textbf{MA213 -- BASIC STATISTICS AND PROBABILITY -- FALL 2026}}\\[2mm]
+SYLLABUS\end{center}
+
+\textbf{LECTURES:} Monday, Wednesday, Friday, 11:15AM--12:05PM, PHO 206
+
+\textbf{DISCUSSION AND LAB SECTIONS:} Check your student schedule.
+
+\section*{Course Staff}
+\textbf{LECTURE INSTRUCTOR:}
+\begin{itemize}
+\item Dr. Yongho Lim (\href{mailto:ylim2@bu.edu}{ylim2@bu.edu}) --- Office: CCDS 408, Office hours: Thursday 12:00PM-2:00PM
+\end{itemize}
+\textbf{LAB INSTRUCTOR:}
+\begin{itemize}
+\item Dr. Emily Stephen (\href{mailto:estephen@bu.edu}{estephen@bu.edu}) --- Office: CCDS 437, Office hours: Monday 12:15PM-1:30PM; Thursday 9:00AM-10:00AM
+\end{itemize}
+\textbf{TEACHING FELLOWS:}
+\begin{itemize}
+\item John Doe (\href{mailto:johndoe@bu.edu}{johndoe@bu.edu}) --- Office: CCDS 000, Office hours: Friday 2:30PM-4:30PM
+\item Jane Doe (\href{mailto:janedoe@bu.edu}{janedoe@bu.edu}) --- Office: CCDS 000, Office hours: Tuesday 12:30PM-2:30PM
+\item James Doe (\href{mailto:jamesdoe@bu.edu}{jamesdoe@bu.edu}) --- Office: CCDS 000, Office hours: Wednesday 3:00PM-5:00PM, Add Zoom link.
+\end{itemize}
+\textbf{LEARNING ASSISTANTS:}
+\begin{itemize}
+\item LA1 (\href{mailto:LA1@bu.edu}{LA1@bu.edu}) --- Office: CCDS 000, Office hours: Thursday 2:00PM-3:00PM, In person and Zoom; confirm meeting details.
+\item LA2 (\href{mailto:LA2@bu.edu}{LA2@bu.edu}) --- Office: CCDS 000, Office hours: Tuesday 11:00AM-12:00PM
+\end{itemize}
+
+\section*{Course Description}
+
+This course serves as an introduction to basic concepts and tools in probability and statistics. We begin with techniques for describing data. Then we study the elements of probability theory, including probability densities, means, variances, correlation, independence, the binomial distribution, and the central limit theorem. Finally, we combine data description and probability theory into an approach to statistical inference. Students should emerge from this course with the ability to incorporate a variety of skills in analyzing and reasoning from data.
+
+\section*{Course Materials}
+
+\textbf{OpenIntro Statistics, 4th Edition} (required): Open-source textbook by Cetinkaya-Rundel, Diez, and Barr. A PDF is available at no cost; optional print copies are available from the publisher.
+
+\begin{center}\url{https://www.openintro.org/book/os/}\end{center}
+
+\textbf{Edfinity} (required): Used for in-class activities and weekly auto-graded homework. The Fall 2025 reference price was \$40 with OfficeHours; confirm the current price.
+
+\textbf{Laptop, phone, or similar device} (required): Bring a device to lectures to participate in in-class activities.
+
+\textbf{R and RStudio} (required): Used during skills labs for statistical programming and data analysis.
+
+\begin{center}\url{https://posit.co/download/rstudio-desktop/}\end{center}
+
+\textbf{Gradescope} (required): Used to submit lab deliverables and revisions.
+
+\section*{Edfinity Enrollment}
+
+\begin{samepage}
+\begin{enumerate}
+\item Use a current version of Google Chrome or Firefox on a Windows or Mac computer. Other browsers or devices may cause issues when Edfinity is accessed through Blackboard.
+\item If you already have an Edfinity account, sign out of Edfinity before beginning enrollment.
+\item Log in to Blackboard.
+\item Open the Edfinity link for this course in Blackboard.
+\item Follow the prompts to enroll and pay the course fee.
+\end{enumerate}
+\end{samepage}
+
+\section*{Grading Approach}
+
+This course uses an alternative grading system based on the following principles:
+
+\begin{samepage}
+\begin{itemize}
+\item Learn the course material in a way that promotes sense-making and retention of knowledge.
+\item Spend much of your time working at your learning edge, where you are challenged but not lost or overwhelmed.
+\item Use clear expectations for what quality work looks like and how grades are determined.
+\item Receive feedback that helps you improve your work.
+\item Have multiple opportunities to learn from mistakes without those mistakes automatically lowering your grade.
+\item Use frequent, smaller assignments and assessments to support learning.
+\item Build a learning community in which students support one another rather than compete for grades.
+\item Promote authentic engagement with statistics rather than cramming, cheating, or arguing about points.
+\item Allow students some choice in their trajectory through the course.
+\end{itemize}
+\end{samepage}
+
+Course work includes Edfinity homework, lecture participation, quizzes, skills labs, and lab group projects. Quiz problems assess core and auxiliary learning objectives. A course grade is determined by meeting every requirement in the corresponding row below. Students may choose the grade they aim to earn and should plan their work accordingly.
+
+\section*{Grade Requirements}
+
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{lYYYYYYY}
+\toprule
+\textbf{Grade} & \textbf{Homeworks} & \textbf{Quiz Core Objectives} & \textbf{Quiz Auxiliary Objectives} & \textbf{Skills Labs} & \textbf{Lab Tutorials} & \textbf{Lab Projects} & \textbf{Lectures} \\
+\midrule
+A & 12/12 complete & 19/20 passed & 9/11 passed & 7/7 passed & at most 1 missed & 2 satisfactory & Fewer than 5 missed \\
+B & 11/12 complete & 16/20 passed & 6/11 passed & Labs 1-6 passed & at most 2 missed & 2 satisfactory & Fewer than 9 missed \\
+C & 10/12 complete & 12/20 passed & 0/11 passed & Labs 1-6 passed & at most 3 missed & 2 satisfactory & Fewer than 15 missed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section*{Additional Grade Rules}
+
+\begin{samepage}
+\begin{itemize}
+\item Grades between letter grades are determined by how close a student is to the next letter grade.
+\item One unsatisfactory project lowers the course grade by one-third of a letter grade, such as B to B-.
+\item Two unsatisfactory project grades lower the course grade by two-thirds of a letter grade, such as B to C+.
+\item Lectures missed with permission are not counted as missed. To request permission, contact the lecture instructor in advance with the reason for the absence and complete any required form.
+\end{itemize}
+\end{samepage}
+
+\section*{Homeworks}
+
+Homework problem sets are assigned in Edfinity. The interface reports when an answer is incorrect and provides another opportunity to submit a correct answer. Due dates and times are generated from the course schedule.
+
+\section*{Quizzes}
+
+Course material is divided into learning objectives described in the course learning objectives. Quizzes occur during discussion sections according to the course schedule. Each objective on an original quiz is evaluated using the following labels:
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{lYY}
+\toprule
+\textbf{Result} & \textbf{Meaning} & \textbf{Next Step} \\
+\midrule
+Pass & The response is correct. & The objective does not need to be attempted again, even when another objective from the same quiz is retaken. \\
+Almost Pass & The response contains only a minor error, such as a typo. & Within one week of receiving the quiz grade, attend office hours, explain the error, and correct it. A correct explanation becomes Pass; an incorrect explanation becomes Not Yet. \\
+Not Yet & The response is incorrect, incomplete, or insufficient. & Retake the objective through the quiz-retake process. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Quiz Retakes:}
+
+Students may retake up to three quizzes near the end of the semester to pass objectives missed on the original quizzes. Retakes may be more difficult than the original quizzes and are graded Pass or Not Passed.
+
+To qualify for a retake, complete a Quiz Retake Qualification Form and have it signed by the lecture instructor or discussion teaching fellow within one week of receiving the original quiz grade. Qualification forms may be completed for more than three quizzes, but no more than three quizzes may be retaken. A missed original quiz uses one of the available retakes and still requires a qualification form.
+
+\section*{Lecture Participation}
+
+Lecture participation is based on completion of in-class Edfinity activities during the lecture.
+
+\section*{Skills Labs}
+
+Lab sections provide opportunities to work in groups, solve problems in probability and data analysis, and use R with RStudio.
+
+Skills labs are evaluated after submission of the in-lab worksheet. Students may revise and resubmit a lab deliverable before the next lab session. Lab topics and deliverables are generated from the lab summaries and meeting schedule.
+
+\section*{Lab Projects}
+
+Students work in groups to complete two projects:
+
+\begin{samepage}
+\begin{itemize}
+\item Project 1: video presentation
+\item Project 2: written report
+\end{itemize}
+\end{samepage}
+
+Each project is evaluated with the ESRN rubric:
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+\textbf{Label} & \textbf{Meaning} \\
+\midrule
+E & Excellent or Exemplary \\
+S & Satisfactory \\
+R & Revisions Needed \\
+N & Not Assessable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+A grade of \textbf{S} receives full credit for the project while grades of \textbf{E} may be considered when deciding between final letter grades. Projects receiving an \textbf{R} or \textbf{N} must be revised and resubmitted once. Any project that do not achieve an \textbf{S} or \textbf{E} by the end of the course will result in a reduction to your final course grade (see above).
+
+\textbf{Peer Evaluation:}
+
+During the project deliverables, each group member will submit a peer assessment form after each deliverable. The peer evaluation rubric includes the following categories: \textbf{Excellent}, \textbf{Satisfactory} and \textbf{Unsatisfactory}. If you consistently receive \textbf{unsatisfactory} ratings from the peer evaluation form, the lab instructor will reach out to you. Repeated \textbf{unsatisfactory} ratings in peer evaluation may result in a reduction of your final project grade.
+
+\section*{Tutorials}
+
+Interactive tutorials developed to prepare for the skills labs. Each tutorial includes guided explanations, R examples, and exercises. Each tutorial is available as an interactive lesson and is intended to be completed before the associated lab.
+
+\section*{Generative AI}
+
+Generative artificial intelligence tools create text, images, computer code, audio, video, and other content. A complete course policy should describe acceptable uses, unauthorized uses, and documentation requirements for each assignment type.
+
+No generative AI use is allowed for quizzes. Any authorized use of generative AI must be appropriately documented. The purpose of this policy is to allow students to use AI to enhance learning while limiting uses that provide an unfair advantage or detract from student learning.
+
+Use of generative AI in ways that have not been explicitly authorized may be addressed under the Boston University Academic Conduct Code. Students who are unsure whether a use is authorized should ask an instructor in advance. Students remain responsible for avoiding plagiarism, fabricated information, and fabricated data.
+
+\section*{Attendance}
+
+Students are expected to attend lectures, labs, and discussion sections unless they have a valid reason for being absent. When an absence is necessary, notify the lecture instructor, lab instructor, or discussion teaching fellow as soon as possible and ideally before the absence. Excused lecture absences are not penalized in the lecture participation requirement.
+
+Boston University attendance policy: \url{https://www.bu.edu/academics/policies/attendance/}
+
+\section*{Recording}
+
+Lectures may be recorded and shared with students who miss class for a valid reason.
+
+\section*{Academic Conduct}
+
+All Boston University students are expected to maintain high standards of academic honesty and integrity. Students are responsible for understanding the Academic Conduct Code, including the ethical standards, rights, and responsibilities that apply to members of the university learning community. Cheating, plagiarism, and other forms of academic misconduct are addressed according to this policy. Penalties may range from failing an assignment or course to suspension or expulsion from the university.
+
+Boston University Academic Conduct Code: \url{https://www.bu.edu/academics/policies/academic-conduct-code/}
+
+\section*{Disability and Access Services}
+
+Students with documented disabilities, including learning disabilities, may be entitled to accommodations that provide integrated and equal access to university programs. Accommodations may include additional testing time, staggered homework assignments, or note-taking assistance.
+
+Students who believe they should receive accommodations should contact Disability and Access Services. The office can provide an accommodation letter to share with instructors; the letter does not state the reason for the accommodations. Students who already have a letter are encouraged to share it with the instructor as soon as possible.
+
+Boston University Disability and Access Services: \url{https://www.bu.edu/disability/}
+
+\section*{Educational Resource Center}
+
+The Educational Resource Center provides programs and services that help students strengthen their learning and develop a plan for academic success. Free peer tutoring may be available for this course, subject to availability.
+
+Boston University Educational Resource Center: \url{https://www.bu.edu/erc/}
+
+\section*{Learning Objectives}
+
+The current learning-objective file contains 23 Core-tagged entries and 11 Auxiliary-tagged entries. Detailed objectives are published on the course website and assessed through the quizzes, labs, and projects.
+
+\section*{Weekly Plan (Subject to Change)}
+
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|p{0.08\textwidth}|}
+\hline
+\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} & \textbf{Other} \\
+\hline
+1 (9/2) & 1; 2.1 & 1 & Lecture 1: Course introduction; Lecture 2: Introduction to data & Lab 1 &  & 1 &  &  \\
+\hline
+2 (9/9) & 2.2; 2.3 & 1 & Lecture 3: Examining numerical data; Lecture 4: Considering categorical data & Lab 2 & Tutorial 1, Tutorial 2 & 2 &  &  \\
+\hline
+3 (9/16) & 3.1; 3.2–3.3; 3.4 & 1; 2 & Lecture 5: Two case studies; Lecture 6: Probability; Lecture 7: Conditional Probability, Sampling & Lab 3 & Tutorial 3 & 3 &  &  \\
+\hline
+4 (9/23) & 3.5; 4.1 & 2 & Lecture 8: Sampling from a small population, Random Variables; Quiz 1: confirmed; Lecture 9: Continuous Distributions & Project1-1 &  & 4 & Quiz 1 &  \\
+\hline
+5 (9/30) & 4.2; 4.3 & 2 & Lecture 10: Continuous Distributions, Normal distribution; Lecture 11: Normal distribution, continued; Lecture 12: Geometric distribution & Lab 4 & Tutorial 4 & 5 &  &  \\
+\hline
+6 (10/7) & 4.5; 5.1 & 2; 3 & Lecture 13: Binomial distribution; Lecture 14: Poisson distribution; Lecture 15: Point estimates and sampling variability & Lab 5 & Tutorial 5 & 6 &  & Midterm Review, 5:00PM-6:00PM \\
+\hline
+7 (10/14) & 5.2; 5.3 & 3 & Lecture 16: Point estimates and sampling variability, continued; Quiz 2: in the lecture time; Lecture 17: Confidence intervals & Project1-2 &  & 7 & Quiz 2 &  \\
+\hline
+8 (10/21) & 6.1; 6.2 & 3 & Lecture 18: Hypothesis testing for a proportion; Lecture 19: Hypothesis testing for a proportion, continued; Lecture 20: Inference for a single proportion & Project2-1 &  & 8 &  &  \\
+\hline
+\end{tabularx}
+\end{center}
+\newpage
+\section*{Weekly Plan (continued)}
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|p{0.08\textwidth}|}
+\hline
+\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} & \textbf{Other} \\
+\hline
+9 (10/28) & 6.3; 6.4; 7.1 & 4 & Lecture 21: Difference of two proportions; Lecture 22: Testing for goodness of fit using chi-square; Lecture 23: Testing for independence in two-way tables & Lab 6 & Tutorial 6 & 9 &  &  \\
+\hline
+10 (11/4) & 7.2; 7.3 & 4 & Lecture 24: One-sample means with the t-distribution; Quiz 3: tentative; Lecture 25: CIs for one-sample means, Paired data & Project2-2 &  & 10 & Quiz 3 &  \\
+\hline
+11 (11/11) & 7.4; 7.5 & 4 & Lecture 26: Difference of two means; Lecture 27: Power calculations for a difference of means; Lecture 28: Issues with Hypothesis Testing 1: The traps of insufficient power & Project2-3 &  & 11 &  &  \\
+\hline
+12 (11/18) & 1 & 4; 5 & Lecture 29: Comparing many means with ANOVA; Lecture 30: Issues with Hypothesis Testing 2: Multiple comparisons; Lecture 31: Beyond Recipes: Frequentist and Bayesian Approaches to Statistical Modeling & Lab 7 & Tutorial 7 & 12 &  &  \\
+\hline
+13 (11/25) & 2 & 5 & Lecture 32: Frequentist modeling using the likelihood function & Lab 8 &  & 13 &  &  \\
+\hline
+14 (12/2) & 3 & 5 & Quiz 4: tentative; Lecture 33: Bayesian modeling with discrete distributions; Lecture 34: Bayesian modeling with the beta-binomial model &  &  & 14 & Quiz 4 &  \\
+\hline
+15 (12/9) &  & 5 & Lecture 35: Case study in modern statistical modeling; Quiz 5: tentative; Lecture 36: Wrap-up and evaluations &  &  &  & Quiz 5 &  \\
+\hline
+\end{tabularx}
+\end{center}
+
+\end{document}
