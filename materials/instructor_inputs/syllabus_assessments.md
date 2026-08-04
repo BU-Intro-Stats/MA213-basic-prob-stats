@@ -7,9 +7,10 @@ Instructor notes:
 - Review retake limits, revision rules, grading labels, and submission platforms before each semester.
 -->
 
-## Homeworks
+## Homework
 
-Homework problem sets are assigned in Edfinity. The interface reports when an answer is incorrect and provides another opportunity to submit a correct answer. Due dates and times are generated from `Homework_schedule.md`.
+Homework problem sets are assigned through Edfinity. The interface indicates when an answer is incorrect and provides another opportunity to submit a correct answer. Students must earn more than 80% to pass the homework.
+Due dates and times are listed on the course calendar.
 
 ## Quizzes
 
@@ -29,4 +30,4 @@ To qualify for a retake, complete a Quiz Retake Qualification Form and have it s
 
 ## Lecture Participation
 
-Lecture participation is based on completion of in-class Edfinity activities during the lecture.
+Lecture participation is based on completion of in-class activities during the lecture.
