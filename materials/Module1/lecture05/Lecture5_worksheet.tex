@@ -1,0 +1,138 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+
+\definecolor{codegray}{gray}{0.97}
+\definecolor{huddleblue}{RGB}{214,234,255}
+\definecolor{predictionyellow}{RGB}{255,242,200}
+\definecolor{debatepink}{RGB}{255,225,225}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  backgroundcolor=\color{codegray},
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  xleftmargin=0pt,
+  xrightmargin=0pt
+}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{2}
+\newcommand{\lectureplaceholder}{5}
+\newcommand{\lecturetitle}{Can Dolphins Communicate? Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\newcommand{\responsebox}[2]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{#1} #2
+      \vspace{0.55in}
+    \end{minipage}
+  }
+}
+
+\newcommand{\linedbox}[1]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      #1
+      \vspace{0.18in}
+
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+    \end{minipage}
+  }
+}
+
+\newcommand{\callout}[3]{
+  \noindent\colorbox{#1}{%
+    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
+  }
+
+  \noindent\fbox{%
+    \begin{minipage}{0.93\linewidth}
+      #3
+    \end{minipage}
+  }
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} Two dolphins, Doris and Buzz, were trained to push buttons in response to a signal light. In the final phase, a curtain was placed between them so that only Doris could see the light. We will decide, individually and then with a partner, whether Buzz's performance is evidence that the dolphins communicated.
+
+\section*{The Case Study}
+
+A curtain is placed between the dolphins. Only Doris can see the headlight; Buzz cannot. Doris must ``tell'' Buzz which button to push, using only sounds. In one phase of the study, Buzz was given 16 trials to push the correct button, and he chose correctly \textbf{15 out of 16 times}.
+
+\[ \text{Proportion correct: } \frac{15}{16} = 0.9375 \; (93.75\%) \]
+
+\textbf{Is this evidence that Doris and Buzz could communicate?}
+
+\section*{Step 1: Think (2 mins)}
+
+On your own, consider:
+\begin{itemize}
+  \item Based on these data, do you think Buzz somehow knew which button to push?
+  \item What are the two possible explanations for Buzz pushing the correct button most of the time?
+\end{itemize}
+
+\textbf{My initial thoughts:}
+\vfill
+\newpage
+
+\section*{Step 2: Icebreaker}
+
+Before discussing, introduce yourself to your partner.
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\responsebox{Icebreaker question:}{Have you ever had a pet or animal that seemed to understand you? What happened?}
+
+\section*{Step 3: Pair (3 mins)}
+
+Discuss the case study with your partner. Use these questions to guide your conversation:
+
+\begin{itemize}
+  \item Do you think Buzz somehow knew which button to push?
+  \item What are the two possible explanations for Buzz's performance?
+  \item If you were trying to convince someone that Buzz \emph{wasn't just guessing}, how could you do it?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}
