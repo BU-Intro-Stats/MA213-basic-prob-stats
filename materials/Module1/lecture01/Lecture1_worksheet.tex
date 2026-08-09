@@ -1,0 +1,145 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+
+\definecolor{codegray}{gray}{0.97}
+\definecolor{huddleblue}{RGB}{214,234,255}
+\definecolor{predictionyellow}{RGB}{255,242,200}
+\definecolor{debatepink}{RGB}{255,225,225}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  backgroundcolor=\color{codegray},
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  xleftmargin=0pt,
+  xrightmargin=0pt
+}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{1}
+\newcommand{\lectureplaceholder}{1}
+\newcommand{\lecturetitle}{Treating Chronic Fatigue Syndrome: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\newcommand{\responsebox}[2]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{#1} #2
+      \vspace{0.55in}
+    \end{minipage}
+  }
+}
+
+\newcommand{\linedbox}[1]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      #1
+      \vspace{0.18in}
+
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+    \end{minipage}
+  }
+}
+
+\newcommand{\callout}[3]{
+  \noindent\colorbox{#1}{%
+    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
+  }
+
+  \noindent\fbox{%
+    \begin{minipage}{0.93\linewidth}
+      #3
+    \end{minipage}
+  }
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} A randomized trial compared cognitive behavior therapy to relaxation for chronic fatigue syndrome. We will decide, individually and then with a partner, whether the observed difference between groups is convincing.
+
+\section*{The Case Study}
+
+Patients were randomly assigned to a treatment group (cognitive behavior therapy) or a control group (relaxation), 30 patients in each group. The table below shows the distribution of patients with good outcomes at 6-month follow-up. Note that 7 patients dropped out of the study: 3 from the treatment and 4 from the control group.
+
+\begin{center}
+\begin{tabular}{ll cc c}
+            &            & \multicolumn{2}{c}{\textit{Good outcome}} \\
+\cline{3-4}
+            &            & Yes    & No     & Total    \\
+\cline{2-5}
+                        &Treatment    & 19        & 8        & 27     \\
+\raisebox{1.5ex}[0pt]{\textit{Group}}    &Control        & 5        & 21        & 26 \\
+\cline{2-5}
+                        &Total        & 24        & 29        & 53
+\end{tabular}
+\end{center}
+
+Proportion with good outcomes in treatment group: $19/27 \approx 70\%$. \\
+Proportion with good outcomes in control group: $5/26 \approx 19\%$.
+
+\section*{Step 1: Think (2 mins)}
+
+On your own, consider: \textbf{Do the data show a ``real'' difference between groups? Are the results generalizable to all patients with chronic fatigue syndrome?}
+
+\textbf{My initial thoughts:}
+\vfill
+\newpage
+
+\section*{Step 2: Icebreaker}
+
+Before discussing, introduce yourself to your partner.
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\responsebox{Icebreaker question:}{What was something fun your partner did over the summer?}
+
+\section*{Step 3: Pair (3 mins)}
+
+Discuss the case study with your partner. Use these questions to guide your conversation:
+
+\begin{itemize}
+  \item Is the difference between the groups big enough to rule out chance as the explanation?
+  \item Could anything about how patients were assigned to groups affect your answer?
+  \item Who were the patients in this study, and who can the results be generalized to?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}
