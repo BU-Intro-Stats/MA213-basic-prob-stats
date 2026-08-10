@@ -1,0 +1,89 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\def\chp1@path{../../../Chp 1}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{amssymb}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{2}
+\newcommand{\lectureplaceholder}{2}
+\newcommand{\lecturetitle}{Types of Variables}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} Every variable is either categorical or numerical, and each of those splits further. Use the diagram below to classify the variables described below.
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{\chp1@path/1-2_data_basics/figures/variables/variables}
+\end{center}
+
+\section*{Classify Each Variable}
+
+For each question below, decide what \textbf{type of variable} it would produce: categorical (regular or ordinal) or numerical (continuous or discrete).
+
+\begin{enumerate}[leftmargin=*,itemsep=1.3em]
+
+  \item \textbf{``How many caffeinated drinks (e.g.\ coffee, tea, soda) do you have per day, on average?''}
+
+  \begin{center}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \textbf{Categorical, regular} & \textbf{Categorical, ordinal} & \textbf{Numerical, continuous} & \textbf{Numerical, discrete} \\
+  \hline
+  $\square$ & $\square$ & $\square$ & $\square$ \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item \textbf{``What is your class year? Choose the answer from a drop-down menu.''}
+
+  \begin{center}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \textbf{Categorical, regular} & \textbf{Categorical, ordinal} & \textbf{Numerical, continuous} & \textbf{Numerical, discrete} \\
+  \hline
+  $\square$ & $\square$ & $\square$ & $\square$ \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item \textbf{``Do you consider yourself introverted or extroverted?''}
+
+  \begin{center}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+  \textbf{Categorical, regular} & \textbf{Categorical, ordinal} & \textbf{Numerical, continuous} & \textbf{Numerical, discrete} \\
+  \hline
+  $\square$ & $\square$ & $\square$ & $\square$ \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+\end{enumerate}
+
+\end{document}
