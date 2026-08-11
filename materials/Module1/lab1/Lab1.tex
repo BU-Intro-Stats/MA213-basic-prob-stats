@@ -1,256 +1,262 @@
-\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% ============================================================
-% MA 213 Lab Activity Template
-% Student-facing worksheet template for lab development.
-% ============================================================
+% Option 1: Slides with solutions
 
-\usepackage[margin=1in]{geometry}
-\usepackage{xcolor}
-\usepackage{parskip}
-\usepackage{array}
-\usepackage{enumitem}
-\usepackage{listings}
+\documentclass[slidestop,compress,mathserif]{beamer}
+\newcommand{\soln}[1]{\textit{#1}}
+\newcommand{\solnGr}[1]{#1}
 
-\definecolor{codegray}{gray}{0.97}
-\definecolor{huddleblue}{RGB}{214,234,255}
-\definecolor{predictionyellow}{RGB}{255,242,200}
-\definecolor{debatepink}{RGB}{255,225,225}
+% Option 2: Handouts without solutions
 
-\lstset{
-  basicstyle=\ttfamily\small,
-  columns=fullflexible,
-  frame=single,
-  framerule=0.4pt,
-  backgroundcolor=\color{codegray},
-  breaklines=true,
-  showstringspaces=false,
-  keepspaces=true,
-  xleftmargin=0pt,
-  xrightmargin=0pt
-}
+%\documentclass[11pt,containsverbatim,handout]{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+%\newcommand{\soln}[1]{ }
+%\newcommand{\solnGr}{ }
 
-\newcommand{\coursenumber}{MA 213}
-\newcommand{\weekplaceholder}{1}
-\newcommand{\labplaceholder}{1}
-\newcommand{\labtitle}{R Intro and First Data Exploration}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
-\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
-\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
-\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+\input{../../lec_style.tex}
 
-\newcommand{\responsebox}[2]{
-  \noindent\fbox{%
-    \begin{minipage}{0.95\linewidth}
-      \textbf{#1} #2
-      \vspace{0.55in}
-    \end{minipage}
-  }
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\linedbox}[1]{
-  \noindent\fbox{%
-    \begin{minipage}{0.95\linewidth}
-      #1
-      \vspace{0.18in}
+\title[Lab 1]{MA213: Lab 1}
+\subtitle{Welcome to Lab}
+\author{}
+\institute{$\:$ \\ {\footnotesize Module 1: Exploratory Data Analysis and Study Design}}
+\date{}
 
-      \longblank
-
-      \vspace{0.18in}
-      \longblank
-
-      \vspace{0.18in}
-      \longblank
-    \end{minipage}
-  }
-}
-
-\newcommand{\callout}[3]{
-  \noindent\colorbox{#1}{%
-    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
-  }
-
-  \noindent\fbox{%
-    \begin{minipage}{0.93\linewidth}
-      #3
-    \end{minipage}
-  }
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\begin{center}
-  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lab \labplaceholder{}}\\
-  {\large \labtitle{}}
-\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
-  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
-  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
-\end{enumerate}
+{
+\addtocounter{framenumber}{-1}
+{\removepagenumbers
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../../OpenIntro_Grid_4_3-01.jpg}}
+\begin{frame}
 
-\textbf{Big idea:} In this lab, you will practice using R to import and explore data sets, identify variables, and write clear first interpretations.
-\textbf{Do not use GenAI tools for this lab.} The point is to practice your own analysis work, coding skills, and statistical reasoning.
+\hfill \includegraphics[width=20mm]{../../oiLogo_highres}
 
-\textbf{Submit this worksheet at the end of the lab.}
+\titlepage
 
-\textbf{Files used:} \texttt{sleep.csv} and \texttt{burger.csv}
-
-\textbf{Skills practiced:} \texttt{read.csv()}, \texttt{head()}, \texttt{dim()}, \texttt{names()}, \texttt{str()}, \texttt{table()}, variables, and observational units.
-
-\textbf{Your mission:} Work with your partner to get familiar with R/RStudio, import two data sets, and explain what the structure of each data set reveals.
-
-\section*{Icebreaker}
-
-Before opening R: introduce yourself to your partner and answer the warm-up question below.
-
-\responsebox{Warm-up response:}{What is one thing you want your partner to know about you?}
-
-\section*{Getting Started}
-
-Open RStudio. Make sure \texttt{Lab1.R}, \texttt{sleep.csv}, and \texttt{burger.csv} are in the same folder. Then open \texttt{Lab1.R} and use it as your starter script.
-
-\begin{lstlisting}
-# Check where R is currently looking for files.
-getwd()
-
-# Read in the sleep data.
-sleep_data <- read.csv("sleep.csv")
-
-# First look.
-head(sleep_data)
-\end{lstlisting}
-
-\callout{huddleblue}{HUDDLE UP}{Before calculating anything, what do you think one row represents? What variables look most important for understanding the sleep data?}
-
-\newpage
-
-\section*{Question 1. Import and First Look}
-
-Import \texttt{sleep.csv} into R. Then look at the first few rows and discuss what you notice.
-
-\begin{lstlisting}
-# Read the CSV file.
-sleep_data <- read.csv("sleep.csv")
-
-# Look at the first few rows.
-head(sleep_data)
-\end{lstlisting}
-
-\linedbox{\textbf{Write 2-3 sentences describing what you see in the data. What do you think this data set is about?}}
-
-\section*{Question 2. Rows, Variables, and Patients}
-
-Use \texttt{dim()}, \texttt{names()}, and \texttt{unique()} to answer the questions below.
-
-\callout{predictionyellow}{PREDICTION TIME}{Before running the code, predict how many patients are in the data set. Is that the same as the number of rows? Why or why not?}
-
-\begin{lstlisting}
-# Dimensions: rows and columns.
-dim(sleep_data)
-
-# Variable names.
-names(sleep_data)
-
-# Number of unique patients.
-length(unique(sleep_data$ID))
-\end{lstlisting}
-
-\begin{center}
-\renewcommand{\arraystretch}{2.3}
-\begin{tabular}{|p{0.34\linewidth}|p{0.54\linewidth}|}
-\hline
-\textbf{Question} & \textbf{Your answer} \\
-\hline
-How many rows are in the data set? & \\
-\hline
-How many variables are in the data set? & \\
-\hline
-What are the variable names? & \\
-\hline
-How many patients are in the data set? & \\
-\hline
-\end{tabular}
-\end{center}
-
-\callout{huddleblue}{HUDDLE UP}{If R gives an error such as ``cannot open file,'' it usually means R is looking in a different folder. Use \texttt{getwd()} to see your working directory and then set your working directory to the folder containing the lab files.}
-
-\section*{Question 3. What Does One Row Represent?}
-
-Use \texttt{str()} to inspect the variables. Then decide which variables are numerical and which are categorical.
-
-\begin{lstlisting}
-str(sleep_data)
-\end{lstlisting}
-
-\begin{center}
-\renewcommand{\arraystretch}{2.3}
-\begin{tabular}{|p{0.24\linewidth}|p{0.27\linewidth}|p{0.36\linewidth}|}
-\hline
-\textbf{Variable} & \textbf{Type or role} & \textbf{What it means} \\
-\hline
-\texttt{extra} & & \\
-\hline
-\texttt{group} & & \\
-\hline
-\texttt{ID} & & \\
-\hline
-\end{tabular}
-\end{center}
-
-\linedbox{\textbf{What does one row represent in this data set? Use the variables to justify your answer.}}
-
-\newpage
-
-\section*{Question 4. Burger Choices and Contingency Tables}
-
-Import \texttt{burger.csv}. Then use \texttt{table()} to make a contingency table for burger place and gender.
-
-\begin{lstlisting}
-burger_data <- read.csv("burger.csv")
-
-table(burger_data$best_burger_place, burger_data$gender)
-\end{lstlisting}
-
-\callout{huddleblue}{HUDDLE UP}{What does each cell in the table count? Does the table answer ``most visited burger place'' directly, or do you need to combine counts across gender?}
-
-\begin{center}
-\renewcommand{\arraystretch}{2.25}
-\begin{tabular}{|p{0.42\linewidth}|p{0.50\linewidth}|}
-\hline
-\textbf{Question} & \textbf{Your answer} \\
-\hline
-What is the most visited burger place overall? & \\
-\hline
-What comparison did you make? & \\
-\hline
-What limitation or caution should readers know? & \\
-\hline
-\end{tabular}
-\end{center}
-
-\section*{Question 5. Close the Lab}
-
-Write a short conclusion that uses both data sets. Focus on what the commands helped you learn, not just the numbers you found.
-
-\callout{debatepink}{DEBATE CORNER}{If you and your partner disagree about what a row represents or which burger place is most visited, write both arguments first. Then decide what claim the evidence actually supports.}
-
-\callout{huddleblue}{CLAIM, EVIDENCE, CONTEXT}{%
-The main thing I learned is \shortblank.\\[.6em]
-My evidence is \shortblank.\\[.6em]
-This matters because \shortblank.
+\end{frame}
+}
 }
 
-\linedbox{\textbf{Final response:} state one claim about the data, cite one command or output as evidence, and explain the context.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Welcome}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section*{Optional Challenge}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Today's plan
+\begin{frame}
+	\frametitle{Today's Plan}
+	\begin{itemize}
+		\item \hl{First half:} what lab is, and how it will run all semester
+		\item \hl{Second half:} three things to finish before you leave
+		\begin{enumerate}
+			\item Get \textbf{R} and \textbf{RStudio} working on your laptop
+			\item Complete \textbf{Tutorial 0} and submit your hash code to Blackboard
+			\item Hand in the \textbf{Lab 1 worksheet}
+		\end{enumerate}
+	\end{itemize}
+	\vfill
+	\Note{You will work with a partner for the worksheet. Find someone sitting near you.}
+\end{frame}
 
-If your team finishes early, create a one-way table that counts only burger places, without splitting by gender.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Who I am
+\begin{frame}
+	\frametitle{Your Lab Instructor}
+	\begin{itemize}
+		\item \hl{Name: Prof. Emily Stephen} 
+		\item \hl{Email: estephen@bu.edu} 
+		\item \hl{Office hours: Tuesdays 00:00--00:00pm, Thursdays 00:00--00:00pm}, or by appointment
+	\end{itemize}
+    \vfill
+	Check TF and LA office hours on Blackboard for additional help.
+	Come to office hours early in the semester, not just before a deadline.
+	% Any comment about the instructor's background, research, or interests can go here.
+\end{frame}
 
-\begin{lstlisting}
-# Optional challenge starter code.
-table(burger_data$best_burger_place)
-\end{lstlisting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How Lab Works}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% What is lab
+\begin{frame}
+	\frametitle{What Is a Lab Section?}
+	Lab is \hl{not} a second lecture. No new theory gets delivered here.
+	\vfill
+	\begin{itemize}
+		\item You work in \hl{pairs or small groups}
+		\item You use \hl{R and RStudio} on real data sets
+		\item You hand in a \hl{worksheet} at the end of every session
+		\item I circulate and help; you should be talking to your partner, not to a screen in silence
+	\end{itemize}
+	\vfill
+	\Note{Lecture is where ideas are introduced. Lab is where you practice them with your hands on the keyboard.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Weekly rhythm
+\begin{frame}
+	\frametitle{The Weekly Rhythm}
+	Every lab follows the same two steps:
+	\vfill
+	\begin{enumerate}
+		\item \hl{Before lab:} complete the assigned \textbf{tutorial} and submit its \textbf{hash code} to Blackboard
+		\item \hl{During lab:} work through the \textbf{worksheet} with your partner, and hand it in
+		%\item \hl{After lab:} finish any post-lab submission listed on the worksheet
+	\end{enumerate}
+	\vfill
+	\Remember{Today is the one exception. We will do Tutorial 0 together, in lab. From Lab 2 onward the tutorial is done \textit{before} you walk in.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tutorials
+\begin{frame}
+	\frametitle{Tutorials and Hash Codes}
+	Tutorials are interactive R lessons: guided explanations, examples, and exercises.
+	\vfill
+	\begin{itemize}
+		\item Each tutorial ends by generating a \hl{hash code}
+		\item That hash code is your \hl{proof of completion}
+		\item You submit the hash code \hl{to Blackboard}
+	\end{itemize}
+	\vfill
+	\red{The hash code goes to Blackboard. Writing it on your paper worksheet does not count as submitting it.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grading
+\begin{frame}
+	\frametitle{How Lab Work Is Graded}
+	\begin{itemize}
+		\item \hl{Skills labs} are evaluated after you submit the in-lab worksheet
+		%\item You may \hl{revise and resubmit} a lab deliverable once, before the next lab session
+		\item Tutorials are credited from the hash code you submit to Blackboard
+		\item One submission covers both the hash code and the worksheet for that lab
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Projects
+\begin{frame}
+	\frametitle{Lab Projects}
+	You will complete \hl{two group projects} during the semester:
+	\vfill
+	\begin{itemize}
+		\item \hl{Project 1:} video presentation
+		\item \hl{Project 2:} written report
+	\end{itemize}
+	\vfill
+	Each is graded with the \hl{ESRN rubric}:
+	\begin{center}
+	\begin{tabular}{ll}
+		\textbf{E} & Excellent or Exemplary \\
+		\textbf{S} & Satisfactory \\
+		\textbf{R} & Revisions Needed \\
+		\textbf{N} & Not Assessable \\
+	\end{tabular}
+	\end{center}
+	\vfill
+	{\footnotesize An \textbf{S} earns full credit. An \textbf{R} or \textbf{N} must be revised and resubmitted once.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Peer evaluation
+\begin{frame}
+	\frametitle{Peer Evaluation}
+	After each project deliverable, every group member submits a \hl{peer assessment form}.
+	\vfill
+	Ratings are \textbf{Excellent}, \textbf{Satisfactory}, or \textbf{Unsatisfactory}.
+	\vfill
+	\begin{itemize}
+		\item Consistent \textit{unsatisfactory} ratings mean I will reach out to you
+		\item Repeated \textit{unsatisfactory} ratings may reduce your final project grade
+	\end{itemize}
+	\vfill
+	\Note{Group work is part of the assessment, not just a convenience.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ground rules
+\begin{frame}
+	\frametitle{Ground Rules}
+	\begin{itemize}
+		\item \red{No GenAI tools on lab worksheets.} The point is to practice your own coding and statistical reasoning. You cannot outsource the skill you are here to build.
+		\item \hl{Bring a laptop} to every lab.
+		\item \hl{Show up.} The work is collaborative, so an absence costs your partner too.
+		\item \hl{Ask early.} If you are stuck for more than a couple of minutes, wave me over.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Getting Set Up}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% R vs RStudio
+\begin{frame}
+	\frametitle{R and RStudio Are Two Different Things}
+	\begin{itemize}
+		\item \hl{R} is the language and the engine that does the computing
+		\item \hl{RStudio} is the workspace you use to write and run R code
+	\end{itemize}
+	\vfill
+	\red{Install R first, then RStudio.} RStudio is only a front end; it will not run without R underneath it.
+	\vfill
+	\begin{itemize}
+		\item R: \webURL{https://cloud.r-project.org}
+		\item RStudio Desktop: \webURL{https://posit.co/download/rstudio-desktop/}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Check install
+\begin{frame}[fragile]
+	\frametitle{Checking Your Install}
+	Open RStudio and type this into the \hl{Console}, then press Enter:
+	\vfill
+	\begin{semiverbatim}
+	R.version.string
+	\end{semiverbatim}
+	\vfill
+	If it prints a version number, you are ready to go.
+	\vfill
+	If it does not, or RStudio will not open at all, \hl{raise your hand now} rather than waiting.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Three tasks recap
+\begin{frame}
+	\frametitle{Before You Leave Today}
+	\begin{enumerate}
+		\item \hl{R and RStudio installed} and opening without errors
+		\item \hl{Tutorial 0 complete}, hash code submitted \textbf{to Blackboard}
+		\item \hl{Worksheet handed in}, with both partners' names on it
+	\end{enumerate}
+	\vfill
+	\Remember{Next week: Tutorial 1 is due \textit{before} Lab 2, submitted the same way.}
+	\vfill
+	\begin{center}
+		\hl{Questions before we start?}
+	\end{center}
+\end{frame}
 
 \end{document}

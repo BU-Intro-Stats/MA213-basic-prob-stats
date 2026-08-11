@@ -62,6 +62,17 @@ Do not edit generated files in `materials/generated_outputs/` or `materials/docs
 
 All files are in `materials/instructor_inputs/`.
 
+## Lab material files
+
+Markdown files in `materials/Module*/<lab>/`, named like the lecture folders:
+
+- `Lab1_agenda.md` — student-facing lab page
+- `Lab1_plan.md` — instructor run-of-show
+
+Both appear on the local website only. The public build drops them, like
+instructor flags in the weekly schedule. To add a lab, create the files; no code
+changes are needed.
+
 ## Syllabus input files
 
 - `syllabus_course.md` — course details, description, and materials

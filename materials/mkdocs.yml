@@ -14,6 +14,8 @@ nav:
   - Lectures: lecture_summary.md
   - Labs: lab_summary.md
   - Learning Objectives: learning_objectives.md
+  # BEGIN GENERATED NAV
+  # END GENERATED NAV
 
 extra_css:
   - stylesheets/extra.css

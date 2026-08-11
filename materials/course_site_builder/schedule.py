@@ -57,6 +57,11 @@ def resolve_child(root: Path, value: str | Path) -> Path:
     return path if path.is_absolute() else root / path
 
 
+MATERIAL_INSTRUCTOR_SUFFIX = "_plan.md"
+NAV_BEGIN = "  # BEGIN GENERATED NAV"
+NAV_END = "  # END GENERATED NAV"
+
+
 @dataclass
 class CourseSiteConfig:
     root: Path
@@ -76,6 +81,9 @@ class CourseSiteConfig:
     quiz_schedule_filename: str = "quiz_schedule.md"
     learning_objectives_filename: str = "learningObjectives.md"
     important_dates_filename: str = "important_dates.md"
+    module_glob: str = "Module*"
+    mkdocs_filename: str = "mkdocs.yml"
+    docs_materials_dirname: str = "materials"
     weekly_schedule_filename: str = "weekly_schedule.md"
     calendar_schedule_filename: str = "calendar_schedule.md"
     calendar_ics_filename: str = "course_calendar.ics"
@@ -104,6 +112,8 @@ class CourseSiteConfig:
         self.quiz_schedule_file = self.instructor_inputs / self.quiz_schedule_filename
         self.learning_objectives_file = self.instructor_inputs / self.learning_objectives_filename
         self.important_dates_file = self.instructor_inputs / self.important_dates_filename
+        self.mkdocs_file = self.root / self.mkdocs_filename
+        self.docs_materials = self.docs / self.docs_materials_dirname
         self.xlsx_file = self.generated_outputs / self.xlsx_filename
         self.output_md = self.generated_outputs / self.weekly_schedule_filename
         self.output_calendar_md = self.generated_outputs / self.calendar_schedule_filename
@@ -1541,6 +1551,134 @@ def sync_docs(config: CourseSiteConfig):
     return len(config.site_source_pages)
 
 
+def material_page_title(path: Path):
+    """Nav label for a material page: the text of its first heading, up to the colon."""
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if line.startswith("#"):
+            heading = line.lstrip("#").strip()
+            if heading:
+                return heading.split(":", 1)[0].strip()
+    return path.stem
+
+
+def discover_material_pages(config: CourseSiteConfig):
+    """Find per-lab markdown pages under the module directories.
+
+    Naming mirrors the lecture folders, where *_agenda.tex is student-facing
+    and *_plan.tex is the instructor lesson plan:
+      Lab1_agenda.md -> student-facing lab page
+      Lab1_plan.md   -> instructor run-of-show
+    Neither is published on the public site; see sync_material_pages.
+    """
+    pages = []
+    for module_dir in sorted(config.root.glob(config.module_glob)):
+        if not module_dir.is_dir():
+            continue
+        for md_path in sorted(module_dir.rglob("*.md")):
+            instructor = md_path.name.endswith(MATERIAL_INSTRUCTOR_SUFFIX)
+            pages.append(
+                {
+                    "source": md_path,
+                    "filename": md_path.name,
+                    "title": material_page_title(md_path),
+                    "instructor": instructor,
+                }
+            )
+
+    seen = {}
+    for page in pages:
+        clash = seen.get(page["filename"])
+        if clash is not None:
+            raise ValueError(
+                f"Duplicate material page name '{page['filename']}': "
+                f"{clash} and {page['source']} would overwrite each other in {config.docs_materials_dirname}/"
+            )
+        seen[page["filename"]] = page["source"]
+
+    return pages
+
+
+def sync_material_pages(config: CourseSiteConfig, pages, include_material_pages: bool):
+    """Copy material pages into docs/ for local builds only.
+
+    The public site publishes none of them: the student-facing content is
+    already covered by the published lab summary, so per-lab pages would only
+    duplicate it. Locally they give the teaching team a per-lab view.
+    """
+    selected = list(pages) if include_material_pages else []
+    config.docs_materials.mkdir(parents=True, exist_ok=True)
+
+    keep = set()
+    for page in selected:
+        destination = config.docs_materials / page["filename"]
+        destination.write_bytes(page["source"].read_bytes())
+        keep.add(destination.name)
+
+    # Clear pages left behind by an earlier build in the other mode.
+    for existing in config.docs_materials.glob("*.md"):
+        if existing.name not in keep:
+            existing.unlink()
+
+    return selected
+
+
+def render_nav_entries(config: CourseSiteConfig, selected):
+    lines = []
+    for label, instructor in (("Lab Materials", False), ("Instructor Plans", True)):
+        group = [page for page in selected if page["instructor"] is instructor]
+        if not group:
+            continue
+        lines.append(f"  - {label}:")
+        for page in group:
+            lines.append(f"      - {page['title']}: {config.docs_materials_dirname}/{page['filename']}")
+    return lines
+
+
+def write_mkdocs_nav(config: CourseSiteConfig, selected):
+    """Rewrite the generated region of the mkdocs nav for the current build mode.
+
+    Hand-maintained nav entries above the sentinels are preserved.
+    """
+    if not config.mkdocs_file.exists():
+        return 0
+
+    lines = config.mkdocs_file.read_text(encoding="utf-8").splitlines()
+    nav_index = next((i for i, line in enumerate(lines) if line.rstrip() == "nav:"), None)
+    if nav_index is None:
+        return 0
+
+    end = nav_index + 1
+    while end < len(lines):
+        line = lines[end]
+        if line.strip() and not line.startswith((" ", "\t")):
+            break
+        end += 1
+
+    kept = []
+    skipping = False
+    for line in lines[nav_index + 1 : end]:
+        stripped = line.strip()
+        if stripped == NAV_BEGIN.strip():
+            skipping = True
+            continue
+        if stripped == NAV_END.strip():
+            skipping = False
+            continue
+        if not skipping:
+            kept.append(line)
+
+    while kept and not kept[-1].strip():
+        kept.pop()
+
+    generated = render_nav_entries(config, selected)
+    block = kept + [NAV_BEGIN] + generated + [NAV_END]
+    updated = lines[: nav_index + 1] + block + [""] + lines[end:]
+
+    config.mkdocs_file.write_text("\n".join(updated) + "\n", encoding="utf-8")
+    return len(generated)
+
+
 def main(config: CourseSiteConfig | None = None):
     config = config or CourseSiteConfig.for_repo(Path.cwd(), "COURSE")
     config.generated_outputs.mkdir(exist_ok=True)
@@ -1595,6 +1733,10 @@ def main(config: CourseSiteConfig | None = None):
     )
     write_ics_calendar(calendar_events, config.output_ics, config)
     synced_docs = sync_docs(config)
+    material_pages = discover_material_pages(config)
+    selected_pages = sync_material_pages(config, material_pages, include_instructor_flags)
+    write_mkdocs_nav(config, selected_pages)
+    instructor_pages = sum(1 for page in selected_pages if page["instructor"])
 
     mode = "instructor" if include_instructor_flags else "public"
     print(f"Processed {len(lecture_rows)} lecture entries, {len(lab_rows)} lab/project entries, and {len(exception_rows)} exception event(s).")
@@ -1604,6 +1746,11 @@ def main(config: CourseSiteConfig | None = None):
     print(f"Wrote calendar view to {config.output_calendar_md.name}")
     print(f"Wrote calendar download to {config.output_ics.name}")
     print(f"Synced {synced_docs} site source files to {config.docs.name}/")
+    print(
+        f"Published {len(selected_pages)} material page(s) to "
+        f"{config.docs.name}/{config.docs_materials_dirname}/ "
+        f"({instructor_pages} instructor-only)"
+    )
 
 
 if __name__ == "__main__":
