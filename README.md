@@ -66,8 +66,8 @@ All files are in `materials/instructor_inputs/`.
 
 Markdown files in `materials/Module*/<lab>/`, named like the lecture folders:
 
-- `Lab1_agenda.md` — student-facing lab page
-- `Lab1_plan.md` — instructor run-of-show
+- `Lab*_agenda.md` — student-facing lab page
+- `Lab*_plan.md` — instructor run-of-show
 
 Both appear on the local website only. The public build drops them, like
 instructor flags in the weekly schedule. To add a lab, create the files; no code
