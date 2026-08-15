@@ -18,6 +18,9 @@ beamer.cls
 *.bbl
 *.blg
 site/
+# Per-lab material pages are copied into docs/ by local builds only; the
+# public CI build deletes them before mkdocs runs. Keep the copies untracked.
+materials/docs/materials/
 lectureDraftArchives/
 lecture_1_classroom_survey.csv
 lecture_1_survey_data_clean.csv

@@ -4,7 +4,7 @@
 
 Lab sections provide opportunities to work in groups, solve problems in probability and data analysis, and use R with RStudio. 
 
-Skills labs are evaluated after submission of the in-lab worksheet. Students may revise and resubmit a lab deliverable before the next lab session. Lab topics and deliverables are generated from `lab_summary.md` and `Lab_schedules.md`.
+Skills labs are evaluated after submission of the in-lab worksheet. One submission covers both the tutorial hash code and the worksheet for that lab. Lab topics and deliverables are generated from `lab_summary.md` and `Lab_schedules.md`.
 
 ## Lab Projects
 

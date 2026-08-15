@@ -12,26 +12,25 @@ This version preserves the original course sequence so that the lab flow stays f
 
 ## Lab details
 
-### Lab 1: R Intro and first data exploration
+### Lab 1: Lab orientation, R setup, and Tutorial 0
 
 - **Lecture Anchor:** Lecture 1
-- **Purpose:** Give students a low-stress entry into the course workflow and connect the first lecture ideas about data and study design to hands-on practice.
+- **Purpose:** Onboard students to how lab works for the rest of the semester and get everyone set up to do the hands-on work: a working R and RStudio install, the tutorial-to-Blackboard submission habit, and a first data import.
 - **Primary Objectives:**
-  - Classify and Analyze Variables
-  - Evaluate Study Design and Its Implications
   - Use R for Data Management and Exploration
   - Carry out a reproducible statistical workflow in R
 - **Pre-Lab Activity:**
-  - Complete the R onboarding site
-  - Review the course workflow for scripts, data files, and submissions
+  - Bring a laptop
+  - Review the Lab 1 materials before lab
 - **In-Lab Activity:**
-  - Load a data set in R
-  - Inspect rows, columns, and variable types
-  - Compute simple summaries and make initial plots
-  - Save and knit a reproducible document
+  - Lab orientation: lab structure, weekly rhythm, grading, projects, and ground rules
+  - Install and verify R and RStudio
+  - Complete Tutorial 0 and submit the hash code to Blackboard
+  - Import a data set with `read.csv()` and compute a simple column summary
 - **Post-Lab Activity:**
   - Lab1 in-lab activity submission
 - **Deliverables:**
+  - Tutorial 0 hash code submitted to Blackboard
 
 ---
 

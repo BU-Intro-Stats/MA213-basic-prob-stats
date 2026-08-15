@@ -64,7 +64,12 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">3</div>
-<p class="calendar-empty">No events</p>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Lab 1 Deliverables Due</h3>
+<p class="calendar-event__time">Due 10:00 PM</p>
+<p>Tutorial 0 hash code submitted to Blackboard</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">4</div>

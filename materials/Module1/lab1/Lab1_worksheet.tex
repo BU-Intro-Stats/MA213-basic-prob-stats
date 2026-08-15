@@ -1,0 +1,214 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 Lab Activity Template
+% Student-facing worksheet template for lab development.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+
+\definecolor{codegray}{gray}{0.97}
+\definecolor{huddleblue}{RGB}{214,234,255}
+\definecolor{predictionyellow}{RGB}{255,242,200}
+\definecolor{debatepink}{RGB}{255,225,225}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  backgroundcolor=\color{codegray},
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  xleftmargin=0pt,
+  xrightmargin=0pt
+}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{1}
+\newcommand{\labplaceholder}{1}
+\newcommand{\labtitle}{Welcome to Lab: Getting Set Up in R}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\newcommand{\responsebox}[2]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{#1} #2
+      \vspace{0.55in}
+    \end{minipage}
+  }
+}
+
+\newcommand{\linedbox}[1]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      #1
+      \vspace{0.18in}
+
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+    \end{minipage}
+  }
+}
+
+\newcommand{\callout}[3]{
+  \noindent\colorbox{#1}{%
+    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
+  }
+
+  \noindent\fbox{%
+    \begin{minipage}{0.93\linewidth}
+      #3
+    \end{minipage}
+  }
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lab \labplaceholder{}}\\
+  {\large \labtitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} This first lab is about getting set up and learning how lab works. There is no statistics to learn today. Your goal is to leave with R running, Tutorial 0 submitted, and this worksheet handed in.
+
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own analysis work, coding skills, and statistical reasoning.
+
+\textbf{Work with a partner.} One worksheet per pair, with both names above.
+
+\textbf{Submit this worksheet at the end of the lab.}
+
+\textbf{Files used:} \texttt{sleep.csv} (and \texttt{Lab1.R} as your starter script)
+
+\section*{Part 1. Introduce Yourself}
+
+Before opening R, introduce yourself to your partner. Take a minute each, then fill in the boxes below.
+
+\responsebox{Your partner's name and major:}{}
+
+\responsebox{Warm-up:}{What is one thing you want your partner to know about you? (Write your partner's answer here.)}
+
+\section*{Part 2. Is R Working?}
+
+Open RStudio. Type the following into the \textbf{Console} and press Enter.
+
+\begin{lstlisting}
+R.version.string
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{|p{0.42\linewidth}|p{0.50\linewidth}|}
+\hline
+\textbf{Question} & \textbf{Your answer} \\
+\hline
+Did RStudio open successfully? (yes / no) & \\
+\hline
+What version of R does it print? & \\
+\hline
+\end{tabular}
+\end{center}
+
+\callout{huddleblue}{HUDDLE UP}{Remember that \textbf{R} and \textbf{RStudio} are two different programs. R is the engine that does the computing; RStudio is the workspace you type into. If RStudio opens but nothing works, R is probably missing. Install R first, then RStudio. If you are stuck, raise your hand now rather than waiting.}
+
+\newpage
+
+\section*{Part 3. Your First Data Import}
+
+Download \texttt{sleep.csv} and \texttt{Lab1.R} from Blackboard and put them \textbf{in the same folder}. Open \texttt{Lab1.R} in RStudio and use it as your starter script.
+
+\begin{lstlisting}
+# Check where R is currently looking for files.
+getwd()
+
+# Read in the sleep data.
+sleep_data <- read.csv("sleep.csv")
+
+# Take a first look at the top few rows.
+head(sleep_data)
+\end{lstlisting}
+
+\callout{huddleblue}{HUDDLE UP}{If you get an error like ``cannot open file,'' R is looking in the wrong folder. Run \texttt{getwd()} to see where it is looking, then use \textbf{Session $\rightarrow$ Set Working Directory $\rightarrow$ To Source File Location}, or move \texttt{sleep.csv} next to your script.}
+
+Now compute the total of the \texttt{extra} column, which records extra hours of sleep.
+
+\begin{lstlisting}
+sum(sleep_data$extra)
+\end{lstlisting}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{|p{0.42\linewidth}|p{0.50\linewidth}|}
+\hline
+\textbf{Question} & \textbf{Your answer} \\
+\hline
+What number does \texttt{sum(sleep\_data\$extra)} print? & \\
+\hline
+Which variable names does \texttt{head()} show you? & \\
+\hline
+\end{tabular}
+\end{center}
+
+\linedbox{\textbf{In one sentence:} what did the \texttt{\$} symbol do in \texttt{sleep\_data\$extra}?}
+
+\section*{Part 4. Tutorial 0 and Your Hash Code}
+
+Work through \textbf{Tutorial 0}. At the end it will generate a \textbf{hash code}.
+
+\callout{debatepink}{IMPORTANT}{Your hash code must be submitted \textbf{to Blackboard}. Writing it on this worksheet does \textbf{not} count as submitting it. Submit it to Blackboard first, then answer the question below.}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{|p{0.62\linewidth}|p{0.30\linewidth}|}
+\hline
+\textbf{Question} & \textbf{Your answer} \\
+\hline
+Did you complete Tutorial 0? (yes / no) & \\
+\hline
+Did you submit your hash code to Blackboard? (yes / no) & \\
+\hline
+Did your partner submit theirs to Blackboard? (yes / no) & \\
+\hline
+\end{tabular}
+\end{center}
+
+\callout{huddleblue}{BEFORE YOU LEAVE}{%
+R and RStudio open without errors: \shortblank\\[.6em]
+Tutorial 0 hash submitted to Blackboard: \shortblank\\[.6em]
+This worksheet handed in, with both names on it: \shortblank
+}
+
+\section*{Optional Challenge}
+
+If you and your partner finish early, import the second data set and build a simple table.
+
+\begin{lstlisting}
+burger_data <- read.csv("burger.csv")
+
+# Count how many people chose each burger place.
+table(burger_data$best_burger_place)
+\end{lstlisting}
+
+\linedbox{\textbf{What is the most visited burger place, and how can you tell from the table?}}
+
+\end{document}
