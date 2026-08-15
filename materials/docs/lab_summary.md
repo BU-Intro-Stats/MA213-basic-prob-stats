@@ -64,11 +64,12 @@ This version preserves the original course sequence so that the lab flow stays f
   - Use R for Data Management and Exploration
 - **Pre-Lab Activity:**
   - Review the lecture notes on categorical and numerical variables
-  - Complete a short tutorial on `dplyr` and plotting
+  - Complete Tutorial 3 and submit the hash code to Blackboard
 - **In-Lab Activity:**
   - Decide whether variables are categorical or numerical
-  - Use `filter()`, `mutate()`, and `summarize()`
+  - Use `filter()`, `mutate()`, `group_by()`, and `summarize()`
   - Create appropriate plots for the variable type
+  - Compare counts against proportions
   - Write interpretations in context
 
 - **Deliverables:**
