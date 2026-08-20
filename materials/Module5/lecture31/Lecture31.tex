@@ -21,6 +21,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\chp8@path{../../../Chp 8}
 \input{../../lec_style.tex}
+\usepackage{booktabs}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,7 +68,213 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Where We've Been}
 
+\begin{frame}
+    \frametitle{Where We've Been}
+    Every inference method in Modules 3 and 4 followed the same recipe:
+    \begin{itemize}
+        \item Assume a \hl{probability model} for the population, governed by an unknown \hl{parameter} ($p$, $\mu$, ...)
+        \item Compute a \hl{sample statistic} (point estimate) from the data ($\hat{p}$, $\bar{X}$, ...)
+        \item Use the statistic's \hl{sampling distribution} to build a confidence interval or run a hypothesis test
+    \end{itemize}
+    \pause
+
+    \medskip
+    Every one of these recipes shares the same underlying philosophy of what probability \emph{means} and how we should reason about unknown parameters --- even though we never named it.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Beyond Recipes}
+    \dq{What happens when there's no recipe for the model you need? What choices were baked into the recipes you've already used, and were they the only reasonable choices?}
+    \pause
+
+    \medskip
+    To answer this, we need to step back and ask two more basic questions:
+    \begin{enumerate}
+        \item Given a parameter to estimate, how do we \emph{construct} a sensible estimator for it?
+        \item Given an estimator, how do we \emph{judge} whether it's a good one?
+    \end{enumerate}
+    \pause
+
+    \medskip
+    It turns out there are two different, internally consistent philosophies for answering these questions: the \hl{Frequentist} perspective and the \hl{Bayesian} perspective.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recall: Different Estimators for the Same Parameter}
+    Back in Lecture 16, we saw that $p$ can be estimated by more than one statistic:
+    \[
+    \hat{p}=\frac{X}{n} \qquad \text{vs.} \qquad \hat{p}^*=\frac{X+1}{n+2} \text{ (Rule of Succession)}
+    \]
+    \pause
+    We judged them by comparing properties of their \hl{sampling distributions}: was the estimator unbiased? How large was its standard error?
+    \pause
+
+    \medskip
+    \textbf{This is a distinctly Frequentist way of judging an estimator.} Today we'll see why, and what a Bayesian alternative looks like.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Frequentist Perspective}
+
+\begin{frame}
+    \frametitle{The Frequentist Perspective}
+    \begin{itemize}
+        \item The parameter $\theta$ (e.g.\ $p$ or $\mu$) is a \hl{fixed, unknown constant}. It is not random --- we just don't know its value.
+        \pause
+        \item Probability describes the \hl{long-run frequency} of a repeatable random process: if we drew a new sample from the population over and over, how would our statistic behave?
+        \pause
+        \item That hypothetical repeated-sampling process is exactly the \hl{sampling distribution} we've been building all along (recall Lecture 15--16): the distribution of a statistic, where randomness comes from re-sampling from the population.
+    \end{itemize}
+    \pause
+
+    \medskip
+    \textbf{Frequentist recipe:} construct an estimator, then judge it using properties of its sampling distribution (bias, standard error, ...).
+\end{frame}
+
+\begin{frame}
+    \frametitle{What Frequentist Methods Can (and Can't) Say}
+    Because $\theta$ is fixed and not random, a Frequentist confidence interval is either right or wrong --- it's not meaningful to attach a probability to whether a specific interval contains $\theta$.
+    \pause
+
+    \medskip
+    Instead, the guarantee is about the \emph{procedure}: ``if we repeated this sampling process many times, 95\% of the resulting intervals would contain $\theta$.''
+    \pause
+
+    \medskip
+    \Note{This is exactly the confidence interval interpretation you've been using since Module 3 --- now you know \emph{why} it's phrased that way.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Bayesian Perspective}
+
+\begin{frame}
+    \frametitle{Recall: Bayes' Rule (Module 2)}
+    For events $A$ and $B$:
+    \[
+    P(A \mid B) = \frac{P(B \mid A)\, P(A)}{P(B)}
+    \]
+    \pause
+
+    \medskip
+    So far we've only used this to reverse conditional probabilities between two \emph{events}. The Bayesian perspective reinterprets this same rule as a way of \hl{updating beliefs about a parameter} in light of data.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Bayesian Perspective}
+    \begin{itemize}
+        \item The parameter $\theta$ is treated as a \hl{random variable}, with its own probability distribution describing our \emph{belief} about its value.
+        \pause
+        \item Before seeing data: a \hl{prior} distribution $f(\theta)$ encodes what we believe about $\theta$.
+        \pause
+        \item After seeing data $x$: Bayes' rule updates this into a \hl{posterior} distribution,
+        \[
+        f(\theta \mid x) = \frac{f(x \mid \theta)\, f(\theta)}{f(x)} \;\propto\; \underbrace{f(x\mid\theta)}_{\text{likelihood}} \cdot \underbrace{f(\theta)}_{\text{prior}}
+        \]
+    \end{itemize}
+    \pause
+
+    \medskip
+    \textbf{Bayesian recipe:} start with a prior, update it with data via Bayes' rule, and reason directly about the posterior distribution of $\theta$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{What Bayesian Methods Can Say}
+    Because $\theta$ is treated as random, a Bayesian \hl{credible interval} $[a,b]$ really does support the statement
+    \[
+    P(a \le \theta \le b \mid \text{data}) = 0.95,
+    \]
+    a direct probability statement about where $\theta$ is likely to be --- given the data \emph{and} the chosen prior.
+    \pause
+    
+    \medskip
+    \Note{That last part is the catch: a Bayesian answer always depends on the prior you started with, not just the data.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Comparing the Two Perspectives}
+
+\begin{frame}
+    \frametitle{Same Data, Two Questions}
+    A rapid test for a rare disease: prevalence $P(D)=0.01$, sensitivity $P(+\mid D) = 0.99$, specificity $P(-\mid D^c)=0.95$. A patient tests positive.
+    \pause
+
+    \medskip
+    \begin{itemize}
+        \item \textbf{Frequentist question:} How surprising is a positive test if the patient is healthy ($H_0$: no disease)?
+        \item \textbf{Bayesian question:} Given the positive test, how likely is it that $H_0$ is true?
+    \end{itemize}
+    \pause
+
+    \medskip
+    These sound similar, but they are \emph{not the same question} --- and they don't give the same numeric answer. We'll derive both fully in Lecture 33; for now, let's just see the punchline.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Frequentist Answer}
+    \[
+    p\text{-value} = P(+ \mid H_0) = 0.05
+    \]
+    \pause
+    \begin{itemize}
+        \item About a 5\% chance of a false positive if the patient is healthy
+        \item That's a fairly small chance --- data this extreme would be somewhat unusual under $H_0$, giving \emph{some} evidence against it
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Bayesian Answer}
+    \[
+    P(H_0 \mid +) = P(\text{no disease}\mid +) \approx 0.83
+    \]
+    \pause
+    \begin{itemize}
+        \item Still \emph{more likely than not} that the patient is healthy --- the low prior prevalence dominates
+        \item An 83\% chance $H_0$ is true is essentially \emph{no} evidence against it
+    \end{itemize}
+    \pause
+
+    \medskip
+    \textbf{Same data, very different conclusions, because the two questions are different.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Frequentist vs.\ Bayesian: Probability and Prior Information}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{4.7cm} >{\raggedright\arraybackslash}p{4.7cm}}
+    \toprule
+    \textbf{Frequentist} & \textbf{Bayesian} \\
+    \midrule
+    Probability = long-run frequency of a repeatable event & Probability = degree of belief / plausibility \\
+    Parameter is fixed; data is random & Parameter is random; conditioned on the observed data \\
+    Does not formally incorporate prior knowledge & Explicitly encodes prior knowledge as a distribution \\
+    \bottomrule
+    \end{tabular}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Frequentist vs.\ Bayesian: When to Use Each}
+    \begin{itemize}
+        \item \textbf{Frequentist} methods are attractive when we want conclusions that don't depend on subjective prior beliefs, and when we care about long-run performance of a procedure (e.g.\ regulatory settings, like FDA drug trials).
+        \pause
+        \item \textbf{Bayesian} methods are attractive when relevant prior information exists and should inform the analysis, or when we want to reason directly about the probability of a hypothesis rather than about a repeatable sampling process.
+        \pause
+        \item With \hl{enough data}, the two approaches tend to \hl{agree} --- the data overwhelms the prior, and both give similar point estimates and intervals.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Where We're Headed}
+    \begin{itemize}
+        \item \textbf{Lecture 32:} Frequentist modeling in detail --- the likelihood function and maximum likelihood estimation
+        \item \textbf{Lectures 33--34:} Bayesian modeling in detail --- discrete models, then the Beta-Binomial model
+        \item \textbf{Lecture 35:} A case study putting both approaches side by side on the same data
+    \end{itemize}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
