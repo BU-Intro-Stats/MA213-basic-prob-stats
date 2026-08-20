@@ -22,6 +22,7 @@
 
 \def\chp9@path{../../../Chp 9}
 \input{../../lec_style.tex}
+\usepackage{booktabs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preamble
@@ -67,10 +68,191 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Same Data, Two Lenses}
 
+\begin{frame}
+    \frametitle{Case Study: The Drug Trial, Revisited}
+    Recall the Phase 1 drug trial from Lecture 34: $n=6$ patients, $x=2$ respond. We want to know about $p$, the true response rate.
+    \pause
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \medskip
+    We've now built up \emph{two complete toolkits} for answering this. Let's run both on the exact same data and compare what comes out.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Frequentist Side}
+
+\begin{frame}
+    \frametitle{Point Estimate and Interval}
+    \textbf{Point estimate (Lecture 32):} $\hat{p} = x/n = 2/6 \approx 0.333$ --- the MLE.
+    \pause
+
+    \medskip
+    \textbf{95\% confidence interval} (the Module 3 recipe, $\hat{p}\pm z^\star SE_{\hat{p}}$):
+    \[
+    0.333 \pm 1.96\sqrt{\frac{(0.333)(0.667)}{6}} = 0.333 \pm 0.377 = (-0.04,\ 0.71)
+    \]
+    \pause
+
+    \medskip
+    \Note{The lower bound is negative --- impossible for a proportion! With $n=6$, we don't have nearly enough successes/failures for the recipe's Normal-approximation conditions to hold.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Hypothesis Test}
+    The company will advance the drug only if $p > 0.15$: $H_0: p\le 0.15$ vs.\ $H_A: p>0.15$.
+    \pause
+
+    \medskip
+    \[
+    z = \frac{\hat{p}-0.15}{\sqrt{(0.15)(0.85)/6}} = \frac{0.333-0.15}{0.146} \approx 1.26, \qquad p\text{-value} \approx 0.104
+    \]
+    \pause
+
+    \medskip
+    Not significant at $\alpha=0.05$ --- but check the conditions first: $n p_0 = 6(0.15) = 0.9$, far below the ``at least 10 expected successes'' rule from Module 3. \textbf{This recipe's conditions aren't met.} The frequentist toolkit alone doesn't give us a trustworthy answer here.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Bayesian Side}
+
+\begin{frame}
+    \frametitle{Posterior and Interval}
+    \textbf{Posterior (Lecture 34,} Dr.\ Banerjee's $Beta(1,5)$ prior$\textbf{):} \; p\mid x \sim Beta(3,9)$, posterior mean $0.25$.
+    \pause
+
+    \medskip
+    \textbf{95\% credible interval:} $(0.06,\ 0.52)$ --- computed directly from the $Beta(3,9)$ distribution, valid regardless of sample size.
+    \pause
+
+    \medskip
+    \Note{No Normal approximation, no sample-size condition to check --- the Beta-Binomial posterior is exact for any $n$.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Bayesian Hypothesis Test}
+    Same question, same data: $H_0: p\le 0.15$ vs.\ $H_A: p>0.15$.
+    \[
+    p_{\text{Bayes}} = P(p\le 0.15 \mid x) \approx 0.221
+    \]
+    \pause
+
+    \medskip
+    A 22\% posterior chance that $H_0$ is true is modest evidence against it --- roughly consistent with the frequentist $p$-value of 0.104, but computed as a direct probability statement about $p$, with no small-sample caveat needed.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Side by Side}
+
+\begin{frame}
+    \frametitle{Side-by-Side Comparison}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l c c}
+    \toprule
+     & \textbf{Frequentist} & \textbf{Bayesian} \\
+    \midrule
+    Point estimate & $\hat{p}=0.333$ (MLE) & Posterior mean $= 0.25$ \\
+    Interval & $(-0.04, 0.71)$ \emph{(invalid!)} & $(0.06, 0.52)$ \\
+    $H_0: p\le 0.15$ & $p=0.104$ & $p_{\text{Bayes}}=0.221$ \\
+    Conditions needed? & Yes, and they fail here & No \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \pause
+
+    \medskip
+    Both point estimates are in the same ballpark, and both hypothesis tests reach the same qualitative conclusion (not enough evidence). But only the Bayesian toolkit gives a valid interval with this little data --- because it doesn't rely on a large-sample approximation.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why Did They Differ Here?}
+    \begin{itemize}
+        \item With $n=6$, the frequentist CI/HT recipes rely on approximations that need reasonably large samples --- and this sample is too small.
+        \pause
+        \item The Bayesian posterior is \hl{exact} for any $n$, but it depends on a prior (Dr.\ Banerjee's $Beta(1,5)$) --- a different oncologist's prior would have given a different posterior (recall the five oncologists, Lecture 34).
+        \pause
+        \item Neither toolkit is ``right'' in general. \textbf{Knowing the assumptions behind each lets you pick the right tool --- or know when neither recipe applies cleanly.}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What If We Had More Data?}
+
+\begin{frame}
+    \frametitle{Recall: They Agree With Enough Data (Lecture 31)}
+    Back in Lecture 31 we claimed: \textbf{with enough data, Frequentist and Bayesian answers tend to agree.} We've now built the tools to check that claim directly.
+    \pause
+    \medskip
+    \dq{What would happen to our two intervals if this had been a bigger trial --- same 1-in-3 response rate, but with $10\times$ or $100\times$ as many patients?}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Same Rate, More Patients}
+    \begin{center}
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l c c c}
+    \toprule
+     & $n=6$ & $n=60$ & $n=600$ \\
+    \midrule
+    $\hat{p}$ (MLE) & $0.333$ & $0.333$ & $0.333$ \\
+    95\% CI & \textcolor{rubineRed}{$(-0.04, 0.71)$} & $(0.21, 0.45)$ & $(0.30, 0.37)$ \\
+    Credible int. & $(0.06, 0.52)$ & $(0.21, 0.43)$ & $(0.30, 0.37)$ \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \pause
+    \medskip
+    Same response rate throughout ($x/n=1/3$), just more patients. The frequentist CI becomes valid once $n$ is large enough, and the two intervals \hl{converge} --- by $n=600$ they're nearly identical, regardless of which prior we started with.
+\end{frame}
+
+\section{R Demo: Watching Frequentist and Bayesian Estimates Converge}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Beyond This Course}
+
+\begin{frame}
+    \frametitle{Real Models Get More Complicated}
+    Everything in Module 5 had a closed-form answer: $\hat{p}=x/n$, $Beta(\alpha,\beta)\to Beta(\alpha+x,\beta+n-x)$. Real applied models rarely do.
+    \pause
+
+    \medskip
+    \begin{itemize}
+        \item \textbf{Frequentist:} when $L(\theta)$ has no clean maximum, find $\hat\theta$ with \hl{numerical optimization}, and study its sampling distribution by \hl{simulation} instead of a formula.
+        \pause
+        \item \textbf{Bayesian:} when the posterior has no clean closed form, either summarize it with a single \hl{MAP} estimate (analogous to the MLE), or approximate the full posterior by \hl{sampling} from it (e.g.\ MCMC).
+    \end{itemize}
+    \pause
+
+    \medskip
+    The core ideas --- likelihood, priors and posteriors, sampling distributions --- are exactly what you learned this module. Only the computation gets harder.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+\begin{frame}
+    \frametitle{Module 5 Summary}
+    \begin{itemize}
+        \item \textbf{LO1, Frequentist:} construct estimators via maximum likelihood; evaluate them via their sampling distribution (bias, standard error, MVUE).
+        \pause
+        \item \textbf{LO2, Bayesian:} update a prior into a posterior via Bayes' rule; update sequentially, order doesn't matter.
+        \pause
+        \item \textbf{LO3, Comparing:} Frequentist and Bayesian answer different questions about the same data, and can disagree --- especially with limited data or when a recipe's conditions aren't met.
+        \pause
+        \item \textbf{LO4--LO5:} discrete Bayesian models and the Beta-Binomial model both instantiate the same posterior $\propto$ likelihood $\times$ prior pattern.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
