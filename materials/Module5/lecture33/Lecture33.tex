@@ -21,6 +21,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\chp8@path{../../../Chp 8}
 \input{../../lec_style.tex}
+\usepackage{booktabs}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,7 +68,343 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Bayesian Knowledge Building}
 
+\begin{frame}
+    \frametitle{How Do You Decide If You Like a New Restaurant?}
+    Imagine a new ramen restaurant just opened nearby.
+    \pause
+
+    \medskip
+    \dq{How do you decide whether it's any good?}
+    \pause
+    \begin{itemize}
+        \item Before you know anything: maybe you check the Yelp rating --- \textbf{2 reviews, 4.5 stars}
+        \pause
+        \item A friend eats there and says it was \textbf{just okay}
+        \pause
+        \item You eat there yourself and \textbf{really enjoy it}
+        \pause
+        \item You go back with friends, and it's \textbf{mediocre}
+    \end{itemize}
+    \pause
+
+    \medskip
+    Your opinion \emph{evolves} as you gather information. You didn't start from scratch each time --- you \hl{updated} what you already believed.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Bayesian Knowledge Building}
+    This is exactly how Bayesian statistics works:
+    \begin{center}
+    {\small prior $\xrightarrow{\text{observe data}}$ posterior $\xrightarrow{\text{observe more data}}$ updated posterior $\longrightarrow \cdots$}
+    \end{center}
+    \pause
+
+    \medskip
+    \textbf{Yesterday's posterior becomes today's prior.} Each new piece of evidence updates your beliefs --- and with more data, your original prior matters less and less.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Bayes' Rule, Reinterpreted}
+
+\begin{frame}
+    \frametitle{Recall: Bayes' Rule for Events (Module 2)}
+    Bayes' rule lets us reverse conditional probabilities:
+    
+    \[
+    P(A \mid B) = \frac{P(B \mid A)\, P(A)}{P(B)}
+    \]
+    \pause
+
+    Last time we reinterpreted this for a \emph{parameter} $\theta$ and \emph{data} $x$:
+    \[
+    \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x\mid\theta)}^{\text{likelihood}} \cdot \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{marginal likelihood}}} 
+    \]
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Disease Screening, Fully Worked}
+
+\begin{frame}
+    \frametitle{Recall: Disease Screening (Lecture 31)}
+    A rapid test for a disease with prevalence $P(D) = 0.01$, sensitivity $P(+\mid D)=0.99$, specificity $P(-\mid D^c)=0.95$. A patient tests positive.
+    \pause
+
+    \medskip
+    Last time we jumped straight to the punchline: $P(H_0\mid +) = P(\text{no disease}\mid +) \approx 0.83$. \hl{Today, let's derive it.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Deriving the Posterior}
+    \[
+    P(D \mid +) = \frac{P(+\mid D)\,P(D)}{P(+\mid D)\,P(D) + P(+\mid D^c)\,P(D^c)}
+    \]
+    \pause
+    \[
+    = \frac{(0.99)(0.01)}{(0.99)(0.01) + (0.05)(0.99)} = \frac{0.0099}{0.0594} \approx 0.167
+    \]
+    \pause
+
+    \medskip
+    So $P(D\mid +) \approx 0.167$, and $P(H_0 \mid +) = 1 - 0.167 \approx 0.83$ --- exactly the number from Lecture 31.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why Isn't the Posterior Higher?}
+    The test is 99\% sensitive, so a positive result feels like strong evidence of disease --- yet $P(D\mid +)$ is still only about 17\%.
+    \pause
+
+    \medskip
+    \begin{itemize}
+        \item The \hl{prior} $P(D) = 0.01$ was small: most people are healthy.
+        \item Even a very accurate test produces some false positives (5\% of the 99\% healthy population), and there are a lot more healthy people to draw false positives from than sick people to draw true positives from.
+    \end{itemize}
+    \pause
+
+    \medskip
+    \textbf{The prior matters!} A single piece of strong evidence isn't always enough to overturn a low prior.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recall: Frequentist vs.\ Bayesian, Same Data}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{4.7cm} >{\raggedright\arraybackslash}p{4.7cm}}
+    \toprule
+    \textbf{Frequentist} & \textbf{Bayesian} \\
+    \midrule
+    $p\text{-value} = P(+\mid H_0) = 0.05$ & $P(H_0\mid +) \approx 0.83$ \\
+    A false positive this rare would be somewhat surprising if $H_0$ were true --- some evidence against $H_0$ & Even after testing positive, it's still more likely than not that $H_0$ is true --- essentially no evidence against $H_0$ \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \pause
+
+    \medskip
+    Now that you've seen the full Bayesian derivation, you can see exactly why these two numbers --- both computed from the \emph{same} data --- answer genuinely different questions.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Sequential Updating}
+
+\begin{frame}
+    \frametitle{What If You Test Positive Again?}
+    \dq{Suppose the patient takes the test a second time (independently) and it's positive again. What's $P(D \mid +_1, +_2)$?}
+    \pause
+
+    \medskip
+    \textbf{Yesterday's posterior becomes today's prior:} use $P(D) = 0.167$ (the posterior from the first test) as the prior for the second update.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Updating Again}
+    \[
+    P(D \mid +_2) = \frac{(0.99)(0.167)}{(0.99)(0.167) + (0.05)(0.833)} \approx \frac{0.165}{0.207} \approx 0.80
+    \]
+    \pause
+
+    \medskip
+    After \textbf{two} independent positive tests: about an \hl{80\% chance} of disease.
+    \pause
+
+    \medskip
+    A third independent positive test pushes it to $P(D \mid +_3) \approx 0.99$.
+    \pause
+
+    \medskip
+    \textbf{Each new piece of data updates our beliefs.} With enough data, the posterior is driven by the evidence rather than the original prior --- exactly like the restaurant example.
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Order Doesn't Matter}
+%     For independent data, only the \emph{total} evidence matters --- not the order it arrived in. Updating on $+_1$ then $+_2$ gives the same final posterior as updating on $+_2$ then $+_1$.
+%     \pause
+
+%     \medskip
+%     \textbf{Why?} The joint likelihood of independent data factors, and multiplication commutes:
+%     \[
+%     L(\theta ; x_1, x_2) = L(\theta ; x_1)\cdot L(\theta ; x_2) = L(\theta ; x_2)\cdot L(\theta ; x_1)
+%     \]
+% \end{frame}
+
+\begin{frame}
+\frametitle{In the Bayesian Paradigm}
+
+\begin{itemize}
+\item We can acknowledge and use available information 
+\pause
+\item Combine our prior information with the data to generate knowledge / understanding 
+\pause
+\item Depending on how strong our priors are, and how sure we are about our data, we may come to different conclusions
+\end{itemize}
+
+\pause
+\medskip
+
+\textbf{Key principle:} with more data, the prior tends to matter less and the data dominates. 
+Bayesian and Frequentist analyses will often agree when there is a lot of data.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{More Than Two Hypotheses}
+
+\begin{frame}
+    \frametitle{Example: Classifying a Gravitational Wave Signal}
+    In 2017, LIGO detected a gravitational wave signal --- a ripple in spacetime from a violent astrophysical event.
+    \pause
+
+    \medskip
+    \dq{What produced it?}
+    \pause
+
+    \medskip
+    \textbf{Possible sources}, with prior probabilities based on expected rates:
+    \renewcommand{\arraystretch}{1.2}
+    \begin{center}
+    \begin{tabular}{l l l}
+    BBH & Binary black hole merger & $P(\text{BBH}) = 0.50$ \\
+    BNS & Binary neutron star merger & $P(\text{BNS}) = 0.15$ \\
+    NSBH & Neutron star--black hole & $P(\text{NSBH}) = 0.10$ \\
+    Noise & Detector glitch & $P(\text{Noise}) = 0.25$
+    \end{tabular}
+    \end{center}
+    \pause
+
+    \medskip
+    Bayes' rule works the same way with \hl{more than two} hypotheses --- we just compute a posterior for each one.
+\end{frame}
+
+\begin{frame}
+    \frametitle{First Observation: Signal Duration}
+    The detected signal lasts more than 1 second (``long'').
+    \pause
+
+    \medskip
+    \begin{itemize}
+        \item $P(\text{long} \mid \text{BBH}) = 0.20$ \quad (BBH signals are typically short)
+        \item $P(\text{long} \mid \text{BNS}) = 0.90$ \quad (neutron stars spiral slowly)
+        \item $P(\text{long} \mid \text{NSBH}) = 0.50$
+        \item $P(\text{long} \mid \text{Noise}) = 0.35$
+    \end{itemize}
+    \pause
+
+    \medskip
+    \[
+    P(H_i \mid \text{long}) = \frac{P(\text{long} \mid H_i)\, P(H_i)}{\sum_j P(\text{long} \mid H_j)\, P(H_j)}
+    \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Posterior After Signal Duration}
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l c c c c}
+    \toprule
+    Source & Prior & Likelihood & Product & Posterior \\
+    \midrule
+    BBH  & 0.50 & 0.20 & 0.100 & 0.268 \\
+    BNS  & 0.15 & 0.90 & 0.135 & \textbf{0.362} \\
+    NSBH & 0.10 & 0.50 & 0.050 & 0.134 \\
+    Noise & 0.25 & 0.35 & 0.088 & 0.235 \\
+    \midrule
+    & & Total: & 0.373 & 1.000 \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \pause
+
+    \medskip
+    BNS rose from 15\% to 36\%, while BBH dropped from 50\% to 27\% --- but there's still substantial uncertainty.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Second Observation: Electromagnetic Counterpart}
+    Astronomers detect a \hl{kilonova} at the source location --- a burst of light produced when neutron star matter is ejected during a merger.
+    \pause
+
+    \medskip
+    \begin{itemize}
+        \item $P(\text{EM} \mid \text{BBH}) = 0.01$ \quad (black holes produce no light)
+        \item $P(\text{EM} \mid \text{BNS}) = 0.80$ \quad (neutron mergers produce kilonovae)
+        \item $P(\text{EM} \mid \text{NSBH}) = 0.20$
+        \item $P(\text{EM} \mid \text{Noise}) = 0.02$ \quad (coincidental)
+    \end{itemize}
+    \pause
+
+    \medskip
+    We use the posterior from before as our new prior and update again --- \hl{sequential updating}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Posterior After EM Counterpart}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l c c c c}
+    \toprule
+    Source & Prior (from before) & Likelihood & Product & Posterior \\
+    \midrule
+    BBH  & 0.268 & 0.01 & 0.003 & 0.008 \\
+    BNS  & 0.362 & 0.80 & 0.290 & \textbf{0.894} \\
+    NSBH & 0.134 & 0.20 & 0.027 & 0.083 \\
+    Noise & 0.235 & 0.02 & 0.005 & 0.014 \\
+    \midrule
+    & & Total: & 0.324 & 1.000 \\
+    \bottomrule
+    \end{tabular}
+    \pause
+
+    \medskip
+    After incorporating the EM counterpart, we're now 89\% confident this is a binary neutron star merger --- exactly how GW170817 was identified.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Bayesian Knowledge Building in Action}
+    \begin{center}
+    \begin{tabular}{l c c c}
+    \toprule
+    Source & Prior & After duration & After EM \\
+    \midrule
+    BBH  & 0.50 & 0.27 & 0.01 \\
+    BNS  & 0.15 & 0.36 & \textbf{0.89} \\
+    NSBH & 0.10 & 0.13 & 0.08 \\
+    Noise & 0.25 & 0.24 & 0.01 \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \pause
+
+    \medskip
+    Same pattern as the restaurant and disease examples --- each observation updates the \emph{full} distribution over all the hypotheses at once.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary}
+
+\begin{frame}
+\frametitle{Summary}
+
+\begin{itemize}
+\item The \hl{Bayesian approach} combines prior beliefs with data to produce updated beliefs (the posterior) --- just like how you naturally update your opinions.
+\pause
+\item \hl{Bayes' rule} lets us reverse conditional probabilities:
+    \[
+    \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x\mid\theta)}^{\text{likelihood}} \cdot \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{marginal likelihood}}} 
+    \]
+\pause
+\item We can \hl{update our beliefs incrementally} sas new evidence arrives 
+\pause 
+\item As we gather more data, the \hl{posterior is increasingly driven by the data} rather than the prior.
+
+\end{itemize}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
