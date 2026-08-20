@@ -120,7 +120,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
     Last time we reinterpreted this for a \emph{parameter} $\theta$ and \emph{data} $x$:
     \[
-    \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x\mid\theta)}^{\text{likelihood}} \cdot \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{marginal likelihood}}} 
+    \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x\mid\theta)}^{\text{likelihood}} \cdot \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{evidence}}} 
     \]
 
 \end{frame}
@@ -228,7 +228,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %     \medskip
 %     \textbf{Why?} The joint likelihood of independent data factors, and multiplication commutes:
 %     \[
-%     L(\theta ; x_1, x_2) = L(\theta ; x_1)\cdot L(\theta ; x_2) = L(\theta ; x_2)\cdot L(\theta ; x_1)
+%     L(\theta \mid x_1, x_2) = L(\theta \mid x_1)\cdot L(\theta \mid x_2) = L(\theta \mid x_2)\cdot L(\theta \mid x_1)
 %     \]
 % \end{frame}
 
@@ -395,7 +395,7 @@ Bayesian and Frequentist analyses will often agree when there is a lot of data.
 \pause
 \item \hl{Bayes' rule} lets us reverse conditional probabilities:
     \[
-    \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x\mid\theta)}^{\text{likelihood}} \cdot \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{marginal likelihood}}} 
+    \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x\mid\theta)}^{\text{likelihood}} \cdot \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{evidence}}} 
     \]
 \pause
 \item We can \hl{update our beliefs incrementally} sas new evidence arrives 
