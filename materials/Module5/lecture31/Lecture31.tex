@@ -172,7 +172,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
         \pause
         \item After seeing data $x$: Bayes' rule updates this into a \hl{posterior} distribution,
         \[
-        f(\theta \mid x) = \frac{f(x \mid \theta)\, f(\theta)}{f(x)} \;\propto\; \underbrace{f(x\mid\theta)}_{\text{likelihood}} \cdot \underbrace{f(\theta)}_{\text{prior}}
+        \underbrace{f(\theta \mid x)}_{\text{posterior}} \;=\; \frac{\overbrace{f(x \mid \theta)}^{\text{likelihood}}\, \overbrace{f(\theta)}^{\text{prior}}}{\underbrace{f(x)}_{\text{marginal likelihood}}}
         \]
     \end{itemize}
     \pause
