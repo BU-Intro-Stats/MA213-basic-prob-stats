@@ -21,6 +21,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\chp8@path{../../../Chp 8}
 \input{../../lec_style.tex}
+\usepackage{booktabs}
+\graphicspath{{figures/}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,8 +69,328 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{From Recipes to Likelihood}
+
+\begin{frame}
+    \frametitle{Recall: Constructing an Estimator}
+    Last time, we asked: given a parameter to estimate, how do we \emph{construct} a sensible estimator for it?
+    \pause
+
+    \medskip
+    So far in this course, every estimator was handed to you (sample proportion $\hat{p}$, sample mean $\bar{X}$, ...). Today we'll see a general, systematic recipe for \emph{building} an estimator from a probability model: \hl{maximum likelihood}.
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Recall: Independent Random Variables}
+%     If $X_1, X_2, \ldots, X_n$ are independent (Module 2), their \hl{joint} pmf/pdf is the product of the individual pmfs/pdfs:
+%     \[
+%     f(x_1, x_2, \ldots, x_n) = f(x_1)\cdot f(x_2) \cdots f(x_n)
+%     \]
+%     \pause
+
+%     \medskip
+%     This is how we'll write down the probability of an entire \emph{data set} $x_1, \ldots, x_n$, not just a single observation.
+% \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Building Intuition for Likelihood}
+
+\begin{frame}
+    \frametitle{Which Model Fits Better?}
+    Assume the daily October temperature in Boston is $Normal(\mu, \sigma=5^\circ)$, independent from day to day. Suppose we observe $x_1 = 55^\circ$, $x_2 = 57^\circ$.
+    \pause
+
+    \medskip
+    \dq{Which is a better description of this data: $\mu = 55^\circ$, or $\mu = 75^\circ$?}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Which Model Fits Better?}
+    Under each candidate $\mu$, our two observations are independent, so the \emph{joint probability} of seeing both is the product of their individual densities:
+    \[
+    f(55\mid\mu) \cdot f(57\mid\mu)
+    \]
+    \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+        \includegraphics[width=0.9\textwidth]{two_candidate_models.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \small
+        \pause
+        $\mu=55$:
+        \[
+        f(55\mid 55)\cdot f(57\mid 55) = 0.0059
+        \]
+        \pause
+        $\mu=75$:
+        \[
+        f(55\mid 75)\cdot f(57\mid 75) \approx 3\times 10^{-9}
+        \]
+    \end{column}
+    \end{columns}
+    \pause
+
+    \medskip
+    \textbf{The data is far more likely under $\mu = 55$.} We say the data \hl{supports} $\mu=55$ over $\mu=75$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Data Likelihood}
+    Let $x_1, \ldots, x_n$ be observed, independent data from a random experiment governed by parameter $\theta$. The \hl{likelihood function} $L(\theta)$ is the joint pmf/pdf of the data, computed as a function of $\theta$, the parameter of interest:
+
+    \medskip
+    \[
+\begin{aligned}
+    L(\theta) &= f(x_1, \ldots, x_n \mid \theta) \\
+    &= f(x_1\mid \theta)\cdot f(x_2\mid \theta) \cdots f(x_n\mid \theta)
+     \quad \text{(if independent)}
+\end{aligned}
+\]
+    \pause
+
+    \medskip
+    The likelihood function \emph{is} the joint distribution of the data, but we treat it \emph{as a function of $\theta$} --- the parameter is unknown, and the data is fixed.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Likelihood Over a Range of $\mu$}
+    What if we allow more candidate values of $\mu$? 
+    \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+        \includegraphics<1>[width=\textwidth]{likelihood_buildup_1.pdf}%
+        \includegraphics<2>[width=\textwidth]{likelihood_buildup_2.pdf}%
+        \includegraphics<3>[width=\textwidth]{likelihood_buildup_3.pdf}%
+        \includegraphics<4->[width=\textwidth]{likelihood_buildup_4.pdf}%
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \small
+        \renewcommand{\arraystretch}{1.2}
+        \only<1>{%
+        \begin{tabular}{c c c c}
+        \toprule
+        $\mu$ & $f(55\mid\mu)$ & $f(57\mid\mu)$ & $L(\mu)$ \\
+        \midrule
+        50 & 0.048 & 0.029 & 0.0014 \\
+        \bottomrule
+        \end{tabular}}%
+        \only<2>{%
+        \begin{tabular}{c c c c}
+        \toprule
+        $\mu$ & $f(55\mid\mu)$ & $f(57\mid\mu)$ & $L(\mu)$ \\
+        \midrule
+        50 & 0.048 & 0.029 & 0.0014 \\
+        55 & 0.080 & 0.074 & 0.0059 \\
+        \bottomrule
+        \end{tabular}}%
+        \only<3>{%
+        \begin{tabular}{c c c c}
+        \toprule
+        $\mu$ & $f(55\mid\mu)$ & $f(57\mid\mu)$ & $L(\mu)$ \\
+        \midrule
+        50 & 0.048 & 0.029 & 0.0014 \\
+        55 & 0.080 & 0.074 & 0.0059 \\
+        56 & 0.078 & 0.078 & \textbf{0.0061} \\
+        \bottomrule
+        \end{tabular}}%
+        \only<4->{%
+        \begin{tabular}{c c c c}
+        \toprule
+        $\mu$ & $f(55\mid\mu)$ & $f(57\mid\mu)$ & $L(\mu)$ \\
+        \midrule
+        50 & 0.048 & 0.029 & 0.0014 \\
+        55 & 0.080 & 0.074 & 0.0059 \\
+        56 & 0.078 & 0.078 & \textbf{0.0061} \\
+        57 & 0.074 & 0.080 & 0.0059 \\
+        \bottomrule
+        \end{tabular}}%
+    \end{column}
+    \end{columns}
+    \medskip
+    \onslide<4->{$L(\mu)$ peaks near $\mu = 56$ --- right between our two observations.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Likelihood as a Continuous Curve}
+    \begin{center}
+        \includegraphics[width=0.85\textwidth]{likelihood_curve.pdf}
+    \end{center}
+    Filling in every value of $\mu$ (not just our grid of four) traces out a smooth curve --- and confirms the peak is exactly at $\mu = 56$, the average of our two observations.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Maximum Likelihood Estimation}
+
+\begin{frame}
+    \frametitle{The Maximum Likelihood Estimator (MLE)}
+    The \hl{maximum likelihood estimator} for $\theta$ is the value $\hat{\theta}$ that maximizes the likelihood $L(\theta)$: the value of $\theta$ that makes the \emph{observed data} most likely.
+    \pause
+
+    \medskip
+    \Note{The MLE is \emph{not} the most likely value of $\theta$. $\theta$ isn't random --- it's just unknown. The MLE is the value that makes the data we saw as likely as possible.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{MLE Example: A Binomial Proportion}
+    Suppose the number of voters who support a bill is $Binomial(n,p)$ with $p$ unknown. If 63 of 100 people surveyed support it, the likelihood is
+    \[
+    L(p) = \binom{100}{63} p^{63} (1-p)^{37}.
+    \]
+    \begin{center}
+        \includegraphics[width=0.46\textwidth]{likelihood_binomial_voters.pdf}
+    \end{center}
+    \pause
+    The likelihood peaks right at $\hat{p} = 63/100 = 0.63$. \\
+    This is our $\hat{p}$ estimator from Module 3 --- and it's the MLE for $p$!
+\end{frame}
+
+\begin{frame}
+    \frametitle{Some Maximum Likelihood Estimators}
+    More generally, maximizing $L(\theta)$ gives:
+    \medskip
+    \small
+    \begin{itemize}
+        \item Binomial proportion: $\hat{p} = \dfrac{x}{n}$
+        \pause
+        \item Normal mean: $\hat{\mu} = \bar{X} = \dfrac{1}{n}\displaystyle\sum_{i=1}^n X_i$
+        \pause
+        \item Normal variance: $\widehat{\sigma^2}_{MLE} = \dfrac{1}{n}\displaystyle\sum_{i=1}^n (X_i - \bar{X})^2$
+    \end{itemize}
+    \pause
+
+    \medskip
+    \normalsize
+    $\hat{p}$ and $\bar{X}$ aren't arbitrary choices --- they're exactly the estimators you've been using since Module 3, and they're the MLEs. What about that last one?
+\end{frame}
+
+\begin{frame}
+    \frametitle{MLE Example: A Normal Variance}
+    Let's look more closely at $\widehat{\sigma^2}_{MLE} = \dfrac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$.
+    \pause
+
+    \medskip
+    Compare this to the sample variance formula from Module 1:
+    \[
+    s^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2.
+    \]
+    \pause
+
+    \medskip
+    \textbf{These are different!} The MLE for $\sigma^2$ divides by $n$, not $n-1$. As we'll see next, that's because the MLE for variance is \hl{biased} --- and the $n-1$ formula is a correction for that bias.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Evaluating Estimators via Their Sampling Distribution}
+
+\begin{frame}
+    \frametitle{Recall: The Sampling Distribution}
+    Any estimator $\hat{\theta}$ --- MLE or not --- is a statistic, so it has a \hl{sampling distribution} (Lecture 15--16): the distribution of $\hat{\theta}$ across hypothetical repeated samples.
+    \pause
+
+    \medskip
+    Maximum likelihood tells us how to \emph{construct} an estimator. The sampling distribution tells us how to \emph{judge} it.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Unbiasedness}
+    An estimator $\hat{\theta}$ is \hl{unbiased} if $E[\hat{\theta}] = \theta$.
+    \pause
+
+    \medskip
+    \begin{itemize}
+        \item $\hat{p} = X/n$ is unbiased for $p$ (Lecture 16)
+        \item $\bar{X}$ is unbiased for $\mu$ (Lecture 16)
+        \item $\widehat{\sigma^2}_{MLE}$ is \textbf{biased} for $\sigma^2$ --- on average, it underestimates. As $n$ grows, the bias shrinks, but it's never exactly zero for finite $n$.
+    \end{itemize}
+    \pause
+
+    \medskip
+    \textbf{Maximum likelihood does not automatically give an unbiased estimator!}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Visualizing the Bias}
+    \begin{center}
+        \includegraphics[width=0.68\textwidth]{likelihood_sigma_bias.pdf}
+    \end{center}
+    For four observations $x = (55, 57, 50, 62)$, the likelihood of $\sigma$ peaks at $\hat\sigma_{MLE}\approx 4.3$ --- but the unbiased $s\approx 5.0$ sits off to the side of that peak. \hl{The most likely value and the unbiased value aren't the same thing.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Standard Error}
+    The \hl{standard error} of an estimator is the standard deviation of its sampling distribution.
+    \pause
+
+    \medskip
+    You've already computed this for $\hat{p}$ and $\bar{X}$:
+    \[
+    SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}} \qquad SE_{\bar{X}} = \frac{\sigma}{\sqrt{n}}
+    \]
+    \pause
+
+    \medskip
+    This name now applies to \emph{any} estimator, not just these two --- it's our general measure of an estimator's variability.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Bias and Variability, Visualized}
+    \begin{center}
+        \includegraphics[width=\textwidth]{bias_variance_target.pdf}
+    \end{center}
+    Each panel shows repeated estimates from the same estimator (dots) relative to the true parameter (center). \hl{Bias} is how far off-center the dots are \emph{on average}; \hl{standard error} is how spread out they are.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Minimum-Variance Unbiased Estimator (MVUE)}
+    If two estimators are both unbiased, we prefer the one with \hl{smaller standard error} --- it's more consistently close to $\theta$.
+    \pause
+
+    \medskip
+    The unbiased estimator with the smallest possible variance is called the \hl{minimum-variance unbiased estimator (MVUE)}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example: Mean vs.\ Median}
+    Suppose we draw $n=11$ iid observations from a $Uniform(0,1)$ population and want to estimate its center, $\mu=0.5$. Both the sample mean $\bar{X}$ and the sample median are unbiased estimators of $\mu$.
+    \pause
+
+    \medskip
+    \dq{Which one should we prefer?}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example: Mean vs.\ Median}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{mean_vs_median.pdf}
+    \end{center}
+    \pause
+    \soln{Simulating the sampling distribution of each shows the sample mean has a noticeably smaller standard error than the sample median --- so $\bar{X}$ is preferred. In fact, $\bar{X}$ is both the MLE \emph{and} the MVUE here.}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recap: What Makes a Good Frequentist Estimator?}
+    \begin{itemize}
+        \item \hl{Construct} it via maximum likelihood: find the $\theta$ that makes the observed data most likely.
+        \pause
+        \item \hl{Evaluate} it using its sampling distribution:
+        \begin{itemize}
+            \item Is it unbiased? ($E[\hat\theta]=\theta$)
+            \item How small is its standard error?
+            \item Is it the MVUE among unbiased estimators?
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why This Matters for Confidence Intervals}
+    This machinery is exactly why a Frequentist confidence interval has its ``long-run coverage'' interpretation (recall Lecture 31): it's built from the sampling distribution of an estimator, not from a probability statement about $\theta$ itself.
+    \pause
+
+    \medskip
+    Next time: the Bayesian alternative, where we \emph{can} make direct probability statements about $\theta$ --- at the cost of needing a prior.
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document
