@@ -23,6 +23,7 @@
 \def\chp9@path{../../../Chp 9}
 \input{../../lec_style.tex}
 \usepackage{booktabs}
+\graphicspath{{figures/}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preamble
@@ -215,18 +216,134 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Beyond This Course}
+\section{Case Study: Overdispersed Counts}
 
 \begin{frame}
     \frametitle{Real Models Get More Complicated}
-    Everything in Module 5 had a closed-form answer: $\hat{p}=x/n$, $Beta(\alpha,\beta)\to Beta(\alpha+x,\beta+n-x)$. Real applied models rarely do.
+    Everything so far in Module 5 had a closed-form answer: $\hat{p}=x/n$, $Beta(\alpha,\beta)\to Beta(\alpha+x,\beta+n-x)$. Real applied models rarely do --- let's see what that actually looks like.
     \pause
 
     \medskip
+    \dq{A small business tracks \textbf{likes per post} on 200 recent posts. How should we model the number of likes?}
+    \pause
+
+    \medskip
+    A natural first guess: $Binomial$ counts of ``successes'' suggest \hl{Poisson}, our go-to model for counts (Module 2).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Does Poisson Fit?}
+    For a Poisson model, the mean and variance must be \emph{equal}. Checking the data:
+    \pause
+    \[
+    \bar{x} = 21.9 \qquad s^2 = 151.8 \qquad \left(\text{ratio} \approx 7\right)
+    \]
+    \pause
+
+    \medskip
+    The variance is about $7\times$ the mean. \textbf{This data is far more spread out than Poisson allows} --- some posts flop, some go semi-viral, and no single rate $\lambda$ captures both.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Poisson MLE, Fit and Checked}
+    The Poisson MLE is still just $\hat\lambda = \bar{x}$ --- closed form, from Lecture 32.
+    \begin{center}
+        \includegraphics[width=0.62\textwidth]{poisson_fit.pdf}
+    \end{center}
+    The fitted curve is far too narrow: it badly underestimates how often posts get very few \emph{or} very many likes.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Negative Binomial Distribution}
+    The \hl{Negative Binomial} distribution adds a second parameter $r$ controlling dispersion, on top of the mean $\mu$:
+    \[
+    P(X=x) = \frac{\Gamma(x+r)}{\Gamma(r)\,x!}\left(\frac{r}{r+\mu}\right)^r\left(\frac{\mu}{r+\mu}\right)^x, \qquad x=0,1,2,\ldots
+    \]
+    \pause
+    \medskip
+    \[
+    E(X) = \mu \qquad Var(X) = \mu + \frac{\mu^2}{r}
+    \]
+    \pause
+    \medskip
+    Small $r$ = highly overdispersed; as $r\to\infty$, this reduces back to Poisson ($Var\to\mu$).
+\end{frame}
+
+\begin{frame}
+    \frametitle{A Model With a Dispersion Parameter}
+    \begin{center}
+        \includegraphics[width=0.88\textwidth]{nb_shapes.pdf}
+    \end{center}
+    \pause
+    \medskip
+    Same mean throughout ($\mu=20$) --- only the shape changes: a long right tail when $r$ is small, converging to the familiar Poisson bell shape as $r$ grows.
+    \pause
+
+    \medskip
+    \textbf{The catch:} maximizing $L(\mu, r)$ has no closed-form solution for $\hat{r}$ --- we need \hl{numerical optimization} (e.g.\ \texttt{optim()} in R), exactly the idea from Lecture 32, just without a formula to fall back on.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Negative Binomial MLE, Fit and Checked}
+    Numerically maximizing $L(\mu,r)$ gives $\hat\mu \approx 21.9$, $\hat{r}\approx 3.3$.
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{poisson_vs_nb.pdf}
+    \end{center}
+    The Negative Binomial captures the spread that Poisson missed.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Frequentist Uncertainty: No Formula, So Simulate}
+    There's no simple formula for $SE(\hat{r})$ here either. So we \hl{simulate}: repeatedly generate fake data from the fitted model, refit, and see how much the estimate bounces around.
+    \pause
+
+    \medskip
+    \begin{center}
+        \includegraphics[width=0.48\textwidth]{boot_mu.pdf}
+    \end{center}
+    This gives a 95\% interval directly from the simulated spread --- the same logic as the confidence intervals in Modules 3--4, just computed by simulation instead of a formula.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Bayesian Side: No Conjugate Prior Either}
+    Put priors on $\mu$ and $r$, likelihood $=$ Negative Binomial. \hl{No conjugate family here} --- unlike the Beta-Binomial, there's no clean formula for the posterior.
+    \pause
+
+    \medskip
+    Instead: \hl{Markov Chain Monte Carlo (MCMC)}. In its simplest form (Metropolis--Hastings), we take a random walk through parameter space, always moving to more-likely values, sometimes accepting a move to a less-likely one --- and the resulting chain of visited values \emph{is} a sample from the posterior.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Watching the Chain Explore}
+    \begin{center}
+        \includegraphics[width=0.42\textwidth]{mcmc_trace.pdf}
+    \end{center}
+    Each trace bounces around a stable range rather than drifting --- a sign the chain is exploring the posterior, not still searching for it.
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Posterior Distributions}
+    \begin{center}
+        \includegraphics[width=0.62\textwidth]{posterior_size.pdf}
+    \end{center}
+    Every value on the $r$-axis with posterior mass is a value we believe is plausible given the data --- no simulate-and-refit needed, the uncertainty is built into the posterior directly.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Same Data, Two Machines}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{freq_vs_bayes_final.pdf}
+    \end{center}
+   
+    The simulation-based confidence interval and the MCMC-based credible interval land almost exactly on top of each other --- \hl{different machinery, same answer}, because with $n=200$ posts, there's plenty of data.
+\end{frame}
+
+\begin{frame}
+    \frametitle{What Carried Over}
     \begin{itemize}
-        \item \textbf{Frequentist:} when $L(\theta)$ has no clean maximum, find $\hat\theta$ with \hl{numerical optimization}, and study its sampling distribution by \hl{simulation} instead of a formula.
+        \item \textbf{Frequentist:} when $L(\theta)$ has no clean maximum, find $\hat\theta$ with \hl{numerical optimization}; study its sampling distribution by \hl{simulation} instead of a formula.
         \pause
-        \item \textbf{Bayesian:} when the posterior has no clean closed form, either summarize it with a single \hl{MAP} estimate (analogous to the MLE), or approximate the full posterior by \hl{sampling} from it (e.g.\ MCMC).
+        \item \textbf{Bayesian:} when the posterior has no clean closed form, approximate it by \hl{sampling} from it (e.g.\ MCMC) instead of deriving it.
     \end{itemize}
     \pause
 
