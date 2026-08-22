@@ -1,0 +1,78 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{14}
+\newcommand{\lectureplaceholder}{33}
+\newcommand{\lecturetitle}{Spam or Not Spam? Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} You just watched a two-hypothesis posterior get computed for a disease test, and then updated \emph{again} using a second positive test as new evidence. Now you'll run that same two-step process yourself, on a different two-hypothesis problem: is an email spam?
+
+\section*{The Setup}
+
+An email either is \textbf{Spam} or \textbf{Not Spam}. Based on your inbox history, your prior belief is
+\[
+P(\text{Spam}) = 0.20, \qquad P(\text{Not Spam}) = 0.80.
+\]
+
+\section*{Step 1: Think (5 mins)}
+
+\textbf{(a)} The email contains the word ``free.'' Historically,
+\[
+P(\text{``free''} \mid \text{Spam}) = 0.30, \qquad P(\text{``free''} \mid \text{Not Spam}) = 0.05.
+\]
+Use Bayes' rule to compute $P(\text{Spam} \mid \text{``free''})$.
+\vspace{0.4in}
+
+\textbf{(b)} The same email \emph{also} contains the word ``winner.'' Historically (and independently of ``free,'' given the class),
+\[
+P(\text{``winner''} \mid \text{Spam}) = 0.25, \qquad P(\text{``winner''} \mid \text{Not Spam}) = 0.02.
+\]
+\textbf{Yesterday's posterior becomes today's prior:} use your answer from (a) as the new prior, and update again on ``winner.'' What is $P(\text{Spam} \mid \text{``free,'' ``winner''})$?
+\vspace{0.4in}
+
+\section*{Step 2: Pair (4 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers to (a) and (b) with your partner. Then discuss:
+
+\begin{itemize}
+  \item Would you have gotten the same final posterior in part (b) if you'd updated on ``winner'' first and ``free'' second? Why or why not?
+  \item \textbf{Bonus:} suppose the email contained \emph{neither} ``free'' nor ``winner.'' Without recomputing, would you expect $P(\text{Spam} \mid \text{data})$ to be higher or lower than your prior of 0.20? Why?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

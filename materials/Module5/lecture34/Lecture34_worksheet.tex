@@ -1,0 +1,77 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{14}
+\newcommand{\lectureplaceholder}{34}
+\newcommand{\lecturetitle}{Updating a Beta Prior: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} You just saw the Beta-Binomial update rule $Beta(\alpha,\beta) \to Beta(\alpha+x,\,\beta+n-x)$. Now apply it yourself, on a new dataset.
+
+\section*{The Setup}
+
+A basketball player is practicing free throws. Historically, shooters like her make around 60\% of their attempts, so we encode this belief as
+\[
+p \sim Beta(6,4) \qquad \left(\text{recall } E(p) = \frac{\alpha}{\alpha+\beta} = \frac{6}{10} = 0.6\right).
+\]
+In a practice session, she attempts $n=10$ free throws and makes $x=8$.
+
+\section*{Step 1: Think (5 mins)}
+
+\textbf{(a)} Using the Beta-Binomial update rule, find the posterior distribution: $p \mid x \sim Beta(\rule{0.5in}{0.4pt},\;\rule{0.5in}{0.4pt})$.
+
+\textbf{(b)} Compute the posterior mean.
+\vspace{0.6in}
+
+\textbf{(c)} Compare three numbers: the prior mean (0.6), the MLE ($\hat{p}=x/n$), and your posterior mean from (b). Where does the posterior mean fall relative to the other two?
+\vspace{0.8in}
+
+\textbf{(d)} \textbf{Bonus:} suppose instead we'd used an uninformative prior, $p\sim Beta(1,1)$ (uniform on $[0,1]$). Recompute the posterior and its mean. How much closer is this posterior mean to the MLE than your answer in (b)? Why does that make sense?
+\vspace{0.8in}
+
+\newpage
+\section*{Step 2: Pair (4 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers with your partner. Then discuss:
+
+\begin{itemize}
+  \item Both priors in this problem encode a belief about her free-throw percentage. Which prior would you call ``stronger,'' and how does that show up in the two posterior means you computed?
+  \item Suppose she instead attempted $n=100$ free throws and made $x=80$ (same 80\% rate as before). Without recomputing exactly, would you expect the two posteriors (from $Beta(6,4)$ vs.\ $Beta(1,1)$) to be closer together or farther apart than they were with $n=10$? Why?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

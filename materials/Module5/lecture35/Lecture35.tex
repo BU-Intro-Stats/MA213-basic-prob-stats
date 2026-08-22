@@ -212,10 +212,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
     Same response rate throughout ($x/n=1/3$), just more patients. The frequentist CI becomes valid once $n$ is large enough, and the two intervals \hl{converge} --- by $n=600$ they're nearly identical, regardless of which prior we started with.
 \end{frame}
 
-\section{R Demo: Watching Frequentist and Bayesian Estimates Converge}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Case Study: Overdispersed Counts}
 
 \begin{frame}
@@ -228,7 +224,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
     \pause
 
     \medskip
-    A natural first guess: $Binomial$ counts of ``successes'' suggest \hl{Poisson}, our go-to model for counts (Module 2).
+    A natural first guess: \hl{Poisson} is our go-to model for counts (Module 2).
 \end{frame}
 
 \begin{frame}
@@ -246,7 +242,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \begin{frame}
     \frametitle{The Poisson MLE, Fit and Checked}
-    The Poisson MLE is still just $\hat\lambda = \bar{x}$ --- closed form, from Lecture 32.
+    Recall that for a Poisson random variable, the mean is the rate parameter $\lambda$. So it is perhaps not surprising that the MLE for $\lambda$ is $\hat\lambda = \bar{x}$
     \begin{center}
         \includegraphics[width=0.62\textwidth]{poisson_fit.pdf}
     \end{center}
@@ -255,7 +251,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 
 \begin{frame}
     \frametitle{The Negative Binomial Distribution}
-    The \hl{Negative Binomial} distribution adds a second parameter $r$ controlling dispersion, on top of the mean $\mu$:
+    The \hl{Negative Binomial} ($\mu,r$) distribution adds a second parameter $r$ controlling dispersion, on top of the mean $\mu$:
     \[
     P(X=x) = \frac{\Gamma(x+r)}{\Gamma(r)\,x!}\left(\frac{r}{r+\mu}\right)^r\left(\frac{\mu}{r+\mu}\right)^x, \qquad x=0,1,2,\ldots
     \]
@@ -268,6 +264,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
     \medskip
     Small $r$ = highly overdispersed; as $r\to\infty$, this reduces back to Poisson ($Var\to\mu$).
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
     \frametitle{A Model With a Dispersion Parameter}
@@ -282,6 +280,22 @@ Some images may be included under fair use guidelines (educational purposes).}}
     \medskip
     \textbf{The catch:} maximizing $L(\mu, r)$ has no closed-form solution for $\hat{r}$ --- we need \hl{numerical optimization} (e.g.\ \texttt{optim()} in R), exactly the idea from Lecture 32, just without a formula to fall back on.
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Think/Pair/Share: Diagnosing Overdispersion}
+    Pick up the worksheet and find a partner.
+    \medskip
+    \begin{itemize}
+        \item \textbf{Step 1 (Think, 3 min):} estimate the likes data's dispersion parameter $r$ by hand, before we reveal the optimizer's answer.
+        \item \textbf{Step 2 (Pair, 3 min):} compare answers with your partner and work through the discussion questions.
+    \end{itemize}
+    \medskip
+    We'll share out a few answers as a class before moving on.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
     \frametitle{The Negative Binomial MLE, Fit and Checked}

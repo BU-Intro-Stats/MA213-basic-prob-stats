@@ -4,20 +4,24 @@
 \begin{frame}
     \frametitle{Lesson Plan}
     \begin{itemize}
-        \item xx min Lecture: 
-     \end{itemize}
+        \item 2 min Lecture: Same Data, Two Lenses --- reintroduce the Lecture 34 drug trial as a case study for both toolkits
+        \item 5 min Lecture: The Frequentist Side --- point estimate/CI (and why the CI is invalid here), hypothesis test (and why its conditions fail)
+        \item 4 min Lecture: The Bayesian Side --- posterior/credible interval, Bayesian hypothesis test
+        \item 4 min Lecture: Side by Side --- comparison table, why the two approaches differed here
+        \item 3.5 min Lecture: What If We Had More Data? --- revisit Lecture 31's convergence claim, $n=6$ vs.\ $60$ vs.\ $600$ table
+        \item 3 min Lecture: Case Study: Overdispersed Counts --- motivating question, checking the Poisson mean/variance assumption
+        \item 6 min Lecture: The Poisson MLE, Fit and Checked; the Negative Binomial distribution; NB shapes for varying $r$ --- so students can see what $r$ does before estimating it themselves
+        \item 6 min Think/Pair/Share: \textit{Diagnosing Overdispersion} worksheet --- estimate $r$ for the likes data by method of moments, before the lecture reveals the numerically-optimized $\hat r$ (see \texttt{Lecture35\_worksheet.tex})
+        \item 10 min Lecture: rest of Overdispersed Counts case study --- NB MLE via \texttt{optim()}, bootstrap simulation for frequentist uncertainty, MCMC for the Bayesian posterior, side-by-side convergence, what carried over
+        \item 2 min Lecture: Module 5 Summary
+    \end{itemize}
 \end{frame}
 
-    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Total: ~45.5 min content + ~4.5 min buffer for agenda/LO/announcements and pacing slack = 50 min.
+% R demo cut (Sec 3.5's convergence table already shows the answer); this is still the densest
+% lecture in the module (22 content frames + the TPS activity), so keep an eye on pacing.
 
-% TODO: Lecture slides
-% TODO: R demo 
-% TODO: Edfinity quiz 
-
-% rough plan: Examples of more complex models
-% ML: Example of how a more complicated model can be built for a real world application, use numerical optimization to define the ML estimator, use simulation to understand its properties. 
-% Bayes: Example of how a more complicated model can be built for a real world application, MAP as analogous to ML estimator, study of full posterior (derivation, sampling) as the “fully Bayesian” approach
 
 
 
