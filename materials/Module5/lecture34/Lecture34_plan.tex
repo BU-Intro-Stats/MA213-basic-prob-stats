@@ -4,21 +4,24 @@
 \begin{frame}
     \frametitle{Lesson Plan}
     \begin{itemize}
-        \item 6 min Lecture: A Continuous Parameter --- drug trial motivation, discrete/continuous RV reminder, Bayes' rule for RVs, evidence as normalizing constant
-        \item 5 min Lecture: Likelihood and Prior on a Grid --- binomial likelihood, encoding prior belief, computing a discrete posterior
-        \item 6 min Lecture: From Discrete to Continuous --- likelihood as a continuous curve, continuous prior, the Beta distribution and its properties
-        \item 4 min Lecture: The Beta-Binomial Model --- conjugacy derivation, update rule
-        \item 9 min Think/Pair/Share: \textit{Updating a Beta Prior} worksheet --- apply the update rule to a new dataset and compare priors of different strength (see \texttt{Lecture34\_worksheet.tex})
-        \item 4 min Lecture: Example: Back to the Drug Trial --- worked posterior, visualizing the update
-        \item 5 min Lecture: The Influence of the Prior --- five oncologists, five posteriors; balancing prior and data as $n$ grows
-        \item 2 min Lecture: Sequential Updating, Revisited --- Beta-Binomial specializes the general sequential-update rule from Lecture 33
-        \item 2 min Lecture: Credible Intervals --- definition, contrast with Frequentist CI interpretation
-        \item 2 min Lecture: Summary
+        \item 5 min Lecture (4 slides): A Continuous Parameter --- drug trial motivation, discrete/continuous RV reminder, Bayes' rule for RVs, evidence as normalizing constant
+        \item 4 min Lecture (3 slides): Likelihood and Prior on a Grid --- binomial likelihood, encoding prior belief, computing a discrete posterior
+        \item 5 min Lecture (5 slides): From Discrete to Continuous --- likelihood as a continuous curve, continuous prior, the Beta distribution and its properties
+        \item 4 min Lecture (2 slides): The Beta-Binomial Model --- conjugacy derivation, update rule
+        \item 9 min Think/Pair/Share (1 slide): \textit{Updating a Beta Prior} worksheet --- apply the update rule to a new dataset and compare priors of different strength (see \texttt{Lecture34\_worksheet.tex})
+        \item 4 min Lecture (2 slides): Example: Back to the Drug Trial --- worked posterior, visualizing the update
+        \item 5 min Lecture (4 slides): The Influence of the Prior --- five oncologists, five posteriors; balancing prior and data as $n$ grows
+        \item 2 min Lecture (1 slide): Sequential Updating, Revisited --- Beta-Binomial specializes the general sequential-update rule from Lecture 33
+        \item 4 min Lecture (2 slides): Credible Intervals --- definition, visualizing the drug-trial posterior with the shaded 95\% interval, contrast with Frequentist CI interpretation
+        \item 3 min Edfinity Quiz (1 slide): Computing a Credible Interval in R --- \texttt{qbeta()} vs.\ \texttt{dbeta()}, correct tail probabilities, correct posterior parameters
+        \item 2 min Lecture (1 slide): Summary
     \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Total: 45 min content + ~5 min buffer for agenda/LO/announcements and pacing slack = 50 min
+% Total: 47 min content + ~3 min buffer for agenda/LO/announcements and pacing slack = 50 min
+% Total slides: 26 (25 lecture/activity slides + 1 quiz slide), ~1.8 min/slide on average --
+% in line with Lectures 31--33's pacing, so this looks feasible.
 % Activity placed right after the Beta-Binomial update rule is derived, so students apply it
 % themselves on a fresh example before the lecture works through the drug-trial reveal.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
