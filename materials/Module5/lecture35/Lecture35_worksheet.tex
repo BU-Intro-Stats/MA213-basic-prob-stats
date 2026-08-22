@@ -1,0 +1,75 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{15}
+\newcommand{\lectureplaceholder}{35}
+\newcommand{\lecturetitle}{Diagnosing Overdispersion: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} You just saw how the Negative Binomial's dispersion parameter $r$ changes its shape: $E(X)=\mu$, $Var(X) = \mu + \mu^2/r$, small $r$ = long right tail, large $r$ = close to Poisson. We haven't yet told you $\hat r$ for the social media likes data --- the lecture gets it by numerically maximizing the likelihood. Beat the reveal: get your own quick hand estimate of $r$ first, \emph{without} numerical optimization.
+
+\section*{The Setup}
+
+Recall the likes-per-post data from earlier ($n=200$ posts):
+\[
+\bar{x} = 21.9 \qquad s^2 = 151.8.
+\]
+
+\section*{Step 1: Think (3 mins)}
+
+\textbf{(a)} Compute the variance-to-mean ratio $s^2/\bar{x}$ (also called the \emph{Fano Factor}). What would it be if the data were perfectly modeled by a Poisson distribution? Does a Poisson model look appropriate here? Why or why not?
+\vspace{0.8in}
+
+\textbf{(b)} A quick \emph{method-of-moments} estimate of $r$ plugs the sample mean and variance directly into $Var(X) = \mu + \mu^2/r$ and solves for $r$:
+\[
+s^2 = \bar{x} + \frac{\bar{x}^2}{r} \quad\Longrightarrow\quad r = \frac{\bar{x}^2}{s^2 - \bar{x}}.
+\]
+Compute $\hat{r}$ for the likes data.
+\vspace{0.8in}
+
+\newpage
+\section*{Step 2: Pair (3 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers with your partner. Then discuss:
+
+\begin{itemize}
+  \item Based on your $\hat r$, do you expect the fitted Negative Binomial to look highly overdispersed (long right tail) or close to Poisson (roughly symmetric bell shape)?
+  \item \textbf{Bonus:} this method-of-moments $\hat r$ is quick to compute by hand, but the lecture is about to show you an $\hat r$ from numerically maximizing the likelihood instead. Do you expect the two to agree exactly? Why might they differ, even on the same data?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

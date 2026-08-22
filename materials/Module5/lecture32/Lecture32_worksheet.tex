@@ -1,0 +1,88 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{13}
+\newcommand{\lectureplaceholder}{32}
+\newcommand{\lecturetitle}{Finding the MLE by Grid Search: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} You just watched the likelihood get evaluated at a grid of candidate $\mu$ values for the temperature example. Now you'll do the same thing yourself, for a \textbf{Geometric} distribution (Module 2).
+
+\section*{The Setup}
+
+A basketball player takes free throws until she makes her first basket. It takes her $X=4$ attempts. Recall the Geometric pmf: $P(X=x) = (1-p)^{x-1}p$. So the likelihood here is
+
+\[
+L(p) = (1-p)^{3}\,p.
+\]
+
+\section*{Step 1: Think (4 mins)}
+
+\textbf{(a)} Fill in the table below:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{c c}
+\toprule
+$p$ & $(1-p)^3 p$ \\
+\midrule
+0.10 & \\
+0.20 & \\
+0.25 & \\
+0.30 & \\
+0.40 & \\
+0.50 & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{(b)} Which value of $p$ in your table \textbf{maximizes} the likelihood? \shortblank
+
+\textbf{(c)} Based on your answer, guess a \textbf{general formula} for $\hat{p}$ in terms of $X$ (the number of attempts until the first basket).
+\vspace{0.3in}
+
+\section*{Step 2: Pair (4 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your table and your answers to (b) and (c) with your partner. Then discuss:
+
+\begin{itemize}
+  \item Why does it make intuitive sense that a \emph{larger} number of attempts before the first basket ($X$) leads to a \emph{smaller} estimated $p$?
+  \item \textbf{Bonus:} using your formula from (c), predict the MLE if she'd instead made her first basket on attempt $X=6$. Check your prediction by computing $L(p)$ at $p=1/6$ and one neighboring value (e.g.\ $p=0.2$).
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

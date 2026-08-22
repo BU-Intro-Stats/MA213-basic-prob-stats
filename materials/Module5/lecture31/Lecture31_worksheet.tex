@@ -1,0 +1,161 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amssymb}
+
+\definecolor{codegray}{gray}{0.97}
+\definecolor{huddleblue}{RGB}{214,234,255}
+\definecolor{predictionyellow}{RGB}{255,242,200}
+\definecolor{debatepink}{RGB}{255,225,225}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  backgroundcolor=\color{codegray},
+  breaklines=true,
+  showstringspaces=false,
+  keepspaces=true,
+  xleftmargin=0pt,
+  xrightmargin=0pt
+}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{12}
+\newcommand{\lectureplaceholder}{31}
+\newcommand{\lecturetitle}{Frequentist or Bayesian? Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1.6in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\newcommand{\responsebox}[2]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{#1} #2
+      \vspace{0.55in}
+    \end{minipage}
+  }
+}
+
+\newcommand{\linedbox}[1]{
+  \noindent\fbox{%
+    \begin{minipage}{0.95\linewidth}
+      #1
+      \vspace{0.18in}
+
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+
+      \vspace{0.18in}
+      \longblank
+    \end{minipage}
+  }
+}
+
+\newcommand{\callout}[3]{
+  \noindent\colorbox{#1}{%
+    \makebox[\dimexpr0.95\linewidth-2\fboxsep\relax][l]{\textbf{#2}}%
+  }
+
+  \noindent\fbox{%
+    \begin{minipage}{0.93\linewidth}
+      #3
+    \end{minipage}
+  }
+}
+
+\newcommand{\classifyrow}[1]{
+  \begin{center}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|c|c|}
+  \hline
+  \textbf{Frequentist} & \textbf{Bayesian} \\
+  \hline
+  $\square$ & $\square$ \\
+  \hline
+  \end{tabular}
+  \end{center}
+  \textbf{Why?} #1
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} The same real-world situation can often be reasoned about in a Frequentist way \emph{or} a Bayesian way --- they're different philosophies for the same underlying question, not different topics. We will decide, individually and then with a partner, which style of reasoning best describes each scenario below, and why.
+
+\section*{The Scenarios}
+
+For each scenario, decide: is the reasoning being described more naturally \textbf{Frequentist} (long-run frequency of a repeatable procedure; the parameter is fixed) or \textbf{Bayesian} (a degree of belief that gets updated; the parameter is treated as random)?
+
+\begin{enumerate}[leftmargin=*,itemsep=1.1em]
+
+  \item \textbf{An FDA committee approves a drug because its clinical trial produced a $p$-value below 0.05.}
+  \classifyrow{}
+  \vspace{0.3em}
+
+  \item \textbf{A doctor updates her belief about whether a patient has a disease after each new test result, factoring in how rare the disease is in the general population.}
+  \classifyrow{}
+  \vspace{0.3em}
+
+  \item \textbf{A pollster reports ``Candidate A leads with a 95\% confidence interval of 48\%--52\%,'' based on the guarantee that this procedure captures the true support 95\% of the time it's used.}
+  \classifyrow{}
+  \vspace{0.3em}
+
+  \item \textbf{A friend says, ``I'm pretty sure it's going to rain --- the sky looks just like it did the last few times it rained.''}
+  \classifyrow{}
+  \vspace{0.3em}
+
+  \item \textbf{A factory's quality-control process rejects a batch whenever the defect rate in a sample exceeds a threshold, calibrated so that a \emph{good} batch only gets rejected by mistake 5\% of the time.}
+  \classifyrow{}
+  \vspace{0.3em}
+
+  \item \textbf{A weather forecaster says, ``There's a 70\% chance of rain tomorrow.''}
+  \classifyrow{}
+
+\end{enumerate}
+
+\section*{Step 1: Think (3 mins)}
+
+On your own, work through all six scenarios above and jot down your reasoning.
+
+\section*{Step 2: Pair (5 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers to all six scenarios with your partner. Use these questions to guide your conversation:
+
+\begin{itemize}
+  \item Did you and your partner classify any scenario differently? Talk through both readings --- is one of you wrong, or can the scenario genuinely be read either way?
+  \item Scenario 6 (the weather forecaster) is a classic hard case. Can you make a genuine argument for \emph{both} the Frequentist and Bayesian reading of ``70\% chance of rain''? What would each one actually mean?
+  \item Pick one scenario you both called Frequentist. What would have to be true about the underlying process for that Frequentist interpretation to be meaningful (a repeatable procedure, a long-run frequency)?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

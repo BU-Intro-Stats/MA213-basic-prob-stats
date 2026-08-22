@@ -245,13 +245,31 @@ Some images may be included under fair use guidelines (educational purposes).}}
     This is our $\hat{p}$ estimator from Module 3 --- and it's the MLE for $p$!
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Think/Pair/Share: Finding the MLE by Grid Search}
+    Pick up the worksheet and find a partner.
+    \medskip
+    \begin{itemize}
+        \item \textbf{Step 1 (Think, 4 min):} compute the geometric likelihood grid by hand and discover the general formula for $\hat{p}$.
+        \item \textbf{Step 2 (Pair, 4 min):} compare tables with your partner and work through the discussion questions.
+    \end{itemize}
+    \medskip
+    We'll share out a few answers as a class before moving on.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
     \frametitle{Some Maximum Likelihood Estimators}
     More generally, maximizing $L(\theta)$ gives:
-    \medskip
-    \small
+    \smallskip
+    \footnotesize
     \begin{itemize}
         \item Binomial proportion: $\hat{p} = \dfrac{x}{n}$
+        \pause
+        \item Geometric proportion: $\hat{p} = \dfrac{1}{X}$
         \pause
         \item Normal mean: $\hat{\mu} = \bar{X} = \dfrac{1}{n}\displaystyle\sum_{i=1}^n X_i$
         \pause
@@ -259,9 +277,9 @@ Some images may be included under fair use guidelines (educational purposes).}}
     \end{itemize}
     \pause
 
-    \medskip
+    \smallskip
     \normalsize
-    $\hat{p}$ and $\bar{X}$ aren't arbitrary choices --- they're exactly the estimators you've been using since Module 3, and they're the MLEs. What about that last one?
+    $\hat{p}$ and $\bar{X}$ aren't arbitrary choices --- they're exactly the estimators you've been using since Module 3, and they're the MLEs. That geometric formula is the one you just found yourselves! What about that last one?
 \end{frame}
 
 \begin{frame}
