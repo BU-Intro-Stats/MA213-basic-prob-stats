@@ -470,6 +470,34 @@ In words:
     \textbf{Interpretation:} given the observed data, there's a 95\% probability $p$ falls in $[a,b]$ --- a direct probability statement, unlike a Frequentist confidence interval's ``long-run coverage'' guarantee (recall Lecture 32).
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Visualizing a Credible Interval}
+    For the drug trial posterior, $p\mid x \sim Beta(3,9)$:
+    \begin{center}
+        \includegraphics[width=0.68\textwidth]{credible_interval.pdf}
+    \end{center}
+    \pause
+    An \hl{equal-tailed} interval leaves 2.5\% of the posterior probability in each tail --- so $a$ and $b$ are just the 2.5th and 97.5th percentiles of the posterior.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz: Computing a Credible Interval in R}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \pq{Recall the drug trial posterior, $p\mid x \sim Beta(3,9)$. Which line of R code correctly computes the 95\% equal-tailed credible interval?}
+
+    \small
+    \begin{enumerate}[(a)]
+        \solnMult{\texttt{qbeta(c(0.025, 0.975), 3, 9)}}
+        \item \texttt{qbeta(c(0.05, 0.95), 3, 9)}
+        \item \texttt{dbeta(c(0.025, 0.975), 3, 9)}
+        \item \texttt{dbeta(c(0.05, 0.95), 3, 9)}
+    \end{enumerate}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Summary}

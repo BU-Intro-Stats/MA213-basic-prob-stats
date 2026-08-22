@@ -142,4 +142,49 @@ p_grid_fig <- ggplot(grid_data, aes(x = p, y = Density)) +
         panel.grid.minor = element_blank())
 ggsave("figures/five_oncologists_grid.pdf", p_grid_fig, width = 10, height = 7)
 
+####################################################################
+# Figure 5: 95% credible interval on the drug-trial posterior, Beta(3,9)
+####################################################################
+
+alpha_ci <- 3; beta_ci <- 9
+ci_lo <- qbeta(0.025, alpha_ci, beta_ci)
+ci_hi <- qbeta(0.975, alpha_ci, beta_ci)
+
+# Insert the exact interval boundaries as grid points so the shaded regions
+# share a common edge there, instead of two separately-filtered geom_areas
+# whose nearest grid points straddle the boundary and visually overlap.
+p_grid_ci <- sort(unique(c(pi_grid2, ci_lo, ci_hi)))
+ci_data <- tibble(p = p_grid_ci, density = dbeta(p_grid_ci, alpha_ci, beta_ci)) |>
+  mutate(region = case_when(
+    p < ci_lo ~ "left_tail",
+    p > ci_hi ~ "right_tail",
+    TRUE ~ "middle"
+  ))
+# Duplicate the boundary points into the neighboring region so the two
+# adjacent polygons share an edge exactly, instead of leaving a gap.
+ci_data <- bind_rows(
+  ci_data,
+  filter(ci_data, p == ci_lo) |> mutate(region = "left_tail"),
+  filter(ci_data, p == ci_hi) |> mutate(region = "right_tail")
+) |> arrange(region, p)
+
+p_ci <- ggplot(ci_data, aes(x = p, y = density)) +
+  geom_area(aes(fill = region, group = region), color = NA, alpha = 0.4) +
+  scale_fill_manual(values = c(middle = "#569BBD", left_tail = "gray70",
+                                right_tail = "gray70"), guide = "none") +
+  geom_line(linewidth = 1, color = "#569BBD") +
+  geom_vline(xintercept = c(ci_lo, ci_hi), linetype = "dashed", color = "gray30") +
+  annotate("text", x = ci_lo, y = -0.15, label = sprintf("%.2f", ci_lo),
+           size = 3.5, vjust = 1) +
+  annotate("text", x = ci_hi, y = -0.15, label = sprintf("%.2f", ci_hi),
+           size = 3.5, vjust = 1) +
+  annotate("text", x = (ci_lo + ci_hi) / 2, y = max(ci_data$density) * 0.4,
+           label = "95%", size = 5, color = "white", fontface = "bold") +
+  labs(x = expression(p), y = expression(f(p~"|"~x)),
+       title = "Posterior Beta(3, 9) with 95% Equal-Tailed Credible Interval") +
+  coord_cartesian(clip = "off") +
+  theme_minimal() +
+  theme(plot.margin = margin(5.5, 5.5, 16, 5.5))
+ggsave("figures/credible_interval.pdf", p_ci, width = 7, height = 4)
+
 cat("Figures saved to figures/\n")
