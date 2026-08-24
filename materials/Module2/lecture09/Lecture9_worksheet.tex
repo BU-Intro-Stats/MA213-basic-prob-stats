@@ -1,0 +1,89 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{4}
+\newcommand{\lectureplaceholder}{9}
+\newcommand{\lecturetitle}{Deriving the Mean and SD of the Sample Mean: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} We just practiced the rules for the mean and variance of linear combinations of independent random variables. Now use those exact rules to derive one of the most important results in this course: the mean and standard deviation of the sample mean.
+
+\section*{The Setup}
+
+Let $X_1, X_2, \ldots, X_n$ be an independent sample, where $E[X_i] = \mu$ and $Var[X_i] = \sigma^2$ for every $i$. The sample mean is defined as
+\[ \bar{X} = \frac{1}{n}\left(X_1 + X_2 + \cdots + X_n\right) = \frac{1}{n}\sum_{i=1}^n X_i. \]
+
+\section*{Step 1: Think (3 mins)}
+Hint: this uses exactly the same linear combination rules from the last few slides, just with $n$ terms instead of 2 or 5. There are more hints on the next page if you get stuck.
+
+\textbf{(a)} Derive $E[\bar{X}]$.
+\vspace{0.9in}
+
+\textbf{(b)} Derive $Var[\bar{X}]$.
+\vspace{0.9in}
+
+\textbf{(c)} Use your answer to (b) to find $StdDev[\bar{X}]$.
+\vspace{0.4in}
+
+\newpage
+\section*{Hints for Step 1}
+
+\textbf{(a)} Substitute the definition of $\bar X$ into $E[\cdot]$. Since $\frac{1}{n}$ is a constant, pull it out front; since expectation is additive, split the sum into a sum of $n$ individual expectations. What is $E[X_i]$ for each of the $n$ terms?
+
+\vspace{0.2in}
+
+\textbf{(b)} Same substitution, but for variance a constant out front gets \emph{squared}: $Var(cY) = c^2\,Var(Y)$. Because the $X_i$ are independent, the variance of their sum is the sum of their variances. What is $Var[X_i]$ for each of the $n$ terms, and how many terms are there?
+
+\vspace{0.2in}
+
+\textbf{(c)} Standard deviation is just the square root of variance --- take the square root of your answer to (b).
+
+\vspace{0.2in}
+\noindent\rule{\linewidth}{0.4pt}
+\vspace{0.2in}
+
+\section*{Step 2: Pair (2 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your derivations with your partner. Then discuss:
+
+\begin{itemize}
+  \item Does $E[\bar X] = \mu$ make sense intuitively? Why should the sample mean be centered at the population mean?
+  \item As $n$ grows large, what happens to $StdDev[\bar X] = \sigma/\sqrt{n}$? What does that tell you about how much $\bar X$ varies from sample to sample?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}
