@@ -1,0 +1,72 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{10}
+\newcommand{\lectureplaceholder}{25}
+\newcommand{\lecturetitle}{Setting Up a Hypothesis Test for Paired Differences: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} 200 students from the High School and Beyond survey each took a reading and a writing test, so the two scores for a given student are \emph{not} independent --- they're paired. We've reduced the two columns to one column of differences (reading $-$ writing) per student. Before the lecture shows you the workflow, work out for yourself how you'd set up the test.
+
+\section*{The Setup}
+
+We have computed \[ \text{diff} = \text{read} - \text{write} \] for each of the 200 students, and we would like to test whether there is a difference between the average reading and writing scores.
+
+\section*{Step 1: Think (2 mins)}
+
+\textbf{(a)} What is the parameter of interest? What is the point estimate?
+\vspace{0.7in}
+
+\textbf{(b)} What are the null and alternative hypotheses for testing whether there is a difference between the average reading and writing scores?
+\vspace{0.7in}
+
+\textbf{(c)} How does this setting compare to what we've done before (e.g.\ one/two-sample tests for proportions, one-sample test for means)? In particular: how many samples of data do we actually have here?
+\vspace{0.7in}
+
+\newpage
+\section*{Step 2: Pair (2 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers with your partner. Then discuss:
+
+\begin{itemize}
+  \item Did you agree on the parameter of interest and the hypotheses? If not, what was the disagreement?
+  \item If the reading and writing scores had been collected from two \emph{different, unrelated} groups of 200 students instead, would the parameter, hypotheses, or analysis change? How?
+  \item What test statistic and reference distribution do you expect to use once you compute the standard error of the mean difference?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}
