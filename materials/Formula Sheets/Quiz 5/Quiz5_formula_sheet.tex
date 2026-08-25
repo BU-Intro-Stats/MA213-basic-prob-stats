@@ -41,30 +41,60 @@
 
 \clearpage
 
-\textbf{Simple Linear Regression}
-
-\textit{Model:}
-\[ y_i = \beta_0 + \beta_1 x_i + \epsilon_i \]
-where $\epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2)$ 
-
-Or:
-\[\hat{y} = b_0 + b_1 x\]
-
-\textit{Estimating the least squares coefficients:}
-\begin{align*}
-    b_1 &= \frac{s_{y}}{s_{x}} R \\
-    b_0 &= \bar{y} - b_1 \bar{x}
-\end{align*} 
+\textbf{Comparing Means with ANOVA}
 
 \textit{Conditions:}
 \begin{itemize}
-    \item Linearity: The relationship between $x$ and $y$ is linear
-    \item Normality: The residuals are independent and approximately normally distributed
-    \item Equal Variance: The residuals have constant variance (homoscedasticity)
+    \item Independence: Observations are independent within and between groups
+    \item Normality: Observations within each group are approximately normally distributed
+    \item Equal Variance: Variability is about equal across groups
 \end{itemize}
 
-\textit{Inference for slope $\beta_1$:}
-\[ \frac{b_1-\beta_1}{SE_{b_1}} \sim t_{df} \qquad df = n-2 \]
+\textit{ANOVA table structure:}
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{l c c c c c}
+\hline
+ & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\
+\hline
+Group & $df_G$ & SSG & MSG & $F$ & \\
+Error & $df_E$ & SSE & MSE & & \\
+\hline
+Total & $df_T$ & SST & & & \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+{\small
+\begin{align*}
+    df_T &= df_G + df_E \qquad SST = SSG + SSE \\
+    MSG &= SSG / df_G \qquad MSE = SSE / df_E \qquad F = MSG / MSE
+\end{align*}
+}
+
+where $k$ is the number of groups and $n$ is the total sample size ($df_G = k-1$, $df_E = n-k$, $df_T = n-1$).
+
+\textbf{Likelihood and Maximum Likelihood Estimation}
+
+\textit{Likelihood function (i.i.d. data):}
+\[ L(\theta) = \prod_{i=1}^n f(x_i; \theta) \]
+
+\textit{Maximum likelihood estimate:}
+\[ \hat{\theta}_{MLE} = \operatorname*{arg\,max}_\theta L(\theta) \]
+
+\textbf{Bayesian Updating}
+
+\[ \text{posterior} \propto \text{likelihood} \times \text{prior} \qquad \pi(\theta \mid x) \propto f(x \mid \theta)\,\pi(\theta) \]
+
+\textbf{Beta-Binomial Model}
+
+\begin{align*}
+    \text{Prior:} \quad & \theta \sim \text{Beta}(\alpha, \beta) \\
+    \text{Data:} \quad & X \mid \theta \sim \text{Binomial}(n, \theta) \\
+    \text{Posterior:} \quad & \theta \mid X = x \sim \text{Beta}(\alpha + x,\ \beta + n - x)
+\end{align*}
 
 \end{multicols} % End two columns
 
