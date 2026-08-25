@@ -280,157 +280,90 @@ Pick up the worksheet and find a partner.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Sampling with replacement}
+\frametitle{Sampling with vs.\ without replacement}
 
-When sampling \hl{with replacement}, you put back what you just drew.
+Imagine a bag with 5 red, 3 blue and 2 orange chips (10 total):\\
+5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$},
+so $Prob(B_1) = \frac{3}{10} = 0.3$.
 
 \pause
 
-\begin{itemize}
+Suppose the first chip drawn is blue. What is $Prob(B_2 | B_1)$?
 
-\item Imagine you have a bag with 5 red, 3 blue and 2 orange chips in it. What is the probability that the first chip you draw is blue?
+\pause
+\vspace{1mm}
+
+\twocol{0.5}{0.5}{
+\centering \textbf{With replacement} \\ {\footnotesize (chip goes back in)}
 \begin{center}
 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
 \end{center}
-
-\pause
-
-\[ Prob(B_1) = \frac{3}{5 + 3 + 2} = \frac{3}{10} = 0.3 \]
-
-\pause
-
-\item Suppose you did indeed pull a blue chip in the first draw. If drawing with replacement, what is the probability of drawing a blue chip in the second draw?
-
-\pause
-
+\[ Prob(B_2|B_1) = \frac{3}{10} = 0.3 \]
+}{
+\centering \textbf{Without replacement} \\ {\footnotesize (chip stays out)}
 \begin{center}
-$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
-
-\pause
-
-$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
+5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
 \end{center}
+\[ Prob(B_2|B_1) = \frac{2}{9} \approx 0.22 \]
+}
 
 \pause
 
-\[ Prob(B_2 | B_1) = \frac{3}{10} = 0.3 \]
-
+{\footnotesize
+\begin{itemize}
+\item With replacement, the bag never changes, so $Prob(B_2|B_1) = Prob(B_1)$: \hl{draws are independent}.
+\item Without replacement, the bag's composition changes, so $Prob(B_2|B_1) \ne Prob(B_1)$: \hl{draws are not independent}.
 \end{itemize}
+}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Sampling with replacement (cont.)}
+\frametitle{Probability of drawing two blues in a row}
 
-\begin{itemize}
-
-\item Suppose you actually pulled an orange chip in the first draw. If drawing with replacement, what is the probability of drawing a blue chip in the second draw?
+\[ Prob(B_1) \cdot Prob(B_2 | B_1) \]
 
 \pause
+\vspace{3mm}
 
-\begin{center}
-$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
-\pause
-$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
-\end{center}
-\pause
-\[ Prob(B_2 | O_1) = \frac{3}{10} = 0.3 \]
-
-\pause
-\item If drawing with replacement, what is the probability of drawing two blue chips in a row?
-\begin{center}
+\twocol{0.5}{0.5}{
+\centering \textbf{With replacement}
+\[ 0.3 \times 0.3 = 0.09 \]
+}{
+\centering \textbf{Without replacement}
+\[ 0.3 \times 0.22 = 0.066 \]
+}
 
 \pause
-$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
-$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
-\end{center}
-\pause
-\[ Prob(B_1) \cdot Prob(B_2 | B_1) = 0.3 \times 0.3 \]
-\[ = 0.3^2 = 0.09 \]
+\vspace{2mm}
 
-\end{itemize}
+The gap between the two matters most when the population is \hl{small}: removing one chip out of 10 changes the odds a lot.
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-\frametitle{Sampling with replacement (cont.)}
+\frametitle{Sampling without replacement from a large population}
 
-\begin{itemize}
+Now suppose the bag has 5000 red, 3000 blue and 2000 orange chips (same proportions, so $Prob(B_1) = 0.3$ still). Given the first chip drawn is blue:
 
-\item When drawing with replacement, probability of the second chip being blue does not depend on the color of the first chip since whatever we draw in the first draw gets put back in the bag.
-\[ Prob(B_2 | B_1) = Prob(B_2 | O_1) \]
+\vspace{2mm}
 
-\item In addition, this probability is equal to the probability of drawing a blue chip in the first draw, since the composition of the bag never changes when sampling with replacement.
-\[ Prob(B_2 | B_1) = Prob(B_1) \]
-
-\item \hl{When drawing with replacement, draws are independent.}
-
-\end{itemize}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Sampling without replacement}
-
-When drawing \hl{without replacement} you do not put back what you just drew.
-
-\begin{itemize}
+\twocol{0.5}{0.5}{
+\centering \textbf{With replacement}
+\[ Prob(B_2|B_1) = \frac{3000}{10000} = 0.3 \]
+}{
+\centering \textbf{Without replacement}
+\[ Prob(B_2|B_1) = \frac{2999}{9999} \approx 0.29997 \]
+}
 
 \pause
+\vspace{4mm}
 
-\item Suppose you pulled a blue chip in the first draw. If drawing without replacement, what is the probability of drawing a blue chip in the second draw?
-\pause
-\begin{center}
-$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
-\pause
-$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
-\end{center}
-\pause
-\[ Prob(B_2 | B_1) = \frac{2}{9} = 0.22 \]
-
-\pause
-
-\item If drawing without replacement, what is the probability of drawing two blue chips in a row?
-\begin{center}
-
-\pause
-$1^{st}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 3 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$} \\
-$2^{nd}$ draw: 5 \textcolor{red}{$\CIRCLE$}~, 2 \textcolor{blue}{$\CIRCLE$}~, 2 \textcolor{orange}{$\CIRCLE$}
-\end{center}
-\pause
-\[ Prob(B_1) \cdot Prob(B_2 | B_1)  = 0.3 \times 0.22 \]
-\[ = 0.066 \]
-
-\end{itemize}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-\frametitle{Sampling without replacement (cont.)}
-
-\begin{itemize}
-
-\item When drawing without replacement, the probability of the second chip being blue given the first was blue is not equal to the probability of drawing a blue chip in the first draw since the composition of the bag changes with the outcome of the first draw.
-\[ Prob(B_2 | B_1) \ne Prob(B_1) \]
-
-\pause
-
-\item \hl{When drawing without replacement, draws are not independent.}
-
-\pause
-
-\item This is especially important to take note of when the sample sizes are small. If we were dealing with, say, 10,000 chips in a (giant) bag, taking out one chip of any color would not have as big an impact on the probabilities in the second draw.
-
-\end{itemize}
+With a large population, removing one chip barely changes the bag, so draws without replacement are \hl{approximately independent.}
 
 \end{frame}
 
