@@ -1,0 +1,99 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{4}
+\newcommand{\lectureplaceholder}{8}
+\newcommand{\lecturetitle}{Bayes' Theorem: A Medical Test: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} We just used the Law of Total Probability and Bayes' Theorem to work out a weather-prediction example. Now apply the exact same method to a new, more consequential context: interpreting a medical test.
+
+\section*{The Setup}
+
+A medical test is given for a rare disease.
+\begin{itemize}
+  \item The disease occurs in 1\% of the population.
+  \item If a person has the disease, the test is positive 95\% of the time.
+  \item If a person does not have the disease, the test is positive 5\% of the time.
+\end{itemize}
+Suppose a randomly chosen person tests positive.
+
+\section*{Step 1: Think (2 mins)}
+Hint: this has the exact same structure as the weather-prediction example --- there are more hints on the next page if you get stuck.
+
+\textbf{(a)} Define events $A_1 = \{\text{has the disease}\}$, $A_2 = \{\text{does not have the disease}\}$, and $B = \{\text{tests positive}\}$. Write down $P(A_1)$, $P(A_2)$, $P(B \mid A_1)$, and $P(B \mid A_2)$.
+\vspace{0.6in}
+
+\textbf{(b)} Use the Law of Total Probability to compute $P(B) = P(\text{Positive})$.
+\vspace{0.6in}
+
+\textbf{(c)} Use Bayes' Theorem to compute $P(A_1 \mid B) = P(\text{Disease} \mid \text{Positive})$.
+\vspace{0.6in}
+
+\newpage
+\section*{Hints for Step 1}
+
+\textbf{(a)} Match each given percentage to one of $P(A_1)$, $P(A_2)$, $P(B\mid A_1)$, $P(B\mid A_2)$. Remember $A_2$ is the complement of $A_1$, so $P(A_2) = 1 - P(A_1)$.
+
+\vspace{0.2in}
+
+\textbf{(b)} Recall the formula from lecture:
+\[ P(B) = P(B\mid A_1)P(A_1) + P(B\mid A_2)P(A_2) \]
+Plug in the four numbers from part (a).
+
+\vspace{0.2in}
+
+\textbf{(c)} Recall Bayes' Theorem:
+\[ P(A_1 \mid B) = \frac{P(A_1)P(B\mid A_1)}{P(B)} \]
+You already computed the denominator in part (b) --- reuse it.
+
+\vspace{0.2in}
+\noindent\rule{\linewidth}{0.4pt}
+\vspace{0.2in}
+
+\section*{Step 2: Pair (2 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers with your partner. Then discuss:
+
+\begin{itemize}
+  \item Is $P(\text{Disease} \mid \text{Positive})$ higher or lower than you expected, given that the test is ``95\% accurate''?
+  \item The test has the same 95\%/5\% accuracy either way, but the disease is rare. How does the rarity of the disease affect the answer?
+  \item What would happen to $P(\text{Disease} \mid \text{Positive})$ if the disease were much more common, say 50\% of the population? (You don't need to recompute --- just reason about it.)
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

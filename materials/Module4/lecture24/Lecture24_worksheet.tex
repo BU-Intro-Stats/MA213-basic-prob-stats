@@ -1,0 +1,69 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{10}
+\newcommand{\lectureplaceholder}{24}
+\newcommand{\lecturetitle}{Applying the CLT for the Sample Mean: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} The CLT for the sample mean tells us $\bar{X} \sim N\left(\text{mean}=\mu, SE = \frac{\sigma}{\sqrt{n}}\right)$, and this holds \emph{exactly} for any $n$ when the population itself is Normal. Let's use it to build a confidence interval by hand.
+
+\section*{The Setup}
+
+You take a random sample of size $n = 10$ from a population and calculate the sample mean $\bar{X} = 49$. Assume that the population is Normal with $\sigma = 20$.
+
+\section*{Step 1: Think (2 mins)}
+
+\textbf{(a)} Using $\bar{X} \sim N\left(\text{mean}=\mu, SE = \frac{\sigma}{\sqrt{n}}\right)$, calculate a 95\% confidence interval for the population mean $\mu$.
+\vspace{1.1in}
+
+\textbf{(b)} Is the data consistent with a population mean of 60? Why or why not?
+\vspace{0.6in}
+
+\newpage
+\section*{Step 2: Pair (2 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your confidence interval and conclusion with your partner. Then discuss:
+
+\begin{itemize}
+  \item Did you both use the same critical value $z^\star$? Where does it come from?
+  \item Would your approach change if the population were \emph{not} known to be Normal, but $n$ were still only 10? What if $n$ were 100 instead?
+  \item Would your approach change if $\sigma$ were unknown instead of $\sigma = 20$?
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

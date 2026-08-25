@@ -1,0 +1,80 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{8}
+\newcommand{\lectureplaceholder}{18}
+\newcommand{\lecturetitle}{Significance Levels: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} Recall that for the Facebook data ($\hat p = 0.67$, $n=850$), we rejected $H_0: p=0.50$ because the 95\% confidence interval $(0.64, 0.70)$ didn't contain 0.50. That 95\% confidence level corresponds to using a significance level of $\alpha = 0.05$ for the equivalent hypothesis test. Now let's reason about what happens when we change $\alpha$.
+
+\section*{Step 1: Think (2 mins)}
+
+\textbf{(a)} If we instead built a 99\% confidence interval for the Facebook data, what significance level $\alpha$ would that correspond to? Would the resulting hypothesis test be \emph{stricter} (harder to reject $H_0$) or more \emph{lenient} (easier to reject $H_0$) than the $\alpha=0.05$ test?
+\vspace{0.6in}
+
+\textbf{(b)} For each statement below, comparing a hypothesis test with significance level $\alpha = 0.05$ to one with $\alpha = 0.01$, decide \textbf{True} or \textbf{False} and briefly explain why.
+
+\begin{enumerate}[label=(\roman*)]
+  \item $\alpha = 0.05$ will tend to reject the null hypothesis more often than $\alpha = 0.01$. \hfill \textbf{T / F}
+  \vspace{0.3in}
+
+  \item $\alpha = 0.05$ will tend to make more Type 1 errors (rejecting $H_0$ when it is actually true) than $\alpha = 0.01$. \hfill \textbf{T / F}
+  \vspace{0.3in}
+
+  \item $\alpha = 0.05$ will tend to make fewer Type 2 errors (failing to reject $H_0$ when it is actually false) than $\alpha = 0.01$. \hfill \textbf{T / F}
+  \vspace{0.3in}
+
+  \item If the null hypothesis is actually false, both $\alpha = 0.05$ and $\alpha = 0.01$ will reject it. \hfill \textbf{T / F}
+  \vspace{0.3in}
+
+  \item If the null hypothesis is actually true, both $\alpha = 0.05$ and $\alpha = 0.01$ will fail to reject it. \hfill \textbf{T / F}
+  \vspace{0.3in}
+\end{enumerate}
+
+\newpage
+\section*{Step 2: Pair (2 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answers with your partner. Then discuss:
+
+\begin{itemize}
+  \item Using the trial analogy ($H_0$: defendant is innocent, $H_A$: defendant is guilty), if you tighten $\alpha$ from 0.05 to 0.01, are you more likely to wrongly convict an innocent defendant, or more likely to let a guilty defendant go free?
+  \item Would switching to a 99\% confidence interval change our conclusion for the Facebook data (still reject $H_0: p=0.50$)? You don't need to recompute the interval --- reason about how far 0.67 is from 0.50 compared to the margin of error.
+\end{itemize}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}

@@ -1,0 +1,62 @@
+\documentclass{article}
+
+% ============================================================
+% MA 213 In-Class Worksheet Template
+% Student-facing worksheet for lecture activities.
+% ============================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\newcommand{\coursenumber}{MA 213}
+\newcommand{\weekplaceholder}{5}
+\newcommand{\lectureplaceholder}{12}
+\newcommand{\lecturetitle}{Using the Geometric Distribution: Think/Pair/Share}
+
+\newcommand{\nameblank}{\rule{1.75in}{0.4pt}}
+\newcommand{\idblank}{\rule{1.55in}{0.4pt}}
+\newcommand{\shortblank}{\rule{1in}{0.4pt}}
+\newcommand{\longblank}{\rule{0.93\linewidth}{0.4pt}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \coursenumber{} Week \weekplaceholder{}: Lecture \lectureplaceholder{}}\\
+  {\large \lecturetitle{}}
+\end{center}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em]
+  \item \textbf{Your name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+\textbf{Big idea:} $X \sim \text{Geometric}(p)$ gives the trial number of the \emph{first} success in a sequence of independent trials, with $Pr(X=n) = (1-p)^{n-1}p$. Practice setting this up in a new context, then apply it back to the Milgram experiment from earlier in this lecture.
+
+\section*{Step 1: Think (2 mins)}
+
+\textbf{(a)} A website randomly displays one of 30 different motivational quotes each time you visit. Only one of these quotes is by Maya Angelou. You refresh the page repeatedly, each time seeing a randomly selected quote. What is the probability that the first Maya Angelou quote appears on your 5th refresh? Give your answer as a formula in terms of powers and fractions.
+\vspace{1.6in}
+
+\newpage
+\section*{Step 2: Pair (2 mins)}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=.7em, start=2]
+  \item \textbf{Partner's name:} \nameblank \hfill \textbf{BU ID:} \idblank
+\end{enumerate}
+
+Compare your answer to (a) with your partner, then work through this together.
+
+\textbf{(b)} Recall that in the Milgram experiment, about 65\% of participants obeyed the experimenter and administered the shock, so about 35\% refused. Suppose Milgram tests participants one at a time, and (based on this historical rate) each participant independently has a 35\% chance of being the first to refuse. What is the probability that the first refusal happens on the 3rd participant tested? Set up $X$ and compute $Pr(X=3)$.
+\vspace{0.7in}
+
+\textbf{(c)} What assumptions does modeling this with a Geometric distribution require (think about the conditions for a sequence of Bernoulli trials)? Are these assumptions realistic for real human participants tested one after another?
+\vspace{0.5in}
+
+\textbf{Our thoughts:}
+\vfill
+
+\end{document}
