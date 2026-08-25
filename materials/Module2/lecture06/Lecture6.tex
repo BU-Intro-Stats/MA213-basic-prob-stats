@@ -239,6 +239,53 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
+\frametitle{Union (or) and Intersection (and)}
+
+\begin{columns}
+	\column{0.48\textwidth}
+		\textbf{Union (or):} $A \cup B$\\
+	$A$ or $B$ or both\\
+	$P(A~or~B) \equiv P(A \cup B)$\\
+	\vspace{2mm}
+	\begin{center}
+		\begin{tikzpicture}
+       		\draw[thick] (-1.2,-1.2) rectangle (2.4,1.2);
+			\path[fill=orange!40, opacity=0.7]
+				(0,0) circle(0.8)
+				-- ++(1.2,0) circle(0.8);
+			\draw[thick] (0,0) circle(0.8);
+			\draw[thick] (1.2,0) circle(0.8);
+			\node at (0,0) {$A$};
+			\node at (1.2,0) {$B$};
+		\end{tikzpicture}
+	\end{center}
+
+	\column{0.48\textwidth}
+		\textbf{Intersection (and):} $A \cap B$\\
+	$A$ and $B$\\
+	$P(A~and~B) \equiv P(A \cap B)  \equiv P(A,B)$\\
+	\vspace{2mm}
+	\begin{center}
+		\begin{tikzpicture}
+       		\draw[thick] (-1.2,-1.2) rectangle (2.4,1.2);
+			\draw[thick] (0,0) circle(0.8);
+			\draw[thick] (1.2,0) circle(0.8);
+			% Fill intersection only
+			\begin{scope}
+			  \clip (0,0) circle(0.8);
+			  \fill[blue!40,opacity=0.7] (1.2,0) circle(0.8);
+			\end{scope}
+			\node at (0,0) {$A$};
+			\node at (1.2,0) {$B$};
+		\end{tikzpicture}
+	\end{center}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
 \frametitle{Union of non-disjoint events}
 
 \dq{What is the probability of drawing a jack or a red card from a well shuffled full deck?}
@@ -307,7 +354,8 @@ P(jack~or~red) &= P(jack) + P(red) - \orange{$P(jack~and~red)$} \\
 \begin{frame}
 \frametitle{Recap}
 
-\formula{General addition rule}{\[ P(A~or~B) = P(A) + P(B) - P(A~and~B) \]}
+\formula{General addition rule}{\[ P(A~or~B) = P(A) + P(B) - P(A~and~B) \]
+\[ P(A \cup B) = P(A) + P(B) - P(A \cap B) \]}
 
 \Note{For disjoint events $P(A~and~B) = 0$, so the above formula simplifies to $P(A~or~B) = P(A) + P(B)$.}
 
@@ -385,6 +433,60 @@ Probability	& 0.25	& 0.25	& 0.25	& 0.25 \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Complement of an event}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Disjoint and Complementary outcomes}
+
+\begin{columns}
+	\column{0.48\textwidth}
+	\textbf{$A$ and $B$ are Disjoint} \\
+	Events $A$ and $B$ cannot both happen \\
+	$P(A~and~B) = 0$
+	\vspace{1em}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Disjoint sets (left)
+			\begin{scope}
+			% Draw sample space box
+			\draw[thick] (-1.5,-1.2) rectangle (3.7,1.2);
+			\draw[thick] (0,0) circle (1);
+			\node at (0,0) {A};
+			\draw[thick] (2.2,0) circle (1);
+			\node at (2.2,0) {B};
+			\node at (1.1,-1.7) {\textbf{Disjoint}};
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+
+
+	\column{0.48\textwidth}
+	\textbf{$A$ and $A^c$ are Complementary} \\
+	$A$ and $A^c$ are disjoint and cover the entire sample space \\
+	$P(A)+P(A^c)=1$ \\
+	$A^c \equiv$ ``not A'' \\
+	\vspace{1em}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			% Complement (right): One event A, shade A^c
+			% Draw sample space box
+			\draw[thick] (-1.5,-1.2) rectangle (3,1.2);
+			% Shade A complement (everything outside A)
+			\begin{scope}
+			\clip (-1.5,-1.2) rectangle (3,1.2);
+			\fill[gray!40, opacity=0.7] (-1.5,-1.2) rectangle (3,1.2);
+			\fill[white] (0.75,0) circle (1);
+			\end{scope}
+			\node at (2.2,0.8) {$A^c$};
+			% Draw circle for A
+			\draw[thick] (0.75,0) circle (1);
+			\node at (0.75,0) {A};
+			\node at (.75,-1.7) {\textbf{Complementary}};
+		\end{tikzpicture}
+	\end{center}
+\end{columns}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
