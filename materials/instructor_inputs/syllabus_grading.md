@@ -37,5 +37,5 @@ Coursework includes Edfinity homework, lecture attendance, quizzes, skills labs,
 - Grades between letter grades are determined by how close a student is to the next letter grade.
 - One unsatisfactory project lowers the course grade by one-third of a letter grade, such as B to B-.
 - Two unsatisfactory project grades lower the course grade by two-thirds of a letter grade, such as B to C+.
-- Lectures/Disscussion missed with permission are not counted as missed. To request permission, contact the lecture instructor in advance with the reason for the absence and complete any required form.
-- Labs missed with permission are not counted as missed. To request permission, contact the lelabcture instructor in advance with the reason for the absence and complete any required form.
+- Lectures/Discussion missed with permission are not counted as missed. To request permission, contact the lecture instructor in advance with the reason for the absence and complete any required form.
+- Labs missed with permission are not counted as missed. To request permission, contact the lab instructor in advance with the reason for the absence and complete any required form.

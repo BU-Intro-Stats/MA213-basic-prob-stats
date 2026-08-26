@@ -213,7 +213,11 @@ def markdown_to_latex(
                 list_kind = wanted_kind
                 output.append(r"\begin{samepage}")
                 output.append(rf"\begin{{{list_kind}}}")
-            output.append(r"\item " + inline_latex(item.group(1)))
+            label = ""
+            if wanted_kind == "enumerate":
+                number = re.match(r"^\s*(\d+)\.", raw).group(1)
+                label = rf"[{number}.]"
+            output.append(r"\item" + label + " " + inline_latex(item.group(1)))
             index += 1
             continue
 
@@ -429,9 +433,9 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 r"\scriptsize",
                 r"\setlength{\tabcolsep}{2pt}",
                 r"\renewcommand{\arraystretch}{1.1}",
-                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|p{0.08\textwidth}|}",
+                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|}",
                 r"\hline",
-                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} & \textbf{Other} \\",
+                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} \\",
                 r"\hline",
             )
         )
@@ -464,7 +468,6 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 deliverables,
                 homework.get(row["Week"], ""),
                 quizzes.get(row["Week"], ""),
-                row.get("Additional Events", ""),
             )
             output.append(" & ".join(inline_latex(cell) for cell in cells) + r" \\")
             output.append(r"\hline")
@@ -518,9 +521,6 @@ def build_document() -> str:
             {"Course Materials": course_materials_latex(INPUTS / "syllabus_course.md")},
         ),
         markdown_to_latex(INPUTS / "syllabus_grading.md"),
-        markdown_to_latex(INPUTS / "syllabus_assessments.md"),
-        markdown_to_latex(INPUTS / "syllabus_lab.md"),
-        markdown_to_latex(INPUTS / "syllabus_policies.md"),
         r"\section*{Learning Objectives}",
         (
             f"The current learning-objective file contains "
@@ -528,6 +528,9 @@ def build_document() -> str:
             f"{auxiliary_count} Auxiliary-tagged entries. Detailed objectives are "
             "published on the course website and assessed through the quizzes, labs, and projects."
         ),
+        markdown_to_latex(INPUTS / "syllabus_assessments.md"),
+        markdown_to_latex(INPUTS / "syllabus_lab.md"),
+        markdown_to_latex(INPUTS / "syllabus_policies.md"),
         r"\section*{Weekly Plan (Subject to Change)}",
         schedule_latex(WEEKLY_SCHEDULE, semester_start_date(INPUTS / "important_dates.md")),
     )
@@ -553,7 +556,7 @@ def build_document() -> str:
 \renewcommand\section{\@startsection{section}{1}{0pt}%
   {-1.5ex plus -.4ex minus -.2ex}%
   {.5ex plus .2ex}%
-  {\normalfont\large\bfseries}}
+  {\normalfont\Large\bfseries}}
 \makeatother
 \begin{document}
 """
