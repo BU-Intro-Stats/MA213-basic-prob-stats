@@ -11,17 +11,15 @@ Each row creates one homework due event. Delete rows for weeks with no homework.
 
 | Homework | Week | Weekday | End Time | Details |
 | --- | --- | --- | --- | --- |
-| Homework 1 | 1 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 2 | 2 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 3 | 3 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 4 | 4 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 5 | 5 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 6 | 6 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 7 | 7 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 8 | 8 | Friday | 3:00PM | Weekly homework component. |
-| Homework 9 | 9 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 10 | 10 | Thursday | 3:00PM | Weekly homework component. |
-| Homework 11 | 11 | Tuesday | 3:00PM | Weekly homework component. |
-| Homework 12 | 12 | Thursday | 3:00PM | Weekly homework component. |
-| Homework 13 | 13 | Thursday | 3:00PM | Weekly homework component. |
-| Homework 14 | 14 | Thursday | 3:00PM | Weekly homework component. |
+| Homework 1 | 2 | Monday | 3:00PM | Weekly homework component. |
+| Homework 2 | 3 | Monday | 3:00PM | Weekly homework component. |
+| Homework 3 | 4 | Monday | 3:00PM | Weekly homework component. |
+| Homework 4 | 5 | Monday | 3:00PM | Weekly homework component. |
+| Homework 5 | 6 | Monday | 3:00PM | Weekly homework component. |
+| Homework 6 | 7 | Monday | 3:00PM | Weekly homework component. |
+| Homework 7 | 8 | Monday | 3:00PM | Weekly homework component. |
+| Homework 8 | 9 | Monday | 3:00PM | Weekly homework component. |
+| Homework 9 | 10 | Monday | 3:00PM | Weekly homework component. |
+| Homework 10 | 11 | Monday | 3:00PM | Weekly homework component. |
+| Homework 11 | 12 | Monday | 3:00PM | Weekly homework component. |
+| Homework 12 | 14 | Monday | 3:00PM | Weekly homework component. |

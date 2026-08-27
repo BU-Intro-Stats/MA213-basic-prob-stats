@@ -433,7 +433,7 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 r"\scriptsize",
                 r"\setlength{\tabcolsep}{2pt}",
                 r"\renewcommand{\arraystretch}{1.1}",
-                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|}",
+                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|p{0.27\textwidth}|p{0.08\textwidth}|p{0.16\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|}",
                 r"\hline",
                 r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} \\",
                 r"\hline",
@@ -456,14 +456,23 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 if lectures.get(number, {}).get("module")
             ))
             labs = row.get("Labs", "")
-            deliverables = ", ".join(dict.fromkeys(
-                re.findall(r"Tutorial\s+\d+", row.get("Lab Deliverables", ""), flags=re.IGNORECASE)
-            ))
+            # The weekly schedule contains the complete deliverable list. Keep
+            # every item in the syllabus, but hide weekday tags that are only
+            # used by the calendar generator (for example, [Thursday]).
+            deliverables = re.sub(r"\[[^\]]+\]\s*", "", row.get("Lab Deliverables", ""))
+            deliverables = re.sub(r"\bLab\s+\d+:\s*", "", deliverables)
+            deliverables = deliverables.replace(" | ", "; ")
+            lecture_topics = re.sub(
+                r"\bQuiz\s+\d+:\s*[^;]*(?:;\s*|$)",
+                "",
+                row.get("Lecture Topics", ""),
+                flags=re.IGNORECASE,
+            )
             cells = (
                 f"{week_number} ({week_date.month}/{week_date.day})",
                 "; ".join(reading_values),
                 "; ".join(module_values),
-                re.sub(r"\s*\(Chapters?\s+[^)]*\)", "", row.get("Lecture Topics", ""), flags=re.IGNORECASE),
+                re.sub(r"\s*\(Chapters?\s+[^)]*\)", "", lecture_topics, flags=re.IGNORECASE),
                 labs,
                 deliverables,
                 homework.get(row["Week"], ""),

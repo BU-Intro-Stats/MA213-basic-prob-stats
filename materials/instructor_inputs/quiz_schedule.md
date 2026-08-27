@@ -15,8 +15,8 @@ lecture.
 
 | Quiz | After Lecture | Status | Notes |
 | --- | --- | --- | --- |
-| Quiz 1 | Lecture 8 | confirmed |  |
-| Quiz 2 | Lecture 16 | in the lecture time |  |
-| Quiz 3 | Lecture 24 | tentative |  |
-| Quiz 4 | Lecture 32 | tentative |  |
+| Quiz 1 | Lecture 7 | confirmed |  |
+| Quiz 2 | Lecture 15 | in the lecture time |  |
+| Quiz 3 | Lecture 23 | tentative |  |
+| Quiz 4 | Lecture 31 | tentative |  |
 | Quiz 5 | Lecture 35 | tentative |  |

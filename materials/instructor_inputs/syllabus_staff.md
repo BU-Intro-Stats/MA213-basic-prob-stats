@@ -12,8 +12,8 @@ Instructor notes:
 
 | Role | Name | Email | Office | Office Hours | Link or Notes |
 | --- | --- | --- | --- | --- | --- |
-| Lecture Instructor | Dr. Yongho Lim | ylim2@bu.edu | CCDS 408 | Thursday 12:00PM-2:00PM |  |
-| Lab Instructor | Dr. Emily Stephen | estephen@bu.edu | CCDS 437 | Monday 12:15PM-1:30PM; Thursday 9:00AM-10:00AM |  |
+| Lecture Instructor | Dr. Yongho Lim | ylim2@bu.edu | CCDS 408 | Monday 2:00PM-3:30PM; Thursday 1:00PM-2:00PM |  |
+| Lab Instructor | Dr. Emily Stephen | estephen@bu.edu | CCDS 437 | Monday 12:15PM-1:30PM; Thursday 2:00PM-3:00PM |  |
 | Teaching Fellow | John Doe | johndoe@bu.edu | CCDS 000 | Friday 2:30PM-4:30PM |  |
 | Teaching Fellow | Jane Doe | janedoe@bu.edu | CCDS 000 | Tuesday 12:30PM-2:30PM |  |
 | Teaching Fellow | James Doe | jamesdoe@bu.edu | CCDS 000 | Wednesday 3:00PM-5:00PM | Add Zoom link. |

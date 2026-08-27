@@ -18,7 +18,10 @@ Edit this table when the recurring course meeting days change.
 | Discussion B4 | Wednesday | 8:00AM | 8:50AM |
 | Discussion B5 | Wednesday | 9:05AM | 9:55AM |
 | Discussion B6 | Wednesday | 10:10AM | 11:00AM |
-| Office Hour 1 | Friday | 3:00PM | 4:00PM |
-| Office Hour 2 | Monday | 4:00PM | 5:00PM |
+| Office Hour Emily | Thursday | 2:00PM | 3:00PM |
+| Office Hour Emily | Monday | 12:15PM | 1:30PM |
+| Office Hour Yongho | Monday | 2:00PM | 3:30PM |
+| Office Hour Yongho | Thursday | 1:00PM | 2:00PM |
+
 
 ---

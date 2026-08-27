@@ -3,7 +3,7 @@
 <!--
 Instructor notes:
 - Calendar: each Lab/Project heading becomes a compact calendar event. Lecture Anchor appears as metadata; Purpose, Primary Objectives, activities, Deliverables, and prerequisite flags are not shown on the lab meeting event.
-- Calendar due events: Deliverables create separate "Deliverables Due" calendar events on the day set in Lab_schedules.md.
+- Calendar due events: Deliverables create separate "Deliverables Due" calendar events on the tagged weekday, such as `[Thursday] Tutorial 2`. Untagged deliverables use the day set in Lab_schedules.md.
 - Weekly schedule: Lab/Project headings fill the "Labs" column. Deliverables fill the "Lab Deliverables" column.
 - Primary Objectives: used for fallback prerequisite matching when learningObjectives.md tags are missing; they are not displayed directly in the weekly schedule or calendar.
 -->
@@ -27,10 +27,8 @@ This version preserves the original course sequence so that the lab flow stays f
   - Install and verify R and RStudio
   - Complete Tutorial 0 and submit the hash code to Blackboard
   - Import a data set with `read.csv()` and compute a simple column summary
-- **Post-Lab Activity:**
-  - Lab1 in-lab activity submission
+
 - **Deliverables:**
-  - Tutorial 0 hash code submitted to Blackboard
 
 ---
 
@@ -49,14 +47,10 @@ This version preserves the original course sequence so that the lab flow stays f
   - Decide whether variables are categorical or numerical
   - Use `filter()`, `mutate()`, and `summarize()`
   - Write interpretations in context
-- **Post-Lab Activity:**
-  - Submit a short analysis summary with tables and written conclusions
-  - Lab2 in-lab activity submission
-  - Lab2 GradeScope
+
 - **Deliverables:**
-  - Lab1 in-lab activity submission
-  - Tutorial 1
-  - Tutorial 2 (pre-lab for lab2)
+  - [Friday] Lab2 in-lab activity submission
+  - [Thursday] Tutorial 2
 
 ---
 
@@ -76,11 +70,10 @@ This version preserves the original course sequence so that the lab flow stays f
   - Use `filter()`, `mutate()`, and `summarize()`
   - Create appropriate plots for the variable type
   - Write interpretations in context
-- **Post-Lab Activity:**
-  - Lab3 in-lab activity submission
+
 - **Deliverables:**
-  - Lab2 in-lab activity submission
-  - Tutorial 3 (pre-lab for lab3)
+  - [Friday] Lab3 in-lab activity submission
+  - [Thursday] Tutorial 3
 
 ---
 
@@ -93,7 +86,7 @@ This version preserves the original course sequence so that the lab flow stays f
 - **In-Lab Activity:**
 - **Post-Lab Activity:**
 - **Deliverables:**
-  - Lab3 in-lab activity submission
+  - Project 1 plan
 
 ---
 
@@ -112,11 +105,11 @@ This version preserves the original course sequence so that the lab flow stays f
   - Compute probabilities using diagrams, tables, and formulas
   - Compare theoretical and simulated probabilities
   - Explore whether outcomes are equally likely or not
-- **Post-Lab Activity:**
-  - Submit a worksheet with probabilities and interpretation
+
 - **Deliverables:**
   - Project 1 Outline
-  - Tutorial 4 (pre-lab for lab4)
+  - [Friday] Lab4 in-lab activity submission
+  - [Thursday] Tutorial 4
 
 ---
 
@@ -134,11 +127,10 @@ This version preserves the original course sequence so that the lab flow stays f
   - Compute expected value and variance from a distribution
   - Compare different probability models
   - Use R to examine normality and unusual observations
-- **Post-Lab Activity:**
-  - Submit a short interpretation of the model choices and results
+
 - **Deliverables:**
-  - Lab4 in-lab activity submission
-  - Tutorial 5 (pre-lab for lab5)
+  - [Friday] Lab5 in-lab activity submission
+  - [Thursday] Tutorial 5
 
 ---
 
@@ -151,7 +143,6 @@ This version preserves the original course sequence so that the lab flow stays f
 - **In-Lab Activity:**
 - **Post-Lab Activity:**
 - **Deliverables:**
-  - Lab5 in-lab activity submission
 
 ---
 
@@ -184,11 +175,9 @@ This version preserves the original course sequence so that the lab flow stays f
   - Check conditions in R
   - Compute intervals, p-values, and effect sizes
   - Interpret results in context
-- **Post-Lab Activity:**
-  - Submit a graded inference worksheet
 - **Deliverables:**
-  - Lab6 in-lab activity submission
-  - Tutorial 6 (pre-lab for lab6)
+  - [Friday] Lab6 in-lab activity submission
+  - [Thursday] Tutorial 6
   - Project2 Outline
 
 ---
@@ -202,7 +191,6 @@ This version preserves the original course sequence so that the lab flow stays f
 - **In-Lab Activity:**
 - **Post-Lab Activity:**
 - **Deliverables:**
-  - Lab6 in-lab activity submission
 
 ---
 
@@ -230,11 +218,10 @@ This version preserves the original course sequence so that the lab flow stays f
 - **In-Lab Activity:**
   - Option A: fit a linear model and interpret slope, residuals, and fit
   - Option B: use a Bayesian update framework to compare prior and posterior thinking
-- **Post-Lab Activity:**
-  - Submit a brief interpretation of the chosen modeling approach
 - **Deliverables:**
   - Project2 writeup
-  - Tutorial 7 (pre-lab for lab7)
+  - [Friday] Lab7 in-lab activity submission
+  - [Thursday] Tutorial 7
 
 ---
 

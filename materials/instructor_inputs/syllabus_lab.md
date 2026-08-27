@@ -2,9 +2,7 @@
 
 ## Skills Labs
 
-Lab sections provide opportunities to work in groups, solve problems in probability and data analysis, and use R with RStudio.
-
-Skills labs are evaluated based on submission of the in-lab worksheet and completion of the interactive tutorial. One submission covers both the tutorial hash code and the worksheet for that lab. Lab topics and deliverables are generated from `lab_summary.md` and `Lab_schedules.md`.
+The lab sections provide you the opportunity to work in groups to solve problems in probability theory and data analysis and learn to use the statistical programming language R using the RStudio software. About half of the labs will be “skills labs” and the other half will be dedicated to the lab projects (see below). During skills labs, you will have the chance to apply practical statistical concepts and deepen your understanding through hands-on work with R. Skills labs are evaluated based on submission of the in-lab worksheet and completion of the interactive tutorial. One completion of skills lab means submission of both the tutorial hash code and the worksheet for that lab.
 
 ## Lab Projects
 
