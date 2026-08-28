@@ -483,7 +483,7 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 r"\scriptsize",
                 r"\setlength{\tabcolsep}{2pt}",
                 r"\renewcommand{\arraystretch}{1.1}",
-                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|p{0.27\textwidth}|p{0.08\textwidth}|p{0.16\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|}",
+                r"\begin{tabular}{|p{0.10\textwidth}|p{0.10\textwidth}|p{0.06\textwidth}|p{0.23\textwidth}|p{0.07\textwidth}|p{0.14\textwidth}|p{0.08\textwidth}|p{0.08\textwidth}|}",
                 r"\hline",
                 r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} \\",
                 r"\hline",
@@ -491,7 +491,13 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
         )
         for row in chunk:
             week_number = int(row.get("Week", "0"))
-            week_date = first_week_date + timedelta(days=7 * (week_number - 1))
+            # The semester begins on Wednesday, so keep Week 1 on that date.
+            # Every subsequent syllabus week is labeled by its Monday.
+            week_date = (
+                first_week_date
+                if week_number == 1
+                else first_week_date + timedelta(days=5 + 7 * (week_number - 2))
+            )
             lecture_numbers = [
                 int(number) for number in re.findall(r"Lecture\s+(\d+)", row.get("Lecture #", ""))
             ]
@@ -517,8 +523,22 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 for number in lecture_numbers
                 if lectures.get(number, {}).get("topic")
             ))
+            week_label = (
+                rf"\parbox[t]{{0.09\textwidth}}{{\centering "
+                rf"{week_number} ({week_date.month}/{week_date.day})}}"
+            )
+            schedule_notes = {
+                7: r"Tues is\\Mon schedule",
+                13: r"No classes\\Wed-Fri",
+            }
+            if week_number in schedule_notes:
+                week_label = (
+                    rf"\parbox[t]{{0.09\textwidth}}{{\centering "
+                    rf"{week_number} ({week_date.month}/{week_date.day})"
+                    rf"\\\scriptsize {schedule_notes[week_number]}}}"
+                )
             cells = (
-                f"{week_number} ({week_date.month}/{week_date.day})",
+                week_label,
                 "; ".join(reading_values),
                 "; ".join(module_values),
                 lecture_topics,
@@ -527,9 +547,12 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 homework.get(row["Week"], ""),
                 quizzes.get(row["Week"], ""),
             )
-            output.append(" & ".join(inline_latex(cell) for cell in cells) + r" \\")
+            output.append(" & ".join(
+                cell if cell.startswith(r"\parbox") else inline_latex(cell)
+                for cell in cells
+            ) + r" \\")
             output.append(r"\hline")
-        output.extend((r"\end{tabularx}", r"\end{center}"))
+        output.extend((r"\end{tabular}", r"\end{center}"))
     return "\n".join(output)
 
 
