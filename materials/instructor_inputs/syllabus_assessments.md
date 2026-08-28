@@ -9,12 +9,11 @@ Instructor notes:
 
 ## Homework
 
-Homework problem sets are assigned through Edfinity. The interface indicates when an answer is incorrect and provides another opportunity to submit a correct answer. Students must earn more than 80% to pass the homework.
-Due dates and times are listed on the course calendar.
+Homework problem sets will be assigned in Edfinity each week and due the following Monday at 3pm. The interface will tell you immediately if your answer is incorrect, and you will have another chance to submit a correct answer. 
 
 ## Quizzes
 
-Course material is divided into learning objectives described in `learningObjectives.md`. Quizzes occur during discussion sections according to `quiz_schedule.md`. Each objective on an original quiz is evaluated using the following labels:
+The course material is divided into a set of Learning Objectives, described in the Learning Objectives document on the course website. There are 19 Core objectives and 11 Auxiliary objectives that will be assessed via 5 quizzes that occur during lecture time. Note that Quiz 5 is entirely Auxiliary objectives. On any given quiz, each objective will be graded Pass/Almost Pass/Not Yet. 
 
 | Result | Meaning | Next Step |
 | --- | --- | --- |

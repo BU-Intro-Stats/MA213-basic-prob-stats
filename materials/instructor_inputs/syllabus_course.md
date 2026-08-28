@@ -16,7 +16,7 @@ Instructor notes:
 | Institution | Boston University |
 | Learning Management System | Blackboard |
 | Lecture Location | PHO 206 |
-| Discussion and Lab Locations | Check your student schedule. |
+| Discussion and Lab Locations | Check your schedule. |
 
 ## Course Description
 
@@ -26,8 +26,8 @@ This course serves as an introduction to basic concepts and tools in probability
 
 | Item | Required | Details | URL |
 | --- | --- | --- | --- |
-| OpenIntro Statistics, 4th Edition | Yes | Open-source textbook by Cetinkaya-Rundel, Diez, and Barr. A PDF is available at no cost; optional print copies are available from the publisher. | https://www.openintro.org/book/os/ |
-| Edfinity | Yes | Used for in-class activities and weekly auto-graded homework. The Fall 2025 reference price was $40 with OfficeHours; confirm the current price. |  |
+| TEXTBOOK: OpenIntro Statistics, 4th Edition | Yes | Open-source textbook by Cetinkaya-Rundel, Diez, and Barr. A PDF is available at no cost; optional print copies are available from the publisher. | https://www.openintro.org/book/os/ |
+| Edfinity | Yes | Used for in-class activities and weekly auto-graded homework. The Fall 2026 reference price was $40 with OfficeHours; confirm the current price. |  |
 | Laptop, phone, or similar device | Yes | Bring a device to lectures to participate in in-class activities. |  |
 | R and RStudio | Yes | Used during skills labs for statistical programming and data analysis. | https://posit.co/download/rstudio-desktop/ |
 | Gradescope | Yes | Used to submit lab deliverables and revisions. |  |
@@ -36,6 +36,6 @@ This course serves as an introduction to basic concepts and tools in probability
 
 1. Use a current version of Google Chrome or Firefox on a Windows or Mac computer. Other browsers or devices may cause issues when Edfinity is accessed through Blackboard.
 2. If you already have an Edfinity account, sign out of Edfinity before beginning enrollment.
-3. Log in to Blackboard.
+3. Log in to Blackboard (learn.bu.edu).
 4. Open the Edfinity link for this course in Blackboard.
 5. Follow the prompts to enroll and pay the course fee.
