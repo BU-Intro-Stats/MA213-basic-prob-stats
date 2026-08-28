@@ -9,9 +9,9 @@ Instructor notes:
 
 ## Generative AI
 
-Generative artificial intelligence tools create text, images, computer code, audio, video, and other content. A complete course policy should describe acceptable uses, unauthorized uses, and documentation requirements for each assignment type.
+Generative artificial intelligence tools create text, images, computer code, audio, video, and other content.
 
-No generative AI use is allowed for quizzes. Any authorized use of generative AI must be appropriately documented. The purpose of this policy is to allow students to use AI to enhance learning while limiting uses that provide an unfair advantage or detract from student learning.
+No generative AI use is allowed for quizzes. For assignments where generative AI use is explicitly authorized, that use must be appropriately documented. The purpose of this policy is to allow students to use AI to enhance learning while limiting uses that provide an unfair advantage or detract from student learning.
 
 Use of generative AI in ways that have not been explicitly authorized may be addressed under the Boston University Academic Conduct Code. Students who are unsure whether a use is authorized should ask an instructor in advance. Students remain responsible for avoiding plagiarism, fabricated information, and fabricated data.
 
@@ -23,7 +23,7 @@ Boston University attendance policy: https://www.bu.edu/academics/policies/atten
 
 ## Recording
 
-Lectures may be recorded and shared with students who miss class for a valid reason.
+Lectures are recorded and shared with students who miss class for a valid reason. Every effort will be made to record lectures; however, technical difficulties may occasionally prevent a recording.
 
 ## Academic Conduct
 

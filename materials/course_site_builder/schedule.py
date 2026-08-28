@@ -524,10 +524,22 @@ def scheduled_weekday_date(
     suspended_dates: set[date],
     clamp_to_term_start: bool = True,
     shift_suspended: bool = True,
-) -> date:
+    substitute_dates: set[date] | None = None,
+) -> date | None:
     candidate = week_start_for_week(term_start, week) + timedelta(days=weekday)
     if clamp_to_term_start and candidate < term_start:
         candidate = term_start
+
+    # A substitute schedule moves the suspended day's recurring events to the
+    # explicitly listed substitute date, while removing events from the date's
+    # normal weekday schedule.
+    substitute_dates = substitute_dates or set()
+    if candidate in substitute_dates:
+        return None
+    if candidate in suspended_dates:
+        replacement = candidate + timedelta(days=1)
+        if replacement in substitute_dates:
+            return replacement
     while shift_suspended and candidate in suspended_dates:
         candidate += timedelta(days=1)
     return candidate
@@ -711,12 +723,16 @@ def annotate_prerequisite_flags(
 
     term_start, _ = term_bounds(important_dates, default_year)
     suspended = class_suspended_dates(important_dates)
+    substitutes = substitute_meeting_dates(important_dates)
     lab_weekday = meeting_patterns["lab"][0]
     for lab in lab_rows:
         if lab["week"] is not None:
-            lab_date = scheduled_weekday_date(term_start, lab["week"], lab_weekday, suspended)
+            lab_date = scheduled_weekday_date(
+                term_start, lab["week"], lab_weekday, suspended, substitute_dates=substitutes
+            )
             lab["date"] = lab_date
-            lab.setdefault("flags", []).extend(nearby_important_dates(lab_date, important_dates))
+            if lab_date is not None:
+                lab.setdefault("flags", []).extend(nearby_important_dates(lab_date, important_dates))
         tag = lab_prerequisite_tag(lab["title"])
         prerequisite_codes = list(objectives_by_tag.get(tag, []))
         if not prerequisite_codes and lab.get("objective_list"):
@@ -969,6 +985,22 @@ def parse_lab_field_line(line: str):
     return "", ""
 
 
+def parse_deliverable(text: str):
+    """Parse an optional weekday tag from a lab deliverable.
+
+    Deliverables without a tag inherit the default weekday from
+    Lab_schedules.md.
+    """
+    match = re.match(r"^\[([^\]]+)\]\s*(.*)$", text)
+    if not match:
+        return {"text": text, "weekday": None}
+
+    weekdays = parse_weekday_list(match.group(1))
+    if not weekdays or not match.group(2).strip():
+        return {"text": text, "weekday": None}
+    return {"text": clean_text(match.group(2)), "weekday": weekdays[0]}
+
+
 def parse_lab_summary(path: Path):
     text = path.read_text(encoding="utf-8")
     sections = {}
@@ -1021,6 +1053,7 @@ def parse_lab_summary(path: Path):
         if not fields["purpose"] and purpose_lines:
             fields["purpose"] = " ".join(purpose_lines)
 
+        deliverable_items = [parse_deliverable(item) for item in fields["deliverables"]]
         row = {
             "heading": heading,
             "title": title,
@@ -1029,7 +1062,8 @@ def parse_lab_summary(path: Path):
             "week": None,
             "objectives": " | ".join(fields["objectives"]),
             "objective_list": fields["objectives"],
-            "deliverables": " | ".join(fields["deliverables"]),
+            "deliverables": " | ".join(item["text"] for item in deliverable_items),
+            "deliverable_items": deliverable_items,
             "flags": [],
         }
 
@@ -1275,6 +1309,7 @@ def build_calendar_events(
     important_by_day = important_dates_by_day(important_dates)
     term_start, term_end = term_bounds(important_dates, default_year)
     suspended = class_suspended_dates(important_dates)
+    substitutes = substitute_meeting_dates(important_dates)
     lab_weekday = meeting_patterns["lab"][0]
     lab_deliverable_weekday = meeting_patterns["lab_deliverable"][0]
 
@@ -1301,7 +1336,11 @@ def build_calendar_events(
     for lab in lab_rows:
         if lab["week"] is None:
             continue
-        lab_date = lab.get("date") or scheduled_weekday_date(term_start, lab["week"], lab_weekday, suspended)
+        lab_date = lab.get("date") or scheduled_weekday_date(
+            term_start, lab["week"], lab_weekday, suspended, substitute_dates=substitutes
+        )
+        if lab_date is None:
+            continue
         lab["date"] = lab_date
         existing_flags = list(lab.get("flags", []))
         lab["flags"] = list(dict.fromkeys(existing_flags + nearby_important_dates(lab_date, important_dates)))
@@ -1321,20 +1360,26 @@ def build_calendar_events(
             }
         )
 
-        if lab["deliverables"]:
+        deliverable_items = lab.get("deliverable_items", [])
+        if not deliverable_items and lab["deliverables"]:
+            deliverable_items = [{"text": lab["deliverables"], "weekday": None}]
+        for deliverable in deliverable_items:
             deliverable_date = scheduled_weekday_date(
                 term_start,
                 lab["week"],
-                lab_deliverable_weekday,
+                deliverable["weekday"]
+                if deliverable["weekday"] is not None
+                else lab_deliverable_weekday,
                 suspended,
+                substitute_dates=substitutes,
             )
-            if term_start <= deliverable_date <= term_end:
+            if deliverable_date is not None and term_start <= deliverable_date <= term_end:
                 start_time, end_time = event_time_range(meeting_patterns, "lab_deliverable")
                 events[deliverable_date].append(
                     {
                         "kind": "lab-deliverable",
                         "title": f"{lab['title']} Deliverables Due",
-                        "details": lab["deliverables"],
+                        "details": deliverable["text"],
                         "start_time": start_time,
                         "end_time": end_time,
                     }
@@ -1344,8 +1389,15 @@ def build_calendar_events(
     for week in range(1, max_week + 1):
         for discussion in meeting_patterns["discussion_patterns"]:
             for weekday in discussion["weekdays"]:
-                discussion_date = scheduled_weekday_date(term_start, week, weekday, suspended, clamp_to_term_start=False)
-                if term_start <= discussion_date <= term_end:
+                discussion_date = scheduled_weekday_date(
+                    term_start,
+                    week,
+                    weekday,
+                    suspended,
+                    clamp_to_term_start=False,
+                    substitute_dates=substitutes,
+                )
+                if discussion_date is not None and term_start <= discussion_date <= term_end:
                     events[discussion_date].append(
                         {
                             "kind": "discussion",
@@ -1364,8 +1416,13 @@ def build_calendar_events(
                     suspended,
                     clamp_to_term_start=False,
                     shift_suspended=False,
+                    substitute_dates=substitutes,
                 )
-                if term_start <= office_hours_date <= term_end and office_hours_date not in suspended:
+                if (
+                    office_hours_date is not None
+                    and term_start <= office_hours_date <= term_end
+                    and office_hours_date not in suspended
+                ):
                     events[office_hours_date].append(
                         {
                             "kind": "office-hours",
@@ -1383,8 +1440,9 @@ def build_calendar_events(
             homework["weekday"],
             suspended,
             clamp_to_term_start=False,
+            substitute_dates=substitutes,
         )
-        if term_start <= homework_date <= term_end:
+        if homework_date is not None and term_start <= homework_date <= term_end:
             events[homework_date].append(
                 {
                     "kind": "homework",

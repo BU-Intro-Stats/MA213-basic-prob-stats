@@ -79,6 +79,11 @@ def inline_latex(text: str) -> str:
     return "".join(parts)
 
 
+def syllabus_section_heading(title: str) -> str:
+    """Render a regular-size bold syllabus heading without a section title."""
+    return "\n".join((r"\section*{}", rf"\textbf{{{inline_latex(title.upper())}:}}"))
+
+
 def strip_comments(text: str) -> str:
     return re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
 
@@ -197,7 +202,7 @@ def markdown_to_latex(
             level = len(heading.group(1))
             if level > 1:
                 if level == 2:
-                    output.append(rf"\section*{{{inline_latex(heading.group(2))}}}")
+                    output.append(syllabus_section_heading(heading.group(2)))
                 else:
                     output.append(rf"\textbf{{{inline_latex(heading.group(2))}:}}")
                 output.append("")
@@ -213,7 +218,11 @@ def markdown_to_latex(
                 list_kind = wanted_kind
                 output.append(r"\begin{samepage}")
                 output.append(rf"\begin{{{list_kind}}}")
-            output.append(r"\item " + inline_latex(item.group(1)))
+            label = ""
+            if wanted_kind == "enumerate":
+                number = re.match(r"^\s*(\d+)\.", raw).group(1)
+                label = rf"[{number}.]"
+            output.append(r"\item" + label + " " + inline_latex(item.group(1)))
             index += 1
             continue
 
@@ -246,7 +255,22 @@ def course_name(path: Path) -> str:
 
 def objective_counts(path: Path) -> tuple[int, int]:
     lines = strip_comments(path.read_text(encoding="utf-8")).splitlines()
-    objective_lines = [line for line in lines if re.match(r"^\s*\d+\.\s+", line)]
+    # Module 6 contains global objectives shared with another course. Include
+    # only its second objective (M6.L02) for this course. Restrict the count to
+    # top-level numbered objectives so nested sub-items are not counted as
+    # separate objectives.
+    objective_lines = []
+    module_number = None
+    for line in lines:
+        module_match = re.match(r"^##\s+Module\s+(\d+)", line)
+        if module_match:
+            module_number = int(module_match.group(1))
+        if (
+            module_number is not None
+            and (module_number <= 5 or module_number == 6 and re.match(r"^2\.\s+", line))
+            and re.match(r"^\d+\.\s+", line)
+        ):
+            objective_lines.append(line)
     core = sum(1 for line in objective_lines if re.search(r"\*\*Core\*\*\s*$", line))
     auxiliary = sum(1 for line in objective_lines if re.search(r"\bAuxiliary\s*$", line))
     return core, auxiliary
@@ -306,7 +330,7 @@ def staff_latex(path: Path) -> str:
     for row in rows:
         grouped.setdefault(row["Role"], []).append(row)
 
-    output = [r"\section*{Course Staff}"]
+    output = []
     for role, people in grouped.items():
         label = role.upper() + ("S" if len(people) > 1 and not role.endswith("s") else "")
         output.append(rf"\textbf{{{inline_latex(label)}:}}")
@@ -334,10 +358,34 @@ def staff_latex(path: Path) -> str:
     return "\n".join(output)
 
 
+def enrollment_latex(path: Path, heading: str) -> str:
+    """Render a numbered enrollment section for inline placement."""
+    lines = strip_comments(path.read_text(encoding="utf-8")).splitlines()
+    heading_pattern = re.compile(rf"^##\s+{re.escape(heading)}\s*$", re.IGNORECASE)
+    in_section = False
+    steps = []
+    for line in lines:
+        stripped = line.strip()
+        if heading_pattern.match(stripped):
+            in_section = True
+            continue
+        if in_section and stripped.startswith("## "):
+            break
+        if in_section:
+            match = re.match(r"^(\d+)\.\s+(.+)$", stripped)
+            if match:
+                steps.append((match.group(1), inline_latex(match.group(2))))
+
+    output = [syllabus_section_heading(heading), r"\begin{samepage}", r"\begin{enumerate}"]
+    output.extend(rf"\item[{number}.] {text}" for number, text in steps)
+    output.extend((r"\end{enumerate}", r"\end{samepage}"))
+    return "\n".join(output)
+
+
 def course_materials_latex(path: Path) -> str:
     """Build the Course Materials section, including optional resource links."""
     rows = read_markdown_table(path, "Course Materials")
-    output = [r"\section*{Course Materials}"]
+    output = [syllabus_section_heading("Course Materials")]
     for row in rows:
         item = inline_latex(row.get("Item", ""))
         required = row.get("Required", "").strip().lower() == "yes"
@@ -349,6 +397,8 @@ def course_materials_latex(path: Path) -> str:
         output.append(label + (f": {details}" if details else ""))
         if url:
             output.append(r"\begin{center}" + rf"\url{{{url}}}" + r"\end{center}")
+        if row.get("Item", "").strip().lower() == "edfinity":
+            output.append(enrollment_latex(path, "Edfinity Enrollment"))
     return "\n\n".join(output)
 
 
@@ -364,7 +414,7 @@ def semester_start_date(path: Path) -> date:
 
 
 def lecture_metadata(path: Path) -> dict[int, dict[str, str]]:
-    """Collect each lecture's module and assigned reading."""
+    """Collect each lecture's module, topic, and assigned reading."""
     metadata: dict[int, dict[str, str]] = {}
     current_module = ""
     current_lecture: int | None = None
@@ -376,7 +426,11 @@ def lecture_metadata(path: Path) -> dict[int, dict[str, str]]:
         lecture_match = re.match(r"^###\s+Lecture\s+(\d+)", line.strip())
         if lecture_match:
             current_lecture = int(lecture_match.group(1))
-            metadata[current_lecture] = {"module": current_module, "reading": ""}
+            metadata[current_lecture] = {"module": current_module, "topic": "", "reading": ""}
+            continue
+        topic_match = re.match(r"^[-*]\s+\*\*Topic:\*\*\s*(.+)$", line.strip())
+        if topic_match and current_lecture is not None:
+            metadata[current_lecture]["topic"] = topic_match.group(1).strip()
             continue
         reading_match = re.match(r"^[-*]\s+\*\*Reading:\*\*\s*(.+)$", line.strip())
         if reading_match and current_lecture is not None:
@@ -422,16 +476,16 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
     for chunk_index, chunk in enumerate(chunks):
         if chunk_index:
             output.append(r"\newpage")
-            output.append(r"\section*{Weekly Plan (continued)}")
+            output.append(syllabus_section_heading("Weekly Plan (continued)"))
         output.extend(
             (
                 r"\begin{center}",
                 r"\scriptsize",
                 r"\setlength{\tabcolsep}{2pt}",
                 r"\renewcommand{\arraystretch}{1.1}",
-                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|Y|p{0.08\textwidth}|p{0.10\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|p{0.08\textwidth}|}",
+                r"\begin{tabularx}{\textwidth}{|c|p{0.11\textwidth}|p{0.07\textwidth}|p{0.27\textwidth}|p{0.08\textwidth}|p{0.16\textwidth}|p{0.09\textwidth}|p{0.06\textwidth}|}",
                 r"\hline",
-                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} & \textbf{Other} \\",
+                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} \\",
                 r"\hline",
             )
         )
@@ -452,19 +506,26 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 if lectures.get(number, {}).get("module")
             ))
             labs = row.get("Labs", "")
-            deliverables = ", ".join(dict.fromkeys(
-                re.findall(r"Tutorial\s+\d+", row.get("Lab Deliverables", ""), flags=re.IGNORECASE)
+            # The weekly schedule contains the complete deliverable list. Keep
+            # every item in the syllabus, but hide weekday tags that are only
+            # used by the calendar generator (for example, [Thursday]).
+            deliverables = re.sub(r"\[[^\]]+\]\s*", "", row.get("Lab Deliverables", ""))
+            deliverables = re.sub(r"\bLab\s+\d+:\s*", "", deliverables)
+            deliverables = deliverables.replace(" | ", "; ")
+            lecture_topics = "; ".join(dict.fromkeys(
+                re.sub(r"\s*\(Chapters?\s+[^)]*\)", "", lectures[number].get("topic", ""), flags=re.IGNORECASE)
+                for number in lecture_numbers
+                if lectures.get(number, {}).get("topic")
             ))
             cells = (
                 f"{week_number} ({week_date.month}/{week_date.day})",
                 "; ".join(reading_values),
                 "; ".join(module_values),
-                re.sub(r"\s*\(Chapters?\s+[^)]*\)", "", row.get("Lecture Topics", ""), flags=re.IGNORECASE),
+                lecture_topics,
                 labs,
                 deliverables,
                 homework.get(row["Week"], ""),
                 quizzes.get(row["Week"], ""),
-                row.get("Additional Events", ""),
             )
             output.append(" & ".join(inline_latex(cell) for cell in cells) + r" \\")
             output.append(r"\hline")
@@ -498,7 +559,6 @@ def build_document() -> str:
 
     semester = semester_label(INPUTS / "important_dates.md")
     title = course_name(INPUTS / "syllabus_course.md")
-    core_count, auxiliary_count = objective_counts(INPUTS / "learningObjectives.md")
     details = course_details()
 
     header = (
@@ -514,21 +574,14 @@ def build_document() -> str:
         staff_latex(INPUTS / "syllabus_staff.md"),
         markdown_to_latex(
             INPUTS / "syllabus_course.md",
-            {"Course Details"},
+            {"Course Details", "Edfinity Enrollment"},
             {"Course Materials": course_materials_latex(INPUTS / "syllabus_course.md")},
         ),
         markdown_to_latex(INPUTS / "syllabus_grading.md"),
         markdown_to_latex(INPUTS / "syllabus_assessments.md"),
         markdown_to_latex(INPUTS / "syllabus_lab.md"),
         markdown_to_latex(INPUTS / "syllabus_policies.md"),
-        r"\section*{Learning Objectives}",
-        (
-            f"The current learning-objective file contains "
-            f"{core_count} Core-tagged entries and "
-            f"{auxiliary_count} Auxiliary-tagged entries. Detailed objectives are "
-            "published on the course website and assessed through the quizzes, labs, and projects."
-        ),
-        r"\section*{Weekly Plan (Subject to Change)}",
+        syllabus_section_heading("Weekly Plan (Subject to Change)"),
         schedule_latex(WEEKLY_SCHEDULE, semester_start_date(INPUTS / "important_dates.md")),
     )
 
@@ -553,7 +606,7 @@ def build_document() -> str:
 \renewcommand\section{\@startsection{section}{1}{0pt}%
   {-1.5ex plus -.4ex minus -.2ex}%
   {.5ex plus .2ex}%
-  {\normalfont\large\bfseries}}
+  {\normalfont\Large\bfseries}}
 \makeatother
 \begin{document}
 """
