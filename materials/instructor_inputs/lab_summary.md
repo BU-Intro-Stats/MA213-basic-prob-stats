@@ -215,17 +215,19 @@ This version preserves the original course sequence so that the lab flow stays f
 
 ---
 
-### Lab 7: Bayesian
+### Lab 7: Bayesian updating
 
 - **Lecture Anchor:** Lecture 30
-- **Purpose:** End the course with a flexible application that connects modeling ideas to the methods already studied.
+- **Purpose:** End the course with a focused modeling activity that connects conditional probability, evidence, and Bayesian updating to the inference methods already studied.
 - **Primary Objectives:**
   - Compare Bayesian and Frequentist Approaches
 - **Pre-Lab Activity:**
   - Review the final lecture material on modeling and inference
 - **In-Lab Activity:**
-  - Option A: fit a linear model and interpret slope, residuals, and fit
-  - Option B: use a Bayesian update framework to compare prior and posterior thinking
+  - Use Bayes' rule and a grid approximation to compare prior and posterior thinking
+  - Interpret posterior summaries and compare Bayesian and frequentist language
+- **Post-Lab Activity:**
+  - Submit the completed Lab 7 worksheet and starter code
 - **Deliverables:**
   - Project2 writeup
   - [Friday] Lab7 in-lab activity submission
