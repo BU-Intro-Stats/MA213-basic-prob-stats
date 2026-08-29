@@ -80,14 +80,18 @@ This version preserves the original course sequence so that the lab flow stays f
 
 ### Project1-1: Project 1 launch
 
-- **Lecture Anchor:**
+- **Lecture Anchor:** Lecture 9
 - **Purpose:** Use this session after Lab 3 to introduce the project prompt, rubric, data access, and timeline. Students should leave with a clear project question and a first analysis plan.
 - **Primary Objectives:**
 - **Pre-Lab Activity:**
 - **In-Lab Activity:**
+  - Start from `P1_1_activity.docx` in Google Docs and complete it as a shared outline
+  - Choose a topic, data source, research question, variables, and planned EDA
+  - Identify a data-quality concern and assign group roles
 - **Post-Lab Activity:**
+  - Submit one completed Google Doc outline per group
 - **Deliverables:**
-  - Project 1 plan
+  - Project 1 Outline
 
 ---
 
