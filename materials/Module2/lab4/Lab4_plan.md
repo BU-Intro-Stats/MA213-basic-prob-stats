@@ -22,6 +22,7 @@
   - Submit a worksheet with probabilities and interpretation
 - **Deliverables:**
   - Project 1 Outline
+  - [Friday] Lab4 in-lab activity submission
   - Tutorial 4 (pre-lab for lab4)
 
 ---
