@@ -169,18 +169,19 @@ This version preserves the original course sequence so that the lab flow stays f
 ### Lab 6: Confidence intervals and hypothesis tests
 
 - **Lecture Anchor:** Lecture 22
-- **Purpose:** Give students practice choosing and interpreting inference procedures, not just computing formulas.
+- **Purpose:** Give students practice constructing and interpreting confidence intervals, testing a one-proportion hypothesis, and carrying out a chi-square test of independence.
 - **Primary Objectives:**
   - Inference for a Single Proportion
   - Understand Errors and Significance Levels
   - Distinguish Statistical vs. Practical Significance
-  - Design, execute, and interpret confidence intervals and hypothesis tests
+  - Conduct and Interpret Chi-Square Tests
 - **Pre-Lab Activity:**
   - Review the difference between confidence intervals and hypothesis tests
 - **In-Lab Activity:**
-  - Choose the appropriate inference method for a given setting
-  - Check conditions in R
-  - Compute intervals, p-values, and effect sizes
+  - Construct and interpret a confidence interval for one population proportion
+  - Compare confidence intervals with hypothesis tests using the same sample
+  - Simulate confidence interval coverage and examine the effect of confidence level
+  - Build a two-way table, calculate expected counts, and conduct a chi-square test of independence
   - Interpret results in context
 - **Deliverables:**
   - [Friday] Lab6 in-lab activity submission
