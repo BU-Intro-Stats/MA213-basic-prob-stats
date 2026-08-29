@@ -1,0 +1,346 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{predictcolor}{RGB}{255,242,200}
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{debatecolor}{RGB}{255,221,221}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{HUDDLE UP}{#1}}
+\newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
+\newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
+\newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\newcommand{\shortwritebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week 12: Lab 7}\\[3pt]
+  {\large Bayesian Updating and Statistical Evidence}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Your name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+  \item \textbf{Partner's name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+\end{enumerate}
+
+\textbf{Big idea:} Bayesian inference updates beliefs by combining a prior distribution with new evidence. In this lab, you will compute posterior probabilities, compare priors, and explain how Bayesian and frequentist reasoning ask different questions.
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own probability reasoning, coding skills, and statistical interpretation.
+
+\textbf{Files used:} No external data file is needed.
+
+\textbf{Skills practiced:} Bayes' rule, prior probability, likelihood, posterior probability, grid approximation, \texttt{dbinom()}, \texttt{sum()}, and \texttt{data.frame()}.
+
+\textbf{Your mission:} Use Bayes' rule to update from prior belief to posterior belief, then decide how the conclusion changes when the prior or the data change.
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner and answer this question. If two students see the same data but start with different prior beliefs, should they always reach the same conclusion? Why or why not?
+
+\shortwritebox{Warm-up response:}
+
+\section*{Getting Started}
+
+Open \texttt{Lab7\_starter.R}. Today we will use two small examples:
+\begin{itemize}
+  \item a diagnostic test example, where Bayes' rule updates the probability of a condition after a positive test;
+  \item a coin example, where we update beliefs about an unknown probability of heads.
+\end{itemize}
+
+\[
+P(A \mid B) = \frac{P(B \mid A)P(A)}{P(B)}
+\]
+
+In words:
+\[
+\text{posterior} =
+\frac{\text{likelihood} \times \text{prior}}{\text{total probability of the evidence}}.
+\]
+
+\discussbox{In ordinary language, what is the difference between a prior belief and evidence from data?}
+
+\section*{Question 1. A diagnostic test}
+
+Suppose a condition affects 2\% of a population. A screening test has:
+\begin{itemize}
+  \item sensitivity 95\%: if a person has the condition, the test is positive 95\% of the time;
+  \item specificity 90\%: if a person does not have the condition, the test is negative 90\% of the time.
+\end{itemize}
+
+A randomly selected person tests positive.
+
+\predictbox{Before calculating, estimate the probability that this person actually has the condition. Is it close to 95\%, close to 50\%, or much lower?}
+
+\begin{lstlisting}[language=R]
+prior_condition <- 0.02
+sensitivity <- 0.95
+specificity <- 0.90
+
+p_positive_given_condition <- sensitivity
+p_positive_given_no_condition <- 1 - specificity
+
+p_positive <- p_positive_given_condition * prior_condition +
+  p_positive_given_no_condition * (1 - prior_condition)
+
+posterior_condition <- p_positive_given_condition * prior_condition /
+  p_positive
+
+posterior_condition
+\end{lstlisting}
+
+\writebox{Interpret the posterior probability in context. Why is it not simply 95\%?}
+
+\section*{Question 2. Build the same result with counts}
+
+Imagine 10,000 people from this population. Complete the expected-count table.
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.18\textwidth}|}
+\hline
+\textbf{Group} & \textbf{Positive test} & \textbf{Negative test} & \textbf{Total}\\
+\hline
+Has condition & & & \\[22pt]
+\hline
+Does not have condition & & & \\[22pt]
+\hline
+Total & & & 10,000\\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\begin{lstlisting}[language=R]
+N <- 10000
+
+has_condition <- N * prior_condition
+no_condition <- N * (1 - prior_condition)
+
+true_positive <- has_condition * sensitivity
+false_positive <- no_condition * (1 - specificity)
+
+positive_total <- true_positive + false_positive
+true_positive / positive_total
+\end{lstlisting}
+
+\discussbox{Which is easier to explain to a non-statistical audience: the formula or the count table? Why?}
+
+\writebox{Use the count table to explain the posterior probability from Question 1.}
+
+\section*{Question 3. Update a prior about a coin}
+
+Now suppose we have a coin, but we are not sure whether it is fair. Let $p$ be the probability of heads.
+
+We will use a grid of possible values for $p$ and assign prior weights to them.
+
+\begin{lstlisting}[language=R]
+p_grid <- seq(0, 1, by = 0.01)
+
+# Start with a flat prior: every value is equally plausible.
+prior <- rep(1, length(p_grid))
+prior <- prior / sum(prior)
+
+heads <- 8
+flips <- 10
+
+likelihood <- dbinom(heads, size = flips, prob = p_grid)
+posterior <- likelihood * prior
+posterior <- posterior / sum(posterior)
+
+bayes_table <- data.frame(
+  p = p_grid,
+  prior = prior,
+  likelihood = likelihood,
+  posterior = posterior
+)
+
+head(bayes_table)
+bayes_table$p[which.max(bayes_table$posterior)]
+\end{lstlisting}
+
+\claimbox{The most plausible value of $p$ after seeing 8 heads in 10 flips is approximately \underline{\hspace{3cm}}.}
+
+\writebox{What did the prior say before the data? What does the posterior say after the data?}
+
+\section*{Question 4. Summarize posterior belief}
+
+Instead of reporting only the most plausible value, compute a posterior mean and a central 90\% credible interval.
+
+\begin{lstlisting}[language=R]
+posterior_mean <- sum(bayes_table$p * bayes_table$posterior)
+posterior_mean
+
+posterior_cdf <- cumsum(bayes_table$posterior)
+
+lower_90 <- bayes_table$p[min(which(posterior_cdf >= 0.05))]
+upper_90 <- bayes_table$p[min(which(posterior_cdf >= 0.95))]
+
+c(lower_90, upper_90)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.32\textwidth}|p{0.55\textwidth}|}
+\hline
+\textbf{Quantity} & \textbf{Your result and interpretation}\\
+\hline
+Posterior mean & \\[22pt]
+\hline
+90\% credible interval & \\[28pt]
+\hline
+Most plausible value on the grid & \\[22pt]
+\hline
+\end{tabular}
+\end{center}
+
+\funfact{A Bayesian credible interval can be interpreted as a probability statement about the parameter after seeing the data. This differs from the frequentist interpretation of a confidence interval.}
+
+\section*{Question 5. Change the prior}
+
+Now use a prior that favors values near 0.5. This represents someone who strongly expected the coin to be close to fair before seeing the data.
+
+\begin{lstlisting}[language=R]
+skeptical_prior <- dbeta(p_grid, shape1 = 20, shape2 = 20)
+skeptical_prior <- skeptical_prior / sum(skeptical_prior)
+
+skeptical_posterior <- likelihood * skeptical_prior
+skeptical_posterior <- skeptical_posterior / sum(skeptical_posterior)
+
+skeptical_table <- data.frame(
+  p = p_grid,
+  prior = skeptical_prior,
+  posterior = skeptical_posterior
+)
+
+skeptical_mean <- sum(skeptical_table$p * skeptical_table$posterior)
+skeptical_mode <- skeptical_table$p[which.max(skeptical_table$posterior)]
+
+c(skeptical_mean = skeptical_mean, skeptical_mode = skeptical_mode)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.32\textwidth}|p{0.25\textwidth}|p{0.32\textwidth}|}
+\hline
+\textbf{Prior} & \textbf{Posterior mean} & \textbf{Main interpretation}\\
+\hline
+Flat prior & & \\[24pt]
+\hline
+Prior centered near 0.5 & & \\[24pt]
+\hline
+\end{tabular}
+\end{center}
+
+\debatebox{Is it unfair that the prior can affect the posterior? When is using prior information helpful, and when could it be misleading?}
+
+\section*{Question 6. More data, less prior influence}
+
+Repeat the update with 80 heads in 100 flips.
+
+\begin{lstlisting}[language=R]
+heads_big <- 80
+flips_big <- 100
+
+likelihood_big <- dbinom(heads_big, size = flips_big, prob = p_grid)
+
+posterior_flat_big <- likelihood_big * prior
+posterior_flat_big <- posterior_flat_big / sum(posterior_flat_big)
+
+posterior_skeptical_big <- likelihood_big * skeptical_prior
+posterior_skeptical_big <- posterior_skeptical_big / sum(posterior_skeptical_big)
+
+mean_flat_big <- sum(p_grid * posterior_flat_big)
+mean_skeptical_big <- sum(p_grid * posterior_skeptical_big)
+
+c(flat_prior = mean_flat_big, skeptical_prior = mean_skeptical_big)
+\end{lstlisting}
+
+\writebox{Compare the two posterior means after 8 heads in 10 flips and after 80 heads in 100 flips. What happens to the influence of the prior as the amount of data increases?}
+
+\section*{Question 7. Bayesian vs. frequentist language}
+
+Use the table below to compare the two perspectives.
+
+\begin{center}
+\begin{tabular}{|p{0.3\textwidth}|p{0.28\textwidth}|p{0.32\textwidth}|}
+\hline
+\textbf{Question} & \textbf{Frequentist wording} & \textbf{Bayesian wording}\\
+\hline
+What is unknown? & & \\[22pt]
+\hline
+How is evidence measured? & & \\[22pt]
+\hline
+What does the interval mean? & & \\[28pt]
+\hline
+How can prior information enter? & & \\[28pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{Final response: In your own words, explain what a posterior probability means and how it differs from a p-value.}
+
+\section*{Optional Challenge}
+
+Create your own prior over \texttt{p\_grid}. Then update it using 14 heads in 20 flips. Explain why your prior is reasonable and how the posterior changes.
+
+\begin{lstlisting}[language=R]
+# Example: create your own prior weights.
+my_prior <- rep(1, length(p_grid))
+my_prior <- my_prior / sum(my_prior)
+
+my_likelihood <- dbinom(14, size = 20, prob = p_grid)
+my_posterior <- my_likelihood * my_prior
+my_posterior <- my_posterior / sum(my_posterior)
+
+sum(p_grid * my_posterior)
+\end{lstlisting}
+
+\end{document}
