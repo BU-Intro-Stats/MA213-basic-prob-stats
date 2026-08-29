@@ -1,0 +1,619 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=3pt,itemsep=4pt,leftmargin=*}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  backgroundcolor=\color{gray!6}
+}
+
+\definecolor{predictcolor}{RGB}{255,242,200}
+\definecolor{discusscolor}{RGB}{214,234,255}
+\definecolor{funfactcolor}{RGB}{222,247,222}
+\definecolor{debatecolor}{RGB}{255,221,221}
+
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
+\newcommand{\discussbox}[1]{\calloutbox{discusscolor}{HUDDLE UP}{#1}}
+\newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
+\newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
+\newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
+
+\newcommand{\writebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\newcommand{\shortwritebox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[12pt]
+      \rule{\linewidth}{0.4pt}\\[14pt]
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\newcommand{\vennbox}[1]{
+  \vspace{3pt}
+  \noindent\fbox{
+    \begin{minipage}{0.96\linewidth}
+      \textbf{#1}\\[6pt]
+      \vspace{110pt}
+    \end{minipage}
+  }
+  \vspace{6pt}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE MA 213 Week 5: Lab 4}\\[3pt]
+  {\large Dice Games, Expected Value, and Simulation}
+\end{center}
+
+\begin{enumerate}
+  \item \textbf{Your name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+  \item \textbf{Partner's name:} \underline{\hspace{0.3\textwidth}} \hfill \textbf{BU ID:} \underline{\hspace{0.25\textwidth}}
+\end{enumerate}
+
+\textbf{Big idea:} Probability helps us make decisions under uncertainty. In this lab you will \emph{simulate first and calculate second}. Every formula in this lab shows up only after you have already watched the answer appear in your own simulated data.
+\textbf{Do not use GenAI tools for this lab.} The point is to practice your own probability reasoning, coding skills, and interpretation.
+
+\textbf{Files used:} No data file is needed. You will generate data using simulation in R.
+
+\begin{sloppypar}
+\textbf{Skills practiced:} \texttt{sample()}, \texttt{if}, \texttt{function()}, \texttt{replicate()}, \texttt{table()}, \texttt{mean()}, \texttt{var()}, and \texttt{ggplot()}.
+\end{sloppypar}
+
+\textbf{Your mission:} Decide whether each game is worth playing, explain the risk using variance, and use simulation to discover the probability rules rather than take them on faith.
+
+\section*{Icebreaker}
+
+Before opening R: introduce yourself to your partner. Then answer: Would you rather play a game with a small chance of a big win, or a game with many small wins and losses?
+
+\shortwritebox{My answer and my partner's answer:}
+
+\section*{Getting Started: Randomness in R}
+
+The function \texttt{sample()} lets R randomly choose outcomes. For a fair die, each side has probability $1/6$.
+
+\begin{lstlisting}[language=R]
+library(dplyr)
+library(ggplot2)
+
+# Roll one fair die once.
+sample(1:6, size = 1)
+
+# Roll one fair die 20 times.
+sample(1:6, size = 20, replace = TRUE)
+
+# Roll a weighted die where 6 is twice as likely as the other values.
+sample(1:6, size = 20, replace = TRUE,
+       prob = c(1, 1, 1, 1, 1, 2))
+\end{lstlisting}
+
+For the weighted die, the true probabilities are $1/7$ for each of the values 1 through 5, and $2/7$ for the value 6.
+
+\predictbox{If the weighted die is rolled many times, will you see \emph{exactly} twice as many 6s as 1s? Write down your prediction before you run anything.}
+
+Now find out. \texttt{table()} counts how often each value appeared, so dividing by the number of rolls gives the \textbf{observed proportion} of each outcome.
+
+\begin{lstlisting}[language=R]
+rolls_small <- sample(1:6, size = 20, replace = TRUE,
+                      prob = c(1, 1, 1, 1, 1, 2))
+table(rolls_small) / 20
+
+rolls_big <- sample(1:6, size = 10000, replace = TRUE,
+                    prob = c(1, 1, 1, 1, 1, 2))
+table(rolls_big) / 10000
+
+# True probabilities for comparison.
+c(1, 1, 1, 1, 1, 2) / 7
+
+# Do the observed proportions add up to something familiar?
+sum(table(rolls_small) / 20)
+sum(table(rolls_big) / 10000)
+\end{lstlisting}
+
+\writebox{Which set of proportions is closer to $1/7,\ldots,2/7$: the one from 20 rolls or the one from 10000 rolls? What is the sum of the proportions in \emph{each} case, and why does that happen no matter how many times you roll?}
+
+\funfact{Three properties make a set of numbers a valid probability distribution: every probability is between 0 and 1, the outcomes are disjoint (a single roll cannot be both a 3 and a 5), and the probabilities sum to 1. Your simulated proportions satisfy all three automatically, which is exactly why proportions are a sensible way to estimate probabilities.}
+
+\section*{Question 1. Play the game before you analyze it}
+
+\textbf{Game A rules:} Roll one die. If you roll a 1, you win \$6. If you roll 2, 3, 4, 5, or 6, you lose \$1.
+
+\predictbox{Before running anything, would you play this game? Does the big \$6 win feel large enough to balance the five losing outcomes?}
+
+Write a function that plays Game A exactly once. A function packages up a rule so you can run it over and over.
+
+\begin{lstlisting}[language=R]
+play_game_a <- function() {
+  roll <- sample(1:6, size = 1)
+
+  if (roll == ____) {
+    winnings <- ____
+  } else {
+    winnings <- ____
+  }
+
+  return(winnings)
+}
+
+# Play ten rounds by hand and write the results in the table below.
+play_game_a()
+\end{lstlisting}
+
+\textbf{Do not set a seed anywhere in this question.} Your results should be different from your partner's, and that difference is the whole point.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Round & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+Winnings & & & & & & & & & & \\[16pt]
+\hline
+\end{tabular}
+\end{center}
+
+\shortwritebox{My average over 10 rounds: \hspace{2cm} My partner's average over 10 rounds:}
+
+Now let R do the repeating. \texttt{replicate()} runs a function many times and collects the results.
+
+\begin{lstlisting}[language=R]
+results_10    <- replicate(10, play_game_a())
+results_100   <- replicate(100, play_game_a())
+results_1000  <- replicate(1000, play_game_a())
+results_10000 <- replicate(10000, play_game_a())
+
+mean(results_10)
+mean(results_100)
+mean(results_1000)
+mean(results_10000)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.3\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
+\hline
+\textbf{Number of games} & \textbf{My average winnings} & \textbf{Partner's average}\\
+\hline
+10 & & \\[14pt]
+\hline
+100 & & \\[14pt]
+\hline
+1000 & & \\[14pt]
+\hline
+10000 & & \\[14pt]
+\hline
+\end{tabular}
+\end{center}
+
+\discussbox{Compare your table with your partner's. At which row do your two columns start to agree with each other? Why would running more games make two different people's answers converge?}
+
+\writebox{As the number of games grows, the average winnings appear to settle toward one particular number. What number is it, as best you can tell from your simulation? Based on that number alone, should you play Game A?}
+
+\section*{Question 2. Where did that number come from?}
+
+You just discovered a number by simulation. It has a name: the \textbf{expected value} of the game, written $E(X)$, where $X$ is the amount of money you win from one play. The formula below is a shortcut for computing the long-run average \emph{without} having to run the simulation.
+
+\[
+E(X) = \sum_i x_iP(x_i).
+\]
+
+Each outcome contributes its value $x_i$ weighted by how often it happens, $P(x_i)$.
+
+\begin{center}
+\begin{tabular}{|p{0.22\textwidth}|p{0.26\textwidth}|p{0.42\textwidth}|}
+\hline
+\textbf{Outcome} & \textbf{Probability} & \textbf{Contribution to $E(X)$}\\
+\hline
+\$6 & & \\[20pt]
+\hline
+-\$1 & & \\[20pt]
+\hline
+\end{tabular}
+\end{center}
+
+\begin{lstlisting}[language=R]
+outcomes <- c(____, ____)
+probs <- c(____, ____)
+
+# Check that this is a valid distribution before using it.
+sum(probs)
+
+E_X <- sum(outcomes * probs)
+E_X
+\end{lstlisting}
+
+\writebox{Show your expected value calculation by hand. How close is it to the number your 10000-game simulation settled on in Question 1?}
+
+\section*{Question 3. What does the law of large numbers look like?}
+
+The \textbf{law of large numbers} says the average of many independent repetitions gets closer to the expected value in the long run. You saw this happen in a table. Now watch it happen in a picture.
+
+From this point on we use \texttt{set.seed()}. Setting a seed fixes R's random number generator so that you get the same "random" results every time you run the code, which is what makes your submitted work reproducible. It does not make the results any less random; it just picks which random results you get.
+
+\subsection*{3a. One long run}
+
+\begin{lstlisting}[language=R]
+set.seed(213)
+n_games <- 10000
+results_a <- replicate(n_games, play_game_a())
+
+cumulative_data_a <- data.frame(
+  game = 1:n_games,
+  average_profit = cumsum(results_a) / (1:n_games)
+)
+
+ggplot(cumulative_data_a, aes(x = game, y = average_profit)) +
+  geom_line(color = "steelblue") +
+  geom_hline(yintercept = E_X, color = "red", linetype = "dashed") +
+  labs(
+    x = "Number of games played",
+    y = "Cumulative average profit",
+    title = "Game A: cumulative average profit",
+    subtitle = "Red dashed line shows the theoretical expected value"
+  )
+\end{lstlisting}
+
+\writebox{Describe what happens early in the graph and what happens later in the graph. Where on the horizontal axis does the blue line stop making large jumps?}
+
+\subsection*{3b. A simulated average is itself random}
+
+In Question 1 you and your partner got different answers from 100 games. That means the average of 100 games is not a fixed number: it is a random quantity with its own distribution. Let's look at that distribution by running the whole 100-game experiment 500 separate times.
+
+\begin{lstlisting}[language=R]
+set.seed(2024)
+means_100 <- replicate(500, mean(replicate(100, play_game_a())))
+
+mean(means_100)
+sd(means_100)
+
+ggplot(data.frame(m = means_100), aes(x = m)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  geom_vline(xintercept = E_X, color = "red", linetype = "dashed") +
+  labs(
+    x = "Average winnings from 100 games",
+    y = "Count",
+    title = "500 repetitions of a 100-game experiment"
+  )
+\end{lstlisting}
+
+Now repeat with 1000 games per repetition instead of 100.
+
+\begin{lstlisting}[language=R]
+set.seed(2025)
+means_1000 <- replicate(500, mean(replicate(1000, play_game_a())))
+
+mean(means_1000)
+sd(means_1000)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.32\textwidth}|p{0.28\textwidth}|p{0.28\textwidth}|}
+\hline
+\textbf{Games per repetition} & \textbf{Mean of the 500 averages} & \textbf{SD of the 500 averages}\\
+\hline
+100 & & \\[16pt]
+\hline
+1000 & & \\[16pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{Which quantity in the table changed a lot when you went from 100 to 1000 games, and which stayed about the same? Explain what that tells you about \emph{where} the average lands versus \emph{how much} it bounces around.}
+
+\section*{Question 4. How risky is Game A?}
+
+Two games can have similar expected values but very different amounts of risk. Look at your simulated results directly.
+
+\begin{lstlisting}[language=R]
+# What do individual game outcomes actually look like?
+table(results_a)
+
+var(results_a)
+sd(results_a)
+\end{lstlisting}
+
+That spread has a formula too. \textbf{Variance} measures how much outcomes tend to vary around the expected value.
+
+\[
+Var(X) = \sum_i (x_i - \mu)^2P(x_i) = E(X^2) - [E(X)]^2.
+\]
+
+\begin{lstlisting}[language=R]
+variance_X <- sum((outcomes - E_X)^2 * probs)
+sd_X <- sqrt(variance_X)
+
+variance_X
+sd_X
+
+# Check using E(X^2) - [E(X)]^2.
+E_X_squared <- sum(outcomes^2 * probs)
+variance_X_check <- E_X_squared - E_X^2
+variance_X_check
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{Quantity} & \textbf{Theoretical value} & \textbf{Simulated value}\\
+\hline
+Expected value & & \\[18pt]
+\hline
+Variance & & \\[18pt]
+\hline
+Standard deviation & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{What does the standard deviation tell you about the typical size of the swings in Game A? Is the expected value alone enough to decide whether to play?}
+
+\section*{Question 5. Probability rules, discovered by simulation}
+
+So far each play produced a number. Events are different: an event either happens or it does not. In R an event is a \textbf{TRUE/FALSE vector}, and this is the key move for the rest of the course:
+
+\begin{center}
+\fbox{\begin{minipage}{0.9\linewidth}
+\textbf{\texttt{mean()} of a TRUE/FALSE vector is the proportion of TRUEs, which is an estimate of the probability of that event.} R treats \texttt{TRUE} as 1 and \texttt{FALSE} as 0, so the average is the fraction of the time the event happened. You will use this same trick to compute p-values later in the course.
+\end{minipage}}
+\end{center}
+
+Simulate 10000 rolls of two fair dice and define two events.
+
+\begin{lstlisting}[language=R]
+set.seed(99)
+n <- 10000
+rolls <- data.frame(
+  d1 = sample(1:6, size = n, replace = TRUE),
+  d2 = sample(1:6, size = n, replace = TRUE)
+)
+
+A <- rolls$d1 == 1                 # event A: the first die is a 1
+B <- (rolls$d1 + rolls$d2) >= 7    # event B: the total is at least 7
+
+head(A)     # look at what these objects actually are
+
+mean(A)         # estimate of P(A)
+mean(B)         # estimate of P(B)
+mean(A & B)     # estimate of P(A and B)
+mean(A | B)     # estimate of P(A or B)
+mean(B[A])      # estimate of P(B given A)
+\end{lstlisting}
+
+\vennbox{Sketch a Venn diagram for events A and B. Shade $A \cap B$, then write your simulated estimate of each of $P(A)$, $P(B)$, $P(A \cap B)$, and $P(A \cup B)$ in the right region.}
+
+\subsection*{5a. The addition rule}
+
+\begin{lstlisting}[language=R]
+mean(A | B)
+mean(A) + mean(B) - mean(A & B)
+\end{lstlisting}
+
+\shortwritebox{Do these two numbers agree? Why do we have to subtract $P(A \cap B)$?}
+
+\subsection*{5b. Does multiplying always work?}
+
+\predictbox{The multiplication rule for independent events says $P(A \cap B) = P(A)P(B)$. Do you expect it to hold for the A and B above? Commit to an answer before running the code.}
+
+\begin{lstlisting}[language=R]
+mean(A & B)             # what the simulation says
+mean(A) * mean(B)       # what the independence rule would predict
+
+# Now a different pair of events.
+C <- rolls$d1 == 1      # first die is a 1
+D <- rolls$d2 == 1      # second die is a 1
+
+mean(C & D)
+mean(C) * mean(D)
+\end{lstlisting}
+
+\writebox{For which pair did the multiplication rule work, and for which did it fail? Compare \texttt{mean(B)} with \texttt{mean(B[A])}. Explain in plain language why knowing that the first die was a 1 changes the chance that the total is at least 7, but does not change the chance that the \emph{second} die is a 1.}
+
+\subsection*{5c. Are all outcomes equally likely?}
+
+\begin{lstlisting}[language=R]
+total <- rolls$d1 + rolls$d2
+table(total) / n
+sum(table(total) / n)
+\end{lstlisting}
+
+\writebox{The two dice are each fair, so all 6 faces are equally likely. Are all 11 possible \emph{totals} equally likely? Which total shows up most often, and why? Verify that your estimated probabilities still sum to 1.}
+
+\section*{Question 6. What changes in a two-dice game?}
+
+\textbf{Game B rules:} Roll two independent dice.
+
+\begin{itemize}
+  \item First die: if it is 1, win \$6; otherwise lose \$1. Call this $X_1$.
+  \item Second die: if it is 1, win \$3; otherwise lose \$3. Call this $X_2$.
+  \item Total winnings are $Y = X_1 + 2X_2$.
+\end{itemize}
+
+\predictbox{Before calculating, do you think Game B has a higher or lower expected value than Game A? Do you think it has more or less variability?}
+
+Write \texttt{play\_game\_b()} yourself. You have already written \texttt{play\_game\_a()}, so this time there is no template: use the same ideas, but you decide the structure.
+
+\begin{lstlisting}[language=R]
+play_game_b <- function() {
+
+  # Your code here. Roll two dice, work out x1 and x2,
+  # and return the total winnings Y = x1 + 2 * x2.
+
+}
+
+# Test it a few times before trusting it.
+play_game_b()
+play_game_b()
+
+set.seed(456)
+n_games <- 10000
+results_b <- replicate(n_games, play_game_b())
+
+mean(results_b)
+var(results_b)
+sd(results_b)
+\end{lstlisting}
+
+\subsection*{6a. Settle the argument with data}
+
+Now the theory. For independent random variables, expected values combine the way you would hope:
+\[
+E(X_1 + 2X_2) = E(X_1) + 2E(X_2).
+\]
+Variance is where students disagree.
+
+\debatebox{\textbf{Group 1} claims $Var(X_1 + 2X_2) = Var(X_1) + 2Var(X_2)$, because the 2 just carries through. \textbf{Group 2} claims $Var(X_1 + 2X_2) = Var(X_1) + 4Var(X_2)$, because the 2 gets squared. Do \emph{not} look this up. Compute both candidates, then compare each one to \texttt{var(results\_b)} from your simulation and let the data decide.}
+
+\begin{lstlisting}[language=R]
+# First die.
+outcomes_x1 <- c(6, -1)
+probs_x1 <- c(1/6, 5/6)
+E_X1 <- sum(outcomes_x1 * probs_x1)
+Var_X1 <- sum((outcomes_x1 - E_X1)^2 * probs_x1)
+
+# Second die.
+outcomes_x2 <- c(____, ____)
+probs_x2 <- c(____, ____)
+E_X2 <- sum(outcomes_x2 * probs_x2)
+Var_X2 <- sum((outcomes_x2 - E_X2)^2 * probs_x2)
+
+E_Y <- E_X1 + 2 * E_X2
+
+# The two competing claims.
+Var_Y_group1 <- Var_X1 + 2 * Var_X2
+Var_Y_group2 <- Var_X1 + 4 * Var_X2
+
+Var_Y_group1
+Var_Y_group2
+var(results_b)      # the referee
+\end{lstlisting}
+
+\shortwritebox{Which group was right? What number decided it?}
+
+\subsection*{6b. Theory versus simulation for Game B}
+
+Fill in this table using the winning formula and your simulated \texttt{results\_b}.
+
+\begin{center}
+\begin{tabular}{|p{0.24\textwidth}|p{0.21\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
+\hline
+\textbf{Quantity} & \textbf{Theoretical} & \textbf{Simulated} & \textbf{Difference}\\
+\hline
+$E(Y)$ & & & \\[18pt]
+\hline
+$Var(Y)$ & & & \\[18pt]
+\hline
+$SD(Y)$ & & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{Based on expected value and standard deviation, would you rather play Game A or Game B? Explain.}
+
+\claimbox{Game \underline{\hspace{1cm}} is the better choice because \underline{\hspace{4cm}}. My evidence is \underline{\hspace{5cm}}.}
+
+\section*{Question 7. What does independence actually buy you?}
+
+Every formula in Question 6 assumed the two dice were \textbf{independent}. Conditions in a theorem are not decoration, so let's break this one and watch what happens. In the version below, a single die roll drives \emph{both} terms, so $X_1$ and $X_2$ are now completely dependent.
+
+\begin{lstlisting}[language=R]
+play_game_b_same_die <- function() {
+  die <- sample(1:6, size = 1)   # ONE roll used for both terms
+
+  if (die == 1) {
+    x1 <- 6
+    x2 <- 3
+  } else {
+    x1 <- -1
+    x2 <- -3
+  }
+
+  return(x1 + 2 * x2)
+}
+
+set.seed(789)
+results_same <- replicate(10000, play_game_b_same_die())
+
+mean(results_same)      # compare to mean(results_b)
+var(results_same)       # compare to var(results_b)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.3\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|}
+\hline
+\textbf{Quantity} & \textbf{Two dice (independent)} & \textbf{One die (dependent)}\\
+\hline
+Mean of $Y$ & & \\[16pt]
+\hline
+Variance of $Y$ & & \\[16pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{One of the two rules survived losing independence and one did not. Which was which? Why does using a single die make the swings bigger, even though the average payout did not move?}
+
+\section*{Optional Challenge}
+
+Design your own dice or coin game. Your game must have at least two possible outcomes and at least two different payoffs.
+
+\begin{lstlisting}[language=R]
+# 1. Define the game rules as a function.
+my_game <- function() {
+  # Your code here.
+}
+
+# 2. Simulate 10000 games and record the mean and variance.
+
+# 3. Calculate theoretical E(X) and Var(X) from the outcomes and probabilities.
+
+# 4. Compare theoretical and simulated values in the table below.
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{Quantity} & \textbf{Theoretical value} & \textbf{Simulated value}\\
+\hline
+Expected value & & \\[18pt]
+\hline
+Variance & & \\[18pt]
+\hline
+\end{tabular}
+\end{center}
+
+\writebox{Describe your game. What is the expected value? What is the variance? Would you play it?}
+
+\end{document}
