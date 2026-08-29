@@ -1,26 +1,27 @@
 ### Lab 5: Simulating LLN/CLT with Different Distributions
 
 **Lecture anchor:** Lecture 14
-**Purpose:** Help students see how probability ideas become useful for understanding distributions and unusual data values.
+**Purpose:** Help students distinguish a population from a sample, build a sampling distribution through simulation, and see how sample size controls the variability of sample means.
 
 **Primary objectives supported**
 - Understand and Compute Expectations and Variances
-- Model Data Using Bernoulli, Geometric, and Binomial Distributions
+- Apply the Law of Large Numbers and Its Implications
 - Assess Data Using the Normal Distribution
 
 **Pre-lab activity**
-- Review expected value, variance, and normal approximation ideas
+- Review population versus sample, parameters versus statistics, and the idea of a sampling distribution
 
 **In-lab activity**
-- Compute expected value and variance from a distribution
-- Compare different probability models
-- Use R to examine normality and unusual observations
+- Build a finite population and draw repeated random samples
+- Compare the population mean with the distribution of sample means
+- Use R to examine how sample size and the number of repetitions affect simulation results
+- Compare the theoretical standard error with the simulated spread
 
 **Post-lab activity**
-- Submit a short interpretation of the model choices and results
+- Submit a short interpretation of the sampling distribution and simulation results
 
 **Deliverables**
-- Lab4 in-lab activity submission 
+- Lab5 in-lab activity submission
 - Tutorial 5 (pre-lab for lab5)
 
 ---
