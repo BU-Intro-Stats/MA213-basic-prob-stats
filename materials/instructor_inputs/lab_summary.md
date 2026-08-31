@@ -12,7 +12,7 @@ This version preserves the original course sequence so that the lab flow stays f
 
 ## Lab details
 
-### Lab 1: Lab orientation, R setup, and Tutorial 0
+### Lab 1: Lab orientation, R setup, and Tutorial 1
 
 - **Lecture Anchor:** Lecture 1
 - **Purpose:** Onboard students to how lab works for the rest of the semester and get everyone set up to do the hands-on work: a working R and RStudio install, the tutorial-to-Blackboard submission habit, and a first data import.
@@ -25,7 +25,7 @@ This version preserves the original course sequence so that the lab flow stays f
 - **In-Lab Activity:**
   - Lab orientation: lab structure, weekly rhythm, grading, projects, and ground rules
   - Install and verify R and RStudio
-  - Complete Tutorial 0 and submit the hash code to Blackboard
+  - Complete Tutorial 1 and submit the hash code to Blackboard
   - Import a data set with `read.csv()` and compute a simple column summary
 
 - **Deliverables:**
