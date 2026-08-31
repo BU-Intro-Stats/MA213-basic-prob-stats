@@ -20,7 +20,7 @@
 
 **Post-lab activity**
 - Lab2 in-lab activity submission
-- Complete Tutorial 3 and submit your hash code by 10pm Tuesday
+- Complete Tutorial 3 and submit your hash code before Lab 3
 
 **Deliverables**
 - Lab1 in-lab activity submission

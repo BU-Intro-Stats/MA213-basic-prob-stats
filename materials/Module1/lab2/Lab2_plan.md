@@ -34,6 +34,6 @@ The worksheet is pair work throughout. Collect it at the door.
   - Q5, average mpg falls 26.66 -> 19.74 -> 15.10 and average hp climbs 82.64 -> 122.29 -> 209.21 as cylinders go 4 -> 6 -> 8 (n = 11, 7, 14).
   - Optional challenge: high horsepower averages 15.41 mpg (n = 15), lower horsepower 24.22 mpg (n = 17).
 - Watch for students reading the contingency table as "most common car" rather than a joint count. Push them to say which margin they are comparing.
-- After lab: Tutorial 3 hash is due by 10pm Tuesday and is the pre-lab for Lab 3.
+- After lab: Tutorial 3 hash is due before Lab 3, which it serves as the pre-lab for.
 
 ---
