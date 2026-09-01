@@ -18,6 +18,8 @@ The worksheet is pair work throughout. Collect it at the door.
 
 - Print `Lab2_worksheet.pdf`, one per student
 - Post `baby_names.csv`, `mtcars.csv`, and `Lab2.R` to Blackboard
+- Set up the Blackboard item for the Tutorial 2 hash and confirm that it is open
+- Set up the Gradescope item for the Worksheet
 - Check Tutorial 2 hash submissions and chase anyone missing; Tutorial 2 is the pre-lab for today
 - Have `install.packages("dplyr")` ready to project
 

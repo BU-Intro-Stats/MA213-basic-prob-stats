@@ -16,8 +16,9 @@ The last three run concurrently, not in sequence. Students who already have R st
 ## Before lab
 
 - Print `Lab1_worksheet.pdf`, one per student; build `Lab1.pdf`
-- Post `sleep.csv` and `Lab1.R` to Blackboard
-- Confirm the Blackboard item for the Tutorial 1 hash is open
+- Post `sleep.csv`, `burger.csv`, and `Lab1.R` to Blackboard
+- Set up the Blackboard item for the Tutorial 1 hash and confirm that it is open
+- Set up the Gradescope item for the Worksheet
 - Links ready to project: <https://cloud.r-project.org>, <https://posit.co/download/rstudio-desktop/>
 
 ## Notes

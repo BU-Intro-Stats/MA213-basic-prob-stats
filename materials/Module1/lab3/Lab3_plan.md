@@ -19,6 +19,8 @@ The worksheet is pair work throughout. Collect it at the door.
 
 - Print `Lab3_worksheet.pdf`, one per student
 - Post `airquality.csv`, `Titanic.csv`, and `Lab3.R` to Blackboard
+- Set up the Blackboard item for the Tutorial 3 hash and confirm that it is open
+- Set up the Gradescope item for the Worksheet
 - Check Tutorial 3 hash submissions and chase anyone missing; Tutorial 3 is the pre-lab for today
 - Assign pairs with `group_divider.py` (reads `Class_list.csv`, writes `group_pairs.pdf`)
 - Have `install.packages(c("ggplot2", "tidyr"))` ready to project
