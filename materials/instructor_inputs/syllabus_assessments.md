@@ -9,17 +9,19 @@ Instructor notes:
 
 ## Homework
 
-Homework problem sets will be assigned in Edfinity each week and due the following Monday at 3pm. The interface will tell you immediately if your answer is incorrect, and you will have another chance to submit a correct answer. 
+Homework problem sets will be assigned in Edfinity each week and due the following Monday at 3pm. The interface will tell you immediately if your answer is incorrect, and you can try multiple times. In order to get credit for a complete homework, you must get at least 80% of the problems correct. 
 
 ## Quizzes
 
-The course material is divided into a set of Learning Objectives, described in the Learning Objectives document on the course website. There are 19 Core objectives and 11 Auxiliary objectives that will be assessed via 5 quizzes that occur during lecture time. Note that Quiz 5 is entirely Auxiliary objectives. On any given quiz, each objective will be graded Pass/Almost Pass/Not Yet. 
+The course material is divided into a set of Learning Objectives, described in the Learning Objectives document on the course website. There are 18 Core objectives and 11 Auxiliary objectives that will be assessed via 5 quizzes that occur during lecture time. Note that Quiz 5 is entirely Auxiliary objectives. On any given quiz, each objective will be graded Pass/Almost Pass/Not Yet. 
 
 | Result | Meaning | Next Step |
 | --- | --- | --- |
 | Pass | The response is correct. | The objective does not need to be attempted again, even when another objective from the same quiz is retaken. |
 | Almost Pass | The response contains only a minor error, such as a typo. | Within one week of receiving the quiz grade, attend office hours, explain the error, and correct it. A correct explanation becomes Pass; an incorrect explanation becomes Not Yet. |
 | Not Yet | The response is incorrect, incomplete, or insufficient. | Retake the objective through the quiz-retake process. |
+
+*&nbsp;If you are unable to take a quiz when it is originally offered, you will need to use a retake for it (including filling out the Retake Qualification Form).
 
 ### Quiz correction & retake procedure
 

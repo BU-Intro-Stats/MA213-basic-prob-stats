@@ -61,18 +61,29 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">3</div>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Lab 1 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Tutorial 1</p>
+</article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -87,6 +98,17 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Lab</div>
 <h3>Lab 1</h3>
 <p class="calendar-event__meta">Anchor: Lecture 1</p>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Lab 1 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Lab1 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -122,6 +144,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
+</article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
 <h3>Homework 1</h3>
@@ -153,24 +190,29 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">10</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 2 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Tutorial 2</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -189,8 +231,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 2 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Lab2 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -216,13 +263,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -242,6 +289,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -267,24 +329,29 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">17</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 3 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Tutorial 3</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -303,8 +370,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 3 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Lab3 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -330,13 +402,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -356,6 +428,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -381,24 +468,23 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">24</div>
-<article class="calendar-event calendar-event--lab-deliverable">
-<div class="calendar-event__kind">Lab Deliverable</div>
-<h3>Project1-1 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
-<p>Project 1 plan</p>
-</article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -412,6 +498,18 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Project1-1</h3>
+<p class="calendar-event__meta">Anchor: Lecture 9</p>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Project1-1 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Project 1 plan</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -437,13 +535,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -463,6 +561,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -487,6 +600,16 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date calendar-date--outside">
@@ -549,24 +672,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 4 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
-<p>Project 1 Outline</p>
-</article>
-<article class="calendar-event calendar-event--lab-deliverable">
-<div class="calendar-event__kind">Lab Deliverable</div>
-<h3>Lab 4 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Tutorial 4</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -585,8 +697,19 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 4 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Project 1 Outline</p>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Lab 4 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Lab4 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -612,13 +735,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -638,6 +761,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -663,6 +801,16 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 <article class="calendar-event calendar-event--review-session">
 <div class="calendar-event__kind">Review Session</div>
 <h3>Midterm Review</h3>
@@ -675,18 +823,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 5 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Tutorial 5</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -705,8 +848,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 5 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Lab5 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -746,13 +894,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -785,6 +933,16 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">15</div>
@@ -792,11 +950,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -815,6 +968,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Project1-2</h3>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -845,13 +1003,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -871,6 +1029,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -896,24 +1069,23 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">22</div>
-<article class="calendar-event calendar-event--lab-deliverable">
-<div class="calendar-event__kind">Lab Deliverable</div>
-<h3>Project2-1 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
-<p>Project1 Video</p>
-</article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -927,6 +1099,17 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Project2-1</h3>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Project2-1 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Project1 Video</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -952,13 +1135,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -978,6 +1161,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1003,30 +1201,29 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">29</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 6 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Tutorial 6</p>
-</article>
-<article class="calendar-event calendar-event--lab-deliverable">
-<div class="calendar-event__kind">Lab Deliverable</div>
-<h3>Lab 6 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
-<p>Project2 Outline</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1045,8 +1242,19 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 6 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Lab6 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Lab 6 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Project2 Outline</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1107,13 +1315,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -1133,6 +1341,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1158,6 +1381,16 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">5</div>
@@ -1165,11 +1398,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1183,6 +1411,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Project2-2</h3>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1208,13 +1441,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -1234,6 +1467,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1259,24 +1507,23 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">12</div>
-<article class="calendar-event calendar-event--lab-deliverable">
-<div class="calendar-event__kind">Lab Deliverable</div>
-<h3>Project2-3 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
-<p>Project2 Progress Report</p>
-</article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1290,6 +1537,17 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
 <h3>Project2-3</h3>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Project2-3 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Project2 Progress Report</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1315,13 +1573,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -1341,6 +1599,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1366,30 +1639,29 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">19</div>
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 7 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
-<p>Project2 writeup</p>
-</article>
-<article class="calendar-event calendar-event--lab-deliverable">
-<div class="calendar-event__kind">Lab Deliverable</div>
-<h3>Lab 7 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Tutorial 7</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1408,8 +1680,19 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 7 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
+<p>Project2 writeup</p>
+</article>
+<article class="calendar-event calendar-event--lab-deliverable">
+<div class="calendar-event__kind">Lab Deliverable</div>
+<h3>Lab 7 Deliverables Due</h3>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Lab7 in-lab activity submission</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1436,13 +1719,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1456,6 +1739,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1519,7 +1817,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <article class="calendar-event calendar-event--lab-deliverable">
 <div class="calendar-event__kind">Lab Deliverable</div>
 <h3>Lab 8 Deliverables Due</h3>
-<p class="calendar-event__time">Due 10:00 PM</p>
+<p class="calendar-event__time">Due 9:00 AM</p>
 <p>Project2 Resubmission</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -1544,13 +1842,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
@@ -1626,6 +1924,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">2</div>
@@ -1651,6 +1964,16 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">3</div>
@@ -1658,11 +1981,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1672,6 +1990,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Lecture 34</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>Bayesian modeling with the beta-binomial model</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">12:30 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1697,13 +2020,13 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Emily</h3>
-<p class="calendar-event__time">12:15 PM-1:30 PM</p>
+<h3>Office Hour Yongho</h3>
+<p class="calendar-event__time">2:00 PM-3:30 PM</p>
 </article>
 <article class="calendar-event calendar-event--office-hours">
 <div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">2:00 PM-3:30 PM</p>
+<h3>Office Hour Emily</h3>
+<p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1717,6 +2040,21 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Discussion</div>
 <h3>Discussion B3</h3>
 <p class="calendar-event__time">3:35 PM-4:25 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Lucia</h3>
+<p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Noah</h3>
+<p class="calendar-event__time">9:30 AM-10:45 AM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Carly</h3>
+<p class="calendar-event__time">11:00 AM-12:00 PM</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1743,6 +2081,16 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Discussion B6</h3>
 <p class="calendar-event__time">10:10 AM-11:00 AM</p>
 </article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Sydney</h3>
+<p class="calendar-event__time">2:30 PM-3:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--office-hours">
+<div class="calendar-event__kind">Office Hours</div>
+<h3>Office Hour Jacob</h3>
+<p class="calendar-event__time">1:00 PM-2:00 PM</p>
+</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">10</div>
@@ -1762,11 +2110,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
-</article>
-<article class="calendar-event calendar-event--office-hours">
-<div class="calendar-event__kind">Office Hours</div>
-<h3>Office Hour Yongho</h3>
-<p class="calendar-event__time">1:00 PM-2:00 PM</p>
 </article>
 </section>
 <section class="calendar-date calendar-date--term-edge">

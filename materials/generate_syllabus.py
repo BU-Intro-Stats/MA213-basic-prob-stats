@@ -19,6 +19,7 @@ OUTPUT = ROOT / "generated_outputs" / "syllabus.tex"
 WEEKLY_SCHEDULE = ROOT / "generated_outputs" / "weekly_schedule.md"
 LECTURE_SUMMARY = INPUTS / "lecture_summary.md"
 HOMEWORK_SCHEDULE = INPUTS / "Homework_schedule.md"
+WEEKLY_PLAN_OVERRIDES = INPUTS / "syllabus_weekly_plan.md"
 
 SYLLABUS_FILES = (
     INPUTS / "syllabus_course.md",
@@ -59,12 +60,17 @@ def latex_escape(text: str) -> str:
 def inline_latex(text: str) -> str:
     """Convert the small set of inline Markdown used by the syllabus inputs."""
     text = text.replace("&nbsp;", " ")
-    pattern = re.compile(r"(\*\*.+?\*\*|`[^`]+`|https?://[^\s|]+)")
+    # ``{{...}}`` passes its contents through untouched so an input file can
+    # supply LaTeX the converter has no Markdown spelling for, such as the
+    # discretionary hyphens in a long author name.
+    pattern = re.compile(r"(\{\{.+?\}\}|\*\*.+?\*\*|`[^`]+`|https?://[^\s|]+)")
     parts = []
     for token in pattern.split(text):
         if not token:
             continue
-        if token.startswith("**") and token.endswith("**"):
+        if token.startswith("{{") and token.endswith("}}"):
+            parts.append(token[2:-2])
+        elif token.startswith("**") and token.endswith("**"):
             parts.append(r"\textbf{" + latex_escape(token[2:-2]) + "}")
         elif token.startswith("`") and token.endswith("`"):
             source = token[1:-1]
@@ -447,6 +453,35 @@ def homework_by_week(path: Path) -> dict[str, str]:
     }
 
 
+def weekly_plan_overrides(path: Path) -> dict[str, dict[str, str]]:
+    """Return per-week syllabus overrides for the Weekly Plan table.
+
+    The syllabus condenses a week of lecture topics into a single phrase and
+    occasionally lists a deliverable in a different week than the calendar
+    does.  This optional table holds those syllabus-only edits so the calendar
+    and course site keep the full generated text.  A blank cell keeps the
+    generated value; ``(none)`` prints an empty cell.
+    """
+    if not path.exists():
+        return {}
+    return {
+        row["Week"].strip(): row
+        for row in read_markdown_table(path, "Weekly Plan Overrides")
+    }
+
+
+def apply_override(cells: dict[str, str], override: dict[str, str]) -> dict[str, str]:
+    """Replace generated Weekly Plan cells with the instructor's syllabus text."""
+    for column, value in override.items():
+        if column == "Week" or column not in cells:
+            continue
+        value = value.strip()
+        if not value:
+            continue
+        cells[column] = "" if value.lower() == "(none)" else value
+    return cells
+
+
 def quizzes_by_week(rows: list[dict[str, str]]) -> dict[str, str]:
     """Map weekly schedule rows to the quizzes listed in each week."""
     return {
@@ -471,6 +506,7 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
     lectures = lecture_metadata(LECTURE_SUMMARY)
     homework = homework_by_week(HOMEWORK_SCHEDULE)
     quizzes = quizzes_by_week(rows)
+    overrides = weekly_plan_overrides(WEEKLY_PLAN_OVERRIDES)
     chunks = [rows[index : index + 8] for index in range(0, len(rows), 8)]
     output = []
     for chunk_index, chunk in enumerate(chunks):
@@ -481,9 +517,10 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
             (
                 r"\begin{center}",
                 r"\scriptsize",
-                r"\setlength{\tabcolsep}{2pt}",
+                r"\setlength{\tabcolsep}{4pt}",
                 r"\renewcommand{\arraystretch}{1.1}",
-                r"\begin{tabular}{|p{0.10\textwidth}|p{0.10\textwidth}|p{0.06\textwidth}|p{0.23\textwidth}|p{0.07\textwidth}|p{0.14\textwidth}|p{0.08\textwidth}|p{0.08\textwidth}|}",
+                r"\hyphenpenalty=10000 \exhyphenpenalty=10000",
+                r"\begin{tabular}{|C{0.095\textwidth}|P{0.100\textwidth}|P{0.075\textwidth}|P{0.170\textwidth}|P{0.090\textwidth}|P{0.145\textwidth}|P{0.105\textwidth}|P{0.067\textwidth}|}",
                 r"\hline",
                 r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} \\",
                 r"\hline",
@@ -523,34 +560,25 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 for number in lecture_numbers
                 if lectures.get(number, {}).get("topic")
             ))
-            week_label = (
-                rf"\parbox[t]{{0.09\textwidth}}{{\centering "
-                rf"{week_number} ({week_date.month}/{week_date.day})}}"
-            )
+            week_label = f"{week_number} ({week_date.month}/{week_date.day})"
             schedule_notes = {
-                7: r"Tues is\\Mon schedule",
-                13: r"No classes\\Wed-Fri",
+                7: r"Tues is\newline Mon schedule",
+                13: r"No classes\newline Wed-Fri",
             }
-            if week_number in schedule_notes:
-                week_label = (
-                    rf"\parbox[t]{{0.09\textwidth}}{{\centering "
-                    rf"{week_number} ({week_date.month}/{week_date.day})"
-                    rf"\\\scriptsize {schedule_notes[week_number]}}}"
-                )
-            cells = (
-                week_label,
-                "; ".join(reading_values),
-                "; ".join(module_values),
-                lecture_topics,
-                labs,
-                deliverables,
-                homework.get(row["Week"], ""),
-                quizzes.get(row["Week"], ""),
-            )
-            output.append(" & ".join(
-                cell if cell.startswith(r"\parbox") else inline_latex(cell)
-                for cell in cells
-            ) + r" \\")
+            cells = {
+                "Reading": "; ".join(reading_values),
+                "Module": "; ".join(module_values),
+                "Lecture Topics": lecture_topics,
+                "Labs": labs,
+                "Lab Deliverable": deliverables,
+                "Homework": homework.get(row["Week"], ""),
+                "Quiz": quizzes.get(row["Week"], ""),
+            }
+            apply_override(cells, overrides.get(str(week_number), {}))
+            note = schedule_notes.get(week_number)
+            rendered = [inline_latex(week_label) + (rf"\newline {note}" if note else "")]
+            rendered.extend(inline_latex(cell) for cell in cells.values())
+            output.append(" & ".join(rendered) + r" \\")
             output.append(r"\hline")
         output.extend((r"\end{tabular}", r"\end{center}"))
     return "\n".join(output)
@@ -621,6 +649,8 @@ def build_document() -> str:
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \setlist{leftmargin=*,topsep=2pt,itemsep=1pt}
 \setlength{\parskip}{5pt}
 \setlength{\parindent}{0pt}
