@@ -22,20 +22,20 @@ This course uses an alternative grading system based on the following principles
 - The assessment system should promote authentic engagement with statistics rather than “studenting” behaviors, such as cramming, cheating, and arguing about points. 
 - You should have some choice in your trajectory through the course. 
 
-You will complete assignments that fall into different categories: 12 Edfinity Homeworks, in-Lecture worksheet, 5 Quizzes, 7 Skills Labs, and 2 Lab Group Projects. Quiz problems are divided into 19 core and 11 auxiliary learning objectives. Your course grade will be determined by how many items you’ve passed in each category; you must meet all of the criteria for a particular grade (see table below). You will have multiple chances to complete assignments that are not graded based on effort/completeness. You can choose what grade you would like to aim for, and you only need to do the work for that grade (I encourage everyone to aim for an A!). The following table and the accompanying notes summarize the requirements for each grade:
+You will complete assignments that fall into different categories: 12 Edfinity Homeworks, in-Lecture worksheet, 5 Quizzes, 7 Skills Labs, and 2 Lab Group Projects. Quiz problems are divided into 18 core and 11 auxiliary learning objectives. Your course grade will be determined by how many items you’ve passed in each category; **You must meet all of the criteria for a particular grade** (see table below). You will have an opportunity to retake quiz problems and revise projects (see below). You can choose what grade you would like to aim for, and you only need to do the work for that grade (I encourage everyone to aim for an A!). The following table and the accompanying notes summarize the requirements for each grade:
 
 ## Grade Requirements
 
-| Grade | Homeworks | Quiz Core Objectives | Quiz Auxiliary Objectives | Skills Labs | Lab Projects | Lectures | Discussion |
+| Grade | Homeworks | Quiz Core Objectives | Quiz Auxiliary Objectives | Skills Labs | Lab Projects | Lectures | Discussions |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | 12/12 complete | 17/19 passed | 9/11 passed | 7/7 complete | 2 satisfactory | Fewer than 5 missed | Fewer than 3 missed |
-| B | 11/12 complete | 15/19 passed | 6/11 passed | Labs 1-6 complete | 2 satisfactory | Fewer than 9 missed | Fewer than 4 missed |
-| C | 10/12 complete | 11/19 passed | 0/11 passed | Labs 1-6 complete | 2 satisfactory | Fewer than 15 missed | Fewer than 5 missed |
+| A | 12/12 complete | 16/18 passed | 9/11 passed | 7/7 complete | 2 satisfactory | Fewer than 5 missed | Fewer than 3 missed |
+| B | 11/12 complete | 14/18 passed | 6/11 passed | Labs 1-6 complete | 2 satisfactory | Fewer than 9 missed | Fewer than 4 missed |
+| C | 10/12 complete | 10/18 passed | 0/11 passed | Labs 1-6 complete | 2 satisfactory | Fewer than 15 missed | Fewer than 5 missed |
 
 ## Additional factors
 
 - Grades between letter grades are determined by how close a student is to the next letter grade.
 - One unsatisfactory project lowers the course grade by one-third of a letter grade, such as B to B-.
 - Two unsatisfactory project grades lower the course grade by two-thirds of a letter grade, such as B to C+.
-- Lectures/Discussion missed with permission are not counted as missed. To request permission, contact the lecture instructor in advance with the reason for the absence and complete any required form.
-- Labs missed with permission are not counted as missed. To request permission, contact the lab instructor in advance with the reason for the absence and complete any required form.
+- Lectures/Discussion missed with permission are not counted as missed. To request permission, contact the lecture instructor (for lectures) or discussion TF (for discussions) in advance with the reason for the absence and complete any required form.
+- If you need to miss a lab, contact the lab instructor in advance to get instructions on how to make up the missed work.

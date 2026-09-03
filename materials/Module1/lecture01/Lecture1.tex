@@ -4,17 +4,17 @@
 
 % Option 1: Slides with solutions
 
-\documentclass[slidestop,compress,mathserif]{beamer}
-\newcommand{\soln}[1]{\textit{#1}}
-\newcommand{\solnGr}[1]{#1}
+% \documentclass[slidestop,compress,mathserif]{beamer}
+% \newcommand{\soln}[1]{\textit{#1}}
+% \newcommand{\solnGr}[1]{#1}
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+\documentclass[11pt,containsverbatim,handout]{beamer}
+\usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+\newcommand{\soln}[1]{ }
+\newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -96,14 +96,14 @@ Some images may be included under fair use guidelines (educational purposes).}}
 		\item \hl{Labs:} Prof. Emily Stephen
 		\item \hl{Graduate Teaching Fellows (TFs):} 
 		\begin{itemize}
-			\item tbd (Discussions)
-			\item tbd (Discussions)
-			\item tbd (Labs)
+			\item Lucia Vilalonga (Discussions)
+			\item Noah Kupinsky (Discussions)
+			\item Sydney Elliot (Labs)
 		\end{itemize}
 		\item \hl{Undergraduate Learning Assistants (LAs):}
 		\begin{itemize}
-			\item tbd
-			\item tbd
+			\item Carly Kent
+			\item Jacob Freedman
 		\end{itemize}
 	\end{itemize}
 
@@ -124,6 +124,8 @@ Some images may be included under fair use guidelines (educational purposes).}}
 		\item \hl{Labs}: Fridays
 		\begin{itemize}
 			\item Check your schedule for your time and location
+			\item Please bring a laptop or tablet for in-lab activities
+			\item Please bring a pen or pencil for worksheets
 			\item Start this week!
 		\end{itemize}
 		\item \hl{Discussions}: Once a week
@@ -147,7 +149,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 			\item Announcements
 			\item Course documents: \textbf{Syllabus} (with Office Hours, GenAI policy, and Calendar), Learning Objectives
 			\item Links to Textbook, Edfinity, Gradescope
-			\item Course Forum
 			\item Lecture slides and videos
 			\item Lab materials
 			\item Your gradebook
@@ -204,6 +205,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 		\item \hl{Weekly labs} on Fridays, starting this week
 		\begin{itemize}
 			\item Bring a laptop
+			\item Bring a pen or pencil for worksheets
 		\end{itemize}
 		\item \hl{Skills labs}
 		\begin{itemize}
@@ -217,7 +219,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 			\item Project 2: Statistical report
 		\end{itemize}
 	\end{itemize}
-	You will receive an email with instructions for setting up your computer for R and RStudio. Please complete the setup before your first lab!
+	You will receive an email with instructions for setting up your computer for R, RStudio and Lab Tutorial. Please complete the setup before your first lab!
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -231,11 +233,11 @@ Some images may be included under fair use guidelines (educational purposes).}}
 			\item Due Mondays at 3:00pm
 			\item Low-stakes, graded for completion
 			\item Can revise and resubmit for full credit
-			\item \hl{Homework 1} due Monday
+			\item \hl{Homework 1} due Tuesday, Sep 8 at 3:00pm
 		\end{itemize} 
 		\item 5 \hl{Quizzes} 
 		\begin{itemize} % TODO update
-			\item In discussion sections, see calendar in Syllabus
+			\item In Lecture time, see calendar in Syllabus
 			\item 18 Core Learning Objectives, 11 Auxiliary Learning Objectives
 			\item 5-6 written problems, graded pass / almost pass / not yet
 			\item Can \textbf{qualify} to retake missed problems at the end of the semester (details later)
@@ -265,8 +267,6 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	Lab Projects & 2 satisfactory & 2 satisfactory & 2 satisfactory \\
 	\hline
 	Lectures & $<$5 missed & $<$9 missed & $<$15 missed \\
-	\hline
-	Labs & $<$3 missed & $<$4 missed & $<$5 missed \\
 	\hline
 	\end{tabular}
 	\end{table}
@@ -303,10 +303,10 @@ Some images may be included under fair use guidelines (educational purposes).}}
 	\frametitle{Learning Objectives}
 	Module 6: Global module (\textcolor{red}{core})
 	\begin{enumerate}
-		\item (Projects) I can carry out a complete, reproducible statistical workflow in R using the inference methods from the course  
-		\item (Quizzes) Given R code for a statistical analysis, I can explain what it does and why, and identify both programmatic and statistical errors 
-		\item (Quizzes) When solving probability and statistics problems, I can support my answers by writing out the steps using the notation and conventions of statistical exposition  
-		\item (Projects) I can recognize whether a statistical workflow is appropriate for the given data and data analysis goals, and explain the results of a statistical analysis to stakeholders
+		\item (\textcolor{red}{core}, Projects) I can carry out a complete, reproducible statistical workflow in R using the inference methods from the course  
+		\item (\textcolor{red}{core}, Quizzes) Given R code for a statistical analysis, I can explain what it does and why, and identify both programmatic and statistical errors 
+		\item (\textcolor{red}{core}, Quizzes) When solving probability and statistics problems, I can support my answers by writing out the steps using the notation and conventions of statistical exposition  
+		\item (\textcolor{red}{core}, Projects) I can recognize whether a statistical workflow is appropriate for the given data and data analysis goals, and explain the results of a statistical analysis to stakeholders
 	\end{enumerate}
 \end{frame}
 
@@ -360,7 +360,7 @@ Some images may be included under fair use guidelines (educational purposes).}}
 		\item \hl{See the Syllabus} for the full calendar (subject to change)
 		\item \hl{Edfinity Homeworks:} Due Monday at 3:00pm
 		\item \hl{Quizzes:} In discussion sections
-		\item \hl{Skills Labs:} Due the following Thursday at 10:00pm
+		\item \hl{Skills Lab Tutorials:} Due before the following Lab
 		\item \hl{Lab Projects:} See Syllabus for deadlines
 	\end{itemize}
 \end{frame}

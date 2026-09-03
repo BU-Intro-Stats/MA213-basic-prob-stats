@@ -29,6 +29,8 @@ This version preserves the original course sequence so that the lab flow stays f
   - Import a data set with `read.csv()` and compute a simple column summary
 
 - **Deliverables:**
+  - [Friday] Lab1 in-lab activity submission
+  - [Thursday] Tutorial 1
 
 ---
 
@@ -91,7 +93,7 @@ This version preserves the original course sequence so that the lab flow stays f
 - **Post-Lab Activity:**
   - Submit one completed Google Doc outline per group
 - **Deliverables:**
-  - Project 1 Outline
+  - Project 1 plan
 
 ---
 

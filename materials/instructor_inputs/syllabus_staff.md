@@ -12,10 +12,10 @@ Instructor notes:
 
 | Role | Name | Email | Office | Office Hours | Link or Notes |
 | --- | --- | --- | --- | --- | --- |
-| Lecture Instructor | Dr. Yongho Lim | ylim2@bu.edu | CCDS 408 | Monday 2:00PM-3:30PM; Thursday 1:00PM-2:00PM |  |
+| Lecture Instructor | Dr. Yongho Lim | ylim2@bu.edu | CCDS 408 | Monday 2:00PM-3:30PM; Friday 12:30PM-1:30PM |  |
 | Lab Instructor | Dr. Emily Stephen | estephen@bu.edu | CCDS 437 | Monday 12:15PM-1:30PM; Thursday 2:00PM-3:00PM |  |
-| Teaching Fellow | John Doe | johndoe@bu.edu | CCDS 000 | Friday 0:00PM-0:00PM |  |
-| Teaching Fellow | Jane Doe | janedoe@bu.edu | CCDS 000 | Tuesday 0:00PM-0:00PM |  |
-| Teaching Fellow | James Doe | jamesdoe@bu.edu | CCDS 000 | Wednesday 0:00PM-0:00PM | Add Zoom link. |
-| Learning Assistant | LA1 | LA1@bu.edu | CCDS 000 | Thursday 0:00PM-0:00PM | In person and Zoom |
-| Learning Assistant | LA2 | LA2@bu.edu | CCDS 000 | Tuesday 0:00PM-0:00PM |  |
+| Teaching Fellow | Lucia Vilallonga | lvilallonga@bu.edu | CCDS 542 | Tuesday 2:00PM-3:00PM |  |
+| Teaching Fellow | Noah Kupinsky | n0ah@bu.edu | CCDS 326 | Tuesday 9:30AM-10:45AM |  |
+| Teaching Fellow | Sydney Elliot | sydelli@bu.edu | Zoom https://bostonu.zoom.us/j/97322041821?pwd=uzB2ApmMgblECb3GObaX4Xw1aIMRtA.1 | Wednesday 2:30PM-3:30PM |  |
+| Learning Assistant | Carly Kent | kentcar@bu.edu | Tbd | Tuesday 11:00AM-12:00PM |  |
+| Learning Assistant | Jacob Freedman | jacobf@bu.edu | Tbd | Wednesday 1:00PM-2:00PM |  |

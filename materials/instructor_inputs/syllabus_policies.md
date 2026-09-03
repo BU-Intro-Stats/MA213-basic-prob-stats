@@ -7,13 +7,10 @@ Instructor notes:
 - Keep each policy under its own level-two heading so sections can be reordered or omitted by the generator.
 -->
 
-## Generative AI
+## Use of Generative AI
 
-Generative artificial intelligence tools create text, images, computer code, audio, video, and other content.
-
-No generative AI use is allowed for quizzes. For assignments where generative AI use is explicitly authorized, that use must be appropriately documented. The purpose of this policy is to allow students to use AI to enhance learning while limiting uses that provide an unfair advantage or detract from student learning.
-
-Use of generative AI in ways that have not been explicitly authorized may be addressed under the Boston University Academic Conduct Code. Students who are unsure whether a use is authorized should ask an instructor in advance. Students remain responsible for avoiding plagiarism, fabricated information, and fabricated data.
+Generative artificial intelligence tools (GenAI) — software that creates new text, images, computer code, audio, video, and other content — have become widely available. Well-known examples include CoPilot, Gemini, ChatGPT, and Claude among others. **A complete policy on the use of Generative AI in this course is included on the course webpage**, including acceptable uses, unauthorized uses, and other considerations. In particular, no GenAI use is allowed for Quizzes. The goal of this policy is to allow you to use AI to enhance their learning, while limiting AI use that could provide an unfair advantage or detract from your learning.
+If you use generative AI tools to complete assignments in this course, in ways that are not explicitly authorized, the course instructors will apply the Boston University Code of Academic Integrity as appropriate to your specific case. If you are unsure about your use of AI, it is best to check in with the course instructor in advance. In addition, you must be wary of unintentional plagiarism or fabrication of data. Please act with integrity, for the sake of both your personal character and your academic record.
 
 ## Attendance
 

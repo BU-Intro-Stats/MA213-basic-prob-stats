@@ -11,7 +11,7 @@ Each row creates one homework due event. Delete rows for weeks with no homework.
 
 | Homework | Week | Weekday | End Time | Details |
 | --- | --- | --- | --- | --- |
-| Homework 1 | 2 | Monday | 3:00PM | Weekly homework component. |
+| Homework 1 | 2 | Tuesday | 3:00PM | Weekly homework component. |
 | Homework 2 | 3 | Monday | 3:00PM | Weekly homework component. |
 | Homework 3 | 4 | Monday | 3:00PM | Weekly homework component. |
 | Homework 4 | 5 | Monday | 3:00PM | Weekly homework component. |
