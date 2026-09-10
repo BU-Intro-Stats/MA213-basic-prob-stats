@@ -23,7 +23,7 @@
 - Complete Tutorial 3 and submit your hash code before Lab 3
 
 **Deliverables**
-- Lab1 in-lab activity submission
+- Lab2 in-lab activity submission
 - Tutorial 1
 - Tutorial 2 (pre-lab for lab2)
 

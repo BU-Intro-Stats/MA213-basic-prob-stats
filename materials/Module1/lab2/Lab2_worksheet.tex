@@ -85,14 +85,25 @@ Before opening R: introduce yourself to your partner and share one fun fact abou
 
 \section*{Getting Started: Open the Case Files}
 
-Load both data sets. The \texttt{str()} function helps you see variable types quickly.
+\textbf{Step 1: Load the \texttt{dplyr} package.}
 
 \begin{lstlisting}[language=R]
 library(dplyr)
+\end{lstlisting}
 
-# Hint: read in both CSV files.
-baby_names <- read.csv("____________.csv")
-cars <- read.csv("____________.csv")
+If this gives an error like\\
+ \texttt{there is no package called `dplyr'}\\
+ run: \\
+ \texttt{install.packages("dplyr")}\\
+ Then run \\
+ \texttt{library(dplyr)} \\
+ again. (You only need to install a package once per computer, but you need to load it with \texttt{library()} every time you start a new R session.)
+
+\textbf{Step 2: Load the data sets.} The \texttt{str()} function helps you see variable types quickly.
+
+\begin{lstlisting}[language=R]
+baby_names <- read.csv("baby_names.csv")
+cars <- read.csv("mtcars.csv")
 
 head(baby_names)
 head(cars)
@@ -101,9 +112,33 @@ str(baby_names)
 str(cars)
 \end{lstlisting}
 
+Remember from Lab 1: if \texttt{read.csv()} gives you a ``cannot open file'' error, your working directory is probably wrong. Fix it with \textbf{Session $>$ Set Working Directory $>$ To Source File Location}.
+
 \section*{Question 1. Classify the Variables}
 
 For each data set, decide what one row represents and whether the variables are categorical or numerical.
+
+\textbf{Part A: \texttt{mtcars}.} Here is a key to the columns:
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Column} & \textbf{Description}\\
+\hline
+\texttt{mpg} & Miles/(US) gallon\\
+\texttt{cyl} & Number of cylinders\\
+\texttt{disp} & Displacement (cu.in.)\\
+\texttt{hp} & Gross horsepower\\
+\texttt{drat} & Rear axle ratio\\
+\texttt{wt} & Weight (1000 lbs)\\
+\texttt{qsec} & 1/4 mile time\\
+\texttt{vs} & Engine (0 = V-shaped, 1 = straight)\\
+\texttt{am} & Transmission (0 = automatic, 1 = manual)\\
+\texttt{gear} & Number of forward gears\\
+\texttt{carb} & Number of carburetors\\
+\hline
+\end{tabular}
+\end{center}
 
 \discussbox{Before you fill in the table: \texttt{mtcars} is famously old. Just by skimming \texttt{head(cars)}, does it look like data from this decade or from a different era? What gave it away?}
 
@@ -112,14 +147,24 @@ For each data set, decide what one row represents and whether the variables are 
 \hline
 \textbf{Data set} & \textbf{Observational unit} & \textbf{Variable types}\\
 \hline
-\texttt{baby\_names} & & \\[26pt]
-\hline
 \texttt{mtcars} & & \\[26pt]
 \hline
 \end{tabular}
 \end{center}
 
 \funfact{The \texttt{mtcars} data set comes from a 1974 \textit{Motor Trend} magazine article and describes design and performance for 32 cars from the 1973--74 model years.}
+
+\textbf{Part B: \texttt{baby\_names}.} This data set does not come with a column key. Use \texttt{head(baby\_names)} and \texttt{str(baby\_names)} to figure out what each column means before you fill in the table.
+
+\begin{center}
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.42\textwidth}|}
+\hline
+\textbf{Data set} & \textbf{Observational unit} & \textbf{Variable types}\\
+\hline
+\texttt{baby\_names} & & \\[26pt]
+\hline
+\end{tabular}
+\end{center}
 
 \section*{Question 2. Investigate a Baby Name Year}
 
@@ -153,25 +198,11 @@ top5_male
 top5_female
 \end{lstlisting}
 
-\claimbox{In \underline{\hspace{1.2cm}}, the most popular male name was \underline{\hspace{2cm}} and the most popular female name was \underline{\hspace{2cm}}. This is evidence that \underline{\hspace{4cm}}.}
+\claimbox{In \underline{\hspace{1.2cm}}, the most popular male name was \underline{\hspace{2cm}} and the most popular female name was \underline{\hspace{2cm}}.}
 
-\begin{center}
-\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
-\hline
-\textbf{Variable} & \textbf{Categorical or numerical?} & \textbf{Reason}\\
-\hline
-\texttt{male} & & \\[18pt]
-\hline
-\texttt{female} & & \\[18pt]
-\hline
-\texttt{year} & & \\[18pt]
-\hline
-\texttt{rank} & & \\[18pt]
-\hline
-\end{tabular}
-\end{center}
+\debatebox{One partner argues \texttt{rank} is basically a number, so you could average it across years. The other argues that averaging ranks is misleading and rank should be treated more like an ordered category. Make your case, then write the team's verdict below.
 
-\debatebox{One partner argues \texttt{rank} is basically a number, so you could average it across years. The other argues that averaging ranks is misleading and rank should be treated more like an ordered category. Make your case, then write the team's verdict above.}
+\vspace{4pt}\noindent\textbf{Verdict:} \underline{\hspace{0.85\linewidth}}}
 
 \section*{Question 3. Track One Name Over Time}
 
@@ -200,6 +231,8 @@ best_rank
 
 \textbf{Optional challenge: Name Rivalry.}
 
+Compare the popularity of two names over time by creating a rivalry table.
+
 \begin{lstlisting}[language=R]
 name1 <- "________"
 name2 <- "________"
@@ -213,9 +246,13 @@ rivalry <- baby_names %>%
 rivalry
 \end{lstlisting}
 
+Which name is more popular? Which name has been around longer?
+
 \section*{Question 4. Build a Contingency Table}
 
 Before comparing averages, investigate the categorical structure of the car data. Are manual and automatic cars spread evenly across cylinder groups, or are some combinations more common?
+
+To do this, you'll need to create a contingency table. You saw contingency tables in Tutorial 2, but as a reminder: a contingency table shows counts for every combination of two categorical variables, so you can see at a glance which combinations are common and which are rare.
 
 \discussbox{\texttt{am} is stored as 0s and 1s. Does storing a category as numbers make it numerical, or is it still categorical underneath?}
 
@@ -237,7 +274,7 @@ Before comparing averages, investigate the categorical structure of the car data
 \end{tabular}
 \end{center}
 
-Use \texttt{mutate()} to create a readable transmission variable. Then produce a contingency table for \texttt{transmission} and \texttt{cyl}. You may use either \texttt{table()} or \texttt{count()}.
+Use \texttt{mutate()} to create a readable transmission variable. Then produce a contingency table for \texttt{transmission} and \texttt{cyl}. You may use \texttt{table()}, \texttt{count()}, or the \texttt{group\_by()}/\texttt{summarize()}/\texttt{pivot\_wider()} approach from Tutorial 2.
 
 \begin{lstlisting}[language=R]
 cars2 <- cars %>%
@@ -254,6 +291,15 @@ transmission_cyl_counts <- cars2 %>%
   count(________, ________)
 
 transmission_cyl_counts
+
+# Option 3: group_by() + summarize() + pivot_wider(), as in Tutorial 2
+# Needs the tidyr package: library(tidyr)
+transmission_cyl_wide <- cars2 %>%
+  group_by(________, ________) %>%
+  summarize(Count = n()) %>%
+  pivot_wider(names_from = ________, values_from = Count)
+
+transmission_cyl_wide
 \end{lstlisting}
 
 \writebox{Use your contingency table to describe the relationship between transmission type and cylinder group. Which combinations are most common? Which are rare or missing?}
@@ -284,6 +330,8 @@ cylinder_summary
 
 \textbf{Optional challenge: Create a Power Category.}
 
+Create a new variable that categorizes each car as either ``high horsepower" or ``lower horsepower" based on whether its horsepower is above or below the median, then summarize the data by this new variable in terms of the mean miles per gallon and number of cars.
+
 \begin{lstlisting}[language=R]
 cars_power <- cars2 %>%
   mutate(power_group = ifelse(hp > median(hp), "high horsepower", "lower horsepower"))
@@ -295,6 +343,7 @@ power_summary <- cars_power %>%
 power_summary
 \end{lstlisting}
 
+How does average mpg differ between high and lower horsepower cars?
 
 \section*{Post-lab Activity}
 

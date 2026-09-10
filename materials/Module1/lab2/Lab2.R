@@ -4,6 +4,9 @@
 #
 # This file is intentionally a starter, not a solution key. Some lines
 # are commented out because you need to fill in the missing pieces first.
+# 
+# Tip: you can comment/uncomment lines in RStudio with 
+# Ctrl+Shift+C (Windows) or Cmd+Shift+C (Mac).
 ############################################################
 
 library(dplyr)
@@ -91,6 +94,22 @@ chosen_name <- "Emma"
 # Was the name climbing, falling, or coming back over time?
 
 
+# Optional challenge: Name Rivalry
+
+# name1 <- "________"
+# name2 <- "________"
+#
+# rivalry <- baby_names %>%
+#   filter(female == name1 | female == name2 | male == name1 | male == name2) %>%
+#   mutate(tracked_name = ifelse(female %in% c(name1, name2), female, male)) %>%
+#   group_by(tracked_name) %>%
+#   summarize(best_rank = min(________), years_in_data = n())
+#
+# rivalry
+
+# Interpretation:
+# Which name is more popular? Which name has been around longer?
+
 ############################################################
 # Question 4. Build a Contingency Table
 ############################################################
@@ -113,10 +132,21 @@ chosen_name <- "Emma"
 
 
 # Option 2: dplyr count()
+#    Hint: count() is a shortcut that combines group_by() and summarize(n=n())
 # transmission_cyl_counts <- cars2 %>%
 #   count(________, ________)
 #
 # transmission_cyl_counts
+
+
+# Option 3: group_by() + summarize() + pivot_wider(), as in Tutorial 2
+# Needs the tidyr package: library(tidyr)
+# transmission_cyl_wide <- cars2 %>%
+#   group_by(________, ________) %>%
+#   summarize(Count = n()) %>%
+#   pivot_wider(names_from = ________, values_from = Count)
+#
+# transmission_cyl_wide
 
 # Interpretation:
 # Which transmission/cylinder combinations are most common?
@@ -154,6 +184,8 @@ chosen_name <- "Emma"
 #
 # power_summary
 
+# Interpretation:
+# How does average mpg differ between high and lower horsepower cars?
 
 ############################################################
 # Closing Arguments
