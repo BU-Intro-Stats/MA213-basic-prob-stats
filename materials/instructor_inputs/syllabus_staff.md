@@ -14,8 +14,8 @@ Instructor notes:
 | --- | --- | --- | --- | --- | --- |
 | Lecture Instructor | Dr. Yongho Lim | ylim2@bu.edu | CCDS 408 | Monday 2:00PM-3:30PM; Friday 12:30PM-1:30PM |  |
 | Lab Instructor | Dr. Emily Stephen | estephen@bu.edu | CCDS 437 | Monday 12:15PM-1:30PM; Thursday 2:00PM-3:00PM |  |
-| Teaching Fellow | Lucia Vilallonga | lvilallonga@bu.edu | CCDS 542 | Tuesday 2:00PM-3:00PM |  |
+| Teaching Fellow | Lucia Vilallonga | luciav@bu.edu | CCDS 542 | Tuesday 2:00PM-3:00PM |  |
 | Teaching Fellow | Noah Kupinsky | n0ah@bu.edu | CCDS 326 | Tuesday 9:30AM-10:45AM |  |
 | Teaching Fellow | Sydney Elliot | sydelli@bu.edu | Zoom https://bostonu.zoom.us/my/sydneye | Wednesday 2:30PM-3:30PM |  |
-| Learning Assistant | Carly Kent | kentcar@bu.edu | Tbd | Tuesday 11:00AM-12:00PM |  |
-| Learning Assistant | Jacob Freedman | jacobf@bu.edu | Tbd | Wednesday 1:00PM-2:00PM |  |
+| Learning Assistant | Carly Kent | kentcar@bu.edu | CDS424 | Tuesday 11:00AM-12:00PM |  |
+| Learning Assistant | Jacob Freedman | jacobf@bu.edu | CDS524 | Wednesday 1:00PM-2:00PM |  |

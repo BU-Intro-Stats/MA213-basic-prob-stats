@@ -4,17 +4,17 @@
 
 % Option 1: Slides with solutions
 
-\documentclass[slidestop,compress,mathserif]{beamer}
-\newcommand{\soln}[1]{\textit{#1}}
-\newcommand{\solnGr}[1]{#1}
+% \documentclass[slidestop,compress,mathserif]{beamer}
+% \newcommand{\soln}[1]{\textit{#1}}
+% \newcommand{\solnGr}[1]{#1}
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+\documentclass[11pt,containsverbatim,handout]{beamer}
+\usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+\newcommand{\soln}[1]{ }
+\newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -298,7 +298,7 @@ The box in a \hl{box plot} represents the middle 50\% of the data, and the thick
   \draw[red,thick] (-0.3,2.1) -- (0.0,2.1); % Q1
   \draw[red,thick] (-0.3,3.2) -- (0.0,3.2); % Q3
   \node[anchor=east, text=red, font=\bfseries\small, visible on=<2>] at (-0.4,2.1) {Q1};
-  \node[anchor=east, text=red, font=\bfseries\small, visible on=<2>] at (-0.4,3.2) {Q2};
+  \node[anchor=east, text=red, font=\bfseries\small, visible on=<2>] at (-0.4,3.2) {Q3};
  \pause
   % --- Stage 3: Box verticals ---
   \draw[red,thick] (-0.3,2.1) -- (-0.3,3.2); % left vertical
