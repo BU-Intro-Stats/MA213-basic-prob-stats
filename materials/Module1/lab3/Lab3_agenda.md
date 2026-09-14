@@ -23,7 +23,7 @@
 - Lab3 in-lab activity submission
 
 **Deliverables**
-- Lab2 in-lab activity submission
+- Lab3 in-lab activity submission
 - Tutorial 3 (pre-lab for lab3)
 
 **Notes**

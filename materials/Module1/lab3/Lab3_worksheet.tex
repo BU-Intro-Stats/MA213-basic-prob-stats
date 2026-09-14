@@ -110,23 +110,11 @@ str(air)
 str(titanic)
 \end{lstlisting}
 
-\discussbox{Before calculating anything, discuss with your partner: What does one row represent in each data set? Which variables are numerical? Which variables are categorical?}
-
 \section*{Question 1. What kind of data are we looking at?}
 
-Classify the variables and decide what kinds of exploratory data analysis are possible for each data set.
+\discussbox{Before calculating anything, discuss with your partner: What does one row represent in each data set? Which variables are numerical? Which variables are categorical?}
 
-\begin{center}
-\begin{tabular}{|p{0.18\textwidth}|p{0.24\textwidth}|p{0.21\textwidth}|p{0.21\textwidth}|}
-\hline
-\textbf{Data set} & \textbf{Observational unit} & \textbf{Numerical variables} & \textbf{Categorical variables}\\
-\hline
-\texttt{airquality} & & & \\[30pt]
-\hline
-\texttt{Titanic} & & & \\[30pt]
-\hline
-\end{tabular}
-\end{center}
+\discussbox{What patterns or relationships might we expect to find in each data set?}
 
 \writebox{Write one possible research question for each data set.}
 
@@ -179,7 +167,7 @@ ggplot(air_clean, aes(x = Temp, y = Solar.R)) +
 
 \section*{Question 4. Can we categorize air quality conditions?}
 
-Use \texttt{mutate()} to create categories. First, remove rows with missing \texttt{Ozone} or \texttt{Wind}. Then classify ozone as high or low using the median, and classify wind speed using simplified Beaufort-style categories.
+Look at how the code below uses \texttt{mutate()} to create simplified Beaufort-style categories (recall the Beaufort wind scale from Tutorial 2). What is each part of the code doing? How are the new variables \texttt{ozone\_level} and \texttt{wind\_level} created?
 
 \begin{lstlisting}[language=R]
 air_categories <- air %>%
@@ -203,17 +191,11 @@ ozone_wind_table <- air_categories %>%
 ozone_wind_table
 \end{lstlisting}
 
-\begin{center}
-\begin{tabular}{|p{0.28\textwidth}|p{0.28\textwidth}|p{0.34\textwidth}|}
-\hline
-\textbf{New variable} & \textbf{Type} & \textbf{How it was created}\\
-\hline
-\texttt{ozone\_level} & & \\[22pt]
-\hline
-\texttt{wind\_level} & & \\[22pt]
-\hline
-\end{tabular}
-\end{center}
+\writebox{What does the \texttt{filter()} line do here?}
+
+\writebox{The \texttt{ifelse()} function takes three arguments: a condition, a value if TRUE, and a value if FALSE. In words, what rule does \texttt{ifelse()} use to assign \texttt{ozone\_level}?}
+
+\writebox{The \texttt{case\_when()} function checks a list of conditions in order and uses the value tied to the first one that is TRUE. Why does \texttt{case\_when()} make more sense than \texttt{ifelse()} for this variable?}
 
 \debatebox{The original \texttt{Wind} variable is numerical. After you create \texttt{wind\_level}, should it be treated as numerical or categorical? Make your case.}
 
@@ -254,24 +236,34 @@ ggplot(class_survival_table, aes(x = Class, y = n, fill = Survived)) +
   )
 \end{lstlisting}
 
-\claimbox{In the Titanic data, passenger class and survival appear to be related because \underline{\hspace{5cm}}. My evidence is \underline{\hspace{5cm}}.}
+\claimbox{In the Titanic data, passenger class and survival \underline{\hspace{5cm}} (do/do not) appear to be related. My evidence is \underline{\hspace{5cm}}.}
 
-\section*{Optional Challenge}
+\section*{Optional Challenge. Did survival differ by sex or age?}
 
-Investigate survival by \texttt{Sex} and \texttt{Age}. Then count the number of male children in the data.
+Using the same approach as above, investigate whether survival differed by \texttt{Sex} and by \texttt{Age}. 
+
+\writebox{Which sex had the highest survival count? Which had the highest survival rate?}
+
+\writebox{Which age group had the highest survival rate? Was the difference between children and adults large or small?}
+
+\discussbox{Does the pattern you see for \texttt{Sex} resemble the pattern you saw for \texttt{Class}? What about the pattern for \texttt{Age}?}
+
+\claimbox{In the Titanic data, \underline{\hspace{3cm}} appears to be more strongly related to survival than \underline{\hspace{3cm}}. My evidence is \underline{\hspace{5cm}}.}
+
+\section*{Extra Challenge. Is there an interaction between sex and class?}
+
+So far you have looked at survival by class alone and by sex alone. But the effect of class on survival might not be the same for both sexes -- this is called an \textbf{interaction}. A mosaic plot can show three categorical variables at once: the width of each column reflects the number of passengers in that group, and the height of the colored blocks within a column reflects the proportion who survived.
+
+\predictbox{Do you think the ``women and children first'' policy applied equally across all three passenger classes? Why or why not?}
 
 \begin{lstlisting}[language=R]
-sex_age_table <- titanic %>%
-  count(Sex, Age)
-
-sex_age_table
-
-child_male <- titanic %>%
-  filter(Sex == "Male", Age == "Child") %>%
-  summarize(total = n())
-
-child_male
+sex_class_survival_table <- table(titanic$Sex, titanic$Class, titanic$Survived)
+mosaicplot(sex_class_survival_table, color=TRUE)
 \end{lstlisting}
+
+\discussbox{Look at the survival split within each Class-by-Sex combination. In which combination is the survival rate highest? In which is it lowest? Does the class pattern look the same for men as it does for women?}
+
+\claimbox{The relationship between class and survival \underline{\hspace{3cm}} (does / does not) appear to depend on sex. I believe this because \underline{\hspace{5cm}}.}
 
 
 \end{document}

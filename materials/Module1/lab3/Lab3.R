@@ -4,6 +4,14 @@
 #
 # This file is intentionally a starter, not a solution key. Some lines
 # are commented out because you need to fill in the missing pieces first.
+#
+# Reminders: 
+# You can comment/uncomment lines in RStudio with
+# Ctrl+Shift+C (Windows) or Cmd+Shift+C (Mac).
+#
+# To run a line (or selected lines) of code, put your cursor on the
+# line (or select multiple lines) and press Ctrl+Enter (Windows) or
+# Cmd+Enter (Mac).
 ############################################################
 
 library(dplyr)
@@ -39,10 +47,11 @@ str(titanic)
 names(air)
 names(titanic)
 
-# No additional code is required here, but use the handout to write:
+# No additional code is required here, but use the handout to discuss/write:
 # - the observational unit for each data set
 # - the numerical variables
 # - the categorical variables
+# - what patterns or relationships you might expect to find in each data set
 # - one possible research question for each data set
 
 
@@ -58,6 +67,8 @@ names(titanic)
 #   summarize(solar_r_avg = mean(________, na.rm = TRUE))
 #
 # solar_by_month
+
+# What does the na.rm = TRUE argument do in the mean() function? Why is it important here?
 
 # Make a bar plot from the summary table.
 
@@ -105,6 +116,7 @@ ggplot(air_clean, aes(x = Temp, y = Solar.R)) +
 
 # Create categorical versions of Ozone and Wind.
 # This block is complete, but read it carefully before running it.
+# Discuss with your partner what each part of the code is doing.
 
 air_categories <- air %>%
   filter(!is.na(Ozone), !is.na(Wind)) %>%
@@ -127,9 +139,16 @@ ozone_wind_table <- air_categories %>%
 ozone_wind_table
 
 # Interpretation:
-# - Is ozone_level numerical or categorical?
-# - Is wind_level numerical or categorical?
-# - How did mutate() change the data set?
+# - What does the filter() line do here? What would happen to the counts
+#   in ozone_wind_table if you removed it?
+# - ifelse() takes a condition, a value if TRUE, and a value if FALSE.
+#   In words, what rule does ifelse() use to assign ozone_level?
+# - case_when() checks a list of conditions in order and uses the value
+#   tied to the first one that is TRUE. In words, what rule does
+#   case_when() use to assign wind_level? Why does case_when() make more
+#   sense than ifelse() for this variable?
+# - The original Wind variable is numerical. After you create wind_level,
+#   should it be treated as numerical or categorical? Make your case.
 
 
 ############################################################
@@ -180,18 +199,31 @@ ozone_wind_table
 
 
 ############################################################
-# Optional Challenge. Survival by Sex and Age
+# Optional Challenge. Did survival differ by sex or age?
 ############################################################
 
-# sex_age_table <- titanic %>%
-#   count(Sex, Age)
-#
-# sex_age_table
+# Using the same approach as above, build a count table and
+# dodged/filled bar plots for Sex and Age.
 
-# Count the number of male children in the data.
+# Interpretation:
+# - Which sex had the highest survival count? Which had the highest survival rate?
+# - Which age group had the highest survival rate? Was the difference between children and adults large or small?
+# - Does the pattern for Sex resemble the pattern you saw for Class? What about Age?
 
-# child_male <- titanic %>%
-#   filter(Sex == "Male", Age == "Child") %>%
-#   summarize(total = n())
-#
-# child_male
+
+############################################################
+# Extra Challenge. Is there an interaction between sex and class?
+############################################################
+
+# The effect of class on survival might not be the same for both sexes.
+# A mosaic plot can show three categorical variables at once: column width
+# reflects the number of passengers in each group, and the height of the
+# colored blocks within a column reflects the proportion who survived.
+
+# sex_class_survival_table <- table(titanic$Sex, titanic$Class, titanic$Survived)
+# mosaicplot(sex_class_survival_table, color=TRUE)
+
+# Interpretation:
+# - In which Class-by-Sex combination is the survival rate highest? Lowest?
+# - Does the class pattern look the same for men as it does for women?
+# - Does the relationship between class and survival appear to depend on sex?
