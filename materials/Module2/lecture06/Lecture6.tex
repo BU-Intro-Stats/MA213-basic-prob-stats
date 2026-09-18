@@ -4,17 +4,17 @@
 
 % Option 1: Slides with solutions
 
-\documentclass[slidestop,compress,mathserif]{beamer}
-\newcommand{\soln}[1]{\textit{#1}}
-\newcommand{\solnGr}[1]{#1}
+% \documentclass[slidestop,compress,mathserif]{beamer}
+% \newcommand{\soln}[1]{\textit{#1}}
+% \newcommand{\solnGr}[1]{#1}
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+\documentclass[11pt,containsverbatim,handout]{beamer}
+\usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+\newcommand{\soln}[1]{ }
+\newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -653,7 +653,7 @@ P(prefers in-person work) seems to vary by department, therefore preference for 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity Quiz}
+% \section{Edfinity Quiz}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -681,52 +681,52 @@ $\:$ \\
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Putting everything together...}
+% \begin{frame}
+% \frametitle{Putting everything together...}
 
-\dq{If we were to randomly select 5 Texans, what is the probability that at least one is uninsured?}
+% \dq{If we were to randomly select 5 Texans, what is the probability that at least one is uninsured?}
 
-\begin{itemize}
+% \begin{itemize}
 
-\item If we were to randomly select 5 Texans, the sample space for the number of Texans who are uninsured would be:
-\[ S = \{0, 1, 2, 3, 4, 5\} \]
+% \item If we were to randomly select 5 Texans, the sample space for the number of Texans who are uninsured would be:
+% \[ S = \{0, 1, 2, 3, 4, 5\} \]
 
-\item We are interested in instances where at least one person is uninsured:
-\[ S = \{0, \orange{$1, 2, 3, 4, 5$} \} \]
+% \item We are interested in instances where at least one person is uninsured:
+% \[ S = \{0, \orange{$1, 2, 3, 4, 5$} \} \]
 
-\item So we can divide up the sample space into two categories:
-\[ S = \{0, \orange{at~least~one} \} \]
+% \item So we can divide up the sample space into two categories:
+% \[ S = \{0, \orange{at~least~one} \} \]
 
-\end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-\frametitle{Putting everything together...}
+% \begin{frame}
+% \frametitle{Putting everything together...}
 
-Since the probability of the sample space must add up to 1:
-\begin{eqnarray*}
-Prob(at~least~1~uninsured) &=& 1 - Prob(none~uninsured) \\
-\pause
-&=& 1 - [(1-0.255)^5] \\
-\pause
-&=& 1- 0.745^5 \\
-\pause
-&=& 1 - 0.23 \\
-\pause
-&=& 0.77
-\end{eqnarray*}
+% Since the probability of the sample space must add up to 1:
+% \begin{eqnarray*}
+% Prob(at~least~1~uninsured) &=& 1 - Prob(none~uninsured) \\
+% \pause
+% &=& 1 - [(1-0.255)^5] \\
+% \pause
+% &=& 1- 0.745^5 \\
+% \pause
+% &=& 1 - 0.23 \\
+% \pause
+% &=& 0.77
+% \end{eqnarray*}
 
-$\:$ \\
-$\:$ \\
+% $\:$ \\
+% $\:$ \\
 
-\formula{At least 1}{\[P(at~least~one) = 1 - P(none)\]}
+% \formula{At least 1}{\[P(at~least~one) = 1 - P(none)\]}
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
