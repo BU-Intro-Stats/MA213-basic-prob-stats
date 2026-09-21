@@ -5,7 +5,7 @@ import random
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.pdfgen import canvas
 
-from local_config import BASE_DIR
+from local_config import LAB_BASE_DIR as BASE_DIR
 
 ########################
 # PARAMETERS
