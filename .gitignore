@@ -27,3 +27,4 @@ lecture_1_survey_data_clean.csv
 
 __pycache__/
 .venv/
+materials/local_config.py

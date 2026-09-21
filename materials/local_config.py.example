@@ -1,0 +1,4 @@
+# Copy this file to local_config.py (gitignored) and fill in the paths for
+# your machine. local_config.py is imported by the group-divider scripts.
+
+BASE_DIR = "/path/to/Labs"
