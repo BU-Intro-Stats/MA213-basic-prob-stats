@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage{resource/shortex}
+\input{resource/teaching}
+
+%--------------------
+\begin{document}
+
+\begin{center}
+\textbf{\Large Project 1, Part 1 \\ Lab Activity}
+\end{center}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Item} & \textbf{Date} \\
+\midrule
+Lab P1\_1 (today) & Fri, Sep 25 \\
+\textbf{Deliverable 1 (outline) due} & \textbf{Thu, Oct 1, 9:00 PM} \\
+Tutorial 4 due; Lab 4 in class & Fri, Oct 2 \\
+\textbf{Deliverable 2 (slides + R code) due} & \textbf{Thu, Oct 8, 9:00 PM} \\
+Tutorial 5 due; Lab 5 in class & Fri, Oct 9 \\
+Lab P1\_2 in class & Fri, Oct 16 \\
+\textbf{Deliverable 3 (recorded presentation) due} & \textbf{Thu, Oct 22, 9:00 PM} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Goal for Today}
+Get your group set up to work efficiently on Project 1 for the rest of the week. You are \textbf{not} expected to finish the Deliverable 1 outline in lab today --- the goal is a solid start: a data set, a draft research question, and a first pass at your analysis plans. You'll have until the Deliverable 1 deadline above to finish it together outside of lab. By the end of today's lab, every member should also know their role and the time of your next check-in.
+
+\subsection*{Before You Start}
+Copy the \href{https://docs.google.com/document/d/1u9wn9czn2f1G6CzEF46wkjXuLb_-Z1Dh_4oGpTxe7AE/edit}{P1\_D1\_Outline} Google doc and share it amongst your group members --- that is the document you will fill in as you go. This activity sheet just tells you what to do and when; it has no blanks of its own.
+
+You have the rest of the lab time to work on this. If don't get to step 6 (assigning roles and scheduling your next meeting) with 10 minutes left, stop where you are and move straight to step 6 --- every group should leave lab today with roles assigned and a next meeting on the calendar.
+
+\subsection*{Suggested Order}
+
+\begin{enumerate}
+    \item \textbf{Introduce group members ($\sim$3 min)}
+    \begin{itemize}
+        \item Go around the group, say your name and BU ID, and fill in outline Section 2 (Group Members).
+        \item Identify your TF/LA mentor, and get their email address.
+        \item \emph{Tip:} pick one person to be the ``scribe'' typing into the shared doc for this session --- it keeps the doc moving and avoids duplicate edits from four people at once.
+    \end{itemize}
+
+    \item \textbf{Explore data sets and discuss possible research questions ($\sim$10 min)}
+    \begin{itemize}
+        \item Browse candidate data sets (see the list of suggested sources below) and talk through what each one could support. 
+        \item \emph{Tip:} favor a data set you can describe in one sentence (``one row = one flight'') over one that sounds impressive but is hard to explain. A clear observational unit makes every later step easier.
+    \end{itemize}
+
+    \item \textbf{Pick a data set and confirm it loads in R ($\sim$10 min)}
+    \begin{itemize}
+        \item Converge on one data set. Actually open the data in R/RStudio; don't just look at a preview online.
+        \item Once it loads, fill in outline Section 5: the data source link/citation, what one row represents, how many rows there are, and what the important variables are (numerical vs.\ categorical).
+        \item \emph{Tip:} if the import fails or the file is huge/messy, that is useful information \emph{now} --- better to discover it in lab than the night before Deliverable 1 is due. If it's not working, drop that data set and try your next candidate instead.
+        \item \emph{Tip:} if the group is stuck between two options, pick the one with fewer missing-data or access problems --- you can always pivot early in the week, but not after Deliverable 2 is drafted.
+    \end{itemize}
+
+    \item \textbf{Draft your research question and analysis plans ($\sim$10 min)}
+    \begin{itemize}
+        \item Write your primary research question (outline Section 4), then draft the numerical and categorical analysis plans (Sections 6a/6b). For each, note what you expect to see.
+        \item \emph{Tip:} state the question first, then ask ``is this comparative, descriptive, or about a relationship?'' If it sounds causal (``does X cause Y''), rewrite it as an association or comparison --- you can't establish causation from observational data.
+    \end{itemize}
+
+    \item \textbf{Go back and fill in the title, motivation, and data-quality check ($\sim$5 min)}
+    \begin{itemize}
+        \item Now that you know your data and question, it's much easier to write a good project title and motivation --- fill in Sections 1 and 3. Also note one data-quality issue to investigate (Section 6c).
+        \item \emph{Tip:} your motivation doesn't need to be profound --- ``we're curious whether X'' or ``this affects people we know'' is a fine reason. Graders want to see genuine engagement, not a contrived justification.
+    \end{itemize}
+
+    \item \textbf{Assign roles by deliverable and plan your next meeting ($\sim$7 min)}
+    \begin{itemize}
+        \item Fill in the Roles by Deliverable grid (outline Section 7) and agree on a specific date/time (or async check-in method) for your next meeting, before Deliverable 1 is due.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Tip: Suggested Task List by Deliverable}
+
+Use this as a menu when filling in the Roles by Deliverable grid.
+
+\begin{description}[nosep, leftmargin=0pt, style=sameline, font=\normalfont]
+    \item[\textbf{D1 --- Outline (write sections):}] 1--2 title/group, 3 motivation, 4 research question, 5 data source, 6a numerical plan, 6b categorical plan, 6c data quality
+    \item[\textbf{D2 --- Plots/tables (R analysis):}] histogram, boxplot, scatter plot, numerical summary table, bar plot, categorical summary table
+    \item[\textbf{D2 --- Slides:}] title, data description, numerical analysis, categorical analysis, conclusion \& future work, references
+    \item[\textbf{D2 --- Other:}] R code cleanup and assembly, roles \& responsibilities summary
+    \item[\textbf{D3 --- Sections:}] introduction, numerical analysis, categorical analysis, conclusion
+    \item[\textbf{D3 --- Other:}] recording and video editing
+\end{description}
+
+\subsection*{Possible Data Sources to Consider (Not Limited to These)}
+You can click the links below to explore possible data sources.
+\begin{itemize}
+    \item \href{https://www.openintro.org/data/}{OpenIntro Datasets}
+    \item \href{https://cran.r-project.org/web/packages/fivethirtyeight/vignettes/fivethirtyeight.html}{fivethirtyeight R Package}
+    \item \href{https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html}{datasets R package}
+    \item \href{https://www.kaggle.com/datasets}{Kaggle datasets}
+    \item \href{https://data.gov/}{US government's open data}
+\end{itemize}
+
+\end{document}
