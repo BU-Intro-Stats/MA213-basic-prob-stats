@@ -18,7 +18,7 @@ The worksheet is pair work throughout. Collect it at the door.
 ## Before lab
 
 - Print `Lab4_worksheet.pdf`, one per student
-- Post `Lab4.R`, `Distribution_table.tex`, and the worksheet PDF to Blackboard
+- Post `Lab4.R` and the worksheet PDF to Blackboard
 - Set up the Blackboard item for the Tutorial 4 hash and confirm that it is open
 - Set up the Gradescope item for the Worksheet
 - Check Tutorial 4 hash submissions and remind students that Tutorial 4 is the pre-lab for today
