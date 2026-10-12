@@ -14,6 +14,7 @@ setwd(dirname(getSourceEditorContext()$path))  # set working directory
 
 # Sample from Geom(0.5)
 samples1 <- rgeom(n=100, p=0.5)
+samples1 <- samples1 + 1 # since R definition of r.v. X takes from 0 not 1
 head(samples1)
 # What do the parameters mean? WARNING: the "n" argument in rgeom is the number 
 # of samples/simulations, *not* the number of trials until you see a success
@@ -43,6 +44,7 @@ print(sigma2)
 # Note that we just copied and pasted code -- we could have used a function
 sample_and_compare_means <- function(nsamples,p){
   samples <- rgeom(n=nsamples, p=p)
+  samples <- samples + 1
   head(samples)
   print(mean(samples))
   print(sd(samples))

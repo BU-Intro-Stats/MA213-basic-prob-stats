@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -240,9 +240,9 @@ Let $X$ = amount of ketchup in a bottle: $X \sim N(\mu = 36, \sigma = 0.11)$ \\
 % \end{eqnarray*}
 \begin{small}
 \begin{eqnarray*}
-P(35.8 < X < 36.2) &=& pnorm(36.2, 35.8, 0.11) - pnorm(35.8, 36, 0.11) \\
+P(35.8 < X < 36.2) &=& pnorm(36.2, 36, 0.11) - pnorm(35.8, 36, 0.11) \\
 &=& 0.9656 - 0.0344 = 0.9312 \\ \pause
-P(-1.82 < Z < 1.82) &=& pnorm(-1.82) - pnorm(1.82) \\
+P(-1.82 < Z < 1.82) &=& pnorm(1.82) - pnorm(-1.82) \\
 &=& 0.9656 - 0.0344 = 0.9312
 \end{eqnarray*}
 \end{small}
@@ -334,7 +334,7 @@ $\:$ \\
 
 \section{Edfinity quiz: cutoff points}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \subsection{68-95-99.7 rule}
 

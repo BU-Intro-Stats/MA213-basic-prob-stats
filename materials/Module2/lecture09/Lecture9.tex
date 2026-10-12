@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,6 +68,11 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Random variables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \frametitle{Random variables}
@@ -96,6 +101,80 @@ Some images may be included under fair use guidelines (educational purposes).}}
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Distribution of a discrete random variable}
+
+\dq{In a game of cards you win \$1 if you draw a heart, \$5 if you draw an ace (including the ace of hearts), \$10 if you draw the king of spades and nothing for any other card you draw. Write the probability model for your winnings, and calculate your expected winning.}
+
+\pause
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l | c | c | c }
+Event		& $X$ 		& $P(X)$        		 \\
+\hline
+Heart (not ace)	& $1$		& $\frac{12}{52}$	 \\
+Ace			& $5$		& $\frac{4}{52}$	 \\	
+King of spades	& $10$		& $\frac{1}{52}$	 \\	
+All else		& $0$		& $\frac{35}{52}$	\\
+\hline
+Total			&			&		1		
+\end{tabular}
+
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Distribution of a discrete random variable}
+
+Below is a visual representation of the probability distribution of winnings from this game:
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{\chp3@path/3-4_random_variables/figures/card_game/card_game}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Edfinity Quiz}
+
+
+% \begin{frame}
+% \frametitle{Random variables}
+
+% \begin{itemize}
+
+% \item A \hl{random variable} is a numeric quantity whose value depends on the outcome of a random event
+% \begin{itemize}
+% \item We use a capital letter, like $X$, to denote a random variable
+% \item The values of a random variable are denoted with a lowercase letter, in this case $x$
+% \item For example, $P(X = x)$
+% \end{itemize}
+
+% \item There are two types of random variables:
+% \begin{itemize}
+% \item \hl{Discrete random variables} often take only integer values
+% \begin{itemize}
+% \item Example: Number of credit hours, Difference in number of credit hours this term vs last
+% \end{itemize}
+% \item \hl{Continuous random variables} take real (decimal) values
+% \begin{itemize}
+% \item Example: Cost of books this term, Difference in cost of books this term vs last
+% \end{itemize}
+% \end{itemize}
+
+% \end{itemize}
+
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
