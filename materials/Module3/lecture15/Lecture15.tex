@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -136,27 +136,27 @@ P(\text{3 failures on a given day}) &=& \frac{0.2857^3 \times e^{-0.2857}}{3!} \
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity quiz: Modeling with the Poisson distribution}
+% \section{Edfinity quiz: Modeling with the Poisson distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Is it Poisson?}
-\begin{small}
-\begin{itemize}
+% \begin{frame}
+% \frametitle{Is it Poisson?}
+% \begin{small}
+% \begin{itemize}
 
-\item A random variable may follow a Poisson distribution if the events occur independently of each other (typically, when the population is large and the events are rare) and the rate of events is constant
+% \item A random variable may follow a Poisson distribution if the events occur independently of each other (typically, when the population is large and the events are rare) and the rate of events is constant
 
-\item However we can think of situations where the rate is not constant. For example, if we are interested in count of weddings over one summer, we should take into consideration that weekends are more popular for weddings.
+% \item However we can think of situations where the rate is not constant. For example, if we are interested in count of weddings over one summer, we should take into consideration that weekends are more popular for weddings.
 
-\item In this case, a Poisson model may sometimes still be reasonable if we allow it to have a different rate for different times; we could model the rate as higher on weekends than on weekdays.
+% \item In this case, a Poisson model may sometimes still be reasonable if we allow it to have a different rate for different times; we could model the rate as higher on weekends than on weekdays.
 
-\item The idea of modeling rates for a Poisson distribution against a second variable (day of the week) forms the
-foundation of some more advanced methods called \hl{generalized linear models}. There are beyond the scope of this course, but we will discuss a foundation of linear models in Chapters 7 and 8.
+% \item The idea of modeling rates for a Poisson distribution against a second variable (day of the week) forms the
+% foundation of some more advanced methods called \hl{generalized linear models}. There are beyond the scope of this course, but we will discuss a foundation of linear models in Chapters 7 and 8.
 
-\end{itemize}
-\end{small}
+% \end{itemize}
+% \end{small}
 
-\end{frame}
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -184,7 +184,7 @@ $Var[X] = np(1-p)$ & $Var[X] = \lambda$ \\
 \hline
 \end{tabular}
 
-\small{For more detail on the relationship between the Binomial and Poisson distributions, see the slides that we didn't cover in Lecture 14 and the R demo Lecture14\_demo3.R.}
+% \small{For more detail on the relationship between the Binomial and Poisson distributions, see the slides that we didn't cover in Lecture 14 and the R demo Lecture14\_demo3.R.}
 
 \end{frame}
 
@@ -367,62 +367,62 @@ Pick up the worksheet and find a partner.
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \begin{frame}
-%     \frametitle{Edfinity Quiz}
+\begin{frame}
+    \frametitle{Worksheet: What would happen if...}
 
-%     \begin{itemize}
+    \begin{itemize}
 
-%         \item If the population proportion were 0.2 and the sample size were 100:
-%         \begin{itemize}
-%             \item Where would you expect the middle of the sampling distribution to be?
-%             \item Would the sampling distribution be symmetrical?
-%             \item Would the sampling distribution be wider/narrower/the same?
-%         \end{itemize}
-%         \item If the population proportion were 0.99 and the sample size were 100:
-%         \begin{itemize}
-%             \item Where would you expect the middle of the sampling distribution to be?
-%             \item Would the sampling distribution be symmetrical?
-%             \item Would the sampling distribution be wider/narrower/the same?
-%         \end{itemize}
+        \item If the population proportion were 0.2 and the sample size were 100:
+        \begin{itemize}
+            \item Where would you expect the middle of the sampling distribution to be?
+            \item Would the sampling distribution be symmetrical?
+            \item Would the sampling distribution be wider/narrower/the same?
+        \end{itemize}
+        \item If the population proportion were 0.99 and the sample size were 100:
+        \begin{itemize}
+            \item Where would you expect the middle of the sampling distribution to be?
+            \item Would the sampling distribution be symmetrical?
+            \item Would the sampling distribution be wider/narrower/the same?
+        \end{itemize}
  
-%     \end{itemize}
+    \end{itemize}
 
-% \end{frame}
+\end{frame}
 
-% \begin{frame}
-%     \frametitle{Edfinity Quiz}
-%     \begin{center}
-%         \includegraphics[width=0.75\textwidth]{sampling_distribution.png}
-%     \end{center}
+\begin{frame}
+    \frametitle{Worksheet: What would happen if...}
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{sampling_distribution.png}
+    \end{center}
     
-%     \soln{
-%     \begin{table}[h!]
-%         \centering
-%         \begin{tabular}{|c|c|c|c|}
-%         \hline
-%          & Middle? & Symm? & Wider/Narrower/Same? \\ 
-%         \hline
-%         p=0.88, n=1000 & $\sim0.88$ & Yes & Same \\ 
-%         \hline
-%         p=0.5, n=100 & $\sim0.5$ & Yes & Wider \\ 
-%         \hline
-%         p=0.99, n=100 & $\sim0.99$ & No & Same? \\ 
-%         \hline
-%         \end{tabular}
-%     \end{table}
-%     }
-% \end{frame}
+    \soln{
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+         & Middle? & Symm? & Wider/Narrower/Same? \\ 
+        \hline
+        p=0.88, n=1000 & $\sim0.88$ & Yes & Same \\ 
+        \hline
+        p=0.5, n=100 & $\sim0.5$ & Yes & Wider \\ 
+        \hline
+        p=0.99, n=100 & $\sim0.99$ & No & Same? \\ 
+        \hline
+        \end{tabular}
+    \end{table}
+    }
+\end{frame}
 
-% \begin{frame}
-%     \frametitle{Edfinity Quiz}
-%     What would happen if the sample size were 10?
-% \end{frame}
+\begin{frame}
+    \frametitle{Worksheet: What would happen if...}
+    What would happen if the sample size were 10?
+\end{frame}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \section{R Demo: What would happen if...}
+\section{R Demo: What would happen if...}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -471,7 +471,7 @@ Pick up the worksheet and find a partner.
 % \end{frame}
 
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \section{R Demo: Comparing different estimators based on their sampling distributions}
 

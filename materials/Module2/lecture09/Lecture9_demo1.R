@@ -31,15 +31,25 @@ ggplot(data=samples, aes(x=samples)) +
 
 # ... or the proportions
 ggplot(data=samples, aes(x=samples)) +
-  geom_histogram(aes(y=..density..), color="black", fill="blue", binwidth=1) +
-  scale_x_continuous(breaks=c(0:10))
+  geom_histogram(aes(y=after_stat(density)), color="black", fill="blue", binwidth=1) +
+  scale_x_continuous(breaks=c(0:10)) +
+  coord_cartesian(ylim=c(0, 1))
 
 # Compare the histogram of proportions to the theoretical distribution
 # (a bar chart of the probabilities of each outcome)
 theoretical <- data.frame(outcomes, probabilities)
 ggplot(data=theoretical, aes(x=outcomes, y=probabilities)) +
-  geom_bar(stat="identity") +
-  scale_x_continuous(breaks=c(0:10))
+  geom_col(color="black", fill="red", width=1) +
+  scale_x_continuous(breaks=c(0:10)) +
+  coord_cartesian(ylim=c(0, 1))
+
+# Or put them on the same plot: histogram of sample proportions (blue)
+# with the theoretical probabilities (red points)
+ggplot(data=samples, aes(x=samples)) +
+  geom_histogram(aes(y=after_stat(density)), color="black", fill="blue", binwidth=1) +
+  geom_point(data=theoretical, aes(x=outcomes, y=probabilities), color="red", size=3) +
+  scale_x_continuous(breaks=c(0:10)) +
+  coord_cartesian(ylim=c(0, 1))
 
 # ---- 3. Comparing the samples and the theoretical distribution ----
 
@@ -57,8 +67,9 @@ var <- (12/52)*(1-ev)**2 + (4/52)*(5-ev)**2 + (1/52)*(10-ev)**2 + (35/52)*(0-ev)
 
 # Add all the values to a table to print
 tab <- matrix(c(sample_mean, ev, sample_var, var), ncol=2, byrow=TRUE)
-colnames(tab) <- c("Mean", "Variance")
-rownames(tab) <- c("Sample", "Theoretical")
+
+colnames(tab) <- c("Sample", "Theoretical")
+rownames(tab) <- c("Mean", "Variance")
 
 print(tab)
 

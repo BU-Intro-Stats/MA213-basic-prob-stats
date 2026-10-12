@@ -880,11 +880,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Academic Calendar</h3>
 <p>Substitute a Monday schedule of classes</p>
 </article>
-<article class="calendar-event calendar-event--quiz">
-<div class="calendar-event__kind">Quiz</div>
-<h3>Quiz 2</h3>
+<article class="calendar-event calendar-event--lecture">
+<div class="calendar-event__kind">Lecture</div>
+<h3>Lecture 16</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>in the lecture time</p>
+<p>Point estimates and sampling variability, continued (Chapter 5.1)</p>
 <p class="calendar-event__meta">Near Indigenous People&#x27;s Day Holiday, Classes Suspended | Substitute a Monday schedule of classes</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -913,9 +913,9 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-date__number">14</div>
 <article class="calendar-event calendar-event--lecture">
 <div class="calendar-event__kind">Lecture</div>
-<h3>Lecture 16</h3>
+<h3>Lecture 17</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Point estimates and sampling variability, continued (Chapter 5.1)</p>
+<p>Confidence intervals (Chapter 5.2)</p>
 <p class="calendar-event__meta">Near Indigenous People&#x27;s Day Holiday, Classes Suspended | Near Substitute a Monday schedule of classes</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -961,9 +961,9 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--lecture">
 <div class="calendar-event__kind">Lecture</div>
-<h3>Lecture 17</h3>
+<h3>Lecture 18</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Confidence intervals (Chapter 5.2)</p>
+<p>Hypothesis testing for a proportion (Chapter 5.3)</p>
 </article>
 <article class="calendar-event calendar-event--lab">
 <div class="calendar-event__kind">Lab</div>
@@ -990,11 +990,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Academic Calendar</h3>
 <p>Second Seven-Week Session Begins</p>
 </article>
-<article class="calendar-event calendar-event--lecture">
-<div class="calendar-event__kind">Lecture</div>
-<h3>Lecture 18</h3>
+<article class="calendar-event calendar-event--quiz">
+<div class="calendar-event__kind">Quiz</div>
+<h3>Quiz 2</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Hypothesis testing for a proportion (Chapter 5.3)</p>
+<p>in the lecture time</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
@@ -1305,7 +1305,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 3</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>tentative</p>
+<p>in the lecture time</p>
 <p class="calendar-event__meta">Prerequisite not yet covered: M3.L05: Distinguish Statistical vs. Practical Significance (first covered Lecture 28)</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -1709,7 +1709,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 4</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>tentative</p>
+<p>in the lecture time</p>
 <p class="calendar-event__meta">Near Thanksgiving Recess</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -2063,7 +2063,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Quiz</div>
 <h3>Quiz 5</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>tentative</p>
+<p>in the lecture time</p>
 <p class="calendar-event__meta">Near Last Day of Classes; Second Seven-Week Session Ends | Near Study Period</p>
 </article>
 <article class="calendar-event calendar-event--discussion">

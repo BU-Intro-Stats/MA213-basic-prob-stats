@@ -904,13 +904,14 @@ SUMMARY:Academic Calendar
 DESCRIPTION:Substitute a Monday schedule of classes
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-13-2-Quiz-2@ma213-course-calendar
+UID:2026-10-13-2-Lecture-16@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261013T111500
 DTEND;TZID=America/New_York:20261013T120500
-SUMMARY:Quiz 2
-DESCRIPTION:in the lecture time\nNear Indigenous People's Day Holiday\, Cla
- sses Suspended | Substitute a Monday schedule of classes
+SUMMARY:Lecture 16
+DESCRIPTION:Point estimates and sampling variability\, continued (Chapter 5
+ .1)\nNear Indigenous People's Day Holiday\, Classes Suspended | Substitute
+  a Monday schedule of classes
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-13-3-Discussion-B1@ma213-course-calendar
@@ -941,14 +942,14 @@ SUMMARY:Homework 6
 DESCRIPTION:Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-14-1-Lecture-16@ma213-course-calendar
+UID:2026-10-14-1-Lecture-17@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261014T111500
 DTEND;TZID=America/New_York:20261014T120500
-SUMMARY:Lecture 16
-DESCRIPTION:Point estimates and sampling variability\, continued (Chapter 5
- .1)\nNear Indigenous People's Day Holiday\, Classes Suspended | Near Subst
- itute a Monday schedule of classes
+SUMMARY:Lecture 17
+DESCRIPTION:Confidence intervals (Chapter 5.2)\nNear Indigenous People's Da
+ y Holiday\, Classes Suspended | Near Substitute a Monday schedule of class
+ es
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-14-2-Discussion-B4@ma213-course-calendar
@@ -1001,12 +1002,12 @@ SUMMARY:Academic Calendar
 DESCRIPTION:First Seven-Week Session Ends
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-16-2-Lecture-17@ma213-course-calendar
+UID:2026-10-16-2-Lecture-18@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261016T111500
 DTEND;TZID=America/New_York:20261016T120500
-SUMMARY:Lecture 17
-DESCRIPTION:Confidence intervals (Chapter 5.2)
+SUMMARY:Lecture 18
+DESCRIPTION:Hypothesis testing for a proportion (Chapter 5.3)
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-16-3-Project1-2@ma213-course-calendar
@@ -1031,12 +1032,12 @@ SUMMARY:Academic Calendar
 DESCRIPTION:Second Seven-Week Session Begins
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-19-2-Lecture-18@ma213-course-calendar
+UID:2026-10-19-2-Quiz-2@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261019T111500
 DTEND;TZID=America/New_York:20261019T120500
-SUMMARY:Lecture 18
-DESCRIPTION:Hypothesis testing for a proportion (Chapter 5.3)
+SUMMARY:Quiz 2
+DESCRIPTION:in the lecture time
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-19-3-Discussion-B1@ma213-course-calendar
@@ -1351,8 +1352,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261102T111500
 DTEND;TZID=America/New_York:20261102T120500
 SUMMARY:Quiz 3
-DESCRIPTION:tentative\nPrerequisite not yet covered: M3.L05: Distinguish St
- atistical vs. Practical Significance (first covered Lecture 28)
+DESCRIPTION:in the lecture time\nPrerequisite not yet covered: M3.L05: Dist
+ inguish Statistical vs. Practical Significance (first covered Lecture 28)
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-02-2-Discussion-B1@ma213-course-calendar
@@ -1812,7 +1813,7 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261123T111500
 DTEND;TZID=America/New_York:20261123T120500
 SUMMARY:Quiz 4
-DESCRIPTION:tentative\nNear Thanksgiving Recess
+DESCRIPTION:in the lecture time\nNear Thanksgiving Recess
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-23-2-Discussion-B1@ma213-course-calendar
@@ -2161,8 +2162,8 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261209T111500
 DTEND;TZID=America/New_York:20261209T120500
 SUMMARY:Quiz 5
-DESCRIPTION:tentative\nNear Last Day of Classes\; Second Seven-Week Session
-  Ends | Near Study Period
+DESCRIPTION:in the lecture time\nNear Last Day of Classes\; Second Seven-We
+ ek Session Ends | Near Study Period
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-09-2-Discussion-B4@ma213-course-calendar

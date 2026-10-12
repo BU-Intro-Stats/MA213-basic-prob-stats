@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,6 +69,48 @@ Some images may be included under fair use guidelines (educational purposes).}}
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Normal distribution (cont.)}
+
+\begin{frame}[fragile]
+\frametitle{Practice}
+
+\pq{Body temperatures of healthy humans are distributed nearly normally with mean 98.2$\degree$F and standard deviation 0.73$\degree$F. What is the cutoff for the highest 10\% of human body temperatures?}
+
+\vspace{-0.5cm}
+\begin{multicols}{2}
+\begin{enumerate}[(a)]
+\item 97.3$\degree$F
+\solnMult{99.1$\degree$F}
+\item 99.4$\degree$F
+\item 99.6$\degree$F
+\end{enumerate}
+\end{multicols}
+
+\soln{
+\vspace{-0.5cm}
+\pause
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.3\textwidth]{\chpiv@path/4-1_normal_distribution/figures/temp/tempHIGH10PERC}
+\end{center}
+\vspace{-0.3cm}
+\pause
+\begin{small}
+\begin{eqnarray*}
+    P(X > x) = 0.10 &\rightarrow& P(X < x) = 0.90 \\
+    &\rightarrow& x = qnorm(0.90, 98.2, 0.73) = 99.1\\ \pause
+    P(Z<z) = 0.90 &\rightarrow& z = qnorm(0.90) = 1.28 \\
+    &\rightarrow& x= (1.28 \times 0.73) + 98.2 = 99.1
+\end{eqnarray*}
+\end{small}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Edfinity quiz: cutoff points}
+
 
 \subsection{68-95-99.7 rule}
 
@@ -163,7 +205,7 @@ SAT scores are distributed nearly normally with mean 1500 and standard deviation
 \begin{itemize}
 \item Mean = 6.88 hours, SD = 0.92 hrs
 \item 72\% of the data are within 1 SD of the mean: $6.88 \pm 0.93$
-\item 92\% of the data are within 1 SD of the mean: $6.88 \pm 2 \times 0.93$
+\item 92\% of the data are within 2 SD of the mean: $6.88 \pm 2 \times 0.93$
 \item[] \textcolor{white}{99\% of the data are within 3 SD of the mean: $6.88 \pm 3 \times 0.93$}
 \end{itemize}
 }

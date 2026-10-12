@@ -24,11 +24,11 @@ plot_binom <- function(n, p, title, xvals) {
 plot_pois <- function(lambda, title, xvals) {
   pois_probs <- dpois(xvals, lambda = lambda)
   df <- data.frame(x = xvals, Probability = pois_probs)
-  mean_text <- bquote(lambda == .(lambda))
+  mean_text <- paste0("lambda == ", lambda)
   ggplot(df, aes(x = x, y = Probability)) +
     geom_bar(stat = "identity", fill = "black", color = "black", alpha = 0.7) +
     labs(title = title, x = "x", y = "P(X = x)") +
-    annotate("text", x = 12, y = 0.3, label = mean_text, size = 5, color = "black") +
+    annotate("text", x = 12, y = 0.3, label = mean_text, parse = TRUE, size = 5, color = "black") +
     ylim(0, 0.65) +
     theme_minimal()
 }
