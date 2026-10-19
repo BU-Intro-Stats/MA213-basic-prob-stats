@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.9in]{geometry}
 \usepackage{array}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -26,10 +26,11 @@
 \definecolor{discusscolor}{RGB}{214,234,255}
 \definecolor{funfactcolor}{RGB}{222,247,222}
 \definecolor{debatecolor}{RGB}{255,221,221}
+\definecolor{checkincolor}{RGB}{232,222,250}
 
 \newcommand{\calloutbox}[3]{%
   \vspace{4pt}\noindent
-  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\*[2pt]
   \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
   \vspace{6pt}
 }
@@ -38,6 +39,13 @@
 \newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
 \newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
 \newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\checkinbox}[1]{%
+  \calloutbox{checkincolor}{CHECK IN: Call over an instructor}{%
+    \begin{minipage}[c]{0.72\linewidth}#1\end{minipage}\hfill
+    \begin{minipage}[c]{0.2\linewidth}\centering
+      \fbox{\rule{0pt}{0.45in}\hspace{0.9in}}\\[2pt]
+      {\small Instructor initials}
+    \end{minipage}}}
 \newcommand{\badge}[1]{$[\ ]$ \textbf{#1}}
 
 \newcommand{\writebox}[1]{
@@ -87,7 +95,7 @@
 
 \section*{Icebreaker}
 
-Before opening R: introduce yourself to your partner. Then answer: If you sampled 10 BU students and recorded their commute time, would your sample mean be exactly the same as another group's sample mean? Why?
+Before opening R: introduce yourself to your partner. Then answer: If you sampled 10 BU students and recorded their commute time, and your partner sampled a different 10 BU students, would your two sample means be exactly the same? Why?
 
 \shortwritebox{My answer and my partner's answer:}
 
@@ -99,7 +107,7 @@ A \textbf{population} is the full group we care about. A \textbf{sample} is a sm
 
 \section*{Question 1. Build your population}
 
-Choose one population below. Different groups should choose different populations when possible.
+Choose one population below. Choose a \emph{different} population than your partner.
 
 \begin{center}
 \begin{tabular}{|p{0.25\textwidth}|p{0.32\textwidth}|p{0.33\textwidth}|}
@@ -128,10 +136,10 @@ sigma <- 0.447
 N <- 100000
 
 # Choose ONE population and comment out the others.
-pop <- rnorm(N, mean = 2, sd = sigma)
+# pop <- rnorm(N, mean = 2, sd = sigma)
 # pop <- rbinom(N, size = 1, prob = 0.3)
 # pop <- rpois(N, lambda = sigma^2)
-# pop <- rexp(N, rate = 1 / sigma)
+pop <- rexp(N, rate = 1 / sigma)
 # pop <- rgamma(N, shape = 4, rate = sqrt(4) / sigma)
 
 population_mean <- mean(pop)
@@ -149,14 +157,14 @@ ggplot(data.frame(X = pop), aes(x = X)) +
   )
 \end{lstlisting}
 
-\writebox{Which population did you choose? Describe its shape, center, and spread.}
+\writebox{Which population did you choose? Describe its shape, center, and spread. How does it differ from your partner's population?}
 
 \section*{Question 2. Draw one sample}
 
-Draw one sample of size $n=100$ from your population and compute the sample mean $\hat{\mu}$.
+Draw one sample of size $n=5$ from your population and compute the sample mean $\hat{\mu}$.
 
 \begin{lstlisting}[language=R]
-n <- 100
+n <- 5
 
 my_sample <- sample(pop, size = n)
 mu_hat <- mean(my_sample)
@@ -166,24 +174,22 @@ population_mean
 mu_hat - population_mean
 \end{lstlisting}
 
-\predictbox{Before comparing with other groups, do you expect your \texttt{mu\_hat} to equal the population mean exactly? Why or why not?}
-
-\writebox{How close was your sample mean to the population mean?}
+\writebox{How close was your sample mean to the population mean? How does your \texttt{mu\_hat} compare with your partner's?}
 
 \section*{Question 3. Build a sampling distribution}
 
-Now repeat the sampling process $K=100$ times. Each repetition gives one sample mean. The vector of sample means approximates the sampling distribution of $\hat{\mu}$.
+Now repeat the sampling process $K=1000$ times. Each repetition gives one sample mean. The vector of sample means approximates the sampling distribution of $\hat{\mu}$.
 
 \begin{lstlisting}[language=R]
-K <- 100
-n <- 100
+K <- 1000
+n <- 5
 
 mu_hat_vector <- rep(0, K)
 
-for (i in 1:K) {
-  my_sample <- sample(pop, size = n)
-  mu_hat_vector[i] <- mean(my_sample)
-}
+# for (_____ in _____) {
+#   my_sample <- sample(pop, size = n)
+#   mu_hat_vector[_____] <- mean(my_sample)
+# }
 
 head(mu_hat_vector)
 mean(mu_hat_vector)
@@ -202,27 +208,30 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
   )
 \end{lstlisting}
 
-\discussbox{Where is the sampling distribution centered? Is it centered near one sample mean, or near the population mean?}
+\discussbox{Where is the sampling distribution centered? Is it centered near one sample mean, or near the population mean? Does your sampling distribution look the same as your partner's sampling distribution?}
 
 \writebox{Describe the shape, center, and spread of your first sampling distribution.}
+
+\checkinbox{Before moving on, walk an instructor through your sampling distribution histogram and your description of its shape, center, and spread.}
 
 \section*{Question 4. Write a reusable simulation function}
 
 Wrap the repeated sampling process into a function. This lets you quickly compare different sample sizes and repetition counts.
 
 \begin{lstlisting}[language=R]
-get_mu_hats <- function(pop, n, K) {
-  mu_hat_vector <- rep(0, K)
+# get_mu_hats <- function(pop, n, K) {
+#   mu_hat_vector <- rep(0, K)
+#
+#   # Repeat K times:
+#   # take a sample of size n from the population pop
+#   # compute its mean
+#   # store the result as one element of mu_hat_vector
+#   _________ # Fill this in
+#
+#   return(mu_hat_vector)
+# }
 
-  for (i in 1:K) {
-    my_sample <- sample(pop, size = n)
-    mu_hat_vector[i] <- mean(my_sample)
-  }
-
-  return(mu_hat_vector)
-}
-
-result_q4 <- get_mu_hats(pop, n = 100, K = 100)
+result_q4 <- get_mu_hats(pop, n = 5, K = 1000)
 head(result_q4)
 \end{lstlisting}
 
@@ -230,16 +239,16 @@ head(result_q4)
 
 \section*{Question 5. What does sample size $n$ change?}
 
-Keep $K=1000$ fixed. Compare the sampling distributions when $n=20$, $n=200$, and $n=1000$.
+Keep $K=1000$ fixed. Compare the sampling distributions when $n=5$, $n=20$, and $n=50$.
 
 \begin{lstlisting}[language=R]
+mu_hats_5 <- get_mu_hats(pop, n = 5, K = 1000)
 mu_hats_20 <- get_mu_hats(pop, n = 20, K = 1000)
-mu_hats_200 <- get_mu_hats(pop, n = 200, K = 1000)
-mu_hats_1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+mu_hats_50 <- get_mu_hats(pop, n = 50, K = 1000)
 
 sampling_n <- data.frame(
-  mu_hat = c(mu_hats_20, mu_hats_200, mu_hats_1000),
-  sample_size = factor(rep(c(20, 200, 1000), each = 1000))
+  mu_hat = c(mu_hats_5, mu_hats_20, mu_hats_50),
+  sample_size = factor(rep(c(5, 20, 50), each = 1000))
 )
 
 ggplot(sampling_n, aes(x = mu_hat)) +
@@ -258,25 +267,27 @@ ggplot(sampling_n, aes(x = mu_hat)) +
 \hline
 \textbf{Sample size} & \textbf{Shape} & \textbf{Center} & \textbf{Spread}\\
 \hline
+$n=5$ & & & \\[22pt]
+\hline
 $n=20$ & & & \\[22pt]
 \hline
-$n=200$ & & & \\[22pt]
-\hline
-$n=1000$ & & & \\[22pt]
+$n=50$ & & & \\[22pt]
 \hline
 \end{tabular}
 \end{center}
 
 \claimbox{As $n$ increases, the sampling distribution of $\hat{\mu}$ becomes \underline{\hspace{4cm}} and its spread becomes \underline{\hspace{3cm}}.}
 
+\discussbox{Compare your $n=5$ histogram with your partner's. Whose looks more Normal? Why might that be, given your two populations?}
+
 \section*{Question 6. What does number of repetitions $K$ change?}
 
-Now keep $n=1000$ fixed and change $K$. This changes how clearly you can see the sampling distribution, but it does not change the theoretical spread of $\hat{\mu}$.
+Now keep $n=50$ fixed and change $K$. 
 
 \begin{lstlisting}[language=R]
-mu_hats_k20 <- get_mu_hats(pop, n = 1000, K = 20)
-mu_hats_k200 <- get_mu_hats(pop, n = 1000, K = 200)
-mu_hats_k1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+mu_hats_k20 <- get_mu_hats(pop, n = 50, K = 20)
+mu_hats_k200 <- get_mu_hats(pop, n = 50, K = 200)
+mu_hats_k1000 <- get_mu_hats(pop, n = 50, K = 1000)
 
 sampling_k <- data.frame(
   mu_hat = c(mu_hats_k20, mu_hats_k200, mu_hats_k1000),
@@ -298,16 +309,18 @@ ggplot(sampling_k, aes(x = mu_hat)) +
 
 \writebox{Explain the difference between increasing $n$ and increasing $K$.}
 
+\checkinbox{Before moving on, explain to an instructor the difference between increasing $n$ and increasing $K$, using your Question 5 and Question 6 graphs.}
+
 \section*{Question 7. Compare standard error and simulated spread}
 
-The standard error of the sample mean is
+If the distribution were Normal, then the standard error of the sample mean would be:
 \[
 SE = \frac{\sigma}{\sqrt{n}}.
 \]
 Compare the theoretical standard error with the empirical standard deviation of your simulated sample means.
 
 \begin{lstlisting}[language=R]
-n <- 1000
+n <- 5
 K <- 1000
 
 mu_hats <- get_mu_hats(pop, n = n, K = K)
@@ -320,13 +333,18 @@ empirical_sd
 abs(SE - empirical_sd)
 \end{lstlisting}
 
-\writebox{Are the theoretical standard error and simulated standard deviation close? Explain in context.}
+\writebox{Are the theoretical standard error and simulated standard deviation close? What happens when the sample size $n$ changes (try $n=5, 50$)? Explain in context.}
 
-\section*{Optional Challenge}
+\section*{Question 8. Check Normality of the Sampling Distribution}
 
 Use the empirical rule to check whether your sampling distribution is approximately Normal.
 
 \begin{lstlisting}[language=R]
+n <- 5
+K <- 1000
+
+mu_hats <- get_mu_hats(pop, n = n, K = K)
+
 m <- mean(mu_hats)
 s <- sd(mu_hats)
 
@@ -341,7 +359,9 @@ rate3
 abs(c(rate1 - 0.68, rate2 - 0.95, rate3 - 0.997))
 \end{lstlisting}
 
-\writebox{Does your sampling distribution approximately follow the 68--95--99.7 rule?}
+\discussbox{Compare your rates at $n=5$ with your partner's. Which population needed a larger $n$ to follow the 68--95--99.7 rule?}
+
+\writebox{Does your sampling distribution approximately follow the 68--95--99.7 rule? What happens when the sample size changes (try $n=5, 50$)?}
 
 \section*{Final Reflection}
 
@@ -349,9 +369,11 @@ abs(c(rate1 - 0.68, rate2 - 0.95, rate3 - 0.997))
   \item What is a sampling distribution in your own words?
   \item What happened to shape, center, and spread as $n$ increased?
   \item What changed when $K$ increased?
-  \item Did your original population shape make it easy or hard for the CLT to appear?
+  \item Did your original population shape make it easy or hard for the Central Limit Theorem to appear? How did that compare with your partner's population?
 \end{enumerate}
 
 \writebox{Write one paragraph summarizing what you learned from the simulation.}
+
+\checkinbox{Before you leave, go over your final reflection with an instructor.}
 
 \end{document}

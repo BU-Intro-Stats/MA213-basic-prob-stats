@@ -19,10 +19,10 @@ sigma <- 0.447
 N <- 100000
 
 # Choose ONE population and comment out the others.
-pop <- rnorm(N, mean = 2, sd = sigma)
+# pop <- rnorm(N, mean = 2, sd = sigma)
 # pop <- rbinom(N, size = 1, prob = 0.3)
 # pop <- rpois(N, lambda = sigma^2)
-# pop <- rexp(N, rate = 1 / sigma)
+pop <- rexp(N, rate = 1 / sigma)
 # pop <- rgamma(N, shape = 4, rate = sqrt(4) / sigma)
 
 population_mean <- mean(pop)
@@ -42,13 +42,14 @@ ggplot(data.frame(X = pop), aes(x = X)) +
 # Interpretation:
 # - Which population did you choose?
 # - Describe its shape, center, and spread.
+# - How does it differ from your partner's population?
 
 
 ############################################################
 # Question 2. Draw one sample
 ############################################################
 
-n <- 100
+n <- 5
 
 my_sample <- sample(pop, size = n)
 mu_hat <- mean(my_sample)
@@ -60,21 +61,24 @@ mu_hat - population_mean
 # Interpretation:
 # - Does mu_hat equal the population mean exactly?
 # - How close was your sample mean to the population mean?
+# - How does your mu_hat compare with your partner's?
 
 
 ############################################################
 # Question 3. Build a sampling distribution
 ############################################################
 
-K <- 100
-n <- 100
+K <- 1000
+n <- 5
 
 mu_hat_vector <- rep(0, K)
 
-for (i in 1:K) {
-  my_sample <- sample(pop, size = n)
-  mu_hat_vector[i] <- mean(my_sample)
-}
+# Fill in the blanks, then uncomment.
+
+# for (_____ in _____) {
+#   my_sample <- sample(pop, size = n)
+#   mu_hat_vector[_____] <- mean(my_sample)
+# }
 
 head(mu_hat_vector)
 mean(mu_hat_vector)
@@ -91,7 +95,9 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
   )
 
 # Interpretation:
-# - Where is the sampling distribution centered?
+# - Where is the sampling distribution centered? Is it centered near one
+#   sample mean, or near the population mean?
+# - Does your sampling distribution look the same as your partner's?
 # - Describe the shape, center, and spread.
 
 
@@ -104,16 +110,17 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
 # get_mu_hats <- function(pop, n, K) {
 #   mu_hat_vector <- rep(0, K)
 #
-#   for (i in 1:K) {
-#     my_sample <- sample(pop, size = ____)
-#     mu_hat_vector[i] <- ____
-#   }
+#   # Repeat K times:
+#   # take a sample of size n from the population pop
+#   # compute its mean
+#   # store the result as one element of mu_hat_vector
+#   _________ # Fill this in
 #
-#   return(____)
+#   return(mu_hat_vector)
 # }
-#
-# result_q4 <- get_mu_hats(pop, n = 100, K = 100)
-# head(result_q4)
+
+result_q4 <- get_mu_hats(pop, n = 5, K = 1000)
+head(result_q4)
 
 # Interpretation:
 # - How could you check whether result_q4 behaves like the vector from
@@ -124,15 +131,15 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
 # Question 5. What does sample size n change?
 ############################################################
 
-# Keep K = 1000 fixed and compare n = 20, 200, and 1000.
+# Keep K = 1000 fixed and compare n = 5, 20, and 50.
 
+# mu_hats_5 <- get_mu_hats(pop, n = 5, K = 1000)
 # mu_hats_20 <- get_mu_hats(pop, n = 20, K = 1000)
-# mu_hats_200 <- get_mu_hats(pop, n = 200, K = 1000)
-# mu_hats_1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+# mu_hats_50 <- get_mu_hats(pop, n = 50, K = 1000)
 #
 # sampling_n <- data.frame(
-#   mu_hat = c(mu_hats_20, mu_hats_200, mu_hats_1000),
-#   sample_size = factor(rep(c(20, 200, 1000), each = 1000))
+#   mu_hat = c(mu_hats_5, mu_hats_20, mu_hats_50),
+#   sample_size = factor(rep(c(5, 20, 50), each = 1000))
 # )
 #
 # ggplot(sampling_n, aes(x = mu_hat)) +
@@ -149,17 +156,19 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
 # - What happens to the shape as n increases?
 # - What happens to the center as n increases?
 # - What happens to the spread as n increases?
+# - Compare your n = 5 histogram with your partner's. Whose looks more
+#   Normal? Why might that be, given your two populations?
 
 
 ############################################################
 # Question 6. What does number of repetitions K change?
 ############################################################
 
-# Keep n = 1000 fixed and compare K = 20, 200, and 1000.
+# Keep n = 50 fixed and compare K = 20, 200, and 1000.
 
-# mu_hats_k20 <- get_mu_hats(pop, n = 1000, K = 20)
-# mu_hats_k200 <- get_mu_hats(pop, n = 1000, K = 200)
-# mu_hats_k1000 <- get_mu_hats(pop, n = 1000, K = 1000)
+# mu_hats_k20 <- get_mu_hats(pop, n = 50, K = 20)
+# mu_hats_k200 <- get_mu_hats(pop, n = 50, K = 200)
+# mu_hats_k1000 <- get_mu_hats(pop, n = 50, K = 1000)
 #
 # sampling_k <- data.frame(
 #   mu_hat = c(mu_hats_k20, mu_hats_k200, mu_hats_k1000),
@@ -185,7 +194,7 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
 # Question 7. Compare standard error and simulated spread
 ############################################################
 
-# n <- 1000
+# n <- 5
 # K <- 1000
 #
 # mu_hats <- get_mu_hats(pop, n = n, K = K)
@@ -199,12 +208,18 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
 
 # Interpretation:
 # - Are the theoretical standard error and simulated standard deviation close?
+# - What happens when the sample size n changes (try n = 5, 50)?
 
 
 ############################################################
-# Optional Challenge. Check the empirical rule
+# Question 8. Check the empirical rule
 ############################################################
 
+# n <- 5
+# K <- 1000
+#
+# mu_hats <- get_mu_hats(pop, n = n, K = K)
+#
 # m <- mean(mu_hats)
 # s <- sd(mu_hats)
 #
@@ -218,8 +233,15 @@ ggplot(data.frame(mu_hat = mu_hat_vector), aes(x = mu_hat)) +
 #
 # abs(c(rate1 - 0.68, rate2 - 0.95, rate3 - 0.997))
 
+# Interpretation:
+# - Does your sampling distribution approximately follow the 68-95-99.7 rule?
+# - What happens when the sample size changes (try n = 5, 50)?
+# - Compare your rates at n = 5 with your partner's. Which population
+#   needed a larger n to follow the 68-95-99.7 rule?
+
 # Final reflection:
 # - What is a sampling distribution?
 # - What changed when n increased?
 # - What changed when K increased?
 # - Did your population shape make it easy or hard for the CLT to appear?
+#   How did that compare with your partner's population?

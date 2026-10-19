@@ -13,6 +13,8 @@
 - 5 min Question 6: vary the number of repetitions and distinguish simulation resolution from sampling variability
 - 5 min Question 7 and closing: compare theoretical standard error with simulated spread and complete the final reflection
 
+5-7 minutes before the end of lab, have students skip to "Final Reflection" if they haven't gotten there already.
+
 The worksheet is pair work throughout. Collect it at the door.
 
 ## Before lab
