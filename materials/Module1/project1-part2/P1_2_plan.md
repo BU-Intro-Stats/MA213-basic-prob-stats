@@ -1,13 +1,14 @@
-### Project1-2: Project 1 workday
-- Use this session after Lab 5 to help groups refine their exploratory analysis and presentation structure.
-- Start from `P1_2_activity.docx` in Google Docs; retain `P1_2_activity.md` as the editable source template.
-- The emphasis is on data quality, numerical and categorical evidence, reproducible R code, and clear communication.
+### Project1-2: Project 1 presentation prep
 
-**Deliverables**
-- Completed Project 1 Week 2 Google Doc activity checkpoint
-- Updated research question and data-cleaning notes
-- At least one improved numerical visual or table and one categorical visual or table
-- Reproducible R code and a draft slide sequence
-- Peer or instructor feedback and assigned next steps
 
----
+# Lesson Plan (50 mins)
+- 5 mins: Go over P1_2_checklist.pdf and the Deliverable 3 requirements (P1_D3_Presentation.pdf), including the Blackboard Q&A
+- 40 mins: Groups work through the checklist; instructor rotates through groups for the R code check-in (~3-4 min per student) and initials each student's check-in box
+- 5 mins: Tell any group that hasn't gotten to step 6 to skip there; note any students who still need a code check-in
+
+
+# Before Lab
+- Return Deliverable 2 feedback
+- Update deadlines
+- Print P1_2_checklist.pdf, one per student
+- Set up the Blackboard discussion board for posting videos and questions
