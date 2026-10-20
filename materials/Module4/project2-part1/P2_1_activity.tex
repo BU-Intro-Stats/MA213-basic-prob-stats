@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage{../../resource/shortex}
+\input{../../resource/teaching}
+
+%--------------------
+\begin{document}
+
+\begin{center}
+\textbf{\Large Project 2, Part 1 \\ Lab Activity}
+\end{center}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Item} & \textbf{Date} \\
+\midrule
+Lab P2\_1 (today) & Fri, Oct 23 \\
+\textbf{Deliverable 1 (outline) due} & \textbf{Thu, Oct 29, 9:00 PM} \\
+Lab 6 in class & Fri, Oct 30 \\
+Lab P2\_2 in class & Fri, Nov 6 \\
+\textbf{Deliverable 2 (slides + R code) due} & \textbf{Thu, Nov 12, 9:00 PM} \\
+Lab P2\_3 in class & Fri, Nov 13 \\
+\textbf{Deliverable 3 (report + R code) due} & \textbf{Thu, Nov 19, 9:00 PM} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Goal for Today}
+Get your group set up to work efficiently on Project 2 for the rest of the week. You are \textbf{not} expected to finish the Deliverable 1 outline in lab today --- the goal is a solid start: a data set, a draft categorical and numerical research question, and a first pass at matching each question to an inference method. You'll have until the Deliverable 1 deadline above to finish it together outside of lab. By the end of today's lab, every member should also know their role and the time of your next check-in.
+
+\subsection*{Before You Start}
+Copy the \href{TODO}{P2\_D1\_Outline} Google doc and share it amongst your group members --- that is the document you will fill in as you go. This activity sheet just tells you what to do and when; it has no blanks of its own.
+
+You have the rest of the lab time to work on this. If you don't get to step 6 (assigning roles and scheduling your next meeting) with 10 minutes left, stop where you are and move straight to step 6 --- every group should leave lab today with roles assigned and a next meeting on the calendar.
+
+\subsection*{Suggested Order}
+
+\begin{enumerate}
+    \item \textbf{Introduce group members ($\sim$3 min)}
+    \begin{itemize}
+        \item Go around the group, say your name and BU ID, and fill in the group members table in outline Section 1.
+        \item Identify your TF/LA mentor, and get their email address.
+        \item \emph{Tip:} pick one person to be the ``scribe'' typing into the shared doc for this session --- it keeps the doc moving and avoids duplicate edits from four people at once.
+    \end{itemize}
+
+    \item \textbf{Explore data sets and discuss possible research questions ($\sim$8 min)}
+    \begin{itemize}
+        \item Browse candidate data sets (see the list of suggested sources below) and talk through what each one could support.
+        \item You need \emph{both} a categorical question and a numerical question that can be answered with a hypothesis test, so look for a data set with at least one categorical variable you can test (proportions or counts) and at least one numerical variable you can compare (across groups, between pairs, or against a reference value).
+        \item \emph{Tip:} favor a data set you can describe in one sentence (``one row = one flight'') over one that sounds impressive but is hard to explain. A clear observational unit makes every later step easier.
+    \end{itemize}
+
+    \item \textbf{Pick a data set and confirm it loads in R ($\sim$8 min)}
+    \begin{itemize}
+        \item Converge on one data set. Actually open the data in R/RStudio; don't just look at a preview online.
+        \item Once it loads, fill in outline Section 3 (data source link/citation, what one row represents, number of rows and variables) and list the candidate variables in the Section 5 table.
+        \item \emph{Tip:} if the import fails or the file is huge/messy, that is useful information \emph{now} --- better to discover it in lab than the night before Deliverable 1 is due. If it's not working, drop that data set and try your next candidate instead.
+        \item \emph{Tip:} the inference methods all have conditions (independence, enough successes and failures, expected counts of at least 5, roughly normal data or a large enough sample). If a data set only has a handful of rows, or the groups you want to compare are tiny, pick another one.
+    \end{itemize}
+
+    \item \textbf{Draft your research questions and match each one to a method ($\sim$10 min)}
+    \begin{itemize}
+        \item Write your categorical and numerical research questions (outline Section 4), then fill in the planned categorical and numerical analyses (Sections 6 and 7): the method, a first exploratory table or plot, the null and alternative hypotheses in words, and the conditions you will need to check.
+        \item \emph{Tip:} let the variables pick the method. One binary categorical variable $\to$ one proportion; a binary variable compared across two groups $\to$ difference of two proportions; one categorical variable with more than two levels $\to$ chi-square goodness-of-fit; two categorical variables $\to$ chi-square test of independence. One numerical variable $\to$ one-sample mean; two measurements on the same unit $\to$ paired means; a numerical variable compared across two groups $\to$ difference of two means; across three or more groups $\to$ ANOVA.
+        \item \emph{Tip:} if a question sounds causal (``does X cause Y''), rewrite it as an association or comparison --- you can't establish causation from observational data.
+    \end{itemize}
+
+    \item \textbf{Fill in data quality, planned visuals, title, and motivation ($\sim$6 min)}
+    \begin{itemize}
+        \item Work through the data quality and feasibility table (Section 8) and list the plots and tables you plan to show (Section 9).
+        \item Now that you know your data and questions, it's much easier to write a good project title and motivation --- fill in the project title (Section 1) and Section 2.
+        \item \emph{Tip:} your motivation doesn't need to be profound --- ``we're curious whether X'' or ``this affects people we know'' is a fine reason. Graders want to see genuine engagement, not a contrived justification.
+    \end{itemize}
+
+    \item \textbf{Assign roles by deliverable and plan your next meeting ($\sim$7 min)}
+    \begin{itemize}
+        \item Fill in the Roles by Deliverable grid (outline Section 10) and agree on a specific date/time (or async check-in method) for your next meeting, before Deliverable 1 is due.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Tip: Suggested Task List by Deliverable}
+
+Use this as a menu when filling in the Roles by Deliverable grid.
+
+\begin{description}[nosep, leftmargin=0pt, style=sameline, font=\normalfont]
+    \item[\textbf{D1 --- Outline (write sections):}] 1 title/group, 2 motivation, 3 data source, 4 research questions, 5 variables, 6 categorical plan, 7 numerical plan, 8 data quality, 9 planned visuals
+    \item[\textbf{D2 --- R analysis:}] data import and cleaning, categorical EDA (table + bar plot), categorical inference (conditions, test statistic, p-value), numerical EDA (summary statistics + histogram/boxplot), numerical inference (conditions, test statistic, p-value)
+    \item[\textbf{D2 --- Slides:}] title, data description, categorical analysis, numerical analysis, conclusion \& future work, references
+    \item[\textbf{D2 --- Other:}] R code cleanup and assembly, data file, roles \& responsibilities summary
+    \item[\textbf{D3 --- Report sections:}] introduction, categorical analysis, numerical analysis, conclusion, references
+    \item[\textbf{D3 --- Other:}] revising R code from D2 feedback, proofreading and assembling the report
+\end{description}
+
+\subsection*{Possible Data Sources to Consider (Not Limited to These)}
+You can click the links below to explore possible data sources.
+\begin{itemize}
+    \item \href{https://www.openintro.org/data/}{OpenIntro Datasets}
+    \item \href{https://cran.r-project.org/web/packages/fivethirtyeight/vignettes/fivethirtyeight.html}{fivethirtyeight R Package}
+    \item \href{https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html}{datasets R package}
+    \item \href{https://www.kaggle.com/datasets}{Kaggle datasets}
+    \item \href{https://data.gov/}{US government's open data}
+\end{itemize}
+
+\end{document}

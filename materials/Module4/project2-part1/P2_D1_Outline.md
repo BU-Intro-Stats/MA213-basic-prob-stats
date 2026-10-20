@@ -1,10 +1,6 @@
-# MA 213 Project 2 Week 1 Activity and Outline
+# Deliverable 1: Project 2 Outline
 
-## Project 2 Deliverable 1: Group Outline
-
-**Purpose:** Use this document to launch Project 2 during class. Your group will complete this file as a Google Doc and submit it as Deliverable 1.
-
-**Submission format:** One completed Google Doc per group.
+*Complete this document as a group in Google Docs. Submit one outline per group. Due Thursday, Oct 29 at 9:00 PM.*
 
 **Before submitting:** Replace the blank response areas with complete sentences, tables, or bullet points. Your outline should clearly explain your topic, data source, research questions, planned categorical inference, planned numerical inference, timeline, and group roles.
 
@@ -12,18 +8,20 @@
 
 ## 1. Project Title and Group Information
 
-**Group members:**
+**Group members (name, BU ID):**
 
-| Name | BU ID | Email or contact |
-|---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+1.
+2.
+3.
+4.
+
+**TF/LA mentor (name, email address):**
+
+
 
 **Project title:**
 
-> 
+
 
 ---
 
@@ -33,11 +31,11 @@ Briefly describe your topic and explain why your group chose it. A reader should
 
 **Topic or area of interest:**
 
-> 
+
 
 **Why is this topic interesting or worth studying?**
 
-> 
+
 
 ---
 
@@ -45,47 +43,29 @@ Briefly describe your topic and explain why your group chose it. A reader should
 
 Identify a data source that can answer your research questions. Your data source must be cited clearly enough that another person could find it.
 
-**Possible data sources:**
+**Data source (link/citation):**
 
-- [OpenIntro datasets](https://www.openintro.org/data/)
-- [R datasets package](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)
-- [FiveThirtyEight data](https://github.com/fivethirtyeight/data)
-- [Kaggle datasets](https://www.kaggle.com/datasets)
-- [Data.gov](https://data.gov/)
+**What does one row represent?**
 
-**Data source link or citation:**
-
-> 
-
-**What does one row represent in the data?**
-
-> 
-
-**Approximate number of rows and variables:**
-
-> 
-
-**Briefly describe the most important variables in the data set:**
-
-> 
+**Approximate number of rows:**
 
 ---
 
 ## 4. Main Research Questions
 
-Project 2 should include both categorical and numerical analysis. Your questions should be answerable with the data and should avoid unsupported causal claims.
+Project 2 should include both categorical and numerical analysis. Your questions should be answerable with the data using one- and two-sample hypothesis tests and confidence intervals.  
 
-**Categorical research question:**
+**Categorical research questions:**
 
-> 
+ 
 
-**Numerical research question:**
+**Numerical research questions:**
 
-> 
+
 
 **Main objective of the project:**
 
-> 
+
 
 ---
 
@@ -103,11 +83,11 @@ Choose variables that connect directly to your research questions.
 
 **Which variables will your group use for categorical inference?**
 
-> 
+
 
 **Which variables will your group use for numerical inference?**
 
-> 
+
 
 ---
 
@@ -124,23 +104,23 @@ Choose at least one categorical inference method. You may revise later as you le
 
 **Planned categorical method:**
 
-> 
+
 
 **Exploratory table or plot you will create first:**
 
-> 
+
 
 **Null hypothesis in words:**
 
-> 
+
 
 **Alternative hypothesis in words:**
 
-> 
+
 
 **Conditions your group will need to check:**
 
-> 
+
 
 ---
 
@@ -158,23 +138,23 @@ Choose at least one numerical inference method. Your choice should match the var
 
 **Planned numerical method:**
 
-> 
+
 
 **Exploratory table or plot you will create first:**
 
-> 
+
 
 **Null hypothesis in words:**
 
-> 
+
 
 **Alternative hypothesis in words:**
 
-> 
+
 
 **Conditions your group will need to check:**
 
-> 
+
 
 ---
 
@@ -193,7 +173,7 @@ Before committing to the project, check whether the data are usable for both EDA
 
 **One data issue your group needs to solve:**
 
-> 
+
 
 ---
 
@@ -212,18 +192,18 @@ What plots or tables will appear in the project?
 
 ## 10. Roles and Timeline
 
-Assign each task to one owner. Everyone should have a clear responsibility for the next project milestone.
+**Roles by deliverable** — list each group member's main responsibility for each deliverable.
 
-| Group member | Task before Deliverable 2 | Due date |
-|---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| Group member | Deliverable 1 (Outline) | Deliverable 2 (Slides + R code + data) | Deliverable 3 (Written report + R code + data) |
+|---|---|---|---|
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
 
 **Next group meeting or check-in time:**
 
-> 
+
 
 ---
 
@@ -239,8 +219,8 @@ Before submitting this Google Doc, make sure your group has:
 - [ ] A planned numerical inference method
 - [ ] A data quality check
 - [ ] Planned plots or tables
-- [ ] Roles assigned for the next project milestone
+- [ ] Roles assigned by deliverable and next meeting set
 
 **Optional: One question your group still has for the instructor:**
 
-> 
+
