@@ -55,23 +55,34 @@ The project is broken into three deliverables (see the timeline below for the sc
 \end{itemize}
 
 \section*{Hypothesis Tests}
+Pick the test that matches your variables and research question.
+
+\subsection*{Categorical Data Analysis (choose at least one)}
 \begin{itemize}
-     \item Categorical Data Analysis (choose at least one)
-    \begin{itemize}
-        \item One categorical variable with one binary outcome (Inference for a single proportion : Chapter 6.1)
-        \item Two Categorical variables with binary outcomes (Inference for two proportions : Chapter 6.2)
-        \item One categorical variable with more than two outcomes (Chi-square goodness-of-fit test : Chapter 6.3)
-        \item Two categorical variables with more than two outcomes (Testing for independece in two-way tables : Chapter 6.4)
-    \end{itemize}
-
-    \item Numerical Data Analysis (choose at least one)
-    \begin{itemize}
-        \item One numerical variable (One-sample means with t-test : Chapter 7.1)
-        \item Two numerical variables (Paired or Two-sample difference in means with t-test : Chapters 7.2, 7.3)
-        \item More than two numerical variables (Comparing many means with ANOVA : Chapter 7.5)
-    \end{itemize}
-
+    \item \textbf{Single proportion} (Chapter 6.1): one categorical variable with two outcomes. Compare the proportion in one outcome to a hypothesized value.\\
+    \emph{Example:} Is the proportion of Titanic passengers who survived different from 50\%?
+    \item \textbf{Difference of two proportions} (Chapter 6.2): a two-outcome variable compared between two groups. Test whether the proportion is the same in both groups.\\
+    \emph{Example:} Is the survival rate different for female and male Titanic passengers?
+    \item \textbf{Chi-square goodness-of-fit} (Chapter 6.3): one categorical variable with three or more outcomes. Test whether the counts match a hypothesized distribution.\\
+    \emph{Example:} Are births equally likely on all seven days of the week?
+    \item \textbf{Chi-square test of independence} (Chapter 6.4): two categorical variables, at least one with three or more outcomes. Test whether the two variables are associated.\\
+    \emph{Example:} Is survival associated with passenger class (1st, 2nd, 3rd) on the Titanic?
 \end{itemize}
+
+\subsection*{Numerical Data Analysis (choose at least one)}
+\begin{itemize}
+    \item \textbf{One-sample mean} (Chapter 7.1): one numerical variable. Compare its mean to a hypothesized value.\\
+    \emph{Example:} Do college students sleep less than 8 hours per night on average?
+    \item \textbf{Paired means} (Chapter 7.2): two numerical measurements on the same individuals (e.g., before and after). Test whether the mean of the differences is zero.\\
+    \emph{Example:} Do students score differently on the final exam than on the midterm, on average?
+    \item \textbf{Difference of two means} (Chapter 7.3): one numerical variable compared between two independent groups. Test whether the two group means are equal.\\
+    \emph{Example:} Is the average birth weight different for babies of mothers who smoke and mothers who don't?
+    \item \textbf{ANOVA} (Chapter 7.5): one numerical variable compared across three or more groups. Test whether all the group means are equal.\\
+    \emph{Example:} Does average gas mileage differ for cars with 4, 6, and 8 cylinders?
+\end{itemize}
+
+\noindent\textbf{What about regression?} Questions about how one numerical variable changes with another numerical variable are answered with \textbf{linear regression}. Regression is \textbf{not required} for this project (it is not taught until MA214). You may still show a scatterplot of two numerical variables as part of your EDA, but your hypothesis test should be one of the tests above.\\
+\emph{Example:} On average, how much does a car's gas mileage change for each additional 1{,}000 pounds of weight? Is this value significantly different from zero? (This is a regression question, not a difference of means question.)
 
 \section*{R Code Guidelines}
 \begin{itemize}

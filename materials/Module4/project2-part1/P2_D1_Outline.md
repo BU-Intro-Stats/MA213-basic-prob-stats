@@ -134,7 +134,6 @@ Choose at least one numerical inference method. Your choice should match the var
 - [ ] Paired means
 - [ ] Difference of two means
 - [ ] Comparing many means with ANOVA
-- [ ] Linear regression, if appropriate
 
 **Planned numerical method:**
 
