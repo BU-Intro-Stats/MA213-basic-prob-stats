@@ -73,6 +73,20 @@ Both appear on the local website only. The public build drops them, like
 instructor flags in the weekly schedule. To add a lab, create the files; no code
 changes are needed.
 
+## Handout preamble
+
+LaTeX handouts in `materials/Module*/<folder>/` (project prompts, rubrics,
+activities, checklists) share one preamble in `materials/resource/`:
+
+```latex
+\usepackage{../../resource/shortex}
+\input{../../resource/teaching}
+```
+
+The semester in the page header comes from the `Semester:` line of
+`materials/instructor_inputs/important_dates.md`, the same line the syllabus
+generator uses, so there is nothing to edit in `resource/` each term.
+
 ## Syllabus input files
 
 - `syllabus_course.md` — course details, description, and materials
