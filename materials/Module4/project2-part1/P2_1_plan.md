@@ -2,7 +2,7 @@
 
 
 # Lesson Plan (50 mins)
-- 10 mins: Go over Project2.pdf (deliverables, R code guidelines, no built-in test functions) and the GenAI policy for projects
+- 10 mins: Go over Project2.pdf (deliverables, R code guidelines, no built-in test functions) and the GenAI policy for projects (allowed: Rephrasing text, Editing and Proofreading)
 - 5 mins: Go through groups (raise hands), assign TF/LA to each group
 - 25 mins: Groups go through P2_1_activity independently, checking off P2_1_checklist as they go
 - 10 mins: Tell any group that hasn't gotten to step 6 to skip there
