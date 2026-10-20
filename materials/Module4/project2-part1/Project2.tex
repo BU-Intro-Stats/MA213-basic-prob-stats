@@ -27,25 +27,56 @@ The project is broken into three deliverables (see the timeline below for the sc
     \item See the P2\_Rubric.pdf for details and full requirements
     \item Categorical analysis:
     \begin{enumerate}
+        \item A description of the research question and the categorical variable(s) of interest
         \item At least one summary table (frequency table or contingency table)
-        \item At least one bar plot (or pie chart)
-        \item Hypotheses, a check of the conditions for inference, the test statistic, and the p-value
+        \item At least one categorical visualization (e.g. bar plot or pie chart)
+        \item At least one hypothesis test, including:
+        \begin{enumerate}
+            \item The null and alternative hypotheses
+            \item A check of the conditions for inference
+            \item The test statistic and p-value
+        \end{enumerate}
         \item A conclusion in the context of the data
     \end{enumerate}
     \item Numerical analysis:
     \begin{enumerate}
+        \item A description of the research question and the numerical variable(s) of interest
         \item At least one summary statistics table (mean, median, sd, IQR, etc.)
-        \item At least one histogram, boxplot, or scatterplot
-        \item Hypotheses, a check of the conditions for inference, the test statistic, and the p-value
+        \item At least one numerical visualization (e.g. bar plot, histogram, boxplot, or scatterplot)
+        \item At least one hypothesis test, including:
+        \begin{enumerate}
+            \item The null and alternative hypotheses
+            \item A check of the conditions for inference
+            \item The test statistic and p-value
+        \end{enumerate}
         \item A conclusion in the context of the data
     \end{enumerate}
     \item Source of data must be cited, and references should be provided at the end
 \end{itemize}
 
+\section*{Hypothesis Tests}
+\begin{itemize}
+     \item Categorical Data Analysis (choose at least one)
+    \begin{itemize}
+        \item One categorical variable with one binary outcome (Inference for a single proportion : Chapter 6.1)
+        \item Two Categorical variables with binary outcomes (Inference for two proportions : Chapter 6.2)
+        \item One categorical variable with more than two outcomes (Chi-square goodness-of-fit test : Chapter 6.3)
+        \item Two categorical variables with more than two outcomes (Testing for independece in two-way tables : Chapter 6.4)
+    \end{itemize}
+
+    \item Numerical Data Analysis (choose at least one)
+    \begin{itemize}
+        \item One numerical variable (One-sample means with t-test : Chapter 7.1)
+        \item Two numerical variables (Paired or Two-sample difference in means with t-test : Chapters 7.2, 7.3)
+        \item More than two numerical variables (Comparing many means with ANOVA : Chapter 7.5)
+    \end{itemize}
+
+\end{itemize}
+
 \section*{R Code Guidelines}
 \begin{itemize}
     \item You will submit your R code as a separate file (Rscript (.R) or Rmd file), that should be well-commented and organized, along with the data file it reads.
-    \item Make sure that your code is reproducible (i.e. that I can run it and get the same results) and that the entire script runs from start to finish without errors.
+    \item Make sure that your code is reproducible (i.e. that I can run it and get the same results) and that the entire script runs from start to finish without errors. Submit your data file if it is necessary to run your code.
     \item Only use R functions that have been covered in class, tutorials, or labs, or are part of the standard R distribution.
     \item Using certain functions in R is not allowed
     \begin{itemize}
@@ -54,7 +85,11 @@ The project is broken into three deliverables (see the timeline below for the sc
     \end{itemize}
 \end{itemize}
 
-
+\section*{Writing Guidelines}
+\begin{itemize}
+    \item Your writing should be clear, concise, and well-structured.
+    \item See the GenAI policy on the course website for guidance on using AI tools in your writing.
+\end{itemize}
 
 \section*{Possible Data Sources to Consider (not limited to these)}
 You can click the links below to explore possible data sources.
@@ -68,25 +103,6 @@ You can click the links below to explore possible data sources.
 \end{itemize}
 
 
-\section*{Some example of analyses you can do}
-\begin{itemize}
-     \item Categorical Data Analysis Examples (choose at least one)
-    \begin{itemize}
-        \item One categorical data with binary outcome (Inference for a single proportion : Chapter 6.1)
-        \item Two Categorical variables with binary outcomes (Inference for two proportions : Chapter 6.2)
-        \item One categorical variable with more than two outcomes (Chi-square goodness-of-fit test : Chapter 6.3)
-        \item Two categorical variables with more than two outcomes (Testing for independece in two-way tables : Chapter 6.4)
-    \end{itemize}
-
-    \item Numerical Data Analysis Examples (choose at least one)
-    \begin{itemize}
-        \item One numerical variable (One-sample means with t-test : Chapter 7.1)
-        \item Two numerical variables (Paired data or Two-sample means with t-test : Chapters 7.2, 7.3)
-        \item More than two numerical variables (Comparing many means with ANOVA : Chapter 7.5)
-    \end{itemize}
-
-\end{itemize}
-
 \section*{Timeline}
 \begin{center}
 \begin{tabular}{ll}
@@ -95,7 +111,7 @@ You can click the links below to explore possible data sources.
 \midrule
 Lab P2\_1 (project launch) in class & Fri, Oct 23 \\
 \textbf{Deliverable 1 (outline) due} & \textbf{Thu, Oct 29, 9:00 PM} \\
-Lab 6 in class & Fri, Oct 30 \\
+Tutorial 6 due; Lab 6 in class & Fri, Oct 30 \\
 Lab P2\_2 (project workday) in class & Fri, Nov 6 \\
 \textbf{Deliverable 2 (slides + R code) due} & \textbf{Thu, Nov 12, 9:00 PM} \\
 Lab P2\_3 (report prep) in class & Fri, Nov 13 \\
