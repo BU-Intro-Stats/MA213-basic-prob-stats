@@ -2,11 +2,15 @@
 
 *Complete this document as a group in Google Docs. Submit one outline per group. Due Thursday, Oct 29 at 9:00 PM.*
 
-**Before submitting:** Replace the blank response areas with complete sentences, tables, or bullet points. Your outline should clearly explain your topic, data source, research questions, planned categorical inference, planned numerical inference, timeline, and group roles.
+**How the deliverables fit together:** Deliverables 1, 2, and 3 use the same numbered sections. In this outline you write your *plan*. In Deliverable 2 you will copy these answers into the next template, revise them as needed, and add your *results* under the same headings. In Deliverable 3 you will turn everything into a written report. Work you do here is not throwaway.
 
 ---
 
-## 1. Project Title and Group Information
+## Title and Group Information
+
+**Project title:**
+
+
 
 **Group members (name, BU ID):**
 
@@ -19,15 +23,13 @@
 
 
 
-**Project title:**
-
-
-
 ---
 
-## 2. Background and Motivation
+## 1. Introduction
 
-Briefly describe your topic and explain why your group chose it. A reader should understand the context of the project and why the question is interesting.
+### 1a. Background and Motivation
+
+Briefly describe your topic and explain why your group chose it. A reader should understand the context of the project and why the questions are interesting.
 
 **Topic or area of interest:**
 
@@ -37,9 +39,11 @@ Briefly describe your topic and explain why your group chose it. A reader should
 
 
 
----
+**Main objective of the project:**
 
-## 3. Data Source and Description
+
+
+### 1b. Data Source and Description
 
 Identify a data source that can answer your research questions. Your data source must be cited clearly enough that another person could find it.
 
@@ -49,27 +53,7 @@ Identify a data source that can answer your research questions. Your data source
 
 **Approximate number of rows:**
 
----
-
-## 4. Main Research Questions
-
-Project 2 should include both categorical and numerical analysis. Your questions should be answerable with the data using one- and two-sample hypothesis tests and confidence intervals.  
-
-**Categorical research questions:**
-
- 
-
-**Numerical research questions:**
-
-
-
-**Main objective of the project:**
-
-
-
----
-
-## 5. Variables of Interest
+### 1c. Variables of Interest
 
 Choose variables that connect directly to your research questions.
 
@@ -81,83 +65,7 @@ Choose variables that connect directly to your research questions.
 |  |  | Response / explanatory / grouping / descriptive |  |
 |  |  | Response / explanatory / grouping / descriptive |  |
 
-**Which variables will your group use for categorical inference?**
-
-
-
-**Which variables will your group use for numerical inference?**
-
-
-
----
-
-## 6. Planned Categorical Analysis
-
-Choose at least one categorical inference method. You may revise later as you learn more, but your outline should include a reasonable first plan.
-
-**Possible categorical methods:**
-
-- [ ] One proportion
-- [ ] Difference of two proportions
-- [ ] Chi-square goodness-of-fit
-- [ ] Chi-square test of independence
-
-**Planned categorical method:**
-
-
-
-**Exploratory table or plot you will create first:**
-
-
-
-**Null hypothesis in words:**
-
-
-
-**Alternative hypothesis in words:**
-
-
-
-**Conditions your group will need to check:**
-
-
-
----
-
-## 7. Planned Numerical Analysis
-
-Choose at least one numerical inference method. Your choice should match the variables and research question.
-
-**Possible numerical methods:**
-
-- [ ] One-sample mean
-- [ ] Paired means
-- [ ] Difference of two means
-- [ ] Comparing many means with ANOVA
-
-**Planned numerical method:**
-
-
-
-**Exploratory table or plot you will create first:**
-
-
-
-**Null hypothesis in words:**
-
-
-
-**Alternative hypothesis in words:**
-
-
-
-**Conditions your group will need to check:**
-
-
-
----
-
-## 8. Data Quality and Feasibility Check
+### 1d. Data Quality and Feasibility Check
 
 Before committing to the project, check whether the data are usable for both EDA and inference.
 
@@ -176,24 +84,117 @@ Before committing to the project, check whether the data are usable for both EDA
 
 ---
 
-## 9. Planned Visual Evidence
+## 2. Categorical Data Analysis
 
-What plots or tables will appear in the project?
+### 2a. Research Question and Variables
 
-| Plot or table | Variables used | Message it should support |
+Your question should be answerable with the data using one of the categorical hypothesis tests in Project2.pdf, and should avoid unsupported causal claims.
+
+**Categorical research question:**
+
+
+
+**Which variable(s) will you use?**
+
+
+
+### 2b. Exploratory Data Analysis (plan)
+
+| Planned table or plot | Variables used | Message it should support |
 |---|---|---|
 |  |  |  |
 |  |  |  |
-|  |  |  |
-|  |  |  |
+
+### 2c. Hypothesis Test (plan)
+
+Choose at least one categorical hypothesis test. You may revise later as you learn more, but your outline should include a reasonable first plan.
+
+**Planned test:**
+
+- [ ] Single proportion
+- [ ] Difference of two proportions
+- [ ] Chi-square goodness-of-fit
+- [ ] Chi-square test of independence
+
+**Null hypothesis in words:**
+
+
+
+**Alternative hypothesis in words:**
+
+
+
+**Conditions your group will need to check:**
+
+
 
 ---
 
-## 10. Roles and Timeline
+## 3. Numerical Data Analysis
+
+### 3a. Research Question and Variables
+
+Your question should be answerable with the data using one of the numerical hypothesis tests in Project2.pdf, and should avoid unsupported causal claims.
+
+**Numerical research question:**
+
+
+
+**Which variable(s) will you use?**
+
+
+
+### 3b. Exploratory Data Analysis (plan)
+
+| Planned table or plot | Variables used | Message it should support |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+
+### 3c. Hypothesis Test (plan)
+
+Choose at least one numerical hypothesis test. Your choice should match the variables and research question.
+
+**Planned test:**
+
+- [ ] One-sample mean
+- [ ] Paired means
+- [ ] Difference of two means
+- [ ] ANOVA
+
+**Null hypothesis in words:**
+
+
+
+**Alternative hypothesis in words:**
+
+
+
+**Conditions your group will need to check:**
+
+
+
+---
+
+## 4. Conclusion
+
+*Nothing to write yet. You will draft this section in Deliverable 2, once you have results.*
+
+---
+
+## 5. References
+
+List your data source citation here. Add any other sources (articles, websites) as you use them.
+
+1.
+
+---
+
+## Roles and Timeline
 
 **Roles by deliverable** — list each group member's main responsibility for each deliverable.
 
-| Group member | Deliverable 1 (Outline) | Deliverable 2 (Slides + R code + data) | Deliverable 3 (Written report + R code + data) |
+| Group member | Deliverable 1 (Outline) | Deliverable 2 (Results + R code + data) | Deliverable 3 (Written report + R code + data) |
 |---|---|---|---|
 |  |  |  |  |
 |  |  |  |  |
@@ -210,14 +211,14 @@ What plots or tables will appear in the project?
 
 Before submitting this Google Doc, make sure your group has:
 
-- [ ] A project title
-- [ ] A cited data source
-- [ ] A categorical research question
-- [ ] A numerical research question
-- [ ] A planned categorical inference method
-- [ ] A planned numerical inference method
-- [ ] A data quality check
-- [ ] Planned plots or tables
+- [ ] A project title and group information
+- [ ] Background, motivation, and main objective (1a)
+- [ ] A cited data source and data description (1b)
+- [ ] Variables of interest (1c)
+- [ ] A data quality check (1d)
+- [ ] A categorical research question, planned EDA, and planned hypothesis test (2a–2c)
+- [ ] A numerical research question, planned EDA, and planned hypothesis test (3a–3c)
+- [ ] Data source listed in References (5)
 - [ ] Roles assigned by deliverable and next meeting set
 
 **Optional: One question your group still has for the instructor:**

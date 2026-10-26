@@ -18,7 +18,7 @@ Lab P2\_1 (today) & Fri, Oct 23 \\
 \textbf{Deliverable 1 (outline) due} & \textbf{Thu, Oct 29, 9:00 PM} \\
 Lab 6 in class & Fri, Oct 30 \\
 Lab P2\_2 in class & Fri, Nov 6 \\
-\textbf{Deliverable 2 (slides + R code) due} & \textbf{Thu, Nov 12, 9:00 PM} \\
+\textbf{Deliverable 2 (results + R code) due} & \textbf{Thu, Nov 12, 9:00 PM} \\
 Lab P2\_3 in class & Fri, Nov 13 \\
 \textbf{Deliverable 3 (report + R code) due} & \textbf{Thu, Nov 19, 9:00 PM} \\
 \bottomrule
@@ -26,55 +26,44 @@ Lab P2\_3 in class & Fri, Nov 13 \\
 \end{center}
 
 \subsection*{Goal for Today}
-Get your group set up to work efficiently on Project 2 for the rest of the week. You are \textbf{not} expected to finish the Deliverable 1 outline in lab today --- the goal is a solid start: a data set, a draft categorical and numerical research question, and a first pass at matching each question to an inference method. You'll have until the Deliverable 1 deadline above to finish it together outside of lab. By the end of today's lab, every member should also know their role and the time of your next check-in.
+Get your group set up to work efficiently on Project 2. You are \textbf{not} expected to finish Deliverable 1 in lab today --- the goal is a solid start.
 
 \subsection*{Before You Start}
-Copy the \href{TODO}{P2\_D1\_Outline} Google doc and share it amongst your group members --- that is the document you will fill in as you go. This activity sheet just tells you what to do and when; it has no blanks of its own.
+Copy the \href{https://docs.google.com/document/d/1J5nZ17STPfx3xI3VadGgF2XQOvTIQxo3MpW34h-n1bU/edit?usp=sharing}{P2\_D1\_Outline} Google doc and share it amongst your group members --- that is the document you will fill in as you go.
 
-You have the rest of the lab time to work on this. If you don't get to step 6 (assigning roles and scheduling your next meeting) with 10 minutes left, stop where you are and move straight to step 6 --- every group should leave lab today with roles assigned and a next meeting on the calendar.
+If you don't get to step 4 (assigning roles and scheduling your next meeting) with 5 minutes left, stop where you are and move straight to step 4 --- every group should leave lab today with roles assigned and a next meeting on the calendar.
 
 \subsection*{Suggested Order}
 
 \begin{enumerate}
     \item \textbf{Introduce group members ($\sim$3 min)}
     \begin{itemize}
-        \item Go around the group, say your name and BU ID, and fill in the group members table in outline Section 1.
+        \item Go around the group, say your name and BU ID, and fill in the group members at the top of the outline (Title and Group Information).
         \item Identify your TF/LA mentor, and get their email address.
-        \item \emph{Tip:} pick one person to be the ``scribe'' typing into the shared doc for this session --- it keeps the doc moving and avoids duplicate edits from four people at once.
     \end{itemize}
 
-    \item \textbf{Explore data sets and discuss possible research questions ($\sim$8 min)}
+    \item \textbf{Find a data set and questions that work together ($\sim$20 min)}
+
+    Choosing a data set and choosing your questions are the same decision: a data set is only a good choice if it supports a categorical \emph{and} a numerical question that each match a test whose conditions are met. So work in a loop, and \textbf{don't fill in the outline yet} --- keep rough notes until you have settled.
+    \begin{enumerate}
+        \item \textbf{Pick a candidate data set} from the suggested sources below (or your own).
+        \item \textbf{Load it in R} and look at the variables (\texttt{str()}, \texttt{summary()}, \texttt{table()}). If it won't load or is too messy, go back to (a).
+        \item \textbf{Draft one categorical and one numerical question.} Look through the tests at the end of this sheet, find the ones that fit your variables, and use their examples as models.
+        \item \textbf{Check the conditions in R.} For example, use \texttt{table()} to count successes and failures (or expected counts) in each group, check how many rows are in each group, and make a quick histogram to look for strong skew.
+        \item \textbf{Decide:} if both questions work, you're done with this step. If one doesn't (no test fits, a condition fails, a group is tiny), go back to (c) with a different question, or to (a) with a different data set.
+    \end{enumerate}
+    \emph{Tip:} it is normal to go around this loop two or three times. It is much easier to switch data sets today than after Deliverable 1.
+
+    \item \textbf{Fill in the outline ($\sim$12 min)}
     \begin{itemize}
-        \item Browse candidate data sets (see the list of suggested sources below) and talk through what each one could support.
-        \item You need \emph{both} a categorical question and a numerical question that can be answered with a hypothesis test, so look for a data set with at least one categorical variable you can test (proportions or counts) and at least one numerical variable you can compare (across groups, between pairs, or against a reference value).
-        \item \emph{Tip:} favor a data set you can describe in one sentence (``one row = one flight'') over one that sounds impressive but is hard to explain. A clear observational unit makes every later step easier.
+        \item Data: source, what one row represents, and number of rows (1b); variables of interest (1c); the data quality table (1d).
+        \item Analyses: for each of Sections 2 (categorical) and 3 (numerical), the research question and variables (a), a planned exploratory table or plot (b), and the planned test, hypotheses in words, and conditions (c).
+        \item Now that you know your data and questions, write the project title (top of the outline) and background and motivation (1a), and add your data source to References (5).
     \end{itemize}
 
-    \item \textbf{Pick a data set and confirm it loads in R ($\sim$8 min)}
+    \item \textbf{Assign roles by deliverable and plan your next meeting ($\sim$5 min)}
     \begin{itemize}
-        \item Converge on one data set. Actually open the data in R/RStudio; don't just look at a preview online.
-        \item Once it loads, fill in outline Section 3 (data source link/citation, what one row represents, number of rows and variables) and list the candidate variables in the Section 5 table.
-        \item \emph{Tip:} if the import fails or the file is huge/messy, that is useful information \emph{now} --- better to discover it in lab than the night before Deliverable 1 is due. If it's not working, drop that data set and try your next candidate instead.
-        \item \emph{Tip:} the inference methods all have conditions (independence, enough successes and failures, expected counts of at least 5, roughly normal data or a large enough sample). If a data set only has a handful of rows, or the groups you want to compare are tiny, pick another one.
-    \end{itemize}
-
-    \item \textbf{Draft your research questions and match each one to a method ($\sim$10 min)}
-    \begin{itemize}
-        \item Write your categorical and numerical research questions (outline Section 4), then fill in the planned categorical and numerical analyses (Sections 6 and 7): the method, a first exploratory table or plot, the null and alternative hypotheses in words, and the conditions you will need to check.
-        \item \emph{Tip:} let the variables pick the method (see the Hypothesis Tests section of Project2.pdf). One binary categorical variable $\to$ one proportion; a binary variable compared across two groups $\to$ difference of two proportions; one categorical variable with more than two levels $\to$ chi-square goodness-of-fit; two categorical variables $\to$ chi-square test of independence. One numerical variable $\to$ one-sample mean; two measurements on the same unit $\to$ paired means; a numerical variable compared across two groups $\to$ difference of two means; across three or more groups $\to$ ANOVA.
-        \item \emph{Tip:} if a question sounds causal (``does X cause Y''), rewrite it as an association or comparison --- you can't establish causation from observational data.
-    \end{itemize}
-
-    \item \textbf{Fill in data quality, planned visuals, title, and motivation ($\sim$6 min)}
-    \begin{itemize}
-        \item Work through the data quality and feasibility table (Section 8) and list the plots and tables you plan to show (Section 9).
-        \item Now that you know your data and questions, it's much easier to write a good project title and motivation --- fill in the project title (Section 1) and Section 2.
-        \item \emph{Tip:} your motivation doesn't need to be profound --- ``we're curious whether X'' or ``this affects people we know'' is a fine reason. Graders want to see genuine engagement, not a contrived justification.
-    \end{itemize}
-
-    \item \textbf{Assign roles by deliverable and plan your next meeting ($\sim$7 min)}
-    \begin{itemize}
-        \item Fill in the Roles by Deliverable grid (outline Section 10) and agree on a specific date/time (or async check-in method) for your next meeting, before Deliverable 1 is due.
+        \item Fill in the Roles by Deliverable grid (Roles and Timeline, at the end of the outline) and agree on a specific date/time (or async check-in method) for your next meeting, before Deliverable 1 is due.
     \end{itemize}
 \end{enumerate}
 
@@ -83,11 +72,11 @@ You have the rest of the lab time to work on this. If you don't get to step 6 (a
 Use this as a menu when filling in the Roles by Deliverable grid.
 
 \begin{description}[nosep, leftmargin=0pt, style=sameline, font=\normalfont]
-    \item[\textbf{D1 --- Outline (write sections):}] 1 title/group, 2 motivation, 3 data source, 4 research questions, 5 variables, 6 categorical plan, 7 numerical plan, 8 data quality, 9 planned visuals
+    \item[\textbf{D1 --- Outline (write sections):}] title/group, 1a motivation, 1b data source, 1c variables, 1d data quality, 2 categorical plan, 3 numerical plan, 5 references
     \item[\textbf{D2 --- R analysis:}] data import and cleaning, categorical EDA (summary table + visualization), categorical inference (conditions, test statistic, p-value), numerical EDA (summary statistics table + visualization), numerical inference (conditions, test statistic, p-value)
-    \item[\textbf{D2 --- Slides:}] title, data description, categorical analysis, numerical analysis, conclusion \& future work, references
-    \item[\textbf{D2 --- Other:}] R code cleanup and assembly, data file, roles \& responsibilities summary
-    \item[\textbf{D3 --- Report sections:}] introduction, categorical analysis, numerical analysis, conclusion, references
+    \item[\textbf{D2 --- Results doc:}] revising D1 sections from feedback, data cleaning (1d), categorical results (2b--2d), numerical results (3b--3d), draft conclusion (4)
+    \item[\textbf{D2 --- Other:}] R code cleanup and assembly, data file, updating roles
+    \item[\textbf{D3 --- Report sections:}] 1 introduction, 2 categorical analysis, 3 numerical analysis, 4 conclusion, 5 references, roles appendix
     \item[\textbf{D3 --- Other:}] revising R code from D2 feedback, proofreading and assembling the report
 \end{description}
 
@@ -100,5 +89,8 @@ You can click the links below to explore possible data sources.
     \item \href{https://www.kaggle.com/datasets}{Kaggle datasets}
     \item \href{https://data.gov/}{US government's open data}
 \end{itemize}
+
+\subsection*{Hypothesis Test Options and Their Conditions}
+\input{hypothesis_tests}
 
 \end{document}
