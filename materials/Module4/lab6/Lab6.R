@@ -6,9 +6,6 @@
 # are commented out because you need to fill in the missing pieces first.
 ############################################################
 
-library(dplyr)
-library(ggplot2)
-
 
 ############################################################
 # Getting Started. One Proportion
@@ -26,7 +23,8 @@ p_hat
 ############################################################
 
 alpha <- 0.05
-z_star <- qnorm(1 - alpha / 2)
+# Fill in the blank with pnorm or qnorm.
+# z_star <- ____(1 - alpha / 2)
 
 SE <- sqrt(p_hat * (1 - p_hat) / n)
 CI <- p_hat + c(-1, 1) * z_star * SE
@@ -52,7 +50,8 @@ p0 <- 0.50
 
 SE_null <- sqrt(p0 * (1 - p0) / n)
 z_stat <- (p_hat - p0) / SE_null
-p_value <- 2 * (1 - pnorm(abs(z_stat)))
+# Fill in the blank with pnorm or qnorm.
+# p_value <- 2 * (1 - ____(abs(z_stat)))
 
 z_stat
 p_value
@@ -74,69 +73,62 @@ true_prop <- mean(pop == "Cellphone")
 
 true_prop
 
-# Fill in the blank in sample(), then run.
+# Run the simulation. It builds a table with one row per simulated sample.
 
-# alpha <- 0.05
-# n <- 200
-# K <- 1000
-#
-# num_of_simulation <- rep(0, K)
-# prop_est <- rep(0, K)
-# lower <- rep(0, K)
-# upper <- rep(0, K)
-# included <- rep(FALSE, K)
-#
-# for (k in 1:K) {
-#   sampled_data <- sample(pop, size = ____)
-#   p_hat <- mean(sampled_data == "Cellphone")
-#   SE <- sqrt(p_hat * (1 - p_hat) / n)
-#   CI <- p_hat + c(-1, 1) * qnorm(1 - alpha / 2) * SE
-#
-#   num_of_simulation[k] <- k
-#   prop_est[k] <- p_hat
-#   lower[k] <- CI[1]
-#   upper[k] <- CI[2]
-#   included[k] <- CI[1] <= true_prop & true_prop <= CI[2]
-# }
-#
-# df_table <- data.frame(
-#   num_of_simulation = num_of_simulation,
-#   prop_est = prop_est,
-#   lower = lower,
-#   upper = upper,
-#   included = included
-# )
-#
-# head(df_table)
-# mean(df_table$included)
+alpha <- 0.05
+n <- 200
+K <- 1000
 
-# Interpretation:
-# - About what proportion of 95% CIs contained the true proportion?
+prop_est <- rep(0, K)
+lower <- rep(0, K)
+upper <- rep(0, K)
+included <- rep(FALSE, K)
 
+for (k in 1:K) {
+  sampled_data <- sample(pop, size = n)
+  p_hat <- mean(sampled_data == "Cellphone")
+  SE <- sqrt(p_hat * (1 - p_hat) / n)
+  CI <- p_hat + c(-1, 1) * qnorm(1 - alpha / 2) * SE
 
-############################################################
-# Question 4. What changes when confidence level changes?
-############################################################
+  prop_est[k] <- p_hat
+  lower[k] <- CI[1]
+  upper[k] <- CI[2]
+  included[k] <- CI[1] <= true_prop & true_prop <= CI[2]
+}
 
-# Change alpha to 0.01 and rerun the simulation above.
-# Compare:
+df_table <- data.frame(
+  prop_est = prop_est,
+  lower = lower,
+  upper = upper,
+  included = included
+)
+
+head(df_table)
+
+# Fill in the blanks, then uncomment and run.
+
+# Coverage rate: the proportion of intervals that contain true_prop.
+# coverage_rate <- mean(df_table$____)
+# coverage_rate
+
+# Typical interval width: the average width of the confidence intervals.
+# widths <- df_table$____ - df_table$____
+# typical_width <- mean(widths)
+# typical_width
+
+# Then change alpha to 0.01 and rerun the simulation above.
+# Compare the 95% and 99% results:
 # - coverage rate
 # - typical interval width
 
 
 ############################################################
-# Question 5. Build a two-way table
+# Question 4. Build a two-way table
 ############################################################
 
-titanic_df <- as.data.frame(Titanic)
+titanic <- read.csv("Titanic.csv", row.names = 1)
 
-class_survival <- titanic_df %>%
-  group_by(Class, Survived) %>%
-  summarize(count = sum(Freq), .groups = "drop")
-
-class_survival
-
-tbl <- xtabs(count ~ Survived + Class, data = class_survival)
+tbl <- table(titanic$Survived, titanic$Class)
 tbl
 addmargins(tbl)
 
@@ -145,7 +137,7 @@ addmargins(tbl)
 
 
 ############################################################
-# Question 6. Calculate expected counts
+# Question 5. Calculate expected counts
 ############################################################
 
 row_totals <- rowSums(tbl)
@@ -155,14 +147,14 @@ total <- sum(tbl)
 expected_tbl <- outer(row_totals, col_totals) / total
 expected_tbl
 
-all(expected_tbl >= 5)
+# all(expected_tbl >= ____)
 
 # Interpretation:
 # - Do expected counts meet the chi-square condition?
 
 
 ############################################################
-# Question 7. Compute the chi-square statistic and p-value
+# Question 6. Compute the chi-square statistic and p-value
 ############################################################
 
 chi_stat <- sum((tbl - expected_tbl)^2 / expected_tbl)
@@ -173,37 +165,39 @@ chi_stat
 df
 p_value
 
+# If R prints a p-value of 0, the p-value is too small to display.
+# Report it as p < 0.001.
+
 # Interpretation:
 # - At alpha = 0.05, do you reject H0?
 # - Write the conclusion in context.
 
 
 ############################################################
-# Question 8. Try another pair of variables
+# Question 7. Write a reusable chi-square function
 ############################################################
 
-sex_survival <- titanic_df %>%
-  group_by(Sex, Survived) %>%
-  summarize(count = sum(Freq), .groups = "drop")
+# Fill in the function body, then uncomment and run.
 
-tbl2 <- xtabs(count ~ Survived + Sex, data = sex_survival)
-tbl2
+# manual_chisq <- function(tbl) {
+#   # Expected counts.
+#
+#   # Chi-square statistic.
+#
+#   # Degrees of freedom.
+#
+#   # P-value.
+#
+#   list(expected = expected_tbl, chi_stat = chi_stat, df = df, p_value = p_value)
+# }
 
-# Fill in the rest of the chi-square workflow.
+# Check: the results should match your answers to Questions 5-6.
+# manual_chisq(tbl)
 
-# expected_tbl2 <- ____
-# chi_stat2 <- ____
-# df2 <- ____
-# p_value2 <- ____
+# Use your function on sex and survival.
+# tbl2 <- table(titanic$Survived, titanic$Sex)
+# tbl2
+# manual_chisq(tbl2)
 
 # Interpretation:
 # - Does survival appear independent of sex in the Titanic data?
-
-
-############################################################
-# Optional Challenge. Reusable chi-square function
-############################################################
-
-# manual_chisq <- function(tbl) {
-#   # Your code here.
-# }

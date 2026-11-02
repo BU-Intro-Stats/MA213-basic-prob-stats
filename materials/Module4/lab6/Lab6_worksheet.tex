@@ -1,8 +1,9 @@
 \documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.75in]{geometry}
 \usepackage{array}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{listings}
 
@@ -26,11 +27,14 @@
 \definecolor{discusscolor}{RGB}{214,234,255}
 \definecolor{funfactcolor}{RGB}{222,247,222}
 \definecolor{debatecolor}{RGB}{255,221,221}
+\definecolor{checkincolor}{RGB}{232,222,250}
 
 \newcommand{\calloutbox}[3]{%
   \vspace{4pt}\noindent
+  \begin{minipage}{\linewidth}
   \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\[2pt]
   \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \end{minipage}
   \vspace{6pt}
 }
 \newcommand{\predictbox}[1]{\calloutbox{predictcolor}{PREDICTION TIME}{#1}}
@@ -38,6 +42,13 @@
 \newcommand{\funfact}[1]{\calloutbox{funfactcolor}{FUN FACT}{#1}}
 \newcommand{\debatebox}[1]{\calloutbox{debatecolor}{DEBATE CORNER}{#1}}
 \newcommand{\claimbox}[1]{\calloutbox{funfactcolor}{CLAIM, EVIDENCE, CONTEXT}{#1}}
+\newcommand{\checkinbox}[1]{%
+  \calloutbox{checkincolor}{CHECK IN: Call over an instructor}{%
+    \begin{minipage}[c]{0.72\linewidth}#1\end{minipage}\hfill
+    \begin{minipage}[c]{0.2\linewidth}\centering
+      \fbox{\rule{0pt}{0.45in}\hspace{0.9in}}\\[2pt]
+      {\small Instructor initials}
+    \end{minipage}}}
 
 \newcommand{\writebox}[1]{
   \vspace{3pt}
@@ -78,9 +89,9 @@
 \textbf{Big idea:} Confidence intervals and hypothesis tests answer different but related questions. In this lab, you will simulate confidence interval coverage and manually build a chi-square test of independence.
 \textbf{Do not use GenAI tools for this lab.} The point is to practice your own inference reasoning, coding skills, and interpretation.
 
-\textbf{Files used:} No external data file is needed. You will generate one population and use R's built-in \texttt{Titanic} table.
+\textbf{Files used:} \texttt{Titanic.csv} (the same file from Lab 3). You will also generate one population in R.
 
-\textbf{Skills practiced:} \texttt{sample()}, \texttt{qnorm()}, \texttt{pchisq()}, \texttt{table()}, \texttt{addmargins()}, \texttt{as.data.frame()}, \texttt{group\_by()}, and \texttt{summarize()}.
+\textbf{Skills practiced:} \texttt{sample()}, \texttt{pnorm()}, \texttt{qnorm()}, \texttt{pchisq()}, \texttt{read.csv()}, \texttt{table()}, and \texttt{addmargins()}.
 
 \textbf{Your mission:} Explain what 95\% confidence means through simulation, then test whether two categorical variables appear independent.
 
@@ -95,9 +106,6 @@ Before opening R: introduce yourself to your partner. Then answer: Which sounds 
 Suppose a survey asks Boston residents whether they own a cell phone. Out of 200 randomly selected residents, 127 say yes.
 
 \begin{lstlisting}[language=R]
-library(dplyr)
-library(ggplot2)
-
 x <- 127
 n <- 200
 p_hat <- x / n
@@ -115,7 +123,8 @@ Construct a 95\% confidence interval for the population proportion of Boston res
 
 \begin{lstlisting}[language=R]
 alpha <- 0.05
-z_star <- qnorm(1 - alpha / 2)
+# Fill in the blank with pnorm or qnorm.
+z_star <- ____(1 - alpha / 2)
 
 SE <- sqrt(p_hat * (1 - p_hat) / n)
 CI <- p_hat + c(-1, 1) * z_star * SE
@@ -125,7 +134,7 @@ SE
 CI
 \end{lstlisting}
 
-\writebox{Interpret the confidence interval in context. Avoid saying there is a 95\% probability that this one interval contains the true proportion.}
+\writebox{State and interpret the confidence interval in context. Avoid saying there is a 95\% probability that this one interval contains the true proportion.}
 
 \section*{Question 2. Test a hypothesis using the same sample}
 
@@ -142,19 +151,22 @@ p0 <- 0.50
 
 SE_null <- sqrt(p0 * (1 - p0) / n)
 z_stat <- (p_hat - p0) / SE_null
-p_value <- 2 * (1 - pnorm(abs(z_stat)))
+# Fill in the blank with pnorm or qnorm.
+p_value <- 2 * (1 - ____(abs(z_stat)))
 
 z_stat
 p_value
 \end{lstlisting}
 
-\discussbox{The confidence interval and hypothesis test use the same sample, but they answer different questions. What question does each one answer?}
+\writebox{What is the p-value? At $\alpha=0.05$, do you reject $H_0$? Write your conclusion in context.}
 
-\writebox{At $\alpha=0.05$, do you reject $H_0$? Write your conclusion in context.}
+\checkinbox{\textbf{Check-in 1.} Show your confidence interval and your hypothesis test conclusion. Keep working on Question 3 until the instructor gets to you.}
 
 \section*{Question 3. Simulate confidence interval coverage}
 
-Create a hypothetical population where the true proportion is known. Then repeatedly sample from it and count how many confidence intervals contain the true proportion.
+Let's use simulation to study whether 95\% confidence intervals for a population proportion actually contain the true proportion 95\% of the time. 
+
+The code below creates a hypothetical population where the true proportion is known. Then it repeatedly samples from that population and builds a confidence interval each time. The ``coverage rate'' is the proportion of these intervals that contain the true proportion.
 
 \begin{lstlisting}[language=R]
 set.seed(213)
@@ -166,26 +178,24 @@ true_prop <- mean(pop == "Cellphone")
 true_prop
 \end{lstlisting}
 
-Complete the simulation below.
+Run the simulation below. It builds a table with one row per simulated sample.
 
 \begin{lstlisting}[language=R]
 alpha <- 0.05
 n <- 200
 K <- 1000
 
-num_of_simulation <- rep(0, K)
 prop_est <- rep(0, K)
 lower <- rep(0, K)
 upper <- rep(0, K)
 included <- rep(FALSE, K)
 
 for (k in 1:K) {
-  sampled_data <- sample(pop, size = ____)
+  sampled_data <- sample(pop, size = n)
   p_hat <- mean(sampled_data == "Cellphone")
   SE <- sqrt(p_hat * (1 - p_hat) / n)
   CI <- p_hat + c(-1, 1) * qnorm(1 - alpha / 2) * SE
 
-  num_of_simulation[k] <- k
   prop_est[k] <- p_hat
   lower[k] <- CI[1]
   upper[k] <- CI[2]
@@ -193,30 +203,27 @@ for (k in 1:K) {
 }
 
 df_table <- data.frame(
-  num_of_simulation = num_of_simulation,
   prop_est = prop_est,
   lower = lower,
   upper = upper,
   included = included
 )
-
-head(df_table)
-mean(df_table$included)
 \end{lstlisting}
 
-\predictbox{Before running the simulation, about what proportion of 95\% confidence intervals do you expect to contain the true proportion?}
-
-\writebox{What proportion of intervals contained the true proportion? Was it close to 95\%?}
-
-\section*{Question 4. What changes when confidence level changes?}
-
-Modify your simulation by changing \texttt{alpha} to 0.01 for a 99\% confidence interval.
+Fill in the blanks to compute the coverage rate and the typical interval width.
 
 \begin{lstlisting}[language=R]
-# Change alpha to 0.01 and rerun the simulation.
-# How does the coverage rate change?
-# How does the interval width change?
+# Coverage rate: the proportion of intervals that contain true_prop.
+coverage_rate <- mean(df_table$____)
+coverage_rate
+
+# Typical interval width: the average width of the confidence intervals.
+widths <- df_table$____ - df_table$____
+typical_width <- mean(widths)
+typical_width
 \end{lstlisting}
+
+Record your results in the 95\% row of the table. Then change \texttt{alpha} to 0.01 for a 99\% confidence interval, rerun the simulation, and fill in the 99\% row.
 
 \begin{center}
 \begin{tabular}{|p{0.25\textwidth}|p{0.28\textwidth}|p{0.37\textwidth}|}
@@ -230,32 +237,28 @@ Modify your simulation by changing \texttt{alpha} to 0.01 for a 99\% confidence 
 \end{tabular}
 \end{center}
 
-\debatebox{A higher confidence level sounds better. What is the tradeoff?}
+\checkinbox{\textbf{Check-in 2.} Show your coverage table and explain what ``95\% confidence'' means. Keep working on Question 4 until the instructor gets to you.}
 
-\section*{Question 5. Build a two-way table}
+\section*{Question 4. Build a two-way table}
 
-For the chi-square test, use R's built-in \texttt{Titanic} table. The code below converts it to a data frame and summarizes survival by passenger class.
+For the chi-square test, use the Titanic data from Lab 3. Each row of \texttt{Titanic.csv} is one passenger. The code below reads the file and cross-tabulates survival by passenger class.
 
 \begin{lstlisting}[language=R]
-titanic_df <- as.data.frame(Titanic)
+titanic <- read.csv("Titanic.csv", row.names = 1)
 
-class_survival <- titanic_df %>%
-  group_by(Class, Survived) %>%
-  summarize(count = sum(Freq), .groups = "drop")
-
-class_survival
-
-tbl <- xtabs(count ~ Survived + Class, data = class_survival)
+tbl <- table(titanic$Survived, titanic$Class)
 tbl
 addmargins(tbl)
 \end{lstlisting}
 
-\discussbox{What would independence mean in this setting? In plain language, what would it mean if passenger class and survival were independent?}
+\writebox{What would independence mean in this setting? In plain language, what would it mean if passenger class and survival were independent?}
 
-\section*{Question 6. Calculate expected counts}
+\section*{Question 5. Calculate expected counts}
 
 For each cell in a two-way table,
 Expected count = (row total)(column total) / table total.
+
+The chi-square test requires every expected count to be at least 5.
 
 \begin{lstlisting}[language=R]
 row_totals <- rowSums(tbl)
@@ -265,12 +268,12 @@ total <- sum(tbl)
 expected_tbl <- outer(row_totals, col_totals) / total
 expected_tbl
 
-all(expected_tbl >= 5)
+all(expected_tbl >= ____)
 \end{lstlisting}
 
-\writebox{Do the expected counts meet the chi-square condition? How do you know?}
+\textbf{Do the expected counts meet the chi-square condition?} \qquad $\square$ Yes \qquad $\square$ No
 
-\section*{Question 7. Compute the chi-square statistic and p-value}
+\section*{Question 6. Compute the chi-square statistic and p-value}
 
 Compute the chi-square statistic manually, then use the chi-square distribution to find the p-value.
 
@@ -288,39 +291,39 @@ df
 p_value
 \end{lstlisting}
 
-\claimbox{At $\alpha=0.05$, I \underline{\hspace{2cm}} reject $H_0$. My conclusion in context is \underline{\hspace{7cm}}.}
+If R prints a p-value of 0, the p-value is too small to display. Report it as $p < 0.001$.
 
-\section*{Question 8. Try another pair of variables}
+\writebox{What is the p-value? At $\alpha=0.05$, do you reject $H_0$? Write your conclusion in context.}
 
-Repeat the chi-square workflow for \texttt{Sex} and \texttt{Survived}.
+\newpage
+\section*{Question 7. Write a reusable chi-square function}
+
+Write a function that takes a two-way table and returns the expected counts, chi-square statistic, degrees of freedom, and p-value. Check it on the class and survival table, then use it to test whether survival is independent of sex.
 
 \begin{lstlisting}[language=R]
-sex_survival <- titanic_df %>%
-  group_by(Sex, Survived) %>%
-  summarize(count = sum(Freq), .groups = "drop")
+manual_chisq <- function(tbl) {
+  # Expected counts.
 
-tbl2 <- xtabs(count ~ Survived + Sex, data = sex_survival)
+  # Chi-square statistic.
+
+  # Degrees of freedom.
+
+  # P-value.
+
+  list(expected = expected_tbl, chi_stat = chi_stat, df = df, p_value = p_value)
+}
+
+# Check: the results should match your answers to Questions 5-6.
+manual_chisq(tbl)
+
+# Use your function on sex and survival.
+tbl2 <- table(titanic$Survived, titanic$Sex)
 tbl2
-
-# Expected counts.
-
-# Chi-square statistic.
-
-# Degrees of freedom.
-
-# P-value.
+manual_chisq(tbl2)
 \end{lstlisting}
 
 \writebox{Does survival appear independent of sex in the Titanic data? Support your answer with a p-value and context.}
 
-\section*{Optional Challenge}
-
-Write a reusable function that takes a two-way table and returns expected counts, chi-square statistic, degrees of freedom, and p-value.
-
-\begin{lstlisting}[language=R]
-manual_chisq <- function(tbl) {
-  # Your code here.
-}
-\end{lstlisting}
+\checkinbox{\textbf{Check-in 3.} Show your function and your conclusion about sex and survival. Turn in this worksheet with as much as you completed.}
 
 \end{document}
