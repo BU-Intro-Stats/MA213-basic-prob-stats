@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -68,6 +68,126 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Statistical vs.\ Practical Significance}
+
+\begin{frame}{A New Online Ad: Small Study}
+\footnotesize
+\dq{A company's online ads have historically had a 20\% click-through rate. They try a new ad design and show it to 100 randomly selected users; 21 click (\(\hat{p} = 0.21\)). Is there convincing evidence that the new ad's click-through rate is higher than 20\%?}
+
+\pause
+\vspace{-2mm}
+\[ H_0: p = 0.20 \qquad H_A: p > 0.20 \]
+
+\pause
+\begin{eqnarray*}
+SE &=& \sqrt{\frac{0.20 \times 0.80}{100}} = 0.04 \\
+Z &=& \frac{0.21 - 0.20}{0.04} = 0.25 \\
+p\text{-value} &=& 1 - 0.5987 = 0.40
+\end{eqnarray*}
+
+\pause
+\textbf{Conclusion:} Since the p-value is large (\(> 0.05\)), we fail to reject \(H_0\). The data \textbf{do not} provide convincing evidence that the new ad does better than 20\%.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{A New Online Ad: Large Study}
+\footnotesize
+\dq{Now suppose the company shows the new ad to 1{,}000{,}000 users and observes the same click-through rate: 210{,}000 click (\(\hat{p} = 0.21\)).}
+
+\pause
+\vspace{-2mm}
+\[ H_0: p = 0.20 \qquad H_A: p > 0.20 \]
+
+\pause
+\begin{eqnarray*}
+SE &=& \sqrt{\frac{0.20 \times 0.80}{1{,}000{,}000}} = 0.0004 \\
+Z &=& \frac{0.21 - 0.20}{0.0004} = 25 \\
+p\text{-value} &\approx& 0
+\end{eqnarray*}
+
+\pause
+\textbf{Conclusion:} We reject \(H_0\). The result is \textbf{statistically significant.}
+
+\medskip
+\textbf{But...} the new ad beats the old rate by only \(\mathbf{0.01}\) (1 percentage point) --
+does that matter in practice?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Statistical vs.\ Practical Significance}
+\footnotesize
+\begin{center}
+\begin{tabular}{lcccc}
+\textbf{Scenario} & \textbf{Sample Size} & \(\hat{p}\) & \textbf{p-value} & \textbf{Stat.\ Sig.?} \\
+\hline
+Small study & 100 & 0.21 & 0.40 & No \\
+Large study & 1{,}000{,}000 & 0.21 & \(\approx 0\) & Yes \\
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Takeaways:}
+\begin{itemize}
+  \item Same \(\hat{p}\), different conclusions: a larger \(n\) gives a smaller \(SE\), so the same difference gives a larger \(Z\).
+  \item Statistical significance depends on both \hl{effect size} and \hl{sample size}.
+  \item Practical significance depends on whether the effect is \hl{large enough to matter}.
+  \item With large enough data, even tiny effects can be statistically significant.
+\end{itemize}
+
+\medskip
+\textit{Statistical significance tells you it's unlikely to be due to chance.  \\
+Practical significance tells you if it matters.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Two different questions}
+\footnotesize
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.16\textwidth}|>{\raggedright\arraybackslash}p{0.37\textwidth}|>{\raggedright\arraybackslash}p{0.37\textwidth}|}
+\hline
+ & \textbf{Practically significant} & \textbf{Not practically significant} \\
+\hline
+\textbf{Statistically significant} &
+40{,}000 patients: new treatment cuts hospital stays by 3 days ($p < 0.001$) &
+2 million users: new app color raises time on app by 1 second ($p < 0.001$) \\
+\hline
+\textbf{Not statistically significant} &
+300 workers: new safety training cuts serious injuries from 2\% to 1\% ($p = 0.30$) &
+80 students: new study app raises scores by 0.2 points ($p = 0.90$) \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item \hl{Statistically significant}: is the data convincing evidence of a difference?
+  \item \hl{Practically significant}: is the difference big enough to matter?
+  \item Not statistically significant $\neq$ no effect: a small study may miss an important effect.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Who decides what matters?}
+\small
+\begin{itemize}
+  \item Practical significance comes from the \hl{context}, not from the data or the p-value.
+  \begin{itemize}
+    \item A 1 percentage point increase in clicks: small for one store, but worth millions for a large online retailer.
+    \item A 1 percentage point drop in serious injuries: important in almost any workplace.
+  \end{itemize}
+  \item Decide what size of effect matters \hl{before} looking at the data.
+  \item Rejecting $H_0$ only tells you the parameter differs from the null value. It does not tell you the result is acceptable, safe, or important.
+  \item Always report the \hl{estimate and a confidence interval}, not just ``significant'' or ``not significant'', so readers can judge whether the size of the effect matters.
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Review: Inference for one proportion}
 
@@ -348,88 +468,6 @@ $\hat{p}$		& 0.657		& 0.668
 \section{R Demonstration: Sample size for proportions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Comparing Two Online Ads: Small Study}
-\small
-Imagine a company tests two versions of an online ad by showing each to 10{,}000 users.
-
-\medskip
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.1}
-\begin{tabular}{lccc}
-\textbf{Ad} & Clicked & Total & \(\hat p\) \\
-\hline
-A & 510 & 10{,}000 & 0.051 \\
-B & 550 & 10{,}000 & 0.055 \\
-\end{tabular}
-
-\medskip
-\[
-\hat{p}_B - \hat{p}_A = 0.004
-\]
-
-\[
-SE = \sqrt{\frac{0.051(1-0.051)}{10{,}000} + \frac{0.055(1-0.055)}{10{,}000}} \approx 0.0031
-\]
-
-\[
-95\%~CI = 0.004 \pm 1.96(0.0031) = (-0.002,\, 0.010)
-\]
-
-\textbf{Interpretation:} The interval includes 0, so we \textbf{do not have statistical evidence}
-that Ad B performs better than Ad A.
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Comparing Two Online Ads: Large Study}
-\small
-Now imagine they did the same thing, but each ad shown to 1{,}000{,}000 users. And they observed the same proportions (5.1\% vs 5.5\%).
-
-\medskip
-\[
-SE = \sqrt{\frac{0.051(1-0.051)}{1{,}000{,}000} + \frac{0.055(1-0.055)}{1{,}000{,}000}}
-      \approx 0.00031
-\]
-\[
-95\%~CI = 0.004 \pm 1.96(0.00031) = (0.0034,\, 0.0046)
-\]
-
-\textbf{Interpretation:} The interval no longer includes 0.  
-The difference is \textbf{statistically significant.}
-
-\medskip
-\textbf{But...} the effect size is only \(\mathbf{0.004}\) (0.4 percentage points) --  
-does that matter in practice?
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Statistical vs.\ Practical Significance}
-\small
-\begin{center}
-\begin{tabular}{lccc}
-\textbf{Scenario} & \textbf{Sample Size} & \textbf{95\% CI} & \textbf{Stat.\ Sig.?} \\
-\hline
-Small study & 10{,}000 per ad & (-0.002,\; 0.010) & No \\
-Large study & 1{,}000{,}000 per ad & (0.0034,\; 0.0046) & Yes \\
-\end{tabular}
-\end{center}
-
-\medskip
-\textbf{Takeaways:}
-\begin{itemize}
-  \item Statistical significance depends on both \hl{effect size} and \hl{sample size}.
-  \item Practical significance depends on whether the effect is \hl{large enough to matter}.
-  \item With large enough data, even tiny effects can be statistically significant.
-\end{itemize}
-
-\bigskip
-\textit{Statistical significance tells you it's unlikely to be due to chance.  \\
-Practical significance tells you if it matters.}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{HT for comparing proportions}
 
