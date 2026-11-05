@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Style
@@ -60,6 +60,14 @@ Some images may be included under fair use guidelines (educational purposes).}}
 }
 }
 
+
+\begin{frame}
+\frametitle{LA mid-semester feedback form}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{LAfeedback.png}
+\end{center}
+\end{frame}
+
 \include{Lecture20_agenda}
 \include{Lecture20_announcements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,6 +75,137 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Recap}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap: Choosing a significance level}
+
+\begin{itemize}
+
+\item Select a level that is smaller or larger than 0.05 depending on the consequences of any conclusions reached from the test.
+
+\item If making a Type 1 Error is dangerous or especially costly, we should choose a small significance level (e.g. 0.01). Under this scenario we want to be very cautious about rejecting the null hypothesis, so we demand very strong evidence favoring $H_A$ before we would reject $H_0$.
+
+\item If a Type 2 Error is relatively more dangerous or much more costly than a Type 1 Error, then we should choose a higher significance level (e.g. 0.10). Here we want to be cautious about failing to reject $H_0$ when the null is actually false.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Recap: Choosing a significance level}
+\begin{center}
+\begin{tabular}{l l | c c}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Decision}} \\
+& & fail to reject $H_0$ &  reject $H_0$ \\
+    \cline{2-4}
+& $H_0$ true & {\green{$\checkmark$}} &  {\orange{Type 1 Error}} \\
+\raisebox{1.5ex}{\textbf{Truth}} & $H_A$ true & {\orange{Type 2 Error}} & {\green{$\checkmark$}} \\
+    \cline{2-4}
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item Type 1 error: rejecting the null hypothesis when $H_0$ is actually true
+\item Type 2 error: failing to reject the null hypothesis when $H_A$ is actually true
+\item $H_0$ : Patient is healthy
+\item $H_A$ : Patient is sick.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap: One vs. two sided hypothesis tests}
+
+\begin{itemize}
+
+\item In two sided hypothesis tests we are interested in whether $p$ is either above or below some null value $p_0$: $H_A: p \ne p_0$.
+
+\item In one sided hypothesis tests we are interested in $p$ differing from the null value $p_0$ in one direction (and not the other):
+\begin{itemize}
+\item If there is only value in detecting if population parameter is less than $p_0$, then $H_A: p < p_0$.
+\item If there is only value in detecting if population parameter is greater than $p_0$, then $H_A: p > p_0$.
+\end{itemize}
+
+\item Two-sided tests are often more appropriate as we often want to detect if the data goes clearly in the opposite direction of our alternative hypothesis as well.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Where is the p-value?}
+
+The p-value is the shaded area under the null distribution in the direction(s) of $H_A$, beyond the observed $Z$.
+
+\vspace{0.5cm}
+
+\begin{columns}[t]
+
+\begin{column}{0.33\textwidth}
+\centering
+$H_A: p < p_0$ \\[0.2cm]
+\begin{tikzpicture}[xscale=0.55, yscale=2.2]
+\fill[oiB!60] (-3.2,0) -- plot[domain=-3.2:-1.5, samples=40, smooth] (\x,{exp(-\x*\x/2)}) -- (-1.5,0) -- cycle;
+\draw[thick, smooth, samples=80, domain=-3.2:3.2] plot (\x,{exp(-\x*\x/2)});
+\draw (-3.4,0) -- (3.4,0);
+\draw[dashed] (-1.5,0) -- (-1.5,{exp(-1.125)});
+\node[below] at (-1.5,0) {\scriptsize $Z$};
+\node[below] at (0,0) {\scriptsize $0$};
+\end{tikzpicture} \\[0.1cm]
+{\footnotesize Lower tail only}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\centering
+$H_A: p > p_0$ \\[0.2cm]
+\begin{tikzpicture}[xscale=0.55, yscale=2.2]
+\fill[oiB!60] (1.5,0) -- plot[domain=1.5:3.2, samples=40, smooth] (\x,{exp(-\x*\x/2)}) -- (3.2,0) -- cycle;
+\draw[thick, smooth, samples=80, domain=-3.2:3.2] plot (\x,{exp(-\x*\x/2)});
+\draw (-3.4,0) -- (3.4,0);
+\draw[dashed] (1.5,0) -- (1.5,{exp(-1.125)});
+\node[below] at (1.5,0) {\scriptsize $Z$};
+\node[below] at (0,0) {\scriptsize $0$};
+\end{tikzpicture} \\[0.1cm]
+{\footnotesize Upper tail only}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\centering
+$H_A: p \ne p_0$ \\[0.2cm]
+\begin{tikzpicture}[xscale=0.55, yscale=2.2]
+\fill[oiB!60] (-3.2,0) -- plot[domain=-3.2:-1.5, samples=40, smooth] (\x,{exp(-\x*\x/2)}) -- (-1.5,0) -- cycle;
+\fill[oiB!60] (1.5,0) -- plot[domain=1.5:3.2, samples=40, smooth] (\x,{exp(-\x*\x/2)}) -- (3.2,0) -- cycle;
+\draw[thick, smooth, samples=80, domain=-3.2:3.2] plot (\x,{exp(-\x*\x/2)});
+\draw (-3.4,0) -- (3.4,0);
+\draw[dashed] (-1.5,0) -- (-1.5,{exp(-1.125)});
+\draw[dashed] (1.5,0) -- (1.5,{exp(-1.125)});
+\node[below] at (-1.5,0) {\scriptsize $-|Z|$};
+\node[below] at (1.5,0) {\scriptsize $|Z|$};
+\node[below] at (0,0) {\scriptsize $0$};
+\end{tikzpicture} \\[0.1cm]
+{\footnotesize Both tails: $2 \times$ one tail}
+\end{column}
+
+\end{columns}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item For the same observed $|Z|$, the two-sided p-value is twice the one-sided p-value.
+\end{itemize}
+
+\end{frame}
+
 
 \section{Inference for a single proportion}
 
@@ -421,7 +560,7 @@ n &\ge& 4898.04 \pause \orange{~$\rightarrow$ n \text{ should be at least 4,899}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Edfinity quiz: Choosing a sample size} 
+% \section{Edfinity quiz: Choosing a sample size}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -536,6 +675,13 @@ Since the p-value is low, we reject $H_0$. The data provide convincing evidence 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Lab feedback form}
+\begin{center}
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Labfeedback.png}
+\end{center}
+\end{frame}
 
 % \section{Edfinity quiz: experimental design examples}  % could replace the "back to experimental design" slides above
 
