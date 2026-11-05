@@ -11,11 +11,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,6 +86,34 @@ We'll formally introduce the hypothesis testing framework using an example on te
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Testing hypotheses using confidence intervals}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Recap: Testing hypotheses using confidence intervals}
+
+{\small \dq{Earlier we calculated a 95\% confidence interval for the proporton of American Facebook users who think Facebook categorizes their interests accurately as 64\% to 67\%. Based on this confidence interval, do the data support the hypothesis that majority of American Facebook users think Facebook categorizes their interests accurately?}}
+
+\begin{itemize}
+
+\item The associated hypotheses are:
+\begin{itemize}
+\item[$H_0$:] $p = 0.50$: 50\% of American Facebook users think Facebook categorizes their interests accurately
+\item[$H_A$:] $p > 0.50$: More than 50\% of American Facebook users think Facebook categorizes their interests accurately
+\end{itemize}
+
+\item Null value is not included in the interval $\rightarrow$ reject the null hypothesis.
+
+
+\end{itemize}
+
+\end{frame}
+
+
+
+
 
 \subsection{Decision errors}
 
@@ -191,6 +219,93 @@ There are two competing hypotheses: the null and the alternative. In a hypothesi
 % \section{Edfinity Quiz: Significance levels}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Worksheet: Significance levels}
+
+\begin{frame}
+\frametitle{Worksheet: Significance levels}
+
+Pick up the worksheet and find a partner.
+
+\begin{itemize}
+    \item \textbf{Step 1 (Think, 2 min):} connect confidence level to significance level, and evaluate statements comparing $\alpha=0.05$ to $\alpha=0.01$.
+    \item \textbf{Step 2 (Pair, 2 min):} compare answers with your partner and discuss the Type 1/Type 2 error tradeoff.
+\end{itemize}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Worksheet: Significance levels}
+
+\begin{frame}
+\frametitle{Worksheet: Significance levels}
+Recall that for the Facebook data ($\hat p = 0.67$, $n=850$), we rejected $H_0: p=0.50$ because the 95\% confidence interval $(0.64, 0.70)$ didn't contain 0.50. That 95\% confidence level corresponds to using a significance level of $\alpha = 0.05$ for the equivalent hypothesis test. Now let's reason about what happens when we change $\alpha$.
+
+\textbf{(a)} If we instead built a 99\% confidence interval for the Facebook data, what significance level $\alpha$ would that correspond to? Would the resulting hypothesis test be \emph{stricter} (harder to reject $H_0$) or more \emph{lenient} (easier to reject $H_0$) than the $\alpha=0.05$ test?
+
+\pause
+
+\soln{\emph{stricter}}
+
+\end{frame}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Worksheet: Significance levels}
+
+\textbf{(b)} For each statement below, comparing a hypothesis test
+with significance level $\alpha = 0.05$ to one with
+$\alpha = 0.01$, decide \textbf{True} or \textbf{False}
+and briefly explain why.
+
+\begin{enumerate}
+  \item $\alpha = 0.05$ will tend to reject the null hypothesis
+  more often than $\alpha = 0.01$.
+  \hfill \textbf{\alt<handout:0|2->{\orange{T}}{T} / F}
+
+  \item $\alpha = 0.05$ will tend to make more Type 1 errors
+  (rejecting $H_0$ when it is actually true) than $\alpha = 0.01$.
+  \hfill \textbf{\alt<handout:0|2->{\orange{T}}{T} / F}
+
+  \item $\alpha = 0.05$ will tend to make fewer Type 2 errors
+  (failing to reject $H_0$ when it is actually false) than
+  $\alpha = 0.01$.
+  \hfill \textbf{\alt<handout:0|2->{\orange{T}}{T} / F}
+
+  \item If the null hypothesis is actually false, both
+  $\alpha = 0.05$ and $\alpha = 0.01$ will reject it.
+  \hfill \textbf{T / \alt<handout:0|2->{\orange{F}}{F}}
+
+  \item If the null hypothesis is actually true, both
+  $\alpha = 0.05$ and $\alpha = 0.01$ will fail to reject it.
+  \hfill \textbf{T / \alt<handout:0|2->{\orange{F}}{F}}
+\end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Worksheet: Significance levels}
+\begin{itemize}
+  \item Using the trial analogy ($H_0$: defendant is innocent, $H_A$: defendant is guilty), if you tighten $\alpha$ from 0.05 to 0.01, are you more likely to wrongly convict an innocent defendant, or more likely to let a guilty defendant go free?
+  \item Would switching to a 99\% confidence interval change our conclusion for the Facebook data (still reject $H_0: p=0.50$)? You don't need to recompute the interval --- reason about how far 0.67 is from 0.50 compared to the margin of error.
+\end{itemize}
+\pause
+\soln{\emph{We are more likely to let a guilty defendant go free.} \\}
+\pause
+\soln{\emph{No, we would still reject $H_0$ because 0.67 is far enough from 0.50 that it would still be outside the 99\% confidence interval.} \\
+$0.67 \pm 1.96 \sqrt{\frac{0.67(1-0.67)}{850}} = (0.64, 0.70)$ \\
+$0.67 \pm 2.576 \sqrt{\frac{0.67(1-0.67)}{850}} = (0.63, 0.71)$}
+
+\end{frame}
+
+
 
 \subsection{Formal testing using p-values}
 

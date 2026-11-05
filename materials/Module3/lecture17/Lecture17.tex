@@ -10,11 +10,11 @@
 
 % Option 2: Handouts without solutions
 
-%\documentclass[11pt,containsverbatim,handout]{beamer}
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
-%\newcommand{\soln}[1]{ }
-%\newcommand{\solnGr}{ }
+% \documentclass[11pt,containsverbatim,handout]{beamer}
+% \usepackage{pgfpages}
+% % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+% \newcommand{\soln}[1]{ }
+% \newcommand{\solnGr}{ }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,6 +67,42 @@ Some images may be included under fair use guidelines (educational purposes).}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Sampling distribution for the sample mean of a Normal population}
+Let $X_1, X_2, \ldots, X_n$ be an iid random sample where $X_i \sim Normal(\mu, \sigma)$
+
+What is the distribution of:
+\begin{align}
+    \bar{X}=\frac{1}{n}(X_1 + X_2 + \ldots + X_n)=\frac{1}{n}\sum_{i=1}^{n} X_i
+\end{align}
+\textcolor{orange}{
+\begin{align*}
+ \bar{X} &\sim Normal\left(\mu_{\bar{X}}=\mu, \sigma_{\bar{X}}=\frac{\sigma}{\sqrt{n}}\right)
+\end{align*}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Quality of the sample mean as an estimator for the population mean}
+\textcolor{orange}{
+\begin{align*}
+ \bar{X} &\sim Normal\left(\mu_{\bar{X}}=\mu, \sigma_{\bar{X}}=\frac{\sigma}{\sqrt{n}}\right)
+\end{align*}
+}
+\dq{What does this tell us about the quality of $\bar{X}$ as an estimator for $\mu$?}
+\soln{
+The sample mean is an \hl{unbiased} estimator for the population mean, and the standard error (standard deviation of the sampling distribution) gets smaller with the square root of the sample size}
+
+\end{frame}
+
+
+\section{Edfinity quiz}
+
+
 
 \begin{frame}
 \frametitle{Sampling distribution of the sample proportion}
@@ -317,7 +353,7 @@ $\:$ \\
 \begin{frame}
 \frametitle{Facebook's categorization of user interests}
 
-\dq{Most commercial websites (e.g. social media platforms, news outlets, online retailers) collect a data about their users' behaviors and use these data to deliver tageted content, recommendations, and ads. To understand whether Americans think their lives line up with how the algorithm-driven classification systems categorizes them, Pew Research asked a representative sample of 850 American Facebook users how accurately they feel the list of categories Facebook has listed for them on the page of their supposed interests actually represents them and their interests. 67\% of the respondents said that the listed categories were accurate. Estimate the true proportion of American Facebook users who think the Facebook categorizes their interests accurately.}
+\dq{Most commercial websites (e.g. social media platforms, news outlets, online retailers) collect a data about their users' behaviors and use these data to deliver tagged content, recommendations, and ads. To understand whether Americans think their lives line up with how the algorithm-driven classification systems categorizes them, Pew Research asked a representative sample of 850 American Facebook users how accurately they feel the list of categories Facebook has listed for them on the page of their supposed interests actually represents them and their interests. 67\% of the respondents said that the listed categories were accurate. Estimate the true proportion of American Facebook users who think the Facebook categorizes their interests accurately.}
 
 \ct{\webURL{https://www.pewinternet.org/2019/01/16/facebook-algorithms-and-personal-data/}}
 
