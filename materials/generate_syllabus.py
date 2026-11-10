@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent
 INPUTS = ROOT / "instructor_inputs"
 OUTPUT = ROOT / "generated_outputs" / "syllabus.tex"
 WEEKLY_SCHEDULE = ROOT / "generated_outputs" / "weekly_schedule.md"
+COURSE_CALENDAR = ROOT / "generated_outputs" / "course_calendar.ics"
 LECTURE_SUMMARY = INPUTS / "lecture_summary.md"
 HOMEWORK_SCHEDULE = INPUTS / "Homework_schedule.md"
 WEEKLY_PLAN_OVERRIDES = INPUTS / "syllabus_weekly_plan.md"
@@ -28,6 +29,7 @@ SYLLABUS_FILES = (
     INPUTS / "syllabus_assessments.md",
     INPUTS / "syllabus_lab.md",
     INPUTS / "syllabus_policies.md",
+    INPUTS / "syllabus_hub.md",
 )
 
 LATEX_SPECIALS = {
@@ -147,6 +149,7 @@ def markdown_to_latex(
     output: list[str] = []
     paragraph: list[str] = []
     list_kind: str | None = None
+    sublist_open = False
     skip_level: int | None = None
 
     def flush_paragraph() -> None:
@@ -155,8 +158,15 @@ def markdown_to_latex(
             output.append("")
             paragraph.clear()
 
+    def close_sublist() -> None:
+        nonlocal sublist_open
+        if sublist_open:
+            output.append(r"\end{enumerate}")
+            sublist_open = False
+
     def close_list() -> None:
         nonlocal list_kind
+        close_sublist()
         if list_kind:
             output.append(rf"\end{{{list_kind}}}")
             output.append(r"\end{samepage}")
@@ -215,9 +225,20 @@ def markdown_to_latex(
             index += 1
             continue
 
+        # Indented lettered items (a., b., ...) nest under a numbered item.
+        letter_item = re.match(r"^\s+([a-z])\.\s+(.+)$", raw)
+        if letter_item and list_kind == "enumerate":
+            if not sublist_open:
+                output.append(r"\begin{enumerate}")
+                sublist_open = True
+            output.append(rf"\item[{letter_item.group(1)}.] " + inline_latex(letter_item.group(2)))
+            index += 1
+            continue
+
         item = re.match(r"^\s*(?:[-*]|\d+\.)\s+(.+)$", raw)
         if item:
             flush_paragraph()
+            close_sublist()
             wanted_kind = "enumerate" if re.match(r"^\s*\d+\.", raw) else "itemize"
             if list_kind != wanted_kind:
                 close_list()
@@ -445,12 +466,27 @@ def lecture_metadata(path: Path) -> dict[int, dict[str, str]]:
     return metadata
 
 
-def homework_by_week(path: Path) -> dict[str, str]:
-    """Return homework numbers keyed by schedule week."""
-    return {
-        row["Week"]: re.search(r"\d+", row["Homework"]).group(0)
-        for row in read_markdown_table(path, "Homework Schedule")
-    }
+def homework_by_week(path: Path, first_week_date: date) -> dict[str, str]:
+    """Return "HW#: start–due" labels keyed by the week of each due date."""
+
+    def term_date(text: str) -> date:
+        month, day = (int(part) for part in text.strip().split("/"))
+        year = first_week_date.year if month >= 8 else first_week_date.year + 1
+        return date(year, month, day)
+
+    first_monday = first_week_date - timedelta(days=first_week_date.weekday())
+    labels: dict[str, list[str]] = {}
+    for row in read_markdown_table(path, "Homework Schedule"):
+        due_text = row.get("Due Date", "").strip()
+        if not due_text:
+            continue
+        due = term_date(due_text)
+        week = str((due - first_monday).days // 7 + 1)
+        number = re.search(r"\d+", row["Homework"]).group(0)
+        start_text = row.get("Start Date", "").strip()
+        span = f"{start_text}–{due_text}" if start_text else f"due {due_text}"
+        labels.setdefault(week, []).append(f"HW{number}: {span}")
+    return {week: "; ".join(items) for week, items in labels.items()}
 
 
 def weekly_plan_overrides(path: Path) -> dict[str, dict[str, str]]:
@@ -482,10 +518,34 @@ def apply_override(cells: dict[str, str], override: dict[str, str]) -> dict[str,
     return cells
 
 
+def quiz_dates(path: Path) -> dict[str, date]:
+    """Return each quiz's meeting date from the generated course calendar."""
+    if not path.exists():
+        return {}
+    dates = {}
+    for event in path.read_text(encoding="utf-8").split("BEGIN:VEVENT")[1:]:
+        summary = re.search(r"^SUMMARY:(Quiz\s+\d+)\s*$", event, flags=re.MULTILINE)
+        start = re.search(r"^DTSTART[^:]*:(\d{8})", event, flags=re.MULTILINE)
+        if summary and start:
+            dates[summary.group(1)] = datetime.strptime(start.group(1), "%Y%m%d").date()
+    return dates
+
+
 def quizzes_by_week(rows: list[dict[str, str]]) -> dict[str, str]:
-    """Map weekly schedule rows to the quizzes listed in each week."""
+    """Map weekly schedule rows to the quizzes listed in each week, with dates."""
+    dates = quiz_dates(COURSE_CALENDAR)
+
+    def label(quiz: str) -> str:
+        quiz_date = dates.get(quiz)
+        if quiz_date is None:
+            return quiz
+        return f"{quiz} ({quiz_date:%a} {quiz_date.month}/{quiz_date.day})"
+
     return {
-        row["Week"]: ", ".join(re.findall(r"Quiz\s+\d+", row.get("Lecture #", "")))
+        row["Week"]: ", ".join(
+            label(re.sub(r"\s+", " ", quiz))
+            for quiz in re.findall(r"Quiz\s+\d+", row.get("Lecture #", ""))
+        )
         for row in rows
     }
 
@@ -504,7 +564,7 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
     """Convert the generated weekly schedule into dated, multi-page tables."""
     rows = read_markdown_table(path, "Weekly Schedule")
     lectures = lecture_metadata(LECTURE_SUMMARY)
-    homework = homework_by_week(HOMEWORK_SCHEDULE)
+    homework = homework_by_week(HOMEWORK_SCHEDULE, first_week_date)
     quizzes = quizzes_by_week(rows)
     overrides = weekly_plan_overrides(WEEKLY_PLAN_OVERRIDES)
     chunks = [rows[index : index + 8] for index in range(0, len(rows), 8)]
@@ -522,7 +582,7 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 r"\hyphenpenalty=10000 \exhyphenpenalty=10000",
                 r"\begin{tabular}{|C{0.095\textwidth}|P{0.100\textwidth}|P{0.075\textwidth}|P{0.170\textwidth}|P{0.090\textwidth}|P{0.145\textwidth}|P{0.105\textwidth}|P{0.067\textwidth}|}",
                 r"\hline",
-                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework due Mon} & \textbf{Quiz} \\",
+                r"\textbf{Week} & \textbf{Reading (Chapter)} & \textbf{Module} & \textbf{Lecture Topics} & \textbf{Labs} & \begin{tabular}[t]{@{}c@{}}\textbf{Lab}\\\textbf{Deliverable}\end{tabular} & \textbf{Homework (Start–Due)} & \textbf{Quiz} \\",
                 r"\hline",
             )
         )
@@ -560,7 +620,12 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
                 for number in lecture_numbers
                 if lectures.get(number, {}).get("topic")
             ))
-            week_label = f"{week_number} ({week_date.month}/{week_date.day})"
+            # Each syllabus week runs through the Friday of that calendar week.
+            week_end = week_date + timedelta(days=4 - week_date.weekday())
+            week_label = (
+                f"{week_number}\n"
+                f"{week_date.month}/{week_date.day}--{week_end.month}/{week_end.day}"
+            )
             schedule_notes = {
                 7: r"Tues is\newline Mon schedule",
                 13: r"No classes\newline Wed-Fri",
@@ -576,7 +641,10 @@ def schedule_latex(path: Path, first_week_date: date) -> str:
             }
             apply_override(cells, overrides.get(str(week_number), {}))
             note = schedule_notes.get(week_number)
-            rendered = [inline_latex(week_label) + (rf"\newline {note}" if note else "")]
+            rendered = [
+                week_label.replace("\n", r"\newline ")
+                + (rf"\newline {note}" if note else "")
+            ]
             rendered.extend(inline_latex(cell) for cell in cells.values())
             output.append(" & ".join(rendered) + r" \\")
             output.append(r"\hline")
@@ -632,6 +700,7 @@ def build_document() -> str:
         markdown_to_latex(INPUTS / "syllabus_assessments.md"),
         markdown_to_latex(INPUTS / "syllabus_lab.md"),
         markdown_to_latex(INPUTS / "syllabus_policies.md"),
+        markdown_to_latex(INPUTS / "syllabus_hub.md"),
         syllabus_section_heading("Weekly Plan (Subject to Change)"),
         schedule_latex(WEEKLY_SCHEDULE, semester_start_date(INPUTS / "important_dates.md")),
     )

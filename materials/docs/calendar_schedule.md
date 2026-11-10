@@ -163,7 +163,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Homework</div>
 <h3>Homework 1</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 9/2. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -275,7 +275,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Homework</div>
 <h3>Homework 2</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 9/8. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -414,7 +414,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Homework</div>
 <h3>Homework 3</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 9/14. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -547,7 +547,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Homework</div>
 <h3>Homework 4</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 9/21. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -747,7 +747,7 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Homework</div>
 <h3>Homework 5</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 9/28. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -902,12 +902,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">12:15 PM-1:30 PM</p>
 </article>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework 6</h3>
-<p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
-</article>
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">14</div>
@@ -950,6 +944,12 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">2:00 PM-3:00 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 6</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Opens 10/5. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1010,12 +1010,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">12:15 PM-1:30 PM</p>
-</article>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework 7</h3>
-<p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1145,9 +1139,9 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
-<h3>Homework 8</h3>
+<h3>Homework 7</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 10/19. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1306,7 +1300,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Quiz 3</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
 <p>in the lecture time</p>
-<p class="calendar-event__meta">Prerequisite not yet covered: M3.L05: Distinguish Statistical vs. Practical Significance (first covered Lecture 28)</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
 <div class="calendar-event__kind">Discussion</div>
@@ -1325,9 +1318,9 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
-<h3>Homework 9</h3>
+<h3>Homework 8</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 10/26. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1451,9 +1444,9 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
-<h3>Homework 10</h3>
+<h3>Homework 9</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 11/2. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1583,9 +1576,9 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </article>
 <article class="calendar-event calendar-event--homework">
 <div class="calendar-event__kind">Homework</div>
-<h3>Homework 11</h3>
+<h3>Homework 10</h3>
 <p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
+<p>Opens 11/9. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1705,11 +1698,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 </section>
 <section class="calendar-date">
 <div class="calendar-date__number">23</div>
-<article class="calendar-event calendar-event--quiz">
-<div class="calendar-event__kind">Quiz</div>
-<h3>Quiz 4</h3>
+<article class="calendar-event calendar-event--lecture">
+<div class="calendar-event__kind">Lecture</div>
+<h3>Lecture 32</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>in the lecture time</p>
+<p>Frequentist modeling using the likelihood function</p>
 <p class="calendar-event__meta">Near Thanksgiving Recess</p>
 </article>
 <article class="calendar-event calendar-event--discussion">
@@ -1726,6 +1719,12 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">12:15 PM-1:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 11</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Opens 11/16. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">
@@ -1803,11 +1802,11 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <h3>Academic Calendar</h3>
 <p>Classes Resume</p>
 </article>
-<article class="calendar-event calendar-event--lecture">
-<div class="calendar-event__kind">Lecture</div>
-<h3>Lecture 32</h3>
+<article class="calendar-event calendar-event--quiz">
+<div class="calendar-event__kind">Quiz</div>
+<h3>Quiz 4</h3>
 <p class="calendar-event__time">11:15 AM-12:05 PM</p>
-<p>Frequentist modeling using the likelihood function</p>
+<p>in the lecture time</p>
 <p class="calendar-event__meta">Near Thanksgiving Recess | Classes Resume</p>
 </article>
 <article class="calendar-event calendar-event--lab">
@@ -1849,12 +1848,6 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">12:15 PM-1:30 PM</p>
-</article>
-<article class="calendar-event calendar-event--homework">
-<div class="calendar-event__kind">Homework</div>
-<h3>Homework 12</h3>
-<p class="calendar-event__time">Due 3:00 PM</p>
-<p>Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date calendar-date--outside">
@@ -2027,6 +2020,12 @@ This month view is generated from course summaries, `materials/instructor_inputs
 <div class="calendar-event__kind">Office Hours</div>
 <h3>Office Hour Emily</h3>
 <p class="calendar-event__time">12:15 PM-1:30 PM</p>
+</article>
+<article class="calendar-event calendar-event--homework">
+<div class="calendar-event__kind">Homework</div>
+<h3>Homework 12</h3>
+<p class="calendar-event__time">Due 3:00 PM</p>
+<p>Opens 11/30. Weekly homework component.</p>
 </article>
 </section>
 <section class="calendar-date">

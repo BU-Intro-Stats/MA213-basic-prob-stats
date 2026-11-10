@@ -68,11 +68,21 @@ Conditions for normality:
     &\text{point estimate} &\pm& (\text{critical value}) \times (\text{standard error})
 \end{align*}
 
-\textit{CI for a Proportion:}
-When computing SE, can substitute $\hat{p}$ for $p$
+\textit{CI for a Proportion:} When computing SE, use $\hat{p}$ instead of $p$.
 
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Confidence Level} & \textbf{Critical value }($z^*$) \\
+\hline
+90\% & 1.645 \\
+95\% & 1.960 \\
+99\% & 2.576 \\
+\hline
+\end{tabular}
 
-% Common critical values for CI table (save for Quiz 4)
+\end{center}
+
 \vspace{1em}
 
 \textbf{Hypothesis Tests}
@@ -83,8 +93,11 @@ When computing SE, can substitute $\hat{p}$ for $p$
     \item Test statistic
     \item P-value: Prob of observing test stat at least as extreme as observed test stat under $H_0$
     \item Significance level ($\alpha$): $\alpha=Pr(Type\; 1\; error | H_0\; true)$
-    \item Inference: reject or fail to reject $H_0$
+    \item Inference: reject $H_0$ if p-value $< \alpha$; otherwise fail to reject $H_0$
 \end{itemize}
+
+\textit{HT for a Proportion} ($H_0: p = p_0$):
+When computing SE under $H_0$, use $p_0$ instead of $\hat{p}$
 
 \begin{center}
 \begin{tabular}{l l | c c}

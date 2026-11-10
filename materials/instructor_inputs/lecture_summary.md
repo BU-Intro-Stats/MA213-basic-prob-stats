@@ -174,6 +174,7 @@ Instructor notes:
 - **Reading:** Chapter 6.3
 - **Learning Objectives:**
   - M4.L01: Inference for a Difference in Proportions
+  - M3.L05: Distinguish Statistical vs. Practical Significance
 
 ### Lecture 22
 - **Topic:** Testing for goodness of fit using chi-square (Chapter 6.3)

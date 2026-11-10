@@ -155,7 +155,7 @@ UID:2026-09-08-7-Homework-1@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260908T150000
 SUMMARY:Homework 1
-DESCRIPTION:Weekly homework component.
+DESCRIPTION:Opens 9/2. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-09-1-Lecture-3@ma213-course-calendar
@@ -279,7 +279,7 @@ UID:2026-09-14-5-Homework-2@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260914T150000
 SUMMARY:Homework 2
-DESCRIPTION:Weekly homework component.
+DESCRIPTION:Opens 9/8. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-15-1-Discussion-B2@ma213-course-calendar
@@ -437,7 +437,7 @@ UID:2026-09-21-5-Homework-3@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260921T150000
 SUMMARY:Homework 3
-DESCRIPTION:Weekly homework component.
+DESCRIPTION:Opens 9/14. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-22-1-Discussion-B2@ma213-course-calendar
@@ -590,7 +590,7 @@ UID:2026-09-28-5-Homework-4@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20260928T150000
 SUMMARY:Homework 4
-DESCRIPTION:Weekly homework component.
+DESCRIPTION:Opens 9/21. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-29-1-Discussion-B2@ma213-course-calendar
@@ -755,7 +755,7 @@ UID:2026-10-05-5-Homework-5@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261005T150000
 SUMMARY:Homework 5
-DESCRIPTION:Weekly homework component.
+DESCRIPTION:Opens 9/28. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-06-1-Discussion-B2@ma213-course-calendar
@@ -935,13 +935,6 @@ DTEND;TZID=America/New_York:20261013T133000
 SUMMARY:Office Hour Emily
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-13-6-Homework-6@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261013T150000
-SUMMARY:Homework 6
-DESCRIPTION:Weekly homework component.
-END:VEVENT
-BEGIN:VEVENT
 UID:2026-10-14-1-Lecture-17@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261014T111500
@@ -992,6 +985,13 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261015T140000
 DTEND;TZID=America/New_York:20261015T150000
 SUMMARY:Office Hour Emily
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-15-2-Homework-6@ma213-course-calendar
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=America/New_York:20261015T150000
+SUMMARY:Homework 6
+DESCRIPTION:Opens 10/5. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-16-1-Academic-Calendar@ma213-course-calendar
@@ -1059,13 +1059,6 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261019T121500
 DTEND;TZID=America/New_York:20261019T133000
 SUMMARY:Office Hour Emily
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-10-19-6-Homework-7@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261019T150000
-SUMMARY:Homework 7
-DESCRIPTION:Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-20-1-Discussion-B2@ma213-course-calendar
@@ -1211,11 +1204,11 @@ DTEND;TZID=America/New_York:20261026T133000
 SUMMARY:Office Hour Emily
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-10-26-5-Homework-8@ma213-course-calendar
+UID:2026-10-26-5-Homework-7@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261026T150000
-SUMMARY:Homework 8
-DESCRIPTION:Weekly homework component.
+SUMMARY:Homework 7
+DESCRIPTION:Opens 10/19. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-27-1-Discussion-B2@ma213-course-calendar
@@ -1352,8 +1345,7 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261102T111500
 DTEND;TZID=America/New_York:20261102T120500
 SUMMARY:Quiz 3
-DESCRIPTION:in the lecture time\nPrerequisite not yet covered: M3.L05: Dist
- inguish Statistical vs. Practical Significance (first covered Lecture 28)
+DESCRIPTION:in the lecture time
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-02-2-Discussion-B1@ma213-course-calendar
@@ -1377,11 +1369,11 @@ DTEND;TZID=America/New_York:20261102T133000
 SUMMARY:Office Hour Emily
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-02-5-Homework-9@ma213-course-calendar
+UID:2026-11-02-5-Homework-8@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261102T150000
-SUMMARY:Homework 9
-DESCRIPTION:Weekly homework component.
+SUMMARY:Homework 8
+DESCRIPTION:Opens 10/26. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-03-1-Discussion-B2@ma213-course-calendar
@@ -1520,11 +1512,11 @@ DTEND;TZID=America/New_York:20261109T133000
 SUMMARY:Office Hour Emily
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-09-5-Homework-10@ma213-course-calendar
+UID:2026-11-09-5-Homework-9@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261109T150000
-SUMMARY:Homework 10
-DESCRIPTION:Weekly homework component.
+SUMMARY:Homework 9
+DESCRIPTION:Opens 11/2. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-10-1-Discussion-B2@ma213-course-calendar
@@ -1671,11 +1663,11 @@ DTEND;TZID=America/New_York:20261116T133000
 SUMMARY:Office Hour Emily
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-16-5-Homework-11@ma213-course-calendar
+UID:2026-11-16-5-Homework-10@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261116T150000
-SUMMARY:Homework 11
-DESCRIPTION:Weekly homework component.
+SUMMARY:Homework 10
+DESCRIPTION:Opens 11/9. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-17-1-Discussion-B2@ma213-course-calendar
@@ -1808,12 +1800,13 @@ DTEND;TZID=America/New_York:20261120T133000
 SUMMARY:Office Hour Yongho
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-23-1-Quiz-4@ma213-course-calendar
+UID:2026-11-23-1-Lecture-32@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261123T111500
 DTEND;TZID=America/New_York:20261123T120500
-SUMMARY:Quiz 4
-DESCRIPTION:in the lecture time\nNear Thanksgiving Recess
+SUMMARY:Lecture 32
+DESCRIPTION:Frequentist modeling using the likelihood function\nNear Thanks
+ giving Recess
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-23-2-Discussion-B1@ma213-course-calendar
@@ -1835,6 +1828,13 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261123T121500
 DTEND;TZID=America/New_York:20261123T133000
 SUMMARY:Office Hour Emily
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-23-5-Homework-11@ma213-course-calendar
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=America/New_York:20261123T150000
+SUMMARY:Homework 11
+DESCRIPTION:Opens 11/16. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-24-1-Discussion-B2@ma213-course-calendar
@@ -1920,13 +1920,12 @@ SUMMARY:Academic Calendar
 DESCRIPTION:Classes Resume
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-11-30-2-Lecture-32@ma213-course-calendar
+UID:2026-11-30-2-Quiz-4@ma213-course-calendar
 DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261130T111500
 DTEND;TZID=America/New_York:20261130T120500
-SUMMARY:Lecture 32
-DESCRIPTION:Frequentist modeling using the likelihood function\nNear Thanks
- giving Recess | Classes Resume
+SUMMARY:Quiz 4
+DESCRIPTION:in the lecture time\nNear Thanksgiving Recess | Classes Resume
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-30-3-Lab-8@ma213-course-calendar
@@ -1983,13 +1982,6 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261130T121500
 DTEND;TZID=America/New_York:20261130T133000
 SUMMARY:Office Hour Emily
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-11-30-11-Homework-12@ma213-course-calendar
-DTSTAMP:20260101T000000Z
-DTSTART;TZID=America/New_York:20261130T150000
-SUMMARY:Homework 12
-DESCRIPTION:Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-01-1-Discussion-B2@ma213-course-calendar
@@ -2120,6 +2112,13 @@ DTSTAMP:20260101T000000Z
 DTSTART;TZID=America/New_York:20261207T121500
 DTEND;TZID=America/New_York:20261207T133000
 SUMMARY:Office Hour Emily
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-07-5-Homework-12@ma213-course-calendar
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=America/New_York:20261207T150000
+SUMMARY:Homework 12
+DESCRIPTION:Opens 11/30. Weekly homework component.
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-08-1-Discussion-B2@ma213-course-calendar

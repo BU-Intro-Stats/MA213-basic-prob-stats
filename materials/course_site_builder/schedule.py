@@ -784,7 +784,7 @@ def parse_quiz_schedule(path: Path):
     return sorted(quiz_rows, key=lambda row: (row["after_lecture"], row["quiz_num"]))
 
 
-def parse_homework_schedule(path: Path):
+def parse_homework_schedule(path: Path, default_year: int = DEFAULT_TERM_YEAR):
     if not path.exists():
         return []
 
@@ -794,20 +794,26 @@ def parse_homework_schedule(path: Path):
     )
     homework_rows = []
     for index, row in enumerate(rows, start=1):
-        week_match = re.search(r"\d+", row.get("week", ""))
-        weekdays = parse_weekday_list(row.get("weekday", "") or row.get("weekdays", ""))
-        if not week_match or not weekdays:
+        due_text = clean_text(row.get("due date", ""))
+        if not due_text:
             continue
 
+        start_text = clean_text(row.get("start date", ""))
+        start_date = parse_schedule_date(start_text, default_year) if start_text else None
         title = clean_text(row.get("homework", "") or row.get("title", "") or row.get("event type", ""))
-        details = clean_text(row.get("details", "") or row.get("description", ""))
-        end_time = normalize_event_time(row.get("end time", "")) or DEFAULT_EVENT_TIMES["homework"][1]
+        details = clean_text(row.get("details", "") or row.get("description", "")) or "Weekly homework component."
+        if start_date is not None:
+            details = f"Opens {start_date.month}/{start_date.day}. {details}"
+        end_time = (
+            normalize_event_time(row.get("due time", "") or row.get("end time", ""))
+            or DEFAULT_EVENT_TIMES["homework"][1]
+        )
         homework_rows.append(
             {
-                "week": int(week_match.group(0)),
-                "weekday": weekdays[0],
+                "start_date": start_date,
+                "due_date": parse_schedule_date(due_text, default_year),
                 "title": title or f"Homework {index}",
-                "details": details or "Weekly homework component.",
+                "details": details,
                 "start_time": "",
                 "end_time": end_time,
             }
@@ -1434,15 +1440,8 @@ def build_calendar_events(
                     )
 
     for homework in homework_rows:
-        homework_date = scheduled_weekday_date(
-            term_start,
-            homework["week"],
-            homework["weekday"],
-            suspended,
-            clamp_to_term_start=False,
-            substitute_dates=substitutes,
-        )
-        if homework_date is not None and term_start <= homework_date <= term_end:
+        homework_date = homework["due_date"]
+        if term_start <= homework_date <= term_end:
             events[homework_date].append(
                 {
                     "kind": "homework",
@@ -1749,7 +1748,7 @@ def main(config: CourseSiteConfig | None = None):
     )
     objectives_by_code, objectives_by_tag = parse_learning_objectives(config.learning_objectives_file)
     quiz_rows = parse_quiz_schedule(config.quiz_schedule_file)
-    homework_rows = parse_homework_schedule(config.homework_schedule_file)
+    homework_rows = parse_homework_schedule(config.homework_schedule_file, config.term_year)
     exception_rows = parse_exception_events(config.exceptions_file, config.term_year)
     lecture_rows = parse_lecture_summary(config.lecture_file, quiz_rows)
     lecture_rows = assign_course_dates(lecture_rows, important_dates, meeting_patterns, config.term_year)

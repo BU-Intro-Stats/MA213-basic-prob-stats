@@ -12,7 +12,7 @@
 
 % \documentclass[11pt,containsverbatim,handout]{beamer}
 % \usepackage{pgfpages}
-% \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
+% % \pgfpagesuselayout{resize to}[letterpaper,landscape,border shrink=5mm]
 % \newcommand{\soln}[1]{ }
 % \newcommand{\solnGr}{ }
 
@@ -516,7 +516,7 @@ T &=& \frac{-0.545 - 0}{\frac{8.887}{\sqrt{200}}} \\
 &=& \frac{-0.545}{0.628} = -0.87 \\
 df &=& 200 - 1 = 199 \\
 \pause
-p-value &=& 0.1927 \times 2 = 0.3854
+p-value &=& 0.1934 \times 2 = 0.3868
 \end{eqnarray*}
 }
 \pause 
@@ -541,10 +541,10 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 \pq{Which of the following is the correct interpretation of the p-value?}
 
 \begin{enumerate}[(a)]
-\item Probability that the average scores on the reading and writing exams are equal.
-\item Probability that the average scores on the reading and writing exams are different.
+\item There is a 38.68\% probability that the population mean reading and writing scores are equal.
+\item There is a 38.68\% probability that the population mean reading and writing scores differ.
 \solnMult{Probability of obtaining a random sample of 200 students where the average difference between the reading and writing scores is at least 0.545 (in either direction), if in fact the true average difference between the scores is 0.}
-\item Probability of incorrectly rejecting the null hypothesis if in fact the null hypothesis is true.
+\item The probability of making a Type I error whenever we use a significance level of 0.05 is 38.68\%.
 \end{enumerate}
 
 \end{frame}
@@ -577,6 +577,10 @@ Since p-value $>$ 0.05, fail to reject, the data do \underline{not} provide conv
 \section{R Demonstration: Computing the Confidence Interval} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % End document

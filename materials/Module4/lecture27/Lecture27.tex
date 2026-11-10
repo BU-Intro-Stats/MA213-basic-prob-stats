@@ -395,31 +395,15 @@ Solve the problem backwards. Start by using the normal approximation (can go bac
 
 \pause
 
-\includegraphics[width=\textwidth]{\chp7@path/7-4_power/figures/power/power_null_0_0-76_with_alt_at_3_and_shaded}
-\pause
+% Figure drawn with SE = 3 / (1.96 + 0.84) = 1.07 so that exactly 80% of the
+% alternative is shaded (see figures/power_bp_80pct.R). Overlay 3: curves only;
+% overlay 4: same figure plus the 0.84 SE / 1.96 SE arrows.
+\begin{center}
+\only<3>{\includegraphics[width=0.85\textwidth]{figures/power_bp_80pct_noarrows.png}}%
+\only<4->{\includegraphics[width=0.85\textwidth]{figures/power_bp_80pct.png}}
+\end{center}
 
-% Overlay arrows and labels using TikZ, aligned to figure axis (-10 to +10)
-\begin{tikzpicture}[overlay, remember picture]
-  % The image is centered and spans 22 units (-11 to +11)
-  % We'll use 1 unit = 0.045\textwidth, so 22 units = full width
-  \def\unit{0.045\textwidth}
-  % Place origin at center of image (x=0)
-  \coordinate (imgcenter) at ([yshift=-0.5cm]current page.center); % adjust yshift to align with axis
-
-  % 0.84 SE arrow (yellow)
-  \draw[<->, thick, yellow!80!black]
-    ([xshift={-3*\unit}, yshift=0.5cm]imgcenter) -- ([xshift={-1.83*\unit}, yshift=0.5cm]imgcenter);
-  \node[fill=white, text=yellow!80!black, font=\bfseries, anchor=west]
-    at ([xshift={-4*\unit}, yshift=-0.1cm]imgcenter) {0.84 SE};
-
-  % 1.96 SE arrow (red)
-  \draw[<->, thick, red!80!black]
-    ([xshift={-1.83*\unit}, yshift=0.5cm]imgcenter) -- ([xshift={0*\unit}, yshift=0.5cm]imgcenter);
-  \node[fill=white, text=red!80!black, font=\bfseries, anchor=west]
-    at ([xshift={-1.5*\unit}, yshift=-0.1cm]imgcenter) {1.96 SE};
-\end{tikzpicture}
-
-\pause
+\pause[5]
 
 \begin{columns}[T]
 \begin{column}{0.5\textwidth}
