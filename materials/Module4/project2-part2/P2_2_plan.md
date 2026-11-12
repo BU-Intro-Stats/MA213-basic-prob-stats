@@ -1,13 +1,14 @@
-### Project2-2: Project 2 workday
-- Use this session to help students move from the Project 2 outline into actual inference results.
-- Students should check data cleaning, justify their categorical and numerical methods, verify conditions, compute draft test statistics, and plan their Deliverable 2 results slides.
-- Start from `P2_2_activity.docx` in Google Docs; retain `P2_2_activity.md` as the editable source template.
-- The activity should function as a Google Doc checkpoint so groups can record progress, feedback, blockers, and next tasks without duplicating the final report.
+### Project2-2: Project 2 results workday
 
-**Deliverables**
-- Project 2 Week 2 activity checkpoint
-- Draft results slides, R code, and data file preparation for Project 2 Deliverable 2
-- Updated research questions, inference conditions, and draft results in context
-- Peer or instructor feedback and assigned next steps
 
----
+# Lesson Plan (50 mins)
+- 5 mins: Go over P2_2_activity.pdf and the Deliverable 2 requirements (P2_D2_Results doc, R code rules: no built-in test functions)
+- 40 mins: Groups work through the activity, splitting up for the categorical (step 3) and numerical (step 4) drafts; instructors rotate through groups for the two check-ins (~3-5 min each) and initial the box on each group member's sheet
+  - Check-ins: table and plot match the research question and are labeled; test fits the variable types; hypotheses are about the population parameter, in words and symbols; each condition is checked with actual numbers (success-failure counts, expected counts, group sizes, histograms, group SDs); the test statistic is computed step by step, or the group has a correct plan for it
+- 5 mins: Tell any group that hasn't gotten to step 6 to skip there; note any groups still missing a check-in
+
+
+# Before Lab
+- Return Deliverable 1 feedback
+- Update deadlines
+- Print P2_2_activity.pdf, one per student, and collect them at the end of lab

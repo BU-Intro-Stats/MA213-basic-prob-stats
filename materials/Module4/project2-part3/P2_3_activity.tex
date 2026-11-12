@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage{../../resource/shortex}
+\input{../../resource/teaching}
+\usepackage{pgffor}
+\usepackage{array}
+
+\definecolor{checkincolor}{RGB}{232,222,250}
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\*[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\checkinbox}[1]{%
+  \calloutbox{checkincolor}{CHECK IN: Call over an instructor}{%
+    \begin{minipage}[c]{0.72\linewidth}#1\end{minipage}\hfill
+    \begin{minipage}[c]{0.2\linewidth}\centering
+      \fbox{\rule{0pt}{0.45in}\hspace{0.9in}}\\[2pt]
+      {\small Instructor initials}
+    \end{minipage}}}
+\newcommand{\writelines}[1]{%
+  \foreach \i in {1,...,#1}{\par\vspace{0.3in}\noindent\hrulefill}\par\vspace{4pt}}
+
+%--------------------
+\begin{document}
+
+\begin{center}
+\textbf{\Large Project 2, Part 3 \\ Lab Activity}
+\end{center}
+
+\nameBUID
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Item} & \textbf{Date} \\
+\midrule
+Lab P2\_3 (today) & Fri, Nov 13 \\
+\textbf{Deliverable 3 (report + R code) due} & \textbf{Thu, Nov 19, 9:00 PM} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Goal for Today}
+Get feedback on your Deliverable 2 results and R code, plan who writes each part of the Deliverable 3 report, and practice explaining your whole project out loud to another group. By the end of lab, you should know exactly what to fix, and every part of the report should have an owner.
+
+\subsection*{Before You Start}
+\begin{itemize}[nosep]
+    \item Open your group's P2\_D2\_Results doc, your R script, your data file, and a copy of the \textbf{P2\_D3\_Report} template (make a copy and share it with your group if you haven't yet).
+    \item Everyone fills out their own sheet. Check off each step as your group finishes it, and hand in your sheet at the end of lab.
+    \item The first half of lab will be for steps 1--2, and the second half will be for steps 3--4.
+\end{itemize}
+
+\begin{enumerate}
+    \item[$\square$] \textbf{1. Go over Deliverable 2 and your R code with an instructor.} Deliverable 2 has not been graded yet, so this check-in \emph{is} your feedback. Before the instructor gets to you:
+    \begin{itemize}[nosep]
+        \item[$\square$] Run your R script from top to bottom with a clean environment, and note any errors
+        \item[$\square$] Write down one question about your results you'd like the instructor to answer
+    \end{itemize}
+
+    \newpage
+    \vspace{6pt}
+    \noindent\textbf{What the instructor told us to change in our results} (tables, plots, hypotheses, conditions, test, conclusions):
+    \writelines{4}
+
+    \checkinbox{\textbf{Deliverable 2 feedback.} The instructor went over both analyses with your group, and you have written down the changes above.}
+
+    \noindent\textbf{What the instructor told us to change in our R code:}
+    \writelines{3}
+
+    \checkinbox{\textbf{R code check.} The script runs from top to bottom without errors, reads the data file you will submit, is commented, produces every table, figure, test statistic, and p-value, and does \textbf{not} use \texttt{t.test()}, \texttt{chisq.test()}, \texttt{prop.test()}, etc.}
+
+    \pagebreak
+    \item[$\square$] \textbf{2. Plan the report ($\sim$10 min).} Look over the P2\_D3\_Report template and P2\_Rubric together. For each part, check that you know what it needs, then give it an owner and a date to have a draft done. Everyone should own at least one part.
+
+    \vspace{4pt}
+    {\renewcommand{\arraystretch}{1.4}
+    \noindent\begin{tabular}{>{\raggedright\arraybackslash}p{0.6\linewidth}|p{0.17\linewidth}|p{0.12\linewidth}}
+    \toprule
+    \textbf{Part of the report and what it needs} & \textbf{Owner} & \textbf{Draft by} \\
+    \midrule
+    \textbf{1. Introduction:} motivation; cited data source; what one row is and how many rows; variables (categorical vs.\ numerical); data cleaning; both research questions & & \\
+    \hline
+    \textbf{2. Categorical analysis:} research question and variables; numbered, titled table and labeled figure, each discussed in the text; $H_0$ and $H_A$ in words and symbols; conditions checked; test statistic (and df) and p-value; conclusion in context & & \\
+    \hline
+    \textbf{3. Numerical analysis:} same as categorical, plus shape, center, spread, and unusual values in the EDA & & \\
+    \hline
+    \textbf{4. Conclusion:} key findings from both analyses; limitations (how the data were collected, borderline conditions, not causal); future work & & \\
+    \hline
+    \textbf{5. References and Roles appendix:} data source and every other source; what each member contributed & & \\
+    \hline
+    \textbf{R code and data file:} changes from the check-in; runs start to finish; output matches the report & & \\
+    \hline
+    \textbf{Final read-through and submission:} paragraphs (not bullets) with transitions; italic guidance text deleted; report, R code, and data file submitted & & \\
+    \bottomrule
+    \end{tabular}}
+
+    \item[$\square$] \textbf{3. Present your project to another group ($\sim$15 min for both groups).} This is a practice run of your report, out loud. It is informal: talk through your P2\_D2\_Results doc and R output, no slides. Each group member presents one section (if your group has more or fewer than 4 people, split or combine sections so everyone presents). Take about 6 minutes per group.
+    \begin{itemize}[nosep]
+        \item \textbf{When presenting:} cover everything that will be in that section of the report, including the numbers.
+        \item \textbf{When listening:} after each section, ask one question or point out one thing that was unclear.
+    \end{itemize}
+
+    \vspace{6pt}
+    \noindent\textbf{We presented to group:} \underline{\hspace{0.4\linewidth}}
+
+    \vspace{4pt}
+    {\renewcommand{\arraystretch}{1.4}
+    \noindent\begin{tabular}{>{\raggedright\arraybackslash}p{0.33\linewidth}|p{0.2\linewidth}|p{0.36\linewidth}}
+    \toprule
+    \textbf{Section} & \textbf{Presented by} & \textbf{Question or suggestion from the other group} \\
+    \midrule
+    \textbf{Introduction:} motivation, data, variables, research questions & & \\[0.3in]
+    \hline
+    \textbf{Categorical analysis:} table and plot, test, conclusion & & \\[0.3in]
+    \hline
+    \textbf{Numerical analysis:} table and plot, test, conclusion & & \\[0.3in]
+    \hline
+    \textbf{Conclusion:} key findings, limitations, future work & & \\[0.3in]
+    \bottomrule
+    \end{tabular}}
+
+    \item[$\square$] \textbf{4. Work on Deliverable 3 (rest of lab).}
+    \begin{itemize}[nosep]
+        \item[$\square$] Add any changes from step 3 to the plan in step 2
+        \item[$\square$] Start on the part(s) you own, beginning with the changes from the check-ins
+        \item[$\square$] Agree on a date/time (or async check-in method) for your next meeting: \underline{\hspace{0.3\linewidth}}
+    \end{itemize}
+\end{enumerate}
+
+\end{document}

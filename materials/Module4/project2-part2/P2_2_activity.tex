@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\usepackage{../../resource/shortex}
+\input{../../resource/teaching}
+
+\definecolor{checkincolor}{RGB}{232,222,250}
+\newcommand{\calloutbox}[3]{%
+  \vspace{4pt}\noindent
+  \colorbox{#1}{\parbox{0.96\linewidth}{\textbf{#2}}}\\*[2pt]
+  \noindent\fbox{\begin{minipage}{0.94\linewidth}\vspace{2pt}#3\vspace{2pt}\end{minipage}}
+  \vspace{6pt}
+}
+\newcommand{\checkinbox}[1]{%
+  \calloutbox{checkincolor}{CHECK IN: Call over an instructor}{%
+    \begin{minipage}[c]{0.72\linewidth}#1\end{minipage}\hfill
+    \begin{minipage}[c]{0.2\linewidth}\centering
+      \fbox{\rule{0pt}{0.45in}\hspace{0.9in}}\\[2pt]
+      {\small Instructor initials}
+    \end{minipage}}}
+
+%--------------------
+\begin{document}
+
+\begin{center}
+\textbf{\Large Project 2, Part 2 \\ Lab Activity}
+\end{center}
+
+\nameBUID
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Item} & \textbf{Date} \\
+\midrule
+Lab P2\_2 (today) & Fri, Nov 6 \\
+\textbf{Deliverable 2 (results + R code) due} & \textbf{Thu, Nov 12, 9:00 PM} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Goal for Today}
+Turn your Deliverable 1 outline into draft results. By the end of lab, your group should have a draft table, plot, and hypothesis test (with conditions checked) for both analyses, should have gone over each one with an instructor, and should know who is finishing each part of Deliverable 2. You are \textbf{not} expected to finish Deliverable 2 in lab today.
+
+\subsection*{Before You Start}
+\begin{itemize}[nosep]
+    \item Open your group's copy of the \href{https://docs.google.com/document/d/1H2uHoyaKZ9WlIEoHcfATuVc-I91VaTd27rTGJ7s2Lc0/edit?usp=sharing}{P2\_D2\_Results} Google Doc (make a copy and share it with your group if you haven't yet), your Deliverable 1 outline and feedback, your R script, and your data file.
+    \item Everyone fills out their own sheet. Check off each step as your group finishes it, and hand in your sheet at the end of lab.
+\end{itemize}
+
+\vspace{6pt}
+\noindent If you don't get to step 6 with 5 minutes left, stop where you are and move straight to step 6.
+
+\begin{enumerate}
+    \item[$\square$] \textbf{1. Review your Deliverable 1 feedback ($\sim$5 min).}
+    \begin{itemize}[nosep]
+        \item[$\square$] Copy your Deliverable 1 answers into the P2\_D2\_Results doc
+        \item[$\square$] Read the feedback together, list every change it asks for, and give each change at least one owner
+        \item[$\square$] If the feedback asks you to change a research question or a test, settle the new version now, before you write code for it
+    \end{itemize}
+
+    \item[$\square$] \textbf{2. Set up one shared R script ($\sim$5 min).}
+    \begin{itemize}[nosep]
+        \item[$\square$] The script loads your data file and does your cleaning steps (e.g., missing values, recoding, filtering)
+        \item[$\square$] Record what you did in 1d (Data Cleaning) and the number of rows after cleaning in 1b
+    \end{itemize}
+    \emph{Tip:} split up for steps 3 and 4. Half the group drafts the categorical analysis while the other half drafts the numerical analysis, in the same script. Call an instructor over as soon as either half is ready to check in.
+
+    \item[$\square$] \textbf{3. Draft the categorical analysis ($\sim$15 min).} Have each item below ready in R. A first draft is fine.
+    \begin{itemize}[nosep]
+        \item[$\square$] \textbf{Table:} a frequency table or contingency table of your categorical variable(s)
+        \item[$\square$] \textbf{Plot:} a bar plot (or pie chart) of the same variable(s), with a title and labeled axes
+        \item[$\square$] \textbf{Hypotheses:} the test you are using, with $H_0$ and $H_A$ in words and in symbols
+        \item[$\square$] \textbf{Conditions:} each condition for your test, checked with numbers from R (e.g., $np_0$ and $n(1-p_0)$, the expected successes and failures in each group, or the smallest expected count), plus a sentence on independence
+        \item[$\square$] \textbf{Test:} the test statistic (and degrees of freedom) and p-value, computed step by step --- or, if you aren't there yet, the formula you will use and which numbers from your table go into it
+    \end{itemize}
+
+    \checkinbox{\textbf{Categorical check-in.} Show your table, plot, hypotheses, condition checks, and test (or test plan). Keep working on step 4 until the instructor gets to you.}
+
+    \item[$\square$] \textbf{4. Draft the numerical analysis ($\sim$15 min).} Have each item below ready in R. A first draft is fine.
+    \begin{itemize}[nosep]
+        \item[$\square$] \textbf{Table:} a summary statistics table (e.g., $n$, mean, median, sd, IQR), by group if you are comparing groups
+        \item[$\square$] \textbf{Plot:} a histogram, boxplot, or scatterplot that shows the comparison in your question, with a title and labeled axes
+        \item[$\square$] \textbf{Hypotheses:} the test you are using, with $H_0$ and $H_A$ in words and in symbols
+        \item[$\square$] \textbf{Conditions:} each condition for your test, with evidence from R: sample size(s) and a histogram or boxplot for normality (of each group, or of the differences for paired data); for ANOVA, the group standard deviations or side-by-side boxplots for constant variance; plus a sentence on independence
+        \item[$\square$] \textbf{Test:} the test statistic, degrees of freedom, and p-value, computed step by step (or with \texttt{aov()} for ANOVA) --- or, if you aren't there yet, the formula you will use and which numbers from your table go into it
+    \end{itemize}
+
+    \checkinbox{\textbf{Numerical check-in.} Show your table, plot, hypotheses, condition checks, and test (or test plan). Keep working on the other steps until the instructor gets to you.}
+
+    \item[$\square$] \textbf{5. Move your results into the doc ($\sim$5 min).}
+    \begin{itemize}[nosep]
+        \item[$\square$] Make the changes suggested at the check-ins
+        \item[$\square$] Paste the tables and figures into 2b and 3b, and fill in 2c and 3c with what you have so far
+        \item[$\square$] If you have a p-value, draft 2--3 sentences of results in context (2d or 3d): do you reject $H_0$, and what does that mean for your research question?
+    \end{itemize}
+
+    \item[$\square$] \textbf{6. Plan the rest of Deliverable 2 ($\sim$5 min).}
+    \begin{itemize}[nosep]
+        \item[$\square$] Every unfinished item on the Submission Checklist at the end of the P2\_D2\_Results doc has one owner and a date before Thu, Nov 12
+        \item[$\square$] Someone owns the final R code check: it runs top to bottom without errors, is commented, reads the data file you will submit, and does \textbf{not} use \texttt{t.test()}, \texttt{chisq.test()}, \texttt{prop.test()}, etc.
+        \item[$\square$] Roles by Deliverable grid updated, and a date/time (or async check-in method) agreed for your next meeting
+    \end{itemize}
+\end{enumerate}
+
+\end{document}
